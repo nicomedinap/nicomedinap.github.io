@@ -1,0 +1,14 @@
+---
+published: true
+title: Pruebá
+layout: post
+---
+
+__Una imagen:__
+
+No se puede escribir con tilde??
+
+<img src="https://raw.githubusercontent.com/nicomedinap/website/gh-pages/density2.jpg"
+ height="430" width="600">
+
+__Codigo:__
