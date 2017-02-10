@@ -7,6 +7,8 @@ __Una imagen:__
 
 No se puede escribir con tilde??
 
+hóla 
+
 <img src="https://raw.githubusercontent.com/nicomedinap/website/gh-pages/density2.jpg"
  height="430" width="600">
 
