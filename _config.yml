@@ -1,5 +1,5 @@
 excerpt_separator: ""
-pygments: true
+pygments: ""
 markdown: kramdown
 url: http://nicomedinap.github.io
 title: ProgTon
