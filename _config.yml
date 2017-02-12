@@ -4,6 +4,6 @@ markdown: kramdown
 url: http://nicomedinap.github.io
 title: nicomedinap
 tagline: A log of everyday life
-description: My awesome new site
+description: Bash
 paginate: 5
 theme: jekyll-theme-cayman
