@@ -3,7 +3,7 @@ pygments: true
 markdown: kramdown
 url: http://nicomedinap.github.io
 title: ProgTon
-tagline: A log of everyday life
+tagline: El blog de un astrónomo aburrido
 description: El blog de un astrónomo aburrido
 paginate: 5
 theme: jekyll-theme-cayman
