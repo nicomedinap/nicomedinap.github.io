@@ -2,8 +2,8 @@ excerpt_separator: ""
 pygments: ""
 markdown: kramdown
 url: http://nicomedinap.github.io
-title: ProgTon
-tagline: El blog de un astrónomo aburrido
+title: PyProg
+tagline: A la física le falta código
 description: El blog de un astrónomo aburrido
 paginate: 5
 theme: jekyll-theme-cayman
