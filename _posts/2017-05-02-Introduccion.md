@@ -8,7 +8,8 @@ Cuando decides estudiar algún área relacionada con la ciencia, tarde o tempran
 Así es la ciencia.
 En mi caso, el área que elegí para hacer mi tesis de Magíster en Astrofísica, fue el estudio de la variabilidad estrellas 
 jóvenes, las cuales son objetos estelares/sub-estelares que están en sus etapas tempranas de evolución, en otras palabras, estrellas que están naciendo :D
-Es común encontrar este tipo de objetos en [Regiones de Formación Estelar](https://es.wikipedia.org/wiki/Formaci%C3%B3n_estelar){:target="_blank"}, nubes gigantes compuestas principalmente de Hidrógeno y Helio, las cuales bajo ciertas condiciones de temperatura y densidad, se fragmentan para crear nuevas poblaciones estelares. Como nuestra galaxia está llena de estas regiones, hay telescopios dedi
+Es común encontrar este tipo de objetos en [Regiones de Formación Estelar](https://es.wikipedia.org/wiki/Formaci%C3%B3n_estelar){:target="_blank"}, nubes gigantes compuestas principalmente de Hidrógeno y Helio, las cuales bajo ciertas condiciones de temperatura y densidad, se fragmentan para crear nuevas poblaciones estelares. 
+Como nuestra galaxia está llena de estas regiones.
 
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/Primer_post/BRCs.png"
  height="295" width="810">
@@ -16,7 +17,3 @@ Es común encontrar este tipo de objetos en [Regiones de Formación Estelar](htt
 
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/Primer_post/Epocas.png"
  height="190" width="810">
-
-
-Hace bastante tiempo atrás, tengo este deseo de escribir sobre algo. Para así tener un espacio propio el cual sirva 
-para expresar las cosas coherentes que salen (a veces) de mi mente.
