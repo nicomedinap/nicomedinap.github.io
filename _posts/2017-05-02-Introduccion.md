@@ -12,11 +12,7 @@ Así es la ciencia.
 En mi caso, el área que elegí para hacer mi tesis de Magíster en Astrofísica, fue el estudio de la variabilidad estrellas 
 jóvenes, las cuales son objetos estelares/sub-estelares que están en sus etapas tempranas de evolución, en otras palabras, 
 estrellas que están naciendo :D
-Es común encontrar este tipo de objetos en Regiones de Formación Estelar, 
-
-
-Desde los inicios de 1980, los telescopios se empezaron a equipar con cámaras CCDs, las mismas que todos portamos hoy en 
-nuestros celulares. 
+Es común encontrar este tipo de objetos en [Regiones de Formación Estelar](https://es.wikipedia.org/wiki/Formaci%C3%B3n_estelar), 
 
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/Primer_post/BRCs.png"
  height="295" width="810">
