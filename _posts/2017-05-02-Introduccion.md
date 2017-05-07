@@ -15,7 +15,7 @@ Es común encontrar este tipo de objetos en [Regiones de Formación Estelar](htt
 
 
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/Primer_post/Epocas.png"
- height="180" width="810">
+ height="190" width="810">
 
 
 Hace bastante tiempo atrás, tengo este deseo de escribir sobre algo. Para así tener un espacio propio el cual sirva 
