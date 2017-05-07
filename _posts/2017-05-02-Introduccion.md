@@ -10,10 +10,12 @@ En mi caso, el área que elegí para hacer mi tesis de Magíster en Astrofísica
 jóvenes, las cuales son objetos estelares/sub-estelares que están en sus etapas tempranas de evolución, en otras palabras, estrellas que están naciendo :D
 Es común encontrar este tipo de objetos en [Regiones de Formación Estelar](https://es.wikipedia.org/wiki/Formaci%C3%B3n_estelar){:target="_blank"}, nubes gigantes compuestas principalmente de Hidrógeno y Helio, las cuales bajo ciertas condiciones de temperatura y densidad, se fragmentan para crear nuevas poblaciones estelares. 
 Como nuestra galaxia está llena de estas regiones.
-
+<center>
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/Primer_post/BRCs.png"
  height="295" width="810">
+</center>
 
-
+<center>
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/Primer_post/Epocas.png"
  height="190" width="810">
+</center>
