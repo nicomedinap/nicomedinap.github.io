@@ -19,7 +19,7 @@ Desde los inicios de 1980, los telescopios se empezaron a equipar con cámaras C
 nuestros celulares. 
 
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/Primer_post/BRCs.png"
- height="510" width="810">
+ height="350" width="810">
 
 
 
