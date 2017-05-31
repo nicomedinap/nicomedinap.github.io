@@ -4,7 +4,7 @@ title: Estrellas Variables
 layout: post
 ---
 
-.medium {
+.small {
     font-size: 11px;
     
 Cuando decides estudiar algún área relacionada con la ciencia, tarde o temprano llega ese difícil momento de elegir el campo de estudio en el cual nos desenvolveremos; ya sea para hacer una Tesis de Licenciatura, Magíster o Doctorado. esta desición es muy importante, nos dará nuestras primeras nociones de cómo es ser científico, finalizando el proceso en un trabajo original: tu tesis. La cual será despedazada sin misericordia por las mismas personas que te ayudaron a crearla. 
