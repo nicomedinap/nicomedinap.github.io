@@ -49,7 +49,7 @@ body {
 
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 6px;
+  font-size: 16px;
   line-height: 1.5;
 }
 @media (min-width: 38rem) {
@@ -338,7 +338,7 @@ tbody tr:nth-child(odd) th {
   margin-top: 0;
 }
 .related-posts li small {
-  font-size: 65%;
+  font-size: 25%;
   color: #999;
 }
 .related-posts li a:hover {
