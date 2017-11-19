@@ -1,4 +1,11 @@
 
+---
+published: true
+title: Gaussiana
+layout: post
+---
+
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
