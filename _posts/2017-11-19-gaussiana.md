@@ -1,6 +1,16 @@
 
 {% include mathjax.html %}
 
+---
+layout: post
+mathjax: true
+comments: true
+title:  "Adding MathJax to a GitHub Pages Jekyll Blog"
+date:   2016-08-21 23:41:54 +0000
+categories: github jekyll
+---
+
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
