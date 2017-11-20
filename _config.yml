@@ -1,6 +1,6 @@
 excerpt_separator: ""
 pygments: ""
-markdown: kramdown
+markdown: maruku
 url: http://nicomedinap.github.io
 title: Fotómetro
 tagline: A la física le falta código
