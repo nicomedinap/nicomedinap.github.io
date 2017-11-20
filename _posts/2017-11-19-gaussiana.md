@@ -1,8 +1,5 @@
 
-<script type="text/javascript"
-      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+{% include mathjax.html %}
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
