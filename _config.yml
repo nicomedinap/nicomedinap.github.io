@@ -4,6 +4,6 @@ markdown: maruku
 url: http://nicomedinap.github.io
 title: Fotómetro
 tagline: A la física le falta código
-description: El blog de un astrónomo aburrido
+description: Código y ciencia
 paginate: 5
 theme: jekyll-theme-cayman
