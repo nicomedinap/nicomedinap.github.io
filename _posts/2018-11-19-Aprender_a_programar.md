@@ -6,11 +6,9 @@ title:  "Prueba 100000"
 ---
 {% include mathjax.html %}
 
-
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
@@ -22,23 +20,22 @@ title:  "Prueba 100000"
 <span class="s2">margin-bottom:1em;</span>
 <span class="s2">}</span>
 
-<span class="s2">div.text_cell_render h1 { /* Main titles bigger, centered */</span>
+<span class="s2">div.text_cell_render h1 { /* Main titles bigger */</span>
 <span class="s2">font-size: 2.2em;</span>
 <span class="s2">line-height:1.4em;</span>
-<span class="s2">text-align:center;</span>
 <span class="s2">}</span>
 
 <span class="s2">div.text_cell_render h2 { /*  Parts names nearer from text */</span>
-<span class="s2">margin-bottom: -0.4em;</span>
+<span class="s2">margin-bottom: -0.3em;</span>
 <span class="s2">}</span>
 
 
 <span class="s2">div.text_cell_render { /* Customize text cells */</span>
-<span class="s2">font-family: &#39;Times New Roman&#39;;</span>
+<span class="s2">font-family: &#39;Open Sans&#39;;</span>
 <span class="s2">font-size:1.em;</span>
 <span class="s2">line-height:1.em;</span>
-<span class="s2">padding-left:3em;</span>
-<span class="s2">padding-right:3em;</span>
+<span class="s2">padding-left:1em;</span>
+<span class="s2">padding-right:1em;</span>
 <span class="s2">}</span>
 
 <span class="s2">.output_png img {</span>
@@ -60,7 +57,7 @@ title:  "Prueba 100000"
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
@@ -71,23 +68,22 @@ margin-top:1em;
 margin-bottom:1em;
 }
 
-div.text_cell_render h1 { /* Main titles bigger, centered */
+div.text_cell_render h1 { /* Main titles bigger */
 font-size: 2.2em;
 line-height:1.4em;
-text-align:center;
 }
 
 div.text_cell_render h2 { /*  Parts names nearer from text */
-margin-bottom: -0.4em;
+margin-bottom: -0.3em;
 }
 
 
 div.text_cell_render { /* Customize text cells */
-font-family: 'Times New Roman';
+font-family: 'Open Sans';
 font-size:1.em;
 line-height:1.em;
-padding-left:3em;
-padding-right:3em;
+padding-left:1em;
+padding-right:1em;
 }
 
 .output_png img {
@@ -99,41 +95,6 @@ padding-right:3em;
 
 </style>
 
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
-&lt;style type=&#39;text/css&#39;&gt;
-.CodeMirror{
-    font-size: 12px;
-&lt;/style&gt;
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-<div class="output_html rendered_html output_subarea ">
-<style type='text/css'>
-.CodeMirror{
-    font-size: 12px;
-</style>
 </div>
 
 </div>
