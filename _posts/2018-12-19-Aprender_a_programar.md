@@ -1,5 +1,3 @@
-
-
 ---
 layout: post
 mathjax: true
@@ -7,6 +5,7 @@ comments: true
 title:  "Prueba 100000"
 ---
 {% include mathjax.html %}
+
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
