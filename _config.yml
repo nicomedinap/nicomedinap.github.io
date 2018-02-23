@@ -6,3 +6,4 @@ tagline: A la física le falta código
 description: Código y ciencia
 paginate: 5
 theme: jekyll-theme-cayman
+highlighter: rouge
