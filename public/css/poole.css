@@ -47,6 +47,8 @@ body {
   padding: 0;
 }
 
+<! Modifique fontsize de 20 a 10 >
+
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -54,7 +56,7 @@ html {
 }
 @media (min-width: 38rem) {
   html {
-    font-size: 20px;
+    font-size: 10px;
   }
 }
 
