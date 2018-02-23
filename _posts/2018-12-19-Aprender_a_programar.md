@@ -1,3 +1,4 @@
+
 ---
 layout: post
 mathjax: true
@@ -6,90 +7,6 @@ title:  "Prueba 100000"
 ---
 {% include mathjax.html %}
 
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
-<span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">&lt;style&gt;</span>
-
-<span class="s2">div.cell { /* Tunes the space between cells */</span>
-<span class="s2">margin-top:1em;</span>
-<span class="s2">margin-bottom:1em;</span>
-<span class="s2">}</span>
-
-<span class="s2">div.text_cell_render h1 { /* Main titles bigger, centered */</span>
-<span class="s2">font-size: 2.2em;</span>
-<span class="s2">line-height:1.4em;</span>
-<span class="s2">text-align:center;</span>
-<span class="s2">}</span>
-
-<span class="s2">div.text_cell_render h2 { /*  Parts names nearer from text */</span>
-<span class="s2">margin-bottom: -0.1em;</span>
-<span class="s2">}</span>
-
-
-<span class="s2">div.text_cell_render { /* Customize text cells */</span>
-<span class="s2">font-family: &#39;new times roman&#39;;</span>
-<span class="s2">font-size:1.1em;</span>
-<span class="s2">line-height:1.2em;</span>
-<span class="s2">padding-left:1em;</span>
-<span class="s2">padding-right:1em;</span>
-<span class="s2">}</span>
-<span class="s2">&lt;/style&gt;</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[30]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-<style>
-
-div.cell { /* Tunes the space between cells */
-margin-top:1em;
-margin-bottom:1em;
-}
-
-div.text_cell_render h1 { /* Main titles bigger, centered */
-font-size: 2.2em;
-line-height:1.4em;
-text-align:center;
-}
-
-div.text_cell_render h2 { /*  Parts names nearer from text */
-margin-bottom: -0.1em;
-}
-
-
-div.text_cell_render { /* Customize text cells */
-font-family: 'new times roman';
-font-size:1.1em;
-line-height:1.2em;
-padding-left:1em;
-padding-right:1em;
-}
-</style>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
