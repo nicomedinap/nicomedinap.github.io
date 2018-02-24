@@ -12,4 +12,10 @@ Aquí una foto mía donde parezco interesante :)
  height="430" width="600">
 
 
---Sobre este proyecto--
+## Sobre el proyecto Fotómetro
+
+Si bien la Astronomía es una ciencia apasionante, es etérea en cuanto a resultados y trascendencia. Pocos son los espacios que existe en español para su discusión, dados que las herramientas que están disponibles también están en inglés. 
+
+El principal objetivo de **Fotómetro** es el brindar un espacio experimental para poder aportar en la divulgación de este vasto campo recurriendo a varios enfoques, como lo son los lenguajes de programación. Cómo es un proyecto, la retroalimentación se agradece y acepta :)
+
+Este proyecto está desarrollado en las [páginas de Github](https://pages.github.com/){:target="_blank"} , usando el formato [Markdown](https://guides.github.com/features/mastering-markdown/){:target="_blank"}.
