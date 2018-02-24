@@ -13,10 +13,6 @@ Aquí una foto mía donde parezco interesante :)
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/workshop_mas_2018.jpg"
  height="430" width="600">
 
-## Contacto
-
-Soy activo en algunas redes sociales, y mi correo acádemico es nicolas.medina@postgrado.uv.cl
-
 ## Sobre el proyecto Fotómetro
 
 Si bien la Astronomía es una ciencia apasionante, es etérea en cuanto a resultados y trascendencia. De su discusión y entendimiento se desprenden resultados concluyentes en cuanto a cómo los humanons entendemos nuestra realidad física. Pocos son los espacios que existe en español para su debate, dada la limitación idiomática, de herramientas necesarias y de rigurosidad científica. 
@@ -24,3 +20,7 @@ Si bien la Astronomía es una ciencia apasionante, es etérea en cuanto a result
 El principal objetivo de **Fotómetro** es el brindar un espacio experimental para poder aportar en la divulgación de este vasto campo recurriendo a varios enfoques, como lo son los lenguajes de programación y su incliusión multidisiplinar. Cómo es un proyecto personal, la retroalimentación se agradece y acepta :)
 
 Este proyecto está desarrollado en las [páginas de Github](https://pages.github.com/){:target="_blank"}, usando el formato [Markdown](https://guides.github.com/features/mastering-markdown/){:target="_blank"}. También en su mayoría, el lenguaje de programación [Python](https://es.wikipedia.org/wiki/Python){:target="_blank"} es usado, basándose en [proyecto Jupyter](http://jupyter.org/){:target="_blank"}. 
+
+## Contacto
+
+Soy activo en algunas redes sociales, y mi correo acádemico es nicolas.medina@postgrado.uv.cl
