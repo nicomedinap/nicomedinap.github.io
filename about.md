@@ -11,9 +11,9 @@ Hago investigación y trabajo el telescopio DuPont como observer/plugger del pro
 Aquí una foto mía donde parezco interesante :)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/workshop_mas_2018.jpg"
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/workshop_mas_2018.jpg"
  height="400" width="550">
- </p>
+</p>
 
 ## Sobre el proyecto Fotómetro
 
