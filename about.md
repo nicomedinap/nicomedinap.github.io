@@ -23,7 +23,7 @@ El principal objetivo de **Fotómetro** es el brindar un espacio experimental pa
 
 Este es un proyecto personal, por ende la retroalimentación se acepta y agradece :)
 
-Este proyecto está desarrollado en las [páginas de Github](https://pages.github.com/){:target="_blank"}, usando el formato [Markdown](https://guides.github.com/features/mastering-markdown/){:target="_blank"}. También en su mayoría, el lenguaje de programación [Python](https://es.wikipedia.org/wiki/Python){:target="_blank"} es usado, basándose en [proyecto Jupyter](http://jupyter.org/){:target="_blank"}. 
+Este proyecto está desarrollado en las [páginas de Github](https://pages.github.com/){:target="_blank"}, usando el formato [Markdown](https://guides.github.com/features/mastering-markdown/){:target="_blank"}. También en su mayoría, el lenguaje de programación [Python](https://es.wikipedia.org/wiki/Python){:target="_blank"} es usado, el cual es ejecutado a través del [proyecto Jupyter](http://jupyter.org/){:target="_blank"}. 
 
 ## Contacto
 
@@ -33,6 +33,6 @@ Soy activo en algunas redes sociales, y mi correo académico es nicolas.medina@p
 
 - [x] Tener un blog.
 - [ ] Entender todo los aspectos del blog.
+- [x] Sobrevivir al 2012.
 - [x] Creerme científico.
-- [x] Sobrevivir al 2010.
 - [ ] Escribir una tésis de Doctorado.
