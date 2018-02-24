@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Links de interés 2
+title: Links de interés
 ---
 
 Acá algunos links que pueden ser de utilidad para astrofísicos, programadores y stalkers:
