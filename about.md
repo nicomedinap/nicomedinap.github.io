@@ -24,3 +24,10 @@ Este proyecto está desarrollado en las [páginas de Github](https://pages.githu
 ## Contacto
 
 Soy activo en algunas redes sociales, y mi correo acádemico es nicolas.medina@postgrado.uv.cl
+
+## Cosas por hacer
+
+- [x] Tener un blog.
+- [x] Creerme científico.
+- [x] Sobrevivir.
+- [ ] Escribir una tésis de Doctorado.
