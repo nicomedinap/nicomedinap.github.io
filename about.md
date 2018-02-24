@@ -35,4 +35,4 @@ Soy activo en algunas redes sociales, y mi correo académico es nicolas.medina@p
 - [ ] Entender todos los aspectos del blog.
 - [x] Sobrevivir al 2012.
 - [x] Creerme científico.
-- [ ] Escribir una tésis de Doctorado.
+- [ ] Escribir una tesis de Doctorado.
