@@ -27,7 +27,7 @@ Este proyecto está desarrollado en las [páginas de Github](https://pages.githu
 
 ## Contacto
 
-Soy activo en algunas redes sociales, y mi correo académico es nicolas.medina@postgrado.uv.cl
+Soy activo en algunas redes sociales, y mi correo académico es nicolas.medina@postgrado.uv.cl.
 
 ## Lista de cosas por hacer
 
