@@ -3,7 +3,7 @@ layout: page
 title: Sobre el autor
 ---
 
-## Aspectos necesarios
+## Aspectos relevantes
 
 Hola! Me llamo Nicolás Medina Peña. Soy Licenciado en Astronomía [(UdeC)](http://www.udec.cl/pexterno/){:target="_blank"}, Magíster en Astrofísica y estudiante de Doctorado en Astrofísica [(UV)](http://uv.cl/){:target="_blank"}. Me gusta la música extraña y pensar cosas raras. 
 Hago investigación y trabajo el telescopio DuPont como observer/plugger del proyecto [Apogee-2 south](http://www.sdss.org/surveys/apogee-2/){:target="_blank"}, alojado en el [Observatorio Las Campanas](https://es.wikipedia.org/wiki/Observatorio_Las_Campanas.){:target="_blank"}
