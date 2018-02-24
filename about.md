@@ -17,7 +17,7 @@ Aquí una foto mía donde parezco interesante :)
 
 ## Sobre el proyecto Fotómetro
 
-Si bien la Astronomía es una ciencia apasionante, es etérea en cuanto a resultados y trascendencia. De su discusión y entendimiento se desprenden resultados concluyentes en cuanto a cómo los humanos entendemos nuestra realidad física. Pocos son los espacios que existe en español para su debate, dada la limitación idiomática, de herramientas necesarias y de rigurosidad científica. 
+Si bien la Astronomía es una ciencia apasionante, es etérea en cuanto a resultados y trascendencia para aquel que no está acostumbrado a su ritmo. De su discusión y entendimiento se desprenden resultados concluyentes en cuanto a cómo los humanos entendemos e interpretamos la realidad física en la cuál estamos inmerso. Pocos son los espacios que existe en español para su debate, dada la limitación idiomática, de herramientas necesarias y de rigurosidad científica. 
 
 El principal objetivo de **Fotómetro** es el brindar un espacio experimental para poder aportar en la divulgación de este vasto campo recurriendo a varios enfoques, como los lenguajes de programación y la matemática involucrada. 
 
