@@ -12,7 +12,7 @@ Aquí una foto mía donde parezco interesante :)
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/workshop_mas_2018.jpg"
- height="300" width="450">
+ height="330" width="450">
 </p>
 
 ## Sobre el proyecto Fotómetro
@@ -32,7 +32,7 @@ Soy activo en algunas redes sociales, y mi correo académico es nicolas.medina@p
 ## Lista de cosas por hacer
 
 - [x] Tener un blog.
-- [ ] Entender todo los aspectos del blog.
+- [ ] Entender todos los aspectos del blog.
 - [x] Sobrevivir al 2012.
 - [x] Creerme científico.
 - [ ] Escribir una tésis de Doctorado.
