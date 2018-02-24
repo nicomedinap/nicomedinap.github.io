@@ -12,7 +12,7 @@ Aquí una foto mía donde parezco interesante :)
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/workshop_mas_2018.jpg"
- height="400" width="550">
+ height="300" width="450">
 </p>
 
 ## Sobre el proyecto Fotómetro
