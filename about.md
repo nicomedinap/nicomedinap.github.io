@@ -29,9 +29,10 @@ Este proyecto está desarrollado en las [páginas de Github](https://pages.githu
 
 Soy activo en algunas redes sociales, y mi correo académico es nicolas.medina@postgrado.uv.cl
 
-## Cosas por hacer
+## Lista de cosas por hacer
 
 - [x] Tener un blog.
+- [ ] Entender todo los aspectos del blog.
 - [x] Creerme científico.
-- [x] Sobrevivir.
+- [x] Sobrevivir al 2010.
 - [ ] Escribir una tésis de Doctorado.
