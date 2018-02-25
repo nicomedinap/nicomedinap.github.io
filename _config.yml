@@ -3,7 +3,7 @@ pygments: ""
 url: http://nicomedinap.github.io
 title: Fotómetro
 tagline: A la física le falta código
-description: Código y ciencia
+description: Interpretando luz de las estrellas
 paginate: 5
 theme: jekyll-theme-cayman
 highlighter: rouge
