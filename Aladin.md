@@ -17,5 +17,5 @@ Prueba 4
 <div id="aladin-lite-div" style="width:600px;height:600px;"></div>
 <script type="text/javascript" src="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8"></script>
 <script type="text/javascript">
-    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:2, target: "18 06 03 -23 41 20"});
+    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:4, target: "18 06 03 -23 41 20"});
 </script>
