@@ -1,9 +1,7 @@
 ---
 layout: page
-title: Sobre el autor
+title: Aladin Lite
 ---
-
-# Aladin Litle
 
 Aladin es un atlas interactivo de objetos astronómicos. Está desarrollano para visualizar diferentes bases de datos astronómicas de carácter públicas, como imágenes fotométricas y/o objetos catalogados. 
 
@@ -17,5 +15,5 @@ Aladin es un atlas interactivo de objetos astronómicos. Está desarrollano para
 <div id="aladin-lite-div" style="width:800px;height:800px;"></div>
 <script type="text/javascript" src="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8"></script>
 <script type="text/javascript">
-    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:60, target: "NGC 6559"});
+    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:30, target: "NGC 6559"});
 </script>
