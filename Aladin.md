@@ -3,7 +3,11 @@ layout: page
 title: Aladin Lite
 ---
 
-Aladin es un atlas interactivo de objetos astronómicos. Está desarrollado para visualizar diferentes bases de datos de carácter público, como imágenes y objetos astronómicos catalogados en algún estudio. Es posible explorar imágenes en diferentes longitudes de onda, donde los colores expresan diferentes tipos de procesos físicos. 
+Aladin es un atlas interactivo de objetos astronómicos. Está desarrollado para visualizar diferentes bases de datos de carácter público, como imágenes y objetos astronómicos catalogados en algún estudio. 
+
+En la esquina superior izquierda es posible intercambiar entre bases de datos que contienene imágenes en diferentes longitudes de onda.
+
+Esta aplicación web está inicializada para mostrar tres regiones de formación estelar, dos de ellas muy emblemáticas: La [Nebulosa de la Laguna (M8)](https://es.wikipedia.org/wiki/Nebulosa_de_la_Laguna){:target="_blank"}, y la [Nebulosa Trifida](https://es.wikipedia.org/wiki/Nebulosa_Tr%C3%ADfida){:target="_blank"}. También se muestra la region de formación estelar [NGC 6559](https://en.wikipedia.org/wiki/NGC_6559){:target="_blank"}, que es el primer objeto que estudié. Tómate un tiempo, y explora nuestra galaxia y el universo!
 
 <!-- include Aladin Lite CSS file in the head section of your page -->
 <link rel="stylesheet" href="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.css" />
