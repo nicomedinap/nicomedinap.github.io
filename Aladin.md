@@ -15,5 +15,5 @@ Aladin es un atlas interactivo de objetos astronómicos. Está desarrollano para
 <div id="aladin-lite-div" style="width:600px;height:600px;"></div>
 <script type="text/javascript" src="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8"></script>
 <script type="text/javascript">
-    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:40, target: "18 10 00.0 -24 00 00"});
+    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:10, target: "18 05 09.0 -23 49 37"});
 </script>
