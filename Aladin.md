@@ -3,7 +3,7 @@ layout: page
 title: Aladin Lite
 ---
 
-Aladin es un atlas interactivo de objetos astronómicos. Está desarrollano para visualizar diferentes bases de datos astronómicas de carácter públicas, como imágenes fotométricas y/o fuentes astronómicas catalogados en algún estudio. 
+Aladin es un atlas interactivo de objetos astronómicos. Está desarrollado para visualizar diferentes bases de datos de carácter público, como imágenes y objetos astronómicos catalogados en algún estudio. Es posible explorar imágenes en diferentes longitudes de onda, donde los colores expresan diferentes tipos de procesos físicos. 
 
 <!-- include Aladin Lite CSS file in the head section of your page -->
 <link rel="stylesheet" href="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.css" />
