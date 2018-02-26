@@ -3,7 +3,7 @@ layout: page
 title: Aladin Lite
 ---
 
-[Aladin](http://aladin.u-strasbg.fr/aladin.gml){:target="_blank"} es un atlas interactivo de objetos astronómicos. Está desarrollado para visualizar diferentes bases de datos de carácter público, como imágenes y objetos astronómicos catalogados en algún estudio.
+[Aladin](http://aladin.u-strasbg.fr/aladin.gml){:target="_blank"} es un Atlas interactivo de base de datos astronómicas. Está desarrollado para visualizar datos de carácter público y que provienen de diversos telescopios, tanto instalado en la tierra como misiones que están en órbita. Es práctico para obtener imágenes compuestas, y contrastar con objetos astronómicos catalogados en algún estudio.
 
 En la esquina superior izquierda es posible intercambiar entre bases de datos que contienen imágenes en diferentes longitudes de onda, cada una de ellas muestra radiación provocada por diferentes procesos físicos.
 
