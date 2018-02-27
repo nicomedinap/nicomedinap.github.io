@@ -21,5 +21,5 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 <div id="aladin-lite-div" style="width:650px;height:650px;"></div>
 <script type="text/javascript" src="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8"></script>
 <script type="text/javascript">
-    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:3, target: "18 06 03 -23 41 20"});
+    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:2.6, target: "18 06 03 -23 41 20"});
 </script>
