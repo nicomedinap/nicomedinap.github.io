@@ -17,9 +17,9 @@ layout: post
 <p>Python es un lenguaje apropiado para aprender de cero a implementar código de manera simple, ya que posee una sintaxis simple y directa lo que conlleva una fácil interpretación para el usuario. Varías estadísticas revelan que Python ha crecido exponencialmente en términos de usuarios en los últimos años. Esto alienta a la creación de librerías especializadas y de carácter libre.</p>
 <p>Daré algunos ejemplos de lo que se puede hacer:</p>
 <h2 id="El-atractor-de-Lorenz:">El atractor de Lorenz:<a class="anchor-link" href="#El-atractor-de-Lorenz:">&#182;</a></h2><p>El sistema de Lorenz es un set de ecuaciones diferenciales acopladas las cuales tiene soluciones caóticas dados ciertos parámetros $\sigma$, $\rho$ y $\beta$ con las condiciones iniciales $x(0)$, $y(0)$ y $z(0)$ evaluadas en la posición inicial de nuestra partícula P.</p>
-<p>$$\displaystyle \frac{{\rm d}x}{{\rm d}t} = \sigma(y - x)$$</p>
-<p>$$\displaystyle \frac{{\rm d}y}{{\rm d}t} = x(\rho - z) - y$$</p>
-<p>$$\displaystyle \frac{{\rm d}z}{{\rm d}t} = xy - \beta z$$</p>
+<p>$$\displaystyle \frac{{ \rm d } x }{{ \rm d } t} = \sigma(y - x)$$</p>
+<p>$$\displaystyle \frac{{ \rm d } y }{{ \rm d } t} = x(\rho - z) - y$$</p>
+<p>$$\displaystyle \frac{{ \rm d } z }{{ \rm d } t } = xy - \beta z$$</p>
 <p>El truco acá será discretizar los diferenciales del set de ecuaciones, asumiendo que el infinitesimal temporal ${\rm d}t$ puede ser aproximada usando una diferencia finita $\Delta t$ suficientemente pequeña. Lo mismo será asumido para las variables espaciales, así por ejemplo para la variable i-ésima $x_{i}$, tenemos que $\Delta x_{i+1} = x_{i+1} - x_{i}$.</p>
 <p>Dicho esto, nuestras ecuaciones toman la siguiente forma:</p>
 <p>$${\rm d}x = \sigma(y - x){\rm d}t\ \ \ \ \ \ \ \Rightarrow\ \ \ \ \ \ \  x_{i+1}=x_{i}+\sigma (y_{i}-x_{i}) \Delta t$$</p>
