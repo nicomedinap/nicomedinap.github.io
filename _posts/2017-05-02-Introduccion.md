@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: Estrellas Variables
 layout: post
 ---
