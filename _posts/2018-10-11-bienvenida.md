@@ -11,6 +11,3 @@ La verdad, aún no tengo claro sobre qué tratará este espacio, pero imagino qu
 He decidido crear este blog dada la inmensa cantidad de información que he podido aprender a través de internet en todos estos años, sobretodo cuando empecé a realizar mi magíster, y que he ido madurando a lo largo de mi doctorado. Por lo tanto, siento que es un deber contribuir algo que pueda ser de utilidad para alguna persona curiosa. 
 
 Dicha esta declaración de principios, nos estamos leyendo!
-
-
-$${\rm d}t$$
