@@ -3,7 +3,7 @@ pygments: ""
 url: http://nicomedinap.github.io
 title: Fotómetro
 tagline: Interpretando luz de las estrellas
-description: 
+description: ""
 paginate: 10
 theme: jekyll-theme-cayman
 highlighter: rouge
