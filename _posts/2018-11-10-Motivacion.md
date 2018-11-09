@@ -27,21 +27,21 @@ Daré algunos ejemplos de lo que se puede hacer:
 ## El atractor de Lorenz:
 El sistema de Lorenz es un set de ecuaciones diferenciales acopladas las cuales tiene soluciones caóticas dados ciertos parámetros $\sigma$, $\rho$ y $\beta$ con las condiciones iniciales $x(0)$, $y(0)$ y $z(0)$ evaluadas en la posición inicial de nuestra partícula P.
 
-$$\displaystyle \frac{{\rm d}x}{{\rm d}t} = \sigma(y - x)$$
+$$\displaystyle \frac{\rm dx}{\rm dt} = \sigma(y - x)$$
 
-$$\displaystyle \frac{{\rm d}y}{{\rm d}t} = x(\rho - z) - y$$
+$$\displaystyle \frac{\rm dy}{\rm dt} = x(\rho - z) - y$$
 
-$$\displaystyle \frac{{\rm d}z}{{\rm d}t} = xy - \beta z$$
+$$\displaystyle \frac{\rm dz}{\rm dt} = xy - \beta z$$
 
 El truco acá será discretizar los diferenciales del set de ecuaciones, asumiendo que el infinitesimal temporal ${\rm d}t$ puede ser aproximada usando una diferencia finita $\Delta t$ suficientemente pequeña. Lo mismo será asumido para las variables espaciales, así por ejemplo para la variable i-ésima $x_{i}$, tenemos que $\Delta x_{i+1} = x_{i+1} - x_{i}$. 
 
 Dicho esto, nuestras ecuaciones toman la siguiente forma:
 
-$${\rm d}x = \sigma(y - x){\rm d}t\ \ \ \ \ \ \ \Rightarrow\ \ \ \ \ \ \  x_{i+1}=x_{i}+\sigma (y_{i}-x_{i}) \Delta t$$
+$${\rm dx} = \sigma(y - x){\rm dt}\ \ \ \ \ \ \ \Rightarrow\ \ \ \ \ \ \  x_{i+1}=x_{i}+\sigma (y_{i}-x_{i}) \Delta t$$
 
-$${\rm d}y = (\rho x - z x - y){\rm d}t\ \ \ \ \ \ \ \ \ \Rightarrow\ \ \ \ \ \ \ \  y_{i+1}=y_{i}+(\rho x_{i} - z_{i} x_{i} - y_{i}) \Delta t$$ 
+$${\rm dy} = (\rho x - z x - y){\rm dt}\ \ \ \ \ \ \ \ \ \Rightarrow\ \ \ \ \ \ \ \  y_{i+1}=y_{i}+(\rho x_{i} - z_{i} x_{i} - y_{i}) \Delta t$$ 
 
-$${\rm d}z = (xy - \beta z){\rm d}t\ \ \ \ \ \ \ \  \Rightarrow\ \ \ \ \ \ \ \  z_{i+1}=z_{i}+(x_{i}y_{i}-\beta z_{i})\Delta t$$  
+$${\rm dz} = (xy - \beta z){\rm dt}\ \ \ \ \ \ \ \  \Rightarrow\ \ \ \ \ \ \ \  z_{i+1}=z_{i}+(x_{i}y_{i}-\beta z_{i})\Delta t$$  
 
 Así, pondremos una partícula de prueba en este mundo gobernado por estas tres leyes y evaluaremos su comportamiento usando 50 mil pequeños pasos $\Delta t$ para ver cómo evoluciona a través de 50 segundos. 
 
