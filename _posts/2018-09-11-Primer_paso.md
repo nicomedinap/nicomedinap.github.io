@@ -2,7 +2,7 @@
 layout: post
 mathjax: true
 comments: true
-title:  "Prueba"
+title:  "Primer paso"
 ---
 {% include mathjax.html %}
 
