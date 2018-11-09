@@ -1,5 +1,10 @@
-
-# Motivación
+---
+layout: post
+mathjax: true
+comments: true
+title:  "Primer paso"
+---
+{% include mathjax.html %}
 
 Hace bastante tiempo quería explicar el por qué creo que programar es importante como una manera de estructurar e implementar el pensamiento lógico. Comprender sus aplicaciones nos habilita a entender diferentes aspectos de nuestra realidad. Con sus herramientas uno podría, por sólo dar ejemplos, construir y reproducir experimentos científicos, estudiar bases de datos para llegar a conclusiones y exhibirlas de una manera comprensible. 
 
