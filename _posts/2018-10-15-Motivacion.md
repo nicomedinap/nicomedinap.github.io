@@ -1,3 +1,11 @@
+---
+layout: post
+mathjax: true
+comments: true
+title:  "Motivacion"
+---
+{% include mathjax.html %}
+
 
 # Motivación
 
