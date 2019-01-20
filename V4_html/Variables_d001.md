@@ -1,6 +1,4 @@
 ---
-layout: post
-mathjax: true
 comments: true
 title:  "Estrellas variables en d001"
 ---
