@@ -8,7 +8,7 @@ Para cada tile analizado, habrá un link donde estarán disponibles todas las cu
 
 * [d001](https://github.com/nicomedinap/nicomedinap.github.io/blob/master/V4_html/Variables_d001.md){:target="_blank"}
 * [d002](https://github.com/nicomedinap/nicomedinap.github.io/blob/master/V4_html/Variables_d002.md){:target="_blank"}
-* [d045](https://github.com/nicomedinap/nicomedinap.github.io/blob/master/V4_html/Aprender_a_programar.html)
+* [d045]
 * [d046]
 * [d083]
 * [d084]
