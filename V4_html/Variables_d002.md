@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 comments: true
 title:  "Estrellas variables en d002"
 ---
