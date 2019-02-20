@@ -1,4 +1,8 @@
-# Música interesante
+---
+layout: default
+comments: true
+title:  "Música interesante"
+---
 
 Acá dejaré un compendio de discos que frecuento bastante en youtube, básicamente porque me da flojera usar Spotify para escucar música, y además para poder acceder a ellos de una manera ágil :)
 
@@ -27,3 +31,9 @@ Bueno, gracias Nico del pasado!
 [Gong - The Flying Teapot (1973)](https://youtu.be/3UArtHsvL50){:target="_blank"}
 
 [Manfred Mann's Earth Band - Watch (1978)](https://youtu.be/5YWaIglbCak){:target="_blank"}
+
+[La máquina de hacer pájaros - Películas (1977)](https://youtu.be/wck9JhNfBLg){:target="_blank"}
+
+[Serú Girán - La grasa de las capitales (1979)](https://youtu.be/ikl-4eYDDWs){:target="_blank"}
+
+[Serú Girán - Serú Girán (1978)](https://youtu.be/S-cySidTKAQ){:target="_blank"}
