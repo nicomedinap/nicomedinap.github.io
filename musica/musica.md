@@ -15,7 +15,7 @@ Bueno, chao.
 
 [Genesis - Nursery Cryme (1971)](https://youtu.be/XJ-I0htgXYI){:target="_blank"}
 
-[Genesis - Foxtrot (1972)](https://www.youtube.com/watch?v=x_9MKJCc3dw) 
+[Genesis - Foxtrot (1972)](https://www.youtube.com/watch?v=x_9MKJCc3dw){:target="_blank"}
 
 [Genesis- Selling England By The Pound (1973)](https://youtu.be/7Rn9tzirks4){:target="_blank"}
 
@@ -25,5 +25,4 @@ Bueno, chao.
 
 [Gong - The Flying Teapot (1973)](https://youtu.be/3UArtHsvL50){:target="_blank"}
 
-[Manfred Mann's Earth Band - Watch ()](){:target="_blank"}
-
+[Manfred Mann's Earth Band - Watch (1978)](https://youtu.be/5YWaIglbCak){:target="_blank"}
