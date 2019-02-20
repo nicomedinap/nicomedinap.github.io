@@ -27,7 +27,7 @@ Este proyecto está desarrollado en las [páginas de Github](https://pages.githu
 
 ## Contacto
 
-Soy activo en algunas redes sociales, y mi correo académico es nicolas.medina@postgrado.uv.cl.
+Soy más o menos activo en las redes sociales enlistadas en los [links de interés](https://nicomedinap.github.io/links.html){:target="_blank"}, y mi correo académico es nicolas.medina@postgrado.uv.cl.
 
 ## Lista de cosas por hacer
 
@@ -36,3 +36,4 @@ Soy activo en algunas redes sociales, y mi correo académico es nicolas.medina@p
 - [x] Sobrevivir al 2012.
 - [x] Creerme científico.
 - [ ] Escribir una tesis de Doctorado.
+- [ ] Escuchar "Close to the Edge" en vivo.
