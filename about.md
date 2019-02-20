@@ -31,9 +31,9 @@ Soy más o menos activo en las redes sociales enlistadas en los [links de inter�
 
 ## Lista de cosas por hacer
 
-- [x] Tener un blog.
-- [ ] Entender todos los aspectos del blog.
-- [x] Sobrevivir al 2012.
-- [x] Creerme científico.
-- [ ] Escribir una tesis de Doctorado.
-- [ ] Escuchar "Close to the Edge" en vivo.
+[x] Tener un blog.
+[ ] Entender todos los aspectos del blog.
+[x] Sobrevivir al 2012.
+[x] Creerme científico.
+[ ] Escribir una tesis de Doctorado.
+[ ] Escuchar "Close to the Edge" en vivo.
