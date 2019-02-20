@@ -1,5 +1,5 @@
 ---
-layout: none
+layout: default
 comments: true
 title:  "Música interesante"
 ---
