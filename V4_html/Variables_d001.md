@@ -1319,4 +1319,4 @@ for i in range(len(ID_non)):
 ![png](Visualizacion_d001_files/Visualizacion_d001_6_89.png)
 
 
-# Holi, gracias por ver mis estrellitas :)
+## Holi, gracias por ver mis estrellitas :)
