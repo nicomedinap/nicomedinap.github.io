@@ -37,3 +37,5 @@ Bueno, gracias Nico del pasado!
 [Serú Girán - La grasa de las capitales (1979)](https://youtu.be/ikl-4eYDDWs){:target="_blank"}
 
 [Serú Girán - Serú Girán (1978)](https://youtu.be/S-cySidTKAQ){:target="_blank"}
+
+[Gentle Giant - The Power And The Glory (1974)](https://youtu.be/ZgoKwMbPSO8){:target="_blank"}
