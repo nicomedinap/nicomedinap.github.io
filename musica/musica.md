@@ -1,4 +1,4 @@
-#Música interesante
+# Música interesante
 
 Acá dejaré un compendio de discos que frecuento bastante en youtube, básicamente porque me da flojera usar Spotify para escucar música, y además para poder acceder a ellos de una manera ágil :)
 
