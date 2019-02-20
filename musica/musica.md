@@ -1,7 +1,7 @@
 Acá dejaré un compendio de discos que frecuento bastante en youtube, básicamente porque me da flojera usar Spotify para 
 escucar música, y además para poder acceder a ellos de una manera ágil :)
 
-Bueno, chao.
+Bueno, gracias Nico del pasado!
 
 [Happy the Man - Crafty Hands (1978)](https://www.youtube.com/watch?v=VRera802pUU){:target="_blank"}
 
