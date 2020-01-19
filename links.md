@@ -13,4 +13,4 @@ Acá algunos links que pueden ser de interés:
 * [Imagen de la Vía Láctea combinando VVV y VPHAS+](http://djer.roe.ac.uk/vsa/vvv/mosaic/lb.html?fbclid=IwAR2rdnczc_BdbZ00PKxs0UhU4nivZu7v5ElS-MCvsO2fDsYPB84ESscn9v8){:target="_blank"}
 * [Colección de Jupyter notebooks en diferentes ciencias](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks){:target="_blank"}
 * ¯\ \_(ツ)_/¯
-* También me gusta escribir, subiré algunos textos [acá](https://github.com/nicomedinap/nicomedinap.github.io/blob/master/escritos/LoQueUnoNecesita.md)
+* También me gusta escribir, subiré algunos textos [acá](https://nicomedinap.github.io/escritos/LoQueUnoNecesita.html){:target="_blank"} 
