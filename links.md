@@ -14,3 +14,4 @@ Acá algunos links que pueden ser de interés:
 * [Colección de Jupyter notebooks en diferentes ciencias](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks){:target="_blank"}
 * ¯\ \_(ツ)_/¯
 * También me gusta escribir, subiré algunos textos [acá](https://nicomedinap.github.io/escritos/LoQueUnoNecesita.html){:target="_blank"} 
+* [Guía rápida de Markdown](https://enterprise.github.com/downloads/en/markdown-cheatsheet.pdf){:target="_blank"}
