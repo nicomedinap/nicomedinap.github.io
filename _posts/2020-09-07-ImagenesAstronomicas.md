@@ -6,8 +6,6 @@ title: Los colores de las imágenes astronómicas
 ---
 {% include mathjax.html %}
 
-<h1 id="<a class="anchor-link" href="#Los-colores-de-las-im&#225;genes-astron&#243;micas"></a></h1>
-
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
