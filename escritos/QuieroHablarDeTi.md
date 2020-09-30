@@ -1,0 +1,32 @@
+---
+layout: default
+comments: true
+title:  "Quiero hablar de ti"
+---
+
+
+## Quiero hablar de ti
+### 13/05/2013 
+
+Siempre hago lo mismo antes de escribir un par de lineas: refriego el rostro contra mis manos, como si le comunicara al mundo que esta vez sí podré conectar unas cuantas palabras que tengan sentido; y tiemblo, algo bastante natural en mi persona cuando enfrento una situación nueva y excitante. Luego, examino qué es lo que me produce esas ganas inmensas de esculpir una pequeña hoja, aquí es cuando se produce el problema.
+
+Quiero hablar de ti. Contigo puedo imaginar conversaciones que pueden ser sostenidas en cualquier parte del planeta mientras reímos. A veces me encuentro pensando en todas y cada una de las palabras que pronunciaste en mi honor, lo que me induce una pequeña nostalgia, equiparable a cuando recuerdas un añejo momento de la niñez; sonrío y busco en alguno de mis bolsillos un cigarro y lo enciendo sin siquiera mover la vista, inhalo profundamente buscando toda la calma de mi ser, y exhalo en dirección al cielo, donde habitas la gran mayoría de las veces. De ti no necesito nada: ni que me mientas, ni me ilustres de tus conocimientos, ni si quiera necesito ese pelo alborotado que siempre delataba la dirección del viento; vivimos todo lo que nos ofreció este mundo, absolutamente todo.
+
+Tiemblo nuevamente, el hecho de cruzar tantos umbrales distintos y construirlos de manera única ha sido un desgaste permanente (y un tópico recurrente, dicho sea de paso) a mis perezosas esperanzas, pero fueron las que dieron existencia a mis mayores introspecciones, tan largas como la vida misma; lo que todos ignoran es que raramente se puede obtener algo bueno de ser sincero frente a un espejo.
+
+Quiero hablar de ti, el ser humano más repugnante que he podido conocer, y digo conocer en el sentido más artificial posible, porque no te conocí en lo más mínimo. Es más, podría apostar que nadie te ha descifrado realmente sin sentir una gran cuota de cólera en el estómago. Tu mirada, tu forma de caminar, de desenvolverte frente a los demás mortales y de mentirles a los que te aman es sólo un extracto; a ratos me gustaría saber hace cuánto tiempo estás podrido, porque todas tus manías me son familiarmente conocidas, más de lo que me gustaría admitir.
+
+Después de encender otro cigarrillo más, de ordenar mi odioso pelo y enfocar mi atención en lo que cubre estas paredes, me pregunto cuánta gente tendrá la convicción de que pertenezco al amplio grupo de los hijos de puta (no porque mi madre lo sea, o porque las putas sean malignas). Después de mentir tanto, a todos, a mis capacidades, a los que me rodean, la pregunta natural es por qué, cuál fue la motivación de concebir un nuevo Nicolás y ofrecerlo al mundo. Un día descubrí que era bueno para inventar historias, fluían por todas partes, las creaba y hablaba de ellas como si fueran mías. En ese entonces me gustaba saber que podía ser realmente bueno para alguna cosa, y no es que tratara de hacer pocas. Al poco tiempo me creé una vida, una nueva vida, donde todo pasaba y era exactamente como yo quería, y era bueno. Quizá estas historias surgieron de los extensos tiempos muertos que soportaba siendo aún un niño, aunque quisiera no podía eliminarlos, no tenía algo para hacerlo. Ahora me encantaría pasar todo ese tiempo meditando y creando (tal vez no era tanto, pero por ejemplo, media hora es eterna para un niño aburrido). Todo eso fue aplastado por la sinceridad de tu voz, de los frondosos árboles que nos cobijaban cuando describíamos el mundo; me enseñaste que asentir a todo no era una virtud, lo que ha sido el mayor logro de toda mi historia. Pero aún así te mentí, y de la manera más dolorosa <<Para mí, no para ti>>, en el fondo tienes todo el derecho a odiarme así como lo haces hoy, de una manera alejada y ausente.
+
+Quiero hablar de ti y de todo tu ser, de tus sueños rasguñados y de tu voluntad vigorosa, en la que todos nos perdemos sin excepción alguna. Acostumbras no decir palabras e ignorar a la gente; así tal cual eres un misterio y cada día me sorprendo de tus demonios. Así fui a dar, por un suburbio extraviado y para mí casi desconocido, con el golpe que exhibió mi inestable equilibrio; y te reíste y te burlaste, un comportamiento acorde a la absurda situación que se había formado. Rehicimos la vida en una larga e inagotable conversación nocturna una y otra y otra vez, nos prometimos recuerdos y momentos de todo tipo para nunca olvidar que fuimos jóvenes y felices; y todo esto parte del hecho de que contigo vivo todo lo que siempre he querido: lo irónico, lo bizarro, lo alocado, lo importante; y tú siempre ahí, con  el mentón horizontal mirando las estrellas, resistiendo el viento a mi lado.
+
+Entra entonces la noche y no puedo dormir, espero una revelación como quién espera algo que está a punto de suceder, pero nada pasa; todo está del otro lado de estas palabras que escribo apresuradamente. Esta noche he cerrado todas las ventanas ya que en la tenue oscuridad me atrevo a decir cosas que antes ocultaba estrategicamente entre los silbidos de la voz.
+
+Quiero hablar de ti, mi única conexión al pasado. Si tuviera que decir algo en lo que nos parecemos, señalaría nuestra predilección a las noches de alcohol y jolgorio, pero el tiempo ya ha hecho de las suyas, calando hondo en lo que nos unía. Estas no son las primeras palabras que te dedico ni aquí ni allá, pero serán las últimas que sintetizo con esta agonía en el pecho, porque ya me harté de esperar y de cargar con tus sombras, me harté de comerme tu mierda, de fingir que nada ha pasado entre nosotros, y por sobretodo de tus grandes e indecisos ojos, los que no tienen expresión cuando hablamos ni cuando reímos ni nunca. Realmente me entristece que no tengas esa alegría que te caracterizaba y te hacía el punto en el cual giraban las cosas.
+
+Esta es la gran problemática, todo radica en que cada día estoy más muerto, porque cada día olvido los detalles de los gemidos que he escuchado y de las sonrisas que me han regalado; mas no olvido que siempre es posible tocar el cielo.
+Porque no necesito ni la más mísera palabra de tu tormentosa boca.
+Porque encarnas la hipocresía en todo su esplendor, flamante juglar de la vida.
+Porque quiero estar presente en todos los momentos donde tu sonrisa brille de felicidad.
+Porque decidiste que nada sería como lo recordábamos, mi pequeña acompañante de la infancia.
+Y porque me he dado cuenta que necesito un tópico más interesante, algo que no incluya sombras etéreas.
