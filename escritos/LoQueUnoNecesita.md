@@ -43,8 +43,13 @@ Entra entonces la noche y no puedo dormir, espero una revelación como quién es
 Quiero hablar de ti, mi única conexión al pasado. Si tuviera que decir algo en lo que nos parecemos, señalaría nuestra predilección a las noches de alcohol y jolgorio, pero el tiempo ya ha hecho de las suyas, calando hondo en lo que nos unía. Estas no son las primeras palabras que te dedico ni aquí ni allá, pero serán las últimas que sintetizo con esta agonía en el pecho, porque ya me harté de esperar y de cargar con tus sombras, me harté de comerme tu mierda, de fingir que nada ha pasado entre nosotros, y por sobretodo de tus grandes e indecisos ojos, los que no tienen expresión cuando hablamos ni cuando reímos ni nunca. Realmente me entristece que no tengas esa alegría que te caracterizaba y te hacía el punto en el cual giraban las cosas.
 
 Esta es la gran problemática, todo radica en que cada día estoy más muerto, porque cada día olvido los detalles de los gemidos que he escuchado y de las sonrisas que me han regalado; mas no olvido que siempre es posible tocar el cielo.
+
 Porque no necesito ni la más mísera palabra de tu tormentosa boca.
+
 Porque encarnas la hipocresía en todo su esplendor, flamante juglar de la vida.
+
 Porque quiero estar presente en todos los momentos donde tu sonrisa brille de felicidad.
+
 Porque decidiste que nada sería como lo recordábamos, mi pequeña acompañante de la infancia.
+
 Y porque me he dado cuenta que necesito un tópico más interesante, algo que no incluya sombras etéreas.
