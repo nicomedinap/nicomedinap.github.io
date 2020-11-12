@@ -21,13 +21,13 @@ title:  "Variación de brillo en las estrellas"
 <p>Sea lo que sea que haya pasado, la explicación menos probable siempre será que fue un alien, un OVNI o vida extraterrestre. Resulta que el universo esta lleno de luces extrañas que cambian su brillo a lo largo del tiempo, y lo más probable es que nos hayamos topado con una <strong>estrella variable</strong>, una fuente estelar que cambia su brillo superficial mientras el tiempo pasa. La verdad que son muy comunes, existen de muchos tipos y hoy explicaré cómo podemos llegar a saber tantas cosas sobre estos puntitos luminosos.</p>
 <table>
 <thead><tr>
-<th style="text-align:center"><img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif" width="550" height="300" alt=""></th>
+<th style="text-align:center"><img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif" width="650" height="400" alt=""></th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td style="text-align:center"><em>Figura 1: Estrellas variables tipo RR Lyrae pulsando y cambiando su brillo mientras viven tranquilamente en el cúmulo globular Messier 3. Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
 
-<td style="text-align:center"><em>Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
 </tr>
 </tbody>
 </table>
@@ -103,10 +103,10 @@ title:  "Variación de brillo en las estrellas"
 <h2 id="&#191;Todas-las-estrellas-son-como-el-sol?-(spoilert-alert:-nope)">&#191;Todas las estrellas son como el sol? (spoilert alert: nope)<a class="anchor-link" href="#&#191;Todas-las-estrellas-son-como-el-sol?-(spoilert-alert:-nope)"></a></h2><p>Toda la cultura y las aventuras de la humanidad están confinadas en nuestro sistema solar y aún así, siento ser yo el que te lo diga, pero el sol es una estrella promedio, una más del montón de estrellas del grupo de baja masa. Nuestra estrella tiene un radio de <strong>697.000 [Km]</strong>, a una distancia de <strong>149.597.870.700 [metros] = 1,49$\times$10$^{8}$ [Km]</strong>, y una masa de <strong>1,99$\times$10$^{30}$ [Kg]</strong> (un uno seguido de 30 ceros), casi el 99,8% de la masa de todo nuestro sistema planetario, y aún así, <strong>es un cuerpo de baja masa D:</strong></p>
 <p>Esta afirmación es el resultado del gran número de estrellas que se han observado a lo largo de los años, tanto dentro de nuestra galaxia como en galaxias vecinas. Hemos comparado todas estas estrellas con el sol y nos hemos dado cuenta que en universo hay estructuras casi <strong>inimaginablemente más grandes</strong>. Pero no importa Sol, nosotros te queremos mucho y vamos a entender el universo usandote como referencia. Has demostrado ser una estrella tranquila y calurosa, así que te usaremos como una regla cósmica, te definiremos y usaremos como unidad básicas:</p>
 <ol>
-<li>la Masa Solar 1 $M_{\odot} := 1,99\times10^{30}\ [Kg]$ </li>
-<li>El Radio Solar 1 $M_{\odot} := 697.000\ [Km]$  </li>
-<li>la Luminosidad Solar 1 $L_{\odot} := 697.000\ [Km]$ </li>
-<li>Distancia tierra-sol: la unidad astronómica 1 $[UA]:=  1,49\times10^{8}\ [Km]$</li>
+<li>la Masa Solar $M_{\odot} := 1,99\times10^{30}\ [Kg]$ </li>
+<li>El Radio Solar $R_{\odot} := 697.000\ [Km]$  </li>
+<li>la Luminosidad Solar $L_{\odot} := 697.000\ [Km]$ </li>
+<li>Distancia tierra-sol: la unidad astronómica $[UA]:=  1,49\times10^{8}\ [Km]$</li>
 </ol>
 <p>Sabiendo esto, ahora podremos hablar de las otras estrellas usando como comparación al Sol. Por ejemplo, la estrella que ostenta el record de más masiva habita la Nebulosa de la Tarántula, en la nube de magallanes, y se llama R136a1, con $M=265M_{\odot}$, o sea que esta estrella tiene 265 veces la masa de nuestro humilde Sol.</p>
 <p>Entonces, como podrán darse cuenta en esta búsqueda se han encontrado toda una gama de diferentes escenarios, y se han definido distintas formas de clasificación, siendo la más importante la clasificación por <strong>tipo espectral</strong>, donde las estrellas se arreglan en base a sus temperaturas superficiales (o efectivas), y se les asigna una clase de <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">tipo espectral</a> ('O','B','A','F','G','K','M'). Diferentes clases poseerán diferentes <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">temperaturas efectivas</a>, las cuales también tiene relación con el color superficial. Si se preguntan por qué se eligieron esas letras, es porque este tipo de clasificación estelar está basado en la llamada <em>clasificación de Harvard</em>.</p>
