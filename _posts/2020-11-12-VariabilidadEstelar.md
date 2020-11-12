@@ -32,18 +32,12 @@ title:  "Variación de brillo en las estrellas"
 <h2 id="Bolas-de-gas-en-equilibrio-quem&#225;ndose-a-millones-de-kil&#243;metros-de-aqu&#237;">Bolas de gas en equilibrio quem&#225;ndose a millones de kil&#243;metros de aqu&#237;<a class="anchor-link" href="#Bolas-de-gas-en-equilibrio-quem&#225;ndose-a-millones-de-kil&#243;metros-de-aqu&#237;"></a></h2><p>Una estrella es una gigantezca esfera de gas la cual ha alcanzado las condiciones físicas necesarias para que en su centro se desencadenen una serie de reacciones nucleares a través de la <a href="https://es.wikipedia.org/wiki/Fusi%C3%B3n_nuclear">fusión nuclear</a>, las cuales liberan y transmiten energía hacia el exterior en forma de radiación electromagnética (luz y calor). Gran parte de las estrellas poseen su característica forma esférica dado que existe un balance entre dos fuerzas fundamentales: Primero está la <strong>gravedad</strong>, la cual es generada por la masa de la estrella y actua atrayendo y comprimiendo el gas hacia el centro. Y luego está la <strong>presión</strong> provocada por el mismo gas, que al estar a una temperatura elevada se expande y genera presión sobre su entorno, como en un globo de aire caliente (asumiendo que han visto uno, personalmente yo no). Cuando una estrella cumple esta condición de equilibrio, se dice que está en <strong>equilibrio hidrostático</strong> y la estrella adoptará una forma esférica estable. La figura 2 grafica cómo la gravedad (flecha roja) y la presión (flecha azul) actuan sobre una estrella, y se contrarrestan hasta alcanzar su LOGICA geometría.</p>
 <table>
 <thead><tr>
-<th style="text-align:center"><a href="https://nicomedinap.github.io"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/hydrosta.jpg" width="450" height="300"></div></a></th>
+<th style="text-align:center"><a href="https://nicomedinap.github.io"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/hydrosta.jpg" width="350" height="230"></div></a></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 2: Esquema del balance de la presión con la gravedad. La gravedad tratará de comprimir</em></td>
-</tr>
-<tr>
-<td style="text-align:center"><em>todo el material hacia el centro del sistema, y la presión tratará de expandirlo, generando esta</em></td>
-</tr>
-<tr>
-<td style="text-align:center"><em>esfera de gas incandescente.</em></td>
+<td style="text-align:center"><em>Figura 2: Esquema del balance de la presión con la gravedad. La gravedad tratará de comprimir todo el material hacia el centro del sistema, y la presión tratará de expandirlo, generando esta esfera de gas incandescente.</em></td>
 </tr>
 </tbody>
 </table>
