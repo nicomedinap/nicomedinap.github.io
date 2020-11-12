@@ -26,7 +26,7 @@ title:  "Variación de brillo en las estrellas"
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 1: Estrellas variables tipo RR Lyrae pulsando y cambiando</em></td>
+<td style="text-align:center"><em>Figura 1: Estrellas variables tipo RR Lyrae pulsando y cambiando su brillo mientras viven tranquilamente en el su brillo mientras viven tranquilamente en el su brillo mientras viven tranquilamente en el</em></td>
 </tr>
 <tr>
 <td style="text-align:center"><em>su brillo mientras viven tranquilamente en el cúmulo globular Messier 3</em></td>
