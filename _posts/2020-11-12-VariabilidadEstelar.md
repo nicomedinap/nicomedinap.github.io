@@ -26,12 +26,7 @@ title:  "Variación de brillo en las estrellas"
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 1: Estrellas variables tipo RR Lyrae pulsando y cambiando su brillo mientras viven tranquilamente en el cúmulo globular Messier 3. Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
-</tr>
-<tr>
-<td style="text-align:center"><em>su brillo mientras viven tranquilamente en el cúmulo globular Messier 3</em></td>
-</tr>
-<tr>
+
 <td style="text-align:center"><em>Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
 </tr>
 </tbody>
