@@ -21,12 +21,12 @@ title:  "Variación de brillo en las estrellas"
 <p>Sea lo que sea que haya pasado, la explicación menos probable siempre será que fue un alien, un OVNI o vida extraterrestre. Resulta que el universo esta lleno de luces extrañas que cambian su brillo a lo largo del tiempo, y lo más probable es que nos hayamos topado con una <strong>estrella variable</strong>, una fuente estelar que cambia su brillo superficial mientras el tiempo pasa. La verdad que son muy comunes, existen de muchos tipos y hoy explicaré cómo podemos llegar a saber tantas cosas sobre estos puntitos luminosos.</p>
 <table>
 <thead><tr>
-<th style="text-align:center"><img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif" width="450" height="300">alt=""></th>
+<th style="text-align:center"><img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif" width="550" height="300" alt=""></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 1: Estrellas variables tipo RR Lyrae pulsando y cambiando s</em></td>
+<td style="text-align:center"><em>Figura 1: Estrellas variables tipo RR Lyrae pulsando y cambiando su brillo mientras viven tranquilamente en el cúmulo globular Messier 3. Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
 </tr>
 <tr>
 <td style="text-align:center"><em>su brillo mientras viven tranquilamente en el cúmulo globular Messier 3</em></td>
