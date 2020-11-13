@@ -105,71 +105,71 @@ title:  "Variación de brillo en las estrellas"
 <p>Entonces, como podrán darse cuenta en esta búsqueda se han encontrado toda una gama de diferentes escenarios, y se han definido distintas formas de clasificación, siendo la más importante la clasificación por <strong>tipo espectral</strong>, donde las estrellas se arreglan en base a sus temperaturas superficiales (o efectivas), y se les asigna una clase de <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">tipo espectral</a> ('O', 'B', 'A', 'F', 'G', 'K', 'M'). Diferentes clases poseerán diferentes <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">temperaturas efectivas</a>, las cuales también tiene relación con el color superficial. Si se preguntan por qué se eligieron esas letras, es porque este tipo de clasificación estelar está basado en la llamada <em>clasificación de Harvard</em>.</p>
 <p>La siguiente tabla compara las propiedades de estrellas clasificadas en distintas clases espectrales, usando como base las unidades solares:</p>
 <table>
-<thead style="text-align:center;font-size:8pt"><tr>
-<th >Clase</th>
-<th style="text-align:center;font-size:6pt">Temperatura</th>
-<th style="text-align:center;font-size:4pt">Color</th>
-<th style="text-align:center;font-size:2pt">Masa</th>
-<th style="text-align:center">Radio</th>
-<th style="text-align:center">Luminosidad bolométrica</th>
+<thead><tr>
+<th style="text-align:center;font-size:12pt">Clase</th>
+<th style="text-align:center;font-size:12pt">Temperatura</th>
+<th style="text-align:center;font-size:12pt">Color</th>
+<th style="text-align:center;font-size:12pt">Masa</th>
+<th style="text-align:center;font-size:12pt">Radio</th>
+<th style="text-align:center;font-size:12pt">Luminosidad bolométrica</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">O</td>
-<td style="text-align:center">≥ 33.000 K</td>
-<td style="text-align:center">azul</td>
-<td style="text-align:center">≥ 16 M☉</td>
-<td style="text-align:center">≥ 6,6 R☉</td>
-<td style="text-align:center">≥ 30.000 L☉</td>
+<td style="text-align:center;font-size:12pt">O</td>
+<td style="text-align:center;font-size:12pt">≥ 33.000 K</td>
+<td style="text-align:center;font-size:12pt">azul</td>
+<td style="text-align:center;font-size:12pt">≥ 16 M☉</td>
+<td style="text-align:center;font-size:12pt">≥ 6,6 R☉</td>
+<td style="text-align:center;font-size:12pt">≥ 30.000 L☉</td>
 </tr>
 <tr>
-<td style="text-align:center">B</td>
-<td style="text-align:center">10.000–33.000 K</td>
-<td style="text-align:center">azul a blanco azulado</td>
-<td style="text-align:center">2,1–16 M☉</td>
-<td style="text-align:center">1,8–6,6 R☉</td>
-<td style="text-align:center">25–30.000 L☉</td>
+<td style="text-align:center;font-size:12pt">B</td>
+<td style="text-align:center;font-size:12pt">10.000–33.000 K</td>
+<td style="text-align:center;font-size:12pt">azul a blanco azulado</td>
+<td style="text-align:center;font-size:12pt">2,1–16 M☉</td>
+<td style="text-align:center;font-size:12pt">1,8–6,6 R☉</td>
+<td style="text-align:center;font-size:12pt">25–30.000 L☉</td>
 </tr>
 <tr>
-<td style="text-align:center">A</td>
-<td style="text-align:center">7.500–10.000 K</td>
-<td style="text-align:center">blanco</td>
-<td style="text-align:center">1,4–2,1M☉</td>
-<td style="text-align:center">1,4–1,8 R☉</td>
-<td style="text-align:center">5–25 L☉</td>
+<td style="text-align:center;font-size:12pt">A</td>
+<td style="text-align:center;font-size:12pt">7.500–10.000 K</td>
+<td style="text-align:center;font-size:12pt">blanco</td>
+<td style="text-align:center;font-size:12pt">1,4–2,1M☉</td>
+<td style="text-align:center;font-size:12pt">1,4–1,8 R☉</td>
+<td style="text-align:center;font-size:12pt">5–25 L☉</td>
 </tr>
 <tr>
-<td style="text-align:center">F</td>
-<td style="text-align:center">6,000–7,500 K</td>
-<td style="text-align:center">blanco amarillento</td>
-<td style="text-align:center">1,04–1,4 M☉</td>
-<td style="text-align:center">1,15–1,4 R☉</td>
-<td style="text-align:center">1,5–5 L☉</td>
+<td style="text-align:center;font-size:12pt">F</td>
+<td style="text-align:center;font-size:12pt">6,000–7,500 K</td>
+<td style="text-align:center;font-size:12pt">blanco amarillento</td>
+<td style="text-align:center;font-size:12pt">1,04–1,4 M☉</td>
+<td style="text-align:center;font-size:12pt">1,15–1,4 R☉</td>
+<td style="text-align:center;font-size:12pt">1,5–5 L☉</td>
 </tr>
 <tr>
-<td style="text-align:center">G</td>
-<td style="text-align:center">5.200–6,000 K</td>
-<td style="text-align:center">amarillo</td>
-<td style="text-align:center">0,8–1,04 M☉</td>
-<td style="text-align:center">0,96–1,15 R☉</td>
-<td style="text-align:center">0,6–1,5 L☉</td>
+<td style="text-align:center;font-size:12pt">G</td>
+<td style="text-align:center;font-size:12pt">5.200–6,000 K</td>
+<td style="text-align:center;font-size:12pt">amarillo</td>
+<td style="text-align:center;font-size:12pt">0,8–1,04 M☉</td>
+<td style="text-align:center;font-size:12pt">0,96–1,15 R☉</td>
+<td style="text-align:center;font-size:12pt">0,6–1,5 L☉</td>
 </tr>
 <tr>
-<td style="text-align:center">K</td>
-<td style="text-align:center">3.700–5.200 K</td>
-<td style="text-align:center">naranja</td>
-<td style="text-align:center">0,45–0,8 M☉</td>
-<td style="text-align:center">0,7–0,96 R☉</td>
-<td style="text-align:center">0,08–0,6 L☉</td>
+<td style="text-align:center;font-size:12pt">K</td>
+<td style="text-align:center;font-size:12pt">3.700–5.200 K</td>
+<td style="text-align:center;font-size:12pt">naranja</td>
+<td style="text-align:center;font-size:12pt">0,45–0,8 M☉</td>
+<td style="text-align:center;font-size:12pt">0,7–0,96 R☉</td>
+<td style="text-align:center;font-size:12pt">0,08–0,6 L☉</td>
 </tr>
 <tr>
-<td style="text-align:center">M</td>
-<td style="text-align:center">≤ 3.700 K</td>
-<td style="text-align:center">rojo</td>
-<td style="text-align:center">≤ 0,45 M☉</td>
-<td style="text-align:center">≤ 0,7 R☉</td>
-<td style="text-align:center">≤ 0,08 L☉</td>
+<td style="text-align:center;font-size:12pt">M</td>
+<td style="text-align:center;font-size:12pt">≤ 3.700 K</td>
+<td style="text-align:center;font-size:12pt">rojo</td>
+<td style="text-align:center;font-size:12pt">≤ 0,45 M☉</td>
+<td style="text-align:center;font-size:12pt">≤ 0,7 R☉</td>
+<td style="text-align:center;font-size:12pt">≤ 0,08 L☉</td>
 </tr>
 </tbody>
 </table>
