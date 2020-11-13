@@ -22,14 +22,14 @@ title:  "Variación de brillo en las estrellas"
 
 <div align="center">
     <a href="http://www.cnyo.org/2013/09/14/an-update-on-nova-del-2013-pnvj202330732046041-dimmer-views-and-a-distance-estimate/" target="_blank">
-        <img src="http://www.cnyo.org/wp-content/uploads/2013/09/2013sept14_gif_1531x1459_2db958_zps3f68f105.gif" width="350" height="250" class="center">
+        <img src="http://www.cnyo.org/wp-content/uploads/2013/09/2013sept14_gif_1531x1459_2db958_zps3f68f105.gif" width="350" height="350" class="center">
     </a>
 </div>
 
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 1: Animación de la candidata a estrella Nova Del2013 (PNVJ20233073+2046041) </em></td>
+<td style="text-align:center"><em>Figura 1: Animación que muestra el evidente brillo variable de la candidata a estrella Nova Del2013 (PNVJ20233073+2046041) </em></td>
 </tr>
 </tbody>
 </table>
