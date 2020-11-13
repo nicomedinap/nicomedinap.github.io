@@ -21,7 +21,7 @@ title:  "Variación de brillo en las estrellas"
 <p>Sea lo que sea que haya pasado, la explicación menos probable siempre será que fue un alien, un OVNI o vida extraterrestre. Resulta que el universo esta lleno de luces extrañas que cambian su brillo a lo largo del tiempo, y lo más probable es que nos hayamos topado con una <strong>estrella variable</strong>, una fuente estelar que cambia su brillo superficial mientras el tiempo pasa. La verdad que son muy comunes, existen de muchos tipos y hoy explicaré cómo podemos llegar a saber tantas cosas sobre estos puntitos luminosos.</p>
 
 <div align="center">
-    <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">
+    <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/" target="_blank">
         <img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif" width="350" height="250" class="center">
     </a>
 </div>
@@ -36,12 +36,11 @@ title:  "Variación de brillo en las estrellas"
 
 <h2 id="Bolas-de-gas-en-equilibrio-quem&#225;ndose-a-millones-de-kil&#243;metros-de-aqu&#237;">Bolas de gas en equilibrio quem&#225;ndose a millones de kil&#243;metros de aqu&#237;<a class="anchor-link" href="#Bolas-de-gas-en-equilibrio-quem&#225;ndose-a-millones-de-kil&#243;metros-de-aqu&#237;"></a></h2><p>Una estrella es una gigantezca esfera de gas la cual ha alcanzado las condiciones físicas necesarias para que en su centro se desencadenen una serie de reacciones nucleares a través de la <a href="https://es.wikipedia.org/wiki/Fusi%C3%B3n_nuclear">fusión nuclear</a>, las cuales liberan y transmiten energía hacia el exterior en forma de radiación electromagnética (luz y calor). Gran parte de las estrellas poseen su característica forma esférica dado que existe un balance entre dos fuerzas fundamentales: Primero está la <strong>gravedad</strong>, la cual es generada por la masa de la estrella y actua atrayendo y comprimiendo el gas hacia el centro. Y luego está la <strong>presión</strong> provocada por el mismo gas, que al estar a una temperatura elevada se expande y genera presión sobre su entorno, como en un globo de aire caliente (asumiendo que han visto uno, personalmente yo no). Cuando una estrella cumple esta condición de equilibrio, se dice que está en <strong>equilibrio hidrostático</strong> y la estrella adoptará una forma esférica estable. La figura 2 grafica cómo la gravedad (flecha roja) y la presión (flecha azul) actuan sobre una estrella, y se contrarrestan hasta alcanzar su LOGICA geometría.</p>
 
-
-
 <div align="center"> 
+    <a href="hhttps://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/hydrosta.jpg" target="_blank">
     <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/hydrosta.jpg" width="350" height="250">
+    </a>
 </div>
-
 
 <table>
 <tbody>
@@ -182,17 +181,18 @@ title:  "Variación de brillo en las estrellas"
 </tbody>
 </table>
 <p>Además, a modo de comparación visual, la figura 3 muestra estrellas clasificadas en diferentes tipos espectrales. De forma visual es posible relacionar sus propiedades, como el tamaño, la masa y su color superficial, este último es muy importante para definor la temperatura superficial de la estrella, que es medido en Kelvin [K].</p>
+
+<a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="550" height="400"></div></a>
+
 <table>
-<thead><tr>
-<th style="text-align:center"><a href="https://nicomedinap.github.io"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="550" height="400"></div></a></th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 3:  Relación entre el color y el tamaño de estrellas de diferentes tipos espectrales</em></td>
+<td style="text-align:center"><em>Figura 3:  Relación entre el color y el tamaño de estrellas de diferentes tipos espectrales. </em></td>
 </tr>
 </tbody>
 </table>
+
+
 <p>Usando la tabla y la figura 3: ¿Cuál sería el tipo espectral del sol? ¿Y dónde estaría posicionado aproximadamente en la figura 3?</p>
 <p>Lo interesante de esta clasificación es que si construimos una representación visual (aka, un gráfico) donde ordenamos las estrellas con respecto a su color (de azules a rojas) y luminosidad (más brillantes a menos brillantes), podemor ver que existe una coherencia, la cual nos habla del <strong>estado evolutivo</strong> de estas estrellas. El siguiente video lo grafica de una manera magistral:</p>
 
@@ -243,50 +243,54 @@ title:  "Variación de brillo en las estrellas"
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>El diagrama antes mostrado, se conoce popularmente como el <a href="https://es.wikipedia.org/wiki/Diagrama_de_Hertzsprung-Russell"><strong>Diagrama de Hertzsprung-Russell</strong></a> o <strong>diagrama HR</strong> para no gastar tanto lápiz. Hay diferentes versiones del diagrama HR, pero todos apuntan a la caracterización del estado evolutivo de las estrellas en estudio. Dependiendo de las caracteristicas de las estrellas (principalmente la masa), éstas recorrerán diferentes lugares del diagrama HR.</p>
 <p>En la figura 4 es posible ver un famoso y autoexplicativo diagrama HR, el cual ilustra en qué posición del diagrama se localizan estrellas con diferentes colores, luminosidades, masas, tipo espectral, y también se estima el tiempo aproximado de vida que poseen cada uno de esos puntitos luminosos. Es posible ver que la mayor parte de las estrellas están distribuidas a lo largo de la llamada <a href="https://es.wikipedia.org/wiki/Secuencia_principal"><strong>Secuencia principal</strong></a>. Esta secuencia se caracteriza por contener estrellas que, en ese momento de sus vidas, están fusionando hidrógeno (el elemento más abundante en las estrellas) para convertirlo en Helio a través de la fusión nuclear, particularmente usando la cadena protón-protón. Justamente aquí, en esta secuencia <strong>es donde vive nuestro Sol</strong>, por lo que se puede deducir que hay muchas, muchísimias estrellas similares a nuestra querida bola nuclear.</p>
+
+
+<a href="http://www.caosyciencia.com/ideas/articulo.php?id=030204" target="_blank"> <div align="center"> <img src="http://www.caosyciencia.com/img/carlos5_2.jpg" width="450" height="600"></div></a></th>
+
 <table>
-<thead><tr>
-<th style="text-align:center"><a href="http://www.caosyciencia.com/ideas/articulo.php?id=030204"> <div align="center"> <img src="http://www.caosyciencia.com/img/carlos5_2.jpg" width="450" height="600"></div></a></th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align:center"><em>Figura 4: Diagrama Hertzsprung-Russell comparando los parámetros físicos de estrellas.</em></td>
 </tr>
 </tbody>
 </table>
+
+
 <h2 id="Las-estrellas-cambian-a-trav&#233;s-del-tiempo">Las estrellas cambian a trav&#233;s del tiempo<a class="anchor-link" href="#Las-estrellas-cambian-a-trav&#233;s-del-tiempo"></a></h2><p>Conforme pasa el tiempo, las estrellas van evolucionando y moviéndose por el diagrama HR. Esto implica que sufrirán diferentes procesos físicos que provocarán cámbios en sus propiedades (cambios de temperatura, tamaño, luminosidad, entre otros). Una de las grandes misiones de la astronomía del siglo XXI es caracterizar los cambios de brillo que pueden sufrir mientras las estrellas se mueven por el diagrama HR</p>
 <p>Supongamos que cada uno tiene a disposición un telescopio para explorar el cielo. Si en vez de observar directamente con él, montamos una cámara fotográfica, podriamos tomar susesivas fotos y unirlas para constriur un mapa nocturno del cielo, o también se podrian tomar muchas fotos de una misma región celeste y ver cómo las fuentes luminosas se comportan a través del tiempo. Al comparar esas imágenes, es posible que veamos fuentes que cambien su luminosidad, de manera regular, irregular o que sencillamente que aparezcan y desaparezcan. A modo de ejemplo, en la figura 4 se muestra un campo estelar que ha sido observado en 4 oportunidades diferentes. Y en el centro de cada imagen, es posible ver una fuente que cambia su brillo en cada una de esas observaciones.</p>
+
+
+
+<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Epocas.png" width="550" height="400"></div></a></th>
+
 <table>
-<thead><tr>
-<th style="text-align:center"><a href="https://nicomedinap.github.io"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Epocas.png" width="550" height="400"></div></a></th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 5: Ejemplo de un mismo campo estelar observado en diferentes fechas (épocas).</em></td>
-</tr>
-<tr>
-<td style="text-align:center"><em>En el círculo rojo del centro se muestra una fuente que cambia su brillo a lo largo del tiempo.</em></td>
-</tr>
-<tr>
-<td style="text-align:center"><em>Las imágenes fueron tomadas con el telescopio VISTA, ubicado en Paranal.</em></td>
+<td style="text-align:center"><em>Figura 5: Ejemplo de un mismo campo estelar observado en diferentes fechas (épocas). En el círculo rojo del centro se muestra una fuente que cambia su brillo a lo largo del tiempo. Las imágenes fueron tomadas con el telescopio VISTA, ubicado en Paranal.</em>
 </tr>
 </tbody>
 </table>
+
+
 <p>¿Qué está pasando aquí? Bueno, imposible saberlo sin información adicional. Pero partamos simplificando el problema con una pregunta fundamental: ¿Es normal que la luminosidad de las fuentes astronómicas cambie a lo largo del tiempo? Para tener una pista, podemos examinar nuestra estrella más cercana, y ver si sufre de algún tipo de cambio de luminosidad.</p>
 <h2 id="De-nuevo-el-sol:-&#191;una-estrella-variable?">De nuevo el sol: &#191;una estrella variable?<a class="anchor-link" href="#De-nuevo-el-sol:-&#191;una-estrella-variable?"></a></h2><p>El sol no es una bola de gas tan estable como nosotros la percibimos. Está muy bien documentado que en la superficie del sol aparecen manchas oscuras o <a href="https://es.wikipedia.org/wiki/Mancha_solar">'manchas solares'</a> con regularidad, que obecede el llamado <a href="http://primerfoton.cl/2016/06/15/ciclo-solar/">'ciclo solar'</a>. Este ciclo se caracteriza por tener una duración de alrededor de 11 años, donde las manchas solares aparecen progresivamente, alcanzando un número máximo en la superficie y luego desaparecen, comenzando nuevamente el ciclo. Esta aparición/desaparición de manchas está asociado a la variación del campo magnético de nuestra estrella.</p>
 <p>Contraintuitivamente, se conoce que el máximo de brillo del sol aparece cuando el número de manchas es máximo. Y es mínimo cuando desaparecen casi por completo. Esa variación de intensidad, medida en energía emitida por superficie [Watts/metro cuadrado] sin embargo, es de tan solo un 0.1% (1365,5-1367 [Watts/metro cuadrado], en relación a la <a href="https://es.wikipedia.org/wiki/Constante_solar">constante solar</a> $K=1366\ [W / m^2]$) por lo que la variación producida por las manchas es <strong>casi despreciable</strong>. La figura 6 muestra la evolución de la superficie de nuestro sol a lo largo de 10 años.</p>
+
+
+
+
+<a href="https://nicomedinap.github.io" target="_blank"> 
+    <div align="center"> <img src="https://www.iaa.csic.es/sites/default/files/524990main_faq10_full.jpg" width="450" height="300"></div>
+</a>
+
 <table>
-<thead><tr>
-<th style="text-align:center"><a href="https://nicomedinap.github.io"> <div align="center"> <img src="https://www.iaa.csic.es/sites/default/files/524990main_faq10_full.jpg" width="450" height="300"></div></a></th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align:center"><em>Figura 6: El ciclo solar muestra la evolución de las manchas solares</em></td>
 </tr>
 </tbody>
 </table>
+
 <p>Además, nuestra querida bola de gas incandescente es la protagonista de diferentes eventos eruptivos y explosiones que emanan grandes cantidades de materia al espacio circundante. Gran parte de estos eventos suceden en las regiones activas asociadas a manchas solares, donde emergen intensos campos magnéticos de la superficie del Sol hacia la corona. Estas fulguraciones solares tiene una escala de tiempo muy cortas (astronómicamente hablando :p) de tan solo minutos. En el siguiente video, es posible ver un evento eruptivo en nuestro sol.</p>
 
 </div>
@@ -353,34 +357,25 @@ title:  "Variación de brillo en las estrellas"
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Ya-bueno:-&#191;y-cu&#225;ntas-fuentes-luminosas-variables-existen?">Ya bueno: &#191;y cu&#225;ntas fuentes luminosas variables existen?<a class="anchor-link" href="#Ya-bueno:-&#191;y-cu&#225;ntas-fuentes-luminosas-variables-existen?"></a></h2><p>A lo largo de la historia, muchos astrónomos e instituciones han catalogado <strong>demasiados</strong> tipos como para ser nombrados aquí.</p>
 <p>Así que mejor consultaremos el arbol de la variabilidad y toda su complejidad :D</p>
+
+
+<a href="https://nicomedinap.github.io" target="_blank"> 
+    <div align="center"> 
+        <img src="https://www.ast.cam.ac.uk/sites/default/files/assets/images/research/milkyway_localgroup/VariabilityTree(1).png" width="550" height="400">
+    </div>
+</a>
+
 <table>
-<thead><tr>
-<th style="text-align:center"><a href="https://nicomedinap.github.io"> <div align="center"> <img src="https://www.ast.cam.ac.uk/sites/default/files/assets/images/research/milkyway_localgroup/VariabilityTree(1).png" width="550" height="400"></div></a></th>
-</tr>
-</thead>
 <tbody>
 <tr>
 <td style="text-align:center"><em>Figura 7: Árbol de la variabilidad", el cual fue sacado de L. Eyer &amp; N. Mowlavi.</em></td>
 </tr>
 </tbody>
 </table>
+
 <p>De aquí en adelante, usaré este arbol de variabilidad para ir hablando de diferentes fuentes que cambian su brillo.</p>
 <p>¡Hasta entonces!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
- 
-
