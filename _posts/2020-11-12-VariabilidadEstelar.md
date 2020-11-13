@@ -182,7 +182,7 @@ title:  "Variación de brillo en las estrellas"
 </table>
 <p>Además, a modo de comparación visual, la figura 3 muestra estrellas clasificadas en diferentes tipos espectrales. De forma visual es posible relacionar sus propiedades, como el tamaño, la masa y su color superficial, este último es muy importante para definor la temperatura superficial de la estrella, que es medido en Kelvin [K].</p>
 
-<a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="550" height="200"></div></a>
+<a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="350" height="150"></div></a>
 
 <table>
 <tbody>
@@ -245,7 +245,7 @@ title:  "Variación de brillo en las estrellas"
 <p>En la figura 4 es posible ver un famoso y autoexplicativo diagrama HR, el cual ilustra en qué posición del diagrama se localizan estrellas con diferentes colores, luminosidades, masas, tipo espectral, y también se estima el tiempo aproximado de vida que poseen cada uno de esos puntitos luminosos. Es posible ver que la mayor parte de las estrellas están distribuidas a lo largo de la llamada <a href="https://es.wikipedia.org/wiki/Secuencia_principal"><strong>Secuencia principal</strong></a>. Esta secuencia se caracteriza por contener estrellas que, en ese momento de sus vidas, están fusionando hidrógeno (el elemento más abundante en las estrellas) para convertirlo en Helio a través de la fusión nuclear, particularmente usando la cadena protón-protón. Justamente aquí, en esta secuencia <strong>es donde vive nuestro Sol</strong>, por lo que se puede deducir que hay muchas, muchísimias estrellas similares a nuestra querida bola nuclear.</p>
 
 
-<a href="http://www.caosyciencia.com/ideas/articulo.php?id=030204" target="_blank"> <div align="center"> <img src="http://www.caosyciencia.com/img/carlos5_2.jpg" width="350" height="500"></div></a>
+<a href="http://www.caosyciencia.com/ideas/articulo.php?id=030204" target="_blank"> <div align="center"> <img src="http://www.caosyciencia.com/img/carlos5_2.jpg" width="350" height="400"></div></a>
 
 <table>
 <tbody>
@@ -260,7 +260,7 @@ title:  "Variación de brillo en las estrellas"
 <p>Supongamos que cada uno tiene a disposición un telescopio para explorar el cielo. Si en vez de observar directamente con él, montamos una cámara fotográfica, podriamos tomar susesivas fotos y unirlas para constriur un mapa nocturno del cielo, o también se podrian tomar muchas fotos de una misma región celeste y ver cómo las fuentes luminosas se comportan a través del tiempo. Al comparar esas imágenes, es posible que veamos fuentes que cambien su luminosidad, de manera regular, irregular o que sencillamente que aparezcan y desaparezcan. A modo de ejemplo, en la figura 4 se muestra un campo estelar que ha sido observado en 4 oportunidades diferentes. Y en el centro de cada imagen, es posible ver una fuente que cambia su brillo en cada una de esas observaciones.</p>
 
 
-<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Epocas.png" width="550" height="150"></div></a></th>
+<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Epocas.png" width="350" height="100"></div></a></th>
 
 <table>
 <tbody>
@@ -279,7 +279,7 @@ title:  "Variación de brillo en las estrellas"
 
 
 <a href="https://nicomedinap.github.io" target="_blank"> 
-    <div align="center"> <img src="https://www.iaa.csic.es/sites/default/files/524990main_faq10_full.jpg" width="450" height="300"></div>
+    <div align="center"> <img src="https://www.iaa.csic.es/sites/default/files/524990main_faq10_full.jpg" width="350" height="250"></div>
 </a>
 
 <table>
@@ -343,7 +343,7 @@ title:  "Variación de brillo en las estrellas"
 <li><p>Por el hecho de estár <em>muy lejos</em> de las fuentes, es muy difícil poder medir con exactitud todos los procesos físicos involucrados.</p>
 </li>
 </ol>
-<p>Consideremos una Galaxia, como por ejemplo <a href="https://upload.wikimedia.org/wikipedia/commons/3/3c/Merging_galaxies_NGC_4676_%28captured_by_the_Hubble_Space_Telescope%29.jpg">las galáxias de los ratones</a>, las cuales se encuentran a una respetable distancia de $89\ Megaparsecs = 2,746\times10^{21} [Km] = 1,83\times10^{13} [UA]$. A esa distancia, nos perderemos gran parte de los procesos estelares, sólo por decir algo.</p>
+<p>Consideremos una Galaxia, como por ejemplo <a href="https://upload.wikimedia.org/wikipedia/commons/3/3c/Merging_galaxies_NGC_4676_%28captured_by_the_Hubble_Space_Telescope%29.jpg">las galáxias de los ratones</a>, las cuales se encuentran a una respetable distancia de 89 Megaparsecs $= 2,746\times10^{21} [Km] = 1,83\times10^{13} [UA]$. A esa distancia, nos perderemos gran parte de los procesos estelares, sólo por decir algo.</p>
 <p>Considerando todos estos aspectos, nuestra premisa será que <strong>todas</strong> las fuentes estelares <strong>son variables</strong>, pero si observamos <strong>lo suficiente</strong>. Es decir, si contamos con equipamiento con <em>resolución</em> y el tiempo necesario para registrar dicha fuente, se podrá caracterizar algún tipo de variación de luminosidad, dejandonos así inferir resultados a partir de dicha medición.</p>
 
 </div>
@@ -358,7 +358,7 @@ title:  "Variación de brillo en las estrellas"
 
 <a href="https://nicomedinap.github.io" target="_blank"> 
     <div align="center"> 
-        <img src="https://www.ast.cam.ac.uk/sites/default/files/assets/images/research/milkyway_localgroup/VariabilityTree(1).png" width="550" height="400">
+        <img src="https://www.ast.cam.ac.uk/sites/default/files/assets/images/research/milkyway_localgroup/VariabilityTree(1).png" width="350" height="250">
     </div>
 </a>
 
