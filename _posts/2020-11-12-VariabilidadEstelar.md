@@ -24,6 +24,7 @@ title:  "Variación de brillo en las estrellas"
 <table>
 <tbody>
 <tr>
+
 <td style="text-align:center"><em>Figura 1: Estrellas variables tipo RR Lyrae pulsando y cambiando su brillo mientras viven tranquilamente en el cúmulo globular Messier 3. Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
 </tr>
 </tbody>
@@ -98,17 +99,17 @@ title:  "Variación de brillo en las estrellas"
 <li>la Masa Solar $M_{\odot} := 1,99\times10^{30}\ [Kg]$ </li>
 <li>El Radio Solar $R_{\odot} := 697.000\ [Km]$  </li>
 <li>la Luminosidad Solar $L_{\odot} := 697.000\ [Km]$ </li>
-<li>Distancia tierra-sol: la unidad astronómica $[UA]:=  1,49\times10^{8}\ [Km]$</li>
+<li>La unidad astronómica $[UA]:=  1,49\times10^{8}\ [Km]$</li>
 </ol>
 <p>Sabiendo esto, ahora podremos hablar de las otras estrellas usando como comparación al Sol. Por ejemplo, la estrella que ostenta el record de más masiva habita la Nebulosa de la Tarántula, en la nube de magallanes, y se llama R136a1, con $M=265M_{\odot}$, o sea que esta estrella tiene 265 veces la masa de nuestro humilde Sol.</p>
-<p>Entonces, como podrán darse cuenta en esta búsqueda se han encontrado toda una gama de diferentes escenarios, y se han definido distintas formas de clasificación, siendo la más importante la clasificación por <strong>tipo espectral</strong>, donde las estrellas se arreglan en base a sus temperaturas superficiales (o efectivas), y se les asigna una clase de <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">tipo espectral</a> ('O','B','A','F','G','K','M'). Diferentes clases poseerán diferentes <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">temperaturas efectivas</a>, las cuales también tiene relación con el color superficial. Si se preguntan por qué se eligieron esas letras, es porque este tipo de clasificación estelar está basado en la llamada <em>clasificación de Harvard</em>.</p>
+<p>Entonces, como podrán darse cuenta en esta búsqueda se han encontrado toda una gama de diferentes escenarios, y se han definido distintas formas de clasificación, siendo la más importante la clasificación por <strong>tipo espectral</strong>, donde las estrellas se arreglan en base a sus temperaturas superficiales (o efectivas), y se les asigna una clase de <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">tipo espectral</a> ('O', 'B', 'A', 'F', 'G', 'K', 'M'). Diferentes clases poseerán diferentes <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">temperaturas efectivas</a>, las cuales también tiene relación con el color superficial. Si se preguntan por qué se eligieron esas letras, es porque este tipo de clasificación estelar está basado en la llamada <em>clasificación de Harvard</em>.</p>
 <p>La siguiente tabla compara las propiedades de estrellas clasificadas en distintas clases espectrales, usando como base las unidades solares:</p>
 <table>
 <thead><tr>
-<th style="text-align:center">Clase</th>
-<th style="text-align:center">Temperatura</th>
-<th style="text-align:center">Color</th>
-<th style="text-align:center">Masa</th>
+<th style="text-align:center;font-size:8pt">Clase</th>
+<th style="text-align:center;font-size:6pt">Temperatura</th>
+<th style="text-align:center;font-size:4pt">Color</th>
+<th style="text-align:center;font-size:2pt">Masa</th>
 <th style="text-align:center">Radio</th>
 <th style="text-align:center">Luminosidad bolométrica</th>
 </tr>
