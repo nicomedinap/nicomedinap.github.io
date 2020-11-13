@@ -245,7 +245,7 @@ title:  "Variación de brillo en las estrellas"
 <p>En la figura 4 es posible ver un famoso y autoexplicativo diagrama HR, el cual ilustra en qué posición del diagrama se localizan estrellas con diferentes colores, luminosidades, masas, tipo espectral, y también se estima el tiempo aproximado de vida que poseen cada uno de esos puntitos luminosos. Es posible ver que la mayor parte de las estrellas están distribuidas a lo largo de la llamada <a href="https://es.wikipedia.org/wiki/Secuencia_principal"><strong>Secuencia principal</strong></a>. Esta secuencia se caracteriza por contener estrellas que, en ese momento de sus vidas, están fusionando hidrógeno (el elemento más abundante en las estrellas) para convertirlo en Helio a través de la fusión nuclear, particularmente usando la cadena protón-protón. Justamente aquí, en esta secuencia <strong>es donde vive nuestro Sol</strong>, por lo que se puede deducir que hay muchas, muchísimias estrellas similares a nuestra querida bola nuclear.</p>
 
 
-<a href="http://www.caosyciencia.com/ideas/articulo.php?id=030204" target="_blank"> <div align="center"> <img src="http://www.caosyciencia.com/img/carlos5_2.jpg" width="350" height="600"></div></a>
+<a href="http://www.caosyciencia.com/ideas/articulo.php?id=030204" target="_blank"> <div align="center"> <img src="http://www.caosyciencia.com/img/carlos5_2.jpg" width="350" height="500"></div></a>
 
 <table>
 <tbody>
