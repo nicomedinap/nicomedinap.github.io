@@ -105,8 +105,8 @@ title:  "Variación de brillo en las estrellas"
 <p>Entonces, como podrán darse cuenta en esta búsqueda se han encontrado toda una gama de diferentes escenarios, y se han definido distintas formas de clasificación, siendo la más importante la clasificación por <strong>tipo espectral</strong>, donde las estrellas se arreglan en base a sus temperaturas superficiales (o efectivas), y se les asigna una clase de <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">tipo espectral</a> ('O', 'B', 'A', 'F', 'G', 'K', 'M'). Diferentes clases poseerán diferentes <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales">temperaturas efectivas</a>, las cuales también tiene relación con el color superficial. Si se preguntan por qué se eligieron esas letras, es porque este tipo de clasificación estelar está basado en la llamada <em>clasificación de Harvard</em>.</p>
 <p>La siguiente tabla compara las propiedades de estrellas clasificadas en distintas clases espectrales, usando como base las unidades solares:</p>
 <table>
-<thead><tr>
-<th style="text-align:center;font-size:8pt">Clase</th>
+<thead style="text-align:center;font-size:8pt"><tr>
+<th >Clase</th>
 <th style="text-align:center;font-size:6pt">Temperatura</th>
 <th style="text-align:center;font-size:4pt">Color</th>
 <th style="text-align:center;font-size:2pt">Masa</th>
