@@ -21,15 +21,15 @@ title:  "Variación de brillo en las estrellas"
 <p>Sea lo que sea que haya pasado, la explicación menos probable siempre será que fue un alien, un OVNI o vida extraterrestre. Resulta que el universo esta lleno de luces extrañas que cambian su brillo a lo largo del tiempo, y lo más probable es que nos hayamos topado con una <strong>estrella variable</strong>, una fuente estelar que cambia su brillo superficial mientras el tiempo pasa. La verdad que son muy comunes, existen de muchos tipos y hoy explicaré cómo podemos llegar a saber tantas cosas sobre estos puntitos luminosos.</p>
 
 <div align="center">
-    <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/" target="_blank">
-        <img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif" width="350" height="250" class="center">
+    <a href="http://www.cnyo.org/2013/09/14/an-update-on-nova-del-2013-pnvj202330732046041-dimmer-views-and-a-distance-estimate/" target="_blank">
+        <img src="http://www.cnyo.org/wp-content/uploads/2013/09/2013sept14_gif_1531x1459_2db958_zps3f68f105.gif" width="350" height="250" class="center">
     </a>
 </div>
 
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 1: Estrellas variables tipo RR Lyrae pulsando y cambiando su brillo mientras viven tranquilamente en el cúmulo globular Messier 3. Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
+<td style="text-align:center"><em>Figura 1: Animación de la candidata a estrella Nova Del2013 (PNVJ20233073+2046041) </em></td>
 </tr>
 </tbody>
 </table>
@@ -372,6 +372,20 @@ title:  "Variación de brillo en las estrellas"
 
 <p>De aquí en adelante, usaré este arbol de variabilidad para ir hablando de diferentes fuentes que cambian su brillo.</p>
 <p>¡Hasta entonces!</p>
+
+<div align="center">
+    <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/" target="_blank">
+        <img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif" width="350" height="250" class="center">
+    </a>
+</div>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align:center"><em>Figura 8: Estrellas variables tipo RR Lyrae pulsando y cambiando su brillo mientras viven tranquilamente en el cúmulo globular Messier 3. Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
