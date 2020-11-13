@@ -20,7 +20,7 @@ title:  "Variación de brillo en las estrellas"
 <p>Cuando logras apartarte de la contaminación lumínica, las estrellas que habitan el cielo son abrumadoras. Muchos, incontables puntos brillantes que ostentan tenues y centellantes colores se posicionan a lo largo del disco de nuestra Vía Láctea. Luego de algunos días ya será posible reconocer estructuras y constelaciones, mira que dicen que hasta escorpiones es posible ver; hasta que de pronto, cuando estás mirando un puntito particular del cielo su brillo cambia, aumentando o disminuyendo de forma dramática: ¿Qué ha pasado?</p>
 <p>Sea lo que sea que haya pasado, la explicación menos probable siempre será que fue un alien, un OVNI o vida extraterrestre. Resulta que el universo esta lleno de luces extrañas que cambian su brillo a lo largo del tiempo, y lo más probable es que nos hayamos topado con una <strong>estrella variable</strong>, una fuente estelar que cambia su brillo superficial mientras el tiempo pasa. La verdad que son muy comunes, existen de muchos tipos y hoy explicaré cómo podemos llegar a saber tantas cosas sobre estos puntitos luminosos.</p>
 
-<img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif"; width="350"; height="250"; style="text-align:center;">
+<th style="text-align:center;"><img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif"; width="350"; height="250"; style="text-align:center;"></th>
 <table>
 <tbody>
 <tr>
