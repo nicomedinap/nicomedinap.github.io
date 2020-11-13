@@ -182,7 +182,7 @@ title:  "Variación de brillo en las estrellas"
 </table>
 <p>Además, a modo de comparación visual, la figura 3 muestra estrellas clasificadas en diferentes tipos espectrales. De forma visual es posible relacionar sus propiedades, como el tamaño, la masa y su color superficial, este último es muy importante para definor la temperatura superficial de la estrella, que es medido en Kelvin [K].</p>
 
-<a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="550" height="400"></div></a>
+<a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="550" height="200"></div></a>
 
 <table>
 <tbody>
@@ -245,7 +245,7 @@ title:  "Variación de brillo en las estrellas"
 <p>En la figura 4 es posible ver un famoso y autoexplicativo diagrama HR, el cual ilustra en qué posición del diagrama se localizan estrellas con diferentes colores, luminosidades, masas, tipo espectral, y también se estima el tiempo aproximado de vida que poseen cada uno de esos puntitos luminosos. Es posible ver que la mayor parte de las estrellas están distribuidas a lo largo de la llamada <a href="https://es.wikipedia.org/wiki/Secuencia_principal"><strong>Secuencia principal</strong></a>. Esta secuencia se caracteriza por contener estrellas que, en ese momento de sus vidas, están fusionando hidrógeno (el elemento más abundante en las estrellas) para convertirlo en Helio a través de la fusión nuclear, particularmente usando la cadena protón-protón. Justamente aquí, en esta secuencia <strong>es donde vive nuestro Sol</strong>, por lo que se puede deducir que hay muchas, muchísimias estrellas similares a nuestra querida bola nuclear.</p>
 
 
-<a href="http://www.caosyciencia.com/ideas/articulo.php?id=030204" target="_blank"> <div align="center"> <img src="http://www.caosyciencia.com/img/carlos5_2.jpg" width="450" height="600"></div></a></th>
+<a href="http://www.caosyciencia.com/ideas/articulo.php?id=030204" target="_blank"> <div align="center"> <img src="http://www.caosyciencia.com/img/carlos5_2.jpg" width="350" height="600"></div></a>
 
 <table>
 <tbody>
@@ -261,12 +261,12 @@ title:  "Variación de brillo en las estrellas"
 
 
 
-<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Epocas.png" width="550" height="400"></div></a></th>
+<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Epocas.png" width="550" height="200"></div></a></th>
 
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 5: Ejemplo de un mismo campo estelar observado en diferentes fechas (épocas). En el círculo rojo del centro se muestra una fuente que cambia su brillo a lo largo del tiempo. Las imágenes fueron tomadas con el telescopio VISTA, ubicado en Paranal.</em>
+<td style="text-align:center"><em>Figura 5: Ejemplo de un mismo campo estelar observado en diferentes fechas (épocas). En el círculo rojo del centro se muestra una fuente que cambia su brillo a lo largo del tiempo. Las imágenes fueron tomadas con el telescopio VISTA, ubicado en Paranal.</em></td>
 </tr>
 </tbody>
 </table>
@@ -293,9 +293,7 @@ title:  "Variación de brillo en las estrellas"
 
 <p>Además, nuestra querida bola de gas incandescente es la protagonista de diferentes eventos eruptivos y explosiones que emanan grandes cantidades de materia al espacio circundante. Gran parte de estos eventos suceden en las regiones activas asociadas a manchas solares, donde emergen intensos campos magnéticos de la superficie del Sol hacia la corona. Estas fulguraciones solares tiene una escala de tiempo muy cortas (astronómicamente hablando :p) de tan solo minutos. En el siguiente video, es posible ver un evento eruptivo en nuestro sol.</p>
 
-</div>
-</div>
-</div>
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="inner_cell">
