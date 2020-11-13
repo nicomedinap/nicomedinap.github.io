@@ -260,12 +260,12 @@ title:  "Variación de brillo en las estrellas"
 <p>Supongamos que cada uno tiene a disposición un telescopio para explorar el cielo. Si en vez de observar directamente con él, montamos una cámara fotográfica, podriamos tomar susesivas fotos y unirlas para constriur un mapa nocturno del cielo, o también se podrian tomar muchas fotos de una misma región celeste y ver cómo las fuentes luminosas se comportan a través del tiempo. Al comparar esas imágenes, es posible que veamos fuentes que cambien su luminosidad, de manera regular, irregular o que sencillamente que aparezcan y desaparezcan. A modo de ejemplo, en la figura 4 se muestra un campo estelar que ha sido observado en 4 oportunidades diferentes. Y en el centro de cada imagen, es posible ver una fuente que cambia su brillo en cada una de esas observaciones.</p>
 
 
-<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Epocas.png" width="350" height="100"></div></a></th>
+<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/epocas.png" width="350" height="350"></div></a></th>
 
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 5: Ejemplo de un mismo campo estelar observado en diferentes fechas (épocas). En el círculo rojo del centro se muestra una fuente que cambia su brillo a lo largo del tiempo. Las imágenes fueron tomadas con el telescopio VISTA, ubicado en Paranal.</em></td>
+<td style="text-align:center"><em>Figura 5: Ejemplo de un mismo campo estelar observado en diferentes fechas (épocas). En el círculo rojo del centro se muestra una fuente que cambia su brillo a lo largo del tiempo. Las imágenes fueron tomadas con el telescopio VISTA, ubicado en Paranal. La estrella, la identifiqué yo :D</em></td>
 </tr>
 </tbody>
 </table>
