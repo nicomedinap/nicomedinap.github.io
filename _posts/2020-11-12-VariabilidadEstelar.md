@@ -20,7 +20,7 @@ title:  "Variación de brillo en las estrellas"
 <p>Cuando logras apartarte de la contaminación lumínica, las estrellas que habitan el cielo son abrumadoras. Muchos, incontables puntos brillantes que ostentan tenues y centellantes colores se posicionan a lo largo del disco de nuestra Vía Láctea. Luego de algunos días ya será posible reconocer estructuras y constelaciones, mira que dicen que hasta escorpiones es posible ver; hasta que de pronto, cuando estás mirando un puntito particular del cielo su brillo cambia, aumentando o disminuyendo de forma dramática: ¿Qué ha pasado?</p>
 <p>Sea lo que sea que haya pasado, la explicación menos probable siempre será que fue un alien, un OVNI o vida extraterrestre. Resulta que el universo esta lleno de luces extrañas que cambian su brillo a lo largo del tiempo, y lo más probable es que nos hayamos topado con una <strong>estrella variable</strong>, una fuente estelar que cambia su brillo superficial mientras el tiempo pasa. La verdad que son muy comunes, existen de muchos tipos y hoy explicaré cómo podemos llegar a saber tantas cosas sobre estos puntitos luminosos.</p>
 
-<th style="text-align:center;"><img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif" width="350" height="250" alt=""></th>
+<img src="https://skyandtelescope.org/wp-content/uploads/M3movie_stanek_341px.gif"; width="350"; height="250"; style="text-align:center;">
 <table>
 <tbody>
 <tr>
@@ -98,7 +98,7 @@ title:  "Variación de brillo en las estrellas"
 <ol>
 <li>la Masa Solar $M_{\odot} := 1,99\times10^{30}\ [Kg]$ </li>
 <li>El Radio Solar $R_{\odot} := 697.000\ [Km]$  </li>
-<li>la Luminosidad Solar $L_{\odot} := 3,82\times10^{8}\ [Watss]$ </li>
+<li>la Luminosidad Solar $L_{\odot} := 3,82\times10^{8}\ [Watts]$ </li>
 <li>La unidad astronómica $[UA]:=  1,49\times10^{26}\ [Km]$</li>
 </ol>
 <p>Sabiendo esto, ahora podremos hablar de las otras estrellas usando como comparación al Sol. Por ejemplo, la estrella que ostenta el record de más masiva habita la Nebulosa de la Tarántula, en la nube de magallanes, y se llama R136a1, con $M=265M_{\odot}$, o sea que esta estrella tiene 265 veces la masa de nuestro humilde Sol.</p>
