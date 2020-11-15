@@ -4,6 +4,8 @@ layout: page
 
 {% for post in site.posts %}
 	{% if post.layout == "post" %}
+		<li>
               <a href="{{ post.title }}">{{ post.title }}</a>
+        </li>
     {% endif %}
  {% endfor %}
