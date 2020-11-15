@@ -1,7 +1,7 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <h1>{{ site.title }}</h1>
+      <a href="https://nicomedinap.github.io"><h1>{{ site.title }}</h1></a>
       <p class="lead">{{ site.description }}</p>
     </div>
     
@@ -35,23 +35,6 @@
           {% endif %}
         {% endif %}
       {% endfor %}
-
-
-      <div class="related">
-        <h2>Te puede interesar</h2>
-        <ul class="related-posts">
-          {% for post in site.related_posts limit:3 %}
-            <li>
-              <h3>
-                <a href="{{ post.url }}">
-                  {{ post.title }}
-                  <small>{{ post.date | date_to_string }}</small>
-                </a>
-              </h3>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
 
       <!--li class="sidebar-nav-item"><a href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a></li>
       <li class="sidebar-nav-item"><a href="{{ site.github.repo }}">GitHub project</a></li>
