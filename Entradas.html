@@ -3,13 +3,7 @@ layout: page
 ---
 
 {% for post in site.posts %}
-
 	{% if post.layout == "post" %}
               <a href="{{ post.title }}">{{ post.title }}</a>
     {% endif %}
-
- <entry>
-   <title>{{ post.title }}</title>
-   <content type="html">{{ post.content | xml_escape }}</content>
- </entry>
  {% endfor %}
