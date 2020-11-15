@@ -37,22 +37,6 @@
       {% endfor %}
 
 
-
-      {% assign pages_list = _post %}
-        {% for post in pages_list %}
-          {% if post.title != null %}
-            {% if post.layout == "post" %}
-          
-            <li class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}">
-              <a href="{{ node.url }}">{{ node.title }}</a>
-            </li>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-
-
-
-
       <!--li class="sidebar-nav-item"><a href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a></li>
       <li class="sidebar-nav-item"><a href="{{ site.github.repo }}">GitHub project</a></li>
       <li class="sidebar-nav-item">Currently v{{ site.version }}</li-->
