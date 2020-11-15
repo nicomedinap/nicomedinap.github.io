@@ -29,7 +29,7 @@ title:  "Variación de brillo en las estrellas"
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 1: Animación que muestra el evidente brillo variable de la candidata a estrella Nova Del2013 (PNVJ20233073+2046041). La imagen muestra dos fotos del mismo campo estelar. </em></td>
+<td style="text-align:center"><em>Figura 1: Animación que muestra el evidente brillo variable de la candidata a estrella Nova Del2013 (PNVJ20233073+2046041). La imagen muestra dos fotos del mismo campo estelar, antes y después del episodio. </em></td>
 </tr>
 </tbody>
 </table>
