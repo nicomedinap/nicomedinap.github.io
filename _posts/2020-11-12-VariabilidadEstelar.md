@@ -320,14 +320,15 @@ title:  "Variación de brillo en las estrellas"
 </div>
 </div>
 
-<div class="output_wrapper">
+
+
+
+
+
+<div class="output_wrapper" align="center">
 <div class="output">
 
-
 <div class="output_area">
-
-
-
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
@@ -347,6 +348,16 @@ title:  "Variación de brillo en las estrellas"
 </div>
 
 </div>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align:center"><em>Video 3: Un timelapse del sol muestra la magnitud que éstas repentinas erupciones pueden tener.</em></td>
+</tr>
+</tbody>
+</table>
+
+
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
