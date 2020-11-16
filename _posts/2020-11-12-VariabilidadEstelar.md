@@ -183,7 +183,7 @@ title:  "Variación de brillo en las estrellas"
 </table>
 <p>Además, a modo de comparación visual, la figura 3 muestra estrellas clasificadas en diferentes tipos espectrales. De forma visual es posible relacionar sus propiedades, como el tamaño, la masa y su color superficial, este último es muy importante para definor la <a href="" target="_blank"></a>temperatura superficial de la estrella, que se mide en Kelvins, por eso la $K$ que la acompaña.</p>
 
-<a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="370" height="150"></div></a>
+<a href="https://en.wikipedia.org/wiki/O-type_star" target="_blank"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="370" height="150"></div></a>
 
 <table>
 <tbody>
@@ -211,7 +211,7 @@ title:  "Variación de brillo en las estrellas"
 </div>
 </div>
 
-<div class="output_wrapper">
+<div class="output_wrapper" align="center">
 <div class="output">
 
 <div class="output_area">
@@ -234,6 +234,17 @@ title:  "Variación de brillo en las estrellas"
 </div>
 
 </div>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align:center"><em>Video 1: blabla</em></td>
+</tr>
+</tbody>
+</table>
+
+
+
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -271,7 +282,7 @@ title:  "Variación de brillo en las estrellas"
 <h2 id="De-nuevo-el-sol:-&#191;una-estrella-variable?">De nuevo el sol: &#191;una estrella variable?<a class="anchor-link" href="#De-nuevo-el-sol:-&#191;una-estrella-variable?"></a></h2><p>El sol no es una bola de gas tan estable como nosotros la percibimos. Está muy bien documentado que en la superficie del sol aparecen manchas oscuras o <a href="https://es.wikipedia.org/wiki/Mancha_solar" target="_blank">manchas solares</a> con regularidad, que obecede el llamado <a href="http://primerfoton.cl/2016/06/15/ciclo-solar/" target="_blank"><strong>ciclo solar</strong></a>. Este ciclo se caracteriza por tener una duración de alrededor de 11 años, donde las manchas solares aparecen progresivamente, alcanzando un número máximo en la superficie y luego desaparecen, comenzando nuevamente el ciclo. Esta aparición/desaparición de manchas está asociado a la variación del campo magnético de nuestra estrella.</p>
 <p>Contraintuitivamente, se conoce que el máximo de brillo del sol aparece cuando el número de manchas es máximo. Y es mínimo cuando desaparecen casi por completo. Esa variación de intensidad, medida en energía emitida por superficie ([Watts/metro cuadrado]) sin embargo, es de tan solo un 0.1% (1365,5-1367 $[W / m^2]$, en relación a la <a href="https://es.wikipedia.org/wiki/Constante_solar" target="_blank">constante solar</a> $K=1366\ [W / m^2]$) por lo que la variación producida por las manchas es <strong>casi despreciable</strong>. La figura 6 muestra la evolución de la superficie de nuestro sol a lo largo de 11 años.</p>
 
-<a href="https://nicomedinap.github.io" target="_blank"> 
+<a href="https://www.nasa.gov/mission_pages/sunearth/news/solarcycle-primer.html" target="_blank"> 
     <div align="center"> <img src="https://www.iaa.csic.es/sites/default/files/524990main_faq10_full.jpg" width="350" height="250"></div>
 </a>
 
@@ -349,7 +360,7 @@ title:  "Variación de brillo en las estrellas"
 <p>Así que mejor consultaremos el arbol de la variabilidad y toda su complejidad :D</p>
 
 
-<a href="https://nicomedinap.github.io" target="_blank"> 
+<a href="https://arxiv.org/pdf/0712.3797.pdf" target="_blank"> 
     <div align="center"> 
         <img src="https://www.ast.cam.ac.uk/sites/default/files/assets/images/research/milkyway_localgroup/VariabilityTree(1).png" width="350" height="250">
     </div>
