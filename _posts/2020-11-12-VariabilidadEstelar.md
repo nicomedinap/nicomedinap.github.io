@@ -70,7 +70,7 @@ title:  "Variación de brillo en las estrellas"
 </div>
 </div>
 
-<div class="output_wrapper">
+<div class="output_wrapper" align="center">
 <div class="output">
 
 
@@ -97,6 +97,17 @@ title:  "Variación de brillo en las estrellas"
 </div>
 
 </div>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align:center"><em>Video 1: Pumba le pregunta a Timón qué son las estrellas. Como Timón cree que lo sabe todo, inventa.</em></td>
+</tr>
+</tbody>
+</table>
+
+
+
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -238,7 +249,7 @@ title:  "Variación de brillo en las estrellas"
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Video 1: blabla</em></td>
+<td style="text-align:center"><em>Video 2: Un campo estelar es motrado, y cada una de las estrellas que están ahí se ordenan, primero por color, y luego por lo brillante. Con esto resulta el diagrama HR.</em></td>
 </tr>
 </tbody>
 </table>
