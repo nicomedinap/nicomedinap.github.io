@@ -393,14 +393,10 @@ A modo de ejemplo, en la figura 4 se muestra un campo estelar que ha sido observ
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 8: Estrellas variables tipo <a href="https://en.wikipedia.org/wiki/RR_Lyrae_variable" target="_blank">RR Lyrae</a> pulsando y cambiando su brillo mientras viven tranquilamente en el <a href="https://es.wikipedia.org/wiki/Cúmulo_globular" target="_blank">cúmulo globular</a> <a href="https://es.wikipedia.org/wiki/Cúmulo_globular_M3" target="_blank">Messier 3</a>. Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
+<td style="text-align:center"><em>Figura 7: Estrellas variables tipo <a href="https://en.wikipedia.org/wiki/RR_Lyrae_variable" target="_blank">RR Lyrae</a> pulsando y cambiando su brillo mientras viven tranquilamente en el <a href="https://es.wikipedia.org/wiki/Cúmulo_globular" target="_blank">cúmulo globular</a> <a href="https://es.wikipedia.org/wiki/Cúmulo_globular_M3" target="_blank">Messier 3</a>. Linda imagen tomada del blog <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/">sky&amp;telescope</a></em></td>
 </tr>
 </tbody>
 </table>
-
-</div>
-</div>
-</div>
 
 
 <p>Cada sub-tipo de estrella variable es un potencial tema de estudio, y donde el dilucidar sus misterios, el mecanismo por el cual sufre estas variaciones y el momento evolutivo que se encuentra son preguntas que aún se discuten y esperamos que pronto se resuelvan dada la ola de datos que se están observando y que se obtendrán con la apertura de la nueva generación de telescopios, como el <a href="https://www.gmto.org" target="_blank">GMT</a> (Observatorio Las Campanas, región de Atacama) y el <a href="https://www.eso.org/sci/facilities/eelt/" target="_blank">ELT</a>(Observatorio Paranal, region de Antofagasta).</p>
@@ -416,7 +412,7 @@ A modo de ejemplo, en la figura 4 se muestra un campo estelar que ha sido observ
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Figura 7: Árbol de la variabilidad", el cual fue sacado de L. Eyer &amp; N. Mowlavi.</em></td>
+<td style="text-align:center"><em>Figura 8: Árbol de la variabilidad", el cual fue sacado de L. Eyer &amp; N. Mowlavi.</em></td>
 </tr>
 </tbody>
 </table>
