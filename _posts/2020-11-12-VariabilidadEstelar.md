@@ -51,7 +51,7 @@ title:  "Variación de brillo en las estrellas"
 </table>
 <h2 id="El-Sol:-La-estrella">La estrella del sistema solar<a class="anchor-link" href="#El-Sol:-La-estrella"></a></h2><p>El Sol es nuestra estrella, y es la fuente de energía que sostiene la vida en la tierra. Es el objeto que contiene más masa y produce mayor cantidad de radiación en estas vecindades galácticas. Pero no es sólo por su luz que es reconocido, sino que también por su gravedad, haciendo que polvo, piedras y bolas de gas cercanas giren a su alrededor e interactuen entre ellas para la formación de diferentes estructuras, como planetas o asteroides.</p>
 <p>La raza humana tempranamente entendió que el sol jugaba un papel principal en su día a día, siendo elevado a la categoría de dios en gran parte de las culturas originarias, llegando al punto de provocar pánico colectivo cuando su brillo disminuía sin previo aviso, como en un con eclipses de luna. Que lata ser un maya y de repente pum, eclipse.</p>
-<p>La observación prolongada de la posición relativa del sol en el cielo, y ver cómo afectaba a la naturaleza permitió distinguir las estaciones, y con ello a los cultivos selectivos, los pueblos sedentarios, las grandes ciudades y de un momento a otro la explosión demográfica. Pasando por toda clase de invenciones relevantes y avances científicos para dispersar la incomodidad de no saber qué era lo que realmente pasaba en el cielo, buscando explicación a ese conjunto de fenómenos regulares que se apreciaban en el movimiento de los planetas, y qué tenían que ver todos esos otros puntos que no parecian para nada soles.</p>
+<p>La observación prolongada de la posición relativa del sol en el cielo, y ver cómo afectaba a la naturaleza permitió distinguir las estaciones, y con ello a los cultivos selectivos, los pueblos sedentarios, las grandes ciudades y de un momento a otro la explosión demográfica. Pasando por toda clase de invenciones relevantes y avances científicos para desvanecer la incomodidad de no saber qué era lo que realmente pasaba en el cielo, buscando explicación a ese conjunto de fenómenos regulares que se apreciaban en el movimiento de los planetas, y qué tenían que ver todos esos otros puntos que no parecian para nada soles.</p>
 
 </div>
 </div>
@@ -121,7 +121,7 @@ title:  "Variación de brillo en las estrellas"
 </ol>
 <p>Sabiendo esto, ahora podremos hablar de otras estrellas usando como referencia las proporciones del sol ${M_{\odot}, R_{\odot}, L_{\odot}}$. 
 
-<p>Entonces, como podrán darse cuenta en esta búsqueda de estudiar y comparar estrellas se han encontrado toda una gama de diferentes escenarios, y se han definido distintas formas de clasificación, siendo la más importante la clasificación por <a href="" target="_blank"></a><strong>tipo espectral</strong>, donde las estrellas se arreglan en base a sus temperaturas superficiales (o efectivas), y se les asigna una clase de <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales" target="_blank">tipo espectral</a> ('O', 'B', 'A', 'F', 'G', 'K', 'M'). Diferentes clases poseerán diferentes <a href="https://es.wikipedia.org/wiki/Temperatura_efectiva" target="_blank">temperaturas efectivas</a>, las cuales también tiene relación con el color superficial. Si se preguntan por qué se eligieron esas letras, es porque este tipo de clasificación estelar está basado en la llamada <a href="" target="_blank"></a><em>clasificación de Harvard</em>.</p>
+<p>Entonces, en esta búsqueda de estudiar y comparar estrellas, se han encontrado toda una gama de diferentes escenarios, y se han definido distintas formas de clasificación, siendo la más importante la clasificación por <a href="" target="_blank"></a><strong>tipo espectral</strong>, donde las estrellas se arreglan en base a sus temperaturas superficiales (o efectivas), y se les asigna una clase de <a href="https://es.wikipedia.org/wiki/Clasificaci%C3%B3n_estelar#Clasificaci%C3%B3n_por_tipos_espectrales" target="_blank">tipo espectral</a> ('O', 'B', 'A', 'F', 'G', 'K', 'M'). Diferentes clases poseerán diferentes <a href="https://es.wikipedia.org/wiki/Temperatura_efectiva" target="_blank">temperaturas efectivas</a>, las cuales también tiene relación con el color superficial. Si se preguntan por qué se eligieron esas letras, es porque este tipo de clasificación estelar está basado en la llamada <a href="" target="_blank"></a><em>clasificación de Harvard</em>.</p>
 <p>La siguiente tabla compara las propiedades de estrellas clasificadas en distintas clases espectrales, usando como base las unidades solares:</p>
 <table>
 <thead><tr>
@@ -192,7 +192,7 @@ title:  "Variación de brillo en las estrellas"
 </tr>
 </tbody>
 </table>
-<p>Además, a modo de comparación visual, la figura 3 muestra estrellas clasificadas en diferentes tipos espectrales. De forma visual es posible relacionar sus propiedades, como el tamaño, la masa y su color superficial, este último es muy importante para definor la <a href="" target="_blank"></a>temperatura superficial de la estrella, que se mide en Kelvins, por eso la $K$ que la acompaña.</p>
+<p>Además, a modo de comparación visual, la figura 3 muestra estrellas clasificadas en diferentes tipos espectrales. De forma visual es posible relacionar sus propiedades, como el tamaño, la masa y su color superficial, este último es muy importante para definir la <a href="" target="_blank"></a>temperatura superficial de la estrella, que se mide en Kelvins, por eso la letra [K] que la acompaña.</p>
 
 <a href="https://en.wikipedia.org/wiki/O-type_star" target="_blank"> <div align="center"> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Morgan-Keenan_spectral_classification.png" width="370" height="150"></div></a>
 
@@ -251,7 +251,7 @@ Por ejemplo, la estrella que ostenta el record de más masiva habita la <a href=
 <table>
 <tbody>
 <tr>
-<td style="text-align:center"><em>Video 2: Un campo estelar con muchas estrellas aparentemente no relacionadas entre si, pero cuando se ordenan las estrellas primero por color y luego por lo brillante, encontramos el diagrama HR.</em></td>
+<td style="text-align:center"><em>Video 2: Un campo estelar muestra muchas estrellas aparentemente no relacionadas entre si, pero cuando las estrellas se ordenan, primero por color y luego por lo brillante, nos damos de cara con el diagrama HR.</em></td>
 </tr>
 </tbody>
 </table>
@@ -277,7 +277,10 @@ Por ejemplo, la estrella que ostenta el record de más masiva habita la <a href=
 
 <h2 id="Las-estrellas-cambian-a-trav&#233;s-del-tiempo">Las estrellas cambian a trav&#233;s del tiempo<a class="anchor-link" href="#Las-estrellas-cambian-a-trav&#233;s-del-tiempo"></a></h2><p>Conforme pasa el tiempo, las estrellas van evolucionando y moviéndose por el diagrama HR. Esto implica que sufrirán diferentes procesos físicos que provocarán cámbios en sus propiedades (cambios de temperatura, tamaño, luminosidad, pérdida de masa, etc) mientras se aproxima su muerte. Cuando una estrella particular sufre estos cambios, es donde se puede romper la condición de equilibrio hidrostático, haciendo que las estrellas puedan hacer visibles sus inestabilidades a través del cámbio de su brillo. Una de las grandes misiones de la astronomía del siglo XXI es caracterizar los cambios de brillo que pueden sufrir mientras las estrellas se mueven por el diagrama HR, para así poder entender qué le pasa.</p>
 
-<p>Supongamos que cada uno tiene a disposición un telescopio para explorar el cielo. Si en vez de observar directamente con él, montamos una cámara fotográfica, podriamos tomar susesivas fotos y unirlas para constriur un mapa nocturno del cielo, o también se podrian tomar muchas fotos de una misma región celeste y ver cómo las fuentes luminosas se comportan a través del tiempo. Al comparar esas imágenes, es posible que veamos fuentes que cambien su luminosidad, de manera regular, irregular o que sencillamente que aparezcan y desaparezcan. A modo de ejemplo, en la figura 4 se muestra un campo estelar que ha sido observado en 4 oportunidades diferentes. Dentro del círculo rojo se señala una estrella que cambia su brillo.</p>
+<p>Supongamos que cada uno tiene a disposición un telescopio para explorar el cielo. Si en vez de observar directamente con él, montamos una cámara fotográfica, podriamos tomar susesivas fotos a lo largo del cielo y unirlas para constriur un mapa nocturno, o también se podrian tomar muchas fotos de una misma región celeste y ver cómo las fuentes luminosas se comportan a través del tiempo. Al comparar esas imágenes, es posible que veamos fuentes que cambien su luminosidad, de manera regular, irregular o que sencillamente que aparezcan y desaparezcan. </p>
+
+<p>
+A modo de ejemplo, en la figura 4 se muestra un campo estelar que ha sido observado en 4 oportunidades diferentes. Dentro del círculo rojo se señala una estrella que cambia su brillo.</p>
 
 <th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/epocas.png" width="350" height="350"></div></a></th>
 
@@ -288,7 +291,6 @@ Por ejemplo, la estrella que ostenta el record de más masiva habita la <a href=
 </tr>
 </tbody>
 </table>
-
 
 <p>¿Qué le pasa a esta estrella? Imposible saberlo sin información adicional. Pero partamos simplificando el problema con una pregunta fundamental: ¿Es normal que la luminosidad de las fuentes astronómicas cambie a lo largo del tiempo? Para tener una pista, podemos examinar nuestra estrella más cercana, y ver si sufre de algún tipo de cambio de luminosidad, que no sea provocado por un eclipse.</p>
 
@@ -380,26 +382,7 @@ Por ejemplo, la estrella que ostenta el record de más masiva habita la <a href=
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Ya-bueno:-&#191;y-cu&#225;ntas-fuentes-luminosas-variables-existen?">Ya bueno: &#191;y cu&#225;ntas fuentes luminosas variables existen?<a class="anchor-link" href="#Ya-bueno:-&#191;y-cu&#225;ntas-fuentes-luminosas-variables-existen?"></a></h2><p>A lo largo de la historia, muchos astrónomos, astrónomas e instituciones han observado toda clase de estrellas variables catalogado <strong>demasiados</strong> tipos como para ser nombrados aquí.</p>
-<p>Así que mejor consultaremos el arbol de la variabilidad y toda su complejidad :D</p>
-
-
-<a href="https://arxiv.org/pdf/0712.3797.pdf" target="_blank"> 
-    <div align="center"> 
-        <img src="https://www.ast.cam.ac.uk/sites/default/files/assets/images/research/milkyway_localgroup/VariabilityTree(1).png" width="350" height="250">
-    </div>
-</a>
-
-<table>
-<tbody>
-<tr>
-<td style="text-align:center"><em>Figura 7: Árbol de la variabilidad", el cual fue sacado de L. Eyer &amp; N. Mowlavi.</em></td>
-</tr>
-</tbody>
-</table>
-
-<p>De aquí en adelante, usaré este para ir hablando de diferentes fuentes que cambian su brillo. Aún me falta algunas palabras para terminar de sintetizar todo esto, pero creo que ya está listo.</p>
-<p>¡Hasta entonces!</p>
+<h2 id="Ya-bueno:-&#191;y-cu&#225;ntas-fuentes-luminosas-variables-existen?">Ya bueno: &#191;y cu&#225;ntas fuentes luminosas variables existen?<a class="anchor-link" href="#Ya-bueno:-&#191;y-cu&#225;ntas-fuentes-luminosas-variables-existen?"></a></h2><p>A lo largo de la historia, muchos astrónomos, astrónomas e instituciones han observado toda clase de estrellas variables catalogado <strong>demasiados</strong> tipos como para ser nombrados aquí. Hay unas, por ejemplo, que se llaman estrellas <a href="https://en.wikipedia.org/wiki/RR_Lyrae_variable" target="_blank">RR Lyrae</a>, las cuales sufren variaciones de brillo extremadamente regulares, y se estima que son estrellas relativamente viejas (). La siguiente imagen muestra cuántas de ellas conviven y centellean en un <a href="https://es.wikipedia.org/wiki/Cúmulo_globular" target="_blank">cúmulo globular</a>.
 
 <div align="center">
     <a href="https://skyandtelescope.org/astronomy-news/the-chaotic-music-of-variable-stars/" target="_blank">
@@ -418,3 +401,25 @@ Por ejemplo, la estrella que ostenta el record de más masiva habita la <a href=
 </div>
 </div>
 </div>
+
+
+<p>Cada sub-tipo de estrella variable es un potencial tema de estudio, y donde el dilucidar sus misterios, el mecanismo por el cual sufre estas variaciones y el momento evolutivo que se encuentra son preguntas que aún se discuten y esperamos que pronto se resuelvan dada la ola de datos que se están observando y que se obtendrán con la apertura de la nueva generación de telescopios, como el <a href="https://www.gmto.org" target="_blank">GMT</a> (Observatorio Las Campanas, región de Atacama) y el <a href="https://www.eso.org/sci/facilities/eelt/" target="_blank">ELT</a>(Observatorio Paranal, region de Antofagasta).</p>
+
+<p>Así que mejor consultaremos el arbol de la variabilidad y toda su complejidad :D, de aquí en adelante, usaré árbol para ir hablando de diferentes fuentes que cambian su brillo. 
+
+<a href="https://arxiv.org/pdf/0712.3797.pdf" target="_blank"> 
+    <div align="center"> 
+        <img src="https://www.ast.cam.ac.uk/sites/default/files/assets/images/research/milkyway_localgroup/VariabilityTree(1).png" width="350" height="250">
+    </div>
+</a>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align:center"><em>Figura 7: Árbol de la variabilidad", el cual fue sacado de L. Eyer &amp; N. Mowlavi.</em></td>
+</tr>
+</tbody>
+</table>
+
+<p>¡Gracias por visitar, y hasta entonces!</p>
+
