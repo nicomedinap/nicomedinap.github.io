@@ -116,8 +116,8 @@ title:  "Variación de brillo en las estrellas"
 <ol>
 <li>la Masa Solar $M_{\odot} := 1,99\times10^{30}\ [Kg]$ </li>
 <li>El Radio Solar $R_{\odot} := 697.000\ [Km]$  </li>
-<li>la Luminosidad Solar $L_{\odot} := 3,82\times10^{8}\ [Watts]$ </li>
-<li>La unidad astronómica $[UA]:=  1,49\times10^{26}\ [Km]$</li>
+<li>la Luminosidad Solar $L_{\odot} := 3,82\times10^{26}\ [Watts]$ </li>
+<li>La unidad astronómica $[UA]:=  1,49\times10^{8}\ [Km]$</li>
 </ol>
 <p>Sabiendo esto, ahora podremos hablar de otras estrellas usando como referencia las proporciones del sol ${M_{\odot}, R_{\odot}, L_{\odot}}$. 
 
