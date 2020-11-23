@@ -32,23 +32,9 @@ Soy más o menos activo en las redes sociales enlistadas en los [links de inter�
 ## Lista de cosas por hacer
 
 - [x] Tener un blog.
-
 - [ ] Entender todos los aspectos del blog.
-
 - [x] Sobrevivir al 2012.
-
 - [x] Creerme científico.
-
 - [ ] Escribir una tesis de Doctorado.
-
 - [ ] Escuchar "Close to the Edge" en vivo.
 
-
-<!-- EMAIL -->
-<img src="_gmail.png" alt="gmail" height="30" width="35"> <h4>My email</h4>
-<!-- TWITTER -->
-<img src="_twitter.png.png" alt="twitter" height="35" width="35"> <h4>Username</h4>
-<!-- FACEBOOK -->
-<img src="_facebook.png" alt="facebook" height="35" width="35"> <h4>Username</h4>
-<!-- INSTAGRAM -->
-<img src="_instagram.png" alt="instagram" height="35" width="35"> <h4>Username</h4>
