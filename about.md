@@ -34,7 +34,7 @@ Soy más o menos activo en las redes sociales enlistadas en los [links de inter�
 - [x] Tener un blog.
 - [ ] Entender todos los aspectos del blog.
 - [x] Sobrevivir al 2012.
-- [x] Sobrevivir el 2020. (version actualizada∫)
+- [x] Sobrevivir el 2020. (version actualizada.∫)
 - [x] Creerme científico.
 - [ ] Escribir una tesis de Doctorado.
 - [ ] Escuchar "Close to the Edge" en vivo.
