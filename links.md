@@ -8,6 +8,8 @@ Acá algunos links que pueden ser de interés:
 1. [Twitter](https://twitter.com/nicomedinap){:target="_blank"}
 2. [Flickr](http://www.flickr.com/photos/73337761@N06/){:target="_blank"}
 3. [Instagram](https://www.instagram.com/nicomediap/){:target="_blank"}
+4. Escribí un bot en bash+python que sube fotos en instagram, se llama [@DosisDelPasado](https://www.instagram.com/dosisdelpasado/){:target="_blank"}
+ -Esto lo estoy desarrollando desde una pregunta en [Stackoverflow](https://stackoverflow.com/questions/65215029/upload-vertical-images-to-instagram-using-python?noredirect=1#comment115581214_65215029){:target="_blank"}
 * Apariciones en algunos videos:
 1. [Astronomía en Vivo: Telescopios, una ventana al Universo](https://youtu.be/uY6pnWmrERs){:target="_blank"}
 2. [REMedia educa: historia de la constitución en Chile](https://www.instagram.com/tv/CGi9ZtWpls-/?utm_source=ig_web_button_share_sheet){:target="_blank"}
