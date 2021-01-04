@@ -4,21 +4,6 @@ comments: true
 title:  "Lo que alguien necesita"
 ---
 
-## Resonancia cognitiva
-### ??/??/2021
-
-A veces cuando hablas con gente y la prosa se entremezcla, no necesariamente se producen una conversación. Somos personas con todo tipo de experiencias distintas, con historias únicas y matices insospechados, entonces no es extraño darse cuenta que nuestros puntos de partida son tan diferentes que ni siquiera nos ponemos de acuerdo en las definiciones de las palabras que usamos. La fe es un gran ejemplo de esto, tan manoseada por la religión, el saber popular y la charlatanería que pasa a ser un aspecto gris, etéreo, que puede significa tantas cosas que pareciera ya carece del sentido propio y colectivo.
-
-Para mí, la fe es creer sin tener una buena razón, credulidad en su máxima expresión. Esta necesidad de ser crédulo nace de la misma curiosidad tan propia de la raza humana, que la lleva a preguntarse cosas de forma ilimitada, sin necesariamente tener respuestas. Es aquí donde se desvela la incomodidad de no saber; herida dolorosa que en reflexiones existenciales pareciera ser hecha con un verdadero cuchillo enterrado en el corazón, herida que desaparece cuando el sueño llega, esperando la nueva oportunidad para abrirse y sangrar lo que sea necesario. 
-
-
-
-
-Si hay evidencia la fe se disipa. Los hechos son una flecha en el tiempo, que nos indica el sentido de la naturaleza, tan críptica de catastrar en demasiados aspectos. 
-
-Y es aquí donde se produce mi conflicto. Porque esto es en lo que yo creo, y no tengo problemas con   
-
----
 
 ## El despertar de un sueño
 ### ??/04/2020
