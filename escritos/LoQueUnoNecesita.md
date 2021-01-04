@@ -5,6 +5,8 @@ title:  "Lo que alguien necesita"
 ---
 
 
+
+
 ## El despertar de un sueño
 ### ??/04/2020
 
@@ -48,20 +50,20 @@ Siempre termino con más dudas cuando conecto ideas, partí con una premisa y me
 ### ??/07?/2019
 
 Cuarenta personas por minuto cruzan miradas conmigo en la célebre estación de trenes, mientras permanezco en la incomodidad del suelo, cerca de un basurero desbordado y olvidado. Muy Londres será pero la gente sigue siendo terrible cuando está de paso y nadie la conoce.
-Cuarenta personas no es menor, creo yo. Y aún así me siento en el piso rodeado de soledad. La única persona que podría comprenderme fue a dejarme cerca del aeropuerto de un país cercano. Quizá se siente igual que yo, rodeada de gente que sólo añaden más profundidad a los pensamientos tristes, consistencia a las palabras vacías.
-Esta soledad rodeada es aún peor, como que te dice que los problemas que la gente arrastra y la inercia que agregan son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
+Cuarenta personas no es menor, creo yo. Y aún así me siento en el piso rodeado de soledad. La única persona que podría comprenderme fue a dejarme al aeropuerto de un país cercano. Quizá se siente igual que yo, rodeada de gente que sólo añaden más profundidad a los pensamientos tristes, consistencia a las palabras vacías.
+Esta soledad rodeada es aún peor, como que te dice que la inercia de la genta y los problemas que arrastran son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
 
 *main the gap between the train and the platform*
 
-Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar algo.
+Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note, pero nadie mira. Da lo mismo la verdad, carezco de las habilidades para explicar qué es lo que ocurre.
 
 *main the gap between the train and the platform*
 
-Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Carezco de las habilidades para sobrellevar una conversación amena con éxito.
+Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Nada más queda por hacer.
 
 *main the gap between the train and the platform*
 
-Tren de mierda, si entendí que hay que tener cuidado. ¿Cómo alguien podría llegar a caerse en ese hoyo entre la puerta y la loza?
+Tren de mierda, si entendí que hay que tener cuidado. ¿Cómo alguien podría llegar a ser tan weón para caerse cuando sale del tren?
 
 *main the gap between the train and the platform*
 
