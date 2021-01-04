@@ -82,7 +82,7 @@ Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadi
 
 *main the gap between the train and the platform*
 
-Tren de mierda, si entendí que hay que tener cuidado. ¿Cómo alguien podría llegar a ser tan weón para caerse cuando sale del tren?
+Tren de mierda, si entendí que hay que tener cuidado. ¿Cómo alguien podría llegar a ser tan weón para caerse al salir del tren?
 
 *main the gap between the train and the platform*
 
