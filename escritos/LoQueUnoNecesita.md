@@ -4,21 +4,6 @@ comments: true
 title:  "Lo que alguien necesita"
 ---
 
-## Resonancia cognitiva
-### ??/??/2021
-
-A veces cuando hablas con gente y la prosa se entremezcla, no necesariamente se producen una conversación. Somos personas con todo tipo de experiencias distintas, con historias únicas y matices insospechados, entonces no es extraño darse cuenta que nuestros puntos de partida son tan diferentes que ni siquiera nos ponemos de acuerdo en las definiciones de las palabras que usamos. La fe es un gran ejemplo de esto, tan manoseada por la religión, el saber popular y la charlatanería que pasa a ser un aspecto gris, etéreo, que puede significa tantas cosas que pareciera ya carece del sentido propio y colectivo.
-
-Para mí, la fe es creer sin tener una buena razón, credulidad en su máxima expresión. Esta necesidad de ser crédulo nace de la misma curiosidad tan propia de la raza humana, que la lleva a preguntarse cosas de forma ilimitada, sin necesariamente tener respuestas. Es aquí donde se desvela la incomodidad de no saber; herida dolorosa que en reflexiones existenciales pareciera ser hecha con un verdadero cuchillo enterrado en el corazón, herida que desaparece cuando el sueño llega, esperando la nueva oportunidad para abrirse y sangrar lo que sea necesario. 
-
-
-
-
-Si hay evidencia la fe se disipa. Los hechos son una flecha en el tiempo, que nos indica el sentido de la naturaleza, tan críptica de catastrar en demasiados aspectos. 
-
-Y es aquí donde se produce mi conflicto. Porque esto es en lo que yo creo, y no tengo problemas con   
-
----
 
 ## El despertar de un sueño
 ### ??/04/2020
@@ -28,7 +13,7 @@ Ayer soñé que despertaba y tú estabas a mi lado. Despertaba en esa cama de a�
 Te contemplé sin confirmar que eras tú, y te vigilé como suelo hacerlo: De manera alejada y ausente, como pensando que no merezco lo que se manifiesta.
 Así me quede horas, esperando algo que quizá nunca ocurriría; pensando en qué dirías cuando cruzáramos las miradas ¿Sería mejor preguntar cómo dormiste? ¿soñarás algo bonito? ¿Qué colores conseguirías imaginar?
 
-Me levante, salí de la habitación y comencé la rutina: Agua caliente, mate y música. Cerré la puerta para no interrumpir mi sueño, tu sueño. 
+Me levante, salí de la habitación y comencé la rutina: Agua caliente, mate y música. Cerré la puerta a mi espalda para no interrumpir tu sueño, mi sueño. 
 
 No volví a abrir la puerta, tampoco volví a verte. 
 
@@ -74,7 +59,7 @@ Esta soledad rodeada es aún peor, hablan sobre la inercia de la gente, que los 
 
 *main the gap between the train and the platform*
 
-Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note, pero nadie mira. Da lo mismo la verdad, carezco de las habilidades para explicar qué es lo que ocurre.
+Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note que están húmedos. Da lo mismo la verdad, nadie mira. Carezco de las habilidades para explicar qué es lo que ocurre.
 
 *main the gap between the train and the platform*
 
