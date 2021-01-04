@@ -78,7 +78,7 @@ Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de refl
 
 *main the gap between the train and the platform*
 
-Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Hay que caer bajo para tener fe. Nada más queda por hacer.
+Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Hay que caer bajo para tener fe.
 
 *main the gap between the train and the platform*
 
