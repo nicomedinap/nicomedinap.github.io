@@ -7,34 +7,34 @@ title:  "Lo que alguien necesita"
 ## Resonancia cognitiva
 ### ??/??/2021
 
-A veces cuando hablas con gente y la prosa se entremezcla, no necesariamente se producen una conversación. Somos personas con todo tipo de experiencias distintas, con historias únicas y matíces insospechados, entonces no es extraño darse cuenta que nuestros puntos de partida son tan diferentes que ni siquiera nos ponemos de acuerdo en las definiciones de las palabras que usamos. La fe es un gran ejemplo de esto, tan manoseada por la religión, el saber popular y la charlatanería que pasa a ser un aspecto gris, etereo, que puede significa tantas cosas que pareciera ya carece del sentido propio y colectivo.
+A veces cuando hablas con gente y la prosa se entremezcla, no necesariamente se producen una conversación. Somos personas con todo tipo de experiencias distintas, con historias únicas y matices insospechados, entonces no es extraño darse cuenta que nuestros puntos de partida son tan diferentes que ni siquiera nos ponemos de acuerdo en las definiciones de las palabras que usamos. La fe es un gran ejemplo de esto, tan manoseada por la religión, el saber popular y la charlatanería que pasa a ser un aspecto gris, etéreo, que puede significa tantas cosas que pareciera ya carece del sentido propio y colectivo.
 
-Para mi, la fe es creer sin tener una buena razón, credulidad en su máxima expresión. Esta necesidad de ser crédulo nace de la misma curiosidad tan propia de la raza humana, que la lleva a preguntarse cosas de forma ilimitada, sin necesariamente tener respuestas. Es aquí donde se desvela la incomodidad de no saber; herida dolorosa que en reflexiones existenciales pareciera ser hecha con un verdadero cuchillo enterrado en el corazón, herida que desaparece cuando el sueño llega, esperando la nueva oportunidad para abrirse y sangrar lo que sea necesario. 
-
-
+Para mí, la fe es creer sin tener una buena razón, credulidad en su máxima expresión. Esta necesidad de ser crédulo nace de la misma curiosidad tan propia de la raza humana, que la lleva a preguntarse cosas de forma ilimitada, sin necesariamente tener respuestas. Es aquí donde se desvela la incomodidad de no saber; herida dolorosa que en reflexiones existenciales pareciera ser hecha con un verdadero cuchillo enterrado en el corazón, herida que desaparece cuando el sueño llega, esperando la nueva oportunidad para abrirse y sangrar lo que sea necesario. 
 
 
-Si hay evidencia la fe se discipa. Los hechos son una flecha en el tiempo, que nos indica el sentido de la naturaleza, tan críptica de catastrar en demasiados aspectos. 
 
-Y es aquí donde se procuce mi conflicto. Porque esto es en lo que yo creo, y no tengo problemas con   
+
+Si hay evidencia la fe se disipa. Los hechos son una flecha en el tiempo, que nos indica el sentido de la naturaleza, tan críptica de catastrar en demasiados aspectos. 
+
+Y es aquí donde se produce mi conflicto. Porque esto es en lo que yo creo, y no tengo problemas con   
 
 ---
 
 ## El despertar de un sueño
 ### ??/04/2020
 
-Ayer soñe que despertaba y tú estabas a mi lado. Despertaba en esa cama de años y estabas ahí nuevamente, sin forma, sin sonido ni facciones, sólo tu respiración cortaba el aire en fracciones de segundos.
+Ayer soñé que despertaba y tú estabas a mi lado. Despertaba en esa cama de años y estabas ahí nuevamente, sin forma, sin sonido ni facciones, sólo tu respiración cortaba el aire en fracciones de segundos.
 Te contemplé sin confirmar que eras tú, y te vigilé como suelo hacerlo: De manera alejada y ausente, como pensando que no merezco lo que se manifiesta.
 Así me quede horas, esperando algo que quizá nunca ocurriría; pensando en qué dirías cuando cruzáramos las miradas ¿Sería mejor preguntar cómo dormiste? ¿soñarás algo bonito? ¿Qué colores conseguirías imaginar?
 
-Me levante, salí de la habitación y comencé la rutina: Agua caliente, mate y música. Cerré la puerta para no interrumpir mi sueño, tu sueño. No volví a abrir la puerta ni volví a verte luego de eso. 
+Me levante, salí de la habitación y comencé la rutina: Agua caliente, mate y música. Cerré la puerta para no interrumpir mi sueño, tu sueño. No volví a abrir la puerta ni volví a verte luego. 
 
 ---
 
 ## Redes sociales
 ### ??/02/2020
 
-Hay preguntas que es mejor no responder. Lo dice un idiota ansioso que piensa exactamente lo contrario, pero empíricamente ha decidido a punta de sangre y peniruas que, a veces, es lo mejor.
+Hay preguntas que es mejor no responder. Lo dice un idiota ansioso que piensa exactamente lo contrario, pero empíricamente ha decidido a punta de sangre y penurias que, a veces, es lo mejor.
 Antes era más fácil ser ignorante, despojado de tantos aspectos públicos de cada persona. Ahora estar presente en todos lados es parte de la vida, algo orgánico, y el que especta tiene su dosis de existencia. Lo real es concreto y despiadado, ocurriendo una y otra vez. 
 
 Sólo un punto en la frontera de las posibilidades basta para crear todo un mundo ficticio, tan real como estas palabras garrapateadas en un momento de nostalgia, el que llegó de golpe y sin aviso, luego de pulular en alguna red social.
@@ -60,22 +60,34 @@ Siempre termino con más dudas cuando conecto ideas, partí con una premisa y me
 ---
 
 ## Estación King's Cross
-### ??/??/2019
+### ??/07?/2019
 
-Cuarenta personas por minuto cruzan miradas conmigo en la célebre estación de trenes, mientras permanezco en la incomodida del suelo, cerca de un basurero desbordado y olvidado. Muy Londres será pero la gente sigue siendo terrible cuando nadie la conoce.
-Cuarenta personas no es menor, creo yo. Y aún así me siento en el piso rodeado de soledad. La única persona que podría comprenderme, pienso, fue a dejarme cerca de un aeropuerto de un país cercano. Quizá se siente igual que yo, rodeada de gente que sólo añaden más profundidad a los pensamientos tristes, consistencia a las palabras vacías.
+Cuarenta personas por minuto cruzan miradas conmigo en la célebre estación de trenes, mientras permanezco en la incomodidad del suelo, cerca de un basurero desbordado y olvidado. Muy Londres será pero la gente sigue siendo terrible cuando está de paso y nadie la conoce.
+Cuarenta personas no es menor, creo yo. Y aún así me siento en el piso rodeado de soledad. La única persona que podría comprenderme fue a dejarme cerca del aeropuerto de un país cercano. Quizá se siente igual que yo, rodeada de gente que sólo añaden más profundidad a los pensamientos tristes, consistencia a las palabras vacías.
 Esta soledad rodeada es aún peor, como que te dice que los problemas que la gente arrastra y la inercia que agregan son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
+
 *main the gap between the train and the platform*
+
 Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar algo.
+
 *main the gap between the train and the platform*
-Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, y carezco de las habilidades para sobrellevar una conversación amena con éxito
+
+Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Carezco de las habilidades para sobrellevar una conversación amena con éxito.
+
 *main the gap between the train and the platform*
+
 Tren de mierda, si entendí que hay que tener cuidado. ¿Cómo alguien podría llegar a caerse en ese hoyo entre la puerta y la loza?
+
 *main the gap between the train and the platform*
+
 *main the gap between the train and the platform*
+
 *main the gap between the train and the platform*
-Las nubes vuelven gris esta ciudad llena de ladrillos.
+
+Las nubes incoloras vuelven gris esta ciudad llena de ladrillos.
+
 *main the gap between the train and the platform*
+
 Llueve.
 
 ## Quiero hablar de ti
@@ -93,7 +105,7 @@ Después de encender otro cigarrillo más, de ordenar mi odioso pelo y enfocar m
 
 Quiero hablar de ti y de todo tu ser, de tus sueños rasguñados y de tu voluntad vigorosa, en la que todos nos perdemos sin excepción alguna. Acostumbras no decir palabras e ignorar a la gente; así tal cual eres un misterio y cada día me sorprendo de tus demonios. Así fui a dar, por un suburbio extraviado y para mí casi desconocido, con el golpe que exhibió mi inestable equilibrio; y te reíste y te burlaste, un comportamiento acorde a la absurda situación que se había formado. Rehicimos la vida en una larga e inagotable conversación nocturna una y otra y otra vez, nos prometimos recuerdos y momentos de todo tipo para nunca olvidar que fuimos jóvenes y felices; y todo esto parte del hecho de que contigo vivo todo lo que siempre he querido: lo irónico, lo bizarro, lo alocado, lo importante; y tú siempre ahí, con  el mentón horizontal mirando las estrellas, resistiendo el viento a mi lado.
 
-Entra entonces la noche y no puedo dormir, espero una revelación como quién espera algo que está a punto de suceder, pero nada pasa; todo está del otro lado de estas palabras que escribo apresuradamente. Esta noche he cerrado todas las ventanas ya que en la tenue oscuridad me atrevo a decir cosas que antes ocultaba estrategicamente entre los silbidos de la voz.
+Entra entonces la noche y no puedo dormir, espero una revelación como quién espera algo que está a punto de suceder, pero nada pasa; todo está del otro lado de estas palabras que escribo apresuradamente. Esta noche he cerrado todas las ventanas ya que en la tenue oscuridad me atrevo a decir cosas que antes ocultaba estratégicamente entre los silbidos de la voz.
 
 Quiero hablar de ti, mi única conexión al pasado. Si tuviera que decir algo en lo que nos parecemos, señalaría nuestra predilección a las noches de alcohol y jolgorio, pero el tiempo ya ha hecho de las suyas, calando hondo en lo que nos unía. Estas no son las primeras palabras que te dedico ni aquí ni allá, pero serán las últimas que sintetizo con esta agonía en el pecho, porque ya me harté de esperar y de cargar con tus sombras, me harté de comerme tu mierda, de fingir que nada ha pasado entre nosotros, y por sobretodo de tus grandes e indecisos ojos, los que no tienen expresión cuando hablamos ni cuando reímos ni nunca. Realmente me entristece que no tengas esa alegría que te caracterizaba y te hacía el punto en el cual giraban las cosas.
 
