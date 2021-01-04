@@ -5,16 +5,17 @@ title:  "Lo que alguien necesita"
 ---
 
 
-
-
 ## El despertar de un sueño
 ### ??/04/2020
 
 Ayer soñé que despertaba y tú estabas a mi lado. Despertaba en esa cama de años y estabas ahí nuevamente, sin forma, sin sonido ni facciones, sólo tu respiración cortaba el aire en fracciones de segundos.
+
 Te contemplé sin confirmar que eras tú, y te vigilé como suelo hacerlo: De manera alejada y ausente, como pensando que no merezco lo que se manifiesta.
 Así me quede horas, esperando algo que quizá nunca ocurriría; pensando en qué dirías cuando cruzáramos las miradas ¿Sería mejor preguntar cómo dormiste? ¿soñarás algo bonito? ¿Qué colores conseguirías imaginar?
 
-Me levante, salí de la habitación y comencé la rutina: Agua caliente, mate y música. Cerré la puerta para no interrumpir mi sueño, tu sueño. No volví a abrir la puerta ni volví a verte luego. 
+Me levante, salí de la habitación y comencé la rutina: Agua caliente, mate y música. Cerré la puerta para no interrumpir mi sueño, tu sueño. 
+
+No volví a abrir la puerta, tampoco volví a verte. 
 
 ---
 
@@ -22,9 +23,10 @@ Me levante, salí de la habitación y comencé la rutina: Agua caliente, mate y 
 ### ??/02/2020
 
 Hay preguntas que es mejor no responder. Lo dice un idiota ansioso que piensa exactamente lo contrario, pero empíricamente ha decidido a punta de sangre y penurias que, a veces, es lo mejor.
-Antes era más fácil ser ignorante, despojado de tantos aspectos públicos de cada persona. Ahora estar presente en todos lados es parte de la vida, algo orgánico, y el que especta tiene su dosis de existencia. Lo real es concreto y despiadado, ocurriendo una y otra vez. 
 
-Sólo un punto en la frontera de las posibilidades basta para crear todo un mundo ficticio, tan real como estas palabras garrapateadas en un momento de nostalgia, el que llegó de golpe y sin aviso, luego de pulular en alguna red social.
+Antes era tan fácil ser ignorante, despojado de tantos aspectos públicos al alcance. Ahora estar presente en todos lados es parte de la vida, algo orgánico, lo real es concreto y despiadado. Pareciera que todo es show y el espectador tiene su dosis de existencia, ocurriendo una y otra vez.xs 
+
+Al final, solo un punto en la frontera de las posibilidades basta para crear todo un mundo ficticio, tan real como estas palabras garrapateadas en un momento de nostalgia, el que llegó de golpe y sin aviso luego de pulular en alguna de tus redes sociales.
 
 ---
 
@@ -50,8 +52,10 @@ Siempre termino con más dudas cuando conecto ideas, partí con una premisa y me
 ### ??/07?/2019
 
 Cuarenta personas por minuto cruzan miradas conmigo en la célebre estación de trenes, mientras permanezco en la incomodidad del suelo, cerca de un basurero desbordado y olvidado. Muy Londres será pero la gente sigue siendo terrible cuando está de paso y nadie la conoce.
+
 Cuarenta personas no es menor, creo yo. Y aún así me siento en el piso rodeado de soledad. La única persona que podría comprenderme fue a dejarme al aeropuerto de un país cercano. Quizá se siente igual que yo, rodeada de gente que sólo añaden más profundidad a los pensamientos tristes, consistencia a las palabras vacías.
-Esta soledad rodeada es aún peor, como que te dice que la inercia de la genta y los problemas que arrastran son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
+
+Esta soledad rodeada es aún peor, hablan sobre la inercia de la gente, que los problemas que arrastran son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
 
 *main the gap between the train and the platform*
 
@@ -59,7 +63,7 @@ Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de refl
 
 *main the gap between the train and the platform*
 
-Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Nada más queda por hacer.
+Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Hay que caer bajo para tener fe. Nada más queda por hacer.
 
 *main the gap between the train and the platform*
 
