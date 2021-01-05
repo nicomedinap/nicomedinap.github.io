@@ -55,29 +55,29 @@ Cuarenta personas por minuto cruzan miradas conmigo en la célebre estación de 
 
 Cuarenta personas no es menor, creo yo. Y aún así me siento en el piso rodeado de soledad. La única persona que podría comprenderme fue a dejarme al aeropuerto de un país cercano. Quizá se siente igual que yo, rodeada de gente que sólo añaden más profundidad a los pensamientos tristes, consistencia a las palabras vacías.
 
-Esta soledad rodeada es aún peor, hablan sobre la inercia de la gente, que los problemas que arrastran son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
+Esta soledad rodeada es aún peor, habla sobre la inercia de del humano, que los problemas que arrastran son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
 
-*main the gap between the train and the platform*
+*mind the gap between the train and the platform*
 
-Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note que están húmedos. Da lo mismo la verdad, nadie mira. Carezco de las habilidades para explicar qué es lo que ocurre.
+Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note que están húmedos. Da lo mismo la verdad, no hay quien mire. Carezco de las habilidades para explicar qué es lo que ocurre.
 
-*main the gap between the train and the platform*
+*mind the gap between the train and the platform*
 
 Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Hay que caer bajo para tener fe.
 
-*main the gap between the train and the platform*
+*mind the gap between the train and the platform*
 
-Tren de mierda, si entendí que hay que tener cuidado. ¿Cómo alguien podría llegar a ser tan weón para caerse al salir del tren?
+Tren de mierda, si ya entendí que hay que tener cuidado. ¿Cómo alguien podría llegar a ser tan weón para caerse al salir del tren?
 
-*main the gap between the train and the platform*
+*mind the gap between the train and the platform*
 
-*main the gap between the train and the platform*
+*mind the gap between the train and the platform*
 
-*main the gap between the train and the platform*
+*mind the gap between the train and the platform*
 
-Las nubes incoloras vuelven gris los suburbios llenos de ladrillos.
+Las nubes incoloras vuelven grises los suburbios llenos de ladrillos.
 
-*main the gap between the train and the platform*
+*mind the gap between the train and the platform*
 
 Llueve.
 
