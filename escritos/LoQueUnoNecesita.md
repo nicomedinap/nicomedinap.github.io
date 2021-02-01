@@ -4,6 +4,41 @@ comments: true
 title:  "Lo que alguien necesita"
 ---
 
+## Es increible
+
+De verdad que es increible lo fácil que es poder escribir aquí y que inmediataente sea publico para el mundo y el espacio que lo rodea. 
+
+Tampoco quiero que las multitudes lo leerán. Por eso está aquí, en un lugar oculto que tiene muchas barreras y se esconde a la vista en una frase descuidada.
+
+Pero un alma curiosa de mi, de lo que tengo que decir y quizá insistió demasiado y escudriñó hasta la más profunda brecha. Estas mismas palabras que le escribo a alguien, de alguna forma siempre fueron para ojos ajenos. Esta pequeña forma que ocurrió de pronto buscaba atención propia. 
+
+Cada forma de expresión es una nueva dimensión: somos tu, yo y mis pensamientos, la forma que mezclo el mundo entre mis palabras; y lo que genera en ti.
+
+Es terrorifico, la verdad. De esas cosas que uno pensaba que pasarían con el tiempo. Igual no sé qué tanto me sorprende, si tengo facebook desde el 2009.
+
+## El camino hacia la astrología
+### ??/??/2021
+
+Hay un ensayo del gran dibulgador ciéntífico Isaac Asimov
+
+Esta es mi impresión sobre la astrología: Una cuna de la charlatanería, que de alguna forma atrae más a las mujeres. 
+
+Y esta última frase es la que me provoca conflicto. ¿Me hace machista este pensamiento? Yo creo que no, pero siempre uno podría llegar a estar cayendo en algún tipo de sesgo natural. Dicho esto, seguiré.
+
+Tiene sentido que sea las mujeres las que adopten  
+
+## Resonancia cognitiva
+### ??/??/2021
+
+A veces cuando hablas con gente y la prosa se entremezcla, no necesariamente se producen una conversación. Somos personas con todo tipo de experiencias distintas, con historias únicas y matices insospechados, entonces no es extraño darse cuenta que nuestros puntos de partida son tan diferentes que ni siquiera nos ponemos de acuerdo en las definiciones de las palabras que usamos. La fe es un gran ejemplo de esto, tan manoseada por la religión, el saber popular y la charlatanería que pasa a ser un aspecto gris, volatil, que puede significa tantas cosas que pareciera ya carece del sentido.
+
+Para mí, la fe es creer sin tener una buena razón, credulidad en su máxima expresión. Esta necesidad de ser crédulo nace de la misma curiosidad tan propia de la raza humana, que la lleva a preguntarse cosas de forma ilimitada, sin que necesariamente existan respuestas. Es aquí donde se desvela la incomodidad de no saber; herida dolorosa que en reflexiones existenciales pareciera ser hecha con un verdadero cuchillo enterrado en el corazón, herida que desaparece cuando el sueño llega, esperando la nueva oportunidad para abrirse y sangrar lo que sea necesario. 
+
+Si hay evidencia la fe se discipa. Los hechos son una flecha que apunta a la dirección correcta, que nos indica el sentido de la naturaleza, tan críptica en demasiados aspectos. 
+
+Y es aquí donde se produce mi conflicto. Porque esto es en lo que yo creo, y no tengo problemas con   
+
+---
 
 ## El despertar de un sueño
 ### ??/04/2020
@@ -59,11 +94,11 @@ Esta soledad rodeada es aún peor, habla sobre la inercia de del humano, que los
 
 *mind the gap between the train and the platform*
 
-Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note que están húmedos. Da lo mismo la verdad, no hay quien mire. Carezco de las habilidades para explicar qué es lo que ocurre.
+Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note que están húmedos. Carezco de las habilidades para explicar qué es lo que ocurre. Da lo mismo la verdad, no hay quien mire.
 
 *mind the gap between the train and the platform*
 
-Difícil dejar de pensar en la soledad, me muevo por el mundo sin conocer a nadie, con fe de que nada inadvertido pasará. Hay que caer bajo para tener fe.
+Difícil dejar de pensar en la soledad, nadie me espera en mi destino. Me muevo por el mundo sin conocer un alma, con fe de que nada inadvertido pasará. Hay que caer bajo para tener fe.
 
 *mind the gap between the train and the platform*
 
@@ -92,7 +127,9 @@ Tiemblo nuevamente, el hecho de cruzar tantos umbrales distintos y construirlos 
 
 Quiero hablar de ti, el ser humano más repugnante que he podido conocer, y digo conocer en el sentido más artificial posible, porque no te conocí en lo más mínimo. Es más, podría apostar que nadie te ha descifrado realmente sin sentir una gran cuota de cólera en el estómago. Tu mirada, tu forma de caminar, de desenvolverte frente a los demás mortales y de mentirles a los que te aman es sólo un extracto; a ratos me gustaría saber hace cuánto tiempo estás podrido, porque todas tus manías me son familiarmente conocidas, más de lo que me gustaría admitir.
 
-Después de encender otro cigarrillo más, de ordenar mi odioso pelo y enfocar mi atención en lo que cubre estas paredes, me pregunto cuánta gente tendrá la convicción de que pertenezco al amplio grupo de los hijos de puta (no porque mi madre lo sea, o porque las putas sean malignas). Después de mentir tanto, a todos, a mis capacidades, a los que me rodean, la pregunta natural es por qué, cuál fue la motivación de concebir un nuevo Nicolás y ofrecerlo al mundo. Un día descubrí que era bueno para inventar historias, fluían por todas partes, las creaba y hablaba de ellas como si fueran mías. En ese entonces me gustaba saber que podía ser realmente bueno para alguna cosa, y no es que tratara de hacer pocas. Al poco tiempo me creé una vida, una nueva vida, donde todo pasaba y era exactamente como yo quería, y era bueno. Quizá estas historias surgieron de los extensos tiempos muertos que soportaba siendo aún un niño, aunque quisiera no podía eliminarlos, no tenía algo para hacerlo. Ahora me encantaría pasar todo ese tiempo meditando y creando (tal vez no era tanto, pero por ejemplo, media hora es eterna para un niño aburrido). Todo eso fue aplastado por la sinceridad de tu voz, de los frondosos árboles que nos cobijaban cuando describíamos el mundo; me enseñaste que asentir a todo no era una virtud, lo que ha sido el mayor logro de toda mi historia. Pero aún así te mentí, y de la manera más dolorosa <<Para mí, no para ti>>, en el fondo tienes todo el derecho a odiarme así como lo haces hoy, de una manera alejada y ausente.
+Después de encender otro cigarrillo más, de ordenar mi odioso pelo y enfocar mi atención en lo que cubre estas paredes, me pregunto cuánta gente tendrá la convicción de que pertenezco al amplio grupo de los hijos de puta (no porque mi madre lo sea, o porque las putas sean malignas). Después de mentir tanto, a todos, a mis capacidades, a los que me rodean, la pregunta natural es por qué, cuál fue la motivación de concebir un nuevo Nicolás y ofrecerlo al mundo. 
+
+Un día descubrí que era bueno para inventar historias, fluían por todas partes, las creaba y hablaba de ellas como si fueran mías. En ese entonces me gustaba saber que podía ser realmente bueno para alguna cosa, y no es que tratara de hacer pocas. Al poco tiempo me creé una vida, una nueva vida, donde todo pasaba y era exactamente como yo quería, y era bueno. Quizá estas historias surgieron de los extensos tiempos muertos que soportaba siendo aún un niño, aunque quisiera no podía eliminarlos, no tenía algo para hacerlo. Ahora me encantaría pasar todo ese tiempo meditando y creando (tal vez no era tanto, pero por ejemplo, media hora es eterna para un niño aburrido). Todo eso fue aplastado por la sinceridad de tu voz, de los frondosos árboles que nos cobijaban cuando describíamos el mundo; me enseñaste que asentir a todo no era una virtud, lo que ha sido el mayor logro de toda mi historia. Pero aún así te mentí, y de la manera más dolorosa <<Para mí, no para ti>>, en el fondo tienes todo el derecho a odiarme así como lo haces hoy, de una manera alejada y ausente.
 
 Quiero hablar de ti y de todo tu ser, de tus sueños rasguñados y de tu voluntad vigorosa, en la que todos nos perdemos sin excepción alguna. Acostumbras no decir palabras e ignorar a la gente; así tal cual eres un misterio y cada día me sorprendo de tus demonios. Así fui a dar, por un suburbio extraviado y para mí casi desconocido, con el golpe que exhibió mi inestable equilibrio; y te reíste y te burlaste, un comportamiento acorde a la absurda situación que se había formado. Rehicimos la vida en una larga e inagotable conversación nocturna una y otra y otra vez, nos prometimos recuerdos y momentos de todo tipo para nunca olvidar que fuimos jóvenes y felices; y todo esto parte del hecho de que contigo vivo todo lo que siempre he querido: lo irónico, lo bizarro, lo alocado, lo importante; y tú siempre ahí, con  el mentón horizontal mirando las estrellas, resistiendo el viento a mi lado.
 
