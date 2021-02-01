@@ -16,28 +16,6 @@ Cada forma de expresión es una nueva dimensión: somos tu, yo y mis pensamiento
 
 Es terrorifico, la verdad. De esas cosas que uno pensaba que pasarían con el tiempo. Igual no sé qué tanto me sorprende, si tengo facebook desde el 2009.
 
-## El camino hacia la astrología
-### ??/??/2021
-
-Hay un ensayo del gran dibulgador ciéntífico Isaac Asimov
-
-Esta es mi impresión sobre la astrología: Una cuna de la charlatanería, que de alguna forma atrae más a las mujeres. 
-
-Y esta última frase es la que me provoca conflicto. ¿Me hace machista este pensamiento? Yo creo que no, pero siempre uno podría llegar a estar cayendo en algún tipo de sesgo natural. Dicho esto, seguiré.
-
-Tiene sentido que sea las mujeres las que adopten  
-
-## Resonancia cognitiva
-### ??/??/2021
-
-A veces cuando hablas con gente y la prosa se entremezcla, no necesariamente se producen una conversación. Somos personas con todo tipo de experiencias distintas, con historias únicas y matices insospechados, entonces no es extraño darse cuenta que nuestros puntos de partida son tan diferentes que ni siquiera nos ponemos de acuerdo en las definiciones de las palabras que usamos. La fe es un gran ejemplo de esto, tan manoseada por la religión, el saber popular y la charlatanería que pasa a ser un aspecto gris, volatil, que puede significa tantas cosas que pareciera ya carece del sentido.
-
-Para mí, la fe es creer sin tener una buena razón, credulidad en su máxima expresión. Esta necesidad de ser crédulo nace de la misma curiosidad tan propia de la raza humana, que la lleva a preguntarse cosas de forma ilimitada, sin que necesariamente existan respuestas. Es aquí donde se desvela la incomodidad de no saber; herida dolorosa que en reflexiones existenciales pareciera ser hecha con un verdadero cuchillo enterrado en el corazón, herida que desaparece cuando el sueño llega, esperando la nueva oportunidad para abrirse y sangrar lo que sea necesario. 
-
-Si hay evidencia la fe se discipa. Los hechos son una flecha que apunta a la dirección correcta, que nos indica el sentido de la naturaleza, tan críptica en demasiados aspectos. 
-
-Y es aquí donde se produce mi conflicto. Porque esto es en lo que yo creo, y no tengo problemas con   
-
 ---
 
 ## El despertar de un sueño
@@ -49,8 +27,6 @@ Te contemplé sin confirmar que eras tú, y te vigilé como suelo hacerlo: De ma
 Así me quede horas, esperando algo que quizá nunca ocurriría; pensando en qué dirías cuando cruzáramos las miradas ¿Sería mejor preguntar cómo dormiste? ¿soñarás algo bonito? ¿Qué colores conseguirías imaginar?
 
 Me levante, salí de la habitación y comencé la rutina: Agua caliente, mate y música. Cerré la puerta a mi espalda para no interrumpir tu sueño, mi sueño. 
-
-No volví a abrir la puerta, tampoco volví a verte. 
 
 ---
 
