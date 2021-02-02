@@ -20,6 +20,8 @@ Acá siguen notas de Nicos anteriores:
 
 	Hay que aplicar lo que has aprendido, y las conclusiones a las que hemos llegado, lo que piensas es importante ¿Mereces ser leído? Tus observacioes en realidad son necesarias. Debes expresarte, brillar en el silencio, ganar en una competencia contra ti. Esta es la forma que elegíste para trabajar. Llenar la página en blanco, sino la vida no avanza.
 
+	Ya no me está gustando tanto lo que escribí anteriormente, porque suena como que de verdad necesito demasiado ánimo para poder escribir de forma frecuente. 
+
 
 ---
 ---
