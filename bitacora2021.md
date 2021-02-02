@@ -2,11 +2,6 @@
 layout: page
 title: Bitacora 2021
 ---
-
-- [x] 
-
----
----
 ---
 Leer es necesario, leer lo que escribo es fundamental.
 Acá siguen notas de Nicos anteriores:
@@ -19,7 +14,12 @@ Acá siguen notas de Nicos anteriores:
 
 	Nuevamente debemos encontrar foco, y parece que el mío no es en silencio, sino que cuando hay una pantalla de fondo, es raro ah? Poder hilar algo cuando otros cuentan sus historias. Hoy vengo a escribir, por una hora diara, ya que soy un escritor, tengo una tesis por escribir, por lo demás. Y soy un comunicador, debo poder realizar todo eso y aún más.
 
-	En fin, quizá ni yo lea esto en adelante, pero tengo fe en el Nico del futuro, el que empezará a ser la persona que deseo ser. Tenemos que tener en cuenta también que nos obligamos igual a ser alguien. Aprendí a tener un poder de concentración grande, y jamás entendó dónde quedó. O si fue subordinado por otro sentimiento, otro placer. 
+	Quizá ni yo lea esto en adelante, pero tengo fe en el Nico del futuro, el que empezará a ser la persona que deseo ser. Tenemos que tener en cuenta también que nos obligamos igual a ser alguien. Aprendí a tener un poder de concentración grande, y jamás entendó dónde quedó. O si fue subordinado por otro sentimiento, otro placer. 
+
+	Pero esa no es la actitud, lo necesario es convencerse que lo que hacemos tiene sentido, que es más grande que nosotros y vale dedicarle una simple vida humana al estudio de la naturaleza, a la comprensión de la realidad de forma infinitesimalmente más precisa. 
+
+	Hay que aplicar lo que has aprendido, y las conclusiones a las que hemos llegado, lo que piensas es importante ¿Mereces ser leído? Tus observacioes en realidad son necesarias. Debes expresarte, brillar en el silencio, ganar en una competencia contra ti. Esta es la forma que elegíste para trabajar. Llenar la página en blanco, sino la vida no avanza.
+
 
 ---
 ---
@@ -67,8 +67,6 @@ bueno, no seguí escribiendo el guión porque me puse a trabajar en la pizarra.
 #### Iniciado en path=/Users/nicomedinap
 
 Me escribí un correo jajaja. O sea, a veces lo hago para poder pasar solo palabras. Lo voy a pegar acá y lo edito. También pensaba que debería quizá actualizar esto semanalmente. Porque tengo cosas que repotar, pero aún estoy tratando de que sea más frecuente. Escribir a mano igual tiene lo suyo y debo encontrar la forma de juntar todo.
-
-
 
 Hoy es 1 de Noviembre
 
@@ -124,15 +122,14 @@ Idea de plot:
 1. Escalas de variabilidad: Poner diferentes imágenes que demuestren visualmente el cambio de brillo de amplitudes determinadas. 
 2. Plot de compararación entre las variabilidades de diferentes estrellas. Poner en el mismo plot una serie rryrae, y una variable irregular de DKs > 5 mag.
 
-
 ## Hoy es el 25/01/2021 y la hora actual es 11:31!
 
 #### Iniciado en path=/Users/nicomedinap
 
 Leo y tomo notas de algunos papers:
 
-Origlia et al 2018: Variable stars in Terzan 5: additional evidence of multi-age and multi-iron stellar populations:
-https://arxiv.org/pdf/1812.04325.pdf
+[Origlia et al 2018: Variable stars in Terzan 5: additional evidence of multi-age and multi-iron stellar populations:](
+https://arxiv.org/pdf/1812.04325.pdf){:target="_blank"}
 
 1.- Intro: An important snd still inexplored tile of the Ter5 puzzle is its population of variable stars, which are independent and poweful tracer os SP (stellar populations) properties. Indeed, as well known, while RRLyrae trace old (>10 Gyr) SPs, Mira stars with different pulsations periods and metallicity can trace SPs of differents ages. Short period Miras (P<300d) ussually trace old SPs, while long period (P>300d) ones are normally younger. 
 
@@ -148,8 +145,7 @@ https://arxiv.org/pdf/1812.04325.pdf
 
 ---
 
-New variable stars discovered in the fields of three Galactic open clusters using the VVV Survey.
-https://arxiv.org/abs/1606.05028
+[New variable stars discovered in the fields of three Galactic open clusters using the VVV Survey.](https://arxiv.org/abs/1606.05028){:target="_blank"}
 
 3.- Variability analysis: For each field, we extracted and analyzed VVV data for objects that best matches the position of theviously reported variable stars, and also performed a blind variability search. Objects with putative light variation were slected using Stetson's variabilitu statistics. The preselected candidates were then subjected to a frequenty analysis. Signal detection was performed using the GLS and the pjase dispersion minimizacion algorithms. Phase-folded light curves with the resulting preliminary periods were then visually inspected to select the best solution and to rejeck spurious signals resulting from various systematics.
 
@@ -157,75 +153,70 @@ https://arxiv.org/abs/1606.05028
 
 4.1- Cepheids analysis: Mirar esta seccion completa en el paper. Servirá para determinar la pertenencia de variable cefeidas usando sus relaciones PL.
 
+---
+## Hoy es el 01/02/2021 y la hora actual es 17:19!
 
+#### Iniciado en path=/Users/nicomedinap
 
+Voy a pasar notas que he tomado a mano, de fecha indefinida:
 
+The Lagoon Nebula and its vicinities.
 
-Es como para la justificación o introducción del paper
-In the central cavity are located two young and massive star clusters: Danks 1 and Danks 2. The molecular cloud from this clusters formed has dissipated, but molecular clouds still exist around the cavity sculpted by those young clusters. The lack of this molecular material around implies that star-formation has ceased in Danks 1 and 2, but these nearby regions may be sites of ongoing star-formation. Several HII-regions and young stellar objects (YSOs) are found in the dense molecular material surrounding the two clusters.
-Stars form from the gas and dust in molecular clouds via a series of complex processes that are currently only partly understood, and the evolution of these clouds drives the evolution of the stellar populations in the universe
-The complex pattern of filaments that shape the interstellar medium is caused by stellar winds of massive stars, outflows from the new generations of sources and proper turbulence of the natal cloud.
-Great part of molecular content revealed by Spitzer inside this SFR is covered by tiles d046 and d084. Sources identified in Faimali catalog followed nicely the red filaments presents in the FoV. Same as the irregular sources identified as irregular variable sources, this strongly indicate active star formation. The formation of new this generations of stars seems to be sequential, initiated and fueled by the action of the two central clusters. Using the catalog provide by Faimali to see the spatial relation of both samples.
-Spatial Distribution
-One of the panoramic views of G305 star-forming complex is shown in figure 1, muestra la distribución espacial de las fuentes. The false-color view provide by the Spitzer Space Telescope mid-infared InfraRed Array Camera (IRAC) (reference) at wavelengths of 3.6 to 8 microns is in background. Visible light images reveal no trace of what is happening in this region, the heavy dust obscuration hide all the ratiation that came from the new generations of stars.
-The selected irregular sources extend along the considered FoV, the sources of tiles d046-d084 are mostly projected on the filaments (The red filaments across the FoV image trace the presence of polycyclic aromatic hydrocarbons, excited by surrounding interstellar radiation and become luminescent at wavelengths near 8.0 microns). Tiles d045-d083 show a homogeneous object density throughout the FoV, revealing a trace of ongoing star-formation zones revealing by NIR photometry. As for example the source N shown in image N is located in a stellarly populated environment, in the IRAC bands it presents a green glow, signal of outburst or jet.
-On a large scale there would appear to be no large over-densities of objects. One of the possible contributions to the homogeneity of the sources are contaminating objects in the sample, which are expected to appear completely randomly. The d093rj3 source is proof of this, it has been classified as a nova source, of amplitude N and magnitude N, so there could also be different types of sources that produce a significant change in amplitude, and fulfilled the required criteria.
-Considering that in previous works it has been said that class 0 / I / II objects are more likely to find variability, given the instability and its evolutionary phase, given that the variability in the NIR decreases over time, while it evolves towards the main-sequence (Rice 2015) we would expect these types of sources to be distributed and concentrated throughout the dust and gas over-densities.
-We will use clustering to see possible associations of variable stars. In order to see if overdensities are observed and where they are projected, we will use clustering ...
-The background Figure (some) shows the density distribution of color (J-Ks) con el fin de ilustrar la posible densidad de columna del FoV usando la fotometría JHKs disponible. Fuentes irregulares pareciera distribuirse bastante bien a lo largo grandes valores del color (J-Ks, ¿qué revelaría este color?). Los mapas se han separado en dos por fines prácticos, además que la superposición entre tiles es despreciable. (Seguir escribiendo cuando el plot esté listo)
-Know groups:
-Variables
-d045-d083:
-Surrounding areas of G305 SFR were also considered and covered by VVV tiles d045 and d083. There are many signs of active star formation, invisibles for IRAC cameras. We can find sources related to small groups of stars in this tiles, as an example ()
-The green jet of gas at the bottom of the region reveals an outflow of hot gas emanating of material from massive star.
-Previous surveys in the FoV have been carried to understand the earlies stages of star formation, as radio and sub-milimetric o
-The shape of G305
-Danks 1 and 2 are surrounded by dense molecular enviroments. HII regions are undestood to be ignite by massive stars with strong stellar winds. which presumably contains a cluster of newly forming stars at a distance
-Star formations is driven by the precence of massive stars, where the strong stellar winds and radiation from such a population can provide dre
--outflow this star and bursting through a giant molecular cloud.
-This outflows are physical signatures of processes that create supersonic beams, or jets, of gas. They are usually accompanied by discs of material around the new star, which likely contain the materials from which future planetary systems are formed. Additional newborn stars, depicted in green, can be seen surrounding the G305 region.
-Numerous regions are found to be associated with multiple star formation tracers.
-One observational approach to overcome such uncer- tainties is to search for young, massive clusters still embed- ded in their natal giant molecular cloud (GMC) and/or asso- ciated giant H ii region. Such a strategy guarantees the youth of such a complex, potentially enabling individual examples of massive young stellar objects (MYSOs) to be identified, and ultimately the global star formation history from a spa- tially resolved census of the (proto-) stellar populations. The latter goal is particularly important, since the limited spa- tial resolution of such objects in external galaxies precludes a detailed analysis of the processes by which the GMC is converted into stars and star clusters. A number of GMCs which appear to contain both mas- sive (>103 M⊙), young clusters as well as deeply embed- ded MYSOs have been identified (e.g. W49A, W51 and the Carina nebula; Alves & Homeier 2003; Kumar et al. 2004; Smith & Brooks 2007). Another such region is the G305 star forming complex (Clark & Porter 2004, l=305.4, b=+0.1; ). Located in the Scutum-Crux arm at an estimated distance of ∼ 4 kpc, it has the form of a large tri-lobed cavity with a maximum extent of ∼34pc, delineated by both mid- and far-IR, sub-millimetre and radio emission and centred on the young clusters Danks 1 & 2 (Fig. 1). A large contingent of massive stars is inferred from the ionising radiation required to support the total radio flux (equivalent to the output from >30 canonical O7 V stars). In addition, there are numerous signposts of ongoing star formation in the cloud’s periph- ery, in the form of deeply embedded MYSOs, compact Hii- regions, and methanol and water masers (Urquhart et al. 2007, 2009; Hindson et al. 2010; Clark et al. 2011). Finally, far-IR and sub-millimetre continuum observations reveal the presence of a significant reservoir of cold molecular mate- rial (>105 M⊙ ) available to fuel further star-forming activity (Hindson et al. 2010, Clark et al. in prep). The overal morphology of the complex is strongly in- dicative of a number of epochs of sequential star forma- tion, initiated and sustained by the action of the two cen- tral clusters. In this paper, we present a near-IR analysis of these clusters, using high-resolution photometry and spec- troscopy, in order to determine their masses and ages, and consequently whether their properties are consistent with such an hypothesis. We discuss and present these data in Section 2, report our analysis in Section 3 and discuss these result both in the context of the G305 complex and also in comparison to other star forming regions in Section 4, before summarising our conclusions in Sect. 5.
-Cosas que pueden ser útiles para Variability classification
-bueno, El método que ha sido implementado nos ha hecho obtener una población difetente gracias a tener en cuenta la amplitud DKs y la coherencia de la serie de tiempo teniendo en cuenta la condición de coherencia η<0.97
-. En este punto, creemos que diferentes indices de variabilidad destacarán difetentes aspectos de la serie de tiempo. Nosotros, ante la falta de una serie de tiempo no regularmente sampleada, hemos asumido el sesgo y decidido preferir la coherencia en la misma fotometría que tratar ante la incerteza de lo que pasó entre los largos periodos sin registros
-Qué podrian ser? Bueno, a pesar de que las High-amplitude variability in YSOs is ussually associated with episodic accretion events, Kumar 2016, ha usado series de tiempo de similares caracteristicas a las acá clasificadas para identificar massive YSOs (MYSOs, of course). El entender e identificar más objetos como este ayudaría a entender el fenómeno de la acreción competitiva o a identificar etapas caóticas de objetos masivos, ya que dada la masa de estos objetos, se cree que evolucionan directamente a la Zams (en alguna parte leí eso).
-Kumar 2016: -> Low-mass YSOs displays optical/infrared flux variability trace a variety of phenomena such as accretion events in the disk, magnetospheric activity, spots and flares on the stellar surface. -> High-Amplitude variable sources are excellent laboratories to understand the accretion phenomenom, especially at unresolved spatial scales representing the accretion disk and the young stellar core.
-Dippers are charactelized by long-lasting dimming eventos followed by a returnto normal brightness. Faders show time-series that slowly decline over time or a peroid of continuous brightness followed by a sudden decreqse sustained over a year. Dippers are often associated with increased extinction from surrounding material. Faders can be caused by either a return to a quienscent accreting phase or a long lasting increase in extinction. It should be noted that both Dippers and Faders share common time-series morphologies and can be.
-High amplitude variables ( Δ𝐾𝑠>1
-Δ
-K
-s
->
-1
-  mag) have been be splitted in four categories, following the YSOVAR~ ???
-???
- : Faders, Dippers, Short Time-scale Variables (STV) and Eruptives.
-For sources with low variability amplitude have been reported in literature (see for example Wolk et al. (2013) and Carpenter et al. (2001)) with light curves similar to those reported in this work. Therefore, given that
-\subsection{Types of variability}
-high amplitude variables (∆K s > 1 mag): Faders, Dippers, Short Time-scale Variables (STV) and Eruptives. However, half of our irregular variables sample has an amplitude ∆K s < 1 mag (right side of figure 9). Similar variable sources with low amplitude have been reported in literature (see for example Wolk et al. (2013) and Carpenter et al. (2001)) with light curves similar to those reported in this work. Therefore, given that classification for irregular variables is defined mainly by the shape of the time series, we extended the classification proposed in Contreras Pe ̃ na et al. (2017a) for low amplitude sources (∆K s < 1 mag), making an exception with the Eruptive classification, which describes sources with eruptions on timescales of hours to days. Sources that present eruptive long-timescales variability (t > 1 year) and ∆K s < 1 mag, will be classified as ’Low Amplitude Eruptive’ (LAE). We used this classification to characterize our sources, when applicable. In Table 2, the main characteristics of the different proposed classes are explained.
-En el primer paper, hemos descrito las clases de variabilidad basados en nombres tomados de Rice e YSOVAR y LUCAS. En estos dos y varias referencias que estrellas clasificadas como dippers está muy relacionadas por efectos de oscurecimiento prolongados, probablemente provocados por nubes de polvo, quizá discos. ¿Podría medirse alguna escala de tiempo de oscurecimiento con este tipo de objetos? Vaya a saber uno.
-(hacer un plot 5x5 mostrando clases y diferentes amplitudes de series de tiempo)
-Es difícil clasificar estrellas con series de tiempo que no están mapeadas de manera, pero hemos tratado de seguir algunas reglas que puedan clasificar de alguna manera las series de tiempo.
-So, the idea is to try to create a link between this two classifications to statisticaly obtain conclusion related to it evolutionaty stage.
-Almost all of our variables, moreover, are located in the "T" region, 60.34\% of the sample, thus confirming that our sources are intrinsically more reddened. The color-magnitude and color-color diagrams are shown in Fig. ??? and Fig???. The percentage and number of sources in every class can be found in Table N.}
-\subsubsection{Variability morphology}
-Variability has been observed from weeks to months, rapid timescales suggest disks perturbations. Quantify the timescales of the variability is important to understand the physic processes in young sources.
-Rapid outburts events it seems to be common in TTauri stars, may lead to significant column density (variability? it can be measured with CO lines) changes in OH and H2O
-Variability can be periodic or chaotic, greater amplitude observed fro embedded targets (gunthe 2014) but also occurs in evolved diskcs (flaherty 2012). It is true this statement? (greater amplitude observed fro embedded targets)
-New obsevations dedicated to variability will further establish statistically relevant differentece between solar-type and high-mass systems and quantify the nature of variability and how short-term variability affects long-term evolution of the disk
-\subsubsubsection{Eruptive variables}
-Describe high amplitude eruptive episodes in a stellar source. Some eruptive phenomena can be explained by magnetic activity, as flares and cold spots (Dal and Evren 2012). Also given the
-\subsubsubsection{Faders}
-Describen fuentes en las cuales la el flujo de la estrella varía muy lentamente a lo largo de la serie de tiempo. Usualmente se observa decrecimiento/aumento monótono del brillo.
-\subsubsubsection{Dippers} Objetos que repentínamente sufren de una disminución espontanea de su brillo. Luego de un tiempo pueden recuperarse rapidamente o de manera gradual.
-\subsubsubsection{Low amplitude eruption variables}
-(Interestellar gas and dist absorb and reprocess a substancial fraction of the radiated energy emitted by) the main core of these young stellar objects (YSOs for short). The shape of the envelope that sourround YSOs , will depend storngly of the amount of time.
-Regarding all the described process, there are several ways to detect YSOs,
-H$_\alpha$ emmision.
-SED modelling and Infrarred Excess in CCD's.
-MASERS of stimulated emission inside molecular clouds.
-Lithium abundance.
+Lagoon Nebula (M8), the Trifid Nebula (M20), the nearby optically-invisible HII region W28A2 l,b=(65.89,-0.39), and the complex of nebulae to the east of the Lagoon Nebula, know as Simeis 188.
+
+M8: 
+ 1. Primintnt HII region which is surrounded by bright rims and with several young O-type stars. Centered in Ra,Dec=(18:04:24,-24:21:12) (J2000).
+ 2. 95Gyrs alone would be enogut to drive the -50Ks/s shell. (?)
+ 3. The young cluster NGC6530. To identify YSOs, astronomers have been used H alpha emission and X-ray Imaging (the X-ray to bolometric flux of T-Tauri stars) is at least 100 times higher than it is for most of the foreground and background stars which dominate optical and infrared images.
+ 4. The distance estimation is base on the determination of distance of NGC6530 -> d=1.3-1.8 Kpc. Method to estimate distance: Parallax of 22GHz H20 Masers. (increible, esto es super útil ahora)
+ 5. Pre-main sequence population: Differente campains have been runned, using X-rays, Halpha emission, optical data. 
+
+Notas para mejorar el guión de las charlas y énfasis en plots:
+ - Mencionar diferencias entre clases YSOs, qué veríamos desde nuestra perspectiva.
+ - Qué sesgo ingresa epochs > 25 and DKs>0.mag.
+ - Calibracion en sistema VISTA. Mostrar estadisticas de calibraciones individuales 
+
+ - The focus of this stydu is to characterize the NIR variability across star-formation regions, and to follow traces of stelar formation.
+
+ - Wolf-Rayet stars are a singpost of massive star formation.
+ - We define a massive star as a star with sufficient mass to produce detectable radio emission associated with HII regions (i.e. M>8Msun). 
+ - Since high-mass stars have already been formed in these cores, which may have apreciable affected their natal enviroment. 
+
+- Introduction to near-infrared studies:
+Near infared studies of young stars allow the direct detection of optically thick discs around these stars via excess K-band flux (lada1992,2000). Now the jump is there:
+
+Time-varying phenomena represents one of the most substancial sources of astrophysical information. Their study it's important to identify different astronomical sources, to discover or constrain new properties of already known systems, and to map the structure of our galaxy.
+
+---
+
+Notas random
+
+- Un idiota subestima sus deseos, tiene miedo de que se rian de sus sueños.
+- En ese tiempo la astronomía sonaba como una tontería...bueno ahora también, pero no es el punto.
+- Los "descuidistas" (ladrones de ocasión); descuidado con el perro.
+- Cuando alguien deja de ser extraño: cuando dan ganas de abrazarlo sin estar culiando. Primero culiar, luego abrazar.
+- Si tus gustos o tus opciones te definen, careces de identidad.
+- Te tomas en serio las cosas cuando planteas y respondes tus propias preguntas.
+
+---
+
+Perspective Herbig Ae/Be stars, René Oudmaijer.
+
+1. Stars come in many sizes and masses, and traditionally astronomers stydy either high- and low-mass objects. Star formation has been no exception. In a way, this is quite indestandable as there are large disparities in our understanding of the romation of low and high-mass stars. For example, we can readily identify two issues that indicate that the formation of a massive star differs from the formation of a lower mass.
+Firstly, it has long been a recognized problem that the intense brightness of massive stars (L~M^3.3) can halt (detener) the accretion of matter onto the stellar surface because of the increased radiation pressure on the onfalling material. This implying that stars more massive tha 30 Msun cannot be formed. However, shuch star are commonplace, so another mechanism for the formation of massive stars needs to be explored.
+2. One of the mechanism is similar to the low-mass star formation. This implies that the stars were formed in a large molecular clouds simultaneosly. The most massive of the fragments steal materia from the other objects and grw more rapidly and to larger final masses. This process has benn coined "competitive accretion" (bonnel et al. 2001,2004) So, we need the accretion dosk through which material is concentrated in the equatorial plane, so that it may overcome the strong ionising radiation of the central object, and be efficiently accreted (e.g. kuiper et al. 2010).
+3. Other fundamental difference between low- and high-mass stars is magnetic field accretion mechanism, which is known to have an important role. Material flows from an accretion disk onto the stars along magnetic field lines, and crashes onto the young object, giving rise to huge shocks that are visible in X-rays and UV excess emission. This process is called magnetically controled accretion (MA), also keplerian disks.
+4. The more massive object are non-magnetic, given their envelopes are radiative, no magnetic fields is generated as this usually happens in stars by convection. 
+
+---
+
+PR5: Eruptive YSOs and the Milky Way time domain surveys: VVV and VVVX. (link? this is a privated document?)
+
+- Over the past 30 years, eruptive variability/episodic accretion has been one of the most important but stubborn(?) problems in star formation. VVV has enabled a breakthrough in the field by detecting a large number of erupting YSOs fo the fist time.
+-High-amplitude variability is most often caused by episodic accretion of matter from the circunstellar disc on to the central star. Plausible theories of unsteady accretion include e.g. gravitational instability (GI) or GI+magneto-rotational instability (MRI), (zhu et al. 2009) or binary interactions (clarke et al. 2005) but there is no consensus.
+- Only ~20 eruptive YSOs were know previously (e.g. Audard et al 2014). The importance of eruptive variability stems from the way in chich it may solve serious problems in the theory of pre-main sequence (PMS) evolution of normal stars. Models generally assume that stars acrette matter from their circumstellar discs in a continuous fashion.
+- PMS typically show wide scatter about the best fitting isochrones (e.g. Mayne et al 2007). Other aspect is the luminosity problem (kenyon & hartmann 1990, Enoch et al 2009): the typical (accretion-powered) luminosities of YSOs are much lower than expected from sun-like stars. If eruptives variability is common amongst YSOs, as is suspected, it can resolve both problems (Baraffe et al. 2009, 2012) 
+
 
 
 
