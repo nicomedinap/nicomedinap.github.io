@@ -3,7 +3,7 @@ layout: page
 title: Links de interés
 ---
 
-Acá algunos links que pueden ser de interés:
+Algunos links que me son de mucho interés, y quizá para alguen también:
 
 Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){:target="_blank"}
 
