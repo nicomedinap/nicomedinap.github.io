@@ -8,13 +8,13 @@ title:  "Lo que alguien necesita"
 
 De verdad que es increible lo fácil que es poder escribir aquí y que inmediataente sea publico para el mundo y el espacio que lo rodea. 
 
-Tampoco quiero que las multitudes lo leerán. Por eso está aquí, en un lugar oculto que tiene muchas barreras y se esconde a la vista en una frase descuidada.
+Aún así, no es mi deseo que las multitudes lean estas palabras y por eso está aquí, en un lugar oculto que tiene muchas barreras y se esconde a la vista en una frase descuidada.
 
 Pero un alma curiosa de mi, de lo que tengo que decir y quizá insistió demasiado y escudriñó hasta la más profunda brecha. Estas mismas palabras que le escribo a alguien, de alguna forma siempre fueron para ojos ajenos. Esta pequeña forma que ocurrió de pronto buscaba atención propia. 
 
-Cada forma de expresión es una nueva dimensión: somos tu, yo y mis pensamientos, la forma que mezclo el mundo entre mis palabras; y lo que genera en ti.
+Cada forma de expresión es una nueva dimensión: somos tu, yo y mis pensamientos, la forma que mezclo el mundo entre mis palabras; y lo que genera en ti. Es terrorifico, la verdad. De esas cosas que uno pensaba que pasarían con el tiempo. 
 
-Es terrorifico, la verdad. De esas cosas que uno pensaba que pasarían con el tiempo. Igual no sé qué tanto me sorprende, si tengo facebook desde el 2009.
+Igual no sé qué tanto me sorprende, si tengo facebook desde el 2009.
 
 ---
 
@@ -70,7 +70,9 @@ Esta soledad rodeada es aún peor, habla sobre la inercia de del humano, que los
 
 *mind the gap between the train and the platform*
 
-Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note que están húmedos. Carezco de las habilidades para explicar qué es lo que ocurre. Da lo mismo la verdad, no hay quien mire.
+Tomo el tren en dirección a Cambridge, hacia el norte de Londres, luego de reflexionar sobre mi posición en el mundo, de lo alejado que estoy de lo que actualmente llamo hogar, y lo parecido del paisaje al sur de Chile. Rodeo ese contraste sin esperar frutos. Refriego mis ojos con habilidad para que nadie note que están húmedos. Carezco de las habilidades para explicar qué es lo que ocurre. 
+
+Da lo mismo la verdad, no hay quien mire.
 
 *mind the gap between the train and the platform*
 
