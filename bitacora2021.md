@@ -226,7 +226,9 @@ PR5: Eruptive YSOs and the Milky Way time domain surveys: VVV and VVVX. (link? t
 
 
 
+PARA LEER Y RESUMIR: 
 
+- [Star formation in bright-rimmed clouds and cluster associated with W5 E Hii region](https://arxiv.org/pdf/1103.3396.pdf)
 
 
 
