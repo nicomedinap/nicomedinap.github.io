@@ -10,9 +10,9 @@ Acá siguen notas de Nicos anteriores:
 
 	Todos los días leerás estás palabras y pensarás en lo que quieres lograr, en lo que quieres ser, como quieres brillar y hacerte notar cuando lo necesitas. Aún así, sabes que tu fin nunca ha sido el reconocimiento ni que la reputación anteceda.
 
-	Luego, verás cómo puedes agregar algo. Luego de un tiempo esto crecerá y crecerá hasta el punto que tendrá sentido, será genuino y unicamente tuyo. ¿Quieres participar? Sólo tienes que escribir. 
+	Luego, verás cómo puedes agregar algo al final, al principio, entre medio de esta columna. Con el tiempo esto crecerá y crecerá hasta el punto que tendrá sentido, será genuino y unicamente tuyo. ¿Quieres participar? Sólo tienes que escribir. 
 
-	Nuevamente debemos encontrar foco, y parece que el mío no es en silencio, sino que cuando hay una pantalla de fondo, es raro ah? Poder hilar algo cuando otros cuentan sus historias. Hoy vengo a escribir, por una hora diara, ya que soy un escritor, tengo una tesis por escribir, por lo demás. Y soy un comunicador, debo poder realizar todo eso y aún más.
+	Nuevamente debemos encontrar foco, y parece que el mío no es en silencio, sino que cuando hay una pantalla de fondo, ¿es raro ah? Poder hilar algo cuando otros cuentan sus historias. Hoy vengo a escribir, por una hora diara, ya que soy un escritor, tengo una tesis por escribir, por lo demás. Y soy un comunicador, debo poder realizar todo eso y aún más.
 
 	Quizá ni yo lea esto en adelante, pero tengo fe en el Nico del futuro, el que empezará a ser la persona que deseo ser. Tenemos que tener en cuenta también que nos obligamos igual a ser alguien. Aprendí a tener un poder de concentración grande, y jamás entendó dónde quedó. O si fue subordinado por otro sentimiento, otro placer. 
 
@@ -20,7 +20,11 @@ Acá siguen notas de Nicos anteriores:
 
 	Hay que aplicar lo que has aprendido, y las conclusiones a las que hemos llegado, lo que piensas es importante ¿Mereces ser leído? Tus observacioes en realidad son necesarias. Debes expresarte, brillar en el silencio, ganar en una competencia contra ti. Esta es la forma que elegíste para trabajar. Llenar la página en blanco, sino la vida no avanza.
 
-	Ya no me está gustando tanto lo que escribí anteriormente, porque suena como que de verdad necesito demasiado ánimo para poder escribir de forma frecuente. 
+	Existen momentos en que no me gusta leer lo que escribí anteriormente, porque suena como que de verdad necesito demasiado ánimo para poder escribir un par de palabras sueltas. Existen momentos que también leo y recito cada frase para buscar la motivación, y funciona. Impresiona cómo hasta la palabra escrita está subordinada a las emociones.
+
+	Me gustaría por lo menos, poder robarle un secreto a la naturaleza, un mísero aspecto que pasó desapercivido por las grandes mentes que han compartido este mundo. Algo que cuando lo pienses, nos lleve lejos, a imaginar, a soñar. A darse cuenta que todo valió la pena, que vivir fue útil, soportar generó pequeños momentos álgidos.
+
+
 
 
 ---
