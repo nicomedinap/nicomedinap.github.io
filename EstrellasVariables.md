@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Estrellas interesantes
+title: Estrellas variables
 ---
 
 Acá iré juntando imágenes de estrellas variables que he podido identicar a lo largo de mi investigación usando principalmente la base de datos VVV, además de la serie de tiempo que construimos y usamos para poder identificarla.
