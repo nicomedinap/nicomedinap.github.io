@@ -16,11 +16,14 @@ falta:
 - [ ] Mostrar periodos si es que la fuente lo muestra.
 - [x] Hacer más listas.
 - [ ] Fecha o día Juliano de la imágen, que sea.
+- [ ] Agregar la serie de tiempo.
 
 ## BRC89v12
 
-Partimos con la fuente que me desconsertó cuando empecé a investigar, a la que le puse BRC89v12.
+Partimos con la fuente que me desconsertó cuando empecé a investigar, a la que le puse BRC89v12, porque era la estrella variable número 12, de la Nube de bordes brillantes 89 (*Bright-Rimmed Cloud*, BRC89), ubicada en el centro galáctico. 
  
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/BRC89v12/BRC89v12_1.jpg" width="300"/> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/BRC89v12/BRC89v12_2.jpg" width="300"/>
 
+
+## Otra estrella con nombre raro
 
