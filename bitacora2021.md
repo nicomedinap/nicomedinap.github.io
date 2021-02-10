@@ -6,6 +6,9 @@ title: Bitacora 2021
 Leer es necesario, leer lo que escribo es fundamental.
 Acá siguen notas de Nicos anteriores:
 
+
+
+
 	Ya Nicolás, este es el lugar donde desarrollarás las formas para analizar todos los datos que has estado analizando todos estos años. Es hora de sacar voluntad, energía desde donde antas había disponible, y lograr tu tono para escribir, es la única forma de mejorar y lo sabes: haciendo y corrigiendo.
 
 	Todos los días leerás estás palabras y pensarás en lo que quieres lograr, en lo que quieres ser, como quieres brillar y hacerte notar cuando lo necesitas. Aún así, sabes que tu fin nunca ha sido el reconocimiento ni que la reputación anteceda.
@@ -20,7 +23,7 @@ Acá siguen notas de Nicos anteriores:
 
 	Hay que aplicar lo que has aprendido, y las conclusiones a las que hemos llegado, lo que piensas es importante ¿Mereces ser leído? Tus observacioes en realidad son necesarias. Debes expresarte, brillar en el silencio, ganar en una competencia contra ti. Esta es la forma que elegíste para trabajar. Llenar la página en blanco, sino la vida no avanza.
 
-	Existen momentos en que no me gusta leer lo que escribí anteriormente, porque suena como que de verdad necesito demasiado ánimo para poder escribir un par de palabras sueltas. Existen momentos que también leo y recito cada frase para buscar la motivación, y funciona. Impresiona cómo hasta la palabra escrita está subordinada a las emociones.
+	Existen momentos en que no me gusta leer lo que escribí anteriormente, porque suena como que de verdad necesito demasiado ánimo para poder escribir un par de palabras sueltas. Existen momentos que también leo y recito cada frase en busca de reflexión o motivación, y funciona. Impresiona cómo hasta la comprensión de la palabra escrita está subordinada a las emociones imperantes.
 
 	Me gustaría por lo menos, poder robarle un secreto a la naturaleza, un mísero aspecto que pasó desapercivido por las grandes mentes que han compartido este mundo. Algo que cuando lo pienses, nos lleve lejos, a imaginar, a soñar. A darse cuenta que todo valió la pena, que vivir fue útil, soportar generó pequeños momentos álgidos.
 
@@ -223,12 +226,34 @@ PR5: Eruptive YSOs and the Milky Way time domain surveys: VVV and VVVX. (link? t
 - Only ~20 eruptive YSOs were know previously (e.g. Audard et al 2014). The importance of eruptive variability stems from the way in chich it may solve serious problems in the theory of pre-main sequence (PMS) evolution of normal stars. Models generally assume that stars acrette matter from their circumstellar discs in a continuous fashion.
 - PMS typically show wide scatter about the best fitting isochrones (e.g. Mayne et al 2007). Other aspect is the luminosity problem (kenyon & hartmann 1990, Enoch et al 2009): the typical (accretion-powered) luminosities of YSOs are much lower than expected from sun-like stars. If eruptives variability is common amongst YSOs, as is suspected, it can resolve both problems (Baraffe et al. 2009, 2012) 
 
-
-
-
 PARA LEER Y RESUMIR: 
 
 - [Star formation in bright-rimmed clouds and cluster associated with W5 E Hii region](https://arxiv.org/pdf/1103.3396.pdf)
+
+
+## Hoy es el 08/02/2021 y la hora actual es 11:08!
+
+#### Iniciado en path=/Users/nicomedinap
+
+Hoy vamos a resolver definitivamente el problema de selección IP y lo aplicaremos en el cluster. Empezaremos revisando el directorio /Users/nicomedinap/Dropbox/scripts/cluster/Seleccion_IP_cluster dentro tengo todos los scripts que he usado en el cluster de cómputo de la U; entre ellos el script en cuestion: analisis_post_IP.py, ahora lo abordaremos y trataremos de mejorarlo para poder obtener los mejores candidatos.
+
+Nota aparte, la última actualización al script es del 30 de Julio del 2019, y está escrito en python2.
+
+Entonces lo que haremos, será reescribir los scripts, el de python que será encargado de analizar las estrellas, y luego de algunas pruebas, escribir el script de bash para ser aplicado en el cluster de forma paralela.
+
+El de paralelizar ya está medio listo y solo hay que ajustarlo para los parámetros específicos del script.
+
+## Hoy es el 09/02/2021 y la hora actual es 09:08!
+
+#### Iniciado en path=/Users/nicomedinap
+
+ 
+
+
+
+
+
+
 
 
 
