@@ -17,6 +17,8 @@ falta:
 - [x] Hacer más listas.
 - [ ] Fecha o día Juliano de la imágen, que sea.
 - [ ] Agregar la serie de tiempo.
+- [ ] Crear GIFs con ambas imágenes para mejorar la visualización.
+- [ ] Información adicional de las fuentes. ¿Relato? ¿Imagen del DSS?
 
 ## BRC89v12
 
