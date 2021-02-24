@@ -13,6 +13,8 @@ Acá siguen notas de Nicos anteriores:
 
 	Todos los días leerás estás palabras y pensarás en lo que quieres lograr, en lo que quieres ser, como quieres brillar y hacerte notar cuando lo necesitas. Aún así, sabes que tu fin nunca ha sido el reconocimiento ni que la reputación anteceda.
 
+	Recuerda donde no quieres volver, lo que no quieres sentir. La tranquilidad es falsa. No destroces la gran oportunidad que has conseguido, elaborado en base a una metodología paupérrima, pero que cuajó de forma críptica desbaratada. 
+
 	Luego, verás cómo puedes agregar algo al final, al principio, entre medio de esta columna. Con el tiempo esto crecerá y crecerá hasta el punto que tendrá sentido, será genuino y unicamente tuyo. ¿Quieres participar? Sólo tienes que escribir. 
 
 	Nuevamente debemos encontrar foco, y parece que el mío no es en silencio, sino que cuando hay una pantalla de fondo, ¿es raro ah? Poder hilar algo cuando otros cuentan sus historias. Hoy vengo a escribir, por una hora diara, ya que soy un escritor, tengo una tesis por escribir, por lo demás. Y soy un comunicador, debo poder realizar todo eso y aún más.
@@ -247,18 +249,49 @@ El de paralelizar ya está medio listo y solo hay que ajustarlo para los paráme
 
 #### Iniciado en path=/Users/nicomedinap
 
- 
+errores de hoy:
+
+en analisis b315.
+
+File "./ObtenerParametrosFuentesIP.py", line 407, in PSA
+    s_residuos = selec[:,0]
+IndexError: too many indices for array
+[########################################                              ] 58%./ObtenerParametrosFuentesIP.py:448: RuntimeWarning: divide by zero encountered in double_scalars
+  chi2_clip = sum((s_residuos**2)*z)/(len(s_mag)-1.)
+./ObtenerParametrosFuentesIP.py:112: RuntimeWarning: divide by zero encountered in double_scalars
+  C[i] = (2*k-v)/((D[i])**2) #The cost Function
+./ObtenerParametrosFuentesIP.py:167: RuntimeWarning: divide by zero encountered in divide
+  return (val[2])*np.exp(-0.5*((x - val[0])/val[1])**2)
 
 
 
+## Hoy es el 17/02/2021 y la hora actual es 15:19!
+
+#### Iniciado en path=/Users/nicomedinap
+
+La miseria.
+
+call last):
+  File "./ObtenerParametrosFuentesIP.py", line 750, in <module>
+    N_frec=armonicos, sigmaClip=3, ID=ID ,columnadoble=False, plot=False)
+  File "./ObtenerParametrosFuentesIP.py", line 407, in PSA
+    s_residuos = selec[:,0]
+IndexError: too many indices for array
 
 
+## Hoy es el 22/02/2021 y la hora actual es 17:41!
+
+#### Iniciado en path=/Users/nicomedinap/Dropbox/scripts/cluster/Seleccion_IP_cluster/PruebaAhoraSioSi
+
+Tres días viviendo en las nubes, de olvidar y escapar 
+
+* Escarbo momentos buscando letras, sentimientos provocados que ya conozco. Como pensando que no volveré a conseguir otros.
+
+...
 
 
-
-
-
-
+Y de un momento ya era mañana
+como lo repitió la voz toda la noche.
 
 
 
