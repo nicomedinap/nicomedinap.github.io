@@ -30,7 +30,8 @@ Todo esto agravado por el consumo de drogas
 - Yo empecé a fumar más marihuana cuando llegué acá a valparaíso, tenía un poco más de presupuesto. Claro mi mami no podía evitar de que vendiera los muebles. 
 - Aquí me hice amigo de un dealer de aquellos que tienen su propio espacio aereo, Helipuerto incluido. Una vez llegó la PDI a su casa, y fue terrible: se sacaron la media multa porque estaba colgado al cable. 
 - Yo tengo cero prejuicio con las drogas, la verdad. Básicamente lo que hacen es alterar tu percepción de la realidad, esto es super profundo.
-	Esta es una de las cosas buenas de ser científico, cuando hablo de drogas parezco alguien culto en vez de un weón drogadicto. De hecho un amigo me preguntó si me iba a vacunar contra el COVID. Yo le dije pero por supuesto, si es gratis! 
+
+- Esta es una de las cosas buenas de ser científico, cuando hablo de drogas parezco alguien culto en vez de un weón drogadicto. De hecho un amigo me preguntó si me iba a vacunar contra el COVID. Yo le dije pero por supuesto, si es gratis! 
 
 Así también como te frie el cerebro. No todas las drogas son buenas, algunas son geniales. 
 
