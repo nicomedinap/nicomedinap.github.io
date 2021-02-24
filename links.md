@@ -25,7 +25,10 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 1. [Son dos links diferentes.](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks){:target="_blank"}
 2. [El anterior era el primero, este es el segundo.](https://notebook.community){:target="_blank"}
 * ¯\ \_(ツ)_/¯
+* ༼;´༎ຶ ۝ ༎ຶ༽
 * También me gusta escribir, subiré algunos textos [acá.](https://nicomedinap.github.io/escritos/LoQueUnoNecesita.html){:target="_blank"} 
 * [Guía rápida de Markdown.](https://enterprise.github.com/downloads/en/markdown-cheatsheet.pdf){:target="_blank"}
 * [Guía de escritura y expresiones útiles en LateX.](https://es.wikipedia.org/wiki/Ayuda:Uso_de_LaTeX){:target="_blank"}
+<!---
 * [ESTOOO](https://nicomedinap.github.io/rutina.html){:target="_blank"}
+-->
