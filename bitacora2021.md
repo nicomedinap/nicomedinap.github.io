@@ -287,9 +287,6 @@ Tres días viviendo en las nubes, de olvidar y escapar
 
 * Escarbo momentos buscando letras, sentimientos provocados que ya conozco. Como pensando que no volveré a conseguir otros.
 
-...
-
-
 Y de un momento ya era mañana
 como lo repitió la voz toda la noche.
 
