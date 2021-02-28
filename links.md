@@ -29,6 +29,3 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 * También me gusta escribir, subiré algunos textos [acá.](https://nicomedinap.github.io/escritos/LoQueUnoNecesita.html){:target="_blank"} 
 * [Guía rápida de Markdown.](https://enterprise.github.com/downloads/en/markdown-cheatsheet.pdf){:target="_blank"}
 * [Guía de escritura y expresiones útiles en LateX.](https://es.wikipedia.org/wiki/Ayuda:Uso_de_LaTeX){:target="_blank"}
-<!---
-* [ESTOOO](https://nicomedinap.github.io/rutina.html){:target="_blank"}
--->
