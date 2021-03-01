@@ -21,17 +21,16 @@ falta:
 - [ ] Información adicional de las fuentes. ¿Relato? ¿Imagen del DSS?
 
 
-<ul>
-	{% for post in site.estrellas %}
-		{% if post.layout == "estrella" %}
-			<p>
-            	<h2>HOLI</h2>
-            	<h5>{{ post.date | date_to_string }}</h5>
-            	<p>leer más ( ಠ‿ಠ)</p>
-        	</p>
-    	{% endif %}
- 	{% endfor %}
-</ul>
+
+{% for post in site.estrellas %}
+	{% if post.layout == "estrella" %}
+		<p>
+      	<h2>HOLI</h2>
+           	<h5>{{ post.date | date_to_string }}</h5>
+           	<p>leer más ( ಠ‿ಠ)</p>
+       	</p>
+   	{% endif %}
+{% endfor %}
 
 
 ## Otra estrella con nombre raro
