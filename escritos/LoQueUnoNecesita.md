@@ -6,11 +6,11 @@ title:  "Lo que alguien necesita"
 
 ## Es increible
 
-De verdad que es increible lo fácil que es poder escribir aquí y que inmediataente sea publico para el mundo y el espacio que lo rodea. 
+De verdad que es increible lo fácil que es poder escribir aquí y que inmediatamente sea publico para el mundo y el espacio que lo rodea. 
 
-Aún así, no es mi deseo que las multitudes lean estas palabras y por eso está aquí, en un lugar oculto que tiene muchas barreras y se esconde a la vista en una frase descuidada.
+Aún así, no es mi deseo que las multitudes lean estas palabras, y es por eso están aquí, en un lugar oculto que tiene muchas barreras y se esconde a la vista en una frase descuidada.
 
-Pero un alma curiosa de mi, de lo que tengo que decir y quizá insistió demasiado y escudriñó hasta la más profunda brecha. Estas mismas palabras que le escribo a alguien, de alguna forma siempre fueron para ojos ajenos. Esta pequeña forma que ocurrió de pronto buscaba atención propia. 
+Están para un alma curiosa de mi, de lo que tengo que decir y quizá insistió demasiado y escudriñó hasta la más profunda brecha. Estas mismas palabras que le escribo a alguien, de alguna forma siempre fueron para ojos ajenos. Esta pequeña forma que ocurrió de pronto buscaba atención propia. 
 
 Cada forma de expresión es una nueva dimensión: somos tu, yo y mis pensamientos, la forma que mezclo el mundo entre mis palabras; y lo que genera en ti. Es terrorifico, la verdad. De esas cosas que uno pensaba que pasarían con el tiempo. 
 
@@ -64,9 +64,9 @@ Siempre termino con más dudas cuando conecto ideas, partí con una premisa y me
 
 Cuarenta personas por minuto cruzan miradas conmigo en la célebre estación de trenes, mientras permanezco en la incomodidad del suelo, cerca de un basurero desbordado y olvidado. Muy Londres será pero la gente sigue siendo terrible cuando está de paso y nadie la conoce.
 
-Cuarenta personas no es menor, creo yo. Y aún así me siento en el piso rodeado de soledad. La única persona que podría comprenderme fue a dejarme al aeropuerto de un país cercano. Quizá se siente igual que yo, rodeada de gente que sólo añaden más profundidad a los pensamientos tristes, consistencia a las palabras vacías.
+Cuarenta personas no es menor. Y aún así me siento en el piso rodeado de soledad. La única persona que podría comprenderme fue a dejarme al aeropuerto de un país cercano. Quizá se siente igual que yo, rodeada de gente que sólo añaden más profundidad a los pensamientos tristes, consistencia a las palabras vacías.
 
-Esta soledad rodeada es aún peor, habla sobre la inercia de del humano, que los problemas que arrastran son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
+Esta soledad rodeada es aún peor, habla sobre la inercia el humano, que los problemas que arrastran son más interesantes que nuestro relato. Pensar en esa idea me hace mal, abre heridas que la verdad nunca han cerrado del todo; cada una de esas cuarenta personas clava el puñal un poco más profundo.
 
 *mind the gap between the train and the platform*
 
@@ -88,7 +88,7 @@ Tren de mierda, si ya entendí que hay que tener cuidado. ¿Cómo alguien podrí
 
 *mind the gap between the train and the platform*
 
-Las nubes incoloras vuelven grises los suburbios llenos de ladrillos.
+Las nubes incoloras tornan grises los suburbios llenos de ladrillos.
 
 *mind the gap between the train and the platform*
 
