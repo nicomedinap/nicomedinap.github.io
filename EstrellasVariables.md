@@ -25,9 +25,9 @@ falta:
 	{% for post in site.estrellas %}
 		{% if post.layout == "estrella" %}
 			<p>
-            	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+            	<h2>HOLI</h2>
             	<h5>{{ post.date | date_to_string }}</h5>
-            	<p>{{ post.content | truncatewords: 500 }} <a href="{{ post.url }}">leer más ( ಠ‿ಠ)</a></p>
+            	<p>leer más ( ಠ‿ಠ)</p>
         	</p>
     	{% endif %}
  	{% endfor %}
