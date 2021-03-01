@@ -20,11 +20,18 @@ falta:
 - [ ] Crear GIFs con ambas imágenes para mejorar la visualización.
 - [ ] Información adicional de las fuentes. ¿Relato? ¿Imagen del DSS?
 
-## BRC89v12
 
-Partimos con la fuente que me desconsertó cuando empecé a investigar, a la que le puse BRC89v12, porque era la estrella variable número 12, de la Nube de bordes brillantes 89 (*Bright-Rimmed Cloud*, BRC89), ubicada en el centro galáctico. 
- 
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/BRC89v12/BRC89v12_1.jpg" width="300"/> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/BRC89v12/BRC89v12_2.jpg" width="300"/>
+<ul>
+	{% for post in site.estrellas %}
+		{% if post.layout == "estrella" %}
+			<p>
+            	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+            	<h5>{{ post.date | date_to_string }}</h5>
+            	<p>{{ post.content | truncatewords: 500 }} <a href="{{ post.url }}">leer más ( ಠ‿ಠ)</a></p>
+        	</p>
+    	{% endif %}
+ 	{% endfor %}
+</ul>
 
 
 ## Otra estrella con nombre raro
