@@ -291,6 +291,12 @@ Y de un momento ya era mañana
 como lo repitió la voz toda la noche.
 
 
+## Hoy es el 02/03/2021 y la hora actual es 12:11!
+#### Iniciado en path=/Users/nicomedinap
+
+Miramos las RRlyraes que existen en el catálogo OGLE. Los catálogos pueden ser encontrados en [ESTE LINK](http://www.astrouw.edu.pl/ogle/ogle3/OIII-CVS/blg/rrlyr/), en el README está todo.
+
+Ahora, veré cuáles son las coordenadas de los objetos usando TOPCAT.
 
 
 
