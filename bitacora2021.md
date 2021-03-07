@@ -298,14 +298,45 @@ Miramos las RRlyraes que existen en el catálogo OGLE. Los catálogos pueden ser
 
 Ahora, veré cuáles son las coordenadas de los objetos usando TOPCAT.
 
+CAT= '/Users/nicomedinap/Desktop/RRLyrae_OGLEIII.cat.txt'
+
+f1 = open('/Users/nicomedinap/Desktop/PRUEBA.cat',"w")
+
+from astropy import units as u
+from astropy.coordinates import SkyCoord
+
+with open(CAT) as infile:
+    #saltamos la primera línea:
+    #next(infile)
+    
+    for line in infile:
+        holi = line
+        #Separamos los valores para armar el array B
+        B = [s for s in holi.split()]
+        
+        #quitamos las coordenadas
+        try:
+            Ra,Dec = B[4],B[5]
+        except IndexError:
+            continue
+        #print(Ra,Dec)
+        #B = B[2:]
+        
+        try:
+            c = SkyCoord(Ra,Dec, unit=(u.hourangle, u.degree))
+        except:
+            continue
+        #print(c.ra.degree, c.dec.degree)
+        
+        f1.write("%.6f\t%.6f\n" %(c.ra.degree,c.dec.degree))
 
 
+Al final, encontré el catálogo de OGLE IV: http://ogle.astrouw.edu.pl/main/collections.html
 
 
+Paper: Automatic Catalog of RRLyrae from ∼ 14 million VVV Light Curves: How far can we go with traditional machine-learning?
 
-
-
-
+https://arxiv.org/pdf/2005.00220.pdf
 
 
 
