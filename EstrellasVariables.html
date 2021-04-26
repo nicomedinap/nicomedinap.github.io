@@ -4,7 +4,7 @@ title: Estrellas variables
 ---
 
 <ul>
-	{% for post in site.estrellas %}
+	{% for post in site.categories.estrellas %}
 		{% if post.layout == "post" %}
 			<p>
             	<h2>HOLI</h2>
@@ -14,3 +14,6 @@ title: Estrellas variables
     	{% endif %}
  	{% endfor %}
 </ul>
+
+
+for post in site.categories.verslagen
