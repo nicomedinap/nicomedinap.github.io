@@ -4,6 +4,52 @@ comments: true
 title:  "Lo que alguien necesita"
 ---
 
+## TITULO (o algorítmo)
+### 22704/2021
+
+Hablamos algo raro sobre el mundo, sobre los deseos o cualquier otro tema interesante que no salga de tu cerebro.
+
+Luego las imágenes. Deben ser coloridas y ojalá con la mayor cantidad de información posible, mientras más irrelevante mejor. 
+
+Y acá es donde te estancas, porque no sabes cómo deberóas avanzar.
+
+¿Debería avanzar?
+
+Negocias contigo: YA AER QUÉ GANO ABER
+
+Terminas y dejas ir, porque nunca será perfecto.
+
+
+## Empezar y terminar algo
+### 22/03/2021
+
+Este escrito o la idea que lo rodea no será terminada nunca. A veces es porque cuando escribo, escudriño una a una las palabras cuando las uno; y en mi cabeza se forman infinidad de posibles caminos. 
+
+Escogí ir de a poco uno por uno. 
+
+Ya bueno, tengo mis favoritos como no hacer nada y abrumarme porque debería estar haciendo algo en vez. Es que son demasiados caminos, eso me agobia. Ya casi con 30 años aún abrazo la esperanza ingenua que podemos ser y hacer todo. Obviamente no es así y ya tendría que bajar la cabeza con las herramientas que desarrollé, darles uso, buscar mi lugar y sobrevivir. Fuiste.
+
+Fueron demasiados caminos.
+
+¿Cuántas vidas son necesarias para hacerlo todo bien?
+
+
+## La mejor versión de mi
+
+Y bueno, tú que me conoces hace mucho tiempo, que compartimos sueños y atravezamos tormentas, quería preguntarte, bueno, ¿Cuál crees que ha sido mi mejor versión de mi?
+
+Es que quería saber ¿Sabes? Recoger las impresiones que he podido causar. Al fin y al cabo es información jajaj, de alguna forma sirven para poder entenderme mejor. Quizá hubo una época que hablaba cosas o hacía 
+
+Porque 
+
+
+## Ya no queda dudas
+
+
+## Los zapatos me quedan grandes
+
+De tanto en tanto, siento que escogí mal mis herramientas. 
+
 ## Es increible
 
 De verdad que es increible lo fácil que es poder escribir aquí y que inmediatamente sea publico para el mundo y el espacio que lo rodea. 
@@ -19,7 +65,7 @@ Igual no sé qué tanto me sorprende, si tengo facebook desde el 2009.
 ---
 
 ## El despertar de un sueño
-### ??/04/2020
+### ??/04/2018
 
 Ayer soñé que despertaba y tú estabas a mi lado. Despertaba en esa cama de años y estabas ahí nuevamente, sin forma, sin sonido ni facciones, sólo tu respiración cortaba el aire en fracciones de segundos.
 
