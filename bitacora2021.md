@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Bitacora 2021
 ---
 ---
@@ -29,7 +28,7 @@ Acá siguen notas de Nicos anteriores:
 
 	Me gustaría por lo menos, poder robarle un secreto a la naturaleza, un mísero aspecto que pasó desapercivido por las grandes mentes que han compartido este mundo. Algo que cuando lo pienses, nos lleve lejos, a imaginar, a soñar. A darse cuenta que todo valió la pena, que vivir fue útil, soportar generó pequeños momentos álgidos.
 
-
+	Envidiable lo diferente que es hacer lo mismo en un entorno diferente. Cambiar la luz, los colores y aromas, hasta los ruidos pueden llegar a ser fascinantes.  
 
 
 ---
@@ -339,6 +338,140 @@ Paper: Automatic Catalog of RRLyrae from ∼ 14 million VVV Light Curves: How fa
 https://arxiv.org/pdf/2005.00220.pdf
 
 
+## Hoy es el 24/03/2021 y la hora actual es 12:11!
+
+#### Iniciado en path=/Users/nicomedinap/Desktop
+
+
+Paper: [SPECTACULAR SPITZER IMAGES OF THE TRIFID NEBULA: PROTOSTARS IN A YOUNG, MASSIVE-STAR-FORMING REGION](https://iopscience.iop.org/article/10.1086/503245/pdf){:target="_blank"}
 
 
 
+
+Número de los platos en el campo de Carina:
+
+12356 -> 288-00-C https://data.sdss.org/sas/apogeework/apogee/spectro/redux/r13/stars/lco25m/288-00-C/
+(3 visitas)
+https://petunia.lco.cl:8080/plateDetail.html?plateID=12356
+
+12357 -> 287-01-C https://data.sdss.org/sas/apogeework/apogee/spectro/redux/r13/stars/lco25m/287-01-C/
+(2 visitas)
+https://petunia.lco.cl:8080/plateDetail.html?plateID=12357
+
+12358 -> 288-01-C https://data.sdss.org/sas/apogeework/apogee/spectro/redux/r13/stars/lco25m/288-01-C/
+(1 visita)
+https://petunia.lco.cl:8080/plateDetail.html?plateID=12358
+
+
+
+
+Librerías y algoritmos para analizar espectros de APOGEE S2.
+https://github.com/ballanr/T-Tauri
+
+
+
+
+Title: The VVV Extended ESO Public Survey (VVVX)
+https://www.eso.org/sci/observing/PublicSurveys/docs/VVVX_SMP_07022017.pdf
+
+
+
+
+
+Hay que hacer una lista de las cosas y datos que tiene el disco duro, y definir para qué sirve cada cosa. 
+
+
+
+## Hoy es el 13/04/2021 y la hora actual es 17:12!
+
+#### Iniciado en path=/Users/nicomedinap
+
+
+Query para la búsqueda de variables en VIVA para grupo ciudadano.
+
+
+SELECT ra,dec,vivaID,JAperMag3, JAperMag3Err, HAperMag3, HAperMag3Err, KsAperMag3, KsAperMag3Err, aVar,EJKs, EJKsErr, bestPeriod
+FROM vvvVivaCatalogue
+WHERE  gbJ2000 BETWEEN -2 AND 2 AND ra BETWEEN 259 AND 270
+
+
+
+Habrá que hacerlo de nuevo, pero con Ra entre 257.8 y 273.9
+
+Además, hoy cree el documento un documento en overleaf para empezar a escribir sobre la tesis. Además, vamos a hacer un directorio 
+^
+6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+En http://ogle.astrouw.edu.pl/main/collections.html hay muchos catálogos de estrellas que deben ser revisados para poder hacer una comparación completa de la base de datos. Pero con el solo hecho de que sea un catalogo.
+
+Los diferentes tipode de 
+
+
+
+
+http://ogledb.astrouw.edu.pl/~ogle/OCVS/catalog_query.php
+
+
+Modificamos el archivo y extraemos la información útil:
+
+bash-3.2$ cat OGLE_IV_BULGE.txt | awk -v OFS='\t' '{print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12}' > OGLE_IV_BULGE_Modificado15Abril2021.txt
+
+Agregué las coordenadas en Grados, usando las funciones de TopCat
+
+
+
+Grupo de trabajo de LPVs y RGBs en IAU
+https://www.iau.org/science/scientific_bodies/working_groups/103/
+
+Descripción del grupo de trabajo
+https://www.iau.org/static/science/scientific_bodies/working_groups/103/wg-arg-triennial-report-2018-2021.pdf
+
+
+
+
+
+Para hacer encuestas online en tiempo real, sugerido por Patricia para las charlas
+https://www.menti.com
+
+
+
+Aliasings en búsqueda de periodos:
+http://jakevdp.github.io/multiband_LS/paper.pdf
+
+
+
+
+Problemas de LPVs y PNs
+
+https://arxiv.org/pdf/1606.08149.pdf
+https://arxiv.org/pdf/1705.00283.pdf
+https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A5C14C1DBECD653F76423AB1A29D8CEB/S007418090020315Xa.pdf/div-class-title-infrared-appearance-of-dust-forming-lpvs-div.pdf
+
+
+
+Catalog of bright-rimmed clouds and their definition:
+
+http://articles.adsabs.harvard.edu//full/1991ApJS...77...59S/0000059.000.html
+
+
+Algunas estrellas se producen por compresión inducida del medio: Radiation-driven implosion of molecular cloud cores (2003)
+
+https://academic.oup.com/mnras/article/338/3/545/1453610
+
+
+¿What is episodic accretion?
+https://physics.stackexchange.com/questions/389939/what-is-episodic-accretion-in-star-formation
