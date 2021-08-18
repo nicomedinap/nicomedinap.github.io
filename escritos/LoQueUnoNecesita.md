@@ -4,21 +4,24 @@ comments: true
 title:  "Lo que alguien necesita"
 ---
 
+# Reflexiones, escritos, ideas, qué sé yo.
+
 ## TITULO (o algorítmo)
-### 22704/2021
+### 22/04/2021
 
 Hablamos algo raro sobre el mundo, sobre los deseos o cualquier otro tema interesante que no salga de tu cerebro.
 
 Luego las imágenes. Deben ser coloridas y ojalá con la mayor cantidad de información posible, mientras más irrelevante mejor. 
 
-Y acá es donde te estancas, porque no sabes cómo deberóas avanzar.
+Y acá es donde te estancas, porque no sabes cómo deberías avanzar.
 
 ¿Debería avanzar?
 
 Negocias contigo: YA AER QUÉ GANO ABER
 
-Terminas y dejas ir, porque nunca será perfecto.
+Terminas la primera versión, a lo más una segunda y luego dejas ir, porque nunca será perfecto.
 
+---
 
 ## Empezar y terminar algo
 ### 22/03/2021
@@ -33,22 +36,23 @@ Fueron demasiados caminos.
 
 ¿Cuántas vidas son necesarias para hacerlo todo bien?
 
+---
 
 ## La mejor versión de mi
 
 Y bueno, tú que me conoces hace mucho tiempo, que compartimos sueños y atravezamos tormentas, quería preguntarte, bueno, ¿Cuál crees que ha sido mi mejor versión de mi?
 
-Es que quería saber ¿Sabes? Recoger las impresiones que he podido causar. Al fin y al cabo es información jajaj, de alguna forma sirven para poder entenderme mejor. Quizá hubo una época que hablaba cosas o hacía 
+Es que quería saber ¿Sabes? Recoger las impresiones que he podido causar. Al fin y al cabo es información jajaj, de alguna forma sirven para poder entenderme mejor. Quizá hubo una época que hablaba cosas más interesantes o hacía algo que me definía completamente...
 
-Porque 
+...
 
-
-## Ya no queda dudas
-
+---
 
 ## Los zapatos me quedan grandes
 
 De tanto en tanto, siento que escogí mal mis herramientas. 
+
+---
 
 ## Es increible
 
