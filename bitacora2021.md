@@ -399,16 +399,6 @@ WHERE  gbJ2000 BETWEEN -2 AND 2 AND ra BETWEEN 259 AND 270
 Habrá que hacerlo de nuevo, pero con Ra entre 257.8 y 273.9
 
 Además, hoy cree el documento un documento en overleaf para empezar a escribir sobre la tesis. Además, vamos a hacer un directorio 
-^
-6
-
-
-
-
-
-
-
-
 
 
 
@@ -440,19 +430,11 @@ https://www.iau.org/science/scientific_bodies/working_groups/103/
 Descripción del grupo de trabajo
 https://www.iau.org/static/science/scientific_bodies/working_groups/103/wg-arg-triennial-report-2018-2021.pdf
 
-
-
-
-
 Para hacer encuestas online en tiempo real, sugerido por Patricia para las charlas
 https://www.menti.com
 
-
-
 Aliasings en búsqueda de periodos:
 http://jakevdp.github.io/multiband_LS/paper.pdf
-
-
 
 
 Problemas de LPVs y PNs
@@ -460,7 +442,6 @@ Problemas de LPVs y PNs
 https://arxiv.org/pdf/1606.08149.pdf
 https://arxiv.org/pdf/1705.00283.pdf
 https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A5C14C1DBECD653F76423AB1A29D8CEB/S007418090020315Xa.pdf/div-class-title-infrared-appearance-of-dust-forming-lpvs-div.pdf
-
 
 
 Catalog of bright-rimmed clouds and their definition:
@@ -475,3 +456,85 @@ https://academic.oup.com/mnras/article/338/3/545/1453610
 
 ¿What is episodic accretion?
 https://physics.stackexchange.com/questions/389939/what-is-episodic-accretion-in-star-formation
+
+
+Biografía e historia de objetos de baja masa:
+http://www.ifa.hawaii.edu/SP1/HerbigBiography.pdf
+
+
+
+
+
+## Hoy es el 09/08/2021 y la hora actual es 15:09!
+
+#### Iniciado en path=/Users/nicomedinap/Documentos_locales/CARINA_SFR/VVVX_TimeSeries
+
+
+
+(Gaia Data Release 2, Variable stars in the colour-absolute magnitude diagram. Paper to developed this part)
+
+
+
+
+user: sdss
+2.5-meters
+
+
+Un ser pulposo.
+
+Yo lo microscopio no lo manejo. Hasta el doctor simi lo desmintió/funó.
+
+Le tirita un lado.
+
+La funa se redacta sola.
+
+En vez de aplausos, pedir suspiros.
+
+Yo no hablé nada hasta los tres años, a los tres años hablé y ¿saben lo que dije?  PARALELEPIPEDO.
+
+Inspirador de obras de arte.
+
+Polisemia: una palabra con varios significados.
+
+El mdio trauma: Material para el psicoanálisis. 
+
+Sentimientos encontrados.
+
+El problema del individualismo fue potenciado por las vacunas. Hizo que mucha gente viviera.
+
+UNO CON ESTADISTICA PUEDE JUSTIFICAR TODO.
+
+Se imaginan a Nicolas Copernico/Galileo viendo como despega un cohete? El mismo te que por brujería.
+
+Hay dos relojes en esta casa que me recuerdan dos veces cada segundo que pierdo sin escribir. 
+
+Primeras veces hay de todo tipo. 
+
+Uno siempre debe estar ebrio, de realidad, de vino, de lo que sea. 
+
+
+No hay que perder la capacidad de asombro, no es normal estar vivo, es rarisimo. Mirarse al espejo y descubrir quien eres, o las preguntas que importan 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
