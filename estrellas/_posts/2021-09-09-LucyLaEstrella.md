@@ -1,11 +1,9 @@
 ---
 layout: post
-title: Lucy_1
+title: La estrella Lucy_1
 mathjax: true
 ---
 {% include mathjax.html %}
-
-Actualmente estoy haciendo muchas imágenes como las que traigo hoy: La estrella Lucy.
 
 Lucy no tenía nombre, pero merecía uno. Justo dentro de una [nube oscura infrarroja](https://es.wikipedia.org/wiki/Nube_oscura_infrarroja){:target="_blank"} (IRDC en inglés), las cuales son regiones muy densas y frías dentro de regiones masivas de formación estelar. Estas nubes son de gran interés dado que porque se piensa que las estrellas masivas (sobre 8 masas solares :o ) se forman en regiones con estas condiciones.  
 
@@ -26,12 +24,8 @@ Dado el gradual incremento en el brillo de esta estrella, ha sido clasificada en
 
 Gracias por leer!!
 
- 10 de Enero del 2010 | 12 de Marzo del 2015
-:---: | :---:
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/BRC89v12/BRC89v12_1.jpg" width="300"/> | <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/BRC89v12/BRC89v12_2.jpg" width="300"/>
-
 Serie de tiempo de la estrella Lucy
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Lucy/Lucy_composicion.jpg" width="700" height="170" /> 
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Lucy/Lucy_composicion.jpg" width="700" height="570" /> 
 
 ### Propiedades básicas conocidas:
 - Coordenadas:  Ra=$270.28408163^{\circ}$,  Dec=$-22.94910841^{\circ}$ 
