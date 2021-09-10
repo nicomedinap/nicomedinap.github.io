@@ -7,7 +7,7 @@ mathjax: true
 
 Lucy no tenía nombre, pero merecía uno. Justo dentro de una [nube oscura infrarroja](https://es.wikipedia.org/wiki/Nube_oscura_infrarroja){:target="_blank"} (IRDC en inglés), las cuales son regiones muy densas y frías dentro de regiones masivas de formación estelar. Estas nubes son de gran interés dado que porque se piensa que las estrellas masivas (sobre 8 masas solares :o ) se forman en regiones con estas condiciones.  
 
-Es posible ver en las [imágenes de color falso](){:target="_blank"} la densidad de estas nubes dado que esconden las estrellas que están por detrás. Todo el campo está poblado, menos donde están distribuidas estas nubes negras. Hasta las estrellas que están cerca de estas nubes parecen más *enrojecidas* o [extintas](https://es.wikipedia.org/wiki/Extinción_(astronom%C3%ADa)){:target="_blank"} de lo normal. 
+Es posible ver en las [imágenes de color falso](https://nicomedinap.github.io/2020/09/07/ImagenesAstronomicas.html){:target="_blank"} la densidad de estas nubes dado que esconden las estrellas que están por detrás. Todo el campo está poblado, menos donde están distribuidas estas nubes negras. Hasta las estrellas que están cerca de estas nubes parecen más *enrojecidas* o [extintas](https://es.wikipedia.org/wiki/Extinción_(astronom%C3%ADa)){:target="_blank"} de lo normal. 
 
 
 Está localizada a 1 grado de distancia de la nebulosa Trífida, la cual he estudiado bastante ultimamente, y famosa además por aparecer en la portada del disco Islands de la banda Británica King Crimson. 
@@ -25,10 +25,10 @@ Dado el gradual incremento en el brillo de esta estrella, ha sido clasificada en
 Gracias por leer!!
 
 Serie de tiempo de la estrella Lucy
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Lucy/Lucy_composicion.jpg" width="700" height="570" /> 
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Lucy/Lucy_composicion.jpg" width="700" height="370" /> 
 
 ### Propiedades básicas conocidas:
 - Coordenadas:  Ra=$270.28408163^{\circ}$,  Dec=$-22.94910841^{\circ}$ 
 - Magnitud promedio en banda $\overline{K}_s=16.361\pm0,033$ [mag]
-- Amplitud fotométrica: $\Delta K_{s}=$ 2.416\pm0.092 [mag]
-- Tipo asociado: Estrella jóven Eruptiva, tipo *Fader*.
+- Amplitud fotométrica: $\Delta K_{s}=2.416\pm0.092$ [mag]
+- Tipo asociado: Estrella jóven tipo *Fader*.
