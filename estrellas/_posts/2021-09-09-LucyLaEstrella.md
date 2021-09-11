@@ -28,7 +28,7 @@ Serie de tiempo de la estrella Lucy
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/Lucy/Lucy_composicion.jpg" width="700" height="370" /> 
 
 ### Propiedades básicas conocidas:
-- Coordenadas:  Ra=$270.28408163^{\circ}$,  Dec=$-22.94910841^{\circ}$ 
+- Coordenadas:  Ra=$270.28408^{\circ}$,  Dec=$-22.94910^{\circ}$ 
 - Magnitud promedio en banda $\overline{K}_s=16.361\pm0,033$ [mag]
 - Amplitud fotométrica: $\Delta K_{s}=2.416\pm0.092$ [mag]
 - Tipo asociado: Estrella jóven tipo *Fader*.
