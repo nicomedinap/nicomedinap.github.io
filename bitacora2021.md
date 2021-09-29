@@ -402,14 +402,9 @@ Además, hoy cree el documento un documento en overleaf para empezar a escribir 
 
 
 
-
-
-
-
 En http://ogle.astrouw.edu.pl/main/collections.html hay muchos catálogos de estrellas que deben ser revisados para poder hacer una comparación completa de la base de datos. Pero con el solo hecho de que sea un catalogo.
 
 Los diferentes tipode de 
-
 
 
 
