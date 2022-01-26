@@ -5,9 +5,7 @@ title: Links de interés
 
 Hola,
 
-Ésta es la parte más útil de la página porque puedo dejar cosas interesantes. 
-
-Algunos links que me son de mucho interés, y quizá para alguen también:
+Ésta es la parte más útil de la página porque puedo dejar link y cosas interesantes. 
 
 Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){:target="_blank"}
 
