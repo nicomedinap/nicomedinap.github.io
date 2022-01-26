@@ -21,7 +21,7 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 2. [REMedia educa: historia de la constitución en Chile.](https://www.instagram.com/tv/CGi9ZtWpls-/?utm_source=ig_web_button_share_sheet){:target="_blank"}
 3. [¿Qué background necesito para estudiar física y astronomía?](https://youtu.be/KTGlYMEI48g){:target="_blank"}
 4. A veces hago timelapses, subo compilaciónes en este [canal de youtube.](https://www.youtube.com/channel/UC27Vv11KAnccwb0UVy7aXtQ?view_as=subscriber){:target="_blank"}
-5. Hablando desde la ignorancia:[Los colores de las imágenes astronómicas](https://www.youtube.com/watch?v=ebR1Rl9GZuA&t=853s){:target="_blank"}
+5. Hablando desde la ignorancia: [Los colores de las imágenes astronómicas](https://www.youtube.com/watch?v=ebR1Rl9GZuA&t=853s){:target="_blank"}
 
 * [Música en Youtube.](https://nicomedinap.github.io/musica/musica.html){:target="_blank"}
 * [Lista de publicaciones en las que participo.](https://arxiv.org/search/astro-ph?searchtype=author&query=Medina%2C+N){:target="_blank"}
