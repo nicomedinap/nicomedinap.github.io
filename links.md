@@ -5,7 +5,7 @@ title: Links de interés
 
 Hola,
 
-Ésta es la parte más útil de la página porque puedo dejar link y cosas interesantes. 
+Me he visto muchas veces buscando links en lugares perdidos del internet, así que mejor me hice este lugar para guardar cosas. Ésta es la parte más útil de la página porque puedo dejar link y cosas interesantes.
 
 Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){:target="_blank"}
 
@@ -25,7 +25,7 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 
 * [Música en Youtube.](https://nicomedinap.github.io/musica/musica.html){:target="_blank"}
 * [Lista de publicaciones en las que participo.](https://arxiv.org/search/astro-ph?searchtype=author&query=Medina%2C+N){:target="_blank"}
-1. Hay una persona en un campo relacionada llamada S.-N. X. Medina, ese no soy yo jajajaj pero trabaja en algo relacionado :o. Increíble. 
+1. Hay una persona en un campo relacionado llamada S.-N. X. Medina, ese no soy yo jajajaj pero trabaja en algo relacionado :o. Increíble. 
 
 * [Imagen de la Vía Láctea combinando VVV y VPHAS+.](http://djer.roe.ac.uk/vsa/vvv/mosaic/lb.html?fbclid=IwAR2rdnczc_BdbZ00PKxs0UhU4nivZu7v5ElS-MCvsO2fDsYPB84ESscn9v8){:target="_blank"}
 * Colección de Jupyter notebooks en diferentes ciencias
