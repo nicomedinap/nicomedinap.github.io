@@ -45,7 +45,7 @@ Y en ese tren de pensamiento estaba cuando llegó el estallido social. Y siendo 
 
 y para mi, el estallido social llegó en el momento indicado, porque justo me estaba cambiando de casa y tenía que deshacerme de varios muebles, así que para la barricada.
 
-Pero claro, hay cosas que no son chistosas, los pacos no son chistosos, la violencia no es chistosa, pero si le pegan a un paco ¿Por qué es chistoso? ¿Alguien podría explicarme? es como menos por menos da mas. Mira, matemáticas aplicadas a pacos.
+Pero claro, hay cosas que no son chistosas, los pacos no son chistosos, la violencia no es chistosa, pero si le pegan a un paco ¿Por qué es chistoso? ¿Alguien podría explicarme? es como menos por menos da mas. Mira, matemáticas aplicadas a pacos. Quién lo diría. 
 
 En el estallido social también aprendí a valorar a mis amigos alérgicos, detectan las lacrimógenas a 100 metros a la redonda.
 
@@ -55,7 +55,7 @@ Y luego llegó el punto de inflexión de este año: La pandemia. Hizo que pusier
 
 Carreteando por videollamadas...lo malo del carrete por zoom es que, cuando se terminaba, bajabas la pantalla y estabas curao y solo. Me tenía que agarrar solito el pelo para vomitar. O me metía curao a RRSSs y corrijo al primer wn que se me cruza. Andai justificando tus comporamientos con merturio retrogado wn. Cómo va ser bulbasor el mejor pokemon de inicio wn.
 
-. Ahí me di cuenta de la cantidad de gente que anda ebria en redes sociales.
+Ahí me di cuenta de la cantidad de gente que anda ebria en redes sociales.
 
 Así que dejé de tomar, y luego de un tiempo bajé de peso. Pensé: “estoy detox, full detox” y no, era la masa muscular la que estaba perdiendo. La grasa seguía ahí.
 
@@ -65,8 +65,7 @@ Y dentro de mi flojera, me empecé a poner creativo: Inventé un sistema para la
 
 La pandemia llegó para confirmar una de mis decisiones de vida: no tener hijos.
 
--El día que vi como le cambiaban el pañal a mi primo decidí no tener hijos, todo el pañal relleno, era una verdadera humita. 
-	- Textura, color, sabor...noo mentira, ni karadima se animó a tanto.
+-El día que vi como le cambiaban el pañal a mi primo decidí no tener hijos, todo el pañal relleno, era una verdadera humita: Textura, color, sabor...noo mentira, ni karadima se animó a tanto.
 
 -Y yo no sé cómo reaccionar frente a un niño. ¿Como se saluda a un niño o niña? Yo le doy la mano, ojalá sólo hacerle *así* con la mano, ojalá que ni nazca la verdad.
 
@@ -90,12 +89,7 @@ Pero claro, entiedo sus dudas porque son la sobreinformación de internet, apare
 	- No que el libre mercado se regula solo.
 
 
-
-
-Inventé un sistema para lavar loza estadísticamente sustentable, 9/10 veces no salen hongos.
 -Por qué estoy haciendo esto? Bueno, precisamente porque no me voy a hacer famoso. Una vez me paso si que estaba hablando con una tipa, y me dijo “ah sipo, ya escuché esa historia” y me descoloqué, ¿qué le cuento ahora? Tuvimos que ir a culiar.
-
-
 
 Lo otro es que trato de acotar mucho el rango de la respuesta para ser específico: Una amiga me decía el otro día: Ooooh, la florencia está tan grande ya…
 Oye, ¿Y Cuándo empiezan a hablar los niñas? Bueno, asumiendo que no es muda. Innecesario.
