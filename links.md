@@ -40,5 +40,4 @@ Primero, mi [Curriculum Vitae](https://drive.google.com/file/d/1QViu8Ri-o14epkEl
 * [Guía rápida de Markdown.](https://enterprise.github.com/downloads/en/markdown-cheatsheet.pdf){:target="_blank"}
 * [Guía de escritura y expresiones útiles en LateX.](https://es.wikipedia.org/wiki/Ayuda:Uso_de_LaTeX){:target="_blank"}
 * [Introducción al análisis de datos en las ciencias biológicas.](http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2019a/){:target="_blank"}
-
-
+* [Open astrophysics Bookshelf.](http://open-astrophysics-bookshelf.github.io){:target="_blank"}
