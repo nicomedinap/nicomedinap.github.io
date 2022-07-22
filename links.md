@@ -22,8 +22,9 @@ Primero, mi [Curriculum Vitae](https://drive.google.com/file/d/1QViu8Ri-o14epkEl
 2. [REMedia educa: historia de la constitución en Chile.](https://www.instagram.com/tv/CGi9ZtWpls-/?utm_source=ig_web_button_share_sheet){:target="_blank"}
 3. [¿Qué background necesito para estudiar física y astronomía?](https://youtu.be/KTGlYMEI48g){:target="_blank"}
 4. A veces hago timelapses, subo compilaciónes en este [canal de youtube.](https://www.youtube.com/channel/UC27Vv11KAnccwb0UVy7aXtQ?view_as=subscriber){:target="_blank"}
+
 * Hablando desde la ignorancia: Presentaciones sobre astronomía y su realidad sideral
-1. [Los colores de las imágenes astronómicas](https://www.youtube.com/watch?v=ebR1Rl9GZuA&t=853s){:target="_blank"}
+1. Los colores de las imágenes astronómicas: Charla que trata sobre la composición de las imágenes usadas en la astronomía. Hay dos versiones de esta charla online: [En mi canal de youtube](https://www.youtube.com/watch?v=ebR1Rl9GZuA&t=853s){:target="_blank"}, y dada como [charla pública en Valparaíso](https://youtu.be/GlTSYEglE6w){:target="_blank"}, con la gestión del grupo de difusión del departamento de física y astronomía (IFA).
 2. [Interpretación de la luz estelar](https://youtu.be/TjQqw0ymOgU){:target="_blank"}
 
 * [Música en Youtube.](https://nicomedinap.github.io/musica/musica.html){:target="_blank"}
