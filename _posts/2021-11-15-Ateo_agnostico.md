@@ -34,6 +34,6 @@ El siguiente gráfico tomado de la página https://www.diferenciador.com/ateo-y-
 
 Ambas dimensiones (saber, creer) pueden ser representados en el plano cartesiano y cuantificarse a lo menos 4 zonas diferentes complementarias; por ende ser ateo agnóstico es una respuesta plausible ante la vida. 
 
-Yo me considero Ateo agnóstico porque considero que el ateísmo y el gnosticismo son planos diferentes de un mismo suceso. Ante la pregunta ¿CREES en dios? Yo digo no, no veo evidencia de él ni ninguna manifestación en toda la historia, por lo que me considero ateo. Mi ateismo proviene de la experimentación de la realidad. Ante la pregunta ¿SABES si existe dios? Yo respondo no sé, no tengo como comprobar que existe, o que no existe, por lo que me considero agnóstico. 
+Yo me considero Ateo agnóstico porque considero que el ateísmo y el gnosticismo son planos diferentes de un mismo suceso. Ante la pregunta ¿CREES en dios? Yo digo no, no veo evidencia de él ni ninguna manifestación en toda la historia, por lo que me considero ateo. Mi ateismo proviene desde la experimentación de la realidad. Ante la pregunta ¿SABES si existe dios? Yo respondo no sé, no tengo como comprobar que existe, o que no existe, por lo que me considero agnóstico. 
 
-El ateismo es una opoinión, pero el agnostiscimo es la conclusión de vivir en un mundo sin fronteras claras. 
+El ateismo es una opinión, pero el agnostiscimo es la conclusión de vivir en un mundo sin fronteras claras. 
