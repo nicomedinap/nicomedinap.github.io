@@ -1,5 +1,5 @@
 ---
-published: False
+published: True
 title: Ateo agnostico
 layout: page
 ---
