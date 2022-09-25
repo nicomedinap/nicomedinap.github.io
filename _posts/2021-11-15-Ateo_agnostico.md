@@ -1,7 +1,7 @@
 ---
 published: True
 title: Ateo agnostico
-layout: page
+layout: post
 ---
 
 ¿Saben? El asunto con escribir aquí es, en realidad, una forma de recordar las cosas que opino sobre materias específicas, y luego olvido porque, bueno, yo soy así.
