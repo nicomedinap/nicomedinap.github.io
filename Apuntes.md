@@ -8,7 +8,7 @@ A lo largo de los años he escrito sobre variadas cosas y acá pondré algunos t
 
 Fotometría.
 
-* [Sobre fotometría PSF](https://nicomedinap.github.io/apuntes/_posts/FotometriaPSF.html){:target="_blank"}
+* [Sobre fotometría PSF](https://nicomedinap.github.io/apuntes/_posts/FotometriaPSF.md){:target="_blank"}
 
 
 
