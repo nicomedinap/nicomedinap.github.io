@@ -1,5 +1,5 @@
 ---
-layout: apuntes
+layout: page
 title: Fotometría PSF.
 mathjax: true
 ---
