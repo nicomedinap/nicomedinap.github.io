@@ -8,12 +8,13 @@ mathjax: true
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="La-Fotometr&#237;a">La Fotometr&#237;a<a class="anchor-link" href="#La-Fotometr&#237;a">&#182;</a></h1><p>Desde el punto de vista astronómico, la <a href="https://en.wikipedia.org/wiki/Photometry_(astronomy)">Fotometría</a> es la medición, calculo y cuantificación de la luz emitida por diferentes objetos astronómicos. Etimilogicamente, proviene de la voz griega “φωτος” (photos,luz) y del sufijo “μετρια” (metria, medida).</p>
+<h1 id="La-Fotometr&#237;a">La Fotometr&#237;a<a class="anchor-link" href="#La-Fotometr&#237;a">;</a></h1><p>Desde el punto de vista astronómico, la <a href="https://en.wikipedia.org/wiki/Photometry_(astronomy)">Fotometría</a> es la medición, calculo y cuantificación de la luz emitida por diferentes objetos astronómicos. Etimilogicamente, proviene de la voz griega “φωτος” (photos,luz) y del sufijo “μετρια” (metria, medida).</p>
 <p>De esta forma, la fotometría es la medición del flujo integrados $F$ (cuentas/tiempo x area) de una fuente en el cielo, y se define matemáticamente de la siguiente forma:</p>
 $$
 F(t)=\displaystyle \int_0^{t} F_{\lambda}(\lambda) S_{\lambda}(\lambda) d\lambda,
-$$<p>Donde $F_{\lambda}$ es el flujo específico proveniente de la fuente, y $S_{\lambda}$ la función de transmisión, que toma en cuenta la respuesta del detector, la condiciones atmosféricas y el filtro que se ha usado. Lógicamente, y por cómo está planteada la medición, mientras mayor sea el tiempo $t$, mayor flujo integrado se obtiene.</p>
-<h3 id="Magnitudes-y-flujos:">Magnitudes y flujos:<a class="anchor-link" href="#Magnitudes-y-flujos:">&#182;</a></h3><p>La magnitud astronómica es, por definición, una cantidad relativa. Esto quiere decir que su valor es definido con respecto a una fuente específica (como por ejemplo, el sistema fotométrico basado en la estrellas Vega). Dos variaciones populares de la magnitud astronomómica son las siguientes:</p>
+$$
+<p>Donde $F_{\lambda}$ es el flujo específico proveniente de la fuente, y $S_{\lambda}$ la función de transmisión, que toma en cuenta la respuesta del detector, la condiciones atmosféricas y el filtro que se ha usado. Lógicamente, y por cómo está planteada la medición, mientras mayor sea el tiempo $t$, mayor flujo integrado se obtiene.</p>
+<h3 id="Magnitudes-y-flujos:">Magnitudes y flujos:<a class="anchor-link" href="#Magnitudes-y-flujos:">;</a></h3><p>La magnitud astronómica es, por definición, una cantidad relativa. Esto quiere decir que su valor es definido con respecto a una fuente específica (como por ejemplo, el sistema fotométrico basado en la estrellas Vega). Dos variaciones populares de la magnitud astronomómica son las siguientes:</p>
 <ul>
 <li><p>Magnitud Bolométrica:
 $$
@@ -33,7 +34,7 @@ $$</p>
 <li>Fotometría de función de dispersión de punto, o point-spread-function (PSF)</li>
 </ol>
 <p>Cada una de estas técnicas posee diferentes filosofías, ventajas y desventas, pero todos tienen en común algunos parámetros. Partamos con la primera:</p>
-<h2 id="Fotometr&#237;a-de-apertura:">Fotometr&#237;a de apertura:<a class="anchor-link" href="#Fotometr&#237;a-de-apertura:">&#182;</a></h2><p>Esta técnica se basa en considerar todas las cuentas (ADU) dentro de un radio $R$ definido, el cual es llamado "apertura", teniendo como regla que el radio de apertura debe ser, a lo menos, menor que el seeing $R&lt;seeing$ <a href="https://es.wikipedia.org/wiki/Seeing">(visión o visibilidad astronómica)</a>.</p>
+<h2 id="Fotometr&#237;a-de-apertura:">Fotometr&#237;a de apertura:<a class="anchor-link" href="#Fotometr&#237;a-de-apertura:">;</a></h2><p>Esta técnica se basa en considerar todas las cuentas (ADU) dentro de un radio $R$ definido, el cual es llamado "apertura", teniendo como regla que el radio de apertura debe ser, a lo menos, menor que el seeing $R&lt;seeing$ <a href="https://es.wikipedia.org/wiki/Seeing">(visión o visibilidad astronómica)</a>.</p>
 <p>Hay que recordar que una imagen (astronómica, fotográfica, etc) es un arreglo de datos de $(n \times n)$ píxeles, entonces los valores $I_{ij}$ describiran las coordenadas físicas de la imagen. Naturalmente, el flujo de luz proveniente de una fuente estelar, por un tiempo de antemano conocido, puede ser estimado sumando cada pixel $I_{ij}$ dentro de la circunferencia caracterizada por el radio R. En palabras más precisas, dentro de la apertura.</p>
 <p>Luego, debemos sustraer la contribución del cielo a la medición usando alguna estimación directa del valor de "cielo". Podemos pensar en esta contribución como el ruido de fondo de la imagen, y será cuantificado como el valor promedio de una imagen en lugares donde no existen objetos astronómicos. Para estimar el cielo, se define una región llamada "Annulus", que es una estructura creada con dos circulos que posee forma de donut. La idea es medir la contribución local (el área circundante) de la imagen para obtener el flujo usando algún estadístico, digamos, el promedio.</p>
 <p>La imagen representa de mejor manera este concepto. Por ejemplo, medimos todos los píxeles $I_{ij}$ dentro del radio interior (<em>Inner Annulus</em> marcado en la imagen) y el exterior (<em>Outer Annulus</em>), obtenemos un valor promedio y será considerado el cielo.</p>
@@ -41,8 +42,9 @@ $$</p>
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/Fotometria_apertura.png" alt="Cuadro comparativo"  width="600" height="330" /> <figcaption align = "center"><b> Figura 1: Geometría relacionada a la fotometría de apertura.</b></figcaption>
 </figure><p>Bajo esta interpretación, el número total de cuentas $I$ dentro del radio de apertura $R$ será la suma de cada uno de los píxeles $I_{ij}$ de la imagen dentro del radio R considerado, menos la contribución del cielo $I_{cielo}$ en cada píxel:</p>
 $$
-\displaystyle I=\sum_{i,j} I_{ij} - n_{pixeles}*I_{cielo}
-$$<p>donde:</p>
+I=\sum_{i,j} I_{ij} - n_{pixeles}*I_{cielo}
+$$
+<p>donde:</p>
 <ol>
 <li>$I$: Cuentas totales de la fuente dentro del radio de apertura.</li>
 <li>$I_{ij}$: Cuentas específicas en cada pixel dentro del radio de apertura.</li>
@@ -55,9 +57,9 @@ $$
 m=-2.5\log_{10}(I) + Constante
 $$<p>El termino constante depende de las variables asociadas a las condiciones de observación (por ejemplo la extincion atmosferica, la masa de aire, el seeing), y básicamente es lo que se modifica para poder calibrar la fotometría en cierca escala de interés.</p>
 <p>La gran desventaja de este método es la alta densidad estelar. No es posible usar fotometría de apertura cuando la fuente bajo estudio no está aislada, que es el caso de grupos de estrellas como los Cúmulos globulares, o en el centro de nuestra galaxia. De alguna forma, el veloz avance de la resolución espacial de las nuevas generaciones de telescopios ha demostrado que la fotometría de apertura es la primera aproximación a la medición del flujo estelar (o gáctico).</p>
-<h3 id="Fotometr&#237;a-Diferencial">Fotometr&#237;a Diferencial<a class="anchor-link" href="#Fotometr&#237;a-Diferencial">&#182;</a></h3><p>La fotometría diferencial consiste en usar estrellas de comparación dentro de la misma imagen para estudiar una estrella en particular, y así ignorar hasta cierto punto las variables atmosféricas y el tiempo de integración. Este método está enfocado en cuantificar la variabilidad estelar de la fuente de interés, y para ser implementada es necesario elegir unas 4 o 10 estrellas de comparación C, medir su magnitud instrumental $m_C$ a través de varias observaciones (o épocas) y calcular el diferencial de magnitud $\Delta m_C$ de cada estrela de comparación, con el fin de cuantificar el cambio de brillo de la estrella de interés.</p>
+<h3 id="Fotometr&#237;a-Diferencial">Fotometr&#237;a Diferencial<a class="anchor-link" href="#Fotometr&#237;a-Diferencial">;</a></h3><p>La fotometría diferencial consiste en usar estrellas de comparación dentro de la misma imagen para estudiar una estrella en particular, y así ignorar hasta cierto punto las variables atmosféricas y el tiempo de integración. Este método está enfocado en cuantificar la variabilidad estelar de la fuente de interés, y para ser implementada es necesario elegir unas 4 o 10 estrellas de comparación C, medir su magnitud instrumental $m_C$ a través de varias observaciones (o épocas) y calcular el diferencial de magnitud $\Delta m_C$ de cada estrela de comparación, con el fin de cuantificar el cambio de brillo de la estrella de interés.</p>
 <p>Este método ofrece muy buenos resultados cuando la cadencia de observación es alta, siendo uno de los favoritos del AAVSO, Kepler, entre otros, pero desconozco si es un método que se siga usando de forma masiva, pero es una interesante forma de medir la luz de las estrellas.</p>
-<h3 id="Fotometr&#237;a-PSF:">Fotometr&#237;a PSF:<a class="anchor-link" href="#Fotometr&#237;a-PSF:">&#182;</a></h3><p>Este método se basa en la idea que todas las fuentes en una imagen tienen exactamente la misma forma. En otras palabras, la distribución espacial de la luz capturada sobre una imagen sigue alguna regla general, que puede ser usada para estimar el flujo F.</p>
+<h3 id="Fotometr&#237;a-PSF:">Fotometr&#237;a PSF:<a class="anchor-link" href="#Fotometr&#237;a-PSF:">;</a></h3><p>Este método se basa en la idea que todas las fuentes en una imagen tienen exactamente la misma forma. En otras palabras, la distribución espacial de la luz capturada sobre una imagen sigue alguna regla general, que puede ser usada para estimar el flujo F.</p>
 <p>La aproximación más usual es asumir que las fuentes poseen un perfil Gaussiano con la misma desviación estándar. Con esta aproximación, el "tamaño" o apertura para una fuente estará caracterizada por el seeing atmosférico. Dependiendo del tamaño de la imagen en la cual trabajemos, podemos considerar que tenemos, en promedio, las mismas perturbaciones atmosféricas. Bajo estas consideraciones, todas las estrellas deberían ser descritas por la misma función puntual de dispersión (point spread function, PSF).</p>
 <p>La forma radial de una Gaussiana bidimensional se describe como:</p>
 $$
@@ -248,11 +250,11 @@ $$<p>Así, en vez de contar fotones y restar la contribución de fondo, sólo ne
 $$
 m = -2.5 \log(I_0) + const.
 $$<p>Donde la constante está dada por el sistema fotométrico utilizado (es decir, el punto cero).</p>
-<h3 id="Ventajas-de-la-fotometr&#237;a-PSF:">Ventajas de la fotometr&#237;a PSF:<a class="anchor-link" href="#Ventajas-de-la-fotometr&#237;a-PSF:">&#182;</a></h3><ol>
+<h3 id="Ventajas-de-la-fotometr&#237;a-PSF:">Ventajas de la fotometr&#237;a PSF:<a class="anchor-link" href="#Ventajas-de-la-fotometr&#237;a-PSF:">;</a></h3><ol>
 <li><strong>Precisión</strong>: Como ya hemos comentado, la fotometría de apertura suma todos los píxeles dentro de una apertura arbitraria. Si alguno de estos píxeles es un pixel caliente, un rayo cósmico u otro, podría aumentar drásticamente el valor de la medición fotométrica. El ajuste de un perfil para obtener el valor $I_0$ convierte a la fotometría PSF en un estimador robusto a píxeles malos, rayos cósmicos y otros contaminantes.</li>
 <li><strong>Puede ser usado en campos muy poblados</strong>: Como sabemos la forma que debe tener cada estrella, podemos estimar el flujo que debe aportar cada fuente al estudiar regiones de alta densidad estelar, como cúmulos globulares o el centro galáctico. Podemos aplicar iterativamente perfiles sobre fuentes para remover contribuciones con el fin de caracterizar de mejor manera estas fuentes que se solapan.</li>
 </ol>
-<h3 id="Otros-perfiles-que-pueden-ser-usados">Otros perfiles que pueden ser usados<a class="anchor-link" href="#Otros-perfiles-que-pueden-ser-usados">&#182;</a></h3><p>Usualmente, dependiendo de las condiciones ambientales o de las fuentes en estudio, se pueden usar diferentes perfiles para describir las funtes. A modo de ejemplo, presentamos algunos de ellos:</p>
+<h3 id="Otros-perfiles-que-pueden-ser-usados">Otros perfiles que pueden ser usados<a class="anchor-link" href="#Otros-perfiles-que-pueden-ser-usados">;</a></h3><p>Usualmente, dependiendo de las condiciones ambientales o de las fuentes en estudio, se pueden usar diferentes perfiles para describir las funtes. A modo de ejemplo, presentamos algunos de ellos:</p>
 <ol>
 <li><strong>Perfil Lorentziano</strong>:
 $$
@@ -268,7 +270,7 @@ $$
 $$</li>
 </ol>
 <p>Donde b es un parámetro libre que se ajustan para obtener la contribución del brillo de la fuente.</p>
-<h3 id="Realizando-Fotometr&#237;a-PSF">Realizando Fotometr&#237;a PSF<a class="anchor-link" href="#Realizando-Fotometr&#237;a-PSF">&#182;</a></h3><p>Existen varias formas de obtener la fotometría PSF desde imágenes astronómicas. Generalmente cada survey ofrece entre su documentación cuál es la tecnica fotométrica que sugieren, el software y sus posibles limitancias. Algunos softwares populares y (que yo personalmente he usado) son los siguientes:</p>
+<h3 id="Realizando-Fotometr&#237;a-PSF">Realizando Fotometr&#237;a PSF<a class="anchor-link" href="#Realizando-Fotometr&#237;a-PSF">;</a></h3><p>Existen varias formas de obtener la fotometría PSF desde imágenes astronómicas. Generalmente cada survey ofrece entre su documentación cuál es la tecnica fotométrica que sugieren, el software y sus posibles limitancias. Algunos softwares populares y (que yo personalmente he usado) son los siguientes:</p>
 <ol>
 <li><p><strong>DaOPhot</strong>: Extractor de fuentes clásico, muy usado en el software IRAF en tiempos tempranos, donde se realizaba la calibración de objetos a mano. Disponible en paquetes de utilidades astronómicas y distribuido generalizadamente.</p>
 </li>
