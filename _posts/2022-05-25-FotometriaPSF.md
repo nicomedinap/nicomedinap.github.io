@@ -40,7 +40,7 @@ $$</p>
 <p>Luego, debemos sustraer la contribución del cielo a la medición usando alguna estimación directa del valor de "cielo". Podemos pensar en esta contribución como el ruido de fondo de la imagen, y será cuantificado como el valor promedio de una imagen en lugares donde no existen objetos astronómicos. Para estimar el cielo, se define una región llamada "Annulus", que es una estructura creada con dos circulos que posee forma de donut. La idea es medir la contribución local (el área circundante) de la imagen para obtener el flujo usando algún estadístico, digamos, el promedio.</p>
 <p>La Figura 1 representa de mejor manera este concepto. Por ejemplo, medimos todos los píxeles $I_{ij}$ dentro del radio interior (<em>Inner Annulus</em> marcado en la imagen) y el exterior (<em>Outer Annulus</em>), obtenemos un valor promedio y será considerado el cielo.</p>
 <figure>
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/Fotometria_apertura.png" alt="Cuadro comparativo"  width="380" height="180" /> <figcaption align = "center"><b> Figura 1: Geometría relacionada a la fotometría de apertura.</b></figcaption>
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/Fotometria_apertura.png" alt="Cuadro comparativo"  width="400" height="200" /> <figcaption align = "center"><b> Figura 1: Geometría relacionada a la fotometría de apertura.</b></figcaption>
 </figure><p>Bajo esta interpretación, el número total de cuentas $I$ dentro del radio de apertura $R$ será la suma de cada uno de los píxeles $I_{ij}$ de la imagen dentro del radio R considerado, menos la contribución del cielo $I_{cielo}$ en cada píxel:</p>
 $$
 I=\sum_{i,j} I_{ij} - n_{pixeles}*I_{cielo}
