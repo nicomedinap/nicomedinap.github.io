@@ -87,9 +87,6 @@ $$<p>donde:</p>
 <p>¿Cuál es la diferencia? La forma de la fuente se mantiene, pero el nivel de ruido del fondo crece. En general, si el peak de intensidad $I_0$ está por sobre el límite del ruido, podrá ser detectada y analizada.</p>
 <p>Para entender mejor la idea, simularemos una estrella usando una distribución gaussiana y estudiaremos sus parámetros con más detalles. Le añadiremos ruido para hacer todo un poco más realista.</p>
 
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
