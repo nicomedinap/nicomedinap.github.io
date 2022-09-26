@@ -272,14 +272,15 @@ $$</li>
 <p>Donde b es un parámetro libre que se ajustan para obtener la contribución del brillo de la fuente.</p>
 <h3 id="Realizando-Fotometr&#237;a-PSF">Realizando Fotometr&#237;a PSF<a class="anchor-link" href="#Realizando-Fotometr&#237;a-PSF"></a></h3><p>Existen varias formas de obtener la fotometría PSF desde imágenes astronómicas. Generalmente cada survey ofrece entre su documentación cuál es la tecnica fotométrica que sugieren, el software y sus posibles limitancias. Algunos softwares populares y (que yo personalmente he usado) son los siguientes:</p>
 <ol>
-<li><p><strong>DaOPhot</strong>: Extractor de fuentes clásico, muy usado en el software IRAF en tiempos tempranos, donde se realizaba la calibración de objetos a mano. Disponible en paquetes de utilidades astronómicas y distribuido generalizadamente.</p>
+<li><p><strong>DAOPHOT</strong>: Extractor de fuentes clásico, muy usado en el software IRAF en tiempos tempranos, donde se realizaba la calibración de objetos a mano. Disponible en paquetes de utilidades astronómicas y distribuido generalizadamente.</p>
 </li>
-<li><p><strong>DoPhot</strong>: Segun uno de los autores, uno de los softwares más usados que provee diferentes modalidades de extracción de fuentes. Doy completa fe de su reputación.</p>
+<li><p><strong>DoPHOT</strong>: Segun uno de los autores, uno de los softwares más usados que provee diferentes modalidades de extracción de fuentes. Doy completa fe de su reputación.</p>
 </li>
 <li><p><strong>SexTractor</strong>: El peor acrónimo del mundo, estamos de acuerdo. Software muy mañoso en su instalación, pero efectivo para obtener catálogos de fotometría sobre una imagen FITS.</p>
 </li>
 </ol>
-<p>Ahora, veremos un ejemplo (y explicación) sobre cómo simular una fuente y realizarle fotometría usando algunas librerias implementadas en python. Más información disponible la documentación el <a href="http://photutils.readthedocs.io/en/stable/psf.html">siguiente link</a>.</p>
+<p>Ahora, veremos un ejemplo (y explicación) sobre cómo simular una fuente y realizarle fotometría usando algunas librerias implementadas en python. Más información disponible la documentación [siguiente link.](http://photutils.readthedocs.io/en/stable/psf.html){:target="_blank"}</p>
+
 <p>Vamos describiendo cada paso y modificando a nuestras anchas a ve qué sucede:</p>
 
 </div>
