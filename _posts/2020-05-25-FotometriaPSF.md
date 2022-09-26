@@ -254,7 +254,7 @@ $$<p>Donde la constante está dada por el sistema fotométrico utilizado (es dec
 <li><strong>Precisión</strong>: Como ya hemos comentado, la fotometría de apertura suma todos los píxeles dentro de una apertura arbitraria. Si alguno de estos píxeles es un pixel caliente, un rayo cósmico u otro, podría aumentar drásticamente el valor de la medición fotométrica. El ajuste de un perfil para obtener el valor $I_0$ convierte a la fotometría PSF en un estimador robusto a píxeles malos, rayos cósmicos y otros contaminantes.</li>
 <li><strong>Puede ser usado en campos muy poblados</strong>: Como sabemos la forma que debe tener cada estrella, podemos estimar el flujo que debe aportar cada fuente al estudiar regiones de alta densidad estelar, como cúmulos globulares o el centro galáctico. Podemos aplicar iterativamente perfiles sobre fuentes para remover contribuciones con el fin de caracterizar de mejor manera estas fuentes que se solapan.</li>
 </ol>
-<h3 id="Otros-perfiles-que-pueden-ser-usados">Otros perfiles que pueden ser usados<a class="anchor-link" href="#Otros-perfiles-que-pueden-ser-usados"></a></h3><p>Usualmente, dependiendo de las condiciones ambientales o de las fuentes en estudio, se pueden usar diferentes perfiles para describir las funtes. A modo de ejemplo, presentamos algunos de ellos:</p>
+<h3 id="Otros-perfiles-que-pueden-ser-usados">Otros perfiles que pueden ser usados<a class="anchor-link" href="#Otros-perfiles-que-pueden-ser-usados"></a></h3><p>Usualmente, dependiendo de las condiciones ambientales o de las fuentes en estudio, se pueden usar diferentes perfiles para describir las fuentes. A modo de ejemplo, presentamos algunos de ellos:</p>
 <ol>
 <li><strong>Perfil Lorentziano</strong>:
 $$
