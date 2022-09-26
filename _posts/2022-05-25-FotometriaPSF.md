@@ -9,7 +9,7 @@ mathjax: true
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
-<p>Desde el punto de vista astronómico, la <a href="https://en.wikipedia.org/wiki/Photometry_(astronomy)">Fotometría</a> es la medición, calculo y cuantificación de la luz emitida por diferentes objetos astronómicos. Etimilogicamente, proviene de la voz griega “φωτος” (photos,luz) y del sufijo “μετρια” (metria, medida).</p>
+<p>Desde el punto de vista astronómico, la <a href="https://en.wikipedia.org/wiki/Photometry_(astronomy)" target="_blank">Fotometría</a> es la medición, calculo y cuantificación de la luz emitida por diferentes objetos astronómicos. Etimilogicamente, proviene de la voz griega “φωτος” (photos,luz) y del sufijo “μετρια” (metria, medida).</p>
 <p>De esta forma, la fotometría es la medición del flujo integrados $F$ (cuentas/tiempo x area) de una fuente en el cielo, y se define matemáticamente de la siguiente forma:</p>
 $$
 F(t)=\displaystyle \int_0^{t} F_{\lambda}(\lambda) S_{\lambda}(\lambda) d\lambda,
@@ -35,7 +35,7 @@ $$</p>
 <li>Fotometría de función de dispersión de punto, o point-spread-function (PSF).</li>
 </ol>
 <p>Cada una de estas técnicas posee diferentes filosofías, ventajas y desventas, pero todos tienen en común algunos parámetros. Partamos con la primera:</p>
-<h3 id="Fotometr&#237;a-de-apertura:">Fotometr&#237;a de apertura<a class="anchor-link" href="#Fotometr&#237;a-de-apertura:"></a></h3><p>Esta técnica se basa en considerar todas las cuentas (ADU) dentro de un radio $R$ definido, el cual es llamado "apertura", teniendo como regla que el radio de apertura debe ser, a lo menos, menor que el seeing $R&lt;seeing$ <a href="https://es.wikipedia.org/wiki/Seeing">(visión o visibilidad astronómica)</a>.</p>
+<h3 id="Fotometr&#237;a-de-apertura:">Fotometr&#237;a de apertura<a class="anchor-link" href="#Fotometr&#237;a-de-apertura:"></a></h3><p>Esta técnica se basa en considerar todas las cuentas (ADU) dentro de un radio $R$ definido, el cual es llamado "apertura", teniendo como regla que el radio de apertura debe ser, a lo menos, menor que el seeing $R&lt;seeing$ <a href="https://es.wikipedia.org/wiki/Seeing" target="_blank">(visión o visibilidad astronómica)</a>.</p>
 <p>Hay que recordar que una imagen (astronómica, fotográfica, etc) es un arreglo de datos de $(n \times n)$ píxeles, entonces los valores $I_{ij}$ describiran las coordenadas físicas de la imagen. Naturalmente, el flujo de luz proveniente de una fuente estelar, por un tiempo de antemano conocido, puede ser estimado sumando cada pixel $I_{ij}$ dentro de la circunferencia caracterizada por el radio R. En palabras más precisas, dentro de la apertura.</p>
 <p>Luego, debemos sustraer la contribución del cielo a la medición usando alguna estimación directa del valor de "cielo". Podemos pensar en esta contribución como el ruido de fondo de la imagen, y será cuantificado como el valor promedio de una imagen en lugares donde no existen objetos astronómicos. Para estimar el cielo, se define una región llamada "Annulus", que es una estructura creada con dos circulos que posee forma de donut. La idea es medir la contribución local (el área circundante) de la imagen para obtener el flujo usando algún estadístico, digamos, el promedio.</p>
 <p>La Figura 1 representa de mejor manera este concepto. Por ejemplo, medimos todos los píxeles $I_{ij}$ dentro del radio interior (<em>Inner Annulus</em> marcado en la imagen) y el exterior (<em>Outer Annulus</em>), obtenemos un valor promedio y será considerado el cielo.</p>
@@ -279,7 +279,7 @@ $$</li>
 <li><p><strong>SexTractor</strong>: El peor acrónimo del mundo, estamos de acuerdo. Software muy mañoso en su instalación, pero efectivo para obtener catálogos de fotometría sobre una imagen FITS.</p>
 </li>
 </ol>
-<p>Ahora, veremos un ejemplo (y explicación) sobre cómo simular una fuente y realizarle fotometría usando algunas librerias implementadas en python. Más información disponible la documentación [siguiente link.](http://photutils.readthedocs.io/en/stable/psf.html){:target="_blank"}</p>
+<p>Ahora, veremos un ejemplo (y explicación) sobre cómo simular una fuente y realizarle fotometría usando algunas librerias implementadas en python. Más información disponible en la documentacio del <a href="http://photutils.readthedocs.io/en/stable/psf.html" target="_blank">siguiente link.</a></p>
 
 <p>Vamos describiendo cada paso y modificando a nuestras anchas a ve qué sucede:</p>
 
