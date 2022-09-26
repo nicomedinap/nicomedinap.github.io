@@ -40,7 +40,7 @@ $$</p>
 <p>Luego, debemos sustraer la contribución del cielo a la medición usando alguna estimación directa del valor de "cielo". Podemos pensar en esta contribución como el ruido de fondo de la imagen, y será cuantificado como el valor promedio de una imagen en lugares donde no existen objetos astronómicos. Para estimar el cielo, se define una región llamada "Annulus", que es una estructura creada con dos circulos que posee forma de donut. La idea es medir la contribución local (el área circundante) de la imagen para obtener el flujo usando algún estadístico, digamos, el promedio.</p>
 <p>La Figura 1 representa de mejor manera este concepto. Por ejemplo, medimos todos los píxeles $I_{ij}$ dentro del radio interior (<em>Inner Annulus</em> marcado en la imagen) y el exterior (<em>Outer Annulus</em>), obtenemos un valor promedio y será considerado el cielo.</p>
 <figure>
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/Fotometria_apertura.png" alt="Cuadro comparativo"  width="300" height="150" /> <figcaption align = "center"><b> Figura 1: Geometría relacionada a la fotometría de apertura.</b></figcaption>
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/Fotometria_apertura.png" alt="Cuadro comparativo"  width="380" height="180" /> <figcaption align = "center"><b> Figura 1: Geometría relacionada a la fotometría de apertura.</b></figcaption>
 </figure><p>Bajo esta interpretación, el número total de cuentas $I$ dentro del radio de apertura $R$ será la suma de cada uno de los píxeles $I_{ij}$ de la imagen dentro del radio R considerado, menos la contribución del cielo $I_{cielo}$ en cada píxel:</p>
 $$
 I=\sum_{i,j} I_{ij} - n_{pixeles}*I_{cielo}
@@ -76,13 +76,15 @@ $$<p>donde:</p>
 <p>La simpleza y utilidad de la fotometría PSF recae en que todas las estrellas pueden ser modeladas usando, en este caso, un perfil Gaussiano con la misma desviación estándar (seeing) $\sigma$, y cada una con diferentes intensidades $I_0$, lo que reduce el problema a elegir un set de parámetros para cada imagen a analizar.</p>
 <p>A continuación, se presentan 3 estrellas de diferentes magnitudes, pero que presentan la misma forma:</p>
 <figure>
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/bright_star.png" alt="Cuadro comparativo"  width="500" height="300" /> 
-</figure><figure>
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/fainter_star.png" alt="Cuadro comparativo"  width="500" height="300" /> 
-
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/bright_star.png" alt="Cuadro comparativo"  width="400" height="180" /><figcaption align = "center"><b></b></figcaption> 
+</figure>
 <figure>
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/much_finter_star.png" alt="Cuadro comparativo"  width="500" height="300" /> <figcaption align = "center"><b>Fig 2: Perfiles de distribución de la luz estelar en diferentes intensidades. El ruido cada vez es más importante. Las estrellas tiene, de arriba a abajo, magnitud 19.225, magnitud 20.575, y magnitud 21.997.</b></figcaption>
-</figure><p>¿Cuál es la diferencia? La forma de la fuente se mantiene, pero el nivel de ruido del fondo crece. En general, si el peak de intensidad $I_0$ está por sobre el límite del ruido, podrá ser detectada y analizada.</p>
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/fainter_star.png" alt="Cuadro comparativo"  width="400" height="190" /><figcaption align = "center"><b></b></figcaption> 
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/imagenes/much_finter_star.png" alt="Cuadro comparativo"  width="400" height="190" /> <figcaption align = "center"><b>Fig 2: Perfiles de distribución de la luz estelar en diferentes intensidades. El ruido cada vez es más importante. Las estrellas tiene, de arriba a abajo, magnitud 19.225, magnitud 20.575, y magnitud 21.997.</b></figcaption>
+</figure>
+<p>¿Cuál es la diferencia? La forma de la fuente se mantiene, pero el nivel de ruido del fondo crece. En general, si el peak de intensidad $I_0$ está por sobre el límite del ruido, podrá ser detectada y analizada.</p>
 <p>Para entender mejor la idea, simularemos una estrella usando una distribución gaussiana y estudiaremos sus parámetros con más detalles. Le añadiremos ruido para hacer todo un poco más realista.</p>
 
 </div>
