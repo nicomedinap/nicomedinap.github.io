@@ -28,9 +28,11 @@ Por otro lado, están los agnosticos, que son personas que consideran que no pue
 
 Existen diversas corrientes filosóficas con definiciones bien detalladas sobre qué es el ateismo, el agnosticismo y sobre un sin fin de corrientes alternativas. Pero bajo mi perspectiva, lo fundamental aquí es entender que el saber y el creer son cosas y planos diferentes del conocimiento, y depende de nuestra honestidad intelectual averiguar cuál es nuestro dominio.   
 
-El siguiente gráfico tomado de la página https://www.diferenciador.com/ateo-y-agnostico/ resulta ilustrador:
+El siguiente gráfico tomado de la página el [diferenciador](https://www.diferenciador.com/ateo-y-agnostico/){:target="_blank"} resulta ilustrador:
 
-<img src="https://cdn.diferenciador.com/imagenes/ateo-agnostico2-cke.jpg" alt="Cuadro comparativo"  width="700" height="370" /> 
+<figure>
+<img src="https://cdn.diferenciador.com/imagenes/ateo-agnostico2-cke.jpg" alt="Cuadro comparativo"  width="400" height="190" /> <figcaption align = "center"><b> Figura 1: Plano cartesiando de las variables (saber,creer). Cuatro posibilidades se abren paso y el universo se complejiza.</b></figcaption>
+</figure>
 
 Ambas dimensiones (saber, creer) pueden ser representados en el plano cartesiano y cuantificarse a lo menos 4 zonas diferentes complementarias; por ende ser ateo agnóstico es una respuesta plausible ante la vida. 
 
