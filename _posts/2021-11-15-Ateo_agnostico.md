@@ -34,7 +34,7 @@ El siguiente gráfico tomado de la página el [diferenciador](https://www.difere
 <img src="https://cdn.diferenciador.com/imagenes/ateo-agnostico2-cke.jpg" alt="Cuadro comparativo"  width="400" height="290" /> <figcaption align = "center"><b> Figura 1: Plano cartesiando de las variables (saber,creer). Cuatro posibilidades se abren paso y el universo se complejiza, para variar.</b></figcaption>
 </figure>
 
-Ambas dimensiones (saber, creer) pueden ser representados en el plano cartesiano y cuantificarse a lo menos 4 zonas diferentes complementarias; por ende ser ateo agnóstico es una respuesta plausible ante la vida. Yo me considero Ateo agnóstico porque considero que el ateísmo y el gnosticismo son planos diferentes de un mismo suceso.
+Ambas dimensiones independientes **(saber, creer)** pueden ser representados en el plano cartesiano y cuantificarse a lo menos 4 zonas diferentes complementarias; por ende ser ateo agnóstico es una respuesta plausible ante la vida. Yo me considero Ateo agnóstico porque considero que el ateísmo y el gnosticismo son planos diferentes de un mismo suceso.
 
 Ante la pregunta ¿CREES en dios? Yo digo no, no creo. No veo evidencia de él ni ninguna manifestación en toda la historia, por lo que me considero ateo. Mi ateismo proviene desde la experimentación de la realidad. Ante la pregunta ¿SABES si existe dios? Yo respondo no sé, no tengo cómo comprobar que existe, o que no existe, por lo que me considero agnóstico. 
 
