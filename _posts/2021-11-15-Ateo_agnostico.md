@@ -16,7 +16,7 @@ Después de pasar toda mi infancia y parte de mi adolescencia siendo un fervient
 
 Fue complejo, pero confié en la conclusión que había llegado: no existía el dios del que me habían contado. Al principio fue dificil, ya que el cristianismo (y en particular el catolicismo) inserta en los creyentes la culpa como uno de los mecanismos fundamentales para no separarse del "camino de dios". Se desarrolla la idea del infierno eterno y obviamente uno no quiere eso ni para uno ni para sus cercanos. 
 
-Además, esta desición tampoco solucionaba el vacío existencial, esa angustia de sentir que nuestra existencia no es, potencialmente, fundamental ni destinada a algo. Esto último sólo se logra evitar con estudio y reflexión. Y vaya que es necesaria la reflexión, porque la realidad es aún más abrumadora cuando no crees que exista un dios.
+Además, esta decisión tampoco solucionaba el vacío existencial, esa angustia de sentir que nuestra existencia no es, potencialmente, fundamental ni destinada a algo. Esto último sólo se logra evitar con estudio y reflexión. Y vaya que es necesaria la reflexión, porque la realidad es aún más abrumadora cuando no crees que exista un dios.
 
 ## Las proposiciones ateas y agnósticas.
 
