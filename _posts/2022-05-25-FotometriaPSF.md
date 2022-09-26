@@ -496,6 +496,8 @@ $$</li>
 <p>Esto puede ser muy útil para estudiar fuentes astronómicas que están demasiado cerca de una fuente brillante, como es el caso de los exoplanetas. Una idea que lleva directamente al coronógrafo.</p>
 <p>Por último, voy a poner una imagen real y hacerle fotometría, pero me queda como trabajo futuro.</p>
 
+<p>Agradecido por su tiempo.</p>
+
 </div>
 </div>
 </div>
