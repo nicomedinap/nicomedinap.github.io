@@ -8,7 +8,7 @@ A lo largo de los años he escrito sobre variadas cosas y acá pondré algunos t
 
 Fotometría estelar.
 
-* [Sobre fotometría PSF](https://nicomedinap.github.io/2022/05/25/FotometriaPSF.html){:target="_blank"}
+* [Sobre fotometría PSF](https://nicomedinap.github.io/2020/05/25/FotometriaPSF.html){:target="_blank"}
 
 
 
