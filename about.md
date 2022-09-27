@@ -27,8 +27,11 @@ Este proyecto está desarrollado en las [páginas de Github](https://pages.githu
 
 Soy más o menos activo en las redes sociales enlistadas en los [links de interés](https://nicomedinap.github.io/links.html){:target="_blank"}, y mi correo académico es nicolas.medina@postgrado.uv.cl.
 
-## Lista de cosas por hacer
+## Curriculum Vitae CV
 
+Existen dos versiones: ([español](https://drive.google.com/file/d/1d1qEw0NPfdGgJZry_5nlx0HjxCDxBVD0/view?usp=sharing){:target="_blank"}, [ingles](https://drive.google.com/file/d/1QViu8Ri-o14epkEljqd96-KOxsWiFlR0/view?usp=sharing){:target="_blank"}).
+
+## Lista de cosas por hacer
 - [x] Tener un blog.
 - [ ] Entender todos los aspectos del blog.
 - [x] Sobrevivir al 2012.
@@ -36,4 +39,3 @@ Soy más o menos activo en las redes sociales enlistadas en los [links de inter�
 - [x] Creerme científico.
 - [ ] Escribir una tesis de Doctorado.
 - [ ] Escuchar "Close to the Edge" en vivo.
-
