@@ -9,8 +9,9 @@ Realizo investigación sobre [variabilidad estelar](https://es.wikipedia.org/wik
 Aquí una foto mía donde parezco interesante :)
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/workshop_mas_2018.jpg"
- height="350" width="500">
+<figure>
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/workshop_mas_2018.jpg" alt="Charla"  width="350" height="500" /> <figcaption align = "center"><b> Figura 1: Persona identificada como el autor de este blog, en el año 2018, hablando sobre estrellas variables.</b></figcaption>
+</figure>
 </p>
 
 ## Sobre el proyecto Fotómetro
