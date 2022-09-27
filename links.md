@@ -8,7 +8,7 @@ Hola,
 Me he visto muchas veces buscando links en lugares perdidos del internet, así que mejor me hice este lugar para guardar cosas. Ésta es la parte más útil de la página porque puedo dejar link y cosas interesantes.
 
 
-Primero, mi Curriculum Vitae ([español](https://drive.google.com/file/d/1d1qEw0NPfdGgJZry_5nlx0HjxCDxBVD0/view?usp=sharing){:target="_blank"}, [ingles](https://drive.google.com/file/d/1QViu8Ri-o14epkEljqd96-KOxsWiFlR0/view?usp=sharing){:target="_blank"}), luego algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){:target="_blank"}.
+Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){:target="_blank"}.
 
 * Redes sociales: Soy activo a veces en algunas, acá están:
 1. [Twitter](https://twitter.com/nicomedinap){:target="_blank"}
