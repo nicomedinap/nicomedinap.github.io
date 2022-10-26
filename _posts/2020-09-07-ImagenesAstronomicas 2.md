@@ -869,7 +869,8 @@ Es así que la imagen desplegada, para cada valor <code>Nubes[x,y]</code> existe
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Cada uno de los puntitos que vemos es una estrella distinta, y hay incontable número de ellas en una pequeña región del cielo, impactante. Donde está oscuro se localiza las llamadas <a href="https://es.wikipedia.org/wiki/Nube_oscura_infrarroja" target="_blank">Nubes oscuras infrarrojas</a>, donde el polvo esta tan concentrado que ni la luz infrarroja puede pasar. Son negras porque no dejan pasar las estrellas que están de fondo, como en todo su alrededor. Las fuentes rojizas representan estrellas que están en su proceso de formación, con unos tiernos cientos de miles de años de vida, y por último, la emisión morado/azulada son nubes que han sido calentadas por sus estrellas calientes a sus alrededores.</p>
-<p>Y así es como se crea una linda imágen para escribir contento un nuevo estudio, como también un fondo de pantalla para tu teléfono, dejaré el <a href="https://drive.google.com/file/d/14SWSfxn25NrlwfI47XC_poP16h_zKYKl/view?usp=sharing" target="_blank">link ACA</a> para descargar la imagen si es que quieres. Gracias por leerme, espero hayas aprendido algo y <span style="color:#00FF00">te quiero mucho :)</span></p>
+
+Gracias por leerme!
 
 </div>
 </div>
