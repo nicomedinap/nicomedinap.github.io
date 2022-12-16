@@ -10,7 +10,8 @@ title:  "Ajustando una distribución normal"
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Ajustando-una-distribuci%C3%B3n-normal"><strong>Ajustando una distribuci&#243;n normal</strong><a class="anchor-link" href="#Ajustando-una-distribuci%C3%B3n-normal">&#182;</a></h2><p>Como el teorema del límite central es tan común en la naturaleza y aparece con tanta frecuencia cuando se levantan grandes cantidades de datos disponibles en nuestra era, que tener una función para ajustar una distribución gaussiana o normal no es una mala idea.</p>
+
+<p>Como el teorema del límite central es tan común en la naturaleza y aparece con tanta frecuencia cuando se levantan grandes cantidades de datos disponibles en nuestra era, que tener una función para ajustar una distribución gaussiana o normal no es una mala idea.</p>
 <p>Me explico: supongamos que tenemos un set de datos que es de nuestro interés, y al visualizarlo notamos que podría ser descrito por un perfíl gaussiano. ¿Cómo obtenemos o extraemos los valores de dicha distribución, con el fin de estudiar sus parámetros?</p>
 <p>Creemos una distribución artificial y veamos cómo entender dicha distribución, usando un puñado de puntos (100 mediciones) para poder caracterizar la muestra:</p>
 
