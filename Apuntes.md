@@ -8,3 +8,4 @@ A lo largo de los años he escrito sobre variadas cosas y acá pondré algunos t
 * [Sobre fotometría PSF (2020)](https://nicomedinap.github.io/2020/05/25/FotometriaPSF.html){:target="_blank"}
 * [El atractor de Lorenz (2018)](https://nicomedinap.github.io/2018/11/09/Motivacion.html#El-atractor-de-Lorenz:){:target="_blank"}
 * [Mapa sismologico de sudamérica (2018)](https://nicomedinap.github.io/2018/11/09/Motivacion.html#Un-mapa-sismológico-de-Sudamérica){:target="_blank"}
+* [Entendiendo la distribución normal (2022)](https://nicomedinap.github.io/2022/12/15/AjustandoUnaDistribucionNormal.html){:target="_blank"}
