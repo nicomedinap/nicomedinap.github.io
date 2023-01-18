@@ -3,7 +3,7 @@ layout: default
 title: Sobre el autor
 ---
 
-Hola! Me llamo Nicolás Medina Peña. Soy Licenciado en Astronomía [(UdeC)](http://www.udec.cl/pexterno/){:target="_blank"}, Magíster en Astrofísica y estudiante de Doctorado en Astrofísica [(UV)](http://uv.cl/){:target="_blank"}. Me gusta la música extraña y conversar sobre cosas aparentemente no relevantes. 
+Hola! Me llamo Nicolás Medina Peña. Soy Licenciado en Astronomía [(UdeC)](http://www.udec.cl/pexterno/){:target="_blank"}, Magíster en Astrofísica y Doctor en Astrofísica [(UV)](http://uv.cl/){:target="_blank"}. Me gusta la música extraña y conversar sobre cosas aparentemente no relevantes. 
 Realizo investigación sobre [variabilidad estelar](https://es.wikipedia.org/wiki/Estrella_variable){:target="_blank"}. Trabajé el telescopio DuPont como observer/plugger del proyecto [Apogee-2 south](http://www.sdss.org/surveys/apogee-2/){:target="_blank"}, alojado en el [Observatorio Las Campanas.](https://es.wikipedia.org/wiki/Observatorio_Las_Campanas){:target="_blank"}. 
 
 Agradecido de su tiempo.
@@ -40,5 +40,5 @@ Existen dos versiones: ([español](https://drive.google.com/file/d/1d1qEw0NPfdGg
 - [x] Sobrevivir al 2012.
 - [x] Sobrevivir el 2020. (version actualizada.)
 - [x] Creerme científico.
-- [ ] Escribir una tesis de Doctorado.
+- [x] Escribir una tesis de Doctorado.
 - [ ] Escuchar "Close to the Edge" en vivo.
