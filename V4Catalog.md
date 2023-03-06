@@ -6,8 +6,12 @@ El Catálogo V⁴ contendrá la información que he sa recolectado usando el mé
 Para cada tile analizado, habrá un link donde estarán disponibles todas las curvas de luz dentro del catálogo, y un plot con la serie de tiempo.
 
 
+
+
+
 * [d001](https://nicomedinap.github.io/V4_html/Variables_d001.html){:target="_blank"}
 * [d002](https://nicomedinap.github.io/V4_html/Variables_d002.html){:target="_blank"}
+
 * [d045]
 * [d046]
 * [d083]
