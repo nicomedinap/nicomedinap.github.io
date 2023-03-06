@@ -463,7 +463,7 @@ Amplitud gaussiana:     0.0019831333256458026
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Vemos que existe un sumario visual de las estadísticas y modelos posibles de generación de una distribución. Los mejores indicadores son una distribución, para sorpresa de nadie, pero no se ve porque está debajo del siguiente modelo que ajusta a la perfección: la distribución gamma. Interesante, podríamos indafar en esto, pero lástima que está fuera de mis intereses justo ahora. Veamos otras cosas que ya tengo preparadas.</p>
+<p>Vemos que existe un sumario visual de las estadísticas y modelos posibles de generación de una distribución. Los mejores indicadores son una distribución normal, para sorpresa de nadie, pero no se ve porque está debajo del siguiente modelo que ajusta a la perfección: la distribución gamma. Interesante, podríamos indagar en esto, pero lástima que está fuera de mis intereses justo ahora. Pero antes de irnos, asegurémoos de que los parámetros son correctos:</p>
 
 </div>
 </div>
