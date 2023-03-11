@@ -19,10 +19,6 @@ Para cada tile analizado, habrá un link donde estarán disponibles todas las cu
 
 
 
-
-
-<html>
-<head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {
@@ -122,6 +118,3 @@ function myFunction(imgs) {
   expandImg.parentElement.style.display = "block";
 }
 </script>
-
-</body>
-</html>
