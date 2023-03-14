@@ -35,7 +35,7 @@ div.pie{
 }
 
 div.galeria:hover{
-	border:  1px solid black;
- 	transition: transform 125ms;
-    transform: translateY(-10px);
+	border:  2px solid black;
+ 	transition: transform 215ms;
+    transform: translateY(-15px);
 }
