@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Composición de imágenes
+title: Composiciones
 ---
 
 <html lang="es">
