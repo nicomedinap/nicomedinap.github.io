@@ -1,0 +1,41 @@
+h1{
+	color: white;
+	text-shadow: 1px 2px 2px black, 0 0 25px blue, 0 0 5px blue;
+	text-align: center;
+	padding: 10px 0;
+}
+
+div.galeria{
+/*	margin:  10px 10px;
+	box-shadow: 0 4px 8px lightskyblue, 0 6px 20px rgba(0, 0, 0, 0.19);
+	float:  left;
+	width: 300px;*/
+
+	display:  grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	width: 95%;
+	margin: auto;
+	grid-gap: 10px;
+	padding:  40px 0;
+	overflow: hidden;
+
+}
+
+div.galeria img{
+	vertical-align: top;
+	width: 100%;
+	height: 500px;
+	object-fit: cover;
+}
+
+div.pie{
+	text-align: center;
+	text-shadow: 2px 2px 5px purple;
+	padding: 10px;
+}
+
+div.galeria:hover{
+	border:  1px solid black;
+ 	transition: transform 125ms;
+    transform: translateY(-10px);
+}
