@@ -39,6 +39,7 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 * ༼;´༎ຶ ۝ ༎ຶ༽
 <!--- * También me gusta escribir, subiré algunos textos [acá.](https://nicomedinap.github.io/escritos/LoQueUnoNecesita.html){:target="_blank"} --->
 * [Guía rápida de Markdown.](https://enterprise.github.com/downloads/en/markdown-cheatsheet.pdf){:target="_blank"}
+* [Editor de Markdown online.](https://stackedit.io){:target="_blank"}
 * [Guía de escritura y expresiones útiles en LateX.](https://es.wikipedia.org/wiki/Ayuda:Uso_de_LaTeX){:target="_blank"}
 * [Introducción al análisis de datos en las ciencias biológicas.](http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2019a/){:target="_blank"}
 * [Open astrophysics Bookshelf.](http://open-astrophysics-bookshelf.github.io){:target="_blank"}
