@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Links de interés
+title: Composición de imágenes
 ---
 
 <html lang="es">
