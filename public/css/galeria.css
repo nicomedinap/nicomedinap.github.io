@@ -5,6 +5,10 @@ h1{
 	padding: 10px 0;
 }
 
+p{
+  font-size: 44px;
+}
+
 div.galeria{
 /*	margin:  10px 10px;
 	box-shadow: 0 4px 8px lightskyblue, 0 6px 20px rgba(0, 0, 0, 0.19);
@@ -12,13 +16,13 @@ div.galeria{
 	width: 300px;*/
 
 	display:  grid;
-	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	width: 95%;
+	height: 23%;
 	margin: auto;
 	grid-gap: 10px;
-	padding:  40px 0;
+	padding:  0px 0;
 	overflow: hidden;
-
 }
 
 div.galeria img{
@@ -31,11 +35,11 @@ div.galeria img{
 div.pie{
 	text-align: center;
 	text-shadow: 2px 2px 5px purple;
-	padding: 10px;
+	padding: 5px;
 }
 
 div.galeria:hover{
 	border:  2px solid black;
- 	transition: transform 215ms;
-    transform: translateY(-15px);
+ 	transition: transform 225ms;
+    transform: translateY(-10px);
 }
