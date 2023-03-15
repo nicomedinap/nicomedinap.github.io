@@ -20,7 +20,7 @@ title: Composiciones
 </head>
 
 <body>
-	<h1 style="font-size:8vw">Composiciones de imágenes astronómicas</h1>
+	<!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
 	<div class="galeria">
     	<div class="foto">
         	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/0.jpg" width="400" height="400">
