@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Composiciones de imágenes astronómicas
+title: 
 --- 
 
 <html lang="es">
