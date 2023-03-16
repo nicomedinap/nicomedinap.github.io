@@ -23,7 +23,31 @@ div.galeria{
 	grid-gap: 10px;
 	padding:  0px 0;
 	overflow: hidden;
+	cursor: pointer;
 }
+
+
+div.galeria_telescopio{
+/*	margin:  10px 10px;
+	box-shadow: 0 4px 8px lightskyblue, 0 6px 20px rgba(0, 0, 0, 0.19);
+	float:  left;
+	width: 300px;*/
+
+
+
+
+
+	display:  grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	width: 95%;
+	height: 23%;
+	margin: auto;
+	grid-gap: 10px;
+	padding:  0px 0;
+	overflow: hidden;
+}
+
+
 
 div.galeria img{
 	vertical-align: top;
@@ -39,7 +63,7 @@ div.pie{
 }
 
 div.galeria:hover{
-	border:  2px solid black;
+	border:  0px solid black;
  	transition: transform 225ms;
     transform: translateY(-10px);
 }
