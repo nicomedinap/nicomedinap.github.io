@@ -57,7 +57,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">Title</h1>
+                            <h1 class="test_title">La Tarantula</h1>
                             
                         </div>
                     </a>
