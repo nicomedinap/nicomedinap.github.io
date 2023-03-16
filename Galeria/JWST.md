@@ -37,7 +37,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">NGC3132</h1>
+                            <h1 class="test_title">NGC7293</h1>
                             
                         </div>
                     </a>
