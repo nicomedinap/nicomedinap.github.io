@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title: Composiciones
 --- 
 
@@ -10,25 +10,80 @@ title: Composiciones
 	<meta name="keywords" content="HTML5">
 	<title>Galeria de fotos </title>
 
-
 <!-- Local -->
 <!-- <link rel="stylesheet" href="/Users/nicomedinap/Documents/GitHub/nicomedinap.github.io/public/css/galeria.css"> -->
 
 <!-- Publico -->
-<link rel="stylesheet" href="/public/css/galeria.css"> 
+<link rel="stylesheet" href="/public/css/JWST.css"> 
 
 </head>
 
 <body>
-	<!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
-	<div class="galeria" target="_blank" onclick="location.href='http://djer.roe.ac.uk/vsa/vvv/mosaic/lb.html?fbclid=IwAR2rdnczc_BdbZ00PKxs0UhU4nivZu7v5ElS-MCvsO2fDsYPB84ESscn9v8';" style="cursor: pointer;">
-    	<div class="foto">
-        	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/0.jpg" width="400" height="400">
+    <h1 class="page_title">Objetos Astronomonicos del telescopio James Webb</h1>
+
+    <div class="row">
+        <div class="container">
+            <div class="test_box box-01 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="#" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">Title</h1>
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="test_box box-02 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="#" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">Title</h1>
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="test_box box-03 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="#" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">Title</h1>
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="test_box box-04 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="#" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">Title</h1>
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="test_box box-05 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="#" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">Title</h1>
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="test_box box-06 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="#" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">Title</h1>
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="pie">
-        	<p> Telescopio espacial James Webb (JWST)</p>
-            <p> Info sobre JWST </p>
-        </div>
-	</div>
+    </div>
 
 </html>
