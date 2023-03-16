@@ -4,13 +4,8 @@
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
 body {
-	background: #048;
-	background: -webkit-linear-gradient(left top, #027, #48a);
-	background: -moz-linear-gradient(bottom right, #027, #48a);
-	background: linear-gradient(to bottom right, #027, #48a);
-	background-attachment: fixed;
+	background: black;
 	color: #fff;
-	font-family: 'Raleway', Helvetica, Arial, sans-serif;
 	font-size: 18px;
 	font-weight: 300;
 	line-height: 140%;
