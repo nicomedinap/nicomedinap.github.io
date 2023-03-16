@@ -21,9 +21,9 @@ title: Composiciones
 
 <body>
 	<!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
-	<div class="galeria" target="_blank" onclick="location.href='link_aca';">
+	<div class="galeria" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/JWST.html';">
     	<div class="foto">
-        	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/0.jpg">
+        	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/0.jpg" width="400" height="400">
         </div>
         <div class="pie">
         	<p> Telescopio espacial James Webb (JWST)</p>
