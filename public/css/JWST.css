@@ -34,7 +34,7 @@ body {
 	padding: 0;
 }
 .test_box .inner {
-	background: #333;
+	background: white;
 	display: block;
 	margin: 2px;
 	overflow: hidden;
