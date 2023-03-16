@@ -21,7 +21,7 @@ title: Composiciones
 
 <body>
 	<!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
-	<div class="galeria" onclick="location.href='http://djer.roe.ac.uk/vsa/vvv/mosaic/lb.html?fbclid=IwAR2rdnczc_BdbZ00PKxs0UhU4nivZu7v5ElS-MCvsO2fDsYPB84ESscn9v8';" style="cursor: pointer;">
+	<div class="galeria" target="_blank" onclick="location.href='http://djer.roe.ac.uk/vsa/vvv/mosaic/lb.html?fbclid=IwAR2rdnczc_BdbZ00PKxs0UhU4nivZu7v5ElS-MCvsO2fDsYPB84ESscn9v8';" style="cursor: pointer;">
     	<div class="foto">
         	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/0.jpg" width="400" height="400">
         </div>
