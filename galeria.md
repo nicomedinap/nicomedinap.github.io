@@ -27,7 +27,6 @@ title: Composiciones
         </div>
         <div class="pie">
         	<p> Telescopio espacial James Webb (JWST)</p>
-            <p> Info sobre JWST </p>
         </div>
 	</div>
         
@@ -37,7 +36,6 @@ title: Composiciones
         </div>
         <div class="pie">
         	<p> Telescopio VISTA </p>
-            <p> Info sobre VISTA </p>
         </div>
 	</div>
 
@@ -47,7 +45,6 @@ title: Composiciones
         </div>
         <div class="pie">
         	<p> Telescopio espacia Hubble (HST)</p>
-            <p> Info sobre HST </p>
         </div>
 	</div>
 
@@ -57,7 +54,6 @@ title: Composiciones
         </div>
         <div class="pie">
         	<p> Misión JUNO</p>
-            <p> Info sobre JUNO </p>
         </div>
 	</div>
 
