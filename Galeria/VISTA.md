@@ -27,7 +27,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">LDN1527</h1>
+                            <h1 class="test_title">IRDC_b319</h1>
                             
                         </div>
                     </a>
@@ -37,7 +37,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">NGC3132</h1>
+                            <h1 class="test_title">NGC6334</h1>
                             
                         </div>
                     </a>
@@ -47,7 +47,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">M16</h1>
+                            <h1 class="test_title">SFR3_123</h1>
                             
                         </div>
                     </a>
@@ -57,7 +57,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">La Tarantula</h1>
+                            <h1 class="test_title">SFR3_521</h1>
                             
                         </div>
                     </a>
