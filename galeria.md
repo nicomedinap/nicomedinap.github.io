@@ -30,7 +30,7 @@ title: Composiciones
         </div>
 	</div>
         
-    <div class="galeria">
+    <div class="galeria" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/VISTA.html';">
     	<div class="foto">
         	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/VISTA/3.png" width="100" height="600">
         </div>
@@ -39,7 +39,7 @@ title: Composiciones
         </div>
 	</div>
 
-	<div class="galeria">
+	<div class="galeria" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/HST.html';">
     	<div class="foto">
         	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/HST/M17_SFR0.png" width="100" height="600">
         </div>
@@ -49,7 +49,7 @@ title: Composiciones
 	</div>
 
 	<div class="galeria">
-    	<div class="foto">
+    	<div class="foto" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/JUNO.html';">
         	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/JUNO/prueba0.png" width="100" height="600">
         </div>
         <div class="pie">
