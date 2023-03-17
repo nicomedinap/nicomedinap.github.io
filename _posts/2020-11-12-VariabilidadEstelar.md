@@ -282,7 +282,7 @@ Por ejemplo, la estrella que ostenta el record de más masiva habita la <a href=
 <p>
 A modo de ejemplo, en la figura 5 se muestra un campo estelar que ha sido observado en 4 oportunidades diferentes. Dentro del círculo rojo se señala una estrella que cambia su brillo.</p>
 
-<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/epocas.png" width="350" height="350"></div></a></th>
+<th style="text-align:center"><a href="https://nicomedinap.github.io" target="_blank"> <div align="center"> <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/epocas.jpg" width="350" height="350"></div></a></th>
 
 <table>
 <tbody>
