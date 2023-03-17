@@ -14,12 +14,12 @@ title: Composiciones
 <!-- <link rel="stylesheet" href="/Users/nicomedinap/Documents/GitHub/nicomedinap.github.io/public/css/galeria.css"> -->
 
 <!-- Publico -->
-<link rel="stylesheet" href="/public/css/JWST.css"> 
+<link rel="stylesheet" href="/public/css/VISTA.css"> 
 
 </head>
 
 <body>
-    <h1 class="page_title">Objetos Astronomonicos del telescopio James Webb</h1>
+    <h1 class="page_title">Objetos Astronomonicos observador por el telescopio VISTA (Observatorio Paranal, Antofagasta.)</h1>
 
     <div class="row">
         <div class="container">
