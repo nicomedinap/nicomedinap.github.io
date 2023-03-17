@@ -19,7 +19,7 @@ title: Composiciones
 </head>
 
 <body>
-    <h1 class="page_title">Objetos Astronomonicos del telescopio James Webb</h1>
+    <h1 class="page_title"> Jupiter a través de la óptica de la misión JUNO:</h1>
 
     <div class="row">
         <div class="container">
@@ -27,7 +27,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">LDN1527</h1>
+                            <h1 class="test_title">Jupiter RGB</h1>
                             
                         </div>
                     </a>
@@ -37,7 +37,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">NGC3132</h1>
+                            <h1 class="test_title">Jupiter GBR</h1>
                             
                         </div>
                     </a>
@@ -47,7 +47,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">M16</h1>
+                            <h1 class="test_title">Jupiter GRB</h1>
                             
                         </div>
                     </a>
@@ -57,7 +57,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">La Tarantula</h1>
+                            <h1 class="test_title">Jupiter RBG</h1>
                             
                         </div>
                     </a>
@@ -67,7 +67,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">Title</h1>
+                            <h1 class="test_title">Jupiter BRG</h1>
                             
                         </div>
                     </a>
@@ -77,7 +77,7 @@ title: Composiciones
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">Title</h1>
+                            <h1 class="test_title">Jupiter BGR</h1>
                             
                         </div>
                     </a>
