@@ -14,7 +14,7 @@ title: Composiciones
 <!-- <link rel="stylesheet" href="/Users/nicomedinap/Documents/GitHub/nicomedinap.github.io/public/css/galeria.css"> -->
 
 <!-- Publico -->
-<link rel="stylesheet" href="/public/css/JWST.css"> 
+<link rel="stylesheet" href="/public/css/JUNO.css"> 
 
 </head>
 
