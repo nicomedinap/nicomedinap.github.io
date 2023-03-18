@@ -20,7 +20,6 @@ body {
 	line-height: 120%;
 	margin: 20px 0;
 	text-shadow: 0 1px 5px rgba(0,0,0,.8);
-	text-transform: uppercase;
 }
 
 /* PEN STYLES ========== */
@@ -59,7 +58,7 @@ body {
 	transition: all 300ms ease;
 }
 .test_box .inner .test_click:hover {
-	background-color: rgba(32,100,255,.2); 
+	background-color: rgba(255,255,255,.3); 
 	mix-blend-mode: hard-light;
 }
 .flex_this {
