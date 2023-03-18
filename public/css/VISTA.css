@@ -59,7 +59,7 @@ body {
 	transition: all 300ms ease;
 }
 .test_box .inner .test_click:hover {
-	background-color: rgba(32,100,255,.2); 
+	background-color: rgba(0, 0, 0, 0.4); 
 	mix-blend-mode: hard-light;
 }
 .flex_this {
