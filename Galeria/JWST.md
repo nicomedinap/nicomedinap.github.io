@@ -1,6 +1,5 @@
 ---
 layout: post
-title: Composiciones
 --- 
 
 <html lang="es">
@@ -17,6 +16,11 @@ title: Composiciones
 <link rel="stylesheet" href="/public/css/JWST.css"> 
 
 </head>
+
+<p1> Desde el año 2022, el telescopio espacial James Webb (JWST para los amigos) ha ido liberando imágenes recurrentemente. Usando sus instrumentos sensibles a la luz infrarroja ha revelado detalles de muchos objetos estelares de interés.</p1>
+
+<br>
+<br>
 
 <body>
     <h1 class="page_title">Objetos Astronomonicos del telescopio James Webb</h1>
