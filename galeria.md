@@ -6,7 +6,6 @@ title: Composiciones
 <html lang="es">
 <head>
 	<meta charset="utf-8">
-	<meta name="description" content="Composiciones">
 	<meta name="keywords" content="HTML5">
 	<title>Galeria de fotos </title>
 
