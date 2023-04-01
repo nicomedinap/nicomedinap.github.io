@@ -24,6 +24,10 @@ p{
   font-size: 30px;
 }
 
+p1{
+  font-size: 15px;
+}
+
 div.galeria{
 /*	margin:  10px 10px;
 	box-shadow: 0 4px 8px lightskyblue, 0 6px 20px rgba(0, 0, 0, 0.19);
