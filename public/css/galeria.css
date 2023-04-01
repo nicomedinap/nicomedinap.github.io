@@ -5,6 +5,11 @@ h1{
 	padding: 10px 0;
 	font-size: 50px;
 }
+
+h2{
+
+	}
+
 body {
 	background: black;
 }
@@ -47,5 +52,5 @@ div.pie{
 div.galeria:hover{
 	border:  0px solid black;
  	transition: transform 225ms;
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
