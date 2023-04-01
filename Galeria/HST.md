@@ -18,8 +18,12 @@ title: Composiciones
 
 </head>
 
+
+<h1 class="page_title">Objetos Astronomonicos del telescopio espacial Hubble.</h1>
+
+<p> Lanzado en el año 1990(?), el telescopio espacial Hubble revolucionó el conocimiento astronómico de la época, tanto por la resolución espacial de su óptica, como por la profundidad de sus observaciones.</p>
+
 <body>
-    <h1 class="page_title">Objetos Astronomonicos del telescopio James Webb</h1>
 
     <div class="row">
         <div class="container">
