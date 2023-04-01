@@ -19,6 +19,8 @@ title: Composiciones
 
 </head>
 
+<p> Acá dejaré algunas composiciones que he ido realizando y aprendiendo a lo largo de mi periplo por las ciencias astronómicas. 
+
 <body>
 	<!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
 	<div class="galeria" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/JWST.html';">
