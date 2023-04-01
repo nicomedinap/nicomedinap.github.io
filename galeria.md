@@ -19,7 +19,7 @@ title: Composiciones
 
 </head>
 
-<p> Acá dejaré algunas composiciones que he ido realizando y aprendiendo a lo largo de mi periplo por las ciencias astronómicas. 
+<p1> Acá dejaré algunas composiciones que he ido realizando y aprendiendo a lo largo de mi periplo por las ciencias astronómicas. </p1>
 
 <body>
 	<!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
