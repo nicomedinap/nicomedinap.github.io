@@ -18,8 +18,11 @@ title: Composiciones
 
 </head>
 
+<h1 class="page_title">Jupiter a través de la sonda JUNO</h1>
+
+<p> </p>
+
 <body>
-    <h1 class="page_title"> Jupiter a través de la óptica de la misión JUNO:</h1>
 
     <div class="row">
         <div class="container">
