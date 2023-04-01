@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Composiciones
+title: 
 --- 
 
 <html lang="es">
