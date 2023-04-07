@@ -29,6 +29,8 @@ body {
 }
 
 .imagen{
+	width: 100%;
+ 	height: 100%;
 	max-width: 100rem;
 	max-height: 100rem;
 	margin: 0 auto;
