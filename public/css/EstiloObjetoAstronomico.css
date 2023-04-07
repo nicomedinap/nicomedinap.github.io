@@ -1,0 +1,39 @@
+*
+{
+	margin: 0;
+	padding: 1px;
+}
+
+.imagen-chica img{
+	height: 70px; 
+	margin: 0px 0;
+	cursor: pointer;
+	display: block;
+	opacity: 0.7;
+}
+
+.imagen-chica img:hover{
+	opacity: 1;
+}
+
+.imagen-chica{
+	float: left;
+}
+
+.imagen{
+	position: fixed;
+	top:  50%;
+	left: 50%;
+	transform:  translate(-50%, -50%);
+
+}
+
+
+.imagen-grande img{
+	height: 800px;
+}
+
+.imagen-grande{
+	float: right;
+	padding: 0px;
+}
