@@ -4,6 +4,14 @@
 	padding: 1px;
 }
 
+body {
+  background-color: #21222c;
+  /* Este color no es negro completamente pero para un fondo oscuro en una web
+   es mejor uno de este tipo a un negro puro ya que es muy intenso.
+  */
+}
+
+
 .imagen-chica img{
 	height: 70px; 
 	margin: 0px 0;
