@@ -30,6 +30,7 @@ body {
 
 .imagen{
 	max-width: 100rem;
+	max-height: 100rem;
 	margin: 0 auto;
 	position: absolute;
 	top:  50%;
