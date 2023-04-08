@@ -13,7 +13,7 @@ body {
 
 .imagen-chica img{
 	height: 70px; 
-	margin: 0px 0;
+	margin: 1px 1px;
 	cursor: pointer;
 	display: block;
 	opacity: 0.6;
