@@ -30,7 +30,7 @@ body {
 }
 
 .imagen{
-
+	height:100vh;
 	margin: 0 auto;
 	position: absolute;
 	top:  50%;
