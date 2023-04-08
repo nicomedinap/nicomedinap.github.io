@@ -3,6 +3,8 @@
 	padding: 0px;
 }
 
+html, body {height:100%;}
+
 body {
   background-color: #21222c;
   /* Este color no es negro completamente pero para un fondo oscuro en una web
