@@ -64,7 +64,7 @@ layout: post
             </div>
             <div class="test_box box-04 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="#" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesNGC2070.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">La Tarantula</h1>
                             
