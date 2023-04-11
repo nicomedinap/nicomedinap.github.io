@@ -32,7 +32,7 @@ layout: post
 
             <div class="test_box box-01 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="#" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesLDN1527.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">LDN1527</h1>
                             
@@ -54,7 +54,7 @@ layout: post
 
             <div class="test_box box-03 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="https://nicomedinap.github.io/Galeria/MostrarImagenesM16.html" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesM16.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">M16</h1>
                             
