@@ -21,44 +21,42 @@ body{
  	 */
 }
 
-.imagen-chica img{
-	height: 16.5%; 
-	margin: 1px 1px;
-	cursor: pointer;
-	display: block;
-	opacity: 0.5;
-}
 
-.imagen-chica img:hover{
-	opacity: 1;
-}
-
-.imagen-chica{
-	float: left;
-}
-
-.imagen{
+.BarraBotones{
+    overflow: hidden;
+    background: none !important;
     display: flex;
-	height: 100%;
-	position: absolute;
-	top:  30%;
-	bottom: 0px;
-	left: 0;
-	padding-left: 5%;
-	padding-right: 5%;
+    justify-content: center;
+    align-items: center;
 }
 
-.imagen-grande img{
-    height:100%;
+/*a es para crear links, así que modificaremos las 
+caracteristicas de ese <a> dentro del div BarraBotones */
+.BarraBotones a{
+	line-height:17px;
+  	float: left;
+	color: #f2f2f2;
+ 	text-align: center;
+ 	padding: 8px 20px; /*dimensiones de los botones*/
+ 	text-decoration: none;
+ 	font-size: 20px;
+	top:0;
 }
 
-.imagen-grande{
-	float: right;
-	padding: 0px;
+.BarraBotones a:hover{
+	background-color: #ddd;
+	color: black;
+}
+
+.BarraBotones a.active{
+	box-shadow: 0 0 5px 5px #04AA6D;
+	background-color: #04AA6D;
+	color: white;
 }
 
 .CajaInfo{
     background-color: black;
+	width:100%;
 	border-radius: 10px;
     top:0;
 	opacity: 0.45;
@@ -69,58 +67,59 @@ body{
     height: 20%;
 	padding-top: 5px;
 	padding-bottom: 20px;
-	padding-left: 35px;
-	padding-right: 35px;
-
-	margin: 0px 0px 0px 280px; 
+	padding-left: 5%;
+	padding-right: 5%;
 	color: white;
 	margin: 30px 30px;
-
 	text-align: center;
 	box-shadow: 0 0 25px 0 black;
 	word-wrap: break-word;
-
     max-width: 80%; 
 }
 
-
-.topnav{
-    overflow: hidden;
-    background: none !important;
+.imagen{
     display: flex;
-    justify-content: center;
-    align-items: center;
-	
+	height: 100%;
+	position: absolute;
+	top:  40%;
+	bottom: 0px;
+	left: 0;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
-.topnav a{
-	line-height:17px;
-  	float: left;
-	color: #f2f2f2;
- 	text-align: center;
- 	padding: 2px 10px;
- 	text-decoration: none;
- 	font-size: 17px;
-	top:0;
+
+.imagen-chica img{
+	height: 16.5%; 
+	margin: 1px 1px;
+	cursor: pointer;
+	display: block;
+	opacity: 0.5;
 }
 
-.topnav a:hover{
-	background-color: #ddd;
-	color: black;
+.imagen-chica img:hover{
+	opacity: 1;
+	box-shadow: 5px 5px 30px 5px white;
 }
 
-.topnav a.active{
-	box-shadow: 0 0 25px 0 black;
-	background-color: #04AA6D;
-	color: white;
+.imagen-chica{
+	float: left;
 }
 
+.imagen-grande img{
+   	max-width: 100%;
+}
+
+.imagen-grande{
+	float: right;
+	padding: 0px;
+}
 
 </style>
 
 <body>
 
-	<div class="topnav">
+	<div class="BarraBotones">
 		<a href="#news">Anterior</a>
 		<a class="active" href="#home">Actual: M16</a>
 		<a href="#contact">Siguiente</a>
@@ -131,9 +130,7 @@ body{
 		<p> Desde el año 2022, el telescopio espacial James Webb (JWST para los amigos) ha ido liberando imágenes recurrentemente. Usando sus instrumentos sensibles a la luz infrarroja ha revelado detalles de muchos objetos estelares de interés.</p>
 	</div>
 
-
 	<div class="imagen" >
-
 		<div class="imagen-chica">
 			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_1.jpg" onclick="Desplegar(this)" >
 			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_2.jpg" onclick="Desplegar(this)">
@@ -142,7 +139,6 @@ body{
 			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_5.jpg" onclick="Desplegar(this)">
 			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" onclick="Desplegar(this)">
 		</div>
-
 		<div class="imagen-grande">
 			<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" >
 		</div>
@@ -156,3 +152,6 @@ body{
 	</script>
 </body>
 </html>
+
+
+
