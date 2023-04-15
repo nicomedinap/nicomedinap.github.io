@@ -1,20 +1,28 @@
 <html>
 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
 <style>
+
+html { height: 100% }
+
 {
-	margin: 0;
-	padding: 0px;
+	margin: 20px;
+	padding: 90px;
 }
 
 body{
-  background-color: #21222c;
-  /* Este color no es negro completamente pero para un fondo oscuro en una web
-   es mejor uno de este tipo a un negro puro ya que es muy intenso.
-  */
+	  height: 100%;
+	  background-color: #21222c;
+	  /* Este color no es negro completamente pero para un fondo oscuro en una web
+  	 es mejor uno de este tipo a un negro puro ya que es muy intenso.
+ 	 */
 }
 
 .imagen-chica img{
-	height: 16%; 
+	height: 16.5%; 
 	margin: 1px 1px;
 	cursor: pointer;
 	display: block;
@@ -31,12 +39,13 @@ body{
 
 .imagen{
     display: flex;
-	height:100%;
-	margin: 0 0;
+	height: 100%;
 	position: absolute;
-	top:  0;
+	top:  30%;
 	bottom: 0px;
 	left: 0;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
 .imagen-grande img{
@@ -47,12 +56,86 @@ body{
 	float: right;
 	padding: 0px;
 }
+
+.CajaInfo{
+    background-color: black;
+	border-radius: 10px;
+    top:0;
+	opacity: 0.45;
+	position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 20%;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-left: 35px;
+	padding-right: 35px;
+
+	margin: 0px 0px 0px 280px; 
+	color: white;
+	margin: 30px 30px;
+
+	text-align: center;
+	box-shadow: 0 0 25px 0 black;
+	word-wrap: break-word;
+
+    max-width: 80%; 
+}
+
+
+.topnav{
+    overflow: hidden;
+    background: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	
+}
+
+.topnav a{
+	line-height:17px;
+  	float: left;
+	color: #f2f2f2;
+ 	text-align: center;
+ 	padding: 2px 10px;
+ 	text-decoration: none;
+ 	font-size: 17px;
+	top:0;
+}
+
+.topnav a:hover{
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav a.active{
+	box-shadow: 0 0 25px 0 black;
+	background-color: #04AA6D;
+	color: white;
+}
+
+
 </style>
+
 <body>
-	<div class="imagen">
+
+	<div class="topnav">
+		<a href="#news">Anterior</a>
+		<a class="active" href="#home">Actual: M16</a>
+		<a href="#contact">Siguiente</a>
+	</div>
+
+	<div class="CajaInfo" > 
+		<h1 class="page_title">La región de formación estelar M16</h1>
+		<p> Desde el año 2022, el telescopio espacial James Webb (JWST para los amigos) ha ido liberando imágenes recurrentemente. Usando sus instrumentos sensibles a la luz infrarroja ha revelado detalles de muchos objetos estelares de interés.</p>
+	</div>
+
+
+	<div class="imagen" >
 
 		<div class="imagen-chica">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_1.jpg" onclick="Desplegar(this)">
+			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_1.jpg" onclick="Desplegar(this)" >
 			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_2.jpg" onclick="Desplegar(this)">
 			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_3.jpg" onclick="Desplegar(this)">
 			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_4.jpg" onclick="Desplegar(this)">
@@ -61,7 +144,7 @@ body{
 		</div>
 
 		<div class="imagen-grande">
-			<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_1.jpg" >
+			<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" >
 		</div>
 	</div>
 
@@ -71,6 +154,5 @@ body{
 			ImagenGrande.src = ImagenChica.src; 
 		}
 	</script>
-
 </body>
 </html>
