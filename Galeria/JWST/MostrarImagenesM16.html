@@ -2,6 +2,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
 </head>
 
 <style>
@@ -53,13 +55,16 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 }
 
 .CajaInfo{
+	resize: vertical;
+  	overflow: auto;
+	width: fit-content;
     background-color: black;
 	max-width:70%;
-	border-radius: 10px;
-	opacity: 0.65;
+	border-radius: 15px;
+	opacity: 0.85;
 	position: absolute;
     top: 20px;
-    height: 30%;
+    height: 40%;
 	padding-top: 5px;
 	padding-bottom: 20px;
 	padding-left: 5%;
@@ -70,6 +75,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 	box-shadow: 0 0 25px 0 black;
 	word-wrap: break-word;
     max-width: 80%; 
+  	text-overflow: ellipsis;
 }
 
 .CajaInfo p{
@@ -77,20 +83,21 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 	}
 
 .imagen{
-    top: 30%;
-    height: 70%;
+    top: 60%;
+    height: 80%;
 	width: 100%;
     display: flex;
-	max-height: 70%;
+	max-height: 90%;
 	position: absolute;
+
 	bottom: 0px;
 	left: 0;
-	padding-left: 8%;
+	padding-left: 5%;
 	padding-right: 5%;
 }
 
 .imagen-chica img{
-	height: 15%; 
+	height: 17%; 
 	margin: 1px 1px;
 	cursor: pointer;
 	display: block;
@@ -109,12 +116,18 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 
 .imagen-grande img{
 	width: 85%;
+   	max-width: 85%;
 }
 
 .imagen-grande{
 	float: right;
 	padding: 0px;
 }
+
+.Contenido{
+    justify-content: center;
+	}
+
 </style>
 
 <body>
@@ -125,28 +138,30 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 		<a href="#contact">Siguiente</a>
 	</div>
 
-	<div class="CajaInfo" > 
-		<h1 class="page_title">La región de formación estelar M16</h1>
+	<div class="Contenido">
+		<div class="CajaInfo" > 
+			<h1 class="page_title">La región de formación estelar M16</h1>
 
-		<p> Los "pilares de la creación" son una parte de la region de formación estelar conocida como M16 o Nebulosa del aguila. Los pilares son columnas de polvo donde la gravedad ensambla constantemente nueas estrellas. Formalmente a este tipo de estructuras se les conoce como "pilares moleculares fríos", como también "trompas de elefante".</p>
+			<p> Los "pilares de la creación" son una parte de la region de formación estelar conocida como M16 o Nebulosa del aguila. Los pilares son columnas de polvo donde la gravedad ensambla constantemente nueas estrellas. Formalmente a este tipo de estructuras se les conoce como "pilares moleculares fríos", como también "trompas de elefante".</p>
 
-		<p>Ya el hecho de que tenga nombre propio habla de la popularidad e impacto que tuvo esta imágen alrededor del mundo.</p>
+			<p>Ya el hecho de que tenga nombre propio habla de la popularidad e impacto que tuvo esta imágen alrededor del mundo.</p>
 
-		<p>Estas imágenes están hechas usando la cámara NIRcam abordo del telescopio espacial James Webb, usando una serie de filtros de banda estrecha (narrow filters) los cuales se encargan de medir la luz emitida por un elemento en particular, el cual emite radiación en una longuitud de onda específica del rango electromagnético. Esta emisión es la que se colorea finalmente.
-		</p>
-	</div>
-
-	<div class="imagen" >
-		<div class="imagen-chica">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_1.jpg" onclick="Desplegar(this)" >
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_2.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_3.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_4.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_5.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" onclick="Desplegar(this)">
+			<p>Estas imágenes están hechas usando la cámara NIRcam abordo del telescopio espacial James Webb, usando una serie de filtros de banda estrecha (narrow filters) los cuales se encargan de medir la luz emitida por un elemento en particular, el cual emite radiación en una longuitud de onda específica del rango electromagnético. Esta emisión es la que se colorea finalmente.
+			</p>
 		</div>
-		<div class="imagen-grande">
-			<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" >
+
+		<div class="imagen" >
+			<div class="imagen-chica">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_1.jpg" onclick="Desplegar(this)" >
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_2.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_3.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_4.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_5.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" onclick="Desplegar(this)">
+			</div>
+			<div class="imagen-grande">
+				<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" >
+			</div>
 		</div>
 	</div>
 
