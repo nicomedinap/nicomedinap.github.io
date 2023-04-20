@@ -17,10 +17,6 @@ El espectro electromagnético es gigantezco, desde los rayos X a las ondas de mi
 
 Podemos decir que son otro tipo de ojo sin caer en ninguna exageración.
 
-https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Electromagnetic_spectrum-es.svg/2880px-Electromagnetic_spectrum-es.svg.png
-
-https://es.wikipedia.org/wiki/Espectro_electromagnético#/media/Archivo:Electromagnetic_spectrum-es.svg
-
 * Cerro Tololo: https://github.com/NOAO/nat-nb/blob/master/sia.ipynb
 
 * OGLE VI (Las Campanas Observatory) http://ogle.astrouw.edu.pl 
