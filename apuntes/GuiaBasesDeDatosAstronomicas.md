@@ -17,7 +17,7 @@ El espectro electromagnético es gigantezco, desde los rayos X a las ondas de mi
 
 Podemos decir que son otro tipo de ojo sin caer en ninguna exageración.
 
-* Cerro Tololo [https://github.com/NOAO/nat-nb/blob/master/sia.ipynb]{:target="_blank"}
+* Cerro Tololo ()[https://github.com/NOAO/nat-nb/blob/master/sia.ipynb]{:target="_blank"}
 
 * OGLE VI (Las Campanas Observatory) [http://ogle.astrouw.edu.pl]{:target="_blank"}
 
