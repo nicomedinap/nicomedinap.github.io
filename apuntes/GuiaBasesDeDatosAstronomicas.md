@@ -17,11 +17,11 @@ El espectro electromagnético es gigantezco, desde los rayos X a las ondas de mi
 
 Podemos decir que son otro tipo de ojo sin caer en ninguna exageración.
 
-* Cerro Tololo ()[https://github.com/NOAO/nat-nb/blob/master/sia.ipynb]{:target="_blank"}
+* Cerro Tololo [](https://github.com/NOAO/nat-nb/blob/master/sia.ipynb){:target="_blank"}
 
-* OGLE VI (Las Campanas Observatory) [http://ogle.astrouw.edu.pl]{:target="_blank"}
+* OGLE VI [](http://ogle.astrouw.edu.pl){:target="_blank"}
 
-* NoirLabs [https://github.com/NOAO/nat-nb]{:target="_blank"}
+* NoirLabs [](https://github.com/NOAO/nat-nb){:target="_blank"}
 
 * Servicio de imágenes de misiones satelitales https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html {:target="_blank"}
 
