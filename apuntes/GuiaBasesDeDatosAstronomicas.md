@@ -17,15 +17,15 @@ El espectro electromagnético es gigantezco, desde los rayos X a las ondas de mi
 
 Podemos decir que son otro tipo de ojo sin caer en ninguna exageración.
 
-* Cerro Tololo [](https://github.com/NOAO/nat-nb/blob/master/sia.ipynb){:target="_blank"}
+* Archivo Cerro Tololo [ttps://github.com/NOAO/nat-nb/blob/master/sia.ipynb](https://github.com/NOAO/nat-nb/blob/master/sia.ipynb){:target="_blank"}
 
-* OGLE VI [](http://ogle.astrouw.edu.pl){:target="_blank"}
+* OGLE VI [http://ogle.astrouw.edu.pl](http://ogle.astrouw.edu.pl){:target="_blank"}
 
-* NoirLabs [](https://github.com/NOAO/nat-nb){:target="_blank"}
+* NoirLabs [https://github.com/NOAO/nat-nb](https://github.com/NOAO/nat-nb){:target="_blank"}
 
-* Servicio de imágenes de misiones satelitales https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html {:target="_blank"}
+* Servicio de imágenes de misiones satelitales [https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html](https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html){:target="_blank"}
 
-* FITS de Hubble liberados para divulgación https://noirlab.edu/public/es/products/applications/fitsliberator/datasets/ {:target="_blank"}
+* FITS de Hubble liberados para divulgación [https://noirlab.edu/public/es/products/applications/fitsliberator/datasets/](https://noirlab.edu/public/es/products/applications/fitsliberator/datasets/){:target="_blank"}
 
 * Archivo de datos de la ESO, con datos de muchos telescopios de diferentes observatorios (ALMA, Paranal, La Silla)
 http://archive.eso.org/eso/eso_archive_main.html {:target="_blank"}
