@@ -169,8 +169,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 
 	<div class="BarraBotones">
 		<a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesLDN1527.html">Anterior</a>
-		<a class="active" href="#home">Actual: NGC3132 </h1>
-</a>
+		<a class="active" href="#home">Actual: NGC3132 </a>
 		<a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesM16.html">Siguiente</a>
 	</div>
 
@@ -186,28 +185,29 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 
 		</div>
 
-	<div class="imagen">
+		<div class="imagen">
 
-		<div class="imagen-chica">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_012.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_021.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_102.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_120.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_201.jpg" onclick="Desplegar(this)">
-			<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_210.jpg" onclick="Desplegar(this)">
+			<div class="imagen-chica">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_012.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_021.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_102.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_120.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_201.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_210.jpg" onclick="Desplegar(this)">
+			</div>
+
+			<div class="imagen-grande">
+				<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_201.jpg" >
+			</div>
 		</div>
 
-		<div class="imagen-grande">
-			<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/2_201.jpg" >
-		</div>
+		<script>
+			function Desplegar(ImagenChica){
+				var ImagenGrande = document.getElementById("CajaDeImagenes");
+				ImagenGrande.src = ImagenChica.src; 
+			}
+		</script>
 	</div>
-
-	<script>
-		function Desplegar(ImagenChica){
-			var ImagenGrande = document.getElementById("CajaDeImagenes");
-			ImagenGrande.src = ImagenChica.src; 
-		}
-	</script>
 </body>
 
 </html>
