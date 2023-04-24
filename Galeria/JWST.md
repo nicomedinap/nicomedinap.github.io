@@ -104,6 +104,18 @@ layout: post
                 </div>
             </div>
 
+            <div class="test_box box-08 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesSNH0pe-2b.html" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">SNH0pe-2b</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+
 
         </div>
     </div>
