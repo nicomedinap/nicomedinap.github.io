@@ -22,6 +22,9 @@ layout: post
 
 <p> Lanzado en el año 1990(?), el telescopio espacial Hubble revolucionó el conocimiento astronómico de la época, tanto por la resolución espacial de su óptica, como por la profundidad de sus observaciones.</p>
 
+
+
+
 <body>
 
     <div class="row">
@@ -29,14 +32,14 @@ layout: post
 
             <div class="test_box box-01 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a ref="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesAntennaeGalaxies.html" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesAntennaeGalaxies.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">Antennae Galaxies</h1>
                         </div>
                     </a>
                 </div>
             </div>
-            
+
 <!--            <div class="test_box box-02 col-xs-6 col-md-4">
                 <div class="inner">
                     <a href="#" class="test_click">
