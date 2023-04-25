@@ -28,7 +28,7 @@ layout: post
         <div class="container">
             <div class="test_box box-01 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a ref="ref="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesAntennaeGalaxies.html" class="test_click">
+                    <a ref="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesAntennaeGalaxies.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">Antennae Galaxies</h1>
                         </div>
