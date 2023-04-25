@@ -20,8 +20,16 @@ body {
 	line-height: 120%;
 	margin: 20px 0;
 	text-shadow: 0 1px 5px rgba(0,0,0,.8);
-	text-transform: uppercase;
 }
+
+h2{
+	color: white;
+	text-shadow: 1px 2px 2px black, 0 0 25px blue, 0 0 5px blue;
+	text-align: center;
+	padding: 10px 0;
+	font-size: 50px;
+	}
+
 
 /* PEN STYLES ========== */
 .row {
@@ -59,7 +67,7 @@ body {
 	transition: all 300ms ease;
 }
 .test_box .inner .test_click:hover {
-	background-color: rgba(32,100,255,.2); 
+	background-color: rgba(255,255,255,.3); 
 	mix-blend-mode: hard-light;
 }
 .flex_this {
