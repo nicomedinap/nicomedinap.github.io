@@ -41,7 +41,7 @@ layout: post
 
             <div class="test_box box-02 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesM17_SFR.html" class="test_click">
+                    <a ref="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesM17_SFR.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">M17 </h1>
                         </div>
