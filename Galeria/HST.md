@@ -20,7 +20,7 @@ layout: post
 
 <h1 class="page_title">Objetos Astronomonicos del telescopio espacial Hubble.</h1>
 
-<p> Lanzado un 24 de abril de 1990, el telescopio espacial Hubble (HST)revolucionó el conocimiento astronómico de la época, tanto por la resolución espacial de su óptica, como por la profundidad de sus observaciones.</p>
+<p> Lanzado un 24 de abril de 1990, el telescopio espacial Hubble (HST) revolucionó el conocimiento astronómico de la época, tanto por la resolución espacial de su óptica, como por la profundidad de sus observaciones.</p>
 
 <p>El HST fue diseñado para observar el universo desde fuera de la atmósfera terrestre y ha estado en servicio más de 30 años, tiempo que lo ha convertido en uno de los telescopios más importantes e icónicos en la historia de la astronomía, dándonos tremendas perspectiva del universo.</p>
 
