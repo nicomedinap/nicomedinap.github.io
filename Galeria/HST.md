@@ -39,16 +39,17 @@ layout: post
                 </div>
             </div>
 
-<!--            <div class="test_box box-02 col-xs-6 col-md-4">
+            <div class="test_box box-02 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="#" class="test_click">
+                    <a href="href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesM17_SFR.html" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">NGC3132</h1>
-                            
+                            <h1 class="test_title">M17 </h1>
                         </div>
                     </a>
                 </div>
             </div>
+
+<!--
             <div class="test_box box-03 col-xs-6 col-md-4">
                 <div class="inner">
                     <a href="#" class="test_click">
