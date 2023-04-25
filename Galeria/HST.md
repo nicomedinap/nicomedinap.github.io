@@ -28,15 +28,14 @@ layout: post
         <div class="container">
             <div class="test_box box-01 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="#" class="test_click">
+                    <a ref="ref="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesAntennaeGalaxies.html" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">LDN1527</h1>
-                            
+                            <h1 class="test_title">Antennae Galaxies</h1>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="test_box box-02 col-xs-6 col-md-4">
+<!--            <div class="test_box box-02 col-xs-6 col-md-4">
                 <div class="inner">
                     <a href="#" class="test_click">
                         <div class="flex_this">
@@ -86,6 +85,8 @@ layout: post
                     </a>
                 </div>
             </div>
+-->
+
         </div>
     </div>
 
