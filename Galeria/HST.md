@@ -49,10 +49,10 @@ layout: post
                 </div>
             </div>
 
-<!--
+
             <div class="test_box box-03 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="#" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesM16.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">M16</h1>
                             
@@ -60,6 +60,7 @@ layout: post
                     </a>
                 </div>
             </div>
+<!--
             <div class="test_box box-04 col-xs-6 col-md-4">
                 <div class="inner">
                     <a href="#" class="test_click">
