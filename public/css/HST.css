@@ -98,11 +98,12 @@ body {
 }
 
 .box-01 .inner {
-	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/4.jpg');
+	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies.jpg');
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+/*  
 .box-02 .inner {
 	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/JWST_NGC7293/JamesWebb_4.jpg');
 	background-position: 50% 50%;
@@ -110,7 +111,7 @@ body {
 	background-size: cover;
 }
 .box-03 .inner {
-	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16.jpg');
+	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16.jpg');
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -128,8 +129,9 @@ body {
 	background-size: cover;
 }
 .box-06 .inner {
-	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3324.jpg');
+	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies.jpg.jpg');
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+*/
