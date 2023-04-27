@@ -63,7 +63,7 @@ layout: post
 
             <div class="test_box box-04 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href=""https://nicomedinap.github.io/Galeria/HST/MostrarImagenesNGC6357.html"" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesNGC6357.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">NGC 6357</h1>
                             
