@@ -15,11 +15,26 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 <link rel="stylesheet" href="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.css" />
  
 <!-- you can skip the following line if your page already integrates the jQuery library -->
-<script type="text/javascript" src="//code.jquery.com/jquery-1.12.1.min.js" charset="utf-8"></script>
+<script 
+    type="text/javascript" src="//code.jquery.com/jquery-1.12.1.min.js" charset="utf-8">
+</script>
  
 <!-- insert this snippet where you want Aladin Lite viewer to appear and after the loading of jQuery -->
-<div id="aladin-lite-div" style="width:650px;height:650px;"></div>
-<script type="text/javascript" src="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8"></script>
+<div id="aladin-lite-div" style="width:750px;height:750px;">
+</div>
+
+
+<input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color<label>
+<input id="DSS-blue" type="radio" name="survey" value="P/DSS2/blue"><label for="DSS-blue">DSS blue<label>
+<input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS<label>
+<input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE<label>
+<input id="glimpse" type="radio" name="survey" value="P/GLIMPSE360"><label for="glimpse">GLIMPSE 360<label>
+
+
+
+<script type="text/javascript" src="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8">
+</script>
+
 <script type="text/javascript">
     var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:2.26, target: "18 06 03 -23 41 20"});
 </script>
