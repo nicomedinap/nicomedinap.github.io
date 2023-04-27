@@ -43,3 +43,4 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 * [Guía de escritura y expresiones útiles en LateX.](https://es.wikipedia.org/wiki/Ayuda:Uso_de_LaTeX){:target="_blank"}
 * [Introducción al análisis de datos en las ciencias biológicas.](http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2019a/){:target="_blank"}
 * [Open astrophysics Bookshelf.](http://open-astrophysics-bookshelf.github.io){:target="_blank"}
+* [Apuntes sobre el template usado en este blog.](https://jekyllrb.com/resources/){:target="_blank"}
