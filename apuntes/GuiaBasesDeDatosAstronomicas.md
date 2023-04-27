@@ -62,6 +62,10 @@ Alberga diferentes surveys de campo amplio como por ejemplo
 * Hubble Heritage 
 [https://hubblesite.org/resource-gallery/learning-resources/hubble-heritage](https://hubblesite.org/resource-gallery/learning-resources/hubble-heritage){:target="_blank"}
 
+* Hubble Legacy Archive [https://hla.stsci.edu](https://hla.stsci.edu){:target="_blank"}
+
 [https://hubblesite.org/contents/media/images/2005/02/1640-Image.html?page=17&amp;filterUUID=6158b489-8e9a-46e2-b679-a868c297bd51](https://hubblesite.org/contents/media/images/2005/02/1640-Image.html?page=17&amp;filterUUID=6158b489-8e9a-46e2-b679-a868c297bd51){:target="_blank"}
 
+* Canadian Astronomy Data Centre [https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/){:target="_blank"}
 
+* [Astrometry.net](https://nova.astrometry.net){:target="_blank"}: Para agregar sistema de coordenadas a imágenes astronómicas
