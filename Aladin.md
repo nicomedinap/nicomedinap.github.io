@@ -43,10 +43,4 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
     });
 
 
-    var marker1 = A.marker(270.332621, -23.078944, {popupTitle: 'PSR B1758-23', popupDesc: 'Object type: Pulsar'});
-    var marker2 = A.marker(270.63206, -22.905550, {popupTitle: 'HD 164514', popupDesc: 'Object type: Star in cluster'});
-    ar marker3 = A.marker(270.598121, -23.030819, {popupTitle: 'HD 164492', popupDesc: 'Object type: Double star'});
-    var markerLayer = A.catalog();
-aladin.addCatalog(markerLayer);
-markerLayer.addSources([marker1, marker2, marker3]);
 </script>
