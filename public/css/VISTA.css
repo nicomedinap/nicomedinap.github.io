@@ -22,6 +22,15 @@ body {
 /* 	text-shadow: 0 1px 5px rgba(0,0,0,.8); */
 }
 
+h2{
+	color: white;
+	text-shadow: 1px 2px 2px black, 0 0 25px blue, 0 0 5px blue;
+	text-align: center;
+	padding: 10px 0;
+	font-size: 50px;
+	}
+
+
 /* PEN STYLES ========== */
 .row {
 	margin: 0;
@@ -50,7 +59,7 @@ body {
 	display: -ms-flexbox;
 	display: flex;
 	flex-wrap: wrap;
-	height: 300px;
+	height: 150px;
 	mix-blend-mode: normal;
 	text-align: center;
 	text-decoration: none;
@@ -99,7 +108,7 @@ body {
 
 
 .box-01 .inner {
-	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/IRDC_b319.jpg');
+	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VISTA/VVV/Pismis24.jpg');
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -116,6 +125,9 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+/* 
+
 .box-04 .inner {
 	background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/SFR3_521_composed.jpg');
 	background-position: 50% 50%;
@@ -134,3 +146,5 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+*/
