@@ -11,18 +11,12 @@ Esta aplicación web está inicializada para mostrar tres regiones de formación
 
 Tómate un tiempo, y explora nuestra galaxia y el universo!
 
-<!-- include Aladin Lite CSS file in the head section of your page -->
-<link rel="stylesheet" href="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.css" />
- 
-<!-- you can skip the following line if your page already integrates the jQuery library -->
-<script 
-    type="text/javascript" src="//code.jquery.com/jquery-1.12.1.min.js" charset="utf-8">
-</script>
- 
-<!-- insert this snippet where you want Aladin Lite viewer to appear and after the loading of jQuery -->
-<div id="aladin-lite-div" style="width:750px;height:750px;">
-</div>
+<!-- our code needs jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js" charset="utf-8"></script>
 
+<!-- Aladin Lite container at requested dimensions -->
+<div id="aladin-lite-div" style="width:700px;height:400px;">
+</div>
 
 <input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color<label>
 <input id="DSS-blue" type="radio" name="survey" value="P/DSS2/blue"><label for="DSS-blue">DSS blue<label>
@@ -31,16 +25,29 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 <input id="glimpse" type="radio" name="survey" value="P/GLIMPSE360"><label for="glimpse">GLIMPSE 360<label>
 
 
+<!-- Aladin Lite JS code -->
+<script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
 
-<script type="text/javascript" src="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8">
-</script>
-
+<!-- Creation of Aladin Lite instance with initial parameters -->
 <script type="text/javascript">
-    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:2.26, target: "18 06 03 -23 41 20"});
+    let aladin;
+    A.init.then(() => {
+        aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:2.0, target: "18 06 03 -23 41 20"});
+    });
 
     $('input[name=survey]').change(function() {
     aladin.setImageSurvey($(this).val());
     });
+
+
+    var marker1 = A.marker(270.332621, -23.078944, {popupTitle: 'PSR B1758-23', popupDesc: 'Object type: Pulsar'});
+    var marker2 = A.marker(270.63206, -22.905550, {popupTitle: 'HD 164514', popupDesc: 'Object type: Star in cluster'});
+    var marker3 = A.marker(270.598121, -23.030819, {popupTitle: 'HD 164492', popupDesc: 'Object type: Double star'});
+    var markerLayer = A.catalog();
+    aladin.addCatalog(markerLayer);
+    markerLayer.addSources([marker1, marker2, marker3]);
+
+</script>
 
 
 </script>
