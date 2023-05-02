@@ -25,7 +25,6 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 <div id="aladin-lite-div" style="width:750px;height:750px;">
 </div>
 
-
 <input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color<label>
 <input id="DSS-blue" type="radio" name="survey" value="P/DSS2/blue"><label for="DSS-blue">DSS blue<label>
 <input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS<label>
