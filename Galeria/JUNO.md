@@ -19,7 +19,10 @@ layout: post
 
 <h1 class="page_title">Jupiter a través de la sonda JUNO</h1>
 
-<p> </p>
+<p> La sonda Juno es un satélite lanzado por la NASA en el año 2011 con el fin de estudiar el planeta Júpiter a detalles, obteniendo información detallada sobre su composición, su campo magnético y su atmósfera.
+
+Sus sensores le permiten medir su temperatura y la estructura interna del planeta, como también su densa admosgera de hidrógeno y helio, y los campos magnéticos que los rodean. 
+</p>
 
 <body>
 
