@@ -10,10 +10,10 @@ body {
 	font-weight: 300;
 	line-height: 140%;
 	margin: 0;
-	height: 40%;
+	height: 100%;
 	padding: 0;
 	text-align: center;
-	width: 140%;
+	width: 100%;
 }
 .page_title {
 	font-weight: 300;
@@ -29,6 +29,7 @@ h2{
 	padding: 10px 0;
 	font-size: 50px;
 	}
+
 
 /* PEN STYLES ========== */
 .row {
@@ -66,7 +67,7 @@ h2{
 	transition: all 300ms ease;
 }
 .test_box .inner .test_click:hover {
-	background-color: rgba(255,255,255,.4); 
+	background-color: rgba(255,255,255,.3); 
 	mix-blend-mode: hard-light;
 }
 .flex_this {
