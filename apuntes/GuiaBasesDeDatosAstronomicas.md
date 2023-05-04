@@ -69,3 +69,5 @@ Alberga diferentes surveys de campo amplio como por ejemplo
 * Canadian Astronomy Data Centre [https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/){:target="_blank"}
 
 * [Astrometry.net](https://nova.astrometry.net){:target="_blank"}: Para agregar sistema de coordenadas a imágenes astronómicas
+
+* Configuración para VPHAS+ [http://archive.eso.org/wdb/wdb/adp/phase3_main/form?phase3_collection=VPHASplus&release_tag=4](http://archive.eso.org/wdb/wdb/adp/phase3_main/form?phase3_collection=VPHASplus&release_tag=4){:target="_blank"} con el VLT Survey Telescope (VST)
