@@ -19,7 +19,7 @@ title: Composiciones
 
 </head>
 
-<p1> Acá dejaré algunas composiciones que he ido realizando y aprendiendo a lo largo de mi periplo por las ciencias astronómicas. </p1>
+<p1> Los telescopios son verdaderas máquinas del tiempo. Acá dejaré algunas composiciones que he ido realizando y aprendiendo a lo largo de mi periplo por las ciencias astronómicas. </p1>
 
 <br>
 <br>
