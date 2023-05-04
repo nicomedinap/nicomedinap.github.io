@@ -17,9 +17,13 @@ layout: post
 
 </head>
 
-<h1 class="page_title">Objetos Astronomonicos observador por el telescopio VISTA.</h1>
+<h1 class="page_title">El telescopio UKIRT.</h1>
 
-<p> El telescopio VISTA está localizado en el observatorio Paranal (Antofagasta, Chile). Es un telescopio equipado con un espejo primario de 4 metros de diámetro, por lo que es preferentemente usado para observaciones de amplio campo, atrapando la luz de miles de estrellas a la vez.</p>
+<p> El Telescopio Infrarrojo del Reino Unido (UKIRT) es un telescopio reflector de 3,8 metros ubicado en la cima del volcán Mauna Kea, en Hawái. Diseñado para observar en longitudes de onda infrarrojas, permitiendo a los astrónomos estudiar objetos celestes que no son visibles en longitudes de onda visibles, además de indagar en el estudio de la formación estelar, la evolución galáctica, la detección de exoplanetas y la observación de objetos del Sistema Solar.
+
+KIRT fue uno de los telescopios más grandes y avanzados en su clase cuando se construyó en la década de 1970.
+
+</p>
 
 <body>
 
@@ -27,7 +31,7 @@ layout: post
         <div class="container">
             <div class="test_box box-01 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="https://nicomedinap.github.io/Galeria/VISTA/MostrarImagenesPismis24.html" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/UKIRT/MostrarImagenesPilaresCreacion.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">Pismis 24</h1>
                             
@@ -35,6 +39,7 @@ layout: post
                     </a>
                 </div>
             </div>
+<!-- 
             <div class="test_box box-02 col-xs-6 col-md-4">
                 <div class="inner">
                     <a href="https://nicomedinap.github.io/Galeria/VISTA/MostrarImagenesTarantula.html" class="test_click">
@@ -56,7 +61,7 @@ layout: post
                 </div>
             </div>
 
-<!-- 
+
 
             <div class="test_box box-04 col-xs-6 col-md-4">
                 <div class="inner">
