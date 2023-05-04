@@ -70,7 +70,7 @@ layout: post
                     </a>
                 </div>
             </div>
-            
+    
            
             <div class="test_box box-05 col-xs-6 col-md-4">
                 <div class="inner">
