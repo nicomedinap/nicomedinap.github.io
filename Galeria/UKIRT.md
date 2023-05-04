@@ -13,7 +13,7 @@ layout: post
 <!-- <link rel="stylesheet" href="/Users/nicomedinap/Documents/GitHub/nicomedinap.github.io/public/css/galeria.css"> -->
 
 <!-- Publico -->
-<link rel="stylesheet" href="/public/css/VISTA.css"> 
+<link rel="stylesheet" href="/public/css/UKIRT.css"> 
 
 </head>
 
