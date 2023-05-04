@@ -62,5 +62,17 @@ title: Composiciones
         </div>
 	</div>
 
+	<div class="galeria">
+    	<div class="foto" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/UKIRT.html';">
+        	<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/UKIRT/WFCAM/PilaresCreacion/210.jpg" width="100" height="600">
+        </div>
+        <div class="pie">
+        	<p> Telescopio UKIRT</p>
+        </div>
+	</div>
+
+
+
+
 </body>
 </html>
