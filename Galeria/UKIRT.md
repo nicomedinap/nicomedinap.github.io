@@ -21,7 +21,7 @@ layout: post
 
 <p> El Telescopio Infrarrojo del Reino Unido (UKIRT) es un telescopio reflector de 3,8 metros ubicado en la cima del volcán Mauna Kea, en Hawái. Diseñado para observar en longitudes de onda infrarrojas, permitiendo a los astrónomos estudiar objetos celestes que no son visibles en longitudes de onda visibles, además de indagar en el estudio de la formación estelar, la evolución galáctica, la detección de exoplanetas y la observación de objetos del Sistema Solar.
 
-KIRT fue uno de los telescopios más grandes y avanzados en su clase cuando se construyó en la década de 1970.
+UKIRT fue uno de los telescopios más grandes y avanzados en su clase cuando se construyó en la década de 1970.
 
 </p>
 
@@ -33,7 +33,7 @@ KIRT fue uno de los telescopios más grandes y avanzados en su clase cuando se c
                 <div class="inner">
                     <a href="https://nicomedinap.github.io/Galeria/UKIRT/MostrarImagenesPilaresCreacion.html" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">Pismis 24</h1>
+                            <h1 class="test_title">Los pilares de la creación</h1>
                             
                         </div>
                     </a>
