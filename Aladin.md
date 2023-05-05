@@ -37,7 +37,7 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 </script>
 
 <script type="text/javascript">
-    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:2.26, target: "18 06 03 -23 41 20"});
+    var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:1.5, target: "18 06 03 -23 41 20"});
 
     $('input[name=survey]').change(function() {
     aladin.setImageSurvey($(this).val());
