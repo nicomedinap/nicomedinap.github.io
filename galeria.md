@@ -38,7 +38,7 @@ title: Composiciones
 	}
 
 	p1{
-	  font-size: 20px;
+	  font-size: 15px;
 	}
 
 	div.galeria{
