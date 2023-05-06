@@ -11,6 +11,7 @@ title: Composiciones
 	<title>Galeria de fotos </title>
 
 <style>
+
 	h1{
 	color: white;
 	text-align: center;
@@ -32,13 +33,8 @@ title: Composiciones
 		background: black;
 	}
 
-
 	p{
 	  font-size: 20px;
-	}
-
-	p1{
-	  font-size: 15px;
 	}
 
 	div.galeria{
@@ -71,11 +67,16 @@ title: Composiciones
 		padding: 5px;
 	}
 
+	.pie p{
+		font-size: 20px;
+	}
+
 	div.galeria:hover{
 		border:  0px solid black;
 	 	transition: transform 225ms;
 	  transform: translateY(-10px);
 	}
+	
 </style>
 
 
@@ -98,9 +99,9 @@ Los telescopios son verdaderas máquinas del tiempo
 
 -->
 
-<p1> En los últimos 100 años, cantidades gigantezcas de recursos, y el esfuerzo de miles de personas de ciencia han permitido generar una intimidante cantidad de información astronómica. Cada telescopio ha ayudado a develar los secretos más profundos de nuestra realidad, plasmando los colores y estructuras fascinantemente inimaginables.
+<p> En los últimos 100 años se han generado una intimidante cantidad de información astronómica. Cada telescopio ha ayudado a develar los secretos más profundos de nuestra realidad, plasmando colores y estructuras fascinantemente inimaginables.
 
-Aquí dejaré mi visión personal de diferentes objetos astronómicos, usando datos liberados de telescopios profesionales y misiones satelitales. Cada una de ellas ha sido posibles de realizad dadas las herramientas desarrolladas a lo largo de mi periplo por las ciencias astronómicas. </p1>
+Aquí dejaré mi visión personal de diferentes objetos astronómicos, usando datos liberados de telescopios profesionales y misiones satelitales. Cada una de ellas ha sido posibles de realizad dadas las herramientas desarrolladas a lo largo de mi periplo por las ciencias astronómicas. </p>
 
 <br>
 <br>
