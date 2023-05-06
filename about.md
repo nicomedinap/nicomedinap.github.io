@@ -22,7 +22,7 @@ El principal objetivo de **Fotómetro** es el brindar un espacio experimental pa
 
 Este es un proyecto personal, por ende la retroalimentación se acepta y agradece :)
 
-Este proyecto está desarrollado en las [páginas de Github](https://pages.github.com/){:target="_blank"}, usando el formato [Markdown](https://guides.github.com/features/mastering-markdown/){:target="_blank"}. También en su mayoría, el lenguaje de programación [Python](https://es.wikipedia.org/wiki/Python){:target="_blank"} es usado, el cual es ejecutado a través del [proyecto Jupyter](http://jupyter.org/){:target="_blank"}. 
+Este proyecto está desarrollado en las [páginas de Github](https://pages.github.com/){:target="_blank"}, usando el formato [Markdown](https://guides.github.com/features/mastering-markdown/){:target="_blank"}. La estructura básica es una mezcla entre html y los sitios estáticos de [Jekyll](https://jekyllrb.com){:target="_blank"}. También en su mayoría, el lenguaje de programación [Python](https://es.wikipedia.org/wiki/Python){:target="_blank"} es usado, el cual es ejecutado a través del [proyecto Jupyter](http://jupyter.org/){:target="_blank"}. 
 Todos estos esfuerzos están enmarcados en los esfuerzos de educación usando nuevas tecnologías. Una guia para iniciarse sería [esta](https://jupyter4edu.github.io/jupyter-edu-book/){:target="_blank"}. 
 
 ## Contacto
