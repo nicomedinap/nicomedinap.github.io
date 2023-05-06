@@ -13,7 +13,50 @@ layout: galeria
 <!-- <link rel="stylesheet" href="/Users/nicomedinap/Documents/GitHub/nicomedinap.github.io/public/css/galeria.css"> -->
 
 <!-- Publico -->
-<link rel="stylesheet" href="/public/css/VISTA.css"> 
+<link rel="stylesheet" href="/public/css/Telescopios.css"> 
+
+<style>
+    .box-01 .inner {
+        background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VVV/Pismis24/Pismis24.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .box-02 .inner {
+        background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/Tarantula.jpg');
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .box-03 .inner {
+        background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VVVX/cltrumpler14/cltrumpler14.jpg');
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+/* 
+
+.box-04 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/SFR3_521_composed.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box-05 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC7320.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box-06 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3324.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
 
 </head>
 
