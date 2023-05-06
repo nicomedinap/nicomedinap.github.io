@@ -13,7 +13,63 @@ layout: galeria
 <!-- <link rel="stylesheet" href="/Users/nicomedinap/Documents/GitHub/nicomedinap.github.io/public/css/galeria.css"> -->
 
 <!-- Publico -->
-<link rel="stylesheet" href="/public/css/JWST.css"> 
+<link rel="stylesheet" href="/public/css/Telescopios.css"> 
+
+<style>
+/* Link a imágenes ========== */
+.box-01 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/4.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box-02 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/JWST_NGC7293/JamesWebb_4.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box-03 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box-04 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/NGC2070.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box-05 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC7320/NGC7320.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box-06 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3324.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-07 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1365/NGC1365.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-08 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/SNH0pe-2b/SNH0pe-2b.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+</style>
+
 
 </head>
 
