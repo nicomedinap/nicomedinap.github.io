@@ -19,7 +19,20 @@ title: Composiciones
 
 </head>
 
-<p1> Los telescopios son verdaderas máquinas del tiempo. Acá dejaré algunas composiciones que he ido realizando y aprendiendo a lo largo de mi periplo por las ciencias astronómicas. </p1>
+<h1 class="page_title">Galería de imágenes de objetos astronómicos</h1>
+
+
+
+
+<!--Una de las consecuencias más fascinantes de que la luz tenga una velocidad finita, es que en realidad siempre estamos percibiendo el pasado. Para la luz cercana a nuestros ojos ese efecto es indetectable, por supuesto, pero para objetos tan, tan alejados como las estrellas o galaxias, este efecto nos permite acceder al pasado de nuestro universo. 
+
+Los telescopios son verdaderas máquinas del tiempo
+
+-->
+
+<p1> En los últimos 100 años, cantidades gigantezcas de recursos, y el esfuerzo de miles de personas de ciencia han permitido generar una intimidante cantidad de información astronómica. Cada telescopio ha ayudado a develar los secretos más profundos de nuestra realidad, plasmando los colores y estructuras fascinantemente inimaginables.
+
+Aquí dejaré mi visión personal de diferentes objetos astronómicos, usando datos liberados de telescopios profesionales y misiones satelitales. Cada una de ellas ha sido posibles de realizad dadas las herramientas desarrolladas a lo largo de mi periplo por las ciencias astronómicas. </p1>
 
 <br>
 <br>
