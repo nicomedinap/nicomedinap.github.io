@@ -33,7 +33,7 @@ title: Composiciones
 		background: black;
 	}
 
-	p1{
+	p{
 	  font-size: 20px;
 	}
 
@@ -99,9 +99,9 @@ Los telescopios son verdaderas máquinas del tiempo
 
 -->
 
-<p1> En los últimos 100 años se han generado una intimidante cantidad de información astronómica. Cada telescopio ha ayudado a develar los secretos más profundos de nuestra realidad, plasmando colores y estructuras fascinantemente inimaginables.
+<p> En los últimos 100 años se han generado una intimidante cantidad de información astronómica. Cada telescopio ha ayudado a develar los secretos más profundos de nuestra realidad, plasmando colores y estructuras fascinantemente inimaginables.
 
-Aquí dejaré mi visión personal de diferentes objetos astronómicos, usando datos liberados de telescopios profesionales y misiones satelitales. </p1>
+Aquí dejaré mi visión personal de diferentes objetos astronómicos, usando datos liberados de telescopios profesionales y misiones satelitales. </p>
 
 <br>
 <br>
