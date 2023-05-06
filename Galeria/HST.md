@@ -15,6 +15,53 @@ layout: galeria
 <!-- Publico -->
 <link rel="stylesheet" href="/public/css/HST.css"> 
 
+
+
+<style>
+.box-01 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies/AntennaeGalaxies.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-02 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M17_SFR/M17_SFR.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+ 
+.box-03 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/M16.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-04 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/NGC6357/NGC6357.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-05 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/HH901/HH901.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-06 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/ARP273/ARP273.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+
+
 </head>
 
 
