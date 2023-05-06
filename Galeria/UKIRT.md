@@ -13,7 +13,32 @@ layout: galeria
 <!-- <link rel="stylesheet" href="/Users/nicomedinap/Documents/GitHub/nicomedinap.github.io/public/css/galeria.css"> -->
 
 <!-- Publico -->
-<link rel="stylesheet" href="/public/css/UKIRT.css"> 
+<link rel="stylesheet" href="/public/css/Telescopios.css"> 
+
+<style>
+    .box-01 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/UKIRT/WFCAM/PilaresCreacion/PilaresCreacion.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* 
+.box-02 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/Tarantula.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-03 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VVVX/cltrumpler14/cltrumpler14.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+</style>
 
 </head>
 
