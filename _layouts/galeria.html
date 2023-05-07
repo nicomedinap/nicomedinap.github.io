@@ -6,20 +6,17 @@
 <style>
     @media screen and (max-width: 600px) {
         .sidebar{display:none}
-
-
-        {% if page.previous %} 
-            <a rel="prev" href="{{ page.previous.url }}">&larr; Older</a>
-        {% endif %}
-        {% if page.next %} 
-            <a rel="next" href="{{ page.next.url }}">Newer &rarr;</a>
-        {% endif %}
-
-
     }
 
 </style>
 
+
+{% if page.previous %} 
+    <a rel="prev" href="{{ page.previous.url }}">&larr; Older</a>
+{% endif %}
+{% if page.next %} 
+    <a rel="next" href="{{ page.next.url }}">Newer &rarr;</a>
+{% endif %}
 
 {% include head.html %}
 
