@@ -1,5 +1,6 @@
 ---
 layout: galeria
+telescopio: Hubble
 --- 
 
 <html lang="es">
