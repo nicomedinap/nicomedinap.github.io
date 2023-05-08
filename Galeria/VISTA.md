@@ -60,7 +60,7 @@ layout: galeria
 
 </head>
 
-<h1 class="page_title">Objetos Astronomonicos observador por el telescopio VISTA.</h1>
+<h1 class="page_title">Objetos Astronomonicos observados por el telescopio VISTA.</h1>
 
 <p> El telescopio VISTA está localizado en el observatorio Paranal (Antofagasta, Chile). Es un telescopio equipado con un espejo primario de 4 metros de diámetro, por lo que es preferentemente usado para observaciones de amplio campo, atrapando la luz de miles de estrellas a la vez.</p>
 
