@@ -8,6 +8,17 @@ Acá subiré fichas de algunas estrellas interesantes que he ido identificando a
 
 El formato será el siguiente: Se pondrán dos imágenes una al lado de la otra, centradas en la estrella en cuestión, que contrendrán la época donde el brillo superficial de dicho objeto es menor (a la izquierda) y mayor (a la derecha). Luego de eso, la serie de tiempo asociada al brillo será expuesta, la que se ha contruido entre los años 2010 y 2015.
 
+<ul>
+	{% for post in site.categories.estrellas %}
+		{% if post.layout == "post" %}
+			<p>
+            	<h2>{{ post.title }}</h2>
+            	<h5>{{ post.date | date_to_string }}</h5>
+            	<p>{{ post.content | truncatewords: 500 }}</p>
+        	</p>
+    	{% endif %}
+ 	{% endfor %}
+</ul>
 
 
 
@@ -17,7 +28,7 @@ El formato será el siguiente: Se pondrán dos imágenes una al lado de la otra,
       <p>
               <h2>{{ post.title }}</h2>
               <h5>{{ post.telescopio }}</h5>
-              <p>{{ post.content | truncatewords: 50 }}</p>
+              <p>{{ post.content  }}</p>
           </p>
       {% endif %}
   {% endfor %}
