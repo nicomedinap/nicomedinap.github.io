@@ -19,3 +19,17 @@ El formato será el siguiente: Se pondrán dos imágenes una al lado de la otra,
     	{% endif %}
  	{% endfor %}
 </ul>
+
+
+
+<ul>
+  {% for post in site.categories.Galeria %}
+    {% if post.layout == "galeria" %}
+      <p>
+              <h2>{{ post.title }}</h2>
+              <h5>{{ post.telescopio }}</h5>
+              <p>{{ post.content | truncatewords: 50 }}</p>
+          </p>
+      {% endif %}
+  {% endfor %}
+</ul>
