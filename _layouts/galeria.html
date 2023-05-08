@@ -11,14 +11,18 @@
 </style>
 
 
-{% if page.previous %} 
-    <a rel="prev" href="{{ page.previous.url }}">&larr; Older</a>
-{% endif %}
-{% if page.next %} 
-    <a rel="next" href="{{ page.next.url }}">Newer &rarr;</a>
-{% endif %}
+<ul>
+  {% for post in site.categories.Galeria %}
+    {% if post.layout == "galeria" %}
+      <p>
+              <h2>{{ post.title }}</h2>
+              <h5>{{ post.telescopio }}</h5>
+              <p>{{ post.content | truncatewords: 50 }}</p>
+          </p>
+      {% endif %}
+  {% endfor %}
+</ul>
 
-{% include head.html %}
 
 <body>
 
