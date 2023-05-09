@@ -20,7 +20,11 @@ El formato será el siguiente: Se pondrán dos imágenes una al lado de la otra,
  	{% endfor %}
 </ul>
 
+{% include variable="hola" %}
 
+{% if variable %}
+	<h5>{{ variable }}</h5>
+{% endif %}
 
 <ul>
   {% for page in site.categories.Galeria %}
