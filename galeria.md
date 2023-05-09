@@ -14,10 +14,10 @@ telescopio: none
 <style>
 
 	h1{
-	color: white;
-	text-align: center;
-	padding: 10px 0;
-	font-size: 50px;
+		color: white;
+		text-align: center;
+		padding: 10px 0;
+		font-size: 50px;
 	}
 
 	/* El siguiente tag lo agregué para que  */
@@ -35,7 +35,7 @@ telescopio: none
 	}
 
 	p{
-	  font-size: 20px;
+	  	font-size: 20px;
 	}
 
 	div.galeria{
@@ -75,9 +75,13 @@ telescopio: none
 	div.galeria:hover{
 		border:  0px solid black;
 	 	transition: transform 225ms;
-	  transform: translateY(-10px);
+	  	transform: translateY(-10px);
 	}
-	
+
+	@media screen and (max-width: 600px) {
+  		.page_title {font-size: 20px} 
+	}
+
 </style>
 
 
