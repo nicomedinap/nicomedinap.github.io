@@ -58,7 +58,7 @@ telescopio: none
 	div.galeria img{
 		vertical-align: top;
 		width: 100%;
-		height: 150px;
+		height: 200px;
 		object-fit: cover;
 	}
 
