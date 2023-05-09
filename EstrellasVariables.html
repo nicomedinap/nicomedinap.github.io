@@ -20,7 +20,10 @@ El formato será el siguiente: Se pondrán dos imágenes una al lado de la otra,
  	{% endfor %}
 </ul>
 
-{% include variable="hola" %}
+
+{% assign variable = "Hola" %}
+
+{% include variable = "hola" %}
 
 {% if variable %}
 	<h5>{{ variable }}</h5>
