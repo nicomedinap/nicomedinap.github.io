@@ -81,6 +81,11 @@
   </div>
 
   {% if page.telescopio %}
+
+    {% page.telescopio %}
+  
+    {% page.next.url %}
+
     {% if page.next.url %}
         <div class="Boton_Siguiente_Telescopio">
           <a href="{{page.next.url}}">{{page.next.telescopio}} &raquo;</a>
