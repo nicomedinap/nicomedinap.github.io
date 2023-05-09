@@ -8,7 +8,7 @@
     padding: 10px;
     overflow: hidden;
     background: none !important;
-    display: flex;
+    display: none;
     justify-content: center;
   }
 
@@ -35,12 +35,53 @@
     background-color: #f2f2f2;
     color: black;
   }
+
+  .Boton_Siguiente_Telescopio{
+    right: 0;
+    position: absolute;
+    top: 0px;
+    padding: 10px;
+    overflow: hidden;
+    background: none !important;
+    display: none;
+    justify-content: center;
+  }
+
+  .Boton_Siguiente_Telescopio a{
+    line-height:0px;
+    border-radius: 15px;
+    float: left;
+    color: #4CAF50;
+    text-align: center;
+    padding: 30px 20px; /*dimensiones de los botones*/
+    text-decoration: none;
+    font-size: 25px;
+    top:0;
+  }
+
+  .Boton_Siguiente_Telescopio a:hover{
+    transition: 0.5s;
+    background-color: lightseagreen;
+    color: black;
+  }
+
+  .Boton_Siguiente_Telescopio a.active{
+    box-shadow: 0 0 5px 5px #04AA6D;
+    background-color: #f2f2f2;
+    color: black;
+  }
+
+
 </style>
 
 <body>
 
   <div class="Boton_inicio">
     <a href="https://nicomedinap.github.io">Volver al inicio</a>
+  </div>
+
+  <div class="Boton_Siguiente_Telescopio">
+    <a href="https://nicomedinap.github.io">Siguiente Telescopio</a>
   </div>
 
 </body>
