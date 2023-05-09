@@ -1,5 +1,6 @@
 ---
 layout: galeria
+telescopio: JUNO
 --- 
 
 <html lang="es">
