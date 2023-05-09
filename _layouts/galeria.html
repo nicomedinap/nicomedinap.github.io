@@ -5,7 +5,7 @@
 <style>
     @media screen and (max-width: 600px) {
         .sidebar{display:none;}
-        {% include Botones.html %}
+        }
     
 
 </style>
@@ -14,14 +14,17 @@
 
 <body>
 
+    {% if not page.telescopio %}
+        {% include Botones.html %}
+    {% endif %}
+
+
     {% if page.telescopio %}
-        <h1>{{ page.telescopio }}</h1>
+        <h2>{{ page.url }}</h2>
     {% endif %}
 
     {% include sidebar.html %}
     
-
-
     <div class="content container">
         {{ content }}
     </div>
