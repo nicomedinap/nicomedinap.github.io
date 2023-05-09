@@ -8,7 +8,7 @@
     } 
     @media not (max-width: 600px) {
         .Boton_inicio{display: none}
-        .Boton_Siguiente_Telescopio{display: none} 
+        .Boton_Volver_Galeria{display: none} 
     }
     
 
@@ -20,12 +20,21 @@
 
     {% include Botones.html %} 
 
+
+    {% if not page.telescopio %}
+        <style> 
+          .Boton_Volver_Galeria{display: none}
+        </style>
+    {% endif %}
+
+
+
     {% if page.telescopio %}
         <style> 
           .Boton_inicio{display: none}
-          
         </style>
     {% endif %}
+
 
     {% include sidebar.html %}
     
