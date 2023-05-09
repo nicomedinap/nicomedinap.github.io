@@ -142,7 +142,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 }
 
 .imagen-grande img{
-  max-width: 95%;
+  max-width: 85%;
 }
 
 .imagen-grande{
@@ -154,7 +154,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
     justify-content: center;
 	}
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 600px) {
 	.BarraBotones a{font-size: 40px}
 	.Boton_volver a{font-size: 40px}
 	.CajaInfo p{font-size: 13px}
