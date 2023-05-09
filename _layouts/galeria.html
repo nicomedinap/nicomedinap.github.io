@@ -5,10 +5,10 @@
 <style>
     @media screen and (max-width: 600px) {
         .sidebar{display:none} 
-        .Boton_inicio{display:flex} 
     } 
     @media not (max-width: 600px) {
         .Boton_inicio{display: none}
+        .Boton_Siguiente_Telescopio{display: none} 
     }
     
 
@@ -21,7 +21,10 @@
     {% include Botones.html %} 
 
     {% if page.telescopio %}
-        <style> .Boton_Siguiente_Telescopio{display: flex} </style>
+        <style> 
+          .Boton_inicio{display: none}
+          
+        </style>
     {% endif %}
 
     {% include sidebar.html %}
