@@ -10,31 +10,23 @@
         .Boton_inicio{display: none}
         .Boton_Volver_Galeria{display: none} 
     }
-    
-
 </style>
 
 {% include head.html %}
 
 <body>
 
+    <!-- agregamos botones y sus condiciones -->
     {% include Botones.html %} 
+
+    {% if page.telescopio != "none" %}
+        <style> .Boton_inicio{display: none} </style>
+    {% endif %}
 
 
     {% if page.telescopio == "none"%}
-        <style> 
-          .Boton_Volver_Galeria{display: none}
-        </style>
+        <style> .Boton_Volver_Galeria{display: none} </style>
     {% endif %}
-
-
-
-    {% if page.telescopio %}
-        <style> 
-          .Boton_inicio{display: none}
-        </style>
-    {% endif %}
-
 
     {% include sidebar.html %}
     
