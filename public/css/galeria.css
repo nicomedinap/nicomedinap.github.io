@@ -92,9 +92,9 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 	border-radius: 15px;
 	opacity: 0.85;
 	position: absolute;
-  top: 28px;
+  top: 40px;
   height: 25%;
-	padding-top: 30px;
+	padding-top: 10px;
 	padding-left: 5%;
 	padding-right: 5%;
 	color: white;
@@ -143,7 +143,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 }
 
 .imagen-grande img{
-  max-width: 85%;
+  max-width: 88%;
 }
 
 .imagen-grande{
