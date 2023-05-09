@@ -1,5 +1,6 @@
 ---
 layout: galeria
+telescopio: VISTA
 --- 
 
 <html lang="es">
