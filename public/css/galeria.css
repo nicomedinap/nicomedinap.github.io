@@ -67,7 +67,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
  	text-align: center;
  	padding: 20px 20px; /*dimensiones de los botones*/
  	text-decoration: none;
- 	font-size: 20px;
+ 	font-size: 15px;
 	top:0;
 }
 
@@ -154,9 +154,9 @@ caracteristicas de ese <a> dentro del div BarraBotones */
     justify-content: center;
 	}
 
-
 @media screen and (max-width: 700px) {
 .BarraBotones a{font-size: 20px}
+.Boton_volver a{font-size: 20px}
 
 } 
     
