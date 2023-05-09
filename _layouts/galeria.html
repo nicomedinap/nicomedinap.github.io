@@ -4,9 +4,10 @@
 <!-- Hacemos un media query, que sirve para identificar si el blog esta siendo visualizado  -->
 <style>
     @media screen and (max-width: 600px) {
-        .sidebar{display:none}
-        {% include Botones.html %} } 
-        
+        .sidebar{display:none} } 
+    @media not (max-width: 600px) {
+        .Boton_inicio{display: none}
+    }
     
 
 </style>
@@ -15,7 +16,10 @@
 
 <body>
 
+    {% include Botones.html %} 
+
     {% if page.telescopio %}
+        <style> .Boton_inicio{display: none} </style>
         <h1>{{ page.url }}</h1>
     {% endif %}
 
