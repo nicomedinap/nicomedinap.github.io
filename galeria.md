@@ -1,6 +1,7 @@
 ---
 layout: galeria
 title: Composiciones
+telescopio: none
 --- 
 
 <html lang="es">
