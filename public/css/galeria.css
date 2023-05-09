@@ -26,7 +26,7 @@ body{
 /*a es para crear links, así que modificaremos las 
 caracteristicas de ese <a> dentro del div BarraBotones */
 .BarraBotones a{
-	font-size: 30px;
+	font-size: 15px;
 	line-height:17px;
   float: left;
 	color: #f2f2f2;
@@ -60,7 +60,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 }
 
 .Boton_volver a{
-	font-size: 30px;
+	font-size: 15px;
 	line-height:0px;
 	border-radius: 25px;
  	float: left;
@@ -158,7 +158,6 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 .contenido h1{
 	font-size: 50px; 
 }
-
 
     
 </style>
