@@ -32,7 +32,10 @@ telescopio: none
 
 	body {
 		background: black;
-		p: font-size: 20px ;
+	}
+
+	body.p {
+		font-size: 20px;
 	}
 
 	div.galeria{
@@ -55,7 +58,7 @@ telescopio: none
 	div.galeria img{
 		vertical-align: top;
 		width: 100%;
-		height: 200px;
+		height: 150px;
 		object-fit: cover;
 	}
 
@@ -66,7 +69,7 @@ telescopio: none
 	}
 
 	.pie p{
-		font-size: 20px;
+		font-size: 30px;
 	}
 
 	div.galeria:hover{
@@ -93,9 +96,6 @@ telescopio: none
 
 <h1 class="page_title">Galería de imágenes de objetos astronómicos</h1>
 
-
-
-
 <!--Una de las consecuencias más fascinantes de que la luz tenga una velocidad finita, es que en realidad siempre estamos percibiendo el pasado. Para la luz cercana a nuestros ojos ese efecto es indetectable, por supuesto, pero para objetos tan, tan alejados como las estrellas o galaxias, este efecto nos permite acceder al pasado de nuestro universo. 
 
 Los telescopios son verdaderas máquinas del tiempo
@@ -112,7 +112,7 @@ Los telescopios son verdaderas máquinas del tiempo
 <!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
 <div class="galeria" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/JWST.html';">
     <div class="foto">
-        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/0.jpg" width="400" height="400">
+        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/0.jpg" width="400" height="300">
     </div>
     <div class="pie">
         <p> Telescopio espacial James Webb (JWST)</p>
