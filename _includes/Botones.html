@@ -36,7 +36,7 @@
     color: black;
   }
 
-  .Boton_Siguiente_Telescopio{
+  .Boton_Volver_Galeria{
     right: 0;
     position: absolute;
     top: 0px;
@@ -47,7 +47,7 @@
     justify-content: center;
   }
 
-  .Boton_Siguiente_Telescopio a{
+  .Boton_Volver_Galeria a{
     line-height:0px;
     border-radius: 15px;
     float: left;
@@ -59,13 +59,13 @@
     top:0;
   }
 
-  .Boton_Siguiente_Telescopio a:hover{
+  .Boton_Volver_Galeria a:hover{
     transition: 0.5s;
     background-color: lightseagreen;
     color: black;
   }
 
-  .Boton_Siguiente_Telescopio a.active{
+  .Boton_Volver_Galeria a.active{
     box-shadow: 0 0 5px 5px #04AA6D;
     background-color: #f2f2f2;
     color: black;
@@ -80,18 +80,11 @@
     <a href="https://nicomedinap.github.io">Volver al inicio</a>
   </div>
 
-  {% if page.telescopio %}
 
-    {% page.telescopio %}
-  
-    {% page.next.title %}
+  <div class="Boton_Volver_Galeria">
+    <a href="https://nicomedinap.github.io/galeria.html">Volver a la galería &raquo;</a>
+  </div>
 
-    {% if page.next.url %}
-        <div class="Boton_Siguiente_Telescopio">
-          <a href="{{page.next.url}}">{{page.next.telescopio}} &raquo;</a>
-        </div>
-    {% endif %}
-  {% endif %}
 
 </body>
 </html>
