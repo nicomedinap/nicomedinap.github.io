@@ -154,10 +154,10 @@ caracteristicas de ese <a> dentro del div BarraBotones */
     justify-content: center;
 	}
 
-@media screen and (max-width: 700px) {
-.BarraBotones a{font-size: 20px}
-.Boton_volver a{font-size: 20px}
-.CajaInfo p{font-size: 10px};
+@media screen and (max-width: 500px) {
+	.BarraBotones a{font-size: 20px}
+	.Boton_volver a{font-size: 20px}
+	.CajaInfo p{font-size: 10px};
 	}
 
 } 
