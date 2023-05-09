@@ -78,9 +78,9 @@ telescopio: none
 	  	transform: translateY(-10px);
 	}
 
-	@media screen and (max-width: 600px) {
-  		.page_title {font-size: 30px}
-  		.p {font-size: 15px;}  
+	@media screen and (max-width: 700px) {
+  		.page_title {font-size: 20px}
+  		.p {font-size: 10px;}  
 	}
 
 </style>
