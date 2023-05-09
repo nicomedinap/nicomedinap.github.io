@@ -1,5 +1,6 @@
 ---
 layout: galeria
+telescopio: JWST
 --- 
 
 <html lang="es">
