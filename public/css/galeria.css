@@ -16,23 +16,23 @@ body{
 }
 
 .BarraBotones{
-    overflow: hidden;
-    background: none !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  overflow: hidden;
+  background: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*a es para crear links, así que modificaremos las 
 caracteristicas de ese <a> dentro del div BarraBotones */
 .BarraBotones a{
 	line-height:17px;
-  	float: left;
+  float: left;
 	color: #f2f2f2;
  	text-align: center;
  	padding: 8px 20px; /*dimensiones de los botones*/
  	text-decoration: none;
- 	font-size: 20px;
+ 	font-size: 10px;
 	top:0;
 }
 
@@ -54,15 +54,15 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 	top: 0px;
 	padding: 10px;
 	overflow: hidden;
-    background: none !important;
-    display: flex;
-    justify-content: center;
+  background: none !important;
+  display: flex;
+  justify-content: center;
 }
 
 .Boton_volver a{
 	line-height:0px;
 	border-radius: 25px;
-  	float: left;
+ 	float: left;
 	color: #f2f2f2;
  	text-align: center;
  	padding: 20px 20px; /*dimensiones de los botones*/
@@ -85,15 +85,15 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 
 .CajaInfo{
 	resize: vertical;
-  	overflow: auto;
+ 	overflow: auto;
 	width: fit-content;
-    background-color: black;
+  background-color: black;
 	max-width:70%;
 	border-radius: 15px;
 	opacity: 0.85;
 	position: absolute;
-    top: 20px;
-    height: 25%;
+  top: 20px;
+  height: 25%;
 	padding-top: 5px;
 	padding-left: 5%;
 	padding-right: 5%;
@@ -102,8 +102,8 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 	text-align: center;
 	box-shadow: 0 0 25px 0 black;
 	word-wrap: break-word;
-    max-width: 80%; 
-  	text-overflow: ellipsis;
+  max-width: 80%; 
+  text-overflow: ellipsis;
 }
 
 .CajaInfo p{
@@ -111,9 +111,9 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 	}
 
 .imagen{
-    top: 32%;
+  top: 32%;
 	width: 100%;
-    display: flex;
+  display: flex;
 	max-height: 90%;
 	position: absolute;
 
@@ -142,7 +142,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 }
 
 .imagen-grande img{
-   	max-width: 85%;
+  max-width: 85%;
 }
 
 .imagen-grande{
@@ -153,3 +153,10 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 .Contenido{
     justify-content: center;
 	}
+
+
+@media screen and (max-width: 700px) {
+
+} 
+    
+</style>
