@@ -155,9 +155,10 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 	}
 
 @media screen and (max-width: 500px) {
-	.BarraBotones a{font-size: 20px}
-	.Boton_volver a{font-size: 20px}
-	.CajaInfo p{font-size: 10px};
+	.BarraBotones a{font-size: 30px}
+	.Boton_volver a{font-size: 30px}
+	.CajaInfo p{font-size: 10px}
+	.Contenido h1 { font-size: 40px }
 	}
 
 } 
