@@ -79,7 +79,8 @@ telescopio: none
 	}
 
 	@media screen and (max-width: 600px) {
-  		.page_title {font-size: 20px} 
+  		.page_title {font-size: 30px}
+  		.p {font-size: 15px;}  
 	}
 
 </style>
