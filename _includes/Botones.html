@@ -80,9 +80,13 @@
     <a href="https://nicomedinap.github.io">Volver al inicio</a>
   </div>
 
-  <div class="Boton_Siguiente_Telescopio">
-    <a href="https://nicomedinap.github.io">Siguiente Telescopio</a>
-  </div>
+  {% if page.telescopio %}
+    {% if page.next.url %}
+        <div class="Boton_Siguiente_Telescopio">
+          <a href="{{page.next.url}}">{{page.next.telescopio}} &raquo;</a>
+        </div>
+    {% endif %}
+  {% endif %}
 
 </body>
 </html>
