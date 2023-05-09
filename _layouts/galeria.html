@@ -5,6 +5,9 @@
 <style>
     @media screen and (max-width: 600px) {
         .sidebar{display:none}
+    }
+    
+    @else { 
         .Boton_volver{display:flex}
     }
 
@@ -14,9 +17,9 @@
 
 <body>
 
-    {% include Botones.html %}
-
     {% include sidebar.html %}
+    
+    {% include Botones.html %}
 
     <div class="content container">
         {{ content }}
