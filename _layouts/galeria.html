@@ -4,7 +4,9 @@
 <!-- Hacemos un media query, que sirve para identificar si el blog esta siendo visualizado  -->
 <style>
     @media screen and (max-width: 600px) {
-        .sidebar{display:none} } 
+        .sidebar{display:none} 
+        .Boton_inicio{display:flex} 
+    } 
     @media not (max-width: 600px) {
         .Boton_inicio{display: none}
     }
@@ -20,7 +22,7 @@
 
     {% if page.telescopio %}
         <style> .Boton_inicio{display: none} </style>
-        <h1>{{site.url}}{{ page.url }}</h1>
+        <h1>{{site.url}}{{page.url}}</h1>
     {% endif %}
 
     {% include sidebar.html %}
