@@ -5,10 +5,7 @@
 <style>
     @media screen and (max-width: 600px) {
         .sidebar{display:none}
-    }
-    
-    @media not screen and (max-width: 600px) {
-        .Boton_volver{display:none}
+        {% include Botones.html %}
     }
 
 </style>
@@ -19,7 +16,7 @@
 
     {% include sidebar.html %}
     
-    {% include Botones.html %}
+
 
     <div class="content container">
         {{ content }}
