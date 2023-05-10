@@ -66,9 +66,9 @@ caracteristicas de ese <a> dentro del div BarraBotones */
  	float: left;
 	color: #f2f2f2;
  	text-align: center;
- 	padding: 12px 20px; /*dimensiones de los botones*/
+ 	padding: 20px 20px; /*dimensiones de los botones*/
  	text-decoration: none;
-	top:0;
+	top: 10px;
 }
 
 .Boton_volver a:hover{
