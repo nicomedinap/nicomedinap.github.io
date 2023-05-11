@@ -19,4 +19,4 @@ Para cada tile analizado, habrá un link donde estarán disponibles todas las cu
 
 
 
-{% include nbody.html %}
+{% include nBodies.html %}
