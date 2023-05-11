@@ -17,6 +17,3 @@ Para cada tile analizado, habrá un link donde estarán disponibles todas las cu
 * [d083]
 * [d084]
 
-
-
-{% include nBodies.html %}
