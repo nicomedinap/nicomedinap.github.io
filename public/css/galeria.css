@@ -27,7 +27,7 @@ body{
 caracteristicas de ese <a> dentro del div BarraBotones */
 .BarraBotones a{
 	font-size: 25px;
-	line-height: 10px;
+	line-height:17px;
   float: left;
 	color: #f2f2f2;
  	text-align: center;
@@ -98,7 +98,7 @@ caracteristicas de ese <a> dentro del div BarraBotones */
 	padding-left: 5%;
 	padding-right: 5%;
 	color: white;
-	margin: 10px 40px;
+	margin: 40px 40px;
 	text-align: center;
 	box-shadow: 0 0 25px 0 black;
 	word-wrap: break-word;
