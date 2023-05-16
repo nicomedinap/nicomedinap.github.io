@@ -19,7 +19,23 @@ Para cada tile analizado, habrá un link donde estarán disponibles todas las cu
 
 
 <html>
-<py-script>
+
+
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Writing to the page</title>
+
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  </head>
+
+  <body>
+  	<py-script>
 	print("hola mundo")
-</py-script>
+	</py-script>
+  </body>
+
+
 </html>
