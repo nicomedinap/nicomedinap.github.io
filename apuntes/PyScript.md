@@ -7,36 +7,69 @@ Este lugar estará destinado a probar las utilidades de pyscript: python ejecuta
 
 Una linea de código al día :)
 
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css">
+    
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.9.3/dist/js/tabulator.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@holoviz/panel@0.13.0/dist/panel.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 
-  <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Writing to the page</title>
+    <title>PyScript Demo</title>
+</head>
+<body>
+    <py-env>
+- numpy
+- pandas
+- bokeh
+- panel
+    </py-env>
 
-  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-  </head>
+    <py-script>
+import math
+print(math.sqrt(49))
+    </py-script>
+    <py-script src="./scripts/demo1.py"></py-script>
 
+    <h3>Interactive REPL</h3>
+    <py-repl id="repl-demo" auto-generate="true"></py-repl>
+    
+    <br/>
+    <h3>Visualization</h3>
+    <div id="plot"></div>
 
-  <py-config>
-    packages = [
-      "https://cdn.holoviz.org/panel/0.14.3/dist/wheels/bokeh-2.4.3-py3-none-any.whl",
-      "numpy","panel==0.14.1"]
-    plugins = [
-      "https://pyscript.net/latest/plugins/python/py_tutor.py"]      
-  </py-config>
+<py-script>
+import asyncio
 
-  <py-script>
-    import panel as pn
+import panel as pn
+import numpy as np
+import pandas as pd
 
-    slider = pn.widgets.FloatSlider(start=0, end=10, name='Amplitude')
+from bokeh.models import ColumnDataSource
+from bokeh.plotting import figure
+from panel.io.pyodide import show
 
-    def callback(new):
-      return f'Amplitude is: {new}'
+df = pd.DataFrame(np.random.randn(10, 4),  columns=list('ABCD')).cumsum()
+p = figure(height=450, width=600)
 
-    pn.Row(slider, pn.bind(callback, slider)).servable(target='simple_app');
-  </py-script>
+cds = ColumnDataSource(data=ColumnDataSource.from_df(df))
 
+p.line('index', 'A', source=cds, line_color='firebrick')
+p.line('index', 'B', source=cds, line_color='dodgerblue')
+p.line('index', 'C', source=cds, line_color='goldenrod')
+p.line('index', 'D', source=cds, line_color='purple')
+
+await show(p, 'plot')
+</py-script>
+</body>
 </html>
