@@ -9,7 +9,7 @@ En los últimos años se ha ido confirmando y caracterizando varios tipos de cam
 
 Telescopios relativamente pequeños han estado escaneando el cielo desde principios de la década de 2000, dando paso a los telescopios de amplio campo, generando inmensas cantidades de información astronómica. En la era del Big Data, la astronomía vive una gran revolución debido a los avances tecnológicos. Los estudios astronómicos han evolucionado desde tomar observaciones de áreas pequeñas y enfocadas del cielo hasta estudios de grandes áreas del cielo, de forma profunda y con telescopios cada vez más grandes.
 
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/V4_html/d084_v4.jpg" alt="Estrella variable d084_v8" style="height: 100px; width:300px;"/>
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/V4_html/d084_v4.jpg" alt="Estrella variable d084_v8" style="height: 200px; width:450px;"/>
 
 Es necesario enfocar esfuerzos para discutir y desarrollar estrategias de análisis sistemático de la información disponible, con un enfoque estadístico que logre construir un set de información fundamental que caracterice una fuente estelar, y que a su vez permita reducir el volumen de datos.
 
