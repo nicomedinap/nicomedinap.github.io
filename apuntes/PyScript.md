@@ -39,5 +39,4 @@ Una linea de código al día :)
     pn.Row(slider, pn.bind(callback, slider)).servable(target='simple_app');
   </py-script>
 
-  </body>
 </html>
