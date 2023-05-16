@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title: PyScript
 ---
 
@@ -22,14 +22,6 @@ Una linea de código al día :)
   <body>
   <py-script>
   	print("hola mundo")
-    import numpy as np
-    import matplotlib as plt
-
-    x = np.linspace(0,100,5)
-    plt.plot(np.cos(x), x,'r-', label='hola, soy una leyenda')
-    plt.legend(loc="best")
-    plt.show()
-
 	</py-script>
   </body>
 </html>
