@@ -21,21 +21,23 @@ Una linea de código al día :)
 
 
   <py-config>
-    packages = ["matplotlib", "numpy"]
+    packages = [
+      "https://cdn.holoviz.org/panel/0.14.3/dist/wheels/bokeh-2.4.3-py3-none-any.whl",
+      "numpy","panel==0.14.1"]
+    plugins = [
+      "https://pyscript.net/latest/plugins/python/py_tutor.py"]      
   </py-config>
 
-  <body>
   <py-script>
-    import matplotlib.pyplot as plt
-    import numpy as np
+    import panel as pn
 
-  	print("hola mundo")
+    slider = pn.widgets.FloatSlider(start=0, end=10, name='Amplitude')
 
-    x = np.linspace(0,30,100)
-    y = np.cos(x)
+    def callback(new):
+      return f'Amplitude is: {new}'
 
-    plt.plot(y,x,"r-")
+    pn.Row(slider, pn.bind(callback, slider)).servable(target='simple_app');
+  </py-script>
 
-	</py-script>
   </body>
 </html>
