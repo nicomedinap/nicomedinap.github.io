@@ -19,9 +19,23 @@ Una linea de código al día :)
   <script defer src="https://pyscript.net/latest/pyscript.js"></script>
   </head>
 
+
+  <py-config>
+    packages = ["matplotlib", "numpy"]
+  </py-config>
+
   <body>
   <py-script>
+    import matplotlib.pyplot as plt
+    import numpy as np
+
   	print("hola mundo")
+
+    x = np.linspace(0,30,100)
+    y = np.cos(x)
+
+    plt.plot(y,x,"r-")
+
 	</py-script>
   </body>
 </html>
