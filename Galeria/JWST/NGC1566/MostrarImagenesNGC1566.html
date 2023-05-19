@@ -1,0 +1,58 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
+<!-- CSS Publico -->
+<link rel="stylesheet" href="/public/css/galeria.css">
+
+<body>
+
+	<div class="Boton_volver">
+		<a href="https://nicomedinap.github.io/Galeria/JWST.html">Volver a la galeria</a>
+	</div>
+
+	<div class="BarraBotones">
+		<a href=" ">Anterior</a>
+		<a class="active" href="#home">Actual:  </a>
+		<a href=" ">Siguiente</a>
+	</div>
+
+	<div class="Contenido">
+		<div class="CajaInfo" > 
+			<h1 class="page_title"> La galaxia NGC1566 </h1>
+
+			<p> NGC1556 es una galaxia espiral intermedia, lo que significa que posee pocos brazos espirales visibles. La formación estelar se concentra, entonces en sus dos largos brazos espirales. 
+
+			De acuerdo a mediciones espectrales, el gas caliente alrededor del núcleo se mueve a una velocidad anormalmente alta, interpretándose que está orbitando un agujero negro supermasivo cuya masa se ha estimado en mas de 8 millones de masas solares.
+
+			Las características del núcleo, pequeño, pero extremádamente luminoso sugieren que se trata de una galaxia activa de tipo Seyfert. </p>
+		</div>
+
+		<div class="imagen">
+
+			<div class="imagen-chica">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/012.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/021.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/102.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/120.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/201.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/210.jpg" onclick="Desplegar(this)">
+			</div>
+
+			<div class="imagen-grande">
+				<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/012.jpg" >
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function Desplegar(ImagenChica){
+			var ImagenGrande = document.getElementById("CajaDeImagenes");
+			ImagenGrande.src = ImagenChica.src; 
+		}
+	</script>
+</body>
+
+</html>
