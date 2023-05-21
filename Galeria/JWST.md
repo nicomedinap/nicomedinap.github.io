@@ -69,6 +69,20 @@ telescopio: JWST
     background-size: cover;
 }
 
+.box-09 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/NGC1566.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-10 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1087/NGC1087.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 </style>
 
 
@@ -172,6 +186,26 @@ telescopio: JWST
             </div>
 
 
+            <div class="test_box box-09 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesNGC1566.html" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">NGC1566</h1>
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="test_box box-10 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesNGC1087.html" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">NGC1087</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
 
         </div>
