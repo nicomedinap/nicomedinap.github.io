@@ -7,11 +7,11 @@ Dado que las estrellas en formación, o en etapas muy tempranas de evolución, s
 
 Telescopios relativamente pequeños han estado escaneando el cielo desde principios de la década de 2000, dando paso a los telescopios de amplio campo, generando inmensas cantidades de información astronómica. En la era del Big Data, la astronomía vive una gran revolución debido a los avances tecnológicos. Los estudios astronómicos han evolucionado desde tomar observaciones de áreas pequeñas y enfocadas del cielo hasta estudios de grandes áreas del cielo, de forma profunda y con telescopios cada vez más grandes.
 
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/V4_html/d084_v4.jpg" alt="Estrella variable d084_v8" style="height: 200px; width:450px;"/>
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/V4_html/d084_v4.jpg" alt="Estrella variable d084_v8" style="height:250px; width:500px;"/>
 
 Es necesario enfocar esfuerzos para discutir y desarrollar estrategias de análisis sistemático de la información disponible, con un enfoque estadístico que logre construir un set de información fundamental que caracterice una fuente estelar, y que a su vez permita reducir el volumen de datos.
 
-El Catálogo V⁴ contendrá la información que he sa recolectado usando el método descrito en [mi primer paper](https://arxiv.org/pdf/1806.04061.pdf){:target="_blank"}, usando los datos disponibles en la base de datos VVV.
+El Catálogo V⁴ contendrá la información que he sa recolectado usando el método descrito en [medina et al. 2018](https://arxiv.org/pdf/1806.04061.pdf){:target="_blank"}, usando los datos disponibles en la base de datos VVV.
 
 Son más de 1000 estrellas que han sido identificadas principalmente por su notorio cambio de brillo.
 
