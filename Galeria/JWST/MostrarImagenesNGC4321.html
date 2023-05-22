@@ -1,0 +1,57 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
+<!-- CSS Publico -->
+<link rel="stylesheet" href="/public/css/galeria.css">
+
+<body>
+
+	<div class="Boton_volver">
+		<a href="https://nicomedinap.github.io/Galeria/JWST.html">Volver a la galeria</a>
+	</div>
+
+	<div class="BarraBotones">
+		<a href=" ">Anterior</a>
+		<a class="active" href="#home">NGC4321  </a>
+		<a href=" ">Siguiente</a>
+	</div>
+
+	<div class="Contenido">
+		<div class="CajaInfo" > 
+			<h1 class="page_title"> El núcleo de la galaxia NGC4321 </h1>
+
+			<p> NGC 4321, M100, es una galaxia espiral, cosiderada dentro del selecto grupo de galaxias con alta tasa de formación estelar, del ingles starbust galaxy, la cual está concentrada en su centro, dentro de una estructura con forma de anillo que impulsa la formación estelar. Este pseudo-anillo son, en realidad, dos brazos espirales fuertemente enrollados unidos a una pequeña barra nuclear. La imagen del JWST revela con extremo detalles el centro galactico de M100.
+
+			
+			</p>
+		</div>
+
+		<div class="imagen">
+
+			<div class="imagen-chica">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC4321/012.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC4321/021.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC4321/102.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC4321/120.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC4321/201.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC4321/210.jpg" onclick="Desplegar(this)">
+			</div>
+
+			<div class="imagen-grande">
+				<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC4321/012.jpg" >
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function Desplegar(ImagenChica){
+			var ImagenGrande = document.getElementById("CajaDeImagenes");
+			ImagenGrande.src = ImagenChica.src; 
+		}
+	</script>
+</body>
+
+</html>
