@@ -44,3 +44,4 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 * [Introducción al análisis de datos en las ciencias biológicas.](http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2019a/){:target="_blank"}
 * [Open astrophysics Bookshelf.](http://open-astrophysics-bookshelf.github.io){:target="_blank"}
 * [Apuntes sobre el template usado en este blog.](https://jekyllrb.com/resources/){:target="_blank"}
+* [aeropython](https://nbviewer.org/github/barbagroup/AeroPython/tree/master/lessons/){:target="_blank"} : aerodinamica con python
