@@ -13,6 +13,7 @@ Este lugar estará destinado a probar las utilidades de pyscript: python ejecuta
 <py-env>
     - matplotlib
     - numpy
+    - sentence-transformers
 </py-env>
 
 <py-config>
@@ -43,7 +44,6 @@ Este lugar estará destinado a probar las utilidades de pyscript: python ejecuta
 <div id="matplotlib-bar"></div>
 <py-script output="matplotlib-bar">
     # Python Code
-    # importing the matplotlib library
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
     # x axis
