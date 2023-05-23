@@ -148,10 +148,9 @@ telescopio: HUBBLE
                 </div>
             </div>
 
-
             <div class="test_box box-07 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesARP273.html" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesNGC5189.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">NGC5189</h1>
                             
