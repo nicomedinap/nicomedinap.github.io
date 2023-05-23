@@ -45,3 +45,4 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 * [Open astrophysics Bookshelf.](http://open-astrophysics-bookshelf.github.io){:target="_blank"}
 * [Apuntes sobre el template usado en este blog.](https://jekyllrb.com/resources/){:target="_blank"}
 * [aeropython](https://nbviewer.org/github/barbagroup/AeroPython/tree/master/lessons/){:target="_blank"} : aerodinamica con python
+* [Visualización del catálogo messier](https://kosmoved.ru/messier/messier-catalog.php?lang=spa){:target="_blank"}
