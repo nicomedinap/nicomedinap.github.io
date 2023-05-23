@@ -12,10 +12,10 @@ Una linea de código al día :)
 <!--code at: https://github.com/ostad-ai/Miscellaneous-->
 <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
 
-#<py-env>
-#    - matplotlib
-#    - numpy
-#</py-env>
+<py-env>
+    - matplotlib
+    - numpy
+</py-env>
 
 <py-config>
     packages = [
