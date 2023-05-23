@@ -1,0 +1,61 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
+<!-- CSS Publico -->
+<link rel="stylesheet" href="/public/css/galeria.css">
+
+<body>
+
+	<div class="Boton_volver">
+		<a href="https://nicomedinap.github.io/Galeria/HST.html">Volver a la galeria</a>
+	</div>
+
+	<div class="BarraBotones">
+		<a href=" ">Anterior</a>
+		<a class="active" href="#home">NGC5189</a>
+		<a href=" ">Siguiente</a>
+	</div>
+
+	<div class="Contenido">
+		<div class="CajaInfo" > 
+			<h1 class="page_title"> La nebulosa planetaria NGC5189 </h1>
+
+			<p> 
+			Las nebulosas planetarias representan la etapa final en la vida de una estrella de tamaño mediano como nuestro Sol. La estrella moribunda expulsa una gran parte de su envoltura exterior, luego este material es iluminado por la radiación ultravioleta del remanente estelar, produciendo nubes brillantes de gas que pueden mostrar una estructura compleja.</p>
+
+			<p> Un ejemplo espectacular de esta hermosa complejidad de la nebulosa planetaria NGC 5189. Como resultado del proceso de pérdida de masa, la nebulosa planetaria se ha creado estructuras anidadas, que se expanden alejándose del centro en diferentes direcciones. Estos suelen estar formados por la acción combinada de las radiaciones fotoionizantes y los vientos estelares.
+			</p>
+
+			<p> Su estructura doble bipolar o cuadrupolar podría explicarse por la presencia de una segunda estrella que orbita alrededor de la estrella central e influye en el patrón de eyección de masa durante sus estertores de muerte que producen nebulosas. El remanente de la estrella central, habiendo perdido gran parte de su masa, ahora vive sus últimos días como una enana blanca. Sin embargo, no hay un candidato visual para el posible compañero.
+			</p>
+		</div>
+
+		<div class="imagen">
+
+			<div class="imagen-chica">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/TEMPLATE/012.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/TEMPLATE/021.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/TEMPLATE/102.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/TEMPLATE/120.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/TEMPLATE/201.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/TEMPLATE/210.jpg" onclick="Desplegar(this)">
+			</div>
+
+			<div class="imagen-grande">
+				<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/TEMPLATE/012.jpg" >
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function Desplegar(ImagenChica){
+			var ImagenGrande = document.getElementById("CajaDeImagenes");
+			ImagenGrande.src = ImagenChica.src; 
+		}
+	</script>
+</body>
+
+</html>
