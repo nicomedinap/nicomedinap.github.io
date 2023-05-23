@@ -5,8 +5,6 @@ title: PyScript
 
 Este lugar estará destinado a probar las utilidades de pyscript: python ejecutado en html. Al parecer es normal que tarde unos segundos en ejecutarse.
 
-Una linea de código al día :)
-
 <html>
 <head>
 <!--code at: https://github.com/ostad-ai/Miscellaneous-->
@@ -58,8 +56,8 @@ Una linea de código al día :)
     # Naming the y-label
     plt.ylabel('Score')
     # Naming the title of the plot
-plt.title('Language vs Score')
-fig
+    plt.title('Language vs Score')
+    fig
 </py-script>
 
 
