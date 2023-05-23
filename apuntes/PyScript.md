@@ -48,11 +48,12 @@ Una linea de código al día :)
 
     plt.figure(figsize=(10,5))
     xs = np.linspace(0,2*np.pi,100)
-    ys = np.sin(xs); 
-    zs = np.cos(xs);
+    ys = np.sin(xs) 
+    zs = np.cos(xs)
     plt.plot(xs,ys,c='red',label='y=sin(x)')
     plt.plot(xs,zs,c='blue',label='y=cos(x)')
-    plt.legend();fig
+    plt.legend()
+    plt.show()
 </py-script>
 
 
