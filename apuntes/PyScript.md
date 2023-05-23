@@ -42,18 +42,24 @@ Una linea de código al día :)
 
 <h1> Creamos un plot simple de matplotlib, unsando numpy:</h1>
 
-<py-script output="py-out">
+<div id="matplotlib-bar"></div>
+<py-script output="matplotlib-bar">
+    # Python Code
+    # importing the matplotlib library
     import matplotlib.pyplot as plt
-    import numpy as np
-
-    plt.figure(figsize=(10,5))
-    xs = np.linspace(0,2*np.pi,100)
-    ys = np.sin(xs) 
-    zs = np.cos(xs)
-    plt.plot(xs,ys,c='red',label='y=sin(x)')
-    plt.plot(xs,zs,c='blue',label='y=cos(x)')
-    plt.legend()
-    plt.show()
+    fig, ax = plt.subplots()
+    # x axis
+    x = ["Python", "C++", "JavaScript", "Golang"]
+    # y axis
+    y = [10, 5, 9, 7]
+    plt.bar(x, y)
+    # Naming the x-label
+    plt.xlabel('Language')
+    # Naming the y-label
+    plt.ylabel('Score')
+    # Naming the title of the plot
+plt.title('Language vs Score')
+fig
 </py-script>
 
 
