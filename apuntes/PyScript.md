@@ -52,8 +52,7 @@ Una linea de código al día :)
     zs = np.cos(xs);
     plt.plot(xs,ys,c='red',label='y=sin(x)')
     plt.plot(xs,zs,c='blue',label='y=cos(x)')
-    plt.legend();
-    fig
+    plt.legend();fig
 </py-script>
 
 
