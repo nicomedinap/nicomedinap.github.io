@@ -81,14 +81,21 @@ import random;
 from math import pi,sin,cos
 
 canvas=Element("my-canvas").element
-canvas.width=window.innerWidth-180; canvas.height=1000
+canvas.width=window.innerWidth-280; 
+canvas.height=300
 ctx = canvas.getContext("2d")
+
 class Tree:
     def __init__(self,level=8,angle=pi/6):
         self.width,self.height=canvas.width,canvas.height    
-        x=self.width/2+random.randint(-self.width/2,self.width/2); y=self.height-10
-        self.cp=[x,y]; self.cd=pi/2; self.angle=angle; self.level=level
-        self.size=20+.04*self.width*random.random(); self.ratio=.7+.1*random.random() 
+        x=self.width/2+random.randint(-self.width/2,self.width/2); 
+        y=self.height-10
+        self.cp=[x,y]; 
+        self.cd=pi/2; 
+        self.angle=angle; 
+        self.level=level
+        self.size=80+.04*self.width*random.random(); 
+        self.ratio=.7+.1*random.random() 
         r,g,b=random.randint(0,200),random.randint(0,200),random.randint(0,200)
         self.color=f'rgba({r},{g},{b},.8)' 
     def forward(self,d):
