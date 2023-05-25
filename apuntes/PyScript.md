@@ -1,3 +1,5 @@
+
+
 ---
 layout: post
 title: PyScript
@@ -10,6 +12,7 @@ Este lugar estará destinado a probar las utilidades de pyscript: python ejecuta
 <!--code at: https://github.com/ostad-ai/Miscellaneous-->
 <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
 
+<!--
 <py-config>
     packages = [
         "numpy",
@@ -21,12 +24,18 @@ Este lugar estará destinado a probar las utilidades de pyscript: python ejecuta
         "https://pyscript.net/latest/plugins/python/py_tutor.py"
     ]
 </py-config>
-<!--
+
 py-env preinstala una libreria externa, se demora en cargar
 <py-env>
 - sentence-transformers
 </py-env>
 -->
+
+<py-env>
+    - matplotlib
+    - numpy
+</py-env>
+
 </head>
 
 <body>
@@ -72,7 +81,7 @@ import random;
 from math import pi,sin,cos
 
 canvas=Element("my-canvas").element
-canvas.width=window.innerWidth-18; canvas.height=1000
+canvas.width=window.innerWidth-180; canvas.height=1000
 ctx = canvas.getContext("2d")
 class Tree:
     def __init__(self,level=8,angle=pi/6):
