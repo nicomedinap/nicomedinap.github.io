@@ -28,10 +28,13 @@ Este lugar estará destinado a probar las utilidades de pyscript: python ejecuta
     ]
 </py-config>
 
+<!--
+py-env preinstala una libreria externa, se demora en cargar
 
 <py-env>
 - sentence-transformers
 </py-env>
+-->
 
 <style>
     div.mydiv{padding:20px;}
@@ -45,8 +48,10 @@ Este lugar estará destinado a probar las utilidades de pyscript: python ejecuta
 
 <h1> Creamos un plot simple de matplotlib, unsando numpy:</h1>
 
+<div id="plot-python">
+</div>
 
-<py-script output="matplotlib-bar">
+<py-script output="plot-python">
     # Python Code
     # importing the matplotlib library
     import matplotlib.pyplot as plt
@@ -62,10 +67,8 @@ Este lugar estará destinado a probar las utilidades de pyscript: python ejecuta
     plt.ylabel('Score')
     # Naming the title of the plot
     plt.title('Language vs Score')
-    plt.show()
+    fig
 </py-script>
-
-<div id="matplotlib-bar"></div>
 
 </body>
 </html>
