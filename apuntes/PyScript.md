@@ -60,15 +60,19 @@ py-env preinstala una libreria externa, se demora en cargar
 
 <h1 style="color:#fa8900;">Python inside HTML: Drawing trees on click</h1>
 <h3>Code by <i>Hamed Shah-Hosseini</i>, at: https://github.com/ostad-ai/Miscellaneous </h3>
-<button style="font-size:20px" id="mybutton" pys-onClick="run">
-    Click to draw Tree</button>&nbsp;
-<button style="font-size:20px" id="mybutton2" pys-onClick="clear">
-    Click to Clear</button>
-<div><canvas id="my-canvas"></canvas></div><py-script>
+
+<button style="font-size:20px" id="mybutton" pys-onClick="run">Click to draw Tree</button>&nbsp;
+<button style="font-size:20px" id="mybutton2" pys-onClick="clear">Click to Clear</button>
+
+<div><canvas id="my-canvas"></canvas></div>
+
+<py-script>
 from js import window
-import random; from math import pi,sin,cos
+import random; 
+from math import pi,sin,cos
+
 canvas=Element("my-canvas").element
-canvas.width=window.innerWidth-12; canvas.height=500
+canvas.width=window.innerWidth-18; canvas.height=1000
 ctx = canvas.getContext("2d")
 class Tree:
     def __init__(self,level=8,angle=pi/6):
