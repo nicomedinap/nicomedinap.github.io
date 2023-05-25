@@ -81,8 +81,10 @@ import random;
 from math import pi,sin,cos
 
 canvas=Element("my-canvas").element
-canvas.width=window.innerWidth-280; 
-canvas.height=300
+
+#canvas.width=window.innerWidth-280; 
+canvas.width=700; 
+canvas.height=500
 ctx = canvas.getContext("2d")
 
 class Tree:
@@ -94,7 +96,7 @@ class Tree:
         self.cd=pi/2; 
         self.angle=angle; 
         self.level=level
-        self.size=80+.04*self.width*random.random(); 
+        self.size=20+.04*self.width*random.random(); 
         self.ratio=.7+.1*random.random() 
         r,g,b=random.randint(0,200),random.randint(0,200),random.randint(0,200)
         self.color=f'rgba({r},{g},{b},.8)' 
