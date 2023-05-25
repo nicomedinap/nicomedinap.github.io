@@ -1,5 +1,3 @@
-
-
 ---
 layout: post
 title: PyScript
@@ -96,7 +94,7 @@ class Tree:
         self.cd=pi/2; 
         self.angle=angle; 
         self.level=level
-        self.size=20+.04*self.width*random.random(); 
+        self.size=50+.04*self.width*random.random(); 
         self.ratio=.7+.1*random.random() 
         r,g,b=random.randint(0,200),random.randint(0,200),random.randint(0,200)
         self.color=f'rgba({r},{g},{b},.8)' 
