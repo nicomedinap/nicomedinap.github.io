@@ -107,7 +107,7 @@ class Circle:
             self.dy=-self.dy
         self.x+=self.dx; self.y+=self.dy
 circles=[]
-for i in range(30):
+for i in range(2):
     circles.append(Circle(canvas.width//2,canvas.height//2,20))
 def run():
     ctx.clearRect(0, 0, canvas.width, canvas.height)
