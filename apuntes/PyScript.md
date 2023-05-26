@@ -38,11 +38,8 @@ py-env preinstala una libreria externa, se demora en cargar
 
 <body>
 
-<div class="mydiv" id="py-out"></div>
-
-<h1> Creamos un plot simple de matplotlib, unsando numpy:</h1>
-
 <!--
+<h1> Creamos un plot simple de matplotlib, unsando numpy:</h1>
 <div id="plot-python">
 </div>
 
@@ -83,6 +80,7 @@ from math import pi,sin,cos
 canvas=Element("my-canvas").element
 
 #canvas.width=window.innerWidth-280; 
+
 canvas.width=700; 
 canvas.height=500
 ctx = canvas.getContext("2d")
@@ -135,6 +133,78 @@ def run(*args, **kwargs):
 def clear(*args,**kwargs):
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 clear(None,None)
+</py-script>
+
+
+
+
+
+
+<button style="font-size:18px" id="mybutton" pys-onClick="drawCube">
+    Click to draw Cube</button>&nbsp;
+<button style="font-size:18px" id="mybutton2" pys-onClick="ClearCubes">
+    Click to Clear</button>
+<div id="container"></div>
+<py-script>
+from js import THREE
+from js import window
+from pyodide import create_proxy
+import random
+from math import pi
+#------------------------
+container=Element("container").element
+renderer = THREE.WebGLRenderer.new()
+renderer.setSize( window.innerWidth, window.innerHeight )
+renderer.shadowMap.enabled=True
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+#-----------
+scene = THREE.Scene.new();
+camera =THREE.PerspectiveCamera.new( 75, window.innerWidth / window.innerHeight, 1, 500 )
+camera.position.z = 5; camera.position.y=2
+#----------
+light = THREE.PointLight.new( color="#ffffff",intensity=2 )
+light.position.set(0,10,4)
+light.castShadow = True
+scene.add( light )
+light.shadow.mapSize.width = 512
+light.shadow.mapSize.height = 512
+light.shadow.camera.near = 1
+light.shadow.camera.far = 500
+#-------------------
+geometry_plane = THREE.PlaneGeometry.new( 200, 200 ,32,32)
+material_plane = THREE.MeshStandardMaterial.new(color="#ffff00",side=THREE.DoubleSide )
+plane = THREE.Mesh.new( geometry_plane, material_plane )
+plane.receiveShadow = True
+plane.position.z=-15
+plane.rotation.x=-pi/2.1
+scene.add(plane)
+#-----------------
+scene.background = THREE.Color.new("#0000ff")
+cubes=[]
+def drawCube(*args,**kwargs):    
+    r,g,b=random.randint(0,255),random.randint(0,255),random.randint(0,255)
+    geometry=THREE.BoxGeometry.new(1.5,1.5,1.5)
+    material = THREE.MeshStandardMaterial.new(color=f"rgb({r},{g},{b})")
+    cube = THREE.Mesh.new(geometry, material);
+    cube.position.z=-5
+    cube.position.x=10-20*random.random()
+    cube.position.y=8-8*random.random()
+    cube.castShadow =True
+    scene.add( cube )
+    cubes.append(cube)
+    #renderer.render( scene, camera )
+def ClearCubes(*args,**kwargs):
+    for cb in cubes:
+        scene.remove(cb)
+    cubes.clear()
+def animate(*args):
+    window.requestAnimationFrame(create_proxy(animate))
+    for cb in cubes:
+        cb.rotation.x+=.01
+        cb.rotation.y+=.015
+    renderer.render( scene, camera )
+animate()
+container.appendChild(renderer.domElement)
 </py-script>
 
 
