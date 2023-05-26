@@ -42,6 +42,7 @@ py-env preinstala una libreria externa, se demora en cargar
 
 <h1> Creamos un plot simple de matplotlib, unsando numpy:</h1>
 
+<!--
 <div id="plot-python">
 </div>
 
@@ -63,10 +64,11 @@ py-env preinstala una libreria externa, se demora en cargar
     plt.title('Language vs Score')
     fig
 </py-script>
-
+-->
 
 <h1 style="color:#fa8900;">Python inside HTML: Drawing trees on click</h1>
-<h3>Code by <i>Hamed Shah-Hosseini</i>, at: https://github.com/ostad-ai/Miscellaneous </h3>
+
+<h3>Código adaptado desde https://github.com/ostad-ai/Miscellaneous, de <i>Hamed Shah-Hosseini</i></h3>
 
 <button style="font-size:20px" id="mybutton" pys-onClick="run">Click to draw Tree</button>&nbsp;
 <button style="font-size:20px" id="mybutton2" pys-onClick="clear">Click to Clear</button>
@@ -89,12 +91,12 @@ class Tree:
     def __init__(self,level=8,angle=pi/6):
         self.width,self.height=canvas.width,canvas.height    
         x=self.width/2+random.randint(-self.width/2,self.width/2); 
-        y=self.height-10
+        y=self.height
         self.cp=[x,y]; 
         self.cd=pi/2; 
         self.angle=angle; 
         self.level=level
-        self.size=50+.04*self.width*random.random(); 
+        self.size=70+.04*self.width*random.random(); 
         self.ratio=.7+.1*random.random() 
         r,g,b=random.randint(0,200),random.randint(0,200),random.randint(0,200)
         self.color=f'rgba({r},{g},{b},.8)' 
@@ -127,6 +129,7 @@ class Tree:
         self.right(self.angle)
         self.size/=self.ratio; self.level+=1
         self.moveTo(-self.size)
+
 def run(*args, **kwargs):    
     tree=Tree(); tree.draw()    
 def clear(*args,**kwargs):
