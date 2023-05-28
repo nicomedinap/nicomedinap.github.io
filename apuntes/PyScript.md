@@ -4,6 +4,12 @@ title: PyScript
 ---
 <html>
 
+<!--
+
+algo de informacion
+https://www.jhanley.com/blog/pyscript-javascript-callbacks/
+
+
 <h1 style="font-size:12px">Este lugar estara destinado a probar las utilidades de pyscript: python ejecutado en html. 
     Al parecer es normal que tarde unos segundos en ejecutarse.
 </h1>
