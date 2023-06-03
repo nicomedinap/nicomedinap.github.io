@@ -13,7 +13,7 @@ No hay que ir muy lejos en el espacio para encontrar materia expuesta a condicio
 
 ¿Dónde podemos encontrar plasma a tu alrededor?
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Plasma_lamp_touching.jpg" alt="Una 'bola de plasma', un objeto en condiciones extremas donde un gas ionizado es manipulado para emitir radiación (luz)" style="height:250px; width:250px;"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Plasma_lamp_touching.jpg" alt="Una 'bola de plasma', un objeto en condiciones extremas donde un gas ionizado es manipulado para emitir radiación (luz)" style="height:250px; width:350px;" />
 
 ## ¿Lugares extremos?
 
@@ -25,25 +25,27 @@ Lo impresionante aquí es darse cuenta que nuestro sol es una bola de plasma, y 
 Materia a baja densidad y temperatura es la más comun de identificar en el espacio interestelar (el espacio entre las estrellas). Las galaxias como la nuestra están llenas de gas desde donde nacen las estrellas, los cuales son llamadas "regiones de formación estelar", un nombre bastante descriptivo. Se caracterizan por  extremádamente coloridos, dadas las diferentes caracteristicas que los telescopios pueden observar.
 
 Telescopio Hubble
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M17_SFR/012.jpg" onclick="Desplegar(this)">
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M17_SFR/012.jpg" style="height:350px; width:350px;">
 
 Imágenes del DSS
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/BRCs.jpg" alt="" style="height:200px; width:550px;"/>
 
 Telescopio James Webb
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/012.jpg" onclick="Desplegar(this)">
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/012.jpg" style="height:400px; width:90px;" />
 
 Misión Juno
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JUNO/ImagenSet3/012.jpg" onclick="Desplegar(this)">
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JUNO/ImagenSet3/012.jpg" style="height:400px; width:90px;" />
 
 
 ## Estado sólido, producto de la gravedad.
 
 La gravedad actua sobre cada particula en el espacio, y cuando se alcanza cierta densidad de materia colapsa sobre si misma formando estructuras de geometría esférica naturalmente. Es por esto que las estrellas se consideran bolas de gas esféricas. 
 
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/LDN1527/4.jpg" onclick="Desplegar(this)">
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/LDN1527/4.jpg" style="height:350px; width:350px;" />
 
-Si un cuerpo sólido no es esférico
+Si un cuerpo sólido no es esférico significa que la masa total del cuerpo no ha sido suficiente para que la gravedad esculpa la forma esférica. Ejemplos de esto son cuerpos solidos pequeños de baja masa como asteroides, cometas y lunas. 
+
+
 
 
 Estado líquido: extrañísimo.
@@ -54,7 +56,6 @@ Enceladus
 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/False_color_Cassini_image_of_jets_in_the_southern_hemisphere_of_Enceladus.jpg" alt="Jets de agua a presión emergen desde la superfice de Enceladus, gracias a la misión Cassini" style="height:200px; width:550px;"/>
-
 
 
 ## Más estados de la materia aún:
