@@ -48,20 +48,23 @@ Si un cuerpo sólido no es esférico
 
 Estado líquido: extrañísimo.
 
+Enceladus
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Enceladus_from_Voyager.jpg" alt="La luna Enceladus a través de la óptica del Voyager." style="height:200px; width:550px;"/>
+
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/86/False_color_Cassini_image_of_jets_in_the_southern_hemisphere_of_Enceladus.jpg" alt="Jets de agua a presión emergen desde la superfice de Enceladus, gracias a la misión Cassini" style="height:200px; width:550px;"/>
 
 
 
-
-Más estados de la materia aún:
+## Más estados de la materia aún:
 
 El universo es un basto lugar donde encotrar nuevas cosas. En condiciones específicas la materia puede sufrir transformaciones únicas y quizá aún no reportadas. Eventos astrofísicos extremos como fusiones de estrellas de neutrones o explosiones de supernovas, la materia puede transformarse en estados como plasma de quarks-gluones o materia degenerada. Estos estados requieren condiciones de alta energía para existir.
 
 Algunos de estos estados son:
 
-Materia Bose-Einstein
-
-Cristales de tiempo
-
-¿Qué pasa con la Materia oscura?
+1. Materia Bose-Einstein
+2. Cristales de tiempo
+3. ¿Qué pasa con la Materia oscura?
 
 
