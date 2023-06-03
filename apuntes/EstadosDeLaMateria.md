@@ -31,10 +31,10 @@ Imágenes del DSS
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/BRCs.jpg" alt="" style="height:200px; width:550px;"/>
 
 Telescopio James Webb
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/012.jpg" style="height:400px; width:90px;" />
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/012.jpg" style="height:400px; width:150px;" />
 
 Misión Juno
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JUNO/ImagenSet3/012.jpg" style="height:400px; width:90px;" />
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JUNO/ImagenSet3/012.jpg" style="height:400px; width:150px;" />
 
 
 ## Estado sólido, producto de la gravedad.
@@ -52,10 +52,10 @@ Estado líquido: extrañísimo.
 
 Enceladus
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Enceladus_from_Voyager.jpg" alt="La luna Enceladus a través de la óptica del Voyager." style="height:200px; width:550px;"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Enceladus_from_Voyager.jpg" alt="La luna Enceladus a través de la óptica del Voyager." style="height:250px; width:350px;"/>
 
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/86/False_color_Cassini_image_of_jets_in_the_southern_hemisphere_of_Enceladus.jpg" alt="Jets de agua a presión emergen desde la superfice de Enceladus, gracias a la misión Cassini" style="height:200px; width:550px;"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/86/False_color_Cassini_image_of_jets_in_the_southern_hemisphere_of_Enceladus.jpg" alt="Jets de agua a presión emergen desde la superfice de Enceladus, gracias a la misión Cassini" style="height:250px; width:350px;"/>
 
 
 ## Más estados de la materia aún:
