@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Los estados de la materia y dónde encontrarlos
-mathjax: true
 ---
 
 La materia es de lo que están compuestas las cosas que te rodean: muebles, plantas, edificios, computadoras, estrellas, galaxias y todo lo que puedas imaginar. Quizá hasta nuestra propia imaginación pueda ser materia y aún sus propiedades no han sido encontradas. El estudio y comprensión de la materia ha sido un tema recurrente en la historia humana, teniendo miles de años de historia sobre cómo es la forma de describir la materia en la escala humana, pensando que materia es, básicamente sus dimensiones físicas observables (masa, altura, interacción con el medio, densidad, etc) serían fundamentales para su completa descripción. Así entonces fueron definidos tres estados fundamentales de la materia, los cuales están ferreamente ligados a la organización de la materia a escala microscópica: Estado sólido, estado líquido y estado gaseoso. Esta escala estaba estrechamente ligada a la temperatura la cual puede ser alcanzada dentro de nuestro humilde planeta tierra. 
