@@ -31,7 +31,7 @@ Al observar estas estructuras con telescopios es posible acceder a los secretos 
 
 las nubes de materia a baja densidad y temperatura es la más comun de identificar en el espacio interestelar. Las galaxias espirales como nuestra Vía Láctea presentan regiones con gigantezcas nubes de gas las que son llamadas "regiones de formación estelar", un nombre bastante descriptivo. El recién estrenado telescopio James Webb nos da una panorámica de una galaxia *espiral intermedia*, donde es posible ver la cantidad de materia contenida en sus brazos espirales. 
 
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/012.jpg" style="height:400px; width:250px;" />
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1566/012.jpg" style="height:500px; width:250px;" />
 
 Los planetas como Júpiter también están compuestos por gas, por supuesto. Al ver de cerca los planetas gaseosos podemos ver rastros de nubes interactuando entre si. La misión Juno revela detalles de la superficie de Jupiter.
 
@@ -48,7 +48,7 @@ El escenario de formación estelar es muy corto (alrededor de un millón de año
 
 Si un cuerpo sólido no es esférico significa que la masa total del cuerpo no ha sido suficiente para que la gravedad esculpa la forma esférica. Ejemplos de esto son cuerpos solidos pequeños de baja masa como asteroides, cometas y lunas. Pongo el ejemplo de la luna Pan, que parece un ravioli.
 
-<img src="https://apod.nasa.gov/apod/image/1707/PIA21449AtlasDaphnisPan_fig1.jpg" style="height:450px;width:150px;" />
+<img src="https://apod.nasa.gov/apod/image/1707/PIA21449AtlasDaphnisPan_fig1.jpg" style="height:450px;width:350px;" />
 
 3. Estado líquido: extrañísimo.
 
@@ -58,9 +58,9 @@ Por ejemplo, la luna de Saturno, Titán, cuenta con lagos y ríos de metano y et
 
 Las siguiente imágenes de la luna Enceladus por la sonda Voyager logró visualizar jets o chorros de agua a través de la superficie congelada de Enceladus.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Enceladus_from_Voyager.jpg" alt="La luna Enceladus a través de la óptica del Voyager." style="height:250px; width:350px;"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Enceladus_from_Voyager.jpg" alt="La luna Enceladus a través de la óptica del Voyager." style="height:350px; width:350px;"/>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/86/False_color_Cassini_image_of_jets_in_the_southern_hemisphere_of_Enceladus.jpg" alt="Jets de agua a presión emergen desde la superfice de Enceladus, gracias a la misión Cassini" style="height:250px; width:350px;"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/86/False_color_Cassini_image_of_jets_in_the_southern_hemisphere_of_Enceladus.jpg" alt="Jets de agua a presión emergen desde la superfice de Enceladus, gracias a la misión Cassini" style="height:350px; width:350px;"/>
 
 ## Más estados de la materia aún:
 
