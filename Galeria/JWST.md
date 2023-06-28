@@ -232,7 +232,7 @@ telescopio: JWST
 
             <div class="test_box box-12 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesNGC4321.html" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesNGC4254.html" class="test_click">
                         <div class="flex_this">
                             <h1 class="test_title">NGC4254</h1>
                         </div>
