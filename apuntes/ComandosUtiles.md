@@ -9,17 +9,22 @@ mathjax: true
 
 
 * Sumar una columna con awk:
-	awk '{SUM += $5} END {print SUM}'
-
+```
+awk '{SUM += $5} END {print SUM}'
+```
 * Comprimir/descomprimir archivos .tar.gz:
 Comprimir: 
-	tar -czvf empaquetado.tar.gz /carpeta/a/empaquetar/
+```
+tar -czvf empaquetado.tar.gz /carpeta/a/empaquetar/
+```
 Descomprimir: 
-	tar -xzvf archivo.tar.gz
-
+```
+tar -xzvf archivo.tar.gz
+```
 * Hace match entre dos palabras entre catalogos:
-	-grep -Ff <Catalogo con nombres> <Catalogo con información>
-
+```
+-grep -Ff <Catalogo con nombres> <Catalogo con información>
+```
 
 SQL VSA para VVV
 
