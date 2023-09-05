@@ -7,12 +7,10 @@ mathjax: true
 
 ### Recopilación comandos útiles 
 
-* agregar una columna nueva con la información "hola" al inicio de un archivo "d084.cat":
+* agregar una columna nueva en todas las filas con el texto "hola" al inicio de un archivo "d084.cat":
 ```
-sed 's/^/d084_v1 /' d084.cat > prueba
+sed 's/^/hola /' d084.cat > prueba
 ```
-donde "d084_v1" es el texto y 
-
 * Sumar una columna con awk:
 ```
 awk '{SUM += $5} END {print SUM}'
