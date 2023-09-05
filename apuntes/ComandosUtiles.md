@@ -7,7 +7,11 @@ mathjax: true
 
 ### Recopilación comandos útiles 
 
-* agregar 
+* agregar una columna nueva con la información "hola" al inicio de un archivo "d084.cat":
+```
+sed 's/^/d084_v1 /' d084.cat > prueba
+```
+donde "d084_v1" es el texto y 
 
 * Sumar una columna con awk:
 ```
@@ -57,7 +61,6 @@ maxra or 234.911892+360.0 between minra and maxra )
 ```
 
 * SQL query Para el catálogo VIVA: http://horus.roe.ac.uk/vsa/vvvGuide.html#VIVACatalogue
-
 ```
 SELECT ra,dec,vivaID,JAperMag3, JAperMag3Err, HAperMag3, HAperMag3Err, KsAperMag3, KsAperMag3Err, aVar,EJKs, EJKsErr, bestPeriod
 FROM vvvVivaCatalogue
