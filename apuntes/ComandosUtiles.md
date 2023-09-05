@@ -67,3 +67,11 @@ FROM vvvVivaCatalogue
 WHERE ra BETWEEN 191 AND 201
 ```
 (Descarga todo el catálogo entre 191 < RA < 201)
+
+
+### Alias típicos para asegurar uniformidad:
+
+```
+alias cl
+alias irafcl
+```
