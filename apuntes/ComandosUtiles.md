@@ -66,6 +66,11 @@ WHERE ra BETWEEN 191 AND 201
 ```
 (Descarga todo el catálogo entre 191 < RA < 201)
 
+* Página de CASU para obtener el tileID de cada cluster:
+
+http://casu.ast.cam.ac.uk/vistasp/imgquery/search
+
+Hay que poner las coordenadas del cluster y un radio de busqueda pequeño para que nos arroje el tile que lo contiene, de la forma "Ra Dec degrees".
 
 ### Alias típicos para asegurar uniformidad:
 
@@ -73,3 +78,6 @@ WHERE ra BETWEEN 191 AND 201
 alias cl
 alias irafcl
 ```
+
+### pasos para instalar gfortran3 en ubunutu 20 hacia arriba.
+https://gist.github.com/sakethramanujam/faf5b677b6505437dbdd82170ac55322

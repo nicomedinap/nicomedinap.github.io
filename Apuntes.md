@@ -12,7 +12,7 @@ A lo largo de los años he escrito sobre variadas cosas y acá pondré algunos t
 * [Mapa sismologico de sudamérica (2018)](https://nicomedinap.github.io/2018/11/09/Motivacion.html#Un-mapa-sismológico-de-Sudamérica)
 * [Ajustando la distribución normal (2022)](https://nicomedinap.github.io/2022/12/15/AjustandoUnaDistribucionNormal.html)
 
-Este espacio también será de pruebas para pyscript
+Espacio de pruebas para pyscript
 * [PyScript (2023)](https://nicomedinap.github.io/apuntes/PyScript.html)
 
-* [Comandos útiles para progranar (2023)](https://nicomedinap.github.io/apuntes/ComandosUtiles.html)
+* [Comandos útiles para programación y accesos a bases de datos(2023)](https://nicomedinap.github.io/apuntes/ComandosUtiles.html)
