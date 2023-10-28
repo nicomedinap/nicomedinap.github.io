@@ -69,8 +69,7 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 <input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE<label>
 <input id="glimpse" type="radio" name="survey" value="P/GLIMPSE360"><label for="glimpse">GLIMPSE 360<label>
 
-<script type="text/javascript" src="//aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8">
-</script>
+<script src='https://aladin.cds.unistra.fr/AladinLite/api/v3/2023-05-17/aladin.js' charset='utf-8'></script>
 
 <script type="text/javascript">
 var aladin;
