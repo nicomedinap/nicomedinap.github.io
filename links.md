@@ -72,6 +72,7 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 <script src='https://aladin.cds.unistra.fr/AladinLite/api/v3/2023-05-17/aladin.js' charset='utf-8'></script>
 
 <script type="text/javascript">
+
 var aladin;
 A.init.then(() => {
     aladin = A.aladin('#aladin-lite-div', {cooFrame: 'galactic', fov: 25});
@@ -81,8 +82,7 @@ A.init.then(() => {
     //    <declination of final position>,
     //    <animation duration in seconds>
     aladin.animateToRaDec(279.0997500, -23.9047499, 15);
-    aladin = A.aladin({fov:3});
-  
+	aladin.setFov(3)  
 });
 </script>
 
