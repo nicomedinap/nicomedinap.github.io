@@ -80,7 +80,7 @@ A.init.then(() => {
     //    <right ascension of final position>,
     //    <declination of final position>,
     //    <animation duration in seconds>
-    aladin.animateToRaDec(279.0997500, -23.9047499, 5);
+    aladin.animateToRaDec(279.0997500, -23.9047499, 15);
     aladin = A.aladin({fov:3});
   
 });
