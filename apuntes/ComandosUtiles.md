@@ -81,3 +81,14 @@ alias irafcl
 
 ### pasos para instalar gfortran3 en ubunutu 20 hacia arriba.
 https://gist.github.com/sakethramanujam/faf5b677b6505437dbdd82170ac55322
+
+
+### Búsqueda en el catálogo VIRAC
+
+info: https://vvv.herts.ac.uk
+
+Paper: https://vvv.herts.ac.uk/virac_v1.pdf
+
+SELECT ra,dec,rapm ,depm FROM vvvProperMotionCatalogue
+WHERE ra BETWEEN 278.9 AND 279.1 AND dec BETWEEN -24.0 AND -23.7 
+
