@@ -82,7 +82,7 @@ A.init.then(() => {
     //    <declination of final position>,
     //    <animation duration in seconds>
     aladin.animateToRaDec(279.0997500, -23.9047499, 15);
-	aladin.setFov(3)  
+	aladin.adjustFovForObject("M22") 
 });
 </script>
 
