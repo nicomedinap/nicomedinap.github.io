@@ -1,0 +1,61 @@
+---
+layout: post
+title: PyScript
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avance Dev • Alan Cruz</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="timeline">
+      <div class="container left">
+        <div class="content">
+          <h2>2023</h2>
+          <p>
+            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
+            admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis
+            iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
+            primis ea eam.
+          </p>
+        </div>
+      </div>
+      <div class="container right">
+        <div class="content">
+          <h2>2022</h2>
+          <p>
+            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
+            admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis
+            iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
+            primis ea eam.
+          </p>
+        </div>
+      </div>
+      <div class="container left">
+        <div class="content">
+          <h2>2021</h2>
+          <p>
+            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
+            admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis
+            iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
+            primis ea eam.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
