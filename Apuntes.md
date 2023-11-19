@@ -16,3 +16,6 @@ Espacio de pruebas para pyscript
 * [PyScript (2023)](https://nicomedinap.github.io/apuntes/PyScript.html)
 
 * [Comandos útiles para programación y accesos a bases de datos(2023)](https://nicomedinap.github.io/apuntes/ComandosUtiles.html)
+
+Linea temporal de eventos
+* (2023)](https://nicomedinap.github.io/apuntes/LineaTemporal.html)
