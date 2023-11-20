@@ -2,60 +2,96 @@
 layout: post
 title: PyScript
 ---
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avance Dev • Alan Cruz</title>
+<html>
+<head>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
+<style>
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="timeline">
-      <div class="container left">
-        <div class="content">
-          <h2>2023</h2>
-          <p>
-            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
-            admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis
-            iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
-            primis ea eam.
-          </p>
-        </div>
-      </div>
-      <div class="container right">
-        <div class="content">
-          <h2>2022</h2>
-          <p>
-            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
-            admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis
-            iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
-            primis ea eam.
-          </p>
-        </div>
-      </div>
-      <div class="container left">
-        <div class="content">
-          <h2>2021</h2>
-          <p>
-            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
-            admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis
-            iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto
-            primis ea eam.
-          </p>
-        </div>
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background-color: #000;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  border-radius: 50%;
+  top: 0;
+  left: 50%;
+  margin-left: -10px;
+}
+
+.timeline-item.left .timeline-content {
+  left: 70%;
+}
+
+.timeline-item.right .timeline-content {
+  left: 20%;
+}
+
+.timeline-content {
+  position: relative;
+  left: 30px;
+}
+
+.timeline-date {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.timeline-description {
+  margin-bottom: 10px;
+}
+</style>
+
+
+  <title>Timeline</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="timeline">
+    <div class="timeline-item right">
+      <div class="timeline-content">
+        <div class="timeline-date">2022</div>
+        <div class="timeline-description">Event 1</div>
+        <div class="timeline-description">Event 2</div>
+        <div class="timeline-description">Event 3</div>
       </div>
     </div>
-  </body>
+    <div class="timeline-item left">
+      <div class="timeline-content">
+        <div class="timeline-date">2023</div>
+        <div class="timeline-description">Event 2</div>
+      </div>
+    </div>
+    <div class="timeline-item right">
+      <div class="timeline-content">
+        <div class="timeline-date">2024</div>
+        <div class="timeline-description">Event 3</div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
