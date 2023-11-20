@@ -7,6 +7,9 @@ title: PyScript
 <html>
 <head>
 
+<!-- Tomado desde -->
+<!-- https://www.educative.io/answers/how-to-create-a-timeline-in-html -->
+
 <style>
 .timeline {
   position: relative;
