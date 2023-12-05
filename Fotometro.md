@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Fotometro
+mathjax: true
 ---
 {% include mathjax.html %}
 
