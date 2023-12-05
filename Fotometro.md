@@ -22,16 +22,20 @@ Para ejecutar el procedimiento, se requieren tres archivos: un archivo con pará
 5. TOP: Parámetro que mide el valor máximo del modelo PSF. El recomendado para las imágenes tiles es 40000.
 6. READ NOISE:
 
+Por defecto, estos parámetros se han estimados y 
+
 ### Búsquedas SQL 
 
 El proceso requiere de tres archivos, de los cuales dos de ellos deben ser obtenidos a través de la búsqueda SQL en la base de datos del Vista Science Archive [(VSA)](http://horus.roe.ac.uk/vsa/index.html){:target="_blank"}. 
 
-El proceso requiere saber cuáles son las imágenes y catálogos disponibles para ser descargados y luego analizados. Por lo que búsquedas SQL como la siguiente son necesarias:
+El proceso requiere saber cuáles son las imágenes y catálogos disponibles para ser descargados y luego analizados. Por lo que búsquedas SQL son necesarias. Para obtener toda la información disponible de un tile en particular, podemos ejecutar la siguiente búsqueda SQL en la base de datos de VSA:
 
 ```
-select distinct raBase,decBase from Multiframe as m, MultiframeEsoKeys
-as e where e.Multiframeid=m.Multiframeid and frameType like 'tilestack'
-and obsName like '%d085%'
+SELECT distinct raBase,decBase 
+FROM Multiframe as m, MultiframeEsoKeys as e 
+WHERE e.Multiframeid=m.Multiframeid 
+AND frameType like 'tilestack'
+AND obsName like '%d085%'
 ```
 
 ### Fotometría PSF
