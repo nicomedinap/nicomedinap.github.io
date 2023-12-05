@@ -5,20 +5,34 @@ mathjax: true
 ---
 {% include mathjax.html %}
 
-[páginas de Github](https://pages.github.com/){:target="_blank"}, 
+[páginas de Github](https://pages.github.com/){:target="_blank"} 
 
-## Sobre el proyecto Fotómetro
 
-El principal objetivo de **Fotómetro** es el brindar un espacio experimental para poder aportar en la divulgación de este vasto campo recurriendo a varios enfoques, como los lenguajes de programación y la matemática involucrada. Nunca he tenido claro qué es este espacio, la verdad. A mi me gusta visitarlo mucho. 
+
+
+## Fotómetro: series de tiempo con fotometría PSF desde la base de datos VVV/VVVX
+
+El anánisis fotométrico es fundamental para la caracterización masiva de estrellas alrededor de nuestra humilde tierra. 
+
+## Búsquedas SQL 
+
+
+## 
+
+
+## Calibración de los datos
+
+La calibración de la fotometría instrumental será llevada a cabo utilizando la fotometría de apertura disponible en la base de datos de CASU. Se tomarán todos los catálogos y se crearán las series de tiempo con las mediciones de apertura. Luego, se aplicarán reetricciones sobre la dispersión y amplitud de la serie de tiempo. 
+
+Las estrellas que presenten baja amplitud y dispersión fotométrica serán elegidas para la calibración de los datos al sistema VVV. Esta calibración debe ser realizada en cada una de las épocas disponibles. Con esto en mente, tenemos que la fotometría calibrada será: 
+
+<p>$$\displaystyle m_{cal} = m_{aper} \times m + b$$</p>
+
+
 
 ## Lista de cosas por hacer
 
-- [x] Crear un lugar para tu blog.
-- [x] Entender todos los aspectos del blog.
+- [x] Crear un sitio en el blog "Fotómetro"
+- [ ] Publicar código en github
 - [ ] Fotometría de los siguientes tiles
-- [ ] 
-
-<p>$$\displaystyle \frac{\rm dx}{\rm dt} = \sigma(y - x)$$</p>
-<p>$$\displaystyle \frac{\rm dy}{\rm dt} = x(\rho - z) - y$$</p>
-<p>$$\displaystyle \frac{\rm dz}{\rm dt} = xy - \beta z$$</p>
 
