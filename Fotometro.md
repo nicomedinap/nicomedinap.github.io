@@ -28,15 +28,20 @@ Por defecto, estos parámetros se han estimados y
 
 El proceso requiere de tres archivos, de los cuales dos de ellos deben ser obtenidos a través de la búsqueda SQL en la base de datos del Vista Science Archive [(VSA)](http://horus.roe.ac.uk/vsa/index.html){:target="_blank"}. 
 
-El proceso requiere saber cuáles son las imágenes y catálogos disponibles para ser descargados y luego analizados. Por lo que búsquedas SQL son necesarias. Para obtener toda la información disponible de un tile en particular, podemos ejecutar la siguiente búsqueda SQL en la base de datos de VSA:
+El proceso requiere saber cuáles son las imágenes y catálogos disponibles para ser descargados y luego analizados. Por lo que búsquedas SQL son necesarias. Para obtener toda la información disponible de un tile en particular TILE que debe ser proporcionado (por ejemplo, supongamos TILE=b259), podemos ejecutar la siguiente búsqueda SQL en la base de datos de VSA:
 
 ```
 SELECT distinct raBase,decBase 
 FROM Multiframe as m, MultiframeEsoKeys as e 
 WHERE e.Multiframeid=m.Multiframeid 
 AND frameType like 'tilestack'
-AND obsName like '%d085%'
+AND obsName like '%b259%'
 ```
+
+El resultado arrojará una tabla con una serie de coordenadas en Ascencion Recta ($RA$) y Declinación ($Dec$). Hay que elegir las coordenadas $RA_{max}$ y $RA_{min}$, como también $Dec_{min}$ y $Dec_{max}$ que deben ser usados en el siguiente paso para descargar las imágenes y catálogos fotométricos de apertura, los cuales serán descargados usando el método $\mathtt{wget}$.
+
+
+
 
 ### Fotometría PSF
 
