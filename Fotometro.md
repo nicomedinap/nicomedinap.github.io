@@ -26,8 +26,9 @@ La calibración de la fotometría instrumental será llevada a cabo utilizando l
 
 Las estrellas que presenten baja amplitud y dispersión fotométrica serán elegidas para la calibración de los datos al sistema VVV. Esta calibración debe ser realizada en cada una de las épocas disponibles. Con esto en mente, tenemos que la fotometría calibrada será: 
 
-<p>$$\displaystyle m_{cal} = m_{aper} \times m + b$$</p>
+<p>$$\displaystyle m_{cal} = m_{aper} \cdot s + b$$</p>
 
+donde $s$ es la pendiente del ajuste lineal.
 
 
 ## Lista de cosas por hacer
