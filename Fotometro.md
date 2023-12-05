@@ -13,16 +13,17 @@ El anánisis fotométrico es fundamental para la caracterización masiva de estr
 
 Al concluir exitósamente, Fotómetro devuelve el llamado catálogo "Multi - Época", el cual contiene las serie de tiempo de todas las fuentes estelares dentro del campo en estudio. Cada una de sus filas será una estrella diferente, y sus columnas representarán las épocas en el tiempo en las que han sido observadas. Por lo tanto, al tomar una de las filas de dicho catálogo, en realidad se está operando sobre la serie de tiempo de una estrella contenida en la región de estudio. 
 
-Para ejecutar el procedimiento, se requieren tres archivos: un archivo con parámetros fundamentales (a la que llamaremos "Lista de parámetros") y arbitrarios para el proceso. Y dos archivos con la lista de archivos disponibles para el análisis. La lista de parámetros contiene algunas cantidades que son arbitrarias y podrían afectar el resultado del proceso fotométrico. Algunos de ellos es
+Para ejecutar el procedimiento, se requieren tres archivos: un archivo con parámetros fundamentales (a la que llamaremos "Lista de parámetros") y arbitrarios para el proceso. Y dos archivos con la lista de archivos disponibles para el análisis. La lista de parámetros contiene algunas cantidades que son arbitrarias y podrían afectar el resultado del proceso fotométrico. Estos parámetros se discuten a continuación:
 
-1. El parámetro $\chi$, que cuantifica la razón entre el seeing medido y calculado a lo largo de la fotometría PSF.
-2. El parámetro $\sigma$-clipping, el cual considerará como posibles valores atípicos u "outliers" luego de cierta dispersión $\sigma$ dentro del ajuste lineal. 
-3. La dispersión máxima $\sigma_{max}$ que puede tener una estrella para ser considerada una estrella "estandar"
+1. El parámetro $\chi$, que cuantifica la razón entre el seeing medido y calculado a lo largo de la fotometría PSF. El valor límite es $\chi<3$.
+2. El parámetro $\sigma$-clipping, el cual considerará como posibles valores atípicos u "outliers" luego de cierta dispersión $\sigma$ dentro del ajuste lineal. El valor asignado es $\sigma=2$.
+3. La dispersión máxima $\sigma_{max}$ que puede tener una estrella para ser considerada una estrella "estandar". La dispersión maxima es $\sigma_{max}=0.05$ [mag]
 4. El número de epocas mínimo $N_{obs}$ para considerar la serie de tiempo de una fuente estelar.  
 5. TOP: Parámetro que mide el valor máximo del modelo PSF. El recomendado para las imágenes tiles es 40000.
-6. READ NOISE:
+6. READ OUT NOISE: 22.9
+7. GAIN: 4.3
 
-Por defecto, estos parámetros se han estimados y 
+Como están reportados, estos valores han sido elegidos dada la experiencia del uso de la pipeline, y pueden ser elegidos de forma diferente para así apuntar a cierta fenomenología particular a estudiar a través de la fotometría.
 
 ### Búsquedas SQL 
 
@@ -40,13 +41,11 @@ AND obsName like '%b259%'
 
 El resultado arrojará una tabla con una serie de coordenadas en Ascencion Recta ($RA$) y Declinación ($Dec$). Hay que elegir las coordenadas $RA_{max}$ y $RA_{min}$, como también $Dec_{min}$ y $Dec_{max}$ que deben ser usados en el siguiente paso para descargar las imágenes y catálogos fotométricos de apertura, los cuales serán descargados usando el método $\mathtt{wget}$.
 
-
-
-
 ### Fotometría PSF
 
-Dophot (citas) es uno de los programas fotométricos más exitosos dentro de la astronomía que realiza fotometría Point Spread Function (PSF). Al final, la idea final de este tipo de fotometría es el asumir que cada una de las estrellas detectadas en cada imagen puede ser caracterizada por una función en particular. 
+Dophot (citas) es uno de los programas fotométricos más exitosos dentro de la astronomía que realiza fotometría Point Spread Function (PSF). Al final, la idea final de este tipo de fotometría es el asumir que cada una de las estrellas detectadas en cada imagen puede ser caracterizada por una función en particular. DoPhot será aplicado independientemente en cada una de las imágenes disponibles para su análisis. El resultado será un catálogo de mediciones instrumentales, reportando cada fuente astronómicas en coordenadas físicas $(X,Y)$ que representan los píxeles de la imagen.
 
+Estas coordenadas físicas son transformadas a coordenadas RA y Dec usando la rutina de $\mathtt{IRAF}$ $\mathtt{wcsctran}$, con el fin de realizar la calibración astrométrica, usando para estos fines 7 decimales para maximizar la precisión de las coordenadas. 
 
 ### Calibración de los datos
 
@@ -61,6 +60,8 @@ donde $s$ es la pendiente del ajuste lineal y b el incercepto.
 ### Creación del catálogo
 
 Luego de obtener la fotometría calibrada para cada una de las épocas observadas, es necesario hacer un cross-match entre las coordenadas de cada uno de los catálogos, para así obtener las mediciones de cada estrella en cada momento en el periodo 2010-2015. 
+
+Utilizando una tolerancia en las coordenadas de 0.35 arco-segundos, se ha usado el software $\mathtt{STILTS}$ para realizar el cross-match y así crear iterativamente el catálogo fotométrico multi-épocas. 
 
 ### Utilidades del catálogo
 
