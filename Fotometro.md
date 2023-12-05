@@ -9,7 +9,7 @@ mathjax: true
 
 El anánisis fotométrico es fundamental para la caracterización masiva de estrellas alrededor de nuestra humilde tierra. 
 
-### El catálogo Multi - época
+### El catálogo Multi-época
 
 Al concluir exitósamente, Fotómetro devuelve el llamado catálogo "Multi - Época", el cual contiene las serie de tiempo de todas las fuentes estelares dentro del campo en estudio. Cada una de sus filas será una estrella diferente, y sus columnas representarán las épocas en el tiempo en las que han sido observadas. Por lo tanto, al tomar una de las filas de dicho catálogo, en realidad se está operando sobre la serie de tiempo de una estrella contenida en la región de estudio. 
 
@@ -49,6 +49,8 @@ Luego de obtener la fotometría calibrada para cada una de las épocas observada
 ### Utilidades del catálogo
 
 Por supuesto que tener el catálogo completo de las series de tiempo de una región de la galaxia tiene muchas posibilidades y casos de uso en astronomía. 
+
+Ha sido usado en (referencia), (referencia), (referencia), (referencia) y en (referencia).
 
 
 ### Lista de cosas por hacer
