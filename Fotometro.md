@@ -11,7 +11,7 @@ El anánisis fotométrico es fundamental para la caracterización masiva de estr
 
 ### El catálogo Multi-época
 
-Al concluir exitósamente, Fotómetro devuelve el llamado catálogo "Multi - Época", el cual contiene las serie de tiempo de todas las fuentes estelares dentro del campo en estudio. Cada una de sus filas será una estrella diferente, y sus columnas representarán las épocas en el tiempo en las que han sido observadas. Por lo tanto, al tomar una de las filas de dicho catálogo, en realidad se está operando sobre la serie de tiempo de una estrella contenida en la región de estudio. 
+Al concluir exitósamente, Fotómetro devuelve el llamado catálogo "Multi-Época", el cual contiene las serie de tiempo de todas las fuentes estelares dentro del campo en estudio. Cada una de sus filas será una estrella diferente, y sus columnas representarán las épocas en el tiempo en las que han sido observadas. Por lo tanto, al tomar una de las filas de dicho catálogo, en realidad se está operando sobre la serie de tiempo de una estrella contenida en la región de estudio. 
 
 Para ejecutar el procedimiento, se requieren tres archivos: un archivo con parámetros fundamentales (a la que llamaremos "Lista de parámetros") y arbitrarios para el proceso. Y dos archivos con la lista de archivos disponibles para el análisis. La lista de parámetros contiene algunas cantidades que son arbitrarias y podrían afectar el resultado del proceso fotométrico. Estos parámetros se discuten a continuación:
 
@@ -23,9 +23,9 @@ Para ejecutar el procedimiento, se requieren tres archivos: un archivo con pará
 6. READ OUT NOISE: 22.9
 7. GAIN: 4.3
 
-Como están reportados, estos valores han sido elegidos dada la experiencia del uso de la pipeline, y pueden ser elegidos de forma diferente para así apuntar a cierta fenomenología particular a estudiar a través de la fotometría.
+Como están reportados, estos valores han sido elegidos dada la experiencia del uso de la pipeline, y pueden ser elegidos de forma diferente para así apuntar a cierta fenomenología a estudiar a través de la fotometría.
 
-### Búsquedas SQL 
+### Búsquedas SQL en la base de datos
 
 El proceso requiere de tres archivos, de los cuales dos de ellos deben ser obtenidos a través de la búsqueda SQL en la base de datos del Vista Science Archive [(VSA)](http://horus.roe.ac.uk/vsa/index.html){:target="_blank"}. 
 
@@ -39,6 +39,9 @@ AND frameType like 'tilestack'
 AND obsName like '%b259%'
 ```
 
+Para consulta sobre la información dentro de las bases de datos de VSA, se puede visitar el [Glosario de VSA](http://vsa.roe.ac.uk/www/vsa_browser.html){:target="_blank"}.
+
+
 El resultado arrojará una tabla con una serie de coordenadas en Ascencion Recta ($RA$) y Declinación ($Dec$). Hay que elegir las coordenadas $RA_{max}$ y $RA_{min}$, como también $Dec_{min}$ y $Dec_{max}$ que deben ser usados en el siguiente paso para descargar las imágenes y catálogos fotométricos de apertura, los cuales serán descargados usando el método $\mathtt{wget}$.
 
 ### Fotometría PSF
@@ -49,13 +52,13 @@ Estas coordenadas físicas son transformadas a coordenadas RA y Dec usando la ru
 
 ### Calibración de los datos
 
-La calibración de la fotometría instrumental será llevada a cabo utilizando la fotometría de apertura disponible en la base de datos de CASU. Se tomarán todos los catálogos y se crearán las series de tiempo con las mediciones de apertura. Luego, se aplicarán reetricciones sobre la dispersión y amplitud de la serie de tiempo. 
+La calibración de la fotometría instrumental será llevada a cabo utilizando la fotometría de apertura disponible en la base de datos de CASU. Se tomarán todos los catálogos y se crearán las series de tiempo con las mediciones de apertura. Luego, se aplicarán reetricciones sobre la dispersión y amplitud de la serie de tiempo.
 
-Las estrellas que presenten baja amplitud y dispersión fotométrica serán elegidas para la calibración de los datos al sistema VVV. Esta calibración debe ser realizada en cada una de las épocas disponibles. Con esto en mente, tenemos que la fotometría calibrada será: 
+Las estrellas que presenten baja amplitud y dispersión fotométrica serán elegidas para la calibración de los datos al sistema fotométrico de VVV. Esta calibración debe ser realizada en cada una de las épocas disponibles. Con esto en mente, tenemos que la fotometría calibrada será: 
 
-<p> $$\displaystyle m_{cal} = m_{aper} \cdot s + b$$ </p>
+<p> $$\displaystyle m_{cal} = m_{aper} \cdot S + b + \epsilon$$ </p>
 
-donde $s$ es la pendiente del ajuste lineal y b el incercepto. 
+donde $S$ es la pendiente del ajuste lineal y b el incercepto. La incerteza $\sigma_{phot}$ del modelo antes usado será agregado a la medición fotométrica final de dicha observación. 
 
 ### Creación del catálogo
 
@@ -63,11 +66,24 @@ Luego de obtener la fotometría calibrada para cada una de las épocas observada
 
 Utilizando una tolerancia en las coordenadas de 0.35 arco-segundos, se ha usado el software $\mathtt{STILTS}$ para realizar el cross-match y así crear iterativamente el catálogo fotométrico multi-épocas. 
 
+### Espeficicaciones técnicas 
+
+Un laptop básico i4 equipado con Ubuntu puede procesar un tile del bulbo galáxctico aproximadamente 
+
+
+Lista de codigos para el [quality flag "deprecated"](http://horus.roe.ac.uk/vsa/masterDeprecationCodes.txt)
+
+### Estimación de tiempo 
+
+
 ### Utilidades del catálogo
 
 Por supuesto que tener el catálogo completo de las series de tiempo de una región de la galaxia tiene muchas posibilidades y casos de uso en astronomía. 
 
 Ha sido usado en (referencia), (referencia), (referencia), (referencia) y en (referencia).
+
+
+### Software usado y sus versiones
 
 
 ### Lista de cosas por hacer
