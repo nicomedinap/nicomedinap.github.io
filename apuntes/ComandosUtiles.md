@@ -58,6 +58,31 @@ and ( 234.911892 between minra and
 maxra or 234.911892+360.0 between minra and maxra )
 ```
 
+If you chose to produce results in csv format then a quick edit of the
+results file to remove the header just leaves the results like
+
+   +234.9118920, -55.1559540<tel:55.1559540>, 2188460
+   +234.9118920, -55.1559540<tel:55.1559540>, 2733137
+
+
+This file can then be used as input to multigetimage
+http://horus.roe.ac.uk:8080/vdfs/VMultiGetImage_form.jsp
+
+Set the "ID column" drop down to multiframeID and DO NOT select a waveband.
+
+The results of multigetImage for this example are temporarily at
+http://horus.roe.ac.uk/vsa/tmp/MultiGetImage/upload22458tmp_325dir/index.html
+(I did 1 arcmin)
+
+Some images will show as "missing" as the min/max RA/Dec held for the images describes an image aligned with RA/Dec which enloses the VVV images which are aligned with l/b.
+
+If you just want tiles change to frametype like 'tilestack'
+For pawprints frametype like 'stack'.
+
+The deprecated < 128 filters out earlier processing versions of the same observation (might not be necessary as I think they are probably not put in the release anyhow). You might like to set deprecated=0 to exclude images deprecated for any reason (depth, seeing etc)
+
+--
+
 * SQL query Para el catálogo VIVA: http://horus.roe.ac.uk/vsa/vvvGuide.html#VIVACatalogue
 ```
 SELECT ra,dec,vivaID,JAperMag3, JAperMag3Err, HAperMag3, HAperMag3Err, KsAperMag3, KsAperMag3Err, aVar,EJKs, EJKsErr, bestPeriod
