@@ -60,15 +60,12 @@ maxra or 234.911892+360.0 between minra and maxra )
 
 If you chose to produce results in csv format then a quick edit of the
 results file to remove the header just leaves the results like
+```
++234.9118920, -55.1559540<tel:55.1559540>, 2188460
++234.9118920, -55.1559540<tel:55.1559540>, 2733137
+```
 
-   +234.9118920, -55.1559540<tel:55.1559540>, 2188460
-   +234.9118920, -55.1559540<tel:55.1559540>, 2733137
-
-
-This file can then be used as input to multigetimage
-http://horus.roe.ac.uk:8080/vdfs/VMultiGetImage_form.jsp
-
-Set the "ID column" drop down to multiframeID and DO NOT select a waveband.
+Este archivo puede ser usado como un input en [multigetimage](http://horus.roe.ac.uk:8080/vdfs/VMultiGetImage_form.jsp), lo que se debe hacer es setear el "ID column" en la opción multiframeID y NO SELECCIONAR ninguna longitud de onda específica. El resultado de este proceso
 
 The results of multigetImage for this example are temporarily at
 http://horus.roe.ac.uk/vsa/tmp/MultiGetImage/upload22458tmp_325dir/index.html
