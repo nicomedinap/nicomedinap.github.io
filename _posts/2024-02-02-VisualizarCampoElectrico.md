@@ -1336,9 +1336,9 @@ $$\vec{E} = -\vec{\nabla}\phi(\vec{x}),$$<p>es decir, el campo eléctrico en rea
 <p>Como siempre, agradecido por su tiempo y atención!</p>
 <p>Links a enlaces de referencia:</p>
 <ol>
-<li><a href="https://scipython.com/blog/visualizing-a-vector-field-with-matplotlib/">Learning Scientific Programming with Python</a></li>
-<li><a href="https://nbviewer.org/github/barbagroup/AeroPython/tree/master/">Aeropython</a></li>
-<li><a href="https://github.com/gfrubi/electrodinamica">Apuntes de Electrodinamica de G. Rubilar.</a></li>
+<li><a target="_blank" href="https://scipython.com/blog/visualizing-a-vector-field-with-matplotlib/">Learning Scientific Programming with Python</a></li>
+<li><a target="_blank" href="https://nbviewer.org/github/barbagroup/AeroPython/tree/master/">Aeropython</a></li>
+<li><a target="_blank" href="https://github.com/gfrubi/electrodinamica">Apuntes de Electrodinamica de G. Rubilar.</a></li>
 </ol>
 
 </div>
