@@ -46,4 +46,4 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 * [Apuntes sobre el template usado en este blog.](https://jekyllrb.com/resources/){:target="_blank"}
 * [aeropython](https://nbviewer.org/github/barbagroup/AeroPython/tree/master/lessons/){:target="_blank"} : aerodinamica con python
 * [Visualización del catálogo messier](https://kosmoved.ru/messier/messier-catalog.php?lang=spa){:target="_blank"}
-
+* http://flothesof.github.io Visualizacion de datos.
