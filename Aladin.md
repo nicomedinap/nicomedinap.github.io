@@ -14,7 +14,7 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 
 
 <!-- insert this snippet where you want Aladin Lite viewer to appear -->
-<div id="aladin-lite-div" style="width:250px;height:700px;"></div>
+<div id="aladin-lite-div" style="width:350px;height:600px;"></div>
 
 <input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color<label>
 <input id="DSS-blue" type="radio" name="survey" value="P/DSS2/blue"><label for="DSS-blue">DSS blue<label>
