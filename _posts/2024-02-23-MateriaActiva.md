@@ -154,6 +154,17 @@ $$<p>Además, el término $\eta\ (t)$ agrega una perturbación aleatoria en la d
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/shorts/AQeqIJLC8lM?feature=share"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+        
+</div>
 
 
 <div class="text_cell_render border-box-sizing rendered_html">
