@@ -149,15 +149,14 @@ $$<p>Además, el término $\eta\ (t)$ agrega una perturbación aleatoria en la d
     </div>
 </div>
 </div>
-
 </div>
 
-<p>Un video extendido de esta simulación puede ser encontrado en mi en mi <a href="https://www.youtube.com/shorts/AQeqIJLC8lM?feature=share" target="_blank">canal de youtube instagram</a> o en mi cuenta de instagram <a href="https://www.instagram.com/nicomediap/" target="_blank">@nicomediap</a></p>
+
+<p>Un video extendido de esta simulación puede ser encontrado en mi en mi <a href="https://www.youtube.com/shorts/AQeqIJLC8lM?feature=share" target="_blank">canal de youtube </a> o en mi cuenta de instagram <a href="https://www.instagram.com/nicomediap/" target="_blank">@nicomediap</a></p>
 <p>¡Gracias por la atención!</p>
 
-</div>
-</div>
-</div>
+
+
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
