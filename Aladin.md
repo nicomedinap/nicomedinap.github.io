@@ -14,7 +14,7 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 
 
 <!-- insert this snippet where you want Aladin Lite viewer to appear -->
-<div id="aladin-lite-div" style="width:280px;height:600px;"></div>
+<div id="aladin-lite-div" style="width:350px;height:650px;"></div>
 
 <input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color<label>
 <input id="DSS-blue" type="radio" name="survey" value="P/DSS2/blue"><label for="DSS-blue">DSS blue<label>
@@ -27,7 +27,7 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 <script type="text/javascript">
 let aladin;
 A.init.then(() => {
-    aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:1.5, target: "18 06 03 -23 41 20"});
+    aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:3.5, target: "18 06 03 -23 41 20"});
 });
     $('input[name=survey]').change(function() {
     aladin.setImageSurvey($(this).val());
