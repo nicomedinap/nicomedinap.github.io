@@ -22,7 +22,7 @@
 
 .timeline-item {
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .timeline-item::after {
