@@ -4,7 +4,7 @@
 <style>
 .timeline {
   position: relative;
-  max-width: 800px;
+  max-width: 250px;
   margin: 0 auto;
   padding: 40px 20px;
 }
@@ -52,7 +52,7 @@
 }
 
 .timeline-item:nth-child(even) .timeline-content {
-  left: 0;
+  left: -50%;
 }
 
 .timeline-item:nth-child(odd) .timeline-content {
@@ -61,6 +61,10 @@
 </style>
 </head>
 <body>
+
+  <p> Fuente: https://www.memoriachilena.gob.cl/602/w3-article-100576.html#cronologia
+  </p>
+
   <div class="timeline">
     <div class="timeline-item">
       <div class="timeline-content">
