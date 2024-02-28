@@ -70,6 +70,7 @@ title: PyScript
 </style>
 
 
+
   <title>Timeline</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -77,23 +78,27 @@ title: PyScript
   <div class="timeline">
     <div class="timeline-item right">
       <div class="timeline-content">
-        <div class="timeline-date">2022</div>
-        <div class="timeline-description">Event 1</div>
+        <div class="timeline-date">1849</div>
+        <div class="timeline-description">Se instala en el Cerro Santa \nLucia un observatorio astronómico \na cargo del científico estadounidense James \nMelville Gillis. Este es el primer \nobservatorio de Latinoamérica</div>
         <div class="timeline-description">Event 2</div>
-        <div class="timeline-description">Event 3</div>
       </div>
     </div>
     <div class="timeline-item left">
       <div class="timeline-content">
-        <div class="timeline-date">2023</div>
-        <div class="timeline-description">Event 2</div>
+        <div class="timeline-date">1850</div>
+        <div class="timeline-description">Ignacio Domeyko propone la \ncompra de las instalaciones del Cerro \nSanta Lucia</div>
       </div>
     </div>
     <div class="timeline-item right">
       <div class="timeline-content">
-        <div class="timeline-date">2024</div>
-        <div class="timeline-description">Event 3</div>
+        <div class="timeline-date">1852</div>
+        <div class="timeline-description">Se inaugura el Observatorio Nacional mediante un Decreto del Presidente Manuel Montt'</div>
       </div>
+    <div class="timeline-item right">
+      <div class="timeline-content">
+        <div class="timeline-date">1855</div>
+        <div class="timeline-description">Se decreta el traslado del Observatorio Nacional al Parque Quinta Normal de Agricultura'</div>
+    </div>
     </div>
   </div>
 </body>
