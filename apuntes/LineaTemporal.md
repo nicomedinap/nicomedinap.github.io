@@ -60,10 +60,10 @@
 }
 </style>
 </head>
+
 <body>
 
-  <p> Fuente: https://www.memoriachilena.gob.cl/602/w3-article-100576.html#cronologia
-  </p>
+  <p> Fuente: https://www.memoriachilena.gob.cl/602/w3-article-100576.html#cronologia</p>
 
   <div class="timeline">
     <div class="timeline-item">
