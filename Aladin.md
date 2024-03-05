@@ -27,7 +27,7 @@ Tómate un tiempo, y explora nuestra galaxia y el universo!
 <script type="text/javascript">
 let aladin;
 A.init.then(() => {
-    aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:3.5, target: "18 06 03 -23 41 20"});
+    aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:15.5, target: "18 06 03 -23 41 20"});
 
     aladin.gotoRaDec(266.41683, -29.00781);
     aladin.animateToRaDec(305.5, 38.5, 70);
