@@ -27,8 +27,7 @@ Conceptos previos
 * Simetrías y cantidades conservadas: Característica de la geometría y otras definiciones abstractas, que relaciona la invariancia bajo ciertas transformaciones, como, por ejemplo, movimientos.
 
 
-
-## Sobre vectores y su álgebra
+### Sobre vectores y su álgebra
 
 Cualquier persona que ha manipulado una expresión matemática alguna vez en su vida debe haber notado que estas pueden tomar longuitudes inesperadas, por decirlo menos. Y en el mundo real, típico que es necesario definir objetos con multiples componentes, ¿Verdad? Es por ello que conviene usar un lenguaje que sea lo suficientemente compacto y en el cual no se pierda información en el proceso.
 
@@ -42,21 +41,127 @@ $$
 $$
 
 
+## Unidad 1: Elementos de relatividad general.
 
-## Introducción al electromagnetísmo
+1. Breve repaso de la teoría electromagnética de James Clerk Maxwell.
+2. Los principios de la relatividad.
+3. La relatividad especial de Einstein.
+4. La necesidad de la relatividad general.
+5. Relatividad general y sus alcances.
 
-Basado en el trabajo de Publicadas en 1865, compila el trabajo de Charles Coulomb, André-Marie Ampère, felix Savart, Jean-Baptiste Biot Michael Faraday y Hans Christian Orsted; James Clerk Maxwell (1832-1879) 
+### Bibliografía unidad 1.
+
+Teoría de la relatividad General, de Bert Janssen. [LINK](https://www.ugr.es/~bjanssen/text/BertJanssen-RelatividadGeneral.pdf)
+
+Electrodinámica, de Guillermo Rubilar. [LINK](https://drive.google.com/viewer?url=https://github.com/gfrubi/electrodinamica/raw/master/electrodinamica.pdf)
+
+Wikipedia: Iré recolectando los links desde dónde tome información, y la iré dejando acá abajo.
+
+[Einstein’s steady-state theory: an abandoned model of the
+cosmos](https://arxiv.org/pdf/1402.0132.pdf)
+
+
+### 1.- Breve repaso de la teoría electromagnética de James Clerk Maxwell
+
+Publicadas en 1865, James Clerk Maxwell (1832-1879) compiló el trabajo de Charles Coulomb, André-Marie Ampère, felix Savart, Jean-Baptiste Biot Michael Faraday y Hans Christian Orsted; 
+
+$$
+\textbf{Maxwell's Equations:}
+
+\textbf{Gauss's Law for Electricity:}
+\begin{equation*}
+\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
+\end{equation*}
+
+\textbf{Gauss's Law for Magnetism:}
+\begin{equation*}
+\nabla \cdot \mathbf{B} = 0
+\end{equation*}
+
+\textbf{Faraday's Law of Induction:}
+\begin{equation*}
+\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
+\end{equation*}
+
+\textbf{Ampère's Law with Maxwell's Addition:}
+\begin{equation*}
+\nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
+\end{equation*}
+$$
 
 
 
+### Ondas en el vacío 
+
+$$
+\textbf{Wave Equation of Electromagnetics:}
+
+\textbf{For Electric Field (\(\mathbf{E}\)):}
+\begin{equation*}
+\nabla^2 \mathbf{E} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0
+\end{equation*}
+
+\textbf{For Magnetic Field (\(\mathbf{B}\)):}
+\begin{equation*}
+\nabla^2 \mathbf{B} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{B}}{\partial t^2} = 0
+\end{equation*}
+
+Where:
+\begin{itemize}
+    \item \(\mathbf{E}\) is the electric field vector,
+    \item \(\mathbf{B}\) is the magnetic field vector,
+    \item \(\nabla^2\) is the Laplacian operator (divergence of the gradient),
+    \item \(\mu_0\) is the permeability of free space (\(4\pi \times 10^{-7}\) H/m),
+    \item \(\varepsilon_0\) is the permittivity of free space (\(8.854 \times 10^{-12}\) F/m), and
+    \item \(\frac{\partial^2}{\partial t^2}\) denotes the second partial derivative with respect to time.
+\end{itemize}
+$$
 
 
+Taking the curl of Faraday's law:
 
+$$
+\[
+\nabla \times \left( \nabla \times \mathbf{E} \right) = -\nabla \times \frac{\partial \mathbf{B}}{\partial t}
+\]
+$$
 
+Using vector calculus identity 
 
+$$
+\(\nabla \times \left( \nabla \times \mathbf{E} \right) = \nabla (\nabla \cdot \mathbf{E}) - \nabla^2 \mathbf{E}\) and \(\nabla \cdot \mathbf{E} = 0\), 
+$$
+we get:
 
+$$
+\[
+\nabla^2 \mathbf{E} = -\frac{\partial}{\partial t} (\nabla \times \mathbf{B})
+\]
+$$
 
+Substituting Ampère's Law, 
 
+$$
+\(\nabla \times \mathbf{B} = \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}\), 
+$$
+
+into the equation:
+
+$$
+\[
+\nabla^2 \mathbf{E} = -\frac{\partial}{\partial t} \left( \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
+\]
+$$
+
+Similarly, we can derive the equation for $\(\mathbf{B}\)$:
+
+$$
+\[
+\nabla^2 \mathbf{B} = -\frac{\partial}{\partial t} \left( \mu_0 \varepsilon_0 \frac{\partial \mathbf{B}}{\partial t} \right)
+\]
+$$
+
+These equations represent the wave equations for the electric and magnetic fields in vacuum. They describe how electromagnetic waves propagate through space without any external sources of charge or current.
 
 
 
