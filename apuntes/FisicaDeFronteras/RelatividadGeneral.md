@@ -65,100 +65,100 @@ cosmos](https://arxiv.org/pdf/1402.0132.pdf)
 
 Publicadas en 1865, James Clerk Maxwell (1832-1879) compiló el trabajo de Charles Coulomb, André-Marie Ampère, felix Savart, Jean-Baptiste Biot Michael Faraday y Hans Christian Orsted; 
 
+
+Maxwell's Equations:
+
+Gauss's Law for Electricity:
+
 $$
-\textbf{Maxwell's Equations:}
-
-\textbf{Gauss's Law for Electricity:}
-\begin{equation*}
 \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
-\end{equation*}
+$$
 
-\textbf{Gauss's Law for Magnetism:}
-\begin{equation*}
+Gauss's Law for Magnetism:
+$$
 \nabla \cdot \mathbf{B} = 0
-\end{equation*}
+$$
 
-\textbf{Faraday's Law of Induction:}
-\begin{equation*}
+Faraday's Law of Induction:
+$$
 \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
-\end{equation*}
+$$
 
-\textbf{Ampère's Law with Maxwell's Addition:}
-\begin{equation*}
+Ampère's Law with Maxwell's Addition:
+
+$$
 \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
-\end{equation*}
 $$
 
 
 
 ### Ondas en el vacío 
 
+
+Wave Equation of Electromagnetics:
+
+For Electric Field $\mathbf{E}$:
+
 $$
-\textbf{Wave Equation of Electromagnetics:}
-
-\textbf{For Electric Field (\(\mathbf{E}\)):}
-\begin{equation*}
 \nabla^2 \mathbf{E} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0
-\end{equation*}
+$$
 
-\textbf{For Magnetic Field (\(\mathbf{B}\)):}
-\begin{equation*}
+
+For Magnetic Field $\mathbf{B}$:
+
+$$
 \nabla^2 \mathbf{B} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{B}}{\partial t^2} = 0
-\end{equation*}
+$$
 
 Where:
-\begin{itemize}
-    \item \(\mathbf{E}\) is the electric field vector,
-    \item \(\mathbf{B}\) is the magnetic field vector,
-    \item \(\nabla^2\) is the Laplacian operator (divergence of the gradient),
-    \item \(\mu_0\) is the permeability of free space (\(4\pi \times 10^{-7}\) H/m),
-    \item \(\varepsilon_0\) is the permittivity of free space (\(8.854 \times 10^{-12}\) F/m), and
-    \item \(\frac{\partial^2}{\partial t^2}\) denotes the second partial derivative with respect to time.
-\end{itemize}
-$$
+
+* $\mathbf{E}$ is the electric field vector,
+* $\mathbf{B}$ is the magnetic field vector,
+* $\nabla^2$ is the Laplacian operator (divergence of the gradient),
+* $\mu_0$ is the permeability of free space $4\pi \times 10^{-7}$ H/m,
+* $\varepsilon_0$ is the permittivity of free space $8.854 \times 10^{-12}$ F/m, and
+* $\frac{\partial^2}{\partial t^2}$ denotes the second partial derivative with respect to time.
 
 
 Taking the curl of Faraday's law:
 
 $$
-\[
 \nabla \times \left( \nabla \times \mathbf{E} \right) = -\nabla \times \frac{\partial \mathbf{B}}{\partial t}
-\]
 $$
 
 Using vector calculus identity 
 
 $$
-\(\nabla \times \left( \nabla \times \mathbf{E} \right) = \nabla (\nabla \cdot \mathbf{E}) - \nabla^2 \mathbf{E}\) and \(\nabla \cdot \mathbf{E} = 0\), 
+\nabla \times \left( \nabla \times \mathbf{E} \right) = \nabla (\nabla \cdot \mathbf{E}) - \nabla^2 \mathbf{E}
 $$
+
+and 
+$$
+\nabla \cdot \mathbf{E} = 0, 
+$$
+
 we get:
 
 $$
-\[
 \nabla^2 \mathbf{E} = -\frac{\partial}{\partial t} (\nabla \times \mathbf{B})
-\]
 $$
 
 Substituting Ampère's Law, 
 
 $$
-\(\nabla \times \mathbf{B} = \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}\), 
+\nabla \times \mathbf{B} = \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}, 
 $$
 
 into the equation:
 
 $$
-\[
 \nabla^2 \mathbf{E} = -\frac{\partial}{\partial t} \left( \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
-\]
 $$
 
-Similarly, we can derive the equation for $\(\mathbf{B}\)$:
+Similarly, we can derive the equation for $\mathbf{B}$:
 
 $$
-\[
 \nabla^2 \mathbf{B} = -\frac{\partial}{\partial t} \left( \mu_0 \varepsilon_0 \frac{\partial \mathbf{B}}{\partial t} \right)
-\]
 $$
 
 These equations represent the wave equations for the electric and magnetic fields in vacuum. They describe how electromagnetic waves propagate through space without any external sources of charge or current.
