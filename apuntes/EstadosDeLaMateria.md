@@ -79,7 +79,7 @@ Algunos de estos estados son:
 5. Aquí podría ir un estado de la materia que tu, estimado lector, podrías descubrir.
 
 
-## ¿En realidad el sol es un lugar extremos?
+## ¿En realidad el sol es un lugar extremo?
 
 Lo impresionante aquí es darse cuenta que nuestro sol es una bola de plasma, y en principio todas las estrellas son bolas de plasma, entonces este estado de la materia es muy común en el universo. Basta apuntar a cualquier estrella para identificar materia en forma de plasma. Quizá todo en realidad sea al revés, y sea el ambiente controlado donde existe esta transición de materia llamada "liquida" lo que potencia a la vida, dadas sus propiedades altamente adaptables al medio ambiente.
 
