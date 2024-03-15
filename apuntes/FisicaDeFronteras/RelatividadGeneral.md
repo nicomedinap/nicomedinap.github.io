@@ -68,8 +68,8 @@ Gauss's Law for Electricity:
 
  Ejemplo | tabla
 :---: | :---:
-Ley de Gauss para el campo eléctrico | $\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$
-Ley de Gauss para el campo magnético | $\nabla \cdot \mathbf{B} = 0 $
+Ley de Gauss para el campo eléctrico | $$\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$$
+Ley de Gauss para el campo magnético | $$\nabla \cdot \mathbf{B} = 0 $$
 
 Faraday's Law of Induction:
 $$
