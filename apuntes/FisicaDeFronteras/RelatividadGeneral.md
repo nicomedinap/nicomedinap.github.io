@@ -5,7 +5,7 @@ mathjax: true
 ---
 {% include mathjax.html %}
 
-## Apuntes del curso "Física de fronteras" para pedagogía en matemáticas y física, Universidad de Talca.
+### Apuntes del curso "Física de fronteras" para pedagogía en matemáticas y física, Universidad de Talca.
 
 Estimado estudiantado,
 
@@ -27,7 +27,7 @@ Conceptos previos
 * Simetrías y cantidades conservadas: Característica de la geometría y otras definiciones abstractas, que relaciona la invariancia bajo ciertas transformaciones, como, por ejemplo, movimientos.
 
 
-### Sobre vectores y su álgebra
+#### Sobre vectores y su álgebra
 
 Cualquier persona que ha manipulado una expresión matemática alguna vez en su vida debe haber notado que estas pueden tomar longuitudes inesperadas, por decirlo menos. Y en el mundo real, típico que es necesario definir objetos con multiples componentes, ¿Verdad? Es por ello que conviene usar un lenguaje que sea lo suficientemente compacto y en el cual no se pierda información en el proceso.
 
@@ -41,7 +41,7 @@ $$
 $$
 
 
-## Unidad 1: Elementos de relatividad general.
+#### Unidad 1: Elementos de relatividad general.
 
 1. Breve repaso de la teoría electromagnética de James Clerk Maxwell.
 2. Los principios de la relatividad.
@@ -49,7 +49,7 @@ $$
 4. La necesidad de la relatividad general.
 5. Relatividad general y sus alcances.
 
-### Bibliografía unidad 1.
+#### Bibliografía unidad 1.
 
 Teoría de la relatividad General, de Bert Janssen. [LINK](https://www.ugr.es/~bjanssen/text/BertJanssen-RelatividadGeneral.pdf)
 
