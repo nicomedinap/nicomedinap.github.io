@@ -56,27 +56,20 @@ $$
 
 Wikipedia: Iré recolectando los links desde dónde tome información, y la iré dejando acá abajo.
 
-[Einstein’s steady-state theory: an abandoned model of the
+<ins> .</ins> [Einstein’s steady-state theory: an abandoned model of the
 cosmos](https://arxiv.org/pdf/1402.0132.pdf)
 
 
 ### 1.- Breve repaso de la teoría electromagnética de James Clerk Maxwell
 
-Publicadas en 1865, James Clerk Maxwell (1832-1879) compiló el trabajo de Charles Coulomb, André-Marie Ampère, felix Savart, Jean-Baptiste Biot Michael Faraday y Hans Christian Orsted; 
-
-
-Maxwell's Equations:
+Publicadas en 1865, James Clerk Maxwell (1832-1879) compiló el trabajo de Charles Coulomb, André-Marie Ampère, felix Savart, Jean-Baptiste Biot Michael Faraday y Hans Christian Orsted. Condensó en 4 expresiones (ya sean de forma diferencial y/o integral), las cuales tienen la siguiente forma:
 
 Gauss's Law for Electricity:
 
-$$
-\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
-$$
-
-Gauss's Law for Magnetism:
-$$
-\nabla \cdot \mathbf{B} = 0
-$$
+ Ejemplo | tabla
+:---: | :---:
+Ley de Gauss para el campo eléctrico | $\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$
+Ley de Gauss para el campo magnético | $\nabla \cdot \mathbf{B} = 0 $
 
 Faraday's Law of Induction:
 $$
@@ -89,9 +82,9 @@ $$
 \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
 $$
 
+#### Demostración de que las ondas electromagnéticas en el vacío son ondas que viajan a la velocidad de la luz
 
-
-### Ondas en el vacío 
+#### Ondas en el vacío 
 
 
 Wave Equation of Electromagnetics:
@@ -164,10 +157,15 @@ These equations represent the wave equations for the electric and magnetic field
 
 
 
-### Demostración de que las ondas electromagnéticas en el vacío son ondas que viajan a la velocidad de la luz
 
 
 
-## Conceptos de relatividad
 
-##  
+#### Conceptos de relatividad
+
+
+Escena del tren en Top Secret
+
+https://www.youtube.com/watch?v=A_peCIVBTAY
+
+
