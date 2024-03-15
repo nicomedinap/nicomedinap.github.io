@@ -5,7 +5,7 @@ mathjax: true
 ---
 {% include mathjax.html %}
 
-### Apuntes del curso "Física de fronteras" para pedagogía en matemáticas y física, Universidad de Talca.
+## Apuntes del curso "Física de fronteras" para pedagogía en matemáticas y física, Universidad de Talca.
 
 Estimado estudiantado,
 
@@ -15,16 +15,16 @@ Algunos cálculos que quizá no son vitales para el entendimiento de este curso,
 
 Conceptos previos 
 
-* Sistema de referencia: Elección de un punto de referencia, usualmente denominado “O”, desde donde se determinan las cantidades físicas observable. 
-* Sistema de coordenadas: Construcción puramente matemática, con el cual se busca la representación de las relaciones matemáticas. Los valores medidos de las cantidades físicas son independientes del sistema coordenado. 
-* Partícula: Por excelencia, el uso del método griego de la “abstracción". Es abstraer un cuerpo de masa M en un punto para no tener en cuenta  su forma.
-* Suceso: Cualquier cosa o evento que ocurra en un punto del espacio, en un instante dado. La posición de un suceso queda operacionalmente definida por cuatro datos $(x,y,x,t)$. La posición de una partícula es definida, por ejemplo, como un suceso.
-* Movimiento: Cambio “continuo” de sucesos (posición) definido con respecto a un sistema de referencia inercial.
-* Sistema de referencia inercial (SRI): En mecánica Newtoniana, un SRI es un sistema donde las leyes de movimiento cumplen las leyes de Newton.
-* Campo: Una teoría de campos se diferencia de una teoría discreta por poseer  un número infinito (continuo) de grados de libertad.
-* Grados de libertad: número mínimo de coordenadas independientes (escalares) necesarias para determinar simultáneamente la posición de cada partícula en un sistema dinámico.
-* Tiempo: Magnitud física que permite ordenar la secuencia de los sucesos, estableciendo un pasado, un presente y un futuro.
-* Simetrías y cantidades conservadas: Característica de la geometría y otras definiciones abstractas, que relaciona la invariancia bajo ciertas transformaciones, como, por ejemplo, movimientos.
+* <ins>Sistema de referencia:</ins> Elección de un punto de referencia, usualmente denominado “O”, desde donde se determinan las cantidades físicas observable. 
+* <ins>Sistema de coordenadas:</ins> Construcción puramente matemática, con el cual se busca la representación de las relaciones matemáticas. Los valores medidos de las cantidades físicas son independientes del sistema coordenado. 
+* <ins>Partícula:</ins> Por excelencia, el uso del método griego de la “abstracción". Es abstraer un cuerpo de masa M en un punto para no tener en cuenta  su forma.
+* <ins>Suceso:</ins> Cualquier cosa o evento que ocurra en un punto del espacio, en un instante dado. La posición de un suceso queda operacionalmente definida por cuatro datos $(x,y,x,t)$. La posición de una partícula es definida, por ejemplo, como un suceso.
+* <ins>Movimiento:</ins> Cambio “continuo” de sucesos (posición) definido con respecto a un sistema de referencia inercial.
+* <ins>Sistema de referencia inercial (SRI):</ins> En mecánica Newtoniana, un SRI es un sistema donde las leyes de movimiento cumplen las leyes de Newton.
+* <ins>Campo:</ins> Una teoría de campos se diferencia de una teoría discreta por poseer  un número infinito (continuo) de grados de libertad.
+* <ins>Grados de libertad:</ins> número mínimo de coordenadas independientes (escalares) necesarias para determinar simultáneamente la posición de cada partícula en un sistema dinámico.
+* <ins>Tiempo:</ins> Magnitud física que permite ordenar la secuencia de los sucesos, estableciendo un pasado, un presente y un futuro.
+* <ins>Simetrías y cantidades conservadas:</ins> Característica de la geometría y otras definiciones abstractas, que relaciona la invariancia bajo ciertas transformaciones, como, por ejemplo, movimientos.
 
 
 #### Sobre vectores y su álgebra
@@ -40,7 +40,6 @@ $$
 \end{align}
 $$
 
-
 #### Unidad 1: Elementos de relatividad general.
 
 1. Breve repaso de la teoría electromagnética de James Clerk Maxwell.
@@ -51,9 +50,9 @@ $$
 
 #### Bibliografía unidad 1.
 
-Teoría de la relatividad General, de Bert Janssen. [LINK](https://www.ugr.es/~bjanssen/text/BertJanssen-RelatividadGeneral.pdf)
+<ins>Teoría de la relatividad General, de Bert Janssen.</ins> [LINK](https://www.ugr.es/~bjanssen/text/BertJanssen-RelatividadGeneral.pdf)
 
-Electrodinámica, de Guillermo Rubilar. [LINK](https://drive.google.com/viewer?url=https://github.com/gfrubi/electrodinamica/raw/master/electrodinamica.pdf)
+<ins>Electrodinámica, de Guillermo Rubilar.</ins> [LINK](https://drive.google.com/viewer?url=https://github.com/gfrubi/electrodinamica/raw/master/electrodinamica.pdf)
 
 Wikipedia: Iré recolectando los links desde dónde tome información, y la iré dejando acá abajo.
 
