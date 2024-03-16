@@ -66,7 +66,7 @@ cosmos](https://arxiv.org/pdf/1402.0132.pdf)
 Publicadas en 1865, James Clerk Maxwell (1832-1879) compiló el trabajo de Charles Coulomb, André-Marie Ampère, felix Savart, Jean-Baptiste Biot Michael Faraday y Hans Christian Orsted. Condensó en 4 expresiones (ya sean de forma diferencial y/o integral), las cuales tienen la siguiente forma:
 
 :---: | :---:
-Ley de Gauss para el campo eléctrico | $ \displaystyle \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$$
+Ley de Gauss para el campo eléctrico | $ \displaystyle \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$
 Ley de Gauss para el campo magnético | $ \displaystyle \nabla \cdot \mathbf{B} = 0 $
 Ley de inducción de Faraday          | $ \displaystyle \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} $
 Ley de Ampere-Maxwell | $ \displaystyle \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} $
@@ -74,18 +74,46 @@ Ley de Ampere-Maxwell | $ \displaystyle \nabla \times \mathbf{B} = \mu_0 \mathbf
 donde: 
 * $\mathbf{E}$ es el vector del campo eléctrico,
 * $\mathbf{B}$ es el vector de campo magnético,
+* $\rho$ es la densidad de cargas,
+* $\mathbf{J}$ denota el vector densidad de corriente,
 * $\mu_0$ es la permeabilidad del vacío, ($4\pi \times 10^{-7}$ [H/m]),
 * $\varepsilon_0$ es la permitividad del vacío ($8.854 \times 10^{-12}$ [F/m]),
 
-#### Paquetes de campo que viajan como ondas
+#### Paquetes de campo que viajan como ondas por el vacío.
 
- and
-* $\frac{\partial^2}{\partial t^2}$ denotes the second partial derivative with respect to time.
+Si consideramos las leyes de Maxwell en el vacío, no existirán ni cargas $\rho$ ni corrientes $\mathbf{J}$ que puedan modificar actívamente los campos $\mathbf{E}$ y $\mathbf{B}$, por lo que las ecuaciones anteriores se reducen a:
 
+:---: | :---:
+Ley de Gauss para el campo eléctrico | $ \displaystyle \nabla \cdot \mathbf{E} = 0$
+Ley de Gauss para el campo magnético | $ \displaystyle \nabla \cdot \mathbf{B} = 0 $
+Ley de inducción de Faraday          | $ \displaystyle \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} $
+Ley de Ampere-Maxwell | $ \displaystyle \nabla \times \mathbf{B} = \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} $
 
+Así, considerando una de las clásicas identidades vectoriales para un campo vectorial en tres dimensiones espaciales \mathbf{A}(\mathbf{x}) = \mathbf{A}(x,y,z):
 
-* $\nabla^2$ is the Laplacian operator (divergence of the gradient),
+$$
+\nabla \times \left( \nabla \times \mathbf{A} \right) = \nabla (\nabla \cdot \mathbf{A}) - \nabla^2 \mathbf{A},
+$$
 
+donde  $\nabla^2$ es el [operador Laplaciano](https://es.wikipedia.org/wiki/Laplaciano_vectorial) (la divergencia del gradiente $\nabla \cdot \nabla $). 
+
+Entonces, manipularemos las ecuaciones en el vacío y usaremos la identidad vectorial antes descrita. Si calculamos el rotacional de la Ley de Faraday, tenemos que:
+
+$$
+\nabla \times \left( \nabla \times \mathbf{E} \right) = -\nabla \times \left(\frac{\partial \mathbf{B}}{\partial t} \right).
+$$
+
+La parte de la izquierda es igual a la parte de la izquierda de la identidad, por lo que podemos reemplazar:
+
+$$
+\nabla (\nabla \cdot \mathbf{E}) - \nabla^2 \mathbf{E} = -\nabla \times \left(\frac{\partial \mathbf{B}}{\partial t} \right).
+$$
+
+Considerando que \nabla \cdot \mathbf{E} 0 (¡El vacío!), tenemos que:
+
+$$
+\nabla^2 \mathbf{E} = \nabla \times \left(\frac{\partial \mathbf{B}}{\partial t} \right).
+$$
 
 #### 
 
@@ -113,15 +141,11 @@ Where:
 
 Taking the curl of Faraday's law:
 
-$$
-\nabla \times \left( \nabla \times \mathbf{E} \right) = -\nabla \times \frac{\partial \mathbf{B}}{\partial t}
-$$
+
 
 Using vector calculus identity 
 
-$$
-\nabla \times \left( \nabla \times \mathbf{E} \right) = \nabla (\nabla \cdot \mathbf{E}) - \nabla^2 \mathbf{E}
-$$
+
 
 and 
 $$
