@@ -89,7 +89,7 @@ Ley de Gauss para el campo magnético | $ \displaystyle \nabla \cdot \mathbf{B} 
 Ley de inducción de Faraday          | $ \displaystyle \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} $
 Ley de Ampere-Maxwell | $ \displaystyle \nabla \times \mathbf{B} = \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} $
 
-Así, considerando una de las clásicas identidades vectoriales para un campo vectorial en tres dimensiones espaciales \mathbf{A}(\mathbf{x}) = \mathbf{A}(x,y,z):
+Así, considerando una de las clásicas identidades vectoriales para un campo vectorial en tres dimensiones espaciales $\mathbf{A}(\mathbf{x}) = \mathbf{A}(x,y,z)$:
 
 $$
 \nabla \times \left( \nabla \times \mathbf{A} \right) = \nabla (\nabla \cdot \mathbf{A}) - \nabla^2 \mathbf{A},
@@ -118,15 +118,20 @@ $$
 También, debemos tener en cuenta que las derivadas espaciales (representadas por $\nabla$) y las temporales ($\frac{\partial}{\partial t}$) no se afectan mutuamente, por lo que su orden es intercambiable, es decir: $\nabla \times \left(\frac{\partial \mathbf{B}}{\partial t} \right) = \frac{\partial}{\partial t} (\nabla \times \mathbf{B})$. Por lo tanto:
 
 $$
-\nabla^2 \mathbf{E} = \frac{\partial}{\partial t} (\nabla \times \mathbf{B})$.
+\nabla^2 \mathbf{E} = \frac{\partial}{\partial t} (\nabla \times \mathbf{B}).
 $$
 
 Finalmente, como $\nabla \times \mathbf{B} = \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}$, llegamos a la ecuación:
 
 $$
-\nabla^2 \mathbf{E} = -\frac{\partial}{\partial t} \left( \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
+\nabla^2 \mathbf{E} = \frac{\partial}{\partial t} \left( \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right).
 $$
 
+Reordenando los términos:
+
+$$
+\nabla^2 \mathbf{E} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0
+$$
 
 
 #### 
