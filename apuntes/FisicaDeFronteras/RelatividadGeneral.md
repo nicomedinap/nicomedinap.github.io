@@ -36,10 +36,12 @@ Como definición (muy informal), un vector en algún espacio Euclideano que vive
 
 $$
 \begin{align}
-\vec{x}& = x_{1}\hat{e}_{1}+x_{2}\hat{e}_{2}+x_{3}\hat{e}_{3}+\cdots+x_{N}\hat{e}x_{N} \\
+\mathbf{x}& = x_{1}\hat{e}_{1}+x_{2}\hat{e}_{2}+x_{3}\hat{e}_{3}+\cdots+x_{N}\hat{e}x_{N} \\
        & = \sum_{i=1}^{N}x_{i} \hat{e}_{i} \\
 \end{align}
 $$
+
+POR AHORA estaremos restringidos a vectores trimidensionales $\mathbf{x} = x \hat{i}+ y \hat{j}+z \hat{k}$.
 
 #### Unidad 1: Elementos de relatividad general.
 
