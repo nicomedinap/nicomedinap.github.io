@@ -130,78 +130,23 @@ $$
 Reordenando los términos:
 
 $$
-\nabla^2 \mathbf{E} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0
+\nabla^2 \mathbf{E} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0,
 $$
 
-
-#### 
-
-#### Ondas en el vacío 
-
-
-Wave Equation of Electromagnetics:
-
-For Electric Field $\mathbf{E}$:
+que es la ecuación de onda para el campo eléctrico \mathbf{E} en el vacío. Para obtener la ecuación de onda del campo magnético \mathbf{B} es análogo al anterior (tomar el rotacioal, aplicar la identidad, intercambiar derivadas, reemplazar  el rotacional dentro de la derivada temporal, reordenar términos), por lo que obtenemos:
 
 $$
-\nabla^2 \mathbf{E} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0
+\nabla^2 \mathbf{B} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{B}}{\partial t^2} = 0.
 $$
 
+Ambas ecuaciones describen porciones de campo que viajan a través del vacío, a una velocidad finita v:
 
-For Magnetic Field $\mathbf{B}$:
+$$ v = \frac{1}{\sqrt{\mu_0 \varepsilon_0}} = c \sim 3 \times 10^{8} \frac{[\mbox{m}]}{[\mbox{s}]},$$
 
-$$
-\nabla^2 \mathbf{B} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{B}}{\partial t^2} = 0
-$$
-
-Where:
+la que es nada más ni nada mes que, la velocidad de la luz. Por lo tanto, Un cambio en el campo electromagnético genera por lo tanto más cambios, resultando en paquetes de campo propagándose por el espacio independientemente de cargas y corrientes. Estos paquetes de campo se llaman ondas electromagnéticas.
 
 
-
-Taking the curl of Faraday's law:
-
-
-
-Using vector calculus identity 
-
-
-
-and 
-$$
-\nabla \cdot \mathbf{E} = 0, 
-$$
-
-we get:
-
-$$
-\nabla^2 \mathbf{E} = -\frac{\partial}{\partial t} (\nabla \times \mathbf{B})
-$$
-
-Substituting Ampère's Law, 
-
-$$
-\nabla \times \mathbf{B} = \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}, 
-$$
-
-into the equation:
-
-$$
-\nabla^2 \mathbf{E} = -\frac{\partial}{\partial t} \left( \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
-$$
-
-Similarly, we can derive the equation for $\mathbf{B}$:
-
-$$
-\nabla^2 \mathbf{B} = -\frac{\partial}{\partial t} \left( \mu_0 \varepsilon_0 \frac{\partial \mathbf{B}}{\partial t} \right)
-$$
-
-These equations represent the wave equations for the electric and magnetic fields in vacuum. They describe how electromagnetic waves propagate through space without any external sources of charge or current.
-
-
-
-
-
-
+### 2.- Los principios de la relatividad.
 
 #### Conceptos de relatividad
 
