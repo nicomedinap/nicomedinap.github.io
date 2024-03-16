@@ -5,6 +5,8 @@ mathjax: true
 ---
 {% include mathjax.html %}
 
+Pasamos por linares a las 15.10.
+
 ## Apuntes del curso "Física de fronteras" para pedagogía en matemáticas y física, Universidad de Talca.
 
 Estimado estudiantado,
@@ -25,7 +27,6 @@ Conceptos previos
 * <ins>Grados de libertad:</ins> número mínimo de coordenadas independientes (escalares) necesarias para determinar simultáneamente la posición de cada partícula en un sistema dinámico.
 * <ins>Tiempo:</ins> Magnitud física que permite ordenar la secuencia de los sucesos, estableciendo un pasado, un presente y un futuro.
 * <ins>Simetrías y cantidades conservadas:</ins> Característica de la geometría y otras definiciones abstractas, que relaciona la invariancia bajo ciertas transformaciones, como, por ejemplo, movimientos.
-
 
 #### Sobre vectores y su álgebra
 
@@ -64,25 +65,29 @@ cosmos](https://arxiv.org/pdf/1402.0132.pdf)
 
 Publicadas en 1865, James Clerk Maxwell (1832-1879) compiló el trabajo de Charles Coulomb, André-Marie Ampère, felix Savart, Jean-Baptiste Biot Michael Faraday y Hans Christian Orsted. Condensó en 4 expresiones (ya sean de forma diferencial y/o integral), las cuales tienen la siguiente forma:
 
-Gauss's Law for Electricity:
-
- Ejemplo | tabla
 :---: | :---:
 Ley de Gauss para el campo eléctrico | $ \displaystyle \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$$
 Ley de Gauss para el campo magnético | $ \displaystyle \nabla \cdot \mathbf{B} = 0 $
+Ley de inducción de Faraday          | $ \displaystyle \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} $
+Ley de Ampere-Maxwell | $ \displaystyle \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} $
 
-Faraday's Law of Induction:
-$$
-\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
-$$
+donde: 
+* $\mathbf{E}$ es el vector del campo eléctrico,
+* $\mathbf{B}$ es el vector de campo magnético,
+* $\mu_0$ es la permeabilidad del vacío, ($4\pi \times 10^{-7}$ [H/m]),
+* $\varepsilon_0$ es la permitividad del vacío ($8.854 \times 10^{-12}$ [F/m]),
 
-Ampère's Law with Maxwell's Addition:
+#### Paquetes de campo que viajan como ondas
 
-$$
-\nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
-$$
+ and
+* $\frac{\partial^2}{\partial t^2}$ denotes the second partial derivative with respect to time.
 
-#### Demostración de que las ondas electromagnéticas en el vacío son ondas que viajan a la velocidad de la luz
+
+
+* $\nabla^2$ is the Laplacian operator (divergence of the gradient),
+
+
+#### 
 
 #### Ondas en el vacío 
 
@@ -104,12 +109,6 @@ $$
 
 Where:
 
-* $\mathbf{E}$ is the electric field vector,
-* $\mathbf{B}$ is the magnetic field vector,
-* $\nabla^2$ is the Laplacian operator (divergence of the gradient),
-* $\mu_0$ is the permeability of free space $4\pi \times 10^{-7}$ H/m,
-* $\varepsilon_0$ is the permittivity of free space $8.854 \times 10^{-12}$ F/m, and
-* $\frac{\partial^2}{\partial t^2}$ denotes the second partial derivative with respect to time.
 
 
 Taking the curl of Faraday's law:
