@@ -100,7 +100,7 @@ donde  $\nabla^2$ es el [operador Laplaciano](https://es.wikipedia.org/wiki/Lapl
 Entonces, manipularemos las ecuaciones en el vacío y usaremos la identidad vectorial antes descrita. Si calculamos el rotacional de la Ley de Faraday, tenemos que:
 
 $$
-\nabla \times \left( \nabla \times \mathbf{E} \right) = -\nabla \times \left(\frac{\partial \mathbf{B}}{\partial t} \right).
+\nabla \times \left( \nabla \times \mathbf{E} \right) = \nabla \times \left(-\frac{\partial \mathbf{B}}{\partial t} \right).
 $$
 
 La parte de la izquierda es igual a la parte de la izquierda de la identidad, por lo que podemos reemplazar:
@@ -109,11 +109,15 @@ $$
 \nabla (\nabla \cdot \mathbf{E}) - \nabla^2 \mathbf{E} = -\nabla \times \left(\frac{\partial \mathbf{B}}{\partial t} \right).
 $$
 
-Considerando que \nabla \cdot \mathbf{E} 0 (¡El vacío!), tenemos que:
+Considerando que $\nabla \cdot \mathbf{E} = 0$ (¡El vacío!), tenemos que:
 
 $$
 \nabla^2 \mathbf{E} = \nabla \times \left(\frac{\partial \mathbf{B}}{\partial t} \right).
 $$
+
+También, debemos tener en cuenta que las derivadas espaciales (representadas por $\nabla$) y las temporales ($\frac{\partial}{\partial t}$) no se afectan mutuamente, por lo que su orden es intercambiable, es decir: $-\nabla \times \left(\frac{\partial \mathbf{B}}{\partial t} \right) = -\frac{\partial}{\partial t} (\nabla \times \mathbf{B})$. Por lo tanto:
+
+
 
 #### 
 
