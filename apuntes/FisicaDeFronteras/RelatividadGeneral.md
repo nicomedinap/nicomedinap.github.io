@@ -185,7 +185,7 @@ $$
 Escribiendo la igual anterior término a término, tenemos que:
 
 $$
-x \hat{i}+ y \hat{j}+z \hat{k} = x' \hat{i}+ y' \hat{j}+z' \hat{k} + V_x t \hat{i} + V_y t \hat{j} + V_z t \hat{k}, 
+x \hat{i}+ y \hat{j}+z \hat{k} = x' \hat{i}+ y' \hat{j}+z' \hat{k} + V_x t\ \hat{i} + V_y t\ \hat{j} + V_z t\ \hat{k}, 
 $$
 
 Por lo tanto, tenemos expresiones para cada coordenada:
