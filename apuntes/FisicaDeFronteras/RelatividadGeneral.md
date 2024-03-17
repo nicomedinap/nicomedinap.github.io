@@ -39,7 +39,7 @@ $$
 \end{align}
 $$
 
-POR AHORA estaremos restringidos a vectores trimidensionales $\mathbf{x} = x \hat{i}+ y \hat{j}+z \hat{k}$.
+POR AHORA estaremos restringidos a vectores trimidensionales $\mathbf{x} = x \hat{i}+ y \hat{j}+z \hat{k}=(x,y,z)$.
 
 #### Unidad 1: Elementos de relatividad general.
 
@@ -162,19 +162,18 @@ $$
 \frac{d}{dt}(\mathbf{p}) - \mathbf{F}_{\mbox{reales}} - \mathbf{f}_{\mbox{ficticias}} = 0, 
 $$
 
+En este contexto: ¿qué significaría una fuerza ficticia? ¿Qué ejemplos se conocen de $\mathbf{f}_{\mbox{ficticias}}$?
+
 Algunas observaciones sobre los SRI:
-* El punto de referencia es arbitrario. Dado un SRI, cualquier otro sistema de derefencia desplazaco con respecto al primero, también lo será.
+* El punto de referencia es arbitrario. Dado un SRI, cualquier otro sistema de referencia desplazado con respecto al primero, también lo será.
 * La orientación de los ejes (o coordenadas) es arbitraria, análogo a lo anterior.
-* Para un desplazamiento a velocidad constante dado un sistema de referencia inercia, cualquier otro que se desplace con velocidad lienar constante, sigue siendo inercial. 
+* Para un desplazamiento a velocidad constante dado un sistema de referencia inercial, cualquier otro que se desplace con velocidad lienal constante, sigue siendo inercial. 
 
-Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno estático, se utilizan las transformaciones de galileo:
-
-
-
+Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno estático, se utilizan las *transformaciones de galileo*, esquematizado en la siguiente imagen:
 
 ![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
 
-
+Para describir la posición de un punto $P$ cualquiera en el espacio desde el origen de coordenadas $O$, se considera el vector $\mathbf{r}=x \hat{i}+ y \hat{j}+z \hat{k}$. Tambión podemos considerar otro sistema de coordenadas que, a un instante $t$, describe desde el origen $O'$
 
 
 
