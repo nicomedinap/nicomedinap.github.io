@@ -214,8 +214,9 @@ $$
 
 De forma análoga, alguien podría estar interesado en la aceleración del sistema, por lo que sólo queda derivar temporalmente nuevamente:
 
+$$
 \mathbf{a}' = \frac{d \mathbf{v}'}{dt} = \frac{d}{dt}(\mathbf{v} - \mathbf{V}_c = \mathbf{a},
-$$)
+$$
 
 Por lo tanto:
 
