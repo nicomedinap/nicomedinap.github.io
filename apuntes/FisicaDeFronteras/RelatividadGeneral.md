@@ -188,12 +188,23 @@ $$
 x \hat{i}+ y \hat{j}+z \hat{k} = x' \hat{i}+ y' \hat{j}+z' \hat{k} + V_x t\ \hat{i} + V_y t\ \hat{j} + V_z t\ \hat{k}, 
 $$
 
+$$
+\begin{align}
+x \hat{i}+ y \hat{j}+z \hat{k} =& x' \hat{i}+ y' \hat{j}+z' \hat{k} + V_x t\ \hat{i} + V_y t\ \hat{j} + V_z t\ \hat{k} \\
+       & = (x'+V_x t)\hat{i} + (y'+V_y t)\hat{j} + (z'+V_z t)\hat{k} \\
+\end{align}
+$$
+
 Por lo tanto, tenemos expresiones para cada coordenada:
 
 :---: | :---: 
-$x= x'+V_x t$ | $x'= x'+V_x t$ 
-$y= y'+V_y t$ | $y'= y'+V_y t$ 
-$z= z'+V_z t$ | $z'= z'+V_z t$ 
+$x= x'+V_x t$ | $x'= x-V_x t$ 
+$y= y'+V_y t$ | $y'= y-V_y t$ 
+$z= z'+V_z t$ | $z'= z-V_z t$ 
+
+Las transformaciones de Galileo para cada coordenada se pueden utulizar para obtener la velocidad y la aceleración del sistema dinámico descrito anteriormente. Por ejemplo, consideremos el origen $O'$ que se mueve con velocidad constante $\mathbf{V}$ y descrito por el vector $\mathbf{r}'$:
+
+
 
 
 Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
