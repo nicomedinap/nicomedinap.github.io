@@ -215,7 +215,7 @@ $$
 De forma análoga, alguien podría estar interesado en la aceleración del sistema, por lo que sólo queda derivar temporalmente nuevamente:
 
 $$
-\mathbf{a}' = \frac{d \mathbf{v}'}{dt} = \frac{d}{dt}(\mathbf{v} - \mathbf{V}_c = \mathbf{a},
+\mathbf{a}' = \frac{d \mathbf{v}'}{dt} = \frac{d}{dt}(\mathbf{v} - \mathbf{V}_c) = \mathbf{a},
 $$
 
 Por lo tanto:
@@ -233,7 +233,6 @@ Vamos a dar un breve salto temporal, y veremos el principio de la relatividad se
 
 :---: |
 Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
-
 
 Escena del tren en Top Secret
 
