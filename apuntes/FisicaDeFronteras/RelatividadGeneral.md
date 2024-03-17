@@ -185,15 +185,15 @@ $$
 Escribiendo la igual anterior término a término, tenemos que:
 
 $$
-\hat{i}+ y \hat{j}+z \hat{k}$ = x' \hat{i}+ y' \hat{j}+z' \hat{k} + V_x t hat{i} + V_y t hat{j} + V_z t hat{k}, 
+x \hat{i}+ y \hat{j}+z \hat{k} = x' \hat{i}+ y' \hat{j}+z' \hat{k} + V_x t \hat{i} + V_y t \hat{j} + V_z t \hat{k}, 
 $$
 
 Por lo tanto, tenemos expresiones para cada coordenada:
 
 :---: | :---: 
-x= x'+V_x t | x'= x'+V_x t 
-y= y'+V_y t | y'= y'+V_y t 
-z= z'+V_z t | z'= z'+V_z t 
+$x= x'+V_x t$ | $x'= x'+V_x t$ 
+$y= y'+V_y t$ | $y'= y'+V_y t$ 
+$z= z'+V_z t$ | $z'= z'+V_z t$ 
 
 
 Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
