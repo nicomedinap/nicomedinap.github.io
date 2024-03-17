@@ -135,7 +135,7 @@ $$
 \nabla^2 \mathbf{E} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0,
 $$
 
-que es la ecuación de onda para el campo eléctrico \mathbf{E} en el vacío. Para obtener la ecuación de onda del campo magnético \mathbf{B} es análogo al anterior (tomar el rotacioal, aplicar la identidad, intercambiar derivadas, reemplazar  el rotacional dentro de la derivada temporal, reordenar términos), por lo que obtenemos:
+que es la ecuación de onda para el campo eléctrico $\mathbf{E}$ en el vacío. Para obtener la ecuación de onda del campo magnético $\mathbf{B}$ es análogo al anterior (tomar el rotacioal, aplicar la identidad, intercambiar derivadas, reemplazar  el rotacional dentro de la derivada temporal, reordenar términos), por lo que obtenemos:
 
 $$
 \nabla^2 \mathbf{B} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{B}}{\partial t^2} = 0.
@@ -145,12 +145,37 @@ Ambas ecuaciones describen porciones de campo que viajan a través del vacío, a
 
 $$ v = \frac{1}{\sqrt{\mu_0 \varepsilon_0}} = c \sim 3 \times 10^{8} \frac{[\mbox{m}]}{[\mbox{s}]},$$
 
-la que es nada más ni nada mes que, la velocidad de la luz. Por lo tanto, Un cambio en el campo electromagnético genera por lo tanto más cambios, resultando en paquetes de campo propagándose por el espacio independientemente de cargas y corrientes. Estos paquetes de campo se llaman ondas electromagnéticas.
+la que es nada más ni nada menos que *la velocidad de la luz*. Por lo tanto, Un cambio en el campo electromagnético genera por lo tanto más cambios, resultando en paquetes de campo propagándose por el espacio independientemente de cargas y corrientes. Estos paquetes de campo se llaman ondas electromagnéticas.
 
 
 ### 2.- Los principios de la relatividad.
 
 #### Conceptos de relatividad
+
+* <ins>Sistema de referencia inercial (SRI):</ins> En mecánica Newtoniana, un SRI es un sistema donde las leyes de movimiento cumplen las leyes de Newton, tal que:
+
+$$
+\frac{d}{dt}(\mathbf{p) - \mathbf{F_{\mbox{reales}}} = 0, 
+$$
+
+donde $\mathbf{p} = m \mathbf{v}$ es el momentum lineal de cierta partícula en movimiento. En un sistema no inercial, tenemos que:
+
+$$
+\frac{d}{dt}(\mathbf{p) - \mathbf{F_{\mbox{reales}}} - \mathbf{f_{\mbox{ficticias}}} = 0, 
+$$
+
+Algunas observaciones sobre los SRI:
+* El punto de referencia es arbitrario. Dado un SRI, cualquier otro sistema de derefencia desplazaco con respecto al primero, también lo será.
+* La orientación de los ejes (o coordenadas) es arbitraria, análogo a lo anterior.
+* Para un desplazamiento a velocidad constante dado un sistema de referencia inercia, cualquier otro que se desplace con velocidad lienar constante, sigue siendo inercial. 
+
+Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno estático, se utilizan las transformaciones de galileo:
+
+
+:---: |
+Es imposible determinar a base de experimentos (mecánicos) si un sustema de referencia está en reposo o en movimiento uniforme y rectilineo. |
+
+
 
 
 Escena del tren en Top Secret
