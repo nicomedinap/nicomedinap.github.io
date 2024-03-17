@@ -5,8 +5,6 @@ mathjax: true
 ---
 {% include mathjax.html %}
 
-Pasamos por linares a las 15.10.
-
 ## Apuntes del curso "Física de fronteras" para pedagogía en matemáticas y física, Universidad de Talca.
 
 Estimado estudiantado,
@@ -155,13 +153,13 @@ la que es nada más ni nada menos que *la velocidad de la luz*. Por lo tanto, Un
 * <ins>Sistema de referencia inercial (SRI):</ins> En mecánica Newtoniana, un SRI es un sistema donde las leyes de movimiento cumplen las leyes de Newton, tal que:
 
 $$
-\frac{d}{dt}(\mathbf{p) - \mathbf{F_{\mbox{reales}}} = 0, 
+\frac{d}{dt}(\mathbf{p}) - \mathbf{F}_{\mbox{reales}} = 0, 
 $$
 
 donde $\mathbf{p} = m \mathbf{v}$ es el momentum lineal de cierta partícula en movimiento. En un sistema no inercial, tenemos que:
 
 $$
-\frac{d}{dt}(\mathbf{p) - \mathbf{F_{\mbox{reales}}} - \mathbf{f_{\mbox{ficticias}}} = 0, 
+\frac{d}{dt}(\mathbf{p) - \mathbf{F}_{\mbox{reales}} - \mathbf{f}_{\mbox{ficticias}} = 0, 
 $$
 
 Algunas observaciones sobre los SRI:
@@ -171,14 +169,22 @@ Algunas observaciones sobre los SRI:
 
 Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno estático, se utilizan las transformaciones de galileo:
 
+![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
+
+
+
+
+
+
+Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
 
 :---: |
 Es imposible determinar a base de experimentos (mecánicos) si un sustema de referencia está en reposo o en movimiento uniforme y rectilineo. |
 
+Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
 
-
-![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
-
+:---: |
+Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
 
 
 Escena del tren en Top Secret
