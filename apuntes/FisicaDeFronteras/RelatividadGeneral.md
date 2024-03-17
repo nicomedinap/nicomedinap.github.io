@@ -174,15 +174,26 @@ Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno est�
 ![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
 
 Para describir la posición de un punto $P$ cualquiera en el espacio desde el origen de coordenadas $O$, se considera el vector $\mathbf{r}=x \hat{i}+ y \hat{j}+z \hat{k}$. Tambión podemos considerar otro sistema de coordenadas que, a un instante $t$, describe el mismo punto $P$ desde el origen $O'$, usando el vector $\mathbf{r}'=x' \hat{i}+ y' \hat{j}+z' \hat{k}$. Si el sistema $O'$ se desplaza a una velocidad constante $\mathbf{V}$ con respecto al observador $O$, en cierto instante $t$, el vector que 
-describe la posición del observador $O'$ desde $O$, será $\mathbf{R} = \mathbf{V} t$.
+describe la posición del observador $O'$ desde $O$, será $\mathbf{R} = \mathbf{V} \cdot t$.
 
 Por las propiedades de suma de vectores, tenemos que:
 
 $$
-\mathbf{r} = \mathbf{r}' + \mathbf{R} = \mathbf{r}' + \mathbf{V} t
+\mathbf{r} = \mathbf{r}' + \mathbf{R} = \mathbf{r}' + \mathbf{V} \cdot t.
 $$
 
+Escribiendo la igual anterior término a término, tenemos que:
 
+$$
+\hat{i}+ y \hat{j}+z \hat{k}$ = x' \hat{i}+ y' \hat{j}+z' \hat{k} + V_x t hat{i} + V_y t hat{j} + V_z t hat{k}, 
+$$
+
+Por lo tanto, tenemos expresiones para cada coordenada:
+
+:---: | :---: 
+x= x'+V_x t | x'= x'+V_x t 
+y= y'+V_y t | y'= y'+V_y t 
+z= z'+V_z t | z'= z'+V_z t 
 
 
 Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
