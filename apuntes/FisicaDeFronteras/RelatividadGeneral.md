@@ -186,7 +186,7 @@ Escribiendo la igual anterior término a término, tenemos que:
 
 $$
 \begin{align}
-x \hat{i}+ y \hat{j}+z \hat{k} =& x' \hat{i}+ y' \hat{j}+z' \hat{k} + \mathbf{V} \cdot t.
+x \hat{i}+ y \hat{j}+z \hat{k} =& x' \hat{i}+ y' \hat{j}+z' \hat{k} + \mathbf{V} \cdot t \\
 	   & = x' \hat{i}+ y' \hat{j}+z' \hat{k} + V_x t\ \hat{i} + V_y t\ \hat{j} + V_z t\ \hat{k} \\
        & = (x'+V_x t)\hat{i} + (y'+V_y t)\hat{j} + (z'+V_z t)\hat{k} \\
 \end{align}
