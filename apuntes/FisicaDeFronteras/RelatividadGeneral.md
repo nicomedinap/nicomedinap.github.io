@@ -150,7 +150,7 @@ la que es nada más ni nada menos que *la velocidad de la luz*. Por lo tanto, Un
 
 #### Conceptos de relatividad
 
-* <ins>Sistema de referencia inercial (SRI):</ins> En mecánica Newtoniana, un SRI es un sistema donde las leyes de movimiento cumplen las leyes de Newton, tal que:
+<ins>Sistema de referencia inercial (SRI):</ins> En mecánica Newtoniana, un SRI es un sistema donde las leyes de movimiento cumplen las leyes de Newton, tal que:
 
 $$
 \frac{d}{dt}(\mathbf{p}) - \mathbf{F}_{\mbox{reales}} = 0, 
@@ -174,12 +174,12 @@ Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno est�
 ![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
 
 Para describir la posición de un punto $P$ cualquiera en el espacio desde el origen de coordenadas $O$, se considera el vector $\mathbf{r}=x \hat{i}+ y \hat{j}+z \hat{k}$. Tambión podemos considerar otro sistema de coordenadas que, a un instante $t$, describe el mismo punto $P$ desde el origen $O'$, usando el vector $\mathbf{r}'=x' \hat{i}+ y' \hat{j}+z' \hat{k}$. Si el sistema $O'$ se desplaza a una velocidad constante $\mathbf{V}$ con respecto al observador $O$, en cierto instante $t$, el vector que 
-describe la posición del observador $O'$ desde $O$, será $\mathbf{R} = $\mathbf{V} \cdot t$.
+describe la posición del observador $O'$ desde $O$, será $\mathbf{R} = \mathbf{V} \cdot t$.
 
 Por las propiedades de suma de vectores, tenemos que:
 
 $$
-\mathbf{r} = \mathbf{r}' + \mathbf{R} = \mathbf{r}' mathbf{V} \cdot t+ 
+\mathbf{r} = \mathbf{r}' + \mathbf{R} = \mathbf{r}' + \mathbf{V} \cdot t
 $$
 
 
