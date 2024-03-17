@@ -57,8 +57,8 @@ POR AHORA estaremos restringidos a vectores trimidensionales $\mathbf{x} = x \ha
 
 Wikipedia: Iré recolectando los links desde dónde tome información, y la iré dejando acá abajo.
 
-<ins> .</ins> [Einstein’s steady-state theory: an abandoned model of the
-cosmos](https://arxiv.org/pdf/1402.0132.pdf)
+<ins> Einstein’s steady-state theory: an abandoned model of the
+cosmos</ins> [Parte de la bibliografía sugerida para este curso](https://arxiv.org/pdf/1402.0132.pdf)
 
 
 ### 1.- Breve repaso de la teoría electromagnética de James Clerk Maxwell
@@ -173,7 +173,14 @@ Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno est�
 
 ![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
 
-Para describir la posición de un punto $P$ cualquiera en el espacio desde el origen de coordenadas $O$, se considera el vector $\mathbf{r}=x \hat{i}+ y \hat{j}+z \hat{k}$. Tambión podemos considerar otro sistema de coordenadas que, a un instante $t$, describe desde el origen $O'$
+Para describir la posición de un punto $P$ cualquiera en el espacio desde el origen de coordenadas $O$, se considera el vector $\mathbf{r}=x \hat{i}+ y \hat{j}+z \hat{k}$. Tambión podemos considerar otro sistema de coordenadas que, a un instante $t$, describe el mismo punto $P$ desde el origen $O'$, usando el vector $\mathbf{r}'=x' \hat{i}+ y' \hat{j}+z' \hat{k}$. Si el sistema $O'$ se desplaza a una velocidad constante $\mathbf{V}$ con respecto al observador $O$, en cierto instante $t$, el vector que 
+describe la posición del observador $O'$ desde $O$, será $\mathbf{R} = $\mathbf{V} \cdot t$.
+
+Por las propiedades de suma de vectores, tenemos que:
+
+$$
+\mathbf{r} = \mathbf{r}' + \mathbf{R} = \mathbf{r}' mathbf{V} \cdot t+ 
+$$
 
 
 
@@ -181,7 +188,7 @@ Para describir la posición de un punto $P$ cualquiera en el espacio desde el or
 Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
 
 :---: |
-Es imposible determinar a base de experimentos (mecánicos) si un sustema de referencia está en reposo o en movimiento uniforme y rectilineo. |
+Es imposible determinar a base de experimentos (mecánicos) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
 
 Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
 
