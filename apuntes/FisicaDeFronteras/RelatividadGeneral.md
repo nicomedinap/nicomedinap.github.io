@@ -159,7 +159,7 @@ $$
 donde $\mathbf{p} = m \mathbf{v}$ es el momentum lineal de cierta partícula en movimiento. En un sistema no inercial, tenemos que:
 
 $$
-\frac{d}{dt}(\mathbf{p) - \mathbf{F}_{\mbox{reales}} - \mathbf{f}_{\mbox{ficticias}} = 0, 
+\frac{d}{dt}(\mathbf{p}) - \mathbf{F}_{\mbox{reales}} - \mathbf{f}_{\mbox{ficticias}} = 0, 
 $$
 
 Algunas observaciones sobre los SRI:
@@ -168,6 +168,9 @@ Algunas observaciones sobre los SRI:
 * Para un desplazamiento a velocidad constante dado un sistema de referencia inercia, cualquier otro que se desplace con velocidad lienar constante, sigue siendo inercial. 
 
 Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno estático, se utilizan las transformaciones de galileo:
+
+
+
 
 ![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
 
