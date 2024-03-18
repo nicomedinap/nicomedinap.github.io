@@ -236,9 +236,9 @@ Las leyes de la física deben tener la misma forma en todos los sistemas de refe
 
 Escena del tren en Top Secret (relatividad en su máxima expresión)
 
-![Alt Text](https://i.makeagif.com/media/4-18-2017/fD2G6V.mp4)
+![Alt Text](http://kaszpir.hlds.pl/4chan/train.gif)
 
-[]](https://www.youtube.com/watch?v=A_peCIVBTAY)
+[Escena en youtube](https://www.youtube.com/watch?v=A_peCIVBTAY)
 
 
 
