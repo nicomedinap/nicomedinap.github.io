@@ -20,8 +20,8 @@ Conceptos previos
 * <ins>Partícula:</ins> Por excelencia, el uso del método griego de la “abstracción". Es abstraer un cuerpo de masa M en un punto para no tener en cuenta  su forma.
 * <ins>Suceso:</ins> Cualquier cosa o evento que ocurra en un punto del espacio, en un instante dado. La posición de un suceso queda operacionalmente definida por cuatro datos $(x,y,x,t)$. La posición de una partícula es definida, por ejemplo, como un suceso.
 * <ins>Movimiento:</ins> Cambio “continuo” de sucesos (posición) definido con respecto a un sistema de referencia inercial.
-* <ins>Sistema de referencia inercial (SRI):</ins> En mecánica Newtoniana, un SRI es un sistema donde las leyes de movimiento cumplen las leyes de Newton.
-* <ins>Campo:</ins> Una teoría de campos se diferencia de una teoría discreta por poseer  un número infinito (continuo) de grados de libertad.
+* <ins>Sistema de referencia inercial (SRI):</ins> Es aquél sistema de referencia que está en reposo o se mueve con velocidad constante. En mecánica Newtoniana, un SRI es un sistema donde las leyes de movimiento cumplen las leyes de Newton.
+* <ins>Campo:</ins> Una teoría de campos (a diferencia de una teoría discreta) posee un número infinito (continuo) de grados de libertad.
 * <ins>Grados de libertad:</ins> número mínimo de coordenadas independientes (escalares) necesarias para determinar simultáneamente la posición de cada partícula en un sistema dinámico.
 * <ins>Tiempo:</ins> Magnitud física que permite ordenar la secuencia de los sucesos, estableciendo un pasado, un presente y un futuro.
 * <ins>Simetrías y cantidades conservadas:</ins> Característica de la geometría y otras definiciones abstractas, que relaciona la invariancia bajo ciertas transformaciones, como, por ejemplo, movimientos.
@@ -224,7 +224,7 @@ $$
 \mathbf{a}' = \mathbf{a}.
 $$
 
-Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
+Como se observa de la última ecuación, *todos los sistemas de referencia inerciales miden la misma aceleración*. Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
 
 :---: |
 Es imposible determinar a base de experimentos (mecánicos) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
@@ -234,8 +234,12 @@ Vamos a dar un breve salto temporal, y veremos el principio de la relatividad se
 :---: |
 Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
 
-Escena del tren en Top Secret
+Escena del tren en Top Secret (relatividad en su máxima expresión)
 
-https://www.youtube.com/watch?v=A_peCIVBTAY
+![Alt Text](https://i.makeagif.com/media/4-18-2017/fD2G6V.mp4)
+
+[]](https://www.youtube.com/watch?v=A_peCIVBTAY)
+
+
 
 
