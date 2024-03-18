@@ -226,7 +226,9 @@ $$
 \mathbf{a}' = \mathbf{a}.
 $$
 
-Como se observa de la última ecuación, *todos los sistemas de referencia inerciales miden la misma aceleración*. Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
+Como se observa de la última ecuación, *todos los sistemas de referencia inerciales miden la misma aceleración*. Un resultado simple, pero poderoso: ¿Cuál es la gran conclusión que podemos obtener desde aquí? Tiene que ver con los privilegios.
+
+Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
 
 :---: |
 Es imposible determinar a base de experimentos (mecánicos) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
@@ -240,7 +242,7 @@ Escena del tren en Top Secret (relatividad en su máxima expresión)
 
 ![Alt Text](http://kaszpir.hlds.pl/4chan/train.gif)
 
-[Escena en youtube](https://www.youtube.com/watch?v=A_peCIVBTAY)
+[Escena en youtube](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y)
 
 
 
