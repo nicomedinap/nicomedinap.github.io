@@ -173,6 +173,8 @@ Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno est�
 
 ![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
 
+Figura 1: esquema de la relatividad de Galileo, imagen tomada desde [este link](http://relativismo.weebly.com/relatividad-de-galileo.html)
+
 Para describir la posición de un punto $P$ cualquiera en el espacio desde el origen de coordenadas $O$, se considera el vector $\mathbf{r}=x \hat{i}+ y \hat{j}+z \hat{k}$. Tambión podemos considerar otro sistema de coordenadas que, a un instante $t$, describe el mismo punto $P$ desde el origen $O'$, usando el vector $\mathbf{r}'=x' \hat{i}+ y' \hat{j}+z' \hat{k}$. Si el sistema $O'$ se desplaza a una velocidad constante $\mathbf{V}$ con respecto al observador $O$, en cierto instante $t$, el vector que 
 describe la posición del observador $O'$ desde $O$, será $\mathbf{R} = \mathbf{V} \cdot t$.
 
