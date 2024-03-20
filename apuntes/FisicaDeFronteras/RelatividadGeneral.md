@@ -13,6 +13,8 @@ Es de mi agrado informar que este espacio será exclusivo para desarrollar ideas
 
 Algunos cálculos que quizá no son vitales para el entendimiento de este curso, serán desarrollados en este espacio con el fin de que ustedes puedan verlos y sabes desde dónde provienen las ideas contra-intuitivas de la realidad.
 
+Las diapositivas actualizadas (hasta la fecha N) se encuentran en [ESTE LINK!]()
+
 Conceptos previos 
 
 * <ins>Sistema de referencia:</ins> Elección de un punto de referencia, usualmente denominado “O”, desde donde se determinan las cantidades físicas observable. 
@@ -238,12 +240,15 @@ Vamos a dar un breve salto temporal, y veremos el principio de la relatividad se
 :---: |
 Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
 
-Escena del tren en Top Secret (relatividad en su máxima expresión)
+Escena del tren en Top Secret: Las velocidades relativas en su máxima expresión.
 
 ![Alt Text](http://kaszpir.hlds.pl/4chan/train.gif)
 
 [Escena en youtube](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y)
 
+
+los cazadores de mitos: 
+https://www.youtube.com/watch?v=BLuI118nhzc
 
 
 
