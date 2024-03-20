@@ -53,14 +53,14 @@ POR AHORA estaremos restringidos a vectores trimidensionales $\mathbf{x} = x \ha
 
 #### Bibliografía unidad 1.
 
-<ins>Teoría de la relatividad General, de Bert Janssen.</ins> [LINK](https://www.ugr.es/~bjanssen/text/BertJanssen-RelatividadGeneral.pdf)
+<ins>Teoría de la relatividad General, de Bert Janssen.</ins> [LINK](https://www.ugr.es/~bjanssen/text/BertJanssen-RelatividadGeneral.pdf){:target="_blank"}
 
-<ins>Electrodinámica, de Guillermo Rubilar.</ins> [LINK](https://drive.google.com/viewer?url=https://github.com/gfrubi/electrodinamica/raw/master/electrodinamica.pdf)
+<ins>Electrodinámica, de Guillermo Rubilar.</ins> [LINK](https://drive.google.com/viewer?url=https://github.com/gfrubi/electrodinamica/raw/master/electrodinamica.pdf){:target="_blank"}
 
 Wikipedia: Iré recolectando los links desde dónde tome información, y la iré dejando acá abajo.
 
 <ins> Einstein’s steady-state theory: an abandoned model of the
-cosmos</ins> [Parte de la bibliografía sugerida para este curso](https://arxiv.org/pdf/1402.0132.pdf)
+cosmos</ins> [Parte de la bibliografía sugerida para este curso](https://arxiv.org/pdf/1402.0132.pdf){:target="_blank"}
 
 
 ### 1.- Breve repaso de la teoría electromagnética de James Clerk Maxwell
@@ -97,7 +97,7 @@ $$
 \nabla \times \left( \nabla \times \mathbf{A} \right) = \nabla (\nabla \cdot \mathbf{A}) - \nabla^2 \mathbf{A},
 $$
 
-donde  $\nabla^2$ es el [operador Laplaciano](https://es.wikipedia.org/wiki/Laplaciano_vectorial) (la divergencia del gradiente $\nabla \cdot \nabla $). 
+donde  $\nabla^2$ es el [operador Laplaciano](https://es.wikipedia.org/wiki/Laplaciano_vectorial){:target="_blank"} (la divergencia del gradiente $\nabla \cdot \nabla $). 
 
 Entonces, manipularemos las ecuaciones en el vacío y usaremos la identidad vectorial antes descrita. Si calculamos el rotacional de la Ley de Faraday, tenemos que:
 
@@ -175,9 +175,9 @@ Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno est�
 
 ![Link Name](http://relativismo.weebly.com/uploads/1/0/8/3/10833300/_1358700800.jpg)  
 
-Figura 1: esquema de la relatividad de Galileo, imagen tomada desde [este link](http://relativismo.weebly.com/relatividad-de-galileo.html)
+Figura 1: esquema de la relatividad de Galileo, imagen tomada desde [este link](http://relativismo.weebly.com/relatividad-de-galileo.html){:target="_blank"}
 
-Para describir la posición de un punto $P$ cualquiera en el espacio desde el origen de coordenadas $O$, se considera el vector $\mathbf{r}=x \hat{i}+ y \hat{j}+z \hat{k}$. Tambión podemos considerar otro sistema de coordenadas que, a un instante $t$, describe el mismo punto $P$ desde el origen $O'$, usando el vector $\mathbf{r}'=x' \hat{i}+ y' \hat{j}+z' \hat{k}$. Si el sistema $O'$ se desplaza a una velocidad constante $\mathbf{V}$ con respecto al observador $O$, en cierto instante $t$, el vector que 
+Para describir la posición de un punto $P$ cualquiera en el espacio desde el origen de coordenadas $O$, se considera el vector $\mathbf{r}=x \hat{i}+ y \hat{j}+z \hat{k}$. También podemos considerar otro sistema de coordenadas que, a un instante $t$, describe el mismo punto $P$ desde el origen $O'$, usando el vector $\mathbf{r}'=x' \hat{i}+ y' \hat{j}+z' \hat{k}$. Si el sistema $O'$ se desplaza a una velocidad constante $\mathbf{V}$ con respecto al observador $O$, en cierto instante $t$, el vector que 
 describe la posición del observador $O'$ desde $O$, será $\mathbf{R} = \mathbf{V} \cdot t$.
 
 Por las propiedades de suma de vectores, tenemos que:
@@ -233,7 +233,7 @@ Como se observa de la última ecuación, *todos los sistemas de referencia inerc
 Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
 
 :---: |
-Es imposible determinar a base de experimentos (mecánicos) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
+Es imposible determinar a base de experimentos (mecánicos (o sea que soltando bolitas o con planos inclinados)) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
 
 Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
 
@@ -244,11 +244,12 @@ Escena del tren en Top Secret: Las velocidades relativas en su máxima expresió
 
 ![Alt Text](http://kaszpir.hlds.pl/4chan/train.gif)
 
-[Escena en youtube](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y)
+[Escena en youtube](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y){:target="_blank"}
 
+Visualización de la inercia en diferentes lanzamientos de pelotas. [link](https://www.youtube.com/watch?v=j1URC2G2qnc){:target="_blank"}, observar que en último caso (cuando la masa *decrece*) no se cumple el comportamiento esperado: ¿Por qué? 
 
-los cazadores de mitos: 
-https://www.youtube.com/watch?v=BLuI118nhzc
+los cazadores de mitos: Sistema cañon-Camioneta[Link](https://www.youtube.com/watch?v=BLuI118nhzc){:target="_blank"}
 
+#### Simetrías en las leyes de la física
 
 
