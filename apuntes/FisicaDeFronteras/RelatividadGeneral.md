@@ -231,15 +231,12 @@ $$
 
 Como se observa de la última ecuación, *todos los sistemas de referencia inerciales miden la misma aceleración*. Un resultado simple, pero poderoso: ¿Cuál es la gran conclusión que podemos obtener desde aquí? Tiene que ver con los privilegios.
 
-Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
+Las velocidades son relativas, pero las aceleraciones son absolutas. Entonces cuando apacere una velocidad, también hay que preguntarse: *velocidad: ¿Con respecto a qué sistema de referencia?*. Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
 
 :---: |
 Es imposible determinar a base de experimentos (mecánicos (o sea que soltando bolitas o con planos inclinados)) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
 
-Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
 
-:---: |
-Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
 
 Top secret: [escena del tren](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y){:target="_blank"}
 
@@ -248,6 +245,49 @@ Visualización de la inercia en diferentes lanzamientos de pelotas. [link](https
 los cazadores de mitos: Sistema cañon-Camioneta[Link](https://www.youtube.com/watch?v=BLuI118nhzc){:target="_blank"}
 
 #### Simetrías en las leyes de la física
+
+En la física clásica (digamos, antes del 1900) la noción de simetría es particularmente importante, abarcando conceptos como la isotropía o la homogeneidad.
+
+
+
+, que está ligada a la invariancia por traslación en el espacio. 
+
+Esta importancia se consolidó a comienzos del siglo xx con el desarrollo del teorema de Noether, que establece que para cualquier ley de conservación existe una simetría subyacente en la teoría que describe el fenómeno físico.
+
+
+
+Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
+
+:---: |
+Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
+
+
+#### Experimento de Michelson-Morley
+
+
+#### La ecuación de FitzGerald
+
+El físico irlandés (nombre) FitzGerald encontró una forma de conciliar la situación, sugiriendo que los objetos disminuyen en longuitud, en la dirección en la que se están moviendo, en un factor de $\sqrt{1-\frac{v^2}{c^2}}$. Por lo tanto:
+
+$$
+\displaystyle L'=L\sqrt{1-\frac{v^2}{c^2}},
+$$
+
+Donde $L'$ es la longitud del cuerpo que se mueve, en la dirección del movimiento; y L es la longitud que debería tener en el reposo. En condiciones normales, el valor de esta corrección de longitud es muy pequeño. Por ejemplo, si un cuerpo se desplazara con un 10% de la velocidad de la luz (o sea, 30.000 [km/s]), su longitud se contrae ligeramente:
+
+$$
+\begin{align}
+\displaystyle L' =& L\sqrt{1-\frac{v^2}{c^2}} \\
+	   			 =& L\sqrt{1-\frac{(0.1c)^2}{c^2}}\\
+       			 =& L\sqrt{1-0.001}\\
+       			 =& L\sqrt{0.99}\\
+\end{align}
+$$
+
+¿A qué velocidad se contraerá un pbjeto hasta alvanzar la mitad de la longitud que tiene en reposo? Respuesta: $v=0.866 \cdot c$.
+
+
+#### La ecuación de Lorentz
 
 
 
