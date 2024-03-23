@@ -13,7 +13,7 @@ Es de mi agrado informar que este espacio será exclusivo para desarrollar ideas
 
 Algunos cálculos que quizá no son vitales para el entendimiento de este curso, serán desarrollados en este espacio con el fin de que ustedes puedan verlos y sabes desde dónde provienen las ideas contra-intuitivas de la realidad.
 
-Las diapositivas actualizadas (hasta la fecha N) se encuentran en [ESTE LINK!]()
+Las diapositivas actualizadas (hasta el 22/03/24) se encuentran en [ESTE LINK!](https://udetalca-my.sharepoint.com/:b:/g/personal/nicolas_medina_utalca_cl/EVpJ0IvQh0VCrBT89iXF674BDLhKH6iEC8UzmubfdT0NKA?e=67CeY7)
 
 Conceptos previos 
 
@@ -147,6 +147,7 @@ $$ v = \frac{1}{\sqrt{\mu_0 \varepsilon_0}} = c \sim 3 \times 10^{8} \frac{[\mbo
 
 la que es nada más ni nada menos que *la velocidad de la luz*. Por lo tanto, Un cambio en el campo electromagnético genera por lo tanto más cambios, resultando en paquetes de campo propagándose por el espacio independientemente de cargas y corrientes. Estos paquetes de campo se llaman ondas electromagnéticas.
 
+Pero: las ondas viajan con velocidad *c* ¿Con respecto a qué?
 
 ### 2.- Los principios de la relatividad.
 
@@ -169,7 +170,7 @@ En este contexto: ¿qué significaría una fuerza ficticia? ¿Qué ejemplos se c
 Algunas observaciones sobre los SRI:
 * El punto de referencia es arbitrario. Dado un SRI, cualquier otro sistema de referencia desplazado con respecto al primero, también lo será.
 * La orientación de los ejes (o coordenadas) es arbitraria, análogo a lo anterior.
-* Para un desplazamiento a velocidad constante dado un sistema de referencia inercial, cualquier otro que se desplace con velocidad lienal constante, sigue siendo inercial. 
+* Para un desplazamiento a velocidad constante dado un sistema de referencia inercial, cualquier otro que se desplace con velocidad lineal constante, sigue siendo inercial. 
 
 Para relacionar un sistema inercian en movimiento rectilineo uniforme y uno estático, se utilizan las *transformaciones de galileo*, esquematizado en la siguiente imagen:
 
@@ -186,7 +187,7 @@ $$
 \mathbf{r} = \mathbf{r}' + \mathbf{R} = \mathbf{r}' + \mathbf{V} \cdot t.
 $$
 
-Escribiendo la igual anterior término a término, tenemos que:
+Escribiendo la igualdad anterior término a término, tenemos que:
 
 $$
 \begin{align}
@@ -240,16 +241,13 @@ Vamos a dar un breve salto temporal, y veremos el principio de la relatividad se
 :---: |
 Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
 
-Escena del tren en Top Secret: Las velocidades relativas en su máxima expresión.
-
-![Alt Text](http://kaszpir.hlds.pl/4chan/train.gif)
-
-[Escena en youtube](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y){:target="_blank"}
+Top secret: [escena del tren](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y){:target="_blank"}
 
 Visualización de la inercia en diferentes lanzamientos de pelotas. [link](https://www.youtube.com/watch?v=j1URC2G2qnc){:target="_blank"}, observar que en último caso (cuando la masa *decrece*) no se cumple el comportamiento esperado: ¿Por qué? 
 
 los cazadores de mitos: Sistema cañon-Camioneta[Link](https://www.youtube.com/watch?v=BLuI118nhzc){:target="_blank"}
 
 #### Simetrías en las leyes de la física
+
 
 
