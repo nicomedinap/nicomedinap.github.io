@@ -279,15 +279,16 @@ $$
 \begin{align}
 \displaystyle L' =& L\sqrt{1-\frac{v^2}{c^2}} \\
 	   			 =& L\sqrt{1-\frac{(0.1c)^2}{c^2}}\\
-       			 =& L\sqrt{1-0.001}\\
+       			 =& L\sqrt{1-0.01}\\
        			 =& L\sqrt{0.99}\\
 \end{align}
 $$
 
-¿A qué velocidad se contraerá un pbjeto hasta alvanzar la mitad de la longitud que tiene en reposo? Respuesta: $v=0.866 \cdot c$.
+¿A qué velocidad se contraerá un objeto hasta alcanzar la mitad de la longitud que tiene en reposo? Respuesta: $v=0.866 c$.
 
+¿Qué ocurre con la longitud de un cuerpo que se mueve a una velocidad igual a la luz?
 
 #### La ecuación de Lorentz
 
-
+El factor $\displaystyle \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$
 
