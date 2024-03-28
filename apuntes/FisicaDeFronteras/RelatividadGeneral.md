@@ -13,7 +13,7 @@ Es de mi agrado informar que este espacio será exclusivo para desarrollar ideas
 
 Algunos cálculos que quizá no son vitales para el entendimiento de este curso, serán desarrollados en este espacio con el fin de que ustedes puedan verlos y sabes desde dónde provienen las ideas contra-intuitivas de la realidad.
 
-Las diapositivas actualizadas (hasta el 22/03/24) se encuentran en [ESTE LINK!](https://udetalca-my.sharepoint.com/:b:/g/personal/nicolas_medina_utalca_cl/EVpJ0IvQh0VCrBT89iXF674BDLhKH6iEC8UzmubfdT0NKA?e=67CeY7)
+Las diapositivas actualizadas (hasta el 27/03/24) se encuentran en [ESTE LINK!](https://udetalca-my.sharepoint.com/:b:/g/personal/nicolas_medina_utalca_cl/EZ7_k3VB5v5Pg1L91rjnxs8BMAxZ9SZ3q8qkefwdASPqDw?e=pAIjEP)
 
 Conceptos previos 
 
@@ -247,20 +247,7 @@ los cazadores de mitos: Sistema cañon-Camioneta[Link](https://www.youtube.com/w
 #### Simetrías en las leyes de la física
 
 En la física clásica (digamos, antes del 1900) la noción de simetría es particularmente importante, abarcando conceptos como la isotropía o la homogeneidad.
-
-
-
-, que está ligada a la invariancia por traslación en el espacio. 
-
 Esta importancia se consolidó a comienzos del siglo xx con el desarrollo del teorema de Noether, que establece que para cualquier ley de conservación existe una simetría subyacente en la teoría que describe el fenómeno físico.
-
-
-
-Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
-
-:---: |
-Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
-
 
 #### Experimento de Michelson-Morley
 
@@ -291,4 +278,20 @@ $$
 #### La ecuación de Lorentz
 
 El factor $\displaystyle \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$
+
+\begin{align*}
+x' &= \gamma (x - vt) \\
+t' &= \gamma \left( t - \frac{vx}{c^2} \right)
+\end{align*}
+
+
+#### La relatividad especial
+
+Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
+
+:---: |
+Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
+
+
+
 
