@@ -309,7 +309,7 @@ $$
 donde el factor $\displaystyle \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$ es el llamado **factor de Lorentz**, en cual tiene a 1 cuando la velocidad $v$ es pequeña, en comparación a la velocidad de la luz $c$. Dicho de otra forma, en el límite donde $v/c \to 0$ es:
 
 $$
-\lim_{{\frac{v}{c} \to 0}} \gamma = \lim_{{\frac{v}{c} \to 0}} \frac{1}{\sqrt{1}} = 1,
+\lim_{ \frac{v}{c} \to 0} \gamma = \lim_{ \frac{v}{c} \to 0} \frac{1}{\sqrt{1}} = 1,
 $$
 
 esta es la razón de que los efectos relativistas son indetectables por nuestros sentidos en velocidades "newtonianas" (velocidades $v$ pequeñas en comparación a la velocidad de la luz $c$), por eso las transformadas de Lorentz tiende a las transformaciones de galileo 
