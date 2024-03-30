@@ -314,7 +314,9 @@ $$
 
 esta es la razón de que los efectos relativistas son indetectables por nuestros sentidos en velocidades "newtonianas" (velocidades $v$ pequeñas en comparación a la velocidad de la luz $c$), por eso las transformadas de Lorentz tiende a las transformaciones de galileo 
 
-#### El estado antes del 1905
+#### La relatividad especial
+
+
 
 El estado
 
