@@ -234,27 +234,49 @@ Como se observa de la última ecuación, *todos los sistemas de referencia inerc
 Las velocidades son relativas, pero las aceleraciones son absolutas. Entonces cuando apacere una velocidad, también hay que preguntarse: *velocidad: ¿Con respecto a qué sistema de referencia?*. Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
 
 :---: |
-Es imposible determinar a base de experimentos (mecánicos (o sea que soltando bolitas o con planos inclinados)) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
+Es imposible determinar a base de experimentos (mecánicos (o sea que soltando bolitas o con planos inclinados)) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. 
 
-
-
-Top secret: [escena del tren](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y){:target="_blank"}
-
-Visualización de la inercia en diferentes lanzamientos de pelotas. [link](https://www.youtube.com/watch?v=j1URC2G2qnc){:target="_blank"}, observar que en último caso (cuando la masa *decrece*) no se cumple el comportamiento esperado: ¿Por qué? 
+A continuación presento algunos videos que visualizan el concepto de la velocidad relativa.
 
 los cazadores de mitos: Sistema cañon-Camioneta[Link](https://www.youtube.com/watch?v=BLuI118nhzc){:target="_blank"}
 
-#### Simetrías en las leyes de la física
+Visualización de la inercia en diferentes lanzamientos de pelotas. [link](https://www.youtube.com/watch?v=j1URC2G2qnc){:target="_blank"}, observar que en último caso (cuando la masa *decrece*) no se cumple el comportamiento esperado: ¿Por qué? 
 
-En la física clásica (digamos, antes del 1900) la noción de simetría es particularmente importante, abarcando conceptos como la isotropía o la homogeneidad.
-Esta importancia se consolidó a comienzos del siglo xx con el desarrollo del teorema de Noether, que establece que para cualquier ley de conservación existe una simetría subyacente en la teoría que describe el fenómeno físico.
+Top secret: escena del tren [LINK](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y){:target="_blank"}
+
+
+#### Los principios de la relatividad
+
+Resumiendo, lo que nos dice Galileo es que hay cantidades que son relativas para diferentes SRI (como la velocidad, por ej) y hay otras cantidades absolutas, como lo es la Aceleración. Además, la teoría Electrodinámica de Maxwell predice ondas electromagnéticas que se propagan a la velocidad de la luz $c$. Pero **¿se propagan a una velocidad $c$ con respecto a qué?**. Ésta es la pregunta fundamental de la relatividad especial. 
+
+Hasta ese momento, las ondas electromagnéticas necesitaban un medio para propagarse, por ende las ondas se propagarían a la velocidad de la luz con respecto al SRI co-movil con ese medio. Era una buena solución y el medio fue llamado el *éter*.
+
+Entonces, dada la lógica Newtoniana de suma de velocidades, un observador que se mueve con una velocidad $v$ con respecto al éter tendrá que medir entonces que la luz se propaga (dependiendo si se acerca o se aleja) a la velocidad:
+
+$$
+c' + c \pm v,
+$$
+
+si asumimos que el observador se mueve en la misma dirección que una onda Electromagnética, verá que la onda está estática ($c'=0$) ya que se encontraría en reposo con respecto al observador.
+
+El hecho anterior es, en general, incompatible con la teoría electromagnética. El único escenario que las leyes de Maxwell admiten soluciones de campo estáticas es que explícitamente los campos $E$ y $B$ sean constantes con respecto al tiempo, tal que $\frac{\partial}{\partial t}\mathbf{E} = \mathbf{0}$ o $\frac{\partial}{\partial t}\mathbf{B} = \mathbf{0}$. 
+
+Algo debía estar mal, y debían seguir proponiendo qué era.
 
 #### Experimento de Michelson-Morley
 
+Otra pieza de información surgió desde el llamado **experimento de Michelson-Morley**, los cuales usaron "el interferómetro" para medir la velocidad de la luz con respecto al éter. Dicho sea de paso, la invención del interferómetro les valió el premino novel de físíca del año ().
 
-#### La ecuación de FitzGerald
+Como la luz es una onda, los posibles efectos de la **interferencia** deberían ser apreciables. Entonces, se hace interferir un haz de luz complétamente caracterizado consigo mismo, haciendo que se divida en un "divisor de haces", viajen haciéndolos rebotar en espejos diferentes, y luego viajen de vuelta hacia una pantalla donde será distinguible el patrón de interferencia. 
 
-El físico irlandés (nombre) FitzGerald encontró una forma de conciliar la situación, sugiriendo que los objetos disminuyen en longuitud, en la dirección en la que se están moviendo, en un factor de $\sqrt{1-\frac{v^2}{c^2}}$. Por lo tanto:
+Si definimos nuestro SRI en la tierra, podríamos considerar que la tierra se mueve a una velocidad $v$ con respecto al éter. El interferómetro comparte el SRI de la tierra, y en un isntante se emite un haz de luz que recorre el interferómetro y vuelve a la pantalla. Se espera que los caminos de estos haces sean modificados por la suma de velocidades en los diferentes caminos que toma el haz, por ende, exista un patrón de interferencia detectable en la pantalla. 
+
+El resultado fue controversial: con la resolución instrumental del momento se esperaba medir un valor de desfase $\Delta \phi \sim 0.4\pi\sim$, pero tal desfase no se encontró. Se probó el experimento en muchos contextos diferentes y nunca hubo resultado. 
+
+
+#### Los esfuerzos de FitzGerald
+
+El físico irlandés George FitzGerald (1851-1901) encontró una forma de conciliar la situación, sugiriendo que cualquier objeto que tiene una velocidad $v$ con respecto al éter disminuyen en longuitud en un factor de $\sqrt{1-\frac{v^2}{c^2}}$. Por lo tanto:
 
 $$
 \displaystyle L'=L\sqrt{1-\frac{v^2}{c^2}},
@@ -275,17 +297,26 @@ $$
 
 ¿Qué ocurre con la longitud de un cuerpo que se mueve a una velocidad igual a la luz?
 
-#### La ecuación de Lorentz
+Casi en paralelo, Hendrik Anton Lorentz (1853-1928) trabajó en el problema de forma independiente, reproduciendo las observaciones de FitzGerald y estableció que las leyes de Maxwell son invariantes bajo las siguientes transormaciones:
 
-El factor $\displaystyle \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$
-
+$$
 \begin{align*}
 x' &= \gamma (x - vt) \\
 t' &= \gamma \left( t - \frac{vx}{c^2} \right)
 \end{align*}
+$$
 
+donde el factor $\displaystyle \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$ es el llamado **factor de Lorentz**, en cual tiene a 1 cuando la velocidad $v$ es pequeña, en comparación a la velocidad de la luz $c$. Dicho de otra forma, en el límite donde $v/c \to 0$ es:
+
+$$
+\lim_{{\frac{v}{c} \to 0}} \gamma = \lim_{{\frac{v}{c} \to 0}} \frac{1}{\sqrt{1}} = 1,
+$$
+
+esta es la razón de que los efectos relativistas son indetectables por nuestros sentidos en velocidades "newtonianas" (velocidades $v$ pequeñas en comparación a la velocidad de la luz $c$), por eso las transformadas de Lorentz tiende a las transformaciones de galileo.
 
 #### La relatividad especial
+
+
 
 Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
 
@@ -293,5 +324,9 @@ Vamos a dar un breve salto temporal, y veremos el principio de la relatividad se
 Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
 
 
+
+
+
+#### Consecuencias de la relatividad especial
 
 
