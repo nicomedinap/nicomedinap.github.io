@@ -316,18 +316,12 @@ esta es la razón de que los efectos relativistas son indetectables por nuestros
 
 #### La relatividad especial
 
-
-
 El estado
 
 Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
 
 :---: |
 Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
-
-
-
-
 
 #### Consecuencias de la relatividad especial
 
