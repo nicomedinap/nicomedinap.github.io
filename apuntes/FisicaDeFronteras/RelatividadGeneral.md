@@ -271,7 +271,7 @@ Como la luz es una onda, los posibles efectos de la **interferencia** deberían 
 
 Si definimos nuestro SRI en la tierra, podríamos considerar que la tierra se mueve a una velocidad $v$ con respecto al éter. El interferómetro comparte el SRI de la tierra, y en un isntante se emite un haz de luz que recorre el interferómetro y vuelve a la pantalla. Se espera que los caminos de estos haces sean modificados por la suma de velocidades en los diferentes caminos que toma el haz, por ende, exista un patrón de interferencia detectable en la pantalla. 
 
-El resultado fue controversial: con la resolución instrumental del momento se esperaba medir un valor de desfase $\Delta \phi \sim 0.4\pi\sim$, pero tal desfase no se encontró. Se probó el experimento en muchos contextos diferentes y nunca hubo resultado. 
+El resultado fue controversial: con la resolución instrumental del momento se esperaba medir un valor de desfase $\Delta \Phi$, pero tal desfase no se encontró. Se probó el experimento en muchos contextos diferentes y nunca hubo resultado. 
 
 
 #### Los esfuerzos de FitzGerald
@@ -306,10 +306,10 @@ t' &= \gamma \left( t - \frac{vx}{c^2} \right)
 \end{align*}
 $$
 
-donde el factor $\displaystyle \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$ es el llamado **factor de Lorentz**, en cual tiene a 1 cuando la velocidad $v$ es pequeña, en comparación a la velocidad de la luz $c$. Dicho de otra forma, en el límite donde $v/c \to 0$ es:
+donde el factor $\displaystyle \gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$ es el llamado **factor de Lorentz**, en cual tiene a 1 cuando la velocidad $v$ es pequeña, en comparación a la velocidad de la luz $c$. Dicho de otra forma, en el límite donde la razón $v/c \to 0$ es:
 
 $$
-\lim_{ \frac{v}{c} \to 0} \gamma = \lim_{ \frac{v}{c} \to 0} \frac{1}{\sqrt{1}} = 1,
+\lim_{ \frac{v}{c} \to 0} \gamma = \lim_{ \frac{v}{c} \to 0} \frac{1}{\sqrt{1}- \cancelto{0}}{\frac{v}{c}} = 1,
 $$
 
 esta es la razón de que los efectos relativistas son indetectables por nuestros sentidos en velocidades "newtonianas" (velocidades $v$ pequeñas en comparación a la velocidad de la luz $c$), por eso las transformadas de Lorentz tiende a las transformaciones de galileo 
