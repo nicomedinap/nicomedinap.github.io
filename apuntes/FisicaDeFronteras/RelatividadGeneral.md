@@ -312,11 +312,11 @@ $$
 \lim_{{\frac{v}{c} \to 0}} \gamma = \lim_{{\frac{v}{c} \to 0}} \frac{1}{\sqrt{1}} = 1,
 $$
 
-esta es la razón de que los efectos relativistas son indetectables por nuestros sentidos en velocidades "newtonianas" (velocidades $v$ pequeñas en comparación a la velocidad de la luz $c$), por eso las transformadas de Lorentz tiende a las transformaciones de galileo.
+esta es la razón de que los efectos relativistas son indetectables por nuestros sentidos en velocidades "newtonianas" (velocidades $v$ pequeñas en comparación a la velocidad de la luz $c$), por eso las transformadas de Lorentz tiende a las transformaciones de galileo 
 
-#### La relatividad especial
+#### El estado antes del 1905
 
-
+El estado
 
 Vamos a dar un breve salto temporal, y veremos el principio de la relatividad segun Einstein:
 
