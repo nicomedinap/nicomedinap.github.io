@@ -316,7 +316,7 @@ esta es la razón de que los efectos relativistas son indetectables por nuestros
 
 El razonamiento forma de obtener las transformaciones de Lorentz fue la siguiente:
 
-![Link Name](https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/imagenes/pulso_luminoso.png)  
+![Link Name](https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/_posts/imagenes/pulso_luminoso.png =150x50)  
 
 Figura 2: esquema de la relatividad de Galileo, imagen tomada desde 
 
