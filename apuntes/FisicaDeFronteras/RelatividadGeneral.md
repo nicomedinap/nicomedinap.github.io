@@ -322,7 +322,7 @@ Figura 2: esquema de la relatividad de Galileo, imagen tomada desde
 
 Supongamos que dos observadores $O$ y $O'$ definen sus sistemas de coordenadas tal que, en el instante $t=t'=0$, los origenes coinciden. Entonces, en el instante $t=0$, se emitirá un pulso electromagnético que se alejará a la velocidad de la luz $ct$ de forma esférica, y el observador se empieza a mover hacia la derecha a velocidad constante $v$.
 
-La transformación lineal más general entre los sistemas (x,y) e (x',t') será de la forma:
+La transformación lineal más general entre los sistemas $(x,y)$ e $(x',t')$ será de la forma:
 
 $$
 \begin{align*}
@@ -331,7 +331,7 @@ t' &= Cx + Dt
 \end{align*}
 $$
 
-donde los coeficientes A,B,C,D son funciones de $v$ y $c$. Como en cáda momento se cumple la condición $x=0$, podemos reducir lo anterior a:
+donde los coeficientes $A,B,C,D$ son funciones de $v$ y $c$. Como en cáda momento se cumple la condición $x=0$, podemos reducir lo anterior a:
 
 $$
 \begin{align*}
@@ -344,15 +344,16 @@ si consideramos que $dx' = B dt$ y que también $dt' = D dt$, tenemos que:
 
 $$-v = \frac{dx'}{dt'}=\frac{B}{D},$$
 
-donde el signo negativo es porque el observador O' se mueve hacia la derecha. Otro hecho que se puede usar es que en el origen de coordenadas de O', siempre está en reposo con respecto a si mismo, por lo tanto x'=0, así:
+donde el signo negativo es porque el observador $O'$ se mueve hacia la derecha. Otro hecho que se puede usar es que en el origen de coordenadas de $O'$, siempre está en reposo con respecto a si mismo, por lo tanto $x'=0$, así:
 
 $$
-0 &= Ax + Bt \\
+0 = Ax + Bt 
 $$
-Si derivamos con respeto a t, tenemos que 
+
+Si derivamos con respeto a $t$, tenemos que 
 
 $$
-0 &= Av + B \Rightarrow B = -vA
+0 = Av + B \Rightarrow B = -v A
 $$
 
 Con estos hechos reducimos nuestras ecuaciones iniciales a:
@@ -364,13 +365,13 @@ t' &= A(\frac{C}{A}x + t)
 \end{align*}
 $$
 
-Además, si consideramos que en el momento $t=t'=0$, cuando se emite el pulso electromagnético. Después de un tiempo, el observador O tendrá unas coordenadas que satisfacen una esfera, de la forma:
+Además, si consideramos que en el momento $t=t'=0$, cuando se emite el pulso electromagnético. Después de un tiempo, el observador $O$ tendrá unas coordenadas que satisfacen una esfera, de la forma:
 
 $$
 x^2 + y^2 + z^2 =(ct)^2.
 $$
 
-Pero para O', el pulso también se expande como una esfera, por lo tanto:
+Pero para $O'$, el pulso también se expande como una esfera, por lo tanto:
 
 $$
 x'^2 + y'^2 + z'^2 = (c t')^2
@@ -385,7 +386,7 @@ $$
 Haciendo álgebra podemos llegar a que:
 
 $$
-A = \frac{1}{\sqrt{1-v^2/c^2}} = \gamma
+A = \frac{1}{\sqrt{1-v^2/c^2}} = \gamma \\
 
 C = \frac{-v/c^2}{\sqrt{1-v^2/c^2}} = -\frac{-v \gamma}{c^2} 
 $$
@@ -396,13 +397,13 @@ $$
 s^2 = (ct)^2 - x^2 - y^2 - z^2 =  (c t')^2 - x'^2 - y'^2 - z'^2 
 $$
 
-se mantenga "invariante". La camntidad s^2 es conocido como **invervalo**, **métrica**, o más formalmente, el **tenson métrico**. Básicamente es el valor al que está asociada la distancia en cierto intervalo. Puede ser entendido como la norma euclideana de un vector $V$:
+se mantenga "invariante". La camntidad $s^2$ es conocido como **invervalo**, **métrica**, o más formalmente, el **tenson métrico**. Básicamente es el valor al que está asociada la distancia en cierto intervalo. Puede ser entendido como la norma euclideana de un vector $V$:
 
 $$
 ds^2 = c^2 dt^2 - dx^2
 $$
 
-En este sentido, este intervalo es una **magnitud absoluta** de la relativdad especial. Posee el mismo valor en todos los sistemas inerciales. ds^2 es una especie de distancia en el espacio-tiempo 4-dimensional: el espacio de Minkowski. Por ejemplo si un suceso ocurre en $(ct_1,x_1,y_1,z_1)$, y otro en $(ct_2,x_2,y_2,z_2)$, la cantidad:
+En este sentido, este intervalo es una **magnitud absoluta** de la relativdad especial. Posee el mismo valor en todos los sistemas inerciales. $ds^2$ es una especie de distancia en el espacio-tiempo 4-dimensional: el espacio de Minkowski. Por ejemplo si un suceso ocurre en $(ct_1,x_1,y_1,z_1)$, y otro en $(ct_2,x_2,y_2,z_2)$, la cantidad:
 
 $$
 \Delta s^2 = c^2(t_2 - t_1)^2 - (x_2 - x_1)^2 - (y_2-y_1)^2 - (z_2-z_1)^2
