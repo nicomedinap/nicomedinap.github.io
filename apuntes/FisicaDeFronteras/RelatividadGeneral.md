@@ -234,10 +234,9 @@ Como se observa de la última ecuación, *todos los sistemas de referencia inerc
 Las velocidades son relativas, pero las aceleraciones son absolutas. Entonces cuando apacere una velocidad, también hay que preguntarse: *velocidad: ¿Con respecto a qué sistema de referencia?*. Entonces, de forma cualitiva, el principio de la relatividad de Galileo se expresa de la siguiente manera:
 
 :---: |
-Es imposible determinar a base de experimentos (mecánicos (o sea que soltando bolitas o con planos inclinados)) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. 
+Es imposible determinar a base de experimentos (mecánicos (o sea que soltando bolitas o con planos inclinados)) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
 
 A continuación presento algunos videos que visualizan el concepto de la velocidad relativa.
-
 los cazadores de mitos: Sistema cañon-Camioneta[Link](https://www.youtube.com/watch?v=BLuI118nhzc){:target="_blank"}
 
 Visualización de la inercia en diferentes lanzamientos de pelotas. [link](https://www.youtube.com/watch?v=j1URC2G2qnc){:target="_blank"}, observar que en último caso (cuando la masa *decrece*) no se cumple el comportamiento esperado: ¿Por qué? 
@@ -361,7 +360,7 @@ Con estos hechos reducimos nuestras ecuaciones iniciales a:
 $$
 \begin{align*}
 x' &= A(x - vt) \\
-t' &= A(\frac{C}{A}x + t)
+t' &= A \left( \frac{C}{A}x + t \right)
 \end{align*}
 $$
 
@@ -397,7 +396,7 @@ $$
 s^2 = (ct)^2 - x^2 - y^2 - z^2 =  (c t')^2 - x'^2 - y'^2 - z'^2 
 $$
 
-se mantenga "invariante". La camntidad $s^2$ es conocido como **invervalo**, **métrica**, o más formalmente, el **tenson métrico**. Básicamente es el valor al que está asociada la distancia en cierto intervalo. Puede ser entendido como la norma euclideana de un vector $V$:
+se mantenga "invariante". La cantidad $s^2$ es conocido como **invervalo**, **métrica**. Básicamente es el valor al que está asociada la distancia en cierto intervalo. Puede ser entendido como la norma euclideana de un vector $V$:
 
 $$
 ds^2 = c^2 dt^2 - dx^2
@@ -418,7 +417,10 @@ El principio de la relatividad segun Einstein:
 :---: |
 Las leyes de la física deben tener la misma forma en todos los sistemas de refencias inerciales. |
 
+El principio de la constancia de la luz:
 
+:---: |
+La velocidad de la luz en el vacío es igual para todos los observadores u tiene el valor de 299.792,458 [km/s], independientemente del estado de movimiento de la fuente. |
 
 #### Consecuencias de la relatividad especial
 
