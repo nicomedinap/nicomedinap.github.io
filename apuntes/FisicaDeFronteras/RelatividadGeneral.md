@@ -399,13 +399,13 @@ $$
 se mantenga "invariante". La cantidad $s^2$ es conocido como **intervalo**, **métrica**. Básicamente es el valor al que está asociada la distancia en cierto intervalo:
 
 $$
-ds^2 = c^2 dt^2 - dx^2
+ds^2 = dx^2 - c^2 dt^2
 $$
 
 En este sentido, este intervalo es una **magnitud absoluta** de la relativdad especial. Posee el mismo valor en todos los sistemas inerciales. $ds^2$ es una especie de distancia en el espacio-tiempo 4-dimensional: el espacio de Minkowski. Por ejemplo si un suceso ocurre en $(ct_1,x_1,y_1,z_1)$, y otro en $(ct_2,x_2,y_2,z_2)$, la cantidad:
 
 $$
-\Delta s^2 = c^2(t_2 - t_1)^2 - (x_2 - x_1)^2 - (y_2-y_1)^2 - (z_2-z_1)^2
+\Delta s^2 = (x_2 - x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2 - c^2(t_2 - t_1)^2 
 $$
 
 es el cuadrado de la distancia de esos dos sucesos.
@@ -422,6 +422,96 @@ El principio de la constancia de la luz:
 :---: |
 La velocidad de la luz en el vacío es igual para todos los observadores u tiene el valor de 299.792,458 [km/s], independientemente del estado de movimiento de la fuente. |
 
+#### Tarea (entrega el 8 de Abril)
+
+El \textbf{\textit{ vector de posición}}, \textbf{\textit{radio vector}} o simplemente \textbf{\textit{Vector posición}} $\Vec{r}$ es aquel vector que parte desde el origen de algún sistema coordenado hasta un punto de interés $P$. Muy útil en física para describir algún punto de vista particular o sistema de referencia. Por esta misma razón es que otra persona podría definir su propio sistema coordenado (o punto de vista) y describir la realidad de otra forma. Ambas descripciones deberían ser equivalentes asumiendo que existe una realidad física objetiva. Considere una escala de tiempo igual para todos los sistemas de referencia.
+
+Si ambos sistemas de referencia observan una particula moverse desde un punto inicial $P_i$ a otra posición final $P_f$: 
+
+\begin{enumerate}
+    \item Demuestre que el vector desplazamiento $\Delta \vec{x} = P_f - P_i$ de esa particula no depende del sistema de referencia. En otras palabras, demuestre que ambos puntos de vista son correctos.
+    \item Si consideramos una escala temporal diferente para cada observador: ¿qué implicancias existen en la medición del desplazamiento $\Delta \vec{x}$. 
+\end{enumerate}
+
 #### Consecuencias de la relatividad especial
 
+El reloj de luz
 
+La transformada de Lorentz 
+
+Composición de velocidades
+
+Sobre vectores, cuadrivectores y tensores
+
+#### La necesidad de la relatividad general
+
+
+Masa gravitatoria y la masa inercial, y la ecuacion itinerario
+
+
+El principio de equivalencia
+
+Las fuerzas son debidas a la curvatura
+
+
+#### Algunos ejercicios para aplicar lo discutido:
+
+
+1.- Hallar el cuadrado del elemento de línea en coordenadas cilíndricas y determinar los factores de escala corespondientes:
+
+
+$$
+\begin{align*}
+x &= \rho \cos(\phi) \\
+y &= \rho \sin(\phi) \\
+z &= z \\ 
+\end{align*}
+$$
+
+Hallar el cuadrado del elemento de línea en coordenadas cilíndricas y determinar los factores de escala correspondientes:
+
+$$
+\begin{align*}
+x &= r \sin(\theta) \cos(\phi) \\
+y &= r \sin(\theta) \sin(\phi) \\
+z &= r \cos(\theta)\\ 
+\end{align*}
+$$
+
+
+2.- Demuestre que la cantidad $\Delta s^2$ es invariable bajo las transformaciones de Lorentz:
+
+$$
+\Delta s^2 = c^2 \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
+$$
+
+Considerando las transformaciones de Lorentz a lo largo del eje $x$ en la dirección $\hat{i}$, las ecuaciones quedan de la forma:
+
+$$
+\begin{align*}
+x' &= \frac{x-vt}{\sqrt{1-\frac{v^2}{c^2}}} = \gamma (x-vt) \\
+y' &= y \\
+z' &= z \\ 
+t' &= \frac{t-\frac{vx}{c^2}}{\sqrt{1-\frac{v^2}{c^2}}} = \gamma (t-\frac{vx}{c^2}) \\  
+\end{align*}
+$$
+
+Entonces,
+
+$$
+\begin{align*}
+\Delta s^2 &= c^2 \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2 = (c \Delta t')^2 - (\Delta x')^2 - (\Delta y')^2 - (\Delta z')^2 \\ 
+		   &=  c^2 \Delta t^2 - \Delta x^2 = (c \Delta t')^2 - (\Delta x')^2
+$$
+
+Por lo tanto, como tenemos expresiones que relacionan ambos sistemas de refencia, tenemos que:
+
+$$
+\begin{align*}
+c^2 \Delta t^2 - \Delta x^2 &= (c \Delta t')^2 - (\Delta x')^2 \\ 
+	&= \left(   \right)^2
+		   
+$$
+
+
+3.- Sean $S$ y $S'$ dos sistemas inerciales que coinciden en un instante. $S'$ se mueve con respecto a $S$ en la dirección $\hat{i}$ con una velocidad $v$ constante. En el origen de $S'$ existe una pantalla de cine que proyecta una película de $t'$ minutos, la cual es vista por un observador que se encuentra en el origen dew $S'$. ¿Cuánto tiempo dura la película para el observador en $S$? Podemos suponer que $v=0.6 c$.
