@@ -13,7 +13,7 @@ Es de mi agrado informar que este espacio será exclusivo para desarrollar ideas
 
 Algunos cálculos que quizá no son vitales para el entendimiento de este curso, serán desarrollados en este espacio con el fin de que ustedes puedan verlos y sabes desde dónde provienen las ideas contra-intuitivas de la realidad.
 
-Las diapositivas actualizadas (hasta el 27/03/24) se encuentran en [ESTE LINK!](https://udetalca-my.sharepoint.com/:b:/g/personal/nicolas_medina_utalca_cl/EZ7_k3VB5v5Pg1L91rjnxs8BMAxZ9SZ3q8qkefwdASPqDw?e=pAIjEP)
+Las diapositivas actualizadas (hasta el 03/04/24) se encuentran en [ESTE LINK!](https://udetalca-my.sharepoint.com/:b:/g/personal/nicolas_medina_utalca_cl/ESAizkIqi_pPlLuBbElQlzIB2Z5btgB-C5L-l1RR_MsZMQ?e=dgX1Dh)
 
 Conceptos previos 
 
@@ -396,7 +396,7 @@ $$
 s^2 = (ct)^2 - x^2 - y^2 - z^2 =  (c t')^2 - x'^2 - y'^2 - z'^2 
 $$
 
-se mantenga "invariante". La cantidad $s^2$ es conocido como **invervalo**, **métrica**. Básicamente es el valor al que está asociada la distancia en cierto intervalo. Puede ser entendido como la norma euclideana de un vector $V$:
+se mantenga "invariante". La cantidad $s^2$ es conocido como **intervalo**, **métrica**. Básicamente es el valor al que está asociada la distancia en cierto intervalo:
 
 $$
 ds^2 = c^2 dt^2 - dx^2
