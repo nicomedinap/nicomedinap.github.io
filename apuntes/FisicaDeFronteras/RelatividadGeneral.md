@@ -512,9 +512,10 @@ Por lo tanto, como tenemos expresiones que relacionan ambos sistemas de refencia
 $$
 \begin{align*}
 c^2 \Delta t^2 - \Delta x^2 &= (c \Delta t')^2 - (\Delta x')^2 \\ 
-	&= \left(   \right)^2
+	&= c^2 \gamma^2 \left(\Delta t-\frac{v\Delta x}{c^2} \right)^2 - \gamma^2 \left( \Delta x-v \Delta t \right)^2 \\
+	&= c^2 \gamma^2 \left( \Delta t^2 - \frac{2v}{c^2} \Delta t \Delta x + \frac{v^2}{c^4}\Delta x^2 \right) - \gamma^2 \left( \Delta x^2 -2v \Delta x Delta t + v^2 \Delta t^2 \right) \\
 \end{align*}	   
 $$
 
 
-3.- Sean $S$ y $S'$ dos sistemas inerciales que coinciden en un instante. $S'$ se mueve con respecto a $S$ en la dirección $\hat{i}$ con una velocidad $v$ constante. En el origen de $S'$ existe una pantalla de cine que proyecta una película de $t'$ minutos, la cual es vista por un observador que se encuentra en el origen dew $S'$. ¿Cuánto tiempo dura la película para el observador en $S$? Podemos suponer que $v=0.6 c$.
+3.- Sean $S$ y $S'$ dos sistemas inerciales que coinciden en un instante. $S'$ se mueve con respecto a $S$ en la dirección $\hat{i}$ con una velocidad $v$ constante. En el origen de $S'$ existe una pantalla de cine que proyecta una película de $t'$ minutos, la cual es vista por un observador que se encuentra en el origen de $S'$. ¿Cuánto tiempo dura la película para el observador en $S$? Podemos suponer que $v=0.6 c$.
