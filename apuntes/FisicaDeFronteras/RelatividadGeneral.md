@@ -424,14 +424,16 @@ La velocidad de la luz en el vacío es igual para todos los observadores u tiene
 
 #### Tarea (entrega el 8 de Abril)
 
-El \textbf{\textit{ vector de posición}}, \textbf{\textit{radio vector}} o simplemente \textbf{\textit{Vector posición}} $\Vec{r}$ es aquel vector que parte desde el origen de algún sistema coordenado hasta un punto de interés $P$. Muy útil en física para describir algún punto de vista particular o sistema de referencia. Por esta misma razón es que otra persona podría definir su propio sistema coordenado (o punto de vista) y describir la realidad de otra forma. Ambas descripciones deberían ser equivalentes asumiendo que existe una realidad física objetiva. Considere una escala de tiempo igual para todos los sistemas de referencia.
+El $\textbf{\textit{ vector de posición}}$, $\textbf{\textit{radio vector}}$ o simplemente $\textbf{\textit{Vector posición}}$ $\Vec{r}$ es aquel vector que parte desde el origen de algún sistema coordenado hasta un punto de interés $P$. Muy útil en física para describir algún punto de vista particular o sistema de referencia. Por esta misma razón es que otra persona podría definir su propio sistema coordenado (o punto de vista) y describir la realidad de otra forma. Ambas descripciones deberían ser equivalentes asumiendo que existe una realidad física objetiva. Considere una escala de tiempo igual para todos los sistemas de referencia.
 
 Si ambos sistemas de referencia observan una particula moverse desde un punto inicial $P_i$ a otra posición final $P_f$: 
 
+$$
 \begin{enumerate}
     \item Demuestre que el vector desplazamiento $\Delta \vec{x} = P_f - P_i$ de esa particula no depende del sistema de referencia. En otras palabras, demuestre que ambos puntos de vista son correctos.
     \item Si consideramos una escala temporal diferente para cada observador: ¿qué implicancias existen en la medición del desplazamiento $\Delta \vec{x}$. 
 \end{enumerate}
+$$
 
 #### Consecuencias de la relatividad especial
 
@@ -502,6 +504,7 @@ $$
 \begin{align*}
 \Delta s^2 &= c^2 \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2 = (c \Delta t')^2 - (\Delta x')^2 - (\Delta y')^2 - (\Delta z')^2 \\ 
 		   &=  c^2 \Delta t^2 - \Delta x^2 = (c \Delta t')^2 - (\Delta x')^2
+\end{align*}
 $$
 
 Por lo tanto, como tenemos expresiones que relacionan ambos sistemas de refencia, tenemos que:
@@ -510,7 +513,7 @@ $$
 \begin{align*}
 c^2 \Delta t^2 - \Delta x^2 &= (c \Delta t')^2 - (\Delta x')^2 \\ 
 	&= \left(   \right)^2
-		   
+\end{align*}	   
 $$
 
 
