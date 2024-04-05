@@ -237,11 +237,12 @@ Las velocidades son relativas, pero las aceleraciones son absolutas. Entonces cu
 Es imposible determinar a base de experimentos (mecánicos (o sea que soltando bolitas o con planos inclinados)) si un sistema de referencia está en reposo o en movimiento uniforme y rectilineo. |
 
 A continuación presento algunos videos que visualizan el concepto de la velocidad relativa.
-los cazadores de mitos: Sistema cañon-Camioneta[Link](https://www.youtube.com/watch?v=BLuI118nhzc){:target="_blank"}
 
-Visualización de la inercia en diferentes lanzamientos de pelotas. [link](https://www.youtube.com/watch?v=j1URC2G2qnc){:target="_blank"}, observar que en último caso (cuando la masa *decrece*) no se cumple el comportamiento esperado: ¿Por qué? 
+1. <ins>los cazadores de mitos: Sistema cañon-Camioneta</ins>[Link](https://www.youtube.com/watch?v=BLuI118nhzc){:target="_blank"}
 
-Top secret: escena del tren [LINK](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y){:target="_blank"}
+2. <ins>Visualización de la inercia en diferentes lanzamientos de pelotas</ins>[Link](https://www.youtube.com/watch?v=j1URC2G2qnc){:target="_blank"}, observar que en último caso (cuando la masa *decrece*) no se cumple el comportamiento esperado: ¿Por qué? 
+
+3. <ins>Top secret: escena del tren</ins>[Link](https://youtu.be/A_peCIVBTAY?si=DTFwC3AaSGZxGaCM&t=6Y){:target="_blank"}
 
 
 #### Los principios de la relatividad
@@ -434,29 +435,24 @@ Si ambos sistemas de referencia observan una particula moverse desde un punto in
 
 #### Consecuencias de la relatividad especial
 
-El reloj de luz
-
-La transformada de Lorentz 
-
-Composición de velocidades
-
-Sobre vectores, cuadrivectores y tensores
+1. El reloj de luz
+2. La transformada de Lorentz 
+3. Composición de velocidades
+4. Sobre vectores, cuadrivectores y tensores
 
 #### La necesidad de la relatividad general
 
-
-Masa gravitatoria y la masa inercial, y la ecuacion itinerario
-
-
-El principio de equivalencia
-
-Las fuerzas son debidas a la curvatura
-
+1. Masa gravitatoria y la masa inercial, y la ecuacion itinerario
+2. El principio de equivalencia
+3. Las fuerzas son debidas a la curvatura
 
 #### Algunos ejercicios para aplicar lo discutido:
 
+##### 1.- El elemento de línea
 
-##### 1.- Hallar el cuadrado del elemento de línea en coordenadas cilíndricas y determinar los factores de escala corespondientes:
+Un elemento de línea o elemento de longitud, de forma muy simplificada, es el desplazamiento infinitesimal de un vector definido sobre cierto [espácio métrico](https://es.wikipedia.org/wiki/Espacio_m%C3%A9trico){:target="_blank"}. Por lo tanto, (e informalmente) la raiz cuadrada de $ds^2$ será el cuadrado de la longitud de un desplazamiento infinitesimal dentro de cierto espacio vectorial. Definido de esa forma, la longitud $s$ de una curva será calculada de la forma usual $s = \int_{\lambda_1}^{\lambda_2} \sqrt{|ds^2|} d\lambda.$
+
+Hallar el cuadrado del elemento de línea en coordenadas cilíndricas.
 
 $$
 \begin{align*}
@@ -465,7 +461,6 @@ y &= \rho \sin(\phi) \\
 z &= z \\ 
 \end{align*}
 $$
-
 
 Consideremos el siguiente vector de tres dimensiones:
 
@@ -483,20 +478,20 @@ Para obtener el elemento de línea de estas coordenadas, diferenciamos el vector
 
 $$
 \begin{align*}
-d\vec{x} &= \dfrac{\partial \vec{r}}{\partial \rho}  d\rho +  \dfrac{\partial \vec{x}}{\partial \phi} d\phi +  \dfrac{\partial \vec{x}}{\partial z} dz \\
+d\vec{x} &= \dfrac{\partial \vec{x}}{\partial \rho}  d\rho +  \dfrac{\partial \vec{x}}{\partial \phi} d\phi +  \dfrac{\partial \vec{x}}{\partial z} dz \\
 	&= d\rho(\cos(\phi) \hat{i} +\sin(\phi) \hat{j}) + d\phi(-\rho\sin(\phi)\hat{i}+\rho\cos(\phi)\hat{j}) + dz \hat{k} \\
-	&= \hat{\rho} d\rho + \rho\hat{\phi}d\phi + \hat{k}dz \\
+	&= d\rho \hat{\rho} + \rho d\phi \hat{\phi} + dz \hat{k} \\
 \end{align*}
 $$
 
 donde hemos definido las cantidades $\hat{\rho}= \cos(\phi) \hat{i} +\sin(\phi) \hat{j}$ y $\hat{\phi} = -\sin(\phi)\hat{i}+\cos(\phi)\hat{j}$. 
-Entonces, el cuadrado del elemento de línea será:
+Entonces, el cuadrado del elemento de línea ds^2 será:
 
 $$
-d\vec{x}\cdot d\vec{x} = d\rho^2 + \rho^2 d\phi^2 + dz^2
+d\vec{x}\cdot d\vec{x} = ds^2 = d\rho^2 + \rho^2 d\phi^2 + dz^2
 $$
 
-##### Repetir el ejercicio anterior pero en coordenadas cilíndricas y determinar los factores de escala correspondientes:
+##### Repetir el ejercicio anterior pero en coordenadas cilíndricas.
 
 $$
 \begin{align*}
@@ -540,7 +535,7 @@ $$
 c^2 \Delta t^2 - \Delta x^2 &= (c \Delta t')^2 - (\Delta x')^2 \\ 
 	&= c^2 \gamma^2 \left(\Delta t-\frac{v\Delta x}{c^2} \right)^2 - \gamma^2 \left( \Delta x-v \Delta t \right)^2 \\
 	&= c^2 \gamma^2 \left( \Delta t^2 - \frac{2v}{c^2} \Delta t \Delta x + \frac{v^2}{c^4}\Delta x^2 \right) - \gamma^2 \left( \Delta x^2 -2v \Delta x \Delta t + v^2 \Delta t^2 \right) \\
-	&=  c^2 \gamma^2 \Delta t^2  + \frac{v^2}{c^2} \gamma^2 \Delta x^2 - \gamma^2 \Delta x^2 - \gamma^2 v \Delta t^2\\
+	&=  c^2 \gamma^2 \Delta t^2  + \frac{v^2}{c^2} \gamma^2 \Delta x^2 - \gamma^2 \Delta x^2 - \gamma^2 v^2 \Delta t^2\\
 	&=   c^2 \gamma^2 \Delta t^2  \left( 1-\frac{v^2}{c^2} \right) - \gamma^2 \Delta x^2 \left( 1-\frac{v^2}{c^2} \right) \\
 	&=  c^2 \Delta t^2 - \Delta x^2, \\
 \end{align*}	   
@@ -549,3 +544,9 @@ $$
 Que era lo que queríamos demostrar.
 
 ##### 3.- Sean $S$ y $S'$ dos sistemas inerciales que coinciden en un instante. $S'$ se mueve con respecto a $S$ en la dirección $\hat{i}$ con una velocidad $v$ constante. En el origen de $S'$ existe una pantalla de cine que proyecta una película de $t'$ minutos, la cual es vista por un observador que se encuentra en el origen de $S'$. ¿Cuánto tiempo dura la película para el observador en $S$? Podemos suponer que $v=0.6 c$.
+
+#### La relatividad General
+
+1. Notación tensorial y su interpretación
+2. Algunos tests de la relatividad general
+3. Ondas gravitatorias
