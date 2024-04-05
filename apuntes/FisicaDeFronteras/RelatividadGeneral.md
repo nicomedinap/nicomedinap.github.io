@@ -424,16 +424,13 @@ La velocidad de la luz en el vacío es igual para todos los observadores u tiene
 
 #### Tarea (entrega el 8 de Abril)
 
-El $\textbf{\textit{ vector de posición}}$, $\textbf{\textit{radio vector}}$ o simplemente $\textbf{\textit{Vector posición}}$ $\Vec{r}$ es aquel vector que parte desde el origen de algún sistema coordenado hasta un punto de interés $P$. Muy útil en física para describir algún punto de vista particular o sistema de referencia. Por esta misma razón es que otra persona podría definir su propio sistema coordenado (o punto de vista) y describir la realidad de otra forma. Ambas descripciones deberían ser equivalentes asumiendo que existe una realidad física objetiva. Considere una escala de tiempo igual para todos los sistemas de referencia.
+El **vector de posición**, **radio vector** o simplemente **Vector posición** $\vec{r}$ es aquel vector que parte desde el origen de algún sistema coordenado hasta un punto de interés $P$. Muy útil en física para describir algún punto de vista particular o sistema de referencia. Por esta misma razón es que otra persona podría definir su propio sistema coordenado (o punto de vista) y describir la realidad de otra forma. Ambas descripciones deberían ser equivalentes asumiendo que existe una realidad física objetiva. Considere una escala de tiempo igual para todos los sistemas de referencia.
 
 Si ambos sistemas de referencia observan una particula moverse desde un punto inicial $P_i$ a otra posición final $P_f$: 
 
-$$
-\begin{enumerate}
-    \item Demuestre que el vector desplazamiento $\Delta \vec{x} = P_f - P_i$ de esa particula no depende del sistema de referencia. En otras palabras, demuestre que ambos puntos de vista son correctos.
-    \item Si consideramos una escala temporal diferente para cada observador: ¿qué implicancias existen en la medición del desplazamiento $\Delta \vec{x}$. 
-\end{enumerate}
-$$
+1. Demuestre que el vector desplazamiento $\Delta \vec{x} = P_f - P_i$ de esa particula no depende del sistema de referencia. En otras palabras, demuestre que ambos puntos de vista son correctos.
+2. Si consideramos una escala temporal diferente para cada observador: ¿qué implicancias existen en la medición del desplazamiento $\Delta \vec{x}$. 
+
 
 #### Consecuencias de la relatividad especial
 
@@ -459,7 +456,7 @@ Las fuerzas son debidas a la curvatura
 #### Algunos ejercicios para aplicar lo discutido:
 
 
-1.- Hallar el cuadrado del elemento de línea en coordenadas cilíndricas y determinar los factores de escala corespondientes:
+##### 1.- Hallar el cuadrado del elemento de línea en coordenadas cilíndricas y determinar los factores de escala corespondientes:
 
 
 $$
@@ -481,7 +478,7 @@ z &= r \cos(\theta)\\
 $$
 
 
-2.- Demuestre que la cantidad $\Delta s^2$ es invariable bajo las transformaciones de Lorentz:
+##### 2.- Demuestre que la cantidad $\Delta s^2$ es invariable bajo las transformaciones de Lorentz:
 
 $$
 \Delta s^2 = c^2 \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
@@ -516,10 +513,10 @@ c^2 \Delta t^2 - \Delta x^2 &= (c \Delta t')^2 - (\Delta x')^2 \\
 	&= c^2 \gamma^2 \left( \Delta t^2 - \frac{2v}{c^2} \Delta t \Delta x + \frac{v^2}{c^4}\Delta x^2 \right) - \gamma^2 \left( \Delta x^2 -2v \Delta x \Delta t + v^2 \Delta t^2 \right) \\
 	&=  c^2 \gamma^2 \Delta t^2  + \frac{v^2}{c^2} \gamma^2 \Delta x^2 - \gamma^2 \Delta x^2 - \gamma^2 v \Delta t^2\\
 	&=   c^2 \gamma^2 \Delta t^2  \left( 1-\frac{v^2}{c^2} \right) - \gamma^2 \Delta x^2 \left( 1-\frac{v^2}{c^2} \right) \\
-	&=  c^2 |Delta t^2 - \Delta x^2, \\
+	&=  c^2 \Delta t^2 - \Delta x^2, \\
 \end{align*}	   
 $$
 
 Que era lo que queríamos demostrar.
 
-3.- Sean $S$ y $S'$ dos sistemas inerciales que coinciden en un instante. $S'$ se mueve con respecto a $S$ en la dirección $\hat{i}$ con una velocidad $v$ constante. En el origen de $S'$ existe una pantalla de cine que proyecta una película de $t'$ minutos, la cual es vista por un observador que se encuentra en el origen de $S'$. ¿Cuánto tiempo dura la película para el observador en $S$? Podemos suponer que $v=0.6 c$.
+##### 3.- Sean $S$ y $S'$ dos sistemas inerciales que coinciden en un instante. $S'$ se mueve con respecto a $S$ en la dirección $\hat{i}$ con una velocidad $v$ constante. En el origen de $S'$ existe una pantalla de cine que proyecta una película de $t'$ minutos, la cual es vista por un observador que se encuentra en el origen de $S'$. ¿Cuánto tiempo dura la película para el observador en $S$? Podemos suponer que $v=0.6 c$.
