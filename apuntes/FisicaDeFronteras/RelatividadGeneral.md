@@ -481,13 +481,15 @@ $$
 
 Para obtener el elemento de línea de estas coordenadas, diferenciamos el vector con respecto a sus variables:
 
+$$
 \begin{align*}
 d\vec{x} &= \dfrac{\partial \vec{r}}{\partial \rho}  d\rho +  \dfrac{\partial \vec{x}}{\partial \phi} d\phi +  \dfrac{\partial \vec{x}}{\partial z} dz \\
 	&= d\rho(\cos(\phi) \hat{i} +\sin(|phi) \hat{j}) + d\phi(-\rho\sin(\phi)\hat{i}+\rho\cos(\phi)\hat{j}) + dz \hat{k}) \\
 	&= \hat{\rho} d\rho + \rho\hat{\phi}d\phi + \hat{k}dz \\
 \end{align*}
+$$
 
-donde hemos definido las cantidades $\hat{\rho}= \cos(\phi) \hat{i} +\sin(\phi) \hat{j}$ y $\hat{\phi} = -\rho\sin(\phi)\hat{i}+\rho\cos(\phi)\hat{j}$. 
+donde hemos definido las cantidades $\hat{\rho}= \cos(\phi) \hat{i} +\sin(\phi) \hat{j}$ y $\hat{\phi} = -\sin(\phi)\hat{i}+\cos(\phi)\hat{j}$. 
 
 Repetir el ejercicio anterior pero en coordenadas cilíndricas y determinar los factores de escala correspondientes:
 
