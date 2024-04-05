@@ -436,13 +436,14 @@ Si ambos sistemas de referencia observan una particula moverse desde un punto in
 #### Consecuencias de la relatividad especial
 
 1. El reloj de luz
-2. La transformada de Lorentz 
-3. Composición de velocidades
-4. Sobre vectores, cuadrivectores y tensores
+2. Composición de velocidades
+3. Sobre vectores, cuadrivectores y tensores
 
 #### La necesidad de la relatividad general
 
 1. Masa gravitatoria y la masa inercial, y la ecuacion itinerario
+
+
 2. El principio de equivalencia
 3. Las fuerzas son debidas a la curvatura
 
@@ -450,7 +451,7 @@ Si ambos sistemas de referencia observan una particula moverse desde un punto in
 
 ##### 1.- El elemento de línea
 
-Un elemento de línea o elemento de longitud, de forma muy simplificada, es el desplazamiento infinitesimal de un vector definido sobre cierto [espácio métrico](https://es.wikipedia.org/wiki/Espacio_m%C3%A9trico){:target="_blank"}. Por lo tanto, (e informalmente) la raiz cuadrada de $ds^2$ será el cuadrado de la longitud de un desplazamiento infinitesimal dentro de cierto espacio vectorial. Definido de esa forma, la longitud $s$ de una curva será calculada de la forma usual $s = \int_{\lambda_1}^{\lambda_2} \sqrt{|ds^2|} d\lambda.$
+Un elemento de línea o elemento de longitud, de forma muy simplificada, es el desplazamiento infinitesimal de un vector definido sobre cierto [espácio métrico](https://es.wikipedia.org/wiki/Espacio_m%C3%A9trico){:target="_blank"}. Por lo tanto, (e informalmente) la raiz cuadrada de $ds^2$ será el cuadrado de la longitud de un desplazamiento infinitesimal dentro de cierto espacio vectorial. Definido de esa forma, la longitud $s$ de una curva será calculada de la forma usual $s = \int_{\lambda_1}^{\lambda_2} \sqrt{\|ds^2\|} d\lambda.$
 
 Hallar el cuadrado del elemento de línea en coordenadas cilíndricas.
 
