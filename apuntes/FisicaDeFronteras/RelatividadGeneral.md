@@ -484,14 +484,19 @@ Para obtener el elemento de línea de estas coordenadas, diferenciamos el vector
 $$
 \begin{align*}
 d\vec{x} &= \dfrac{\partial \vec{r}}{\partial \rho}  d\rho +  \dfrac{\partial \vec{x}}{\partial \phi} d\phi +  \dfrac{\partial \vec{x}}{\partial z} dz \\
-	&= d\rho(\cos(\phi) \hat{i} +\sin(|phi) \hat{j}) + d\phi(-\rho\sin(\phi)\hat{i}+\rho\cos(\phi)\hat{j}) + dz \hat{k}) \\
+	&= d\rho(\cos(\phi) \hat{i} +\sin(\phi) \hat{j}) + d\phi(-\rho\sin(\phi)\hat{i}+\rho\cos(\phi)\hat{j}) + dz \hat{k} \\
 	&= \hat{\rho} d\rho + \rho\hat{\phi}d\phi + \hat{k}dz \\
 \end{align*}
 $$
 
 donde hemos definido las cantidades $\hat{\rho}= \cos(\phi) \hat{i} +\sin(\phi) \hat{j}$ y $\hat{\phi} = -\sin(\phi)\hat{i}+\cos(\phi)\hat{j}$. 
+Entonces, el cuadrado del elemento de línea será:
 
-Repetir el ejercicio anterior pero en coordenadas cilíndricas y determinar los factores de escala correspondientes:
+$$
+d\vec{x}\cdot d\vec{x} = d\rho^2 + \rho^2 d\phi^2 + dz^2
+$$
+
+##### Repetir el ejercicio anterior pero en coordenadas cilíndricas y determinar los factores de escala correspondientes:
 
 $$
 \begin{align*}
