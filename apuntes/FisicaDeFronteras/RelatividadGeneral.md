@@ -443,6 +443,7 @@ Si ambos sistemas de referencia observan una particula moverse desde un punto in
 
 1. Masa gravitatoria y la masa inercial, y la ecuacion itinerario
 
+En la mecánica Newtoniana aparecen dos tipos de masas diferentes, con propiedades bastante diferentes para el fenómeno que cuantificaban. 
 
 2. El principio de equivalencia
 3. Las fuerzas son debidas a la curvatura
@@ -451,7 +452,7 @@ Si ambos sistemas de referencia observan una particula moverse desde un punto in
 
 ##### 1.- El elemento de línea
 
-Un elemento de línea o elemento de longitud, de forma muy simplificada, es el desplazamiento infinitesimal de un vector definido sobre cierto [espácio métrico](https://es.wikipedia.org/wiki/Espacio_m%C3%A9trico){:target="_blank"}. Por lo tanto, (e informalmente) la raiz cuadrada de $ds^2$ será el cuadrado de la longitud de un desplazamiento infinitesimal dentro de cierto espacio vectorial. Definido de esa forma, la longitud $s$ de una curva será calculada de la forma usual $s = \int_{\lambda_1}^{\lambda_2} \sqrt{\|ds^2\|} d\lambda.$
+Un elemento de línea o elemento de longitud, de forma muy simplificada, es el desplazamiento infinitesimal de un vector definido sobre cierto [espácio métrico](https://es.wikipedia.org/wiki/Espacio_m%C3%A9trico){:target="_blank"}. Por lo tanto, (e informalmente) la raiz cuadrada de $ds^2$ será el cuadrado de la longitud de un desplazamiento infinitesimal dentro de cierto espacio vectorial. Definido de esa forma, la longitud $s$ de una curva parametrizada bajo una cantidad $\lambda$ será calculada de la forma usual $s = \int_{\lambda_1}^{\lambda_2} \sqrt{\|ds^2\|} d\lambda.$
 
 Hallar el cuadrado del elemento de línea en coordenadas cilíndricas.
 
@@ -503,10 +504,10 @@ z &= r \cos(\theta)\\
 $$
 
 
-##### 2.- Demuestre que la cantidad $\Delta s^2$ es invariable bajo las transformaciones de Lorentz:
+##### 2.- Demuestre que la cantidad $\Delta s^2$ es invariable bajo las transformaciones de Lorentz, donde $\Delta s^2$ se define como:
 
 $$
-\Delta s^2 = c^2 \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2
+\Delta s^2 = c^2 \Delta t^2 - \Delta x^2 - \Delta y^2 - \Delta z^2.
 $$
 
 Considerando las transformaciones de Lorentz a lo largo del eje $x$ en la dirección $\hat{i}$, las ecuaciones quedan de la forma:
@@ -551,3 +552,17 @@ Que era lo que queríamos demostrar.
 1. Notación tensorial y su interpretación
 2. Algunos tests de la relatividad general
 3. Ondas gravitatorias
+
+
+
+Tarea 2:
+
+\begin{center}
+\line(1,0){450}
+\end{center}
+
+1.- Considere dos sistemas de referencia inerciales: $O$ y $O'$, donde $O'$ se mueve a velocidad constante $v$ en la dirección $\hat{i}+\hat{j}$ con respecto a $O$. Demuestre que las transformaciones de Lorentz entre estos sistemas inerciales dejan invariante la metrica espacio-temporal.\\
+
+2.- Si el sistema de referencia $O'$ a velocidad $v$ observa un objeto con longitud $L'$: ¿Cuál será la longitud que verá el observador en el sistema $O$? ¿Qué velocidad debe tener $O'$ para que observe la mitad de la longitud que observa $O$?\\
+
+3.- En el contexto newtoniano, derive la ecuación de movimiento (ecuación itinerario) correspondiente a una partícula dentro de un campo gravitatorio uniformemente acelerado, en función de la masa inercial y la masa gravitatoria. Describa cómo el principio de equivalencia local resuelve la discrepancia conceptual masa gravitatoria/masa inercial. Discuta cualquier aspecto que considere relevante. 
