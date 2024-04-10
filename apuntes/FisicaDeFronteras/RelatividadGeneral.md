@@ -554,15 +554,12 @@ Que era lo que queríamos demostrar.
 3. Ondas gravitatorias
 
 
-
 Tarea 2:
 
-\begin{center}
 \line(1,0){450}
-\end{center}
 
-1.- Considere dos sistemas de referencia inerciales: $O$ y $O'$, donde $O'$ se mueve a velocidad constante $v$ en la dirección $\hat{i}+\hat{j}$ con respecto a $O$. Demuestre que las transformaciones de Lorentz entre estos sistemas inerciales dejan invariante la metrica espacio-temporal.\\
+1.- Considere dos sistemas de referencia inerciales: $O$ y $O'$, donde $O'$ se mueve a velocidad constante $v$ en la dirección $\hat{i}+\hat{j}$ con respecto a $O$. Demuestre que las transformaciones de Lorentz entre estos sistemas inerciales dejan invariante la metrica espacio-temporal.
 
-2.- Si el sistema de referencia $O'$ a velocidad $v$ observa un objeto con longitud $L'$: ¿Cuál será la longitud que verá el observador en el sistema $O$? ¿Qué velocidad debe tener $O'$ para que observe la mitad de la longitud que observa $O$?\\
+2.- Si el sistema de referencia $O'$ a velocidad $v$ observa un objeto con longitud $L'$: ¿Cuál será la longitud que verá el observador en el sistema $O$? ¿Qué velocidad debe tener $O'$ para que observe la mitad de la longitud que observa $O$?
 
 3.- En el contexto newtoniano, derive la ecuación de movimiento (ecuación itinerario) correspondiente a una partícula dentro de un campo gravitatorio uniformemente acelerado, en función de la masa inercial y la masa gravitatoria. Describa cómo el principio de equivalencia local resuelve la discrepancia conceptual masa gravitatoria/masa inercial. Discuta cualquier aspecto que considere relevante. 
