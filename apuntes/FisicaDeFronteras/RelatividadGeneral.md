@@ -547,19 +547,23 @@ Que era lo que queríamos demostrar.
 
 ##### 3.- Sean $S$ y $S'$ dos sistemas inerciales que coinciden en un instante. $S'$ se mueve con respecto a $S$ en la dirección $\hat{i}$ con una velocidad $v$ constante. En el origen de $S'$ existe una pantalla de cine que proyecta una película de $t'$ minutos, la cual es vista por un observador que se encuentra en el origen de $S'$. ¿Cuánto tiempo dura la película para el observador en $S$? Podemos suponer que $v=0.6 c$.
 
+
+Sobre didactica de la fisica
+https://www.matematicasenaccion.unican.es/transparencias20112012/CuadrivectoresMNDFisica.pdf
+
+Transformaciones de Lorentz en coordenadas no-euclideanas.
+https://ejournal2.undip.ac.id/index.php/jpa/article/view/4951/2777
+
+Tarea 2:
+
+1.- Considere dos sistemas de referencia inerciales: $O$ y $O'$, donde $O'$ se mueve a velocidad constante $v$ en la dirección $\hat{k}$ con respecto a $O$. Demuestre que las transformaciones de Lorentz entre estos sistemas inerciales dejan invariante la metrica espacio-temporal.
+
+2.- Si el sistema de referencia $O'$ a velocidad $v$ observa un objeto con longitud $L'$: ¿Cuál será la longitud que verá el observador en el sistema $O$? ¿Qué velocidad debe tener $O'$ para que observe la mitad de la longitud que observa $O$?
+
+3.- En el contexto newtoniano, derive la ecuación de movimiento (ecuación itinerario) correspondiente a una partícula dentro de un campo gravitatorio uniformemente acelerado, en función de la masa inercial y la masa gravitatoria. Describa cómo el principio de equivalencia local resuelve la discrepancia conceptual masa gravitatoria/masa inercial. Discuta cualquier aspecto que considere relevante. 
+
 #### La relatividad General
 
 1. Notación tensorial y su interpretación
 2. Algunos tests de la relatividad general
 3. Ondas gravitatorias
-
-
-Tarea 2:
-
-\line(1,0){450}
-
-1.- Considere dos sistemas de referencia inerciales: $O$ y $O'$, donde $O'$ se mueve a velocidad constante $v$ en la dirección $\hat{i}+\hat{j}$ con respecto a $O$. Demuestre que las transformaciones de Lorentz entre estos sistemas inerciales dejan invariante la metrica espacio-temporal.
-
-2.- Si el sistema de referencia $O'$ a velocidad $v$ observa un objeto con longitud $L'$: ¿Cuál será la longitud que verá el observador en el sistema $O$? ¿Qué velocidad debe tener $O'$ para que observe la mitad de la longitud que observa $O$?
-
-3.- En el contexto newtoniano, derive la ecuación de movimiento (ecuación itinerario) correspondiente a una partícula dentro de un campo gravitatorio uniformemente acelerado, en función de la masa inercial y la masa gravitatoria. Describa cómo el principio de equivalencia local resuelve la discrepancia conceptual masa gravitatoria/masa inercial. Discuta cualquier aspecto que considere relevante. 
