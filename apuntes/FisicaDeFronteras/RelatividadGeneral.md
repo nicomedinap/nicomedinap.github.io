@@ -493,17 +493,6 @@ $$
 d\vec{x}\cdot d\vec{x} = ds^2 = d\rho^2 + \rho^2 d\phi^2 + dz^2
 $$
 
-##### Repetir el ejercicio anterior pero en coordenadas cilíndricas.
-
-$$
-\begin{align*}
-x &= r \sin(\theta) \cos(\phi) \\
-y &= r \sin(\theta) \sin(\phi) \\
-z &= r \cos(\theta)\\ 
-\end{align*}
-$$
-
-
 ##### 2.- Demuestre que la cantidad $\Delta s^2$ es invariable bajo las transformaciones de Lorentz, donde $\Delta s^2$ se define como:
 
 $$
