@@ -63,33 +63,109 @@
 
 <body>
 
-  <p> Fuente: https://www.memoriachilena.gob.cl/602/w3-article-100576.html#cronologia</p>
+  <p>Fuente: Varios recursos.</p>
 
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-date">1849</div>
-        <div class="timeline-description">Se instala en el Cerro Santa Lucia un observatorio astronómico a cargo del científico estadounidense James Melville Gillis. Este es el primer observatorio de Latinoamérica</div>
-        <div class="timeline-description">Event 2</div>
-      </div>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1900</div>
+      <div class="timeline-description">Max Planck propone la idea de que la energía es cuantizada en unidades discretas, dando inicio a la teoría cuántica.</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-date">1850</div>
-        <div class="timeline-description">Ignacio Domeyko propone la compra de las instalaciones del Cerro Santa Lucia</div>
-      </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1905</div>
+      <div class="timeline-description">Albert Einstein publica su trabajo sobre el efecto fotoeléctrico, mostrando la naturaleza cuántica de la luz y ganando un Premio Nobel por ello en 1921.</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-date">1852</div>
-        <div class="timeline-description">Se inaugura el Observatorio Nacional mediante un Decreto del Presidente Manuel Montt</div>
-      </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1913</div>
+      <div class="timeline-description">Niels Bohr propone el modelo atómico cuántico, que incorpora cuantización del momento angular y niveles de energía cuantizados.</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <div class="timeline-date">1855</div>
-        <div class="timeline-description">Se decreta el traslado del Observatorio Nacional al Parque Quinta Normal de Agricultura</div>
-      </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1924</div>
+      <div class="timeline-description">Louis de Broglie propone la hipótesis de la dualidad onda-partícula, sugiriendo que las partículas también pueden exhibir comportamientos ondulatorios.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1925</div>
+      <div class="timeline-description">Werner Heisenberg desarrolla la mecánica matricial, una de las formulaciones fundamentales de la mecánica cuántica.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1926</div>
+      <div class="timeline-description">Erwin Schrödinger formula la ecuación de onda de Schrödinger, otra formulación importante de la mecánica cuántica.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1927</div>
+      <div class="timeline-description">Werner Heisenberg formula el principio de incertidumbre, que establece que es imposible conocer simultáneamente con precisión la posición y la velocidad de una partícula.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1927</div>
+      <div class="timeline-description">Paul Dirac formula la ecuación de onda relativista para el electrón, que combina la teoría cuántica con la teoría de la relatividad.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1927</div>
+      <div class="timeline-description">La interpretación de Copenhague de la mecánica cuántica, propuesta por Niels Bohr y Werner Heisenberg, establece el papel fundamental de la observación en la determinación de los resultados de un experimento cuántico.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1930</div>
+      <div class="timeline-description">El principio de exclusión de Pauli, propuesto por Wolfgang Pauli, establece que dos fermiones idénticos no pueden ocupar el mismo estado cuántico simultáneamente.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1957</div>
+      <div class="timeline-description">Hugh Everett propone la interpretación de los mundos múltiples, una interpretación alternativa de la mecánica cuántica que sugiere la existencia de universos paralelos.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1967</div>
+      <div class="timeline-description">John Bell formula el teorema de Bell, que establece una prueba experimental para distinguir entre la mecánica cuántica y teorías locales realistas.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1982</div>
+      <div class="timeline-description">Alain Aspect realiza un experimento que confirma las predicciones de la mecánica cuántica y refuta las teorías locales realistas, apoyando la interpretación cuántica del entrelazamiento cuántico.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1994</div>
+      <div class="timeline-description">Peter Shor desarrolla un algoritmo cuántico para factorizar números enteros, demostrando el potencial de las computadoras cuánticas para resolver problemas de manera más eficiente que las computadoras clásicas en ciertas tareas.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">2011</div>
+      <div class="timeline-description">Los científicos anuncian la observación del estado cuántico del movimiento browniano, demostrando el efecto cuántico en objetos macroscópicos.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">2020</div>
+      <div class="timeline-description">Google anuncia que su computadora cuántica Sycamore ha logrado una tarea específica en un tiempo increíblemente corto, marcando un hito importante en el desarrollo de la computación cuántica.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">2022</div>
+      <div class="timeline-description">Se continúa la investigación en computación cuántica, con avances prometedores hacia la construcción de sistemas cuánticos más grandes y estables.</div>
     </div>
   </div>
 </body>
