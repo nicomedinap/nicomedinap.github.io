@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
+
 <html>
 <head>
 <style>
 .timeline {
   position: relative;
-  max-width: 250px;
+  max-width: 350px;
   margin: 0 auto;
   padding: 40px 20px;
 }
@@ -40,6 +42,7 @@
 .timeline-content {
   position: relative;
   left: 70px;
+  font-size: 14px; /* Adjust font size */
 }
 
 .timeline-date {
@@ -52,7 +55,7 @@
 }
 
 .timeline-item:nth-child(even) .timeline-content {
-  left: -50%;
+  left: -60%;
 }
 
 .timeline-item:nth-child(odd) .timeline-content {
@@ -99,6 +102,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1926</div>
+      <img src="https://miro.medium.com/v2/resize:fit:1400/0*iZPs3b28ttOft7Xf.jpg" alt="Descripción de la imagen">
       <div class="timeline-description">Erwin Schrödinger formula la ecuación de onda de Schrödinger, otra formulación importante de la mecánica cuántica.</div>
     </div>
   </div>
