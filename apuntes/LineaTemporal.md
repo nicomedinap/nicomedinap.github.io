@@ -102,7 +102,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1926</div>
-      <img src="https://miro.medium.com/v2/resize:fit:1400/0*iZPs3b28ttOft7Xf.jpg" alt="Descripción de la imagen">
+      <img src="https://miro.medium.com/v2/resize:fit:1400/0*iZPs3b28ttOft7Xf.jpg" alt="Ecuación de Schrödinger" style="width: 30px; height: auto;">
       <div class="timeline-description">Erwin Schrödinger formula la ecuación de onda de Schrödinger, otra formulación importante de la mecánica cuántica.</div>
     </div>
   </div>
