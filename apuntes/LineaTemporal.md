@@ -39,7 +39,7 @@
 
 .timeline-content {
   position: relative;
-  left: 30px;
+  left: 70px;
 }
 
 .timeline-date {
