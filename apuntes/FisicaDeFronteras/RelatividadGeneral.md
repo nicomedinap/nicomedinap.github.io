@@ -204,7 +204,7 @@ $x= x'+V_x t$ | $x'= x-V_x t$
 $y= y'+V_y t$ | $y'= y-V_y t$ 
 $z= z'+V_z t$ | $z'= z-V_z t$ 
 
-Las transformaciones de Galileo para cada coordenada se pueden utulizar para obtener la velocidad y la aceleración del sistema dinámico descrito anteriormente. Por ejemplo, consideremos el origen $O'$ que se mueve con velocidad constante $\mathbf{V}_c$ y descrito por el vector $\mathbf{r}'=\mathbf{r} - \mathbf{V}_c \cdot t$. Si quisiéramos obtener la velocidad del sistema:
+Las transformaciones de Galileo para cada coordenada se pueden utilizar para obtener la velocidad y la aceleración del sistema dinámico descrito anteriormente. Por ejemplo, consideremos el origen $O'$ que se mueve con velocidad constante $\mathbf{V}_c$ y descrito por el vector $\mathbf{r}'=\mathbf{r} - \mathbf{V}_c \cdot t$. Si quisiéramos obtener la velocidad del sistema:
 
 $$
 \mathbf{v}' =\frac{d \mathbf{r}'}{dt} = \frac{d}{dt}(\mathbf{r} - \mathbf{V}_c \cdot t) = \mathbf{v} - \mathbf{V}_c,
