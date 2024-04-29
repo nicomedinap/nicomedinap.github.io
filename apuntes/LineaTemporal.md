@@ -100,7 +100,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1924</div>
-        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/94df6d9afabe2a7d8f7d95e00d508f0f80eab2ab" alt="modelo de bohr" style="width: 120px; height: auto;">
+        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/94df6d9afabe2a7d8f7d95e00d508f0f80eab2ab" alt="modelo de bohr" style="width: 100px; height: auto;">
         <div class="timeline-description">Louis de Broglie propone la hipótesis de la dualidad onda-partícula, sugiriendo que las partículas también pueden exhibir comportamientos ondulatorios.</div>
     </div>
   </div>
@@ -121,7 +121,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1927</div>
-        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/dfad4605bd5cc074dba10330bd766f60b113fa1b" alt=" " style="width: 140px; height: auto;">
+        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/dfad4605bd5cc074dba10330bd766f60b113fa1b" alt=" " style="width: 120px; height: auto;">
         <div class="timeline-description">Werner Heisenberg formula el principio de incertidumbre, que establece que es imposible conocer simultáneamente con precisión la posición y la velocidad de una partícula.</div>
     </div>
   </div>
@@ -165,7 +165,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1967</div>
-        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8bf31903c9d7582f47999568fce8372fab2e6709" alt=" " style="width: 230px; height: auto;">
+        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8bf31903c9d7582f47999568fce8372fab2e6709" alt=" " style="width: 250px; height: auto;">
         <div class="timeline-description">John Bell formula el teorema de Bell, que establece una prueba experimental para distinguir entre la mecánica cuántica y teorías locales realistas.</div>
     </div>
   </div>
@@ -179,7 +179,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1994</div>
-        <img src="https://miro.medium.com/v2/resize:fit:1400/1*bkN-PgZ8DnC7-bCihS-Isg.png " alt=" " style="width: 180px; height: auto;">
+        <img src="https://miro.medium.com/v2/resize:fit:1400/1*bkN-PgZ8DnC7-bCihS-Isg.png " alt=" " style="width: 250px; height: auto;">
         <div class="timeline-description">Peter Shor desarrolla un algoritmo cuántico para factorizar números enteros, demostrando el potencial de las computadoras cuánticas para resolver problemas de manera más eficiente que las computadoras clásicas en ciertas tareas.</div>
     </div>
   </div>
@@ -194,7 +194,7 @@
     <div class="timeline-content">
       <div class="timeline-date">2020</div>
         <!-- <img src=" " alt=" " style="width: 180px; height: auto;"> -->
-        <div class="timeline-description">La computadora cuántica Sycamore ha logrado avances en la computación cuántica.</div>
+        <div class="timeline-description">La computadora cuántica Sycamore anuncia avances signiticativos en la computación cuántica.</div>
     </div>
 </div>
 
