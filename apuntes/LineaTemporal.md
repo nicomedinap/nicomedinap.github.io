@@ -6,9 +6,10 @@
 <style>
 .timeline {
   position: relative;
-  max-width: 350px;
-  margin: 0 auto;
+  max-width: 250px;  /* tamaño del lugar donde irá el texto */
+  margin: auto;
   padding: 40px 20px;
+  left: 2cm;
 }
 
 .timeline::after {
@@ -32,7 +33,7 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  background-color: #000;
+  background-color: red;
   border-radius: 50%;
   top: 0;
   left: 50%;
@@ -41,7 +42,7 @@
 
 .timeline-content {
   position: relative;
-  left: 70px;
+  left: 700px;
   font-size: 14px; /* Adjust font size */
 }
 
