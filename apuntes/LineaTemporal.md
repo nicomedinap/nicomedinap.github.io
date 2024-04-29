@@ -73,13 +73,7 @@ p.timeline-subtitle {
 
 .timeline-item:nth-child(odd) .timeline-date { margin-left: -5px;}
 .timeline-item:nth-child(odd) .timeline-content {left: 60%}
-
-@media screen and (max-width: 700px) { 
-    .timeline {max-width: 200px; left: 1cm, font-size: 7px};
-}
     
-
-
 @media screen and (max-width: 700px) {
     .timeline {
         max-width: 200px;
@@ -87,15 +81,9 @@ p.timeline-subtitle {
         font-size: 7px;
     }
     
-    .timeline-item:nth-child(even) .timeline-date { margin-left: 176px;}
+    .timeline-item:nth-child(even) .timeline-date { margin-left: 150px;}
     .timeline-item:nth-child(even) .timeline-content { left: -70%; }
-
-    .timeline-item:nth-child(odd) .timeline-date { margin-left: -5px;}
-    .timeline-item:nth-child(odd) .timeline-content {left: 60%}
 }
-
-
-
 
 </style>
 </head>
