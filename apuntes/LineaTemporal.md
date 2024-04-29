@@ -6,10 +6,9 @@
 <style>
 .timeline {
   position: relative;
-  max-width: 250px;  /* tamaño del lugar donde irá el texto */
+  max-width: 350px;  /* tamaño del lugar donde irá el texto */
   margin: auto;
   padding: 40px 20px;
-  left: 2cm;
 }
 
 .timeline::after {
@@ -62,6 +61,10 @@
 .timeline-item:nth-child(odd) .timeline-content {
   left: 60%; /* Adjusted left position for odd items */
 }
+
+@media screen and (max-width: 700px) {
+      .timeline {max-width: 200px;   left: 3cm}
+
 </style>
 </head>
 
