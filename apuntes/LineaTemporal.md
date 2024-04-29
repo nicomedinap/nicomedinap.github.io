@@ -47,6 +47,7 @@
 .timeline-date {
   font-weight: bold;
   margin-bottom: 10px;
+  font-size: 24px
 }
 
 .timeline-description {
@@ -161,6 +162,15 @@
         <div class="timeline-description">Hugh Everett propone una interpretación alternativa de la mecánica cuántica: los mundos múltiples.</div>
     </div>
   </div>
+
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1965</div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Ley_de_Moore.png" alt=" " style="width: 180px; height: auto;">
+        <div class="timeline-description">Gordon Moore publica una relación empírica entre el número de transistores en circuitos electrónicos cada año, lo que se convierte en la "Ley de Moore": aproximadamente cada 2 años se duplica el número de transistores en un microprocesador. 
+    </div>
+  </div>
+
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1967</div>
@@ -179,7 +189,7 @@
     <div class="timeline-content">
       <div class="timeline-date">1994</div>
         <img src="https://miro.medium.com/v2/resize:fit:1400/1*bkN-PgZ8DnC7-bCihS-Isg.png " alt=" " style="width: 250px; height: auto;">
-        <div class="timeline-description">Peter Shor desarrolla un algoritmo cuántico para factorizar números enteros, demostrando el potencial de las computadoras cuánticas para resolver problemas de manera más eficiente que las computadoras clásicas en ciertas tareas.</div>
+        <div class="timeline-description">Peter Shor desarrolla un algoritmo cuántico para factorizar números enteros, demostrando el potencial de las computadoras cuánticas para resolver problemas de manera más eficiente en ciertas tareas.</div>
     </div>
   </div>
   <div class="timeline-item">
