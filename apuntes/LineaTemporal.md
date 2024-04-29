@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <meta charset="UTF-8">
 
 <html>
@@ -93,7 +92,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1913</div>
-        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9338fa27ac6b5292cbff7eb36bd0d04db7b3a80a" alt="modelo de bohr" style="width: 140px; height: auto;">
+        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9338fa27ac6b5292cbff7eb36bd0d04db7b3a80a" alt="modelo de bohr" style="width: 120px; height: auto;">
         <div class="timeline-description">Niels Bohr propone el modelo atómico cuántico, que incorpora cuantización del momento angular y niveles de energía cuantizados.</div>
     </div>
   </div>
