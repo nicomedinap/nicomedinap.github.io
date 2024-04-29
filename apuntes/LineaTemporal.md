@@ -167,7 +167,7 @@
     <div class="timeline-content">
       <div class="timeline-date">1965</div>
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Ley_de_Moore.png" alt=" " style="width: 180px; height: auto;">
-        <div class="timeline-description">Gordon Moore publica una relación empírica entre el número de transistores en circuitos electrónicos cada año, lo que se convierte en la "Ley de Moore": aproximadamente cada 2 años se duplica el número de transistores en un microprocesador. 
+        <div class="timeline-description">Gordon Moore publica una relación empírica entre el número de transistores en circuitos electrónicos cada año, lo que se convierte en la "Ley de Moore": aproximadamente cada 2 años se duplica el número de transistores en un microprocesador.</div> 
     </div>
   </div>
 
