@@ -6,7 +6,7 @@
 <style>
 .timeline {
   position: relative;
-  max-width: 350px;  /* tamaño del lugar donde irá el texto */
+  max-width: 300px;  /* tamaño del lugar donde irá el texto */
   margin: auto;
   padding: 40px 20px;
 }
@@ -63,7 +63,8 @@
 }
 
 @media screen and (max-width: 700px) {
-      .timeline {max-width: 200px;   left: 3cm}
+      .timeline {max-width: 200px;   left: 0.5cm}
+
 
 </style>
 </head>
