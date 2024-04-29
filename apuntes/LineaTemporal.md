@@ -68,7 +68,7 @@ p.timeline-subtitle {
   color: #333; 
 }
 
-.timeline-item:nth-child(even) .timeline-date { margin-left: 260px;}
+.timeline-item:nth-child(even) .timeline-date { margin-left: 160px;}
 .timeline-item:nth-child(even) .timeline-content { left: -60%; }
 
 .timeline-item:nth-child(odd) .timeline-date { margin-left: -5px;}
@@ -217,7 +217,7 @@ p.timeline-subtitle {
     <div class="timeline-content">
       <div class="timeline-date">2020</div>
         <!-- <img src=" " alt=" " style="width: 180px; height: auto;"> -->
-        <div class="timeline-description">La computadora cuántica Sycamore anuncia avances signiticativos en la computación cuántica.</div>
+        <div class="timeline-description">La computadora cuántica Sycamore logra avances signiticativos en la computación.</div>
     </div>
 </div>
 
