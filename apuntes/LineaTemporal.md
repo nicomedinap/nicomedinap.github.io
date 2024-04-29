@@ -63,7 +63,7 @@
 }
 
 @media screen and (max-width: 700px) {
-      .timeline {max-width: 200px;   left: 0.5cm}
+      .timeline {max-width: 200px;   left: 0.5cm, font-size: 7px}
 
 
 </style>
@@ -77,6 +77,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1900</div>
+      <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/497dcd1c34d321ae3c86ccfc9ca2968ba1dc9770" alt="Ecuación de Schrödinger" style="width: 180px; height: auto;">
       <div class="timeline-description">Max Planck propone la idea de que la energía es cuantizada en unidades discretas, dando inicio a la teoría cuántica.</div>
     </div>
   </div>
