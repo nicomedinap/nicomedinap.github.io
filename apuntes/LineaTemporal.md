@@ -71,7 +71,9 @@
 
 <body>
 
-  <p>Fuente: Varios recursos.</p>
+<p>Línea de tiempo de los hitos de la mecánica cuántica.</p>
+
+<p>Fuente: Varios recursos.</p>
 
 <div class="timeline">
   <div class="timeline-item">
@@ -98,7 +100,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1924</div>
-        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/94df6d9afabe2a7d8f7d95e00d508f0f80eab2ab" alt="modelo de bohr" style="width: 180px; height: auto;">
+        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/94df6d9afabe2a7d8f7d95e00d508f0f80eab2ab" alt="modelo de bohr" style="width: 120px; height: auto;">
         <div class="timeline-description">Louis de Broglie propone la hipótesis de la dualidad onda-partícula, sugiriendo que las partículas también pueden exhibir comportamientos ondulatorios.</div>
     </div>
   </div>
@@ -119,7 +121,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1927</div>
-        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/dfad4605bd5cc074dba10330bd766f60b113fa1b" alt=" " style="width: 180px; height: auto;">
+        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/dfad4605bd5cc074dba10330bd766f60b113fa1b" alt=" " style="width: 140px; height: auto;">
         <div class="timeline-description">Werner Heisenberg formula el principio de incertidumbre, que establece que es imposible conocer simultáneamente con precisión la posición y la velocidad de una partícula.</div>
     </div>
   </div>
@@ -133,28 +135,37 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1927</div>
-        <img src=" " alt=" " style="width: 180px; height: auto;">
+        <!--<img src=" " alt=" " style="width: 180px; height: auto;"> -->
         <div class="timeline-description">La interpretación de Copenhague de la mecánica cuántica, propuesta por Niels Bohr y Werner Heisenberg, establece el papel fundamental de la observación en la determinación de los resultados de un experimento cuántico.</div>
     </div>
   </div>
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1930</div>
-        <img src=" " alt=" " style="width: 180px; height: auto;">
+        <img src="https://useruploads.socratic.org/4Kfe7qHSQW2Qql76K7nj_pauliexample.jpg" alt=" " style="width: 180px; height: auto;">
         <div class="timeline-description">El principio de exclusión de Pauli, propuesto por Wolfgang Pauli, establece que dos fermiones idénticos no pueden ocupar el mismo estado cuántico simultáneamente.</div>
     </div>
   </div>
+
+  <div class="timeline-item">
+    <div class="timeline-content">
+      <div class="timeline-date">1948</div>
+        <img src="http://www-stuart.ch.cam.ac.uk/img/paths.jpg" alt=" " style="width: 180px; height: auto;">
+        <div class="timeline-description">Richard Feynman publica un formalismo de la mecánica cuántica basado en sus integrales de camino .</div>
+    </div>
+  </div>
+
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1957</div>
-        <img src=" " alt=" " style="width: 180px; height: auto;">
-        <div class="timeline-description">Hugh Everett propone la interpretación de los mundos múltiples, una interpretación alternativa de la mecánica cuántica que sugiere la existencia de universos paralelos.</div>
+        <!--<img src=" " alt=" " style="width: 180px; height: auto;"> -->
+        <div class="timeline-description">Hugh Everett propone una interpretación alternativa de la mecánica cuántica: los mundos múltiples.</div>
     </div>
   </div>
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1967</div>
-        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8bf31903c9d7582f47999568fce8372fab2e6709" alt=" " style="width: 180px; height: auto;">
+        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8bf31903c9d7582f47999568fce8372fab2e6709" alt=" " style="width: 230px; height: auto;">
         <div class="timeline-description">John Bell formula el teorema de Bell, que establece una prueba experimental para distinguir entre la mecánica cuántica y teorías locales realistas.</div>
     </div>
   </div>
@@ -175,14 +186,14 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">2011</div>
-        <img src=" " alt=" " style="width: 180px; height: auto;">
+        <!--<img src=" " alt=" " style="width: 180px; height: auto;"> -->
         <div class="timeline-description">Se observa un estado cuántico del movimiento browniano, demostrando el efecto cuántico en objetos macroscópicos.</div>
     </div>
   </div>
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">2020</div>
-        <img src=" " alt=" " style="width: 180px; height: auto;">
+        <!-- <img src=" " alt=" " style="width: 180px; height: auto;"> -->
         <div class="timeline-description">La computadora cuántica Sycamore ha logrado avances en la computación cuántica.</div>
     </div>
 </div>
