@@ -68,7 +68,7 @@ p.timeline-subtitle {
   color: #333; 
 }
 
-.timeline-item:nth-child(even) .timeline-date { margin-left: 180px;}
+.timeline-item:nth-child(even) .timeline-date { margin-left: 190px;}
 .timeline-item:nth-child(even) .timeline-content { left: -60%; }
 
 .timeline-item:nth-child(odd) .timeline-date { margin-left: -5px;}
@@ -81,7 +81,7 @@ p.timeline-subtitle {
         font-size: 7px;
     }
     
-    .timeline-item:nth-child(even) .timeline-date { margin-left: 190px;}
+    .timeline-item:nth-child(even) .timeline-date { margin-left: 180px;}
     .timeline-item:nth-child(even) .timeline-content { left: -100%; }
 }
 
