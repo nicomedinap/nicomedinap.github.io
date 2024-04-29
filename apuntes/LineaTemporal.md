@@ -93,7 +93,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1913</div>
-        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9338fa27ac6b5292cbff7eb36bd0d04db7b3a80a" alt="modelo de bohr" style="width: 180px; height: auto;">
+        <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9338fa27ac6b5292cbff7eb36bd0d04db7b3a80a" alt="modelo de bohr" style="width: 140px; height: auto;">
         <div class="timeline-description">Niels Bohr propone el modelo atómico cuántico, que incorpora cuantización del momento angular y niveles de energía cuantizados.</div>
     </div>
   </div>
@@ -150,7 +150,7 @@
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1948</div>
-        <img src="http://www-stuart.ch.cam.ac.uk/img/paths.jpg" alt=" " style="width: 180px; height: auto;">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKt5yHAv_GFYP9K12CN94OZymI03ZPhGErE1JE-AGLxPbk6hGZlzKepkMm0bZZHsJnKWrPcTzu0X-BfPcz40mbvGbvxazdaotzNuVQosOGf6k78mns4X23S0s6HiBPDtg4FArY2A6Ppm9F/s1600/Path+Integral+Quantum+Mechanics+Picture.jpg" alt=" " style="width: 180px; height: auto;">
         <div class="timeline-description">Richard Feynman publica un formalismo de la mecánica cuántica basado en sus integrales de camino .</div>
     </div>
   </div>
