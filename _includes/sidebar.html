@@ -1,31 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <style>
-    .fa{
+    /* Estilos generales */
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .sidebar {
+      background-color: #f1f1f1; /* Color de fondo del sidebar */
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh; /* Ajusta la altura del sidebar al 100% del viewport */
+    }
+
+    .sidebar-about, .sidebar-nav {
+      padding: 20px; /* Espaciado interno */
+    }
+
+    .sidebar-nav-item a {
+      display: block;
+      padding: 10px 0; /* Espaciado interno */
+      color: black; /* Color del texto */
+      text-decoration: none;
+    }
+
+    .sidebar-nav-item a:hover {
+      background-color: #ddd; /* Color de fondo al pasar el mouse */
+    }
+
+    .fa {
       padding: 10px;
       font-size: 15px;
       width: 0px;
     }
 
-    .fa:hover{
-        opacity: 0.7;
+    .fa:hover {
+      opacity: 0.7;
     }
 
-    .fa-youtube{
+    .fa-youtube {
       color: gray;
     }
 
-    .fa-instagram{
+    .fa-instagram {
       color: gray;
     }
 
     /* Estilo para la sección activa */
     .active-section {
       text-decoration: underline;
+    }
+
+    /* Media query para dispositivos con un ancho máximo de 700px */
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 100%; /* Ocupa todo el ancho del viewport */
+      }
+
+      .container {
+        height: auto; /* Autoajuste de la altura */
+      }
+
+      .sidebar-about, .sidebar-nav {
+        padding: 10px; /* Espaciado interno reducido */
+      }
+
+      .sidebar-nav-item a {
+        padding: 8px 0; /* Espaciado interno reducido */
+      }
     }
 </style>
 </head>
@@ -86,8 +136,6 @@
 
   </div>
 </div>
-
-
 
 </body>
 </html>
