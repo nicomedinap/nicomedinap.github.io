@@ -1,4 +1,5 @@
-
+<!DOCTYPE html>
+<html>
 <head>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,6 +21,11 @@
 
     .fa-instagram{
       color: gray;
+    }
+
+    /* Estilo para la sección activa */
+    .active-section {
+      text-decoration: underline;
     }
 </style>
 </head>
@@ -57,7 +63,7 @@
           {% if node.layout == "page" or node.layout == "galeria"%}
           
             <li class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}">
-              <a href="{{ node.url }}">{{ node.title }}</a>
+              <a href="{{ node.url }}" {% if page.url == node.url %}class="active-section"{% endif %}>{{ node.title }}</a>
             </li>
           {% endif %}
         {% endif %}
@@ -84,3 +90,4 @@
 
 
 </body>
+</html>
