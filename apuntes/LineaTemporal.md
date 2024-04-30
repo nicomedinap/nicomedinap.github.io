@@ -94,7 +94,7 @@ img.imagen {
     left: 1cm;
   }
 
-  .timeline-item:nth-child(even) .timeline-date { margin-left: 165px; font-size: 17px; }
+  .timeline-item:nth-child(even) .timeline-date { margin-left: 160px; font-size: 17px; }
   .timeline-item:nth-child(even) .timeline-content { left: -80%; font-size: 12px; }
   .timeline-item:nth-child(odd) .timeline-date { margin-left: -5px; font-size: 17px; }
   .timeline-item:nth-child(odd) .timeline-content { left: 60%; font-size: 12px; }
@@ -222,7 +222,7 @@ img.imagen {
   <div class="timeline-item">
     <div class="timeline-content">
       <div class="timeline-date">1994</div>
-        <img class="imagen-grande"src="https://miro.medium.com/v2/resize:fit:1400/1*bkN-PgZ8DnC7-bCihS-Isg.png " alt=" ";>
+        <img class="imagen-grande"src="https://miro.medium.com/v2/resize:fit:1400/1*bkN-PgZ8DnC7-bCihS-Isg.png " alt=" ">
         <div class="timeline-description">Peter Shor desarrolla un algoritmo cuántico para factorizar números enteros, demostrando el potencial de las computadoras cuánticas para resolver problemas de manera más eficiente en ciertas tareas.</div>
     </div>
   </div>
