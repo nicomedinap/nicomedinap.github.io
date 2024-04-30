@@ -81,7 +81,7 @@ p.timeline-subtitle {
         font-size: 7px;
     }
     
-    .timeline-item:nth-child(even) .timeline-date { margin-left: 165px;}
+    .timeline-item:nth-child(even) .timeline-date { margin-left: 155px;}
     .timeline-item:nth-child(even) .timeline-content { left: -80%; }
 }
 
