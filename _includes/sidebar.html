@@ -1,86 +1,25 @@
-<!DOCTYPE html>
-<html>
+
 <head>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-    /* Estilos generales */
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif; /* Fuente */
-      background-color: #f1f1f1; /* Color de fondo */
-    }
-    
-    .sidebar {
-      background-color: #555; /* Color de fondo del sidebar */
-      color: #fff; /* Color del texto */
-      overflow-x: hidden;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100vh; /* Ajusta la altura del sidebar al 100% del viewport */
-    }
-
-    .sidebar-about, .sidebar-nav {
-      padding: 20px; /* Espaciado interno */
-    }
-
-    .sidebar-nav-item a {
-      display: block;
-      padding: 10px 0; /* Espaciado interno */
-      color: #fff; /* Color del texto */
-      text-decoration: none;
-    }
-
-    .sidebar-nav-item a:hover {
-      background-color: #444; /* Color de fondo al pasar el mouse */
-    }
-
-    .fa {
+    .fa{
       padding: 10px;
       font-size: 15px;
       width: 0px;
     }
 
-    .fa:hover {
-      opacity: 0.7;
+    .fa:hover{
+        opacity: 0.7;
     }
 
-    .fa-youtube {
-      color: #fff; /* Color del icono de YouTube */
+    .fa-youtube{
+      color: gray;
     }
 
-    .fa-instagram {
-      color: #fff; /* Color del icono de Instagram */
-    }
-
-    /* Estilo para la sección activa */
-    .active-section {
-      text-decoration: underline;
-    }
-
-    /* Media query para dispositivos con un ancho máximo de 700px */
-    @media screen and (max-width: 700px) {
-      .sidebar {
-        width: 100%; /* Ocupa todo el ancho del viewport */
-      }
-
-      .container {
-        height: auto; /* Autoajuste de la altura */
-      }
-
-      .sidebar-about, .sidebar-nav {
-        padding: 10px; /* Espaciado interno reducido */
-      }
-
-      .sidebar-nav-item a {
-        padding: 8px 0; /* Espaciado interno reducido */
-      }
+    .fa-instagram{
+      color: gray;
     }
 </style>
 </head>
@@ -118,7 +57,7 @@
           {% if node.layout == "page" or node.layout == "galeria"%}
           
             <li class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}">
-              <a href="{{ node.url }}" {% if page.url == node.url %}class="active-section"{% endif %}>{{ node.title }}</a>
+              <a href="{{ node.url }}">{{ node.title }}</a>
             </li>
           {% endif %}
         {% endif %}
@@ -142,5 +81,6 @@
   </div>
 </div>
 
+
+
 </body>
-</html>
