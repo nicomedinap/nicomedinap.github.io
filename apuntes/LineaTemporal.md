@@ -90,8 +90,8 @@ p.timeline-subtitle {
 
 <body>
 
-<p class="timeline-title" >Línea de tiempo de los hitos de la mecánica cuántica.</p>
-<p class="timeline-subtitle" >Fuente: Varios recursos.</p>
+<p class="timeline-title" >Hitos de la mecánica cuántica.</p>
+<!-- <p class="timeline-subtitle" >Fuente: Varios recursos.</p> -->
 
 <div class="timeline">
   <div class="timeline-item">
