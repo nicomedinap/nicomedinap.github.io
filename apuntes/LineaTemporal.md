@@ -82,7 +82,7 @@ p.timeline-subtitle {
     }
     
     .timeline-item:nth-child(even) .timeline-date { margin-left: 165px;}
-    .timeline-item:nth-child(even) .timeline-content { left: -100%; }
+    .timeline-item:nth-child(even) .timeline-content { left: -80%; }
 }
 
 </style>
