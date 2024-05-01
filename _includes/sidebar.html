@@ -21,6 +21,10 @@
     .fa-instagram{
       color: gray;
     }
+
+    .active-section {
+    text-decoration: underline;
+}
 </style>
 </head>
 <body>
@@ -57,7 +61,7 @@
           {% if node.layout == "page" or node.layout == "galeria"%}
           
             <li class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}">
-              <a href="{{ node.url }}" {% if page.url == node.url %}class="active-section"{% endif %}>{{ node.title }}</a>
+              <a href="{{ node.url }}" {% if page.url == node.url %} class="active-section"{% endif %}>{{ node.title }}</a>
             </li>
           {% endif %}
         {% endif %}
