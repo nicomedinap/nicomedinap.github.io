@@ -37,11 +37,6 @@ py-env preinstala una libreria externa, se demora en cargar
 </py-env>
 -->
 
-<py-env>
-    - matplotlib
-    - numpy
-</py-env>
-
 </head>
 
 <body>
@@ -76,55 +71,86 @@ py-env preinstala una libreria externa, se demora en cargar
 
 <button id="mybuttonstart" pys-onClick="start">Start animation</button>
 <button id="mybuttonstop" pys-onClick="stop">Stop animation</button>
-<canvas id="my-canvas"></canvas></div><py-script>
-from js import window, setInterval,clearInterval
+<canvas id="my-canvas"></canvas>
+<div id="timer">Elapsed time: 0s</div>
+<py-script>
+from js import window, setInterval, clearInterval
 from pyodide import create_proxy
-import random; from math import pi
-canvas=Element("my-canvas").element;
-canvas.width=window.innerWidth-12; canvas.height=500
+import random
+from math import pi
+
+canvas = Element("my-canvas").element
+canvas.width = window.innerWidth - 200
+canvas.height = 800
 ctx = canvas.getContext("2d")
-ret=None
-def start(*args,**kwargs):
-    global ret
-    if ret==None:
-        ret=setInterval(create_proxy(run),30)
-def stop(*args,**kwargs):
+
+ret = None
+g = 0.5  # Gravity constant
+start_time = None
+
+def start(*args, **kwargs):
+    global ret, start_time
+    if ret is None:
+        start_time = window.performance.now()
+        ret = setInterval(create_proxy(run), 30)
+
+def stop(*args, **kwargs):
     global ret
     clearInterval(ret)
-    ret=None
+    ret = None
+
 class Circle:
-    def __init__(self,x,y,radius):
-        self.x=x; self.y=y
-        self.radius=radius+random.randint(0,30)
-        r,g,b=random.randint(0,200),random.randint(0,200),random.randint(0,200)
-        self.color=f'rgba({r},{g},{b},.8)'
-        self.width=canvas.width
-        self.height=canvas.height
-        self.dx=2+random.randint(0,20)
-        self.dy=3+random.randint(0,20)
+    def __init__(self, x, y, radius):
+        self.x = x
+        self.y = y
+        self.radius = radius + random.randint(0, 30)
+        r, g, b = random.randint(0, 200), random.randint(0, 200), random.randint(0, 200)
+        self.color = f'rgba({r},{g},{b},.8)'
+        self.width = canvas.width
+        self.height = canvas.height
+        self.dx = 2 + random.randint(0, 20)
+        self.dy = 3 + random.randint(0, 20)
+        self.dy_initial = self.dy  # Store initial dy to reset later
+
     def draw(self):
-        ctx.beginPath() 
-        ctx.fillStyle=self.color
-        ctx.arc(self.x, self.y, self.radius, 0, 2 * pi) 
-        ctx.fill()   
-        if (self.x>=(self.width-self.radius)) or (self.x < self.radius):
-            self.dx=-self.dx
-        if (self.y>=(self.height-self.radius)) or (self.y < self.radius):
-            self.dy=-self.dy
-        self.x+=self.dx; self.y+=self.dy
-circles=[]
-for i in range(2):
-    circles.append(Circle(canvas.width//2,canvas.height//2,20))
+        ctx.beginPath()
+        ctx.fillStyle = self.color
+        ctx.arc(self.x, self.y, self.radius, 0, 2 * pi)
+        ctx.fill()
+        
+        # Bounce off the walls
+        if self.x >= (self.width - self.radius) or self.x <= self.radius:
+            self.dx = -self.dx
+        if self.y >= (self.height - self.radius):
+            self.dy = -self.dy * 0.9  # Reduce speed after bounce (simulate energy loss)
+        elif self.y <= self.radius:
+            self.dy = abs(self.dy)  # Ensure movement direction is correct
+        
+        # Update position with gravity
+        self.x += self.dx
+        self.y += self.dy
+        self.dy += g  # Apply gravity
+
+circles = []
+for i in range(9):
+    circles.append(Circle(canvas.width // 2, canvas.height // 2, 20))
+
 def run():
+    global start_time
+    elapsed_time = (window.performance.now() - start_time) / 1000
+    Element("timer").element.innerText = f"Elapsed time: {elapsed_time:.2f}s"
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.beginPath()
-    ctx.lineWidth='5'
-    ctx.strokeStyle='yellow'
-    ctx.rect(0,0,canvas.width,canvas.height)
+    ctx.lineWidth = '5'
+    ctx.strokeStyle = 'yellow'
+    ctx.rect(0, 0, canvas.width, canvas.height)
     ctx.stroke()
     for circle in circles:
         circle.draw()
+
 </py-script>
+
 
 </body>
 </html>
