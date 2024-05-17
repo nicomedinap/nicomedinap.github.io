@@ -41,31 +41,6 @@ py-env preinstala una libreria externa, se demora en cargar
 
 <body>
 
-<!--
-<h1> Creamos un plot simple de matplotlib, unsando numpy:</h1>
-<div id="plot-python">
-</div>
-
-<py-script output="plot-python">
-    # Python Code
-    # importing the matplotlib library
-    import matplotlib.pyplot as plt
-    fig, ax = plt.subplots()
-    # x axis
-    x = ["Python", "C++", "JavaScript", "Golang"]
-    # y axis
-    y = [10, 5, 9, 7]
-    plt.bar(x, y)
-    # Naming the x-label
-    plt.xlabel('Language')
-    # Naming the y-label
-    plt.ylabel('Score')
-    # Naming the title of the plot
-    plt.title('Language vs Score')
-    fig
-</py-script>
--->
-
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js'></script>
 
@@ -80,8 +55,8 @@ import random
 from math import pi
 
 canvas = Element("my-canvas").element
-canvas.width = window.innerWidth - 200
-canvas.height = 800
+canvas.width = window.innerWidth - 500
+canvas.height = 700
 ctx = canvas.getContext("2d")
 
 ret = None
@@ -132,13 +107,13 @@ class Circle:
         self.dy += g  # Apply gravity
 
 circles = []
-for i in range(9):
-    circles.append(Circle(canvas.width // 2, canvas.height // 2, 20))
+for i in range(50):
+    circles.append(Circle(random.randint(40, canvas.width), random.randint(40, canvas.height) // 2, 20))
 
 def run():
     global start_time
     elapsed_time = (window.performance.now() - start_time) / 1000
-    Element("timer").element.innerText = f"Elapsed time: {elapsed_time:.2f}s"
+    Element("timer").element.innerText = f"Tiempo: {elapsed_time:.1f} s"
     
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.beginPath()
