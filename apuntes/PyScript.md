@@ -3,127 +3,128 @@ layout: post
 title: PyScript
 ---
 <html>
+<head>
+<script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
+<py-env>
+    - numpy
+    - matplotlib
+</py-env>
+</head>
 
-<!--
-
-algo de informacion
-https://www.jhanley.com/blog/pyscript-javascript-callbacks/
-
+<body>
 
 <h1 style="font-size:12px">Este lugar estara destinado a probar las utilidades de pyscript: python ejecutado en html. 
     Al parecer es normal que tarde unos segundos en ejecutarse.
 </h1>
 
-<head>
-<!--code at: https://github.com/ostad-ai/Miscellaneous-->
-<script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
+<div id="animation"></div>
 
-<!--
-<py-config>
-    packages = [
-        "numpy",
-        "matplotlib.pyplot"
-        "matplotlib.animations"
-        "collections"
-    ]
-    plugins = [
-        "https://pyscript.net/latest/plugins/python/py_tutor.py"
-    ]
-</py-config>
+<py-script output="animation">
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import animation
 
-py-env preinstala una libreria externa, se demora en cargar
-<py-env>
-- sentence-transformers
-</py-env>
--->
+plt.style.use('dark_background')
 
-<py-env>
-    - matplotlib
-    - numpy
-</py-env>
+# Número de objetos:
+N = 1
+# gravedad
+g = 9.8       
+# Tamaño de la caja:
+Lx = 5           
+Ly = 10
+# Radio de la pelota:
+R = 0.2
+# energía retenida:
+E_retenida = 0.8
+# paso temporal Delta t:
+dt = 0.02
+Dt = dt
+# Número de epocas:
+Nt = 800
+# Masa:
+m = 1
 
-</head>
+np.random.seed(N)
 
-<body>
+# Se elige la posición y velocidad de forma random:
+x = 2.
+y = 8.
 
-<!--
-<h1> Creamos un plot simple de matplotlib, unsando numpy:</h1>
-<div id="plot-python">
-</div>
+# Calculamos las componentes individuales
+v_init = 25
+theta = 10
+vx = v_init * np.cos(np.radians(theta))
+vy = v_init * np.sin(np.radians(theta))
 
-<py-script output="plot-python">
-    # Python Code
-    # importing the matplotlib library
-    import matplotlib.pyplot as plt
-    fig, ax = plt.subplots()
-    # x axis
-    x = ["Python", "C++", "JavaScript", "Golang"]
-    # y axis
-    y = [10, 5, 9, 7]
-    plt.bar(x, y)
-    # Naming the x-label
-    plt.xlabel('Language')
-    # Naming the y-label
-    plt.ylabel('Score')
-    # Naming the title of the plot
-    plt.title('Language vs Score')
-    fig
-</py-script>
--->
+# Iniciamos el plot y metodo quiver para visualizar:
+fig, ax = plt.subplots(figsize=(3.5, 6), dpi=100)
 
+# Funciones para calcular la energía cinética y potencial:
+def E_cinetica(vx, vy): return 0.5 * m * (vx**2 + vy**2)
+def E_potencial(h): return m * h * g
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js'></script>
+# Función para crear el video:
+def dibujar_plot(frame):
+    global x, y, Lx, Ly, vx, vy, Dt, E_retenida
 
-<button id="mybuttonstart" pys-onClick="start">Start animation</button>
-<button id="mybuttonstop" pys-onClick="stop">Stop animation</button>
-<canvas id="my-canvas"></canvas></div><py-script>
-from js import window, setInterval,clearInterval
-from pyodide import create_proxy
-import random; from math import pi
-canvas=Element("my-canvas").element;
-canvas.width=window.innerWidth-12; canvas.height=500
-ctx = canvas.getContext("2d")
-ret=None
-def start(*args,**kwargs):
-    global ret
-    if ret==None:
-        ret=setInterval(create_proxy(run),30)
-def stop(*args,**kwargs):
-    global ret
-    clearInterval(ret)
-    ret=None
-class Circle:
-    def __init__(self,x,y,radius):
-        self.x=x; self.y=y
-        self.radius=radius+random.randint(0,30)
-        r,g,b=random.randint(0,200),random.randint(0,200),random.randint(0,200)
-        self.color=f'rgba({r},{g},{b},.8)'
-        self.width=canvas.width
-        self.height=canvas.height
-        self.dx=2+random.randint(0,20)
-        self.dy=3+random.randint(0,20)
-    def draw(self):
-        ctx.beginPath() 
-        ctx.fillStyle=self.color
-        ctx.arc(self.x, self.y, self.radius, 0, 2 * pi) 
-        ctx.fill()   
-        if (self.x>=(self.width-self.radius)) or (self.x < self.radius):
-            self.dx=-self.dx
-        if (self.y>=(self.height-self.radius)) or (self.y < self.radius):
-            self.dy=-self.dy
-        self.x+=self.dx; self.y+=self.dy
-circles=[]
-for i in range(2):
-    circles.append(Circle(canvas.width//2,canvas.height//2,20))
-def run():
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.beginPath()
-    ctx.lineWidth='5'
-    ctx.strokeStyle='yellow'
-    ctx.rect(0,0,canvas.width,canvas.height)
-    ctx.stroke()
-    for circle in circles:
-        circle.draw()
+    # Limpiamos el grafico:
+    ax.clear()
+    ax.set_title(r'Pelota elástica sometida a un campo gravitatorio $\vec{g}$', fontsize=7)
+    ax.set_xlim(0, Lx)
+    ax.set_ylim(0, Ly)
+    
+    # Colisiones:
+    if (y + R) >= Ly: 
+        vy = -vy
+        y = y - R / 4
+        
+    if (y - R) <= 0:
+        vy = -E_retenida * vy
+        y = y + R / 4
+    
+    if (x + R) >= Lx:
+        x = x - R / 4
+        vx = -vx * E_retenida
+    if (x - R) <= 0:
+        vx = -vx * E_retenida
+        x = x + R / 4
+            
+    # Actualizamos la posición     
+    y += vy * dt - (1 / 2.) * g * dt**2
+    x += vx * dt
+
+    # Actualizamos la velocidad:    
+    vy += -g * dt
+
+    # Calculamos la energia:
+    Ecinetica = E_cinetica(vx, vy)
+    Epotencial = E_potencial(y - R)
+    
+    Dt += dt
+    
+    plt.plot(x, y, 'ro', ms=15, mec='w')
+    ax.quiver(x, y, vx, vy, color='yellow', scale=45, width=0.005)    
+    
+    ax.annotate(r'$E_{cinética}$=%0.1f' % Ecinetica, xy=(0.73, 0.97), xycoords='axes fraction', color='y', fontsize=6)
+    ax.annotate(r'$E_{potencial}$=%0.1f' % Epotencial, xy=(0.73, 0.94), xycoords='axes fraction', color='r', fontsize=6)
+    
+    E_tot = Ecinetica + Epotencial
+    ax.annotate(r'$E_{total}$=%0.1f' % E_tot, xy=(0.74, 0.89), xycoords='axes fraction', color='w', fontsize=7)
+    
+    if E_tot < 1.5:
+        E_retenida = 0.3
+    
+    ax.set_aspect('equal')
+    ax.tick_params(axis="x", labelsize=0)
+    ax.get_yaxis().set_visible(False)
+    ax.set_xlabel('tiempo t=%.1f [s]' % Dt)
+
+ani = animation.FuncAnimation(fig, dibujar_plot, frames=Nt, interval=100)
+ani.save('animation.mp4', writer='ffmpeg', fps=30, dpi=300)
+
+from IPython.display import Video
+Video("animation.mp4")
 </py-script>
 
 </body>
