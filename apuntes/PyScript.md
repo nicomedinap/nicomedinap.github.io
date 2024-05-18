@@ -44,41 +44,33 @@ py-env preinstala una libreria externa, se demora en cargar
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js'></script>
 
-<button id="mybuttonstart" pys-onClick="start">Start animation</button>
-<button id="mybuttonstop" pys-onClick="stop">Stop animation</button>
+<input type="number" id="ballCount" placeholder="Enter number of balls" />
+<button id="generateBalls" pys-onClick="generate_balls">Generate Balls</button>
+<button id="mybuttonstart" pys-onClick="start" disabled>Start animation</button>
+<button id="mybuttonstop" pys-onClick="stop" disabled>Stop animation</button>
 <canvas id="my-canvas"></canvas>
-<div id="timer">Elapsed time: 0s</div>
+<div id="timer">Tiempo: 0s</div>
 <py-script>
-from js import window, setInterval, clearInterval
+from js import window, setInterval, clearInterval, document
 from pyodide import create_proxy
 import random
 from math import pi
 
 canvas = Element("my-canvas").element
 canvas.width = window.innerWidth - 500
-canvas.height = 700
+canvas.height = 600
 ctx = canvas.getContext("2d")
 
 ret = None
 g = 0.5  # Gravity constant
 start_time = None
-
-def start(*args, **kwargs):
-    global ret, start_time
-    if ret is None:
-        start_time = window.performance.now()
-        ret = setInterval(create_proxy(run), 30)
-
-def stop(*args, **kwargs):
-    global ret
-    clearInterval(ret)
-    ret = None
+circles = []
 
 class Circle:
     def __init__(self, x, y, radius):
         self.x = x
         self.y = y
-        self.radius = radius + random.randint(0, 30)
+        self.radius = radius + random.randint(0, 20)
         r, g, b = random.randint(0, 200), random.randint(0, 200), random.randint(0, 200)
         self.color = f'rgba({r},{g},{b},.8)'
         self.width = canvas.width
@@ -97,7 +89,7 @@ class Circle:
         if self.x >= (self.width - self.radius) or self.x <= self.radius:
             self.dx = -self.dx
         if self.y >= (self.height - self.radius):
-            self.dy = -self.dy * 0.9  # Reduce speed after bounce (simulate energy loss)
+            self.dy = -self.dy 
         elif self.y <= self.radius:
             self.dy = abs(self.dy)  # Ensure movement direction is correct
         
@@ -106,9 +98,28 @@ class Circle:
         self.y += self.dy
         self.dy += g  # Apply gravity
 
-circles = []
-for i in range(50):
-    circles.append(Circle(random.randint(40, canvas.width), random.randint(40, canvas.height) // 2, 20))
+def generate_balls(*args, **kwargs):
+    global circles
+    num_balls = int(Element("ballCount").element.value)
+    circles = []
+    for i in range(num_balls):
+        circles.append(Circle(random.randint(40, canvas.width), random.randint(40, canvas.height) // 2, 20))
+    Element("mybuttonstart").element.disabled = False
+
+def start(*args, **kwargs):
+    global ret, start_time
+    if ret is None:
+        start_time = window.performance.now()
+        ret = setInterval(create_proxy(run), 30)
+    Element("mybuttonstart").element.disabled = True
+    Element("mybuttonstop").element.disabled = False
+
+def stop(*args, **kwargs):
+    global ret
+    clearInterval(ret)
+    ret = None
+    Element("mybuttonstart").element.disabled = False
+    Element("mybuttonstop").element.disabled = True
 
 def run():
     global start_time
