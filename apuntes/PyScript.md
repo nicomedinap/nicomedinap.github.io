@@ -5,7 +5,6 @@ title: PyScript
 <html>
 
 <!--
-
 algo de informacion
 https://www.jhanley.com/blog/pyscript-javascript-callbacks/
 
@@ -14,8 +13,9 @@ https://www.jhanley.com/blog/pyscript-javascript-callbacks/
     Al parecer es normal que tarde unos segundos en ejecutarse.
 </h1>
 
+<!--
 <head>
-<!--code at: https://github.com/ostad-ai/Miscellaneous-->
+code at: https://github.com/ostad-ai/Miscellaneous-->
 <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
 
 <!--
@@ -35,16 +35,16 @@ py-env preinstala una libreria externa, se demora en cargar
 <py-env>
 - sentence-transformers
 </py-env>
--->
 
 </head>
+-->
 
 <body>
 
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js'></script>
 
-<input type="number" id="ballCount" placeholder="Enter number of balls" />
+<input type="number" id="ballCount" placeholder="¿cuantas pelotitas?" />
 <button id="generateBalls" pys-onClick="generate_balls">Generate Balls</button>
 <button id="mybuttonstart" pys-onClick="start" disabled>Start animation</button>
 <button id="mybuttonstop" pys-onClick="stop" disabled>Stop animation</button>
