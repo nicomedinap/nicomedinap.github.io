@@ -134,7 +134,7 @@
                 total_energy += circle.kinetic_energy() + circle.potential_energy()
                 if circle.display_energy:
                     # Display energy for each ball
-                    energy_text = f"E= {circle.kinetic_energy() + circle.potential_energy():.2f} J"
+                    energy_text = f"E= {circle.kinetic_energy() + circle.potential_energy():.1f} J"
                     ctx.font = "10px Arial"
                     ctx.fillStyle = "black"
                     ctx.fillText(energy_text, circle.x - circle.radius, circle.y - circle.radius)
@@ -161,7 +161,7 @@
                             other_circle.x -= overlap * dx
                             other_circle.y -= overlap * dy
 
-            Element("energy").element.innerText = f"Energía Total: {total_energy:.2f} J"
+            Element("energy").element.innerText = f"Energía Total: {total_energy:.1f} J"
 
     </py-script>
 </body>
