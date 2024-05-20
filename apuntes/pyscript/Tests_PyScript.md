@@ -1,72 +1,124 @@
----
-layout: post
-title: PyScript Two-Body Problem
----
 <html>
-
 <head>
-<script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
-
+    <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
+    <py-env>
+        - numpy
+    </py-env>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-top: 10px;
+        }
+        input, select, button {
+            margin: 2px;
+            padding: 5px;
+            font-size: 14px;
+        }
+        canvas {
+            border: 2px solid black;
+            margin-top: 20px;
+        }
+        #controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        #info {
+            margin-top: 10px;
+            text-align: center;
+        }
+        button:disabled {
+            background-color: #ccc;
+            color: #666;
+        }
+        button.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
 <body>
+    <h1>Problema de tres cuerpos gravitatorios</h1>
+    <div id="controls">
+        <button id="startButton" pys-onClick="generate_and_start">Generar y Empezar Animación</button>
+        <button id="stopButton" pys-onClick="stop" disabled>Detener Animación</button>
+    </div>
+    <canvas id="my-canvas" width="800" height="600"></canvas>
+    <div id="info">
+        <div id="timer">Tiempo: 0s</div>
+    </div>
 
-<canvas id="my-canvas" width="500" height="500"></canvas>
+    <py-script>
+        from js import window, setInterval, clearInterval, document
+        from pyodide import create_proxy
+        import random
+        from math import pi, sqrt
 
-<button id="startButton" pys-onClick="start_animation">Start Animation</button>
-<button id="stopButton" pys-onClick="stop_animation">Stop Animation</button>
+        canvas = Element("my-canvas").element
+        ctx = canvas.getContext("2d")
 
-<py-script>
-from js import document, console, setInterval, clearInterval
-import math
+        ret = None
+        g = 9.8  # Constante de gravedad (m/s^2)
+        dt = 0.05  # Paso de tiempo (s)
+        fps = 60  # Fotogramas por segundo
+        start_time = None
+        bodies = []
 
-# Initialize global variables
-positions = [[100, 100], [400, 400]]  # Initial positions of the two balls
-velocities = [[1, 1], [-1, -1]]        # Initial velocities of the two balls
-animation_interval = None
+        class Body:
+            def __init__(self, x, y, radius):
+                self.x = x
+                self.y = y
+                self.radius = radius
+                self.color = f'rgba({random.randint(0, 200)},{random.randint(0, 200)},{random.randint(0, 200)},0.8)'
+                self.width = canvas.width
+                self.height = canvas.height
+                self.dx = (random.random() - 0.5) * 100  # Rango de velocidad inicial ajustado
+                self.dy = (random.random() - 0.5) * 100  # Rango de velocidad inicial ajustado
 
-def animate():
-    console.log("Animating...")  # Log to check if animate is called
-    ctx = document.getElementById("my-canvas").getContext("2d")
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+            def draw(self):
+                ctx.beginPath()
+                ctx.fillStyle = self.color
+                ctx.arc(self.x, self.y, self.radius, 0, 2 * pi)
+                ctx.fill()
 
-    # Update positions based on velocities
-    for i in range(2):
-        positions[i][0] += velocities[i][0]
-        positions[i][1] += velocities[i][1]
+        def generate_and_start(*args, **kwargs):
+            global bodies, ret, start_time
+            num_bodies = 3
+            bodies = []
+            for i in range(num_bodies):
+                bodies.append(Body(random.randint(40, canvas.width - 40), random.randint(40, canvas.height - 40), 20))
+            if ret is None:
+                start_time = window.performance.now()
+                ret = setInterval(create_proxy(run), int(1000 / fps))
+            Element("startButton").element.disabled = True
+            Element("stopButton").element.disabled = False
+            Element("stopButton").element.classList.add('active')
 
-        # Reverse velocity if ball reaches canvas boundary
-        if positions[i][0] <= 0 or positions[i][0] >= 500:
-            velocities[i][0] *= -1
-        if positions[i][1] <= 0 or positions[i][1] >= 500:
-            velocities[i][1] *= -1
+        def stop(*args, **kwargs):
+            global ret
+            if ret is not None:
+                clearInterval(ret)
+                ret = None
+            Element("startButton").element.disabled = False
+            Element("stopButton").element.disabled = True
+            Element("stopButton").element.classList.remove('active')
 
-    # Draw the first ball (red)
-    ctx.fillStyle = 'red'
-    ctx.beginPath()
-    ctx.arc(positions[0][0], positions[0][1], 20, 0, 2 * math.pi)
-    ctx.fill()
+        def run():
+            global start_time
+            elapsed_time = (window.performance.now() - start_time) / 1000
+            Element("timer").element.innerText = f"Tiempo: {elapsed_time:.1f} s"
 
-    # Draw the second ball (blue)
-    ctx.fillStyle = 'blue'
-    ctx.beginPath()
-    ctx.arc(positions[1][0], positions[1][1], 20, 0, 2 * math.pi)
-    ctx.fill()
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            for body in bodies:
+                body.draw()
 
-def start_animation(*args, **kwargs):
-    global animation_interval
-    console.log("Start button pressed")  # Log to check if start_animation is called
-    if animation_interval is None:
-        animation_interval = setInterval(animate, 30)
-        console.log("Animation started")  # Log to confirm interval is set
-
-def stop_animation(*args, **kwargs):
-    global animation_interval
-    console.log("Stop button pressed")  # Log to check if stop_animation is called
-    if animation_interval is not None:
-        clearInterval(animation_interval)
-        animation_interval = None
-        console.log("Animation stopped")  # Log to confirm interval is cleared
-
-</py-script>
-
+    </py-script>
 </body>
 </html>

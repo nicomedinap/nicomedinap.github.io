@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
