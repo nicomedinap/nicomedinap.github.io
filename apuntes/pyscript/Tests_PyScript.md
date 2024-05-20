@@ -6,7 +6,6 @@ title: PyScript Two-Body Problem
 
 <head>
 <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
-</head>
 
 <body>
 
