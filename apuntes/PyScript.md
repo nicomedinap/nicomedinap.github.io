@@ -16,5 +16,5 @@ Las siguientes son algunas implementaciones básicas que he logrado crear:
 2. [Pelotas que resuelven un laberinto](https://nicomedinap.github.io/apuntes/pyscript/Laberinto.html
 ){:target="_blank"}
 
-3. [Probando cosas](https://nicomedinap.github.io/apuntes/pyscript/Tests_PyScript.html){:target="_blank"}
+3. [Probando cosas: actualmente implementando el problema de los n cuerpos](https://nicomedinap.github.io/apuntes/pyscript/Tests_PyScript.html){:target="_blank"}
 
