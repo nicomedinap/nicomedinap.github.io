@@ -17,7 +17,7 @@
             margin-top: 10px;
         }
         input, select, button {
-            margin: 5px;
+            margin: 2px;
             padding: 5px;
             font-size: 14px;
         }
@@ -61,10 +61,10 @@
             <button id="startButton" pys-onClick="generate_and_start">Generar y Empezar Animación</button>
             <button id="stopButton" pys-onClick="stop" disabled>Detener Animación</button>
             <button id="toggleEnergyButton" pys-onClick="toggle_energy">Mostrar/Ocultar Energía Individual</button>
-            <button id="toggleCollisionButton" pys-onClick="toggle_collision">Habilitar/Deshabilitar Colisiones</button>
+            <button id="toggleCollisionButton" pys-onClick="toggle_collision">Hab/Deshab Colisiones</button>
         </div>
     </div>
-    <canvas id="my-canvas" width="400" height="600"></canvas>
+    <canvas id="my-canvas" width="300" height="500"></canvas>
     <div id="info">
         <div id="timer">Tiempo: 0s</div>
         <div id="energy">Energía Total: 0 J</div>
