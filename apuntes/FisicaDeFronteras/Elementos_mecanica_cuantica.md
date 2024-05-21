@@ -9,10 +9,6 @@ mathjax: true
 
 Estimado estudiantado,
 
-Es de mi agrado informar que este espacio será exclusivo para desarrollar ideas, ordenar reflexiones, realizar cálculos y brindar información sobre el actual curso de "Física de fronteras", donde estudiaremos los fenómenos físicos de vanguardia en los últimos 100 años.
-
-Algunos cálculos que quizá no son vitales para el entendimiento de este curso, serán desarrollados en este espacio con el fin de que ustedes puedan verlos y sabes desde dónde provienen las ideas contra-intuitivas de la realidad.
-
 Las diapositivas actualizadas (hasta el 03/04/24) se encuentran en [ESTE LINK!]()
 
 Conceptos previos 
@@ -44,21 +40,7 @@ Wikipedia: Iré recolectando los links desde dónde tome información, y la iré
 
 ### 1.- Brevísimo repaso de la teoría electromagnética de James Clerk Maxwell
 
-Publicadas en 1865, James Clerk Maxwell (1832-1879) compiló el trabajo de Charles Coulomb, André-Marie Ampère, felix Savart, Jean-Baptiste Biot Michael Faraday y Hans Christian Orsted. Condensó en 4 expresiones (ya sean de forma diferencial y/o integral), las cuales tienen la siguiente forma:
-
-:---: | :---:
-Ley de Gauss para el campo eléctrico | $ \displaystyle \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$
-Ley de Gauss para el campo magnético | $ \displaystyle \nabla \cdot \mathbf{B} = 0 $
-Ley de inducción de Faraday          | $ \displaystyle \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} $
-Ley de Ampere-Maxwell | $ \displaystyle \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} $
-
-donde: 
-* $\mathbf{E}$ es el vector del campo eléctrico,
-* $\mathbf{B}$ es el vector de campo magnético,
-* $\rho$ es la densidad de cargas,
-* $\mathbf{J}$ denota el vector densidad de corriente,
-* $\mu_0$ es la permeabilidad del vacío, ($4\pi \times 10^{-7}$ [H/m]),
-* $\varepsilon_0$ es la permitividad del vacío ($8.854 \times 10^{-12}$ [F/m]),
+Las ondas 
 
 #### Paquetes de campo que viajan como ondas por el vacío.
 
@@ -70,6 +52,10 @@ que es la ecuación de onda para el campo eléctrico $\mathbf{E}$ en el vacío. 
 
 
 ### 2.- Las teorías clásicas fallan.
+
+
+#### Radiación de cuerpo negro
+
 
 Teoría de Max Planck: Cada oscilador puede emitir o absorver energía en cantididade que son múltiplos enteros de cierta cantidad básica de energia $n\epsilon$, tal que:
 
@@ -92,22 +78,26 @@ $$
 R=\sigma T^4,
 $$
 
-donde R es la potencia/area.
+donde R es la potencia/area. Cuando fueron anunciados sus resultados en 1900, Planck no sintió mucha aprobación del mundo científico; es más, él mismo creía que había encontrado una solución ad-hoc para el problema físico de la catástrofe ultravioleta. 
 
-Una estrella con temperatura superficial de 3000 Kelvin radía 100 veces la potencia del sol: ¿cuál es su radio?...
 
-$$
+#### Efecto fotoeléctrico
 
-$$
+#### Efecto Compton
 
-Cuando fueron anunciados sus resultados en 1900, Planck no sintió mucha aprobación del mundo científico; es más, él mismo creía que había encontrado una solución ad-hoc para el problema físico de la catástrofe ultravioleta. 
-
+#### Principio de correspondencia
 
 ### 3.- Física moderna.
 
-Física atómica.
+#### Atomo de Hidrógeno 
+
+#### La Hipótesis de de Broglie
+
+#### Ecuación de Shrodinger
 
 ### 4.- Las matemáticas de los números cuánticos.
+
+Estos provienen básicamente de la física atómica
 
 Ecuacion de Shrodinger en tres dimensiones
 
@@ -117,8 +107,7 @@ $$
 \nabla^2 = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial}{\partial r} \right) + \frac{1}{r^2 \sin(\theta)} \frac{\partial}{\partial \theta} \left( \sin(\theta) \frac{\partial}{\partial \theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{\partial^2}{\partial \phi^2}
 $$
 
-
-### 5.- La ecuación de Schrödinger y La evolución temporal.
+#### La ecuación de Schrödinger y La evolución temporal.
 
 La ecuación de Schrödinger tridimensional en coordenadas esféricas se utiliza comúnmente para describir sistemas físicos con simetría esférica, como átomos o partículas en potenciales esféricamente simétricos. La forma general de la ecuación de Schrödinger en coordenadas esféricas es:
 
