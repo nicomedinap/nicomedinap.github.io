@@ -143,6 +143,15 @@ $$
 
 
 
+
+
+
+
+
+
+
+
+
 --------------------
 
 $$
@@ -166,3 +175,50 @@ $$
 Esta ecuación angular es la ecuación de Laplace en coordenadas esféricas, cuyas soluciones son las funciones armónicas esféricas \(Y(\theta,\phi)\). Las soluciones a esta ecuación proporcionarán los números cuánticos asociados al momento angular del sistema: el número cuántico principal \(l\) y el número cuántico magnético \(m\). Las funciones armónicas esféricas están tabuladas y se pueden expresar como combinaciones de polinomios de Legendre y exponenciales complejas.
 
 Una vez que se resuelven las partes radial y angular de la ecuación de Schrödinger, la función de onda total \(\psi(r,\theta,\phi)\) se obtiene multiplicando la solución radial por la solución angular.
+
+
+
+
+
+
+
+----
+
+\section*{Ecuaciones diferenciales asociadas a los números cuánticos}
+
+\subsection*{Parte radial}
+
+La ecuación radial para el átomo de hidrógeno es:
+
+\begin{equation}
+-\frac{\hbar^2}{2\mu} \frac{d^2 u(r)}{dr^2} + \left( V(r) + \frac{\hbar^2}{2\mu} \frac{l(l+1)}{r^2} \right) u(r) = E u(r)
+\end{equation}
+
+\subsection*{Parte angular}
+
+Las ecuaciones diferenciales angulares se separan en dos partes:
+
+\subsubsection*{Ecuación en \(\theta\)}
+
+\begin{equation}
+\frac{1}{\sin \theta} \frac{d}{d \theta} \left( \sin \theta \frac{d \Theta(\theta)}{d \theta} \right) + \left( l(l+1) - \frac{m^2}{\sin^2 \theta} \right) \Theta(\theta) = 0
+\end{equation}
+
+\subsubsection*{Ecuación en \(\phi\)}
+
+\begin{equation}
+\frac{d^2 \Phi(\phi)}{d \phi^2} = -m^2 \Phi(\phi)
+\end{equation}
+
+\subsection*{Números cuánticos}
+
+Los números cuánticos asociados a estas soluciones son:
+
+\begin{itemize}
+  \item \(n\): número cuántico principal (solución de la ecuación radial).
+  \item \(l\): número cuántico del momento angular orbital (solución de la ecuación en \(\theta\)).
+  \item \(m\): número cuántico magnético (solución de la ecuación en \(\phi\)).
+\end{itemize}
+
+
+
