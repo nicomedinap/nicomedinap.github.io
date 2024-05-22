@@ -123,7 +123,27 @@ $$
 \psi(r, \theta, \phi) = R(r)Y(\theta, \phi)
 $$
 
+$$
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) Y + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) R + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} R \right) + V(r, \theta, \phi) RY = i\hbar \frac{\partial}{\partial t} (RY)
+$$
 
+
+$$
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} \right) + V(r, \theta, \phi) = E
+
+$$
+
+
+$$
+-\frac{\hbar^2}{2\mu} \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + V(r)R = ER
+$$
+
+
+
+
+
+
+--------------------
 
 $$
 -\frac{\hbar^2}{2\mu} \frac{1}{R} \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + V(r) = E
