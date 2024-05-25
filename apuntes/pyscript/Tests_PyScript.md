@@ -2,9 +2,7 @@
 <html>
 <head>
     <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
-    <py-env>
-        - numpy
-    </py-env>
+
     <style>
         body {
             display: flex;
@@ -46,7 +44,7 @@
     </style>
 </head>
 <body>
-    <h1>Problema de n (30) cuerpos gravitatorios</h1>
+    <h1>Problema de n (20) cuerpos gravitatorios</h1>
     <div id="controls">
         <button id="startButton" pys-onClick="generate_and_start">Generar y Empezar Animación</button>
         <button id="stopButton" pys-onClick="stop" disabled>Detener Animación</button>
@@ -59,12 +57,11 @@
     <py-script>
         from js import window, setInterval, clearInterval, document, Math
         from pyodide import create_proxy
-        import numpy as np
         import random
 
         canvas = document.getElementById("my-canvas")
         ctx = canvas.getContext("2d")
-        G = 6.67430e-6  # Constante gravitacional universal, ajustada para mejorar la interacción
+        G = 6.67430 # Constante gravitacional universal, ajustada para mejorar la interacción
         ret = None
         dt = 0.05  # Paso de tiempo (s), ajustado para mejorar la simulación
         fps = 10  # Fotogramas por segundo
@@ -112,12 +109,12 @@
 
         def generate_and_start(*args, **kwargs):
             global bodies, ret, start_time
-            num_bodies = 30
+            num_bodies = 20
             bodies = []
             for i in range(num_bodies):
                 # Masa proporcional al radio:
-                radii = random.randint(1, 15)
-                mass = radii**3*5000000
+                radii = random.randint(5, 15)
+                mass = radii**3*5
 
                 bodies.append(Body(random.randint(40, canvas.width - 40), random.randint(40, canvas.height - 40), radii, mass))
             if ret is None:
