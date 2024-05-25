@@ -1,8 +1,6 @@
-<!DOCTYPE html>
 <html>
 <head>
     <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>
-
     <style>
         body {
             display: flex;
@@ -61,9 +59,9 @@
 
         canvas = document.getElementById("my-canvas")
         ctx = canvas.getContext("2d")
-        G = 6.67430 # Constante gravitacional universal, ajustada para mejorar la interacción
+        G = 6.67430 # Constante gravitacional universal
         ret = None
-        dt = 0.05  # Paso de tiempo (s), ajustado para mejorar la simulación
+        dt = 0.05  # Paso de tiempo (s)
         fps = 10  # Fotogramas por segundo
         start_time = None
         bodies = []
@@ -75,10 +73,8 @@
                 self.radius = radius
                 self.mass = mass
                 self.color = f'rgba({random.randint(0, 200)},{random.randint(0, 200)},{random.randint(0, 200)},0.8)'
-                self.width = canvas.width
-                self.height = canvas.height
-                self.dx = (random.random() - 0.5) * 10.5  # Rango de velocidad inicial ajustado
-                self.dy = (random.random() - 0.5) * 10.5  # Rango de velocidad inicial ajustado
+                self.dx = (random.random() - 0.5) * 10.5
+                self.dy = (random.random() - 0.5) * 10.5
                 self.history = []
 
             def draw(self):
@@ -88,34 +84,21 @@
                 ctx.fill()
 
             def update_position(self, forces):
-                # Calcular la aceleración resultante de las fuerzas
                 ax = sum([f[0] / self.mass for f in forces])
                 ay = sum([f[1] / self.mass for f in forces])
-
-                # Actualizar velocidades
                 self.dx += ax * dt
                 self.dy += ay * dt
-
-                # Actualizar posición
                 self.x += self.dx * dt
                 self.y += self.dy * dt
-
-                # Condiciones de borde periódicas
-                #self.x %= self.width
-                #self.y %= self.height
-
-                # Guardar posición en el historial
                 self.history.append((self.x, self.y))
 
         def generate_and_start(*args, **kwargs):
             global bodies, ret, start_time
-            num_bodies = 20
+            num_bodies = 30
             bodies = []
-            for i in range(num_bodies):
-                # Masa proporcional al radio:
+            for _ in range(num_bodies):
                 radii = random.randint(5, 15)
-                mass = radii**3*5
-
+                mass = radii**4
                 bodies.append(Body(random.randint(40, canvas.width - 40), random.randint(40, canvas.height - 40), radii, mass))
             if ret is None:
                 start_time = window.performance.now()
