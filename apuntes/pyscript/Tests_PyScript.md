@@ -112,12 +112,12 @@
 
         def generate_and_start(*args, **kwargs):
             global bodies, ret, start_time
-            num_bodies = 30
+            num_bodies = 20
             bodies = []
             for i in range(num_bodies):
                 # Masa proporcional al radio:
-                radii = random.randint(5, 20)
-                mass = radii * 5000
+                radii = random.randint(1, 200)
+                mass = radii * 5000000000000
                 bodies.append(Body(random.randint(40, canvas.width - 40), random.randint(40, canvas.height - 40), radii, mass))
             if ret is None:
                 start_time = window.performance.now()
