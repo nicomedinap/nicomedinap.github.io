@@ -46,12 +46,12 @@
     </style>
 </head>
 <body>
-    <h1>Problema de n (20) cuerpos gravitatorios</h1>
+    <h1>Problema de n (30) cuerpos gravitatorios</h1>
     <div id="controls">
         <button id="startButton" pys-onClick="generate_and_start">Generar y Empezar Animación</button>
         <button id="stopButton" pys-onClick="stop" disabled>Detener Animación</button>
     </div>
-    <canvas id="my-canvas" width="400" height="600"></canvas>
+    <canvas id="my-canvas" width="350" height="500"></canvas>
     <div id="info">
         <div id="timer">Tiempo: 0s</div>
     </div>
@@ -66,8 +66,8 @@
         ctx = canvas.getContext("2d")
         G = 6.67430e-6  # Constante gravitacional universal, ajustada para mejorar la interacción
         ret = None
-        dt = 0.01  # Paso de tiempo (s), ajustado para mejorar la simulación
-        fps = 40  # Fotogramas por segundo
+        dt = 0.05  # Paso de tiempo (s), ajustado para mejorar la simulación
+        fps = 10  # Fotogramas por segundo
         start_time = None
         bodies = []
 
@@ -80,8 +80,8 @@
                 self.color = f'rgba({random.randint(0, 200)},{random.randint(0, 200)},{random.randint(0, 200)},0.8)'
                 self.width = canvas.width
                 self.height = canvas.height
-                self.dx = (random.random() - 0.5) * 5.5  # Rango de velocidad inicial ajustado
-                self.dy = (random.random() - 0.5) * 5.5  # Rango de velocidad inicial ajustado
+                self.dx = (random.random() - 0.5) * 10.5  # Rango de velocidad inicial ajustado
+                self.dy = (random.random() - 0.5) * 10.5  # Rango de velocidad inicial ajustado
                 self.history = []
 
             def draw(self):
@@ -112,11 +112,11 @@
 
         def generate_and_start(*args, **kwargs):
             global bodies, ret, start_time
-            num_bodies = 20
+            num_bodies = 30
             bodies = []
             for i in range(num_bodies):
                 # Masa proporcional al radio:
-                radii = random.randint(15, 30)
+                radii = random.randint(1, 15)
                 mass = radii**3*5000000
 
                 bodies.append(Body(random.randint(40, canvas.width - 40), random.randint(40, canvas.height - 40), radii, mass))
@@ -139,7 +139,7 @@
         def calculate_gravitational_force(body1, body2):
             dx = body2.x - body1.x
             dy = body2.y - body1.y
-            distance = max(Math.sqrt(dx ** 2 + dy ** 2), 1)  # Evitar divisiones por cero
+            distance = max(Math.sqrt(dx ** 2 + dy ** 2), 0.001)  # Evitar divisiones por cero
             force_magnitude = G * body1.mass * body2.mass / distance ** 2
             angle = Math.atan2(dy, dx)
             force_x = force_magnitude * Math.cos(angle)
