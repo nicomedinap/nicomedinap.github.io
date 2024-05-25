@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-    <h1>Problema de tres cuerpos gravitatorios</h1>
+    <h1>Problema de n (20) cuerpos gravitatorios</h1>
     <div id="controls">
         <button id="startButton" pys-onClick="generate_and_start">Generar y Empezar Animación</button>
         <button id="stopButton" pys-onClick="stop" disabled>Detener Animación</button>
