@@ -222,3 +222,57 @@ Los números cuánticos asociados a estas soluciones son:
 
 
 
+
+
+
+
+
+
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Ecuación del átomo de hidrógeno y números cuánticos}
+
+\subsection*{Ecuación de Schrödinger en coordenadas esféricas}
+
+La ecuación de Schrödinger en coordenadas esféricas para el átomo de hidrógeno es:
+
+\[
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi = E \psi
+\]
+
+\subsection*{Separación de variables}
+
+Suponemos una solución de la forma:
+
+\[
+\psi(r, \theta, \phi) = R(r) Y(\theta, \phi)
+\]
+
+\subsection*{Parte radial}
+
+Sustituimos la solución propuesta en la ecuación de Schrödinger y separamos las variables, lo que nos lleva a la ecuación radial:
+
+\[
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + \frac{l(l+1)}{r^2} \right) R(r) + V(r)R(r) = E R(r)
+\]
+
+\subsection*{Parte angular}
+
+La parte angular se resuelve utilizando las funciones armónicas esféricas \( Y(\theta, \phi) \), que llevan a los números cuánticos \( l \) y \( m \).
+
+\subsection*{Números cuánticos}
+
+Los números cuánticos asociados son:
+\begin{itemize}
+    \item \( n \): número cuántico principal, que surge de la solución radial.
+    \item \( l \): número cuántico del momento angular orbital, que surge de la solución angular.
+    \item \( m \): número cuántico magnético, que especifica la orientación del momento angular en el espacio.
+\end{itemize}
+
+\end{document}
+
+
+
