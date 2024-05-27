@@ -282,11 +282,11 @@ $$
 Schrodinger en esfericas, dependiente del tiempo 
 
 $$
-i \hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi = i \hbar \frac{\partial \psi}{\partial t}
 $$
 
 
-Asumiendo soluciones del tipo: $\psi(\vec{r},t)=\phi(r) \exp^{\frac{-i Et}{\hbar}}$ (separando variables)
+Asumiendo soluciones del tipo: $\psi(\vec{r},t)=\phi(r) {\rm e}^{\frac{-i Et}{\hbar}}$ (separando variables)
 
 $$
 -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \phi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \phi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial \phi}{\partial \phi^2} \right) + V(r) \phi = E \phi
