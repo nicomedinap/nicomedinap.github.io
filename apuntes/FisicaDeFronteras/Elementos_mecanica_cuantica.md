@@ -117,7 +117,7 @@ $$
 
 Separación de variables
 
-Suponemos que la función de onda $psi(r, \theta, \phi)$ se puede separar en una parte radial $R(r)$ y una parte angular $Y(\theta, \phi)$, es decir:
+Suponemos que la función de onda $\psi(r, \theta, \phi)$ se puede separar en una parte radial $R(r)$ y una parte angular $Y(\theta, \phi)$, es decir:
 
 $$
 \psi(r, \theta, \phi) = R(r)Y(\theta, \phi)
@@ -262,6 +262,37 @@ Los números cuánticos asociados son:
 2. \( l \): número cuántico del momento angular orbital, que surge de la solución angular.
 3. \( m \): número cuántico magnético, que especifica la orientación del momento angular en el espacio.
 
+
+-----
+
+
+
+Eq de Schrodinger:
+
+$$
+i \hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi + V \psi
+$$
+
+El Laplaciano en Esféricas:
+
+$$
+\nabla^2 = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial}{\partial r} \right) + \frac{1}{r^2 \sin(\theta)} \frac{\partial}{\partial \theta} \left( \sin(\theta) \frac{\partial}{\partial \theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{\partial^2}{\partial \phi^2}
+$$
+
+Schrodinger en esfericas, dependiente del tiempo 
+
+$$
+i \hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi
+
+
+$$
+
+
+Asumiendo soluciones del tipo: \psi(\vec{r},t)=\phi(r) \exp^{\frac{-i Et}{\hbar}} (separando variables)
+
+$$
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \phi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \phi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial \phi}{\partial \phi^2} \right) + V(r) \phi = E \phi
+$$
 
 
 
