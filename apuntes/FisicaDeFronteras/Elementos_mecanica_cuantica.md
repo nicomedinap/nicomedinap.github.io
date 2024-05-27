@@ -97,173 +97,9 @@ donde R es la potencia/area. Cuando fueron anunciados sus resultados en 1900, Pl
 
 ### 4.- Las matemáticas de los números cuánticos.
 
-Estos provienen básicamente de la física atómica
-
-Ecuacion de Shrodinger en tres dimensiones
-
-El Laplaciano 
-
-$$
-\nabla^2 = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial}{\partial r} \right) + \frac{1}{r^2 \sin(\theta)} \frac{\partial}{\partial \theta} \left( \sin(\theta) \frac{\partial}{\partial \theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{\partial^2}{\partial \phi^2}
-$$
-
 #### La ecuación de Schrödinger y La evolución temporal.
 
 La ecuación de Schrödinger tridimensional en coordenadas esféricas se utiliza comúnmente para describir sistemas físicos con simetría esférica, como átomos o partículas en potenciales esféricamente simétricos. La forma general de la ecuación de Schrödinger en coordenadas esféricas es:
-
-$$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin(\theta)} \frac{\partial}{\partial \theta} \left( \sin(\theta) \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi(r,\theta,\phi) = i\hbar \frac{\partial \psi}{\partial t}
-$$
-
-Separación de variables
-
-Suponemos que la función de onda $\psi(r, \theta, \phi)$ se puede separar en una parte radial $R(r)$ y una parte angular $Y(\theta, \phi)$, es decir:
-
-$$
-\psi(r, \theta, \phi) = R(r)Y(\theta, \phi)
-$$
-
-$$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) Y + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) R + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} R \right) + V(r) RY = i\hbar \frac{\partial}{\partial t} (RY)
-$$
-
-
-$$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} \right) + V(r, \theta, \phi) = E
-$$
-
-
-$$
--\frac{\hbar^2}{2\mu} \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + V(r)R = ER
-$$
-
-
-
-
-
-
-
-
-
-
-
-
---------------------
-
-$$
--\frac{\hbar^2}{2\mu} \frac{1}{R} \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + V(r) = E
-$$
-
-Dado que esta es una ecuación diferencial de segundo orden, es conveniente hacer el cambio de variable $u(r) = rR(r)$. Entonces, la ecuación se transforma en:
-
-$$
--\frac{\hbar^2}{2\mu} \frac{d^2u}{dr^2} + V(r)u = Eu
-$$
-
-Esta es la forma de la ecuación radial de Schrödinger, que debe resolverse para obtener las funciones de onda radiales.
-
-Resolución de la parte angular:
-
-$$
-\frac{1}{Y} \left( \frac{1}{\sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) + \frac{1}{\sin^2(\theta)} \frac{d^2Y}{d\phi^2} \right) = -\frac{2\mu}{\hbar^2} E
-$$
-
-Esta ecuación angular es la ecuación de Laplace en coordenadas esféricas, cuyas soluciones son las funciones armónicas esféricas \(Y(\theta,\phi)\). Las soluciones a esta ecuación proporcionarán los números cuánticos asociados al momento angular del sistema: el número cuántico principal \(l\) y el número cuántico magnético \(m\). Las funciones armónicas esféricas están tabuladas y se pueden expresar como combinaciones de polinomios de Legendre y exponenciales complejas.
-
-Una vez que se resuelven las partes radial y angular de la ecuación de Schrödinger, la función de onda total \(\psi(r,\theta,\phi)\) se obtiene multiplicando la solución radial por la solución angular.
-
-
-
-
-
-
-
-----
-
-\section*{Ecuaciones diferenciales asociadas a los números cuánticos}
-
-\subsection*{Parte radial}
-
-La ecuación radial para el átomo de hidrógeno es:
-
-$$
--\frac{\hbar^2}{2\mu} \frac{d^2 u(r)}{dr^2} + \left( V(r) + \frac{\hbar^2}{2\mu} \frac{l(l+1)}{r^2} \right) u(r) = E u(r)
-$$
-
-\subsection*{Parte angular}
-
-Las ecuaciones diferenciales angulares se separan en dos partes:
-
-\subsubsection*{Ecuación en \(\theta\)}
-
-$$
-\frac{1}{\sin \theta} \frac{d}{d \theta} \left( \sin \theta \frac{d \Theta(\theta)}{d \theta} \right) + \left( l(l+1) - \frac{m^2}{\sin^2 \theta} \right) \Theta(\theta) = 0
-$$
-
-\subsubsection*{Ecuación en \(\phi\)}
-
-$$
-\frac{d^2 \Phi(\phi)}{d \phi^2} = -m^2 \Phi(\phi)
-$$
-
-\subsection*{Números cuánticos}
-
-Los números cuánticos asociados a estas soluciones son:
-
-\begin{itemize}
-  \item \(n\): número cuántico principal (solución de la ecuación radial).
-  \item \(l\): número cuántico del momento angular orbital (solución de la ecuación en \(\theta\)).
-  \item \(m\): número cuántico magnético (solución de la ecuación en \(\phi\)).
-\end{itemize}
-
-
-
-
-
-\section*{Ecuación del átomo de hidrógeno y números cuánticos}
-
-\subsection*{Ecuación de Schrödinger en coordenadas esféricas}
-
-La ecuación de Schrödinger en coordenadas esféricas para el átomo de hidrógeno es:
-
-$$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi = E \psi
-$$
-
-\subsection*{Separación de variables}
-
-Suponemos una solución de la forma:
-
-$$
-\psi(r, \theta, \phi) = R(r) Y(\theta, \phi)
-$$
-
-\subsection*{Parte radial}
-
-Sustituimos la solución propuesta en la ecuación de Schrödinger y separamos las variables, lo que nos lleva a la ecuación radial:
-
-$$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + \frac{l(l+1)}{r^2} \right) R(r) + V(r)R(r) = E R(r)
-$$
-
-\subsection*{Parte angular}
-
-La parte angular se resuelve utilizando las funciones armónicas esféricas \( Y(\theta, \phi) \), que llevan a los números cuánticos \( l \) y \( m \).
-
-\subsection*{Números cuánticos}
-
-Los números cuánticos asociados son:
-
-1. \( n \): número cuántico principal, que surge de la solución radial.
-2. \( l \): número cuántico del momento angular orbital, que surge de la solución angular.
-3. \( m \): número cuántico magnético, que especifica la orientación del momento angular en el espacio.
-
-
------
-
-
-
-Eq de Schrodinger:
 
 $$
 i \hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi + V \psi
@@ -310,18 +146,51 @@ $$
 -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} \right) + V(r) = E
 $$
 
+$$
+-\frac{\hbar^2}{2\mu} \frac{d^2 u(r)}{dr^2} + \left( V(r) + \frac{\hbar^2}{2\mu} \frac{l(l+1)}{r^2} \right) u(r) = E u(r)
+$$
 
-Parte radial:
-
-
-
-
+...
 
 En resumen:
 
 $$
-\frac{1}{r^2}\frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) +\left[ \frac{2\mu}{\hbar^2}(E +V(r)) - \ell(\ell+1) \right]  
+\frac{1}{r^2}\frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) +\left[ \frac{2\mu}{\hbar^2}(E +V(r)) - \frac{\ell(\ell+1)}{r^2} \right] R = 0  
+$$
 
 $$
+\frac{1}{\sin(\theta)} \frac{d}{d\theta} (\sin(\theta) \frac{d\Theta}{d\theta}) + \left[ \ell(\ell +1) - \frac{m^2}{\sin^2(\theta)}\right] \Theta = 0
+$$
+
+donde la solución es: $\Theta(\theta) = P_l^m(\cos \theta)$, donde $P_l^m$ son los polinomios asociados de Legendre.
+
+$$
+\frac{d\Phi^2}{d\phi^2}+m^2\Phi = 0
+$$
+
+La solución para esta última es más evidente: $\Phi(\phi)=e^{im\phi}$, donde aquí obtenemos el número cuántico $m$
+
+
+La solución general para la función de onda $\psi$ es:
+
+$$
+\psi_{nlm}(r, \theta, \phi, t) = R_{nl}(r) P_l^m(\cos \theta) e^{im\phi} e^{-iE_nt/\hbar}
+$$
+
+donde:
+
+1. $R_{nl}(r)$ es la solución radial.
+2. $P_l^m(\cos \theta)$ son los polinomios asociados de Legendre.
+3. $e^{im\phi}$ es la solución en $\phi$.
+4. $e^{-iE_nt/\hbar}$ representa la parte temporal.
+
+Veamo que, dentro de las soluciones de estas ecuaciones diferenciales, aparecen los números cuánticos $l$ y $m$.
+
+Los números cuánticos asociados son:
+
+1. $n$: número cuántico principal, que surge de la solución radial.
+2. $l$: número cuántico del momento angular orbital, que surge de la solución angular.
+3. $m$: número cuántico magnético, que especifica la orientación del momento angular en el espacio.
+
 
 
