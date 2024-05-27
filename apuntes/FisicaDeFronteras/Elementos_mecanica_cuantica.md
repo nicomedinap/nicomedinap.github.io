@@ -112,7 +112,7 @@ $$
 La ecuación de Schrödinger tridimensional en coordenadas esféricas se utiliza comúnmente para describir sistemas físicos con simetría esférica, como átomos o partículas en potenciales esféricamente simétricos. La forma general de la ecuación de Schrödinger en coordenadas esféricas es:
 
 $$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin(\theta)} \frac{\partial}{\partial \theta} \left( \sin(\theta) \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r,\theta,\phi) \psi(r,\theta,\phi) = i\hbar \frac{\partial \psi}{\partial t}
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin(\theta)} \frac{\partial}{\partial \theta} \left( \sin(\theta) \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi(r,\theta,\phi) = i\hbar \frac{\partial \psi}{\partial t}
 $$
 
 Separación de variables
@@ -124,22 +124,18 @@ $$
 $$
 
 $$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) Y + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) R + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} R \right) + V(r, \theta, \phi) RY = i\hbar \frac{\partial}{\partial t} (RY)
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) Y + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) R + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} R \right) + V(r) RY = i\hbar \frac{\partial}{\partial t} (RY)
 $$
 
 
 $$
 -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} \right) + V(r, \theta, \phi) = E
-
 $$
 
 
 $$
 -\frac{\hbar^2}{2\mu} \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + V(r)R = ER
 $$
-
-
-
 
 
 
@@ -293,11 +289,7 @@ $$
 $$
 
 
-La ecuación de Schrödinger independiente del tiempo en coordenadas esféricas es:
-
-$$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi = E \psi
-$$
+Que es la ecuación de Schrödinger independiente del tiempo en coordenadas esféricas. 
 
 
 Separación de variables
@@ -309,7 +301,27 @@ $$
 $$
 
 $$
--\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) Y + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) R + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} R \right) + V(r, \theta, \phi) RY = E(RY)
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) Y + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) R + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} R \right) + V(r) RY = E(RY)
+$$
+
+Dividimos por algunos terminos:
+
+$$
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + \frac{1}{r^2 \sin(\theta)} \frac{d}{d\theta} \left( \sin(\theta) \frac{dY}{d\theta} \right) + \frac{1}{r^2 \sin^2(\theta)} \frac{d^2Y}{d\phi^2} \right) + V(r) = E
+$$
+
+
+Parte radial:
+
+
+
+
+
+En resumen:
+
+$$
+\frac{1}{r^2}\frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) +\left[ \frac{2\mu}{\hbar^2}(E +V(r)) - \ell(\ell+1) \right]  
+
 $$
 
 
