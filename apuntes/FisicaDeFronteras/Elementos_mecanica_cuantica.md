@@ -190,9 +190,9 @@ Una vez que se resuelven las partes radial y angular de la ecuación de Schrödi
 
 La ecuación radial para el átomo de hidrógeno es:
 
-\begin{equation}
+$$
 -\frac{\hbar^2}{2\mu} \frac{d^2 u(r)}{dr^2} + \left( V(r) + \frac{\hbar^2}{2\mu} \frac{l(l+1)}{r^2} \right) u(r) = E u(r)
-\end{equation}
+$$
 
 \subsection*{Parte angular}
 
@@ -200,15 +200,15 @@ Las ecuaciones diferenciales angulares se separan en dos partes:
 
 \subsubsection*{Ecuación en \(\theta\)}
 
-\begin{equation}
+$$
 \frac{1}{\sin \theta} \frac{d}{d \theta} \left( \sin \theta \frac{d \Theta(\theta)}{d \theta} \right) + \left( l(l+1) - \frac{m^2}{\sin^2 \theta} \right) \Theta(\theta) = 0
-\end{equation}
+$$
 
 \subsubsection*{Ecuación en \(\phi\)}
 
-\begin{equation}
+$$
 \frac{d^2 \Phi(\phi)}{d \phi^2} = -m^2 \Phi(\phi)
-\end{equation}
+$$
 
 \subsection*{Números cuánticos}
 
@@ -224,40 +224,31 @@ Los números cuánticos asociados a estas soluciones son:
 
 
 
-
-
-
-
-\documentclass{article}
-\usepackage{amsmath}
-
-\begin{document}
-
 \section*{Ecuación del átomo de hidrógeno y números cuánticos}
 
 \subsection*{Ecuación de Schrödinger en coordenadas esféricas}
 
 La ecuación de Schrödinger en coordenadas esféricas para el átomo de hidrógeno es:
 
-\[
+$$
 -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi = E \psi
-\]
+$$
 
 \subsection*{Separación de variables}
 
 Suponemos una solución de la forma:
 
-\[
+$$
 \psi(r, \theta, \phi) = R(r) Y(\theta, \phi)
-\]
+$$
 
 \subsection*{Parte radial}
 
 Sustituimos la solución propuesta en la ecuación de Schrödinger y separamos las variables, lo que nos lleva a la ecuación radial:
 
-\[
+$$
 -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) + \frac{l(l+1)}{r^2} \right) R(r) + V(r)R(r) = E R(r)
-\]
+$$
 
 \subsection*{Parte angular}
 
@@ -266,13 +257,11 @@ La parte angular se resuelve utilizando las funciones armónicas esféricas \( Y
 \subsection*{Números cuánticos}
 
 Los números cuánticos asociados son:
-\begin{itemize}
-    \item \( n \): número cuántico principal, que surge de la solución radial.
-    \item \( l \): número cuántico del momento angular orbital, que surge de la solución angular.
-    \item \( m \): número cuántico magnético, que especifica la orientación del momento angular en el espacio.
-\end{itemize}
 
-\end{document}
+1. \( n \): número cuántico principal, que surge de la solución radial.
+2. \( l \): número cuántico del momento angular orbital, que surge de la solución angular.
+3. \( m \): número cuántico magnético, que especifica la orientación del momento angular en el espacio.
+
 
 
 
