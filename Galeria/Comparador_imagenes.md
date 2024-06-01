@@ -51,14 +51,12 @@
         }
 
         .controls input {
-            width: 100px;
+            width: 200px;
         }
-        
+
         #showValuesBtn {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 50px;
+            margin-left: 40%;
             padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
@@ -69,6 +67,17 @@
 
         #showValuesBtn:hover {
             background-color: #0056b3;
+        }
+
+        /* CSS para dispositivos móviles */
+        @media screen and (max-width: 600px) {
+            .controls label {
+                font-size: 12px; /* Ajusta el tamaño de la fuente según tus preferencias */
+            }
+
+            .controls input {
+                width: 80px; /* Ajusta el tamaño de los controles si es necesario */
+            }
         }
     </style>
 </head>
@@ -113,8 +122,8 @@
         <div class="image-container">
             <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg" id="image2" class="image" alt="Imagen 2">
         </div>
-        <button id="showValuesBtn">Mostrar Valores</button>
     </div>
+    <button id="showValuesBtn">Mostrar Valores</button>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -144,7 +153,7 @@
             }
 
             scaleSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
-            angleSlider1.addEventListener('input',() => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
+            angleSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             opacitySlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             xposSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             yposSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
@@ -181,4 +190,3 @@
     </script>
 </body>
 </html>
-
