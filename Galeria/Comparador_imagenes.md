@@ -48,7 +48,7 @@
 
         .controls label {
             font-weight: bold;
-            font-size: 10px;
+            font-size: 9px;
         }
 
         .controls input[type="range"] {
