@@ -50,12 +50,12 @@
             font-weight: bold;
         }
 
-        .controls input {
+        .controls input[type="range"] {
             width: 200px;
         }
 
         #showValuesBtn {
-            margin-top: 50px;
+            margin-top: 20px;
             margin-left: 40%;
             padding: 10px 20px;
             background-color: #007bff;
@@ -75,47 +75,65 @@
                 font-size: 12px; /* Ajusta el tamaño de la fuente según tus preferencias */
             }
 
-            .controls input {
+            .controls input[type="range"] {
                 width: 80px; /* Ajusta el tamaño de los controles si es necesario */
             }
+        }
+
+        .extra-controls {
+            display: none;
+        }
+
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Nebulosa de la tarántula, usando el VISTA y el JWST</h1>
+    <div class="checkbox-container">
+        <label for="modifyParams">Modificar Parámetros:</label>
+        <input type="checkbox" id="modifyParams">
+    </div>
     <div class="container">
         <div class="controls">
             <div>
-                <label for="scale1">Escala Imagen 1:</label>
-                <input type="range" id="scale1" min="0.5" max="2" step="0.1" value="1.3">
-                <br>
-                <label for="angle1">Ángulo Imagen 1:</label>
-                <input type="range" id="angle1" min="-180" max="180" step="1" value="-1">
-                <br>
+                <div class="extra-controls">
+                    <label for="scale1">Escala Imagen 1:</label>
+                    <input type="range" id="scale1" min="0.5" max="2" step="0.1" value="1.3">
+                    <br>
+                    <label for="angle1">Ángulo Imagen 1:</label>
+                    <input type="range" id="angle1" min="-180" max="180" step="1" value="-1">
+                    <br>
+                    <label for="xpos1">Posición X Imagen 1:</label>
+                    <input type="range" id="xpos1" min="-100" max="100" step="1" value="0">
+                    <br>
+                    <label for="ypos1">Posición Y Imagen 1:</label>
+                    <input type="range" id="ypos1" min="-100" max="100" step="1" value="45">
+                    <br>
+                </div>
                 <label for="opacity1">Opacidad Imagen 1:</label>
                 <input type="range" id="opacity1" min="0" max="1" step="0.1" value="1">
-                <br>
-                <label for="xpos1">Posición X Imagen 1:</label>
-                <input type="range" id="xpos1" min="-100" max="100" step="1" value="0">
-                <br>
-                <label for="ypos1">Posición Y Imagen 1:</label>
-                <input type="range" id="ypos1" min="-100" max="100" step="1" value="45">
             </div>
             <div>
-                <label for="scale2">Escala Imagen 2:</label>
-                <input type="range" id="scale2" min="0.5" max="2" step="0.1" value="1.5">
-                <br>
-                <label for="angle2">Ángulo Imagen 2:</label>
-                <input type="range" id="angle2" min="-180" max="180" step="1" value="-17">
-                <br>
+                <div class="extra-controls">
+                    <label for="scale2">Escala Imagen 2:</label>
+                    <input type="range" id="scale2" min="0.5" max="2" step="0.1" value="1.5">
+                    <br>
+                    <label for="angle2">Ángulo Imagen 2:</label>
+                    <input type="range" id="angle2" min="-180" max="180" step="1" value="-17">
+                    <br>
+                    <label for="xpos2">Posición X Imagen 2:</label>
+                    <input type="range" id="xpos2" min="-100" max="100" step="1" value="-3">
+                    <br>
+                    <label for="ypos2">Posición Y Imagen 2:</label>
+                    <input type="range" id="ypos2" min="-100" max="100" step="1" value="-27">
+                    <br>
+                </div>
                 <label for="opacity2">Opacidad Imagen 2:</label>
                 <input type="range" id="opacity2" min="0" max="1" step="0.1" value="1">
-                <br>
-                <label for="xpos2">Posición X Imagen 2:</label>
-                <input type="range" id="xpos2" min="-100" max="100" step="1" value="-3">
-                <br>
-                <label for="ypos2">Posición Y Imagen 2:</label>
-                <input type="range" id="ypos2" min="-100" max="100" step="1" value="-27">
             </div>
         </div>
         <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg" id="image1" class="image" alt="Imagen 1">
@@ -141,6 +159,9 @@
             const xposSlider2 = document.getElementById('xpos2');
             const yposSlider2 = document.getElementById('ypos2');
 
+            const modifyParamsCheckbox = document.getElementById('modifyParams');
+            const extraControls = document.querySelectorAll('.extra-controls');
+
             function updateImageTransform(image, scaleSlider, angleSlider, opacitySlider, xposSlider, yposSlider) {
                 const scale = scaleSlider.value;
                 const angle = angleSlider.value;
@@ -150,6 +171,12 @@
 
                 image.style.transform = `scale(${scale}) rotate(${angle}deg) translate(${xpos}px, ${ypos}px)`;
                 image.style.opacity = opacity;
+            }
+
+            function toggleExtraControls() {
+                extraControls.forEach(control => {
+                    control.style.display = modifyParamsCheckbox.checked ? 'block' : 'none';
+                });
             }
 
             scaleSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
@@ -186,6 +213,9 @@
 
                 alert(valuesImage1 + "\n\n" + valuesImage2);
             });
+
+            modifyParamsCheckbox.addEventListener('change', toggleExtraControls);
+            toggleExtraControls(); // Inicializar el estado de los controles adicionales
         });
     </script>
 </body>
