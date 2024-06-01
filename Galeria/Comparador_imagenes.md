@@ -48,10 +48,11 @@
 
         .controls label {
             font-weight: bold;
+            font-size: 10px;
         }
 
         .controls input[type="range"] {
-            width: 200px;
+            width: 150px;
         }
 
         #showValuesBtn {
@@ -72,7 +73,7 @@
         /* CSS para dispositivos móviles */
         @media screen and (max-width: 600px) {
             .controls label {
-                font-size: 12px; /* Ajusta el tamaño de la fuente según tus preferencias */
+                font-size: 8px; /* Ajusta el tamaño de la fuente según tus preferencias */
             }
 
             .controls input[type="range"] {
