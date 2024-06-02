@@ -52,7 +52,7 @@
         }
 
         .controls input[type="range"] {
-            width: 10px;
+            width: 150px;
         }
 
         #showValuesBtn {
@@ -80,7 +80,7 @@
                 width: 80px; /* Ajusta el tamaño de los controles si es necesario */
             }
             .controls {
-                top: 80%; /* Ajusta abajo */
+                top: 70%; /* Ajusta abajo */
             }
 
         }
