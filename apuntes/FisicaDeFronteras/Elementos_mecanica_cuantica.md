@@ -191,9 +191,14 @@ donde $m_e$ es la masa del electrón ()
 por lo tanto $\displaystyle p = \sqrt{2m_e E_{c}}$. Así:
 
 $$
-\lambda = \frac{h}{\sqrt{2m_e E_{c}}} = 
+\lambda = \frac{h}{\sqrt{2m_e E_{c}}} = \frac{6.625\times10^{-34}\ [J\cdot s]}{2\sqrt{9.1\times10^{-31}\ [kg] * 4500\ [eV] }}
 $$
 
+considerando que $1eV=1.602\times10^{−19}\ [J]$
+
+$$
+\lambda = 5.778\times 10^{−12}\ [m]
+$$
 
 Tarea 4: 
 
