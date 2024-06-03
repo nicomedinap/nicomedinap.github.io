@@ -56,21 +56,21 @@ que es la ecuación de onda para el campo eléctrico $\mathbf{E}$ en el vacío. 
 
 #### Radiación de cuerpo negro
 
-
 Teoría de Max Planck: Cada oscilador puede emitir o absorver energía en cantididade que son múltiplos enteros de cierta cantidad básica de energia $n\epsilon$, tal que:
 
 $$
-E=n\epsilon, n=1,2,3,...,
+E=n\hbar \omega, n=1,2,3,...,
 $$
 
 donde $n$ es el número de cuantos, o $quanta$, desde donde proviene el nómbre de la teoría. La energía de cada uno de los cuantos $n$ esta determinada por la frecuencia:
 
 $$
-\epsilon = h f,
+\hbar \omega = \frac{h \omega}{2\pi} = hf ,
 $$
 
-donde $h$ es la constante de proporcionalidad de Planck
+donde $h$ es la constante de proporcionalidad de Planck y $\hbar=h/2\pi$ es la constante de Panck reducida,
 
+<!---
 Una de las consecuencias más importantes de la ley de Planck es la deducción de la ley de Stefan-boltzmann. Indica que el valor de la energía total radiada por unidad de superficie y unidad de tiempo en todas las longitudes de onda, es proporcional a la cuarta potencia de la temperatura.
 A la energía total radiada por unidad de superficie de un cuerpo negro en una unidad de tiempo, en todas las longitudes de onda se la conoce como potencia emisiva, y viene dada por:
 
@@ -78,10 +78,15 @@ $$
 R=\sigma T^4,
 $$
 
-donde R es la potencia/area. Cuando fueron anunciados sus resultados en 1900, Planck no sintió mucha aprobación del mundo científico; es más, él mismo creía que había encontrado una solución ad-hoc para el problema físico de la catástrofe ultravioleta. 
+donde R es la potencia/area. 
+-->
+
+Cuando fueron anunciados sus resultados en 1900, Planck no sintió mucha aprobación del mundo científico; es más, él mismo creía que había encontrado una solución ad-hoc para el problema físico de la catástrofe ultravioleta. 
 
 
 #### Efecto fotoeléctrico
+
+Si la energía $E=\hbar \omega $
 
 #### Efecto Compton
 
@@ -90,6 +95,23 @@ donde R es la potencia/area. Cuando fueron anunciados sus resultados en 1900, Pl
 ### 3.- Física moderna.
 
 #### Atomo de Hidrógeno 
+
+$L = n\hbar$
+
+$$
+\Delta E = E_n  - E_{n-1}\hbar \omega 
+$$
+
+$$
+\Rightarrow E_n = -\frac{E_0}{n^2}
+$$
+
+$$
+n=1 \Rightarrow E_n = -E_0 = \frac{-m_e K^2 e^4}{2\hbar^2} = -2.18\times 10^{-18} [J] = -13.6 [eV]
+$$
+
+#### La Hipótesis de de Broglie
+
 
 
 Tarea 3: 
@@ -109,10 +131,10 @@ $$
 L = m_{T} v_{T} r_{T},
 $$
 
-donde $m_{T} = 5.98\times10^{24}$[kg] es la masa de la tierra, $r_{T} = 1.5\times10^{11}$[m] es la distancia tierra-sol y v_{T} es la velocidad en la que la tierra da una órbita y vuelve al mismo punto, es decir:
+donde $m_{T} = 5.98\times10^{24}$[kg] es la masa de la tierra, $r_{T} = 1.5\times10^{11}$[m] es la distancia tierra-sol y $v_{T}$ es la velocidad en la que la tierra da una órbita y vuelve al mismo punto, es decir:
 
 $$
-v = \frac{2\pi r_{T}}{1 año} = \frac{2\pi r_{T}}{3.16\times10^{7}\mbox{[s]}} = 29825.24 [m/s] = 2.98 \times 10^{4} [m/s].
+v = \frac{2\pi r_{T}}{1 año} = \frac{2\pi r_{T}}{3.16\times10^{7}\mbox{[s]}} = 29825.24\ [m/s] = 2.98 \times 10^{4}\ [m/s].
 $$
 
 Por lo tanto, como $L = m_{T} v_{T} r_{T}$ y $L= n\hbar$, tenemos que
@@ -133,13 +155,11 @@ E_{c} =\frac{1}{2} m_e v^2 = \frac{p^2}{2m_e},
 $$
 
 donde $m_e$ es la masa del electrón ()
-por lo tanto $\displaystyle p = \sqrt{2mE_{c}}$. Así:
+por lo tanto $\displaystyle p = \sqrt{2m_e E_{c}}$. Así:
 
 $$
-\lambda = \frac{h}{\sqrt{2mE_{c}}} = 
+\lambda = \frac{h}{\sqrt{2m_e E_{c}}} = 
 $$
-
-#### La Hipótesis de de Broglie
 
 #### Ecuación de Shrodinger
 
@@ -166,7 +186,7 @@ $$
 $$
 
 
-Asumiendo soluciones del tipo: $\psi(\vec{x,y,z},t)=\varphi(x,y,z) {\rm e}^{\frac{-i Et}{\hbar}}$ (separando variables)
+Asumiendo soluciones del tipo: $\psi(x,y,z,t)=\varphi(x,y,z) {\rm e}^{\frac{-i Et}{\hbar}}$ (separando variables)
 
 $$
 -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \varphi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \varphi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial \varphi}{\partial \varphi^2} \right) + V(r) \varphi = E \varphi
@@ -242,14 +262,13 @@ $$
 P_l(x) = \frac{1}{2^l l!} \frac{d^l}{dx^l} (x^2 - 1)^l
 $$
 
-
 Veamo que, dentro de las soluciones de estas ecuaciones diferenciales, aparecen los números cuánticos $l$ y $m$.
 
 Los números cuánticos asociados son:
 
 1. $n$: número cuántico principal, que surge de la solución radial.
-2. $l$: número cuántico del momento angular orbital, que surge de la solución angular. $\ell = 0,1,2,...,n-1$
-3. $m_{\ell}$: número cuántico magnético, que especifica la orientación del momento angular en el espacio. m_{\ell} = -\ell,-\ell -1,...,0,...,\ell-1,\ell. En total podemos contar (2\ell +1) posibles valores. 
+2. $\ell$: número cuántico del momento angular orbital, que surge de la solución angular. $\ell = 0,1,2,...,n-1$
+3. $m_{\ell}$: número cuántico magnético, que especifica la orientación del momento angular en el espacio. $m_{\ell} = -\ell,-\ell -1,...,0,...,\ell-1,\ell$. En total podemos contar $(2\ell +1)$ posibles valores. 
 
 
 
