@@ -100,25 +100,25 @@ Solución:
 En el modelo de Bohr, el momento angular $L$ de un electrón en una órbita es un múltiplo entero de la constante de Planck reducida$\hbar$, tal que 
 
 $$
-L = b\hbar,
+L = n\hbar,
 $$
 
 donde $n$ es el numero cuántico. Como en un movimiento circular como el que describe la órbita de la tierra alrededor del sol, el momento angular es una constante de movimiento descrita por:
 
 $$
-L = m_{Tierra} v_{Tierra}, r_{orbita},
+L = m_{T} v_{T} r_{T},
 $$
 
-donde $m_{Tierra} = 5.98\times10^{24}$[kg] es la masa de la tierra, $r_{orbita} = 1.5\times10^{11}$[m] es la distancia tierra-sol y v_{Tierra} es la velocidad en la que la tierra da una órbita y vuelve al mismo punto, es decir:
+donde $m_{T} = 5.98\times10^{24}$[kg] es la masa de la tierra, $r_{T} = 1.5\times10^{11}$[m] es la distancia tierra-sol y v_{T} es la velocidad en la que la tierra da una órbita y vuelve al mismo punto, es decir:
 
 $$
-v = \frac{2\pi r_{orbita}}{1 año} = \frac{2\pi r_{orbita}}{3.16\times10^{7}\mbox{[s]}} = 29825.24 [m/s] = 2.98 \times 10^{4} [m/s].
+v = \frac{2\pi r_{T}}{1 año} = \frac{2\pi r_{T}}{3.16\times10^{7}\mbox{[s]}} = 29825.24 [m/s] = 2.98 \times 10^{4} [m/s].
 $$
 
-Por lo tanto, como $L = m_{Tierra} v_{Tierra}, r_{orbita}$ y $L= n\hbar$, tenemos que
+Por lo tanto, como $L = m_{T} v_{T} r_{T}$ y $L= n\hbar$, tenemos que
 
 $$
-n\hbar = m_{Tierra} v_{Tierra}, r_{orbita} \Rightarrow n=\frac{m_{Tierra} v_{Tierra}, r_{orbita}}{\hbar} = 2.54\times 10^{74}
+n\hbar = m_{T} v_{T} r_{T} \Rightarrow n=\frac{m_{T} v_{T} r_{T}}{\hbar} = 2.54\times 10^{74}
 $$
 
 ¿Qué significado podría tener este número cuántico?
@@ -126,17 +126,17 @@ $$
 
 2. Calcular la longitud de onda de de Broglie para un electrón con 4.5 KeV de energía cinética.
 
-La expresión de de Brogile es $\lambda =\frac{h}{p}$. Como sólo consideramos la energía cinética, se tiene que:
+La expresión de de Broglie es $\lambda =\frac{h}{p}$. Como sólo consideramos la energía cinética, se tiene que:
 
 $$
-E_{cinética} =\frac{1}{2} m_e v^2 = \frac{p^2}{2m_e},
+E_{c} =\frac{1}{2} m_e v^2 = \frac{p^2}{2m_e},
 $$
 
 donde $m_e$ es la masa del electrón ()
-por lo tanto $\displaystyle p = \sqrt{2mE_{cinetica}}$. Así:
+por lo tanto $\displaystyle p = \sqrt{2mE_{c}}$. Así:
 
 $$
-\lambda = \frac{h}{\sqrt{2mE_{cinetica}}} = 
+\lambda = \frac{h}{\sqrt{2mE_{c}}} = 
 $$
 
 #### La Hipótesis de de Broglie
