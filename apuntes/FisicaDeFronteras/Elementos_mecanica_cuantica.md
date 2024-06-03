@@ -91,6 +91,54 @@ donde R es la potencia/area. Cuando fueron anunciados sus resultados en 1900, Pl
 
 #### Atomo de Hidrógeno 
 
+
+Tarea 3: 
+
+1. Si el momento angular de la tierra a través del sol fuera cuantizado: ¿Cuál sería el numero cuántico n de la órbita de la tierra?
+
+Solución: 
+En el modelo de Bohr, el momento angular $L$ de un electrón en una órbita es un múltiplo entero de la constante de Planck reducida$\hbar$, tal que 
+
+$$
+L = b\hbar,
+$$
+
+donde $n$ es el numero cuántico. Como en un movimiento circular como el que describe la órbita de la tierra alrededor del sol, el momento angular es una constante de movimiento descrita por:
+
+$$
+L = m_{Tierra} v_{Tierra}, r_{orbita},
+$$
+
+donde $m_{Tierra} = 5.98\times10^{24}$[kg] es la masa de la tierra, $r_{orbita} = 1.5\times10^{11}$[m] es la distancia tierra-sol y v_{Tierra} es la velocidad en la que la tierra da una órbita y vuelve al mismo punto, es decir:
+
+$$
+v = \frac{2\pi r_{orbita}}{1 año} = \frac{2\pi r_{orbita}}{3.16\times10^{7}\mbox{[s]}} = 29825.24 [m/s] = 2.98 \times 10^{4} [m/s].
+$$
+
+Por lo tanto, como $L = m_{Tierra} v_{Tierra}, r_{orbita}$ y $L= n\hbar$, tenemos que
+
+$$
+n\hbar = m_{Tierra} v_{Tierra}, r_{orbita} \Rightarrow n=\frac{m_{Tierra} v_{Tierra}, r_{orbita}}{\hbar} = 2.54\times 10^{74}
+$$
+
+¿Qué significado podría tener este número cuántico?
+
+
+2. Calcular la longitud de onda de de Broglie para un electrón con 4.5 KeV de energía cinética.
+
+La expresión de de Brogile es $\lambda =\frac{h}{p}$. Como sólo consideramos la energía cinética, se tiene que:
+
+$$
+E_{cinética} =\frac{1}{2} m_e v^2 = \frac{p^2}{2m_e},
+$$
+
+donde $m_e$ es la masa del electrón ()
+por lo tanto $\displaystyle p = \sqrt{2mE_{cinetica}}$. Así:
+
+$$
+\lambda = \frac{h}{\sqrt{2mE_{cinetica}}} = 
+$$
+
 #### La Hipótesis de de Broglie
 
 #### Ecuación de Shrodinger
@@ -152,7 +200,7 @@ $$
 
 ...
 
-En resumen:
+Luego de dolorosas 3 horas resolviendo y ordenando, tenemos las soluciones son de la forma:
 
 $$
 \frac{1}{r^2}\frac{d}{dr} \left( r^2 \frac{dR}{dr} \right) +\left[ \frac{2\mu}{\hbar^2}(E +V(r)) - \frac{\ell(\ell+1)}{r^2} \right] R = 0  
@@ -184,13 +232,26 @@ donde:
 3. $e^{im\phi}$ es la solución en $\phi$.
 4. $e^{-iE_nt/\hbar}$ representa la parte temporal.
 
+$$
+P_l^m(x) = (-1)^m (1 - x^2)^{m/2} \frac{d^m}{dx^m} P_l(x)
+$$
+
+y donde 
+
+$$
+P_l(x) = \frac{1}{2^l l!} \frac{d^l}{dx^l} (x^2 - 1)^l
+$$
+
+
 Veamo que, dentro de las soluciones de estas ecuaciones diferenciales, aparecen los números cuánticos $l$ y $m$.
 
 Los números cuánticos asociados son:
 
 1. $n$: número cuántico principal, que surge de la solución radial.
-2. $l$: número cuántico del momento angular orbital, que surge de la solución angular.
-3. $m$: número cuántico magnético, que especifica la orientación del momento angular en el espacio.
+2. $l$: número cuántico del momento angular orbital, que surge de la solución angular. $\ell = 0,1,2,...,n-1$
+3. $m_{\ell}$: número cuántico magnético, que especifica la orientación del momento angular en el espacio. m_{\ell} = -\ell,-\ell -1,...,0,...,\ell-1,\ell. En total podemos contar (2\ell +1) posibles valores. 
+
+
 
 
 
