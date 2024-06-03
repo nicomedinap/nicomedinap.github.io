@@ -38,10 +38,10 @@
             position: absolute;
             top: 87%; /* Ajusta abajo */
             left: 0;
-            width: 95%;
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 0px;
             z-index: 3;
             background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco transparente */
         }
@@ -77,10 +77,10 @@
             }
 
             .controls input[type="range"] {
-                width: 80px; /* Ajusta el tamaño de los controles si es necesario */
+                width: 50%; /* Ajusta el tamaño de los controles si es necesario */
             }
             .controls {
-                top: 70%; /* Ajusta abajo */
+                top: 80%; /* Ajusta abajo */
             }
 
         }
@@ -107,16 +107,16 @@
             <div>
                 <div class="extra-controls">
                     <label for="scale1">Escala Imagen 1:</label>
-                    <input type="range" id="scale1" min="0.5" max="2" step="0.1" value="1.1">
+                    <input type="range" id="scale1" min="0.5" max="2" step="0.1" value="1.3">
                     <br>
                     <label for="angle1">Ángulo Imagen 1:</label>
-                    <input type="range" id="angle1" min="-180" max="180" step="1" value="-1">
+                    <input type="range" id="angle1" min="-90" max="90" step="1" value="-3">
                     <br>
-                    <label for="xpos1">Posición X Imagen 1:</label>
-                    <input type="range" id="xpos1" min="-100" max="100" step="1" value="5">
+                    <label for="xpos1">Pos X Imagen 1:</label>
+                    <input type="range" id="xpos1" min="-50" max="50" step="1" value="1">
                     <br>
-                    <label for="ypos1">Posición Y Imagen 1:</label>
-                    <input type="range" id="ypos1" min="-100" max="100" step="1" value="30">
+                    <label for="ypos1">Pos Y Imagen 1:</label>
+                    <input type="range" id="ypos1" min="-20" max="70" step="1" value="13">
                     <br>
                 </div>
                 <label for="opacity1">Opacidad Imagen 1:</label>
@@ -128,13 +128,13 @@
                     <input type="range" id="scale2" min="0.5" max="2" step="0.1" value="1.5">
                     <br>
                     <label for="angle2">Ángulo Imagen 2:</label>
-                    <input type="range" id="angle2" min="-180" max="180" step="1" value="-16">
+                    <input type="range" id="angle2" min="-90" max="90" step="1" value="-16">
                     <br>
-                    <label for="xpos2">Posición X Imagen 2:</label>
-                    <input type="range" id="xpos2" min="-100" max="100" step="1" value="-3">
+                    <label for="xpos2">Pos X Imagen 2:</label>
+                    <input type="range" id="xpos2" min="-50" max="50" step="1" value="-0">
                     <br>
-                    <label for="ypos2">Posición Y Imagen 2:</label>
-                    <input type="range" id="ypos2" min="-100" max="100" step="1" value="-27">
+                    <label for="ypos2">Pos Y Imagen 2:</label>
+                    <input type="range" id="ypos2" min="-50" max="60" step="1" value="-45">
                     <br>
                 </div>
                 <label for="opacity2">Opacidad Imagen 2:</label>
