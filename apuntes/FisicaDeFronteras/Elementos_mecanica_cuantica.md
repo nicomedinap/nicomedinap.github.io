@@ -38,25 +38,31 @@ Wikipedia: Iré recolectando los links desde dónde tome información, y la iré
 [<ins> Apuntes de Mecánica cuántica I</ins>](http://llacolen.ciencias.uchile.cl/~vmunoz/cursos/cuantica/qm.pdf){:target="_blank"}
 
 
-### 1.- Brevísimo repaso de la teoría electromagnética de James Clerk Maxwell
+### 1.- Brevísimos comentarios sobre la teoría electromagnética de James Clerk Maxwell
 
-Las ondas 
-
-#### Paquetes de campo que viajan como ondas por el vacío.
+Maxwell pudo demostrar que la luz puede ser descrita como una onda, consagrandose en el mundo científico. Que la radiacion electromagnética sea un aspecto más que puede ser descrito por ondas unifica la teoría óptica con la electromagnética. Es así como la luz puede ser considerada como "paquetes de campo que viajan como ondas por el vacío". La expresión más general de la ecuación de onda viene dada por la expresión:
 
 $$
-\nabla^2 \mathbf{E} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0,
+\nabla^2 \psi - \frac{1}{v^2}\frac{\partial^2 \psi{\partial t^2} = 0,
 $$
 
-que es la ecuación de onda para el campo eléctrico $\mathbf{E}$ en el vacío. Para obtener la ecuación de onda del campo magnético $\mathbf{B}$ es análogo al anterior (tomar el rotacioal, aplicar la identidad, intercambiar derivadas, reemplazar  el rotacional dentro de la derivada temporal, reordenar términos), por lo que obtenemos:
+donde $\psi$ es el elemento que describe matemáticamente a la onda. La ecuación de onda no modifica la onda, sino que, cuando es aplicada a $\psi$, describe las propiedades de su propagación por el espacio. Entonces, puede ser entendida como un "operador". 
 
+¿Por qué esto es importante? Porque desde el 1900, empieza una nueva ola de física que probarán de todo, hasta que algo funcione y pueda describir la realidad.
 
 ### 2.- Las teorías clásicas fallan.
 
+A fines del siglo XIX se hizo cada vez más evidente que la física desarrollada hasta entonces era completamente incapaz de dar cuenta de varios hechos experimentales. El estudio de estos problemas llevó a un conjunto de principios y descripciones, a veces bastante forzados, conocidos hoy en día con el nombre de Física moderna, o Mecánica Cuántica antigua.
 
-#### Radiación de cuerpo negro
+Por ejemplo, desde la termodinámica se aceptaba la idea de los estados energéticos de un sistema que un oscilador podían ser descritos (o aproximados) por la "distribución de Boltzmann". Pero esta idea chocó con una pared cuando trataron de medirse la energía interna de los gases $diatomicos$, como también cuando trataron de estimarse la densid de energía dentro de una caja considerada como un "cuerpo negro". 
 
-Teoría de Max Planck: Cada oscilador puede emitir o absorver energía en cantididade que son múltiplos enteros de cierta cantidad básica de energia $n\epsilon$, tal que:
+Sin ser nada riguroso, un cuerpo negro es cualquier entidad física que posea una temperatura (una propiedad macroscópica), y esta temperatura se relaciona con las propiedades radiativas de este cuerpo. Ejemplos clásicos de cuerpo negro son las estrellas, como también el fondo cósmico de micro ondas.
+
+Nadie sabía como abordar el problema, porque cuando se seguían las reglas clásicas de la físíca, ocurría la llamda "Catástrofe ultravioleta", es decir, la densidad de energía espectral dentro de esta caja especial tendía a infinito, mientras que el resultado experimental era finito. Algo olía mal. 
+
+#### La energía es un múltiplo entero de algo
+
+Para abordar el problema del cuerpo negro, Max Planck propuso que cada oscilador puede emitir o absorver energía en cantididade que son múltiplos enteros de cierta cantidad básica de energia $\hbar \omega$ tal que:
 
 $$
 E=n\hbar \omega, n=1,2,3,...,
@@ -68,7 +74,7 @@ $$
 \hbar \omega = \frac{h \omega}{2\pi} = hf ,
 $$
 
-donde $h$ es la constante de proporcionalidad de Planck y $\hbar=h/2\pi$ es la constante de Panck reducida,
+donde $h$ es la constante de proporcionalidad de Planck y $\hbar=h/2\pi$ es la constante de Panck reducida. Así, Max Planck desarrolla la "Ley de Planck". 
 
 <!---
 Una de las consecuencias más importantes de la ley de Planck es la deducción de la ley de Stefan-boltzmann. Indica que el valor de la energía total radiada por unidad de superficie y unidad de tiempo en todas las longitudes de onda, es proporcional a la cuarta potencia de la temperatura.
@@ -81,25 +87,52 @@ $$
 donde R es la potencia/area. 
 -->
 
-Cuando fueron anunciados sus resultados en 1900, Planck no sintió mucha aprobación del mundo científico; es más, él mismo creía que había encontrado una solución ad-hoc para el problema físico de la catástrofe ultravioleta. 
-
+Cuando fueron anunciados sus resultados en 1900, Planck no sintió mucha aprobación del mundo científico; es más, él mismo creía que había encontrado una solución ad-hoc para el problema físico de la catástrofe ultravioleta. Pero el hecho de considerar que, en realidad, la energía no es continua sino $cuantizada$, resolvería muchos problemas observacionales en un futuro cercano. 
 
 #### Efecto fotoeléctrico
 
-Si la energía $E=\hbar \omega $
+Cinco años después, Albert Einstein se enfrentaría al problema de la detección de electrones al iluminar una placa metálica. Este efecto fue denominado "efecto fotoeléctrico". Este hecho por sí solo es fácil de explicar pensado en la propuesta de la energía cuantizada de Planck: la luz que incide sobre la placa transporta una cierta energía que la traspasa a los electrones. Algunos electrones adquieren suficiente energía como para sobrepasar la barrera de potencial que los mantiene dentro del metal. 
+
+Entonces, si consideramos que la luz, o una onda electromagnética que tiene frecuencia $\omega$ y una energía cuantizada $n\hbar \omega$, podremos decir que esta energía está compuesta de $n$ particulas llamadas $fotones$, cada uno con energía $\hbar \omega$. Por lo tanto, si estos fotones interactuan (digamos, elásticamente) con los electrones del metal, la energía del electrón despedido será:
+
+$$
+E_e = \hbar \omega - \phi,
+$$
+
+donde $\phi$ es la "función de trabajo del metal", o la energía que es necesaria para quitar este electrón del metal. 
+
+Principalmente, hay dos cosas que las teorías clásicas no podían explicar: 1) la energía de los electrones emitidos no dependía de la intensidad de la luz incidente; al disminuir la intensidad de la luz, sólo disminuye el número de electrones. La energía de los electrones emitidos sólo depende de la frecuencia de la luz y del metal considerado. 2) Al iluminar una placa metálica con luz y medir el tiempo transcurrido entre la detección de dos electrones emitidos por el metal se encuentra que éstos siguen una distribución de Poisson, indicando que el efecto fotoeléctrico proceso que ocurre completamente al azar (o sea intrínsecamente irreproducible o estocástico). 
+
+¿Cómo la cuantización de la energía de Planck-Einstein resuelve esto?
 
 #### Efecto Compton
 
+La dispersión de Compton ocurre al hacer coincidir radiación de rayos X (altamente energetica, por ende, de longitud de onda corta) en átomos. Los átomos dispersan esta radiación en una pequeña (pero medible) fracción. Este hecho fue explicado exitosamente al considerar las nuevas ideas de la cuantización de la energía, y agregando un poquito de relatividad, por qué no. 
+
+Siguiendo la relatividad especial, un electrón en reposo tiene "energía en reposo" de la forma: $E = m_e c^2$, pero además, los fotones tienen energía $E = p_{foton}c $, ya que:
+
+$$
+E = c\sqrt{p^2 + m^2 c^2},
+$$
+
+lo que es deducible si consideramos que los fotones no tienen masa. Si además consideramos la energía de Planck $E=\hbar \omega$. Así, cuando un fotón energético interacciona (choca) con un electrón unido a este átomo, se produce un choque elástico y se intercambian energía. 
+
 #### Principio de correspondencia
+
+Con todas las nuevas ideas que daban vueltas, era dificl que todos los físicos estuvieran felices, ya que era dificl asumir el hecho que, esta realidad atómica debiera ser descrita por menos grados de libertad. Por ende, se propuso que cualquier efecto cuántico debe tener su contraparte clásica, pero cuando la escala de la realidad es ajustada. Me explico: Si en un problema cuántico se realiza el límite donde $h\rightarrow \inf$ (o sea, que los estamos cuantizados no son relevantes, o que la mecánica cuántica se vuelve continua), debemos tener un efecto clásico. 
+
+Planteado de otra forma: Si el número cuántico tiende a infinito (un estado de alta energía, más parecido a la mecánica Newtoniana), el resultado cuántico debe coincidir con el resultado clásico. Esta idea llevo a la concepción de numerosos modelos atómicos, pero uno en particular fue muy exitoso.
 
 ### 3.- Física moderna.
 
 #### Atomo de Hidrógeno 
 
+Ya desde mediadios del 1800 se sabían varias cosas de la radiación de los elementos. Entre ellos ya era conocido el espectro de emisión del hidrógeno. 
+
 $L = n\hbar$
 
 $$
-\Delta E = E_n  - E_{n-1}\hbar \omega 
+\Delta E = E_n  - E_{n-1}=\hbar \omega 
 $$
 
 $$
@@ -161,7 +194,52 @@ $$
 \lambda = \frac{h}{\sqrt{2m_e E_{c}}} = 
 $$
 
-#### Ecuación de Shrodinger
+
+Tarea 4: 
+
+Consideremos una nube de hidrogeno, es decir, muchos átomos de hidrógeno que podrían interactuar de diferentes formas entre ellos. Uno de esos átomos posee un electrón en una orbita caracterizada por n=4, cuando de forma espontánea transiciona hacia un estado n=2:
+
+\begin{enumerate}
+    \item Calcule la diferencia de energía $\Delta E= E_{final}-E_{inicial}$ del electrón cuando salta de una órbita n = 4 a n = 2. ¿El electrón pierde o gana energía? Recuerde que la energía cuantizada en el radio de Bohr es $\displaystyle E_n = - \frac{13.6 \, \text{[eV]}}{n^2}$
+    \item Calcule la longitud de onda de la radiación electromagnética (fotón) emitida. Recuerde que para una onda: $v=\lambda f$, y particularmente para la luz: $c=\lambda f$
+    \item Ese mismo fotón emitido anteriormente, viaja hasta interactuar con otro electrón de un átomo de hidrógeno en el estado fundamental (n=1), el fotón es absorbido por el electrón y transiciona hacia otra órbita $l$. Determine cuál es esta órbita $l$. ¿Cuáles son las implicancias de tener que considerar a $l$ como un número entero?
+\end{enumerate}
+
+Vamos a desarrollar el tercer enunciado. 
+
+El estado fundamental de un átomo es el estado de menor energía, por lo que el electrón está en $n=1$, entonces su energía es:
+
+$$
+E1 = \frac{E_0}{n^2} = -13.6\ [eV].
+$$
+
+Queremos encontrar el nivel  $l$ tal que la energía absorbida por el electrón coincida con la energía del fotón:
+
+$$
+\Delta E = E_l - E_1
+$$
+
+Sabemos que, (del apartado anterior) $\Delta E = 2.55 \ [eV]$, así:
+
+$$
+2.55 \ [eV] = - \frac{13.6 \ [eV]}{l^2} - (-13.6 \, \text{eV})
+$$
+
+$$\frac{2.55}{13.6} = 1 - \frac{1}{l^2}$$
+
+$$0.1875 = 1 - \frac{1}{l^2} $$
+
+$$
+\frac{1}{l^2} = 1 - 0.1875 \Rightarrow  \frac{1}{l^2} = 0.8125.
+$$
+
+Así,
+
+$$
+l^2 = \frac{1}{0.8125} \approx 1.23 \Rightarrow l \approx \sqrt{1.23} \approx 1.11
+$$
+
+Dado que $l$ debe ser un número entero y los niveles de energía en el átomo de hidrógeno corresponden a números enteros, el nivel más cercano es $l = 2$. ¿Cómo podría interpretarse este caso?
 
 ### 4.- Las matemáticas de los números cuánticos.
 
