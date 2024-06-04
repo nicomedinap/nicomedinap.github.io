@@ -351,7 +351,7 @@ Esta ecuación desempeña un papel en la mecánica cuántica análogo al de la s
 
 #### La ecuación de Schrödinger y La evolución temporal del átomo de hidrógeno.
 
-$(CALCULOS DEMOSTRATIVOS)$
+$(CALCULOS\ DEMOSTRATIVOS)$
 
 La ecuación de Schrödinger tridimensional en coordenadas esféricas se utiliza comúnmente para describir sistemas físicos con simetría esférica, como átomos o partículas en potenciales esféricamente simétricos. 
 
