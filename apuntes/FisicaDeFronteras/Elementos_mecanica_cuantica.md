@@ -269,7 +269,7 @@ Consideremos una nube de hidrogeno, es decir, muchos átomos de hidrógeno que p
 
 1. Calcule la diferencia de energía $\Delta E= E_{final}-E_{inicial}$ del electrón cuando salta de una órbita n = 4 a n = 2. ¿El electrón pierde o gana energía? Recuerde que la energía cuantizada en el radio de Bohr es $\displaystyle E_n = - \frac{13.6 \, \text{[eV]}}{n^2}$
 2. Calcule la longitud de onda de la radiación electromagnética (fotón) emitida. Recuerde que para una onda: $v=\lambda f$, y particularmente para la luz: $c=\lambda f$
-3. Ese mismo fotón emitido anteriormente, viaja hasta interactuar con otro electrón de un átomo de hidrógeno en el estado fundamental (n=1), el fotón es absorbido por el electrón y transiciona hacia otra órbita $l$. Determine cuál es esta órbita $l$. ¿Cuáles son las implicancias de tener que considerar a $l$ como un número entero?
+3. Ese mismo fotón emitido anteriormente, viaja hasta interactuar con otro electrón de un átomo de hidrógeno en el estado fundamental (n=1), el fotón es absorbido por el electrón y transiciona hacia otra órbita $\ell$. Determine cuál es esta órbita $l$. ¿Cuáles son las implicancias de tener que considerar a $l$ como un número entero?
 
 Vamos a desarrollar el tercer enunciado. 
 
@@ -279,33 +279,33 @@ $$
 E_1 = \frac{E_0}{n^2} = -13.6\ [eV].
 $$
 
-Queremos encontrar el nivel  $l$ tal que la energía absorbida por el electrón coincida con la energía del fotón:
+Queremos encontrar el nivel $\ell$ tal que la energía absorbida por el electrón coincida con la energía del fotón:
 
 $$
-\Delta E = E_l - E_1
+\Delta E = E_{\ell} - E_1
 $$
 
 Sabemos que, (del apartado anterior) $\Delta E = 2.55 \ [eV]$, así:
 
 $$
-2.55 \ [eV] = - \frac{13.6 \ [eV]}{l^2} - (-13.6 \, \text{eV})
+2.55 \ [eV] = - \frac{13.6 \ [eV]}{{\ell}^2} - (-13.6 \, \text{eV})
 $$
 
-$$\frac{2.55}{13.6} = 1 - \frac{1}{l^2}$$
+$$\frac{2.55}{13.6} = 1 - \frac{1}{{\ell}^2}$$
 
-$$0.1875 = 1 - \frac{1}{l^2} $$
+$$0.1875 = 1 - \frac{1}{{\ell}^2} $$
 
 $$
-\frac{1}{l^2} = 1 - 0.1875 \Rightarrow  \frac{1}{l^2} = 0.8125.
+\frac{1}{{\ell}^2} = 1 - 0.1875 \Rightarrow  \frac{1}{{\ell}^2} = 0.8125.
 $$
 
 Así,
 
 $$
-l^2 = \frac{1}{0.8125} \approx 1.23 \Rightarrow l \approx \sqrt{1.23} \approx 1.11
+{\ell}^2 = \frac{1}{0.8125} \approx 1.23 \Rightarrow \ell \approx \sqrt{1.23} \approx 1.11
 $$
 
-Dado que $l$ debe ser un número entero y los niveles de energía en el átomo de hidrógeno corresponden a números enteros, el nivel más cercano es $l = 2$. ¿Cómo podría interpretarse este caso? ¿Qué sucede si en realidad aproximamos l=1?  ¿Se absorvió el fotón en realidad?
+Dado que $\ell$ debe ser un número entero y los niveles de energía en el átomo de hidrógeno corresponden a números enteros, el nivel más cercano es $\ell = 2$. ¿Cómo podría interpretarse este caso? ¿Qué sucede si en realidad aproximamos \ell=1?  ¿Se absorvió el fotón en realidad o no?
 
 #### La ecuación de Schrödinger
 
