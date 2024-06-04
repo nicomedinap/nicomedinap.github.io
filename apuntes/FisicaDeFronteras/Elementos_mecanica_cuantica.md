@@ -289,18 +289,18 @@ $$
 2.55 \ [eV] = - \frac{13.6 \ [eV]}{\ell^2} - (-13.6 \, \text{eV})
 $$
 
-$$\frac{2.55}{13.6} = 1 - \frac{1}{{\ell}^2}$$
+$$\frac{2.55}{13.6} = 1 - \frac{1}{\ell^2}$$
 
-$$0.1875 = 1 - \frac{1}{{\ell}^2} $$
+$$0.1875 = 1 - \frac{1}{\ell^2} $$
 
 $$
-\frac{1}{{\ell}^2} = 1 - 0.1875 \Rightarrow  \frac{1}{{\ell}^2} = 0.8125.
+\frac{1}{\ell^2} = 1 - 0.1875 \Rightarrow  \frac{1}{\ell^2} = 0.8125.
 $$
 
 Así,
 
 $$
-{\ell}^2 = \frac{1}{0.8125} \approx 1.23 \Rightarrow \ell \approx \sqrt{1.23} \approx 1.11
+\ell^2 = \frac{1}{0.8125} \approx 1.23 \Rightarrow \ell \approx \sqrt{1.23} \approx 1.11
 $$
 
 Dado que $\ell$ debe ser un número entero y los niveles de energía en el átomo de hidrógeno corresponden a números enteros, el nivel más cercano es $\ell = 2$. ¿Cómo podría interpretarse este caso? ¿Qué sucede si en realidad aproximamos $\ell=1$?  ¿Se absorbió el fotón en realidad, o no ha ocurrido nada?
