@@ -322,7 +322,7 @@ $$
 La que es una relación de propagación de ondas dispersivas. ¿Cuál es el punto de esto? Si suponemos que la materia es descrita por una onda, podemos usar una [onda plana](https://es.wikipedia.org/wiki/Onda_plana){:target="_blank"} unidimensional de la forma:
 
 $$
-\psi(x,t) = A\cdot e^{i(kx-\omega t)},
+\psi(x,t) = A \cdot e^{i(kx-\omega t)},
 $$
 
 donde $i$ es la unidad imaginaria y $A$ una constante ligada a la amplitud de la onda. Como sabemos que la ecuación de onda es de la forma:
