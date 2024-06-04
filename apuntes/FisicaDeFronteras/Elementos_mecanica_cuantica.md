@@ -13,8 +13,6 @@ Las diapositivas actualizadas (hasta el 03/04/24) se encuentran en [ESTE LINK!](
 
 Conceptos previos 
 
-* <ins>Sistema de referencia:</ins> Elección de un punto de referencia, usualmente denominado “O”, desde donde se determinan las cantidades físicas observable. 
-* <ins>Sistema de coordenadas:</ins> Construcción puramente matemática, con el cual se busca la representación de las relaciones matemáticas. Los valores medidos de las cantidades físicas son independientes del sistema coordenado. 
 * <ins>Partícula:</ins> Por excelencia, el uso del método griego de la “abstracción". Es abstraer un cuerpo de masa M en un punto para no tener en cuenta  su forma.
 * <ins>Movimiento:</ins> Cambio “continuo” de sucesos (posición) definido con respecto a un sistema de referencia inercial.
 * <ins>Campo:</ins> Una teoría de campos (a diferencia de una teoría discreta) posee un número infinito (continuo) de grados de libertad.
@@ -33,7 +31,7 @@ Conceptos previos
 
 #### Bibliografía unidad 2.
 
-Wikipedia: Iré recolectando los links desde dónde tome información, y la iré dejando acá abajo.
+Wikipedia: Iré recolectando los links desde dónde tome información, y la iré dejando espacidos a lo largo de los apuntes.
 
 [<ins> Apuntes de Mecánica cuántica I</ins>](http://llacolen.ciencias.uchile.cl/~vmunoz/cursos/cuantica/qm.pdf){:target="_blank"}
 
@@ -62,7 +60,7 @@ Nadie sabía como abordar el problema, porque cuando se seguían las reglas clá
 
 #### La energía es un múltiplo entero de algo
 
-Para abordar el problema del cuerpo negro, Max Planck propuso que cada oscilador puede emitir o absorver energía en cantididade que son múltiplos enteros de cierta cantidad básica de energia $\hbar \omega$ tal que:
+Para abordar el problema del cuerpo negro, Max Planck propuso que cada oscilador puede emitir o absorber energía en cantididade que son múltiplos enteros de cierta cantidad básica de energia $\hbar \omega$ tal que:
 
 $$
 E=n\hbar \omega, n=1,2,3,...,
@@ -138,8 +136,8 @@ $R_H$ es la constante de Rydberg para el hidrógeno, y $n_1, n_2$ son enteros ta
 
 En 1913, y luego de varios intentos por desvelar los secretos del átomo, Niels Bohr propuso su modelo atómico, incluyendo las ideas de la energía cuantizada, el cual se basa en tres postulados: 
 
-1. Los electrones describen órbitas circulares en torno al núcleo del átomo sin irradiar energía.
-2. Las únicas órbitas permitidas para un electrón son aquellas para las cuales el [momento angular](https://es.wikipedia.org/wiki/Momento_angular){:target="_blank"} $L$ del electrón es un múltiplo entero de $\hbar$ de la forma:
+1.) Los electrones describen órbitas circulares en torno al núcleo del átomo sin irradiar energía.
+2.) Las únicas órbitas permitidas para un electrón son aquellas para las cuales el [momento angular](https://es.wikipedia.org/wiki/Momento_angular){:target="_blank"} $L$ del electrón es un múltiplo entero de $\hbar$ de la forma:
 
 $$
 L = n\hbar,
@@ -165,7 +163,7 @@ $$
 E_1 = -E_0 = = -13.6 [eV].
 $$
 
-3. El electrón solo emite o absorbe energía en los saltos de una órbita permitida a otra. Dicho cambio emite o absorbe un fotón cuya energía es la diferencia de energía $\Delta E$ entre ambos niveles de la forma:
+3.) El electrón solo emite o absorbe energía en los saltos de una órbita permitida a otra. Dicho cambio emite o absorbe un fotón cuya energía es la diferencia de energía $\Delta E$ entre ambos niveles de la forma:
 
 $$
 \Delta E = E_n  - E_{n-1}=\hbar \omega,
@@ -212,9 +210,9 @@ $$
 \Rightarrow \lambda = \frac{h}{p}
 $$
 
-Tarea 3: 
+### Tarea 3: 
 
-1. Si el momento angular de la tierra a través del sol fuera cuantizado: ¿Cuál sería el numero cuántico n de la órbita de la tierra?
+1.) Si el momento angular de la tierra a través del sol fuera cuantizado: ¿Cuál sería el numero cuántico n de la órbita de la tierra?
 
 Solución: 
 En el modelo de Bohr, el momento angular $L$ de un electrón en una órbita es un múltiplo entero de la constante de Planck reducida$\hbar$, tal que 
@@ -244,7 +242,7 @@ $$
 ¿Qué significado podría tener este número cuántico?
 
 
-2. Calcular la longitud de onda de de Broglie para un electrón con 4.5 KeV de energía cinética.
+2.) Calcular la longitud de onda de de Broglie para un electrón con 4.5 KeV de energía cinética.
 
 La expresión de de Broglie es $\lambda =\frac{h}{p}$. Como sólo consideramos la energía cinética, se tiene que:
 
@@ -265,14 +263,13 @@ $$
 \lambda = 5.778\times 10^{−12}\ [m]
 $$
 
-Tarea 4: 
+### Tarea 4: 
 
 Consideremos una nube de hidrogeno, es decir, muchos átomos de hidrógeno que podrían interactuar de diferentes formas entre ellos. Uno de esos átomos posee un electrón en una orbita caracterizada por n=4, cuando de forma espontánea transiciona hacia un estado n=2:
 
 1. Calcule la diferencia de energía $\Delta E= E_{final}-E_{inicial}$ del electrón cuando salta de una órbita n = 4 a n = 2. ¿El electrón pierde o gana energía? Recuerde que la energía cuantizada en el radio de Bohr es $\displaystyle E_n = - \frac{13.6 \, \text{[eV]}}{n^2}$
 2. Calcule la longitud de onda de la radiación electromagnética (fotón) emitida. Recuerde que para una onda: $v=\lambda f$, y particularmente para la luz: $c=\lambda f$
 3. Ese mismo fotón emitido anteriormente, viaja hasta interactuar con otro electrón de un átomo de hidrógeno en el estado fundamental (n=1), el fotón es absorbido por el electrón y transiciona hacia otra órbita $l$. Determine cuál es esta órbita $l$. ¿Cuáles son las implicancias de tener que considerar a $l$ como un número entero?
-\end{enumerate}
 
 Vamos a desarrollar el tercer enunciado. 
 
