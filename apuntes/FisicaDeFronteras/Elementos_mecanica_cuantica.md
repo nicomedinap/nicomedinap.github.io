@@ -160,7 +160,7 @@ donde $E_0$ es la energía de $ligado$ o de $ionización$, equivalente a 13.6 [e
 ¿Cuánto vale la energía del electrón en el $estado$ $fundamental$? (estado de menor energía). Para averiguarlo, tendremos que asumir que $n=1$, así: 
 
 $$
-E_1 = -E_0 = = -13.6 [eV].
+E_1 = -E_0 = -13.6 [eV].
 $$
 
 3.) El electrón solo emite o absorbe energía en los saltos de una órbita permitida a otra. Dicho cambio emite o absorbe un fotón cuya energía es la diferencia de energía $\Delta E$ entre ambos niveles de la forma:
