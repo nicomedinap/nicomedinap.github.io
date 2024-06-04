@@ -96,7 +96,9 @@ $$
 
 donde $\phi$ es la "función de trabajo del metal", o la energía que es necesaria para quitar este electrón del metal. 
 
-Principalmente, hay dos cosas que las teorías clásicas no podían explicar: 1) la energía de los electrones emitidos no dependía de la intensidad de la luz incidente; al disminuir la intensidad de la luz, sólo disminuye el número de electrones. La energía de los electrones emitidos sólo depende de la frecuencia de la luz y del metal considerado. 2) Al iluminar una placa metálica con luz y medir el tiempo transcurrido entre la detección de dos electrones emitidos por el metal se encuentra que éstos siguen una distribución de Poisson, indicando que el efecto fotoeléctrico proceso que ocurre completamente al azar (o sea intrínsecamente irreproducible o estocástico). 
+Principalmente  hay dos cosas que las teorías clásicas no podían explicar: 
+1) La energía de los electrones emitidos sólo depende de la frecuencia de la luz y del metal iluminado.
+2) Al iluminar una placa metálica con luz y medir el tiempo transcurrido entre la detección de dos electrones emitidos por el metal se encuentra que éstos siguen una distribución de Poisson, indicando que el efecto fotoeléctrico proceso que ocurre completamente al azar (o sea intrínsecamente irreproducible o estocástico). 
 
 ¿Cómo la cuantización de la energía de Planck-Einstein resuelve esto?
 
@@ -133,7 +135,7 @@ $R_H$ es la constante de Rydberg para el hidrógeno, y $n_1, n_2$ son enteros ta
 
 En 1913, y luego de varios intentos por desvelar los secretos del átomo, Niels Bohr propuso su modelo atómico, incluyendo las ideas de la energía cuantizada, el cual se basa en tres postulados: 
 
-1.) Los electrones describen órbitas circulares en torno al núcleo del átomo sin irradiar energía. \\
+1.) Los electrones describen órbitas circulares en torno al núcleo del átomo sin irradiar energía. 
 
 2.) Las únicas órbitas permitidas para un electrón son aquellas para las cuales el [momento angular](https://es.wikipedia.org/wiki/Momento_angular){:target="_blank"} $L$ del electrón está cuantizado, es decir, es un múltiplo entero de $\hbar$ de la forma:
 
