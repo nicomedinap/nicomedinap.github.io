@@ -336,21 +336,33 @@ $$
 \nabla^2 \psi - \frac{1}{v^2} \frac{\partial^2 \psi}{\partial t^2} = 0,
 $$
 
-en el caso unidimiensional (digamos, en el eje $x$) se reduce a:
+en el caso unidimiensional (digamos, en el eje $x$) la ecuación de la onda se reduce a:
 
 $$
 \frac{\partial^2 \psi}{\partial x^2} - \frac{1}{v^2} \frac{\partial^2 \psi}{\partial t^2} = 0,
 $$
 
+Luego de introducir la onda de materia \psi dentro de la ecuación de onda, y considerando las expresiones combinadas clásicas-modernas (y luego de un poco de álgebra) podemos obtener la llamada $ecuación$ $de$ $Schrödinger$ unidimensional, de la forma:
 
-k(\vec{r})$ para describir la materia.
+$$
+-\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2} = i \hbar \frac{\partial \psi}{\partial t}.
+$$ 
+ 
+¿Qué representa la ecuación de Schrödinger? Representa la evolución temporal de una "onda de materia" De forma bastante informal, la eq. de Schrödinger es la ecuación de onda de la materia.
 
+Esta ecuación desempeña un papel en la mecánica cuántica análogo al de la segunda ley de Newton en la mecánica clásica.
 
 ### 4.- Las matemáticas de los números cuánticos.
 
 #### La ecuación de Schrödinger y La evolución temporal.
 
-La ecuación de Schrödinger tridimensional en coordenadas esféricas se utiliza comúnmente para describir sistemas físicos con simetría esférica, como átomos o partículas en potenciales esféricamente simétricos. La forma general de la ecuación de Schrödinger en coordenadas esféricas es:
+La ecuación de Schrödinger tridimensional en coordenadas esféricas se utiliza comúnmente para describir sistemas físicos con simetría esférica, como átomos o partículas en potenciales esféricamente simétricos. 
+
+La forma general de la eq. de Schrödinger es de la forma: 
+
+{\displaystyle i\hbar {\frac {\partial }{\partial t}}\Psi (\mathbf {r} ,t)=\left[{\frac {-\hbar ^{2}}{2\mu }}\nabla ^{2}+V(\mathbf {r} ,t)\right]\Psi (\mathbf {r} ,t)},
+
+La forma general de la ecuación de Schrödinger en coordenadas esféricas es:
 
 $$
 i \hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi + V \psi
