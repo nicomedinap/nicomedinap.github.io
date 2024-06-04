@@ -349,21 +349,19 @@ Esta ecuación desempeña un papel en la mecánica cuántica análogo al de la s
 
 ### 4.- Las matemáticas de los números cuánticos.
 
-#### La ecuación de Schrödinger y La evolución temporal.
+#### La ecuación de Schrödinger y La evolución temporal del átomo de hidrógeno.
+
+$(CALCULOS DEMOSTRATIVOS)$
 
 La ecuación de Schrödinger tridimensional en coordenadas esféricas se utiliza comúnmente para describir sistemas físicos con simetría esférica, como átomos o partículas en potenciales esféricamente simétricos. 
 
 La forma general de la eq. de Schrödinger es de la forma: 
 
 $$
-{\displaystyle i\hbar {\frac {\partial }{\partial t}}\Psi (\mathbf {r} ,t)=\left[{\frac {-\hbar ^{2}}{2\mu }}\nabla ^{2}+V(\mathbf {r} ,t)\right]\Psi (\mathbf {r} ,t)},
-$$
-
-La forma general de la ecuación de Schrödinger en coordenadas esféricas es:
-
-$$
 i \hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi + V \psi
 $$
+
+Para poder describir el átomo de hidrógeno, haremos uso de su simetría esférica. La forma general de la ecuación de Schrödinger en coordenadas esféricas se obtiene al considerar los siguientes pasos: 
 
 El Laplaciano en Esféricas:
 
@@ -376,7 +374,6 @@ Schrodinger en esfericas, dependiente del tiempo
 $$
 -\frac{\hbar^2}{2\mu} \left( \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right) + V(r) \psi = i \hbar \frac{\partial \psi}{\partial t}
 $$
-
 
 Asumiendo soluciones del tipo: $\psi(x,y,z,t)=\varphi(x,y,z) {\rm e}^{\frac{-i Et}{\hbar}}$ (separando variables)
 
