@@ -286,7 +286,7 @@ $$
 Sabemos que, (del apartado anterior) que el la energía del fotón emitido (que es igual a la energía perdida por el electrón) es de $\Delta E = 2.55 \ [eV]$, así:
 
 $$
-2.55 \ [eV] = - \frac{13.6 \ [eV]}{{\ell}^2} - (-13.6 \, \text{eV})
+2.55 \ [eV] = - \frac{13.6 \ [eV]}{\ell^2} - (-13.6 \, \text{eV})
 $$
 
 $$\frac{2.55}{13.6} = 1 - \frac{1}{{\ell}^2}$$
