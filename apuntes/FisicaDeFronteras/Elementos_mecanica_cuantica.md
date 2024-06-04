@@ -7,9 +7,7 @@ mathjax: true
 
 ## Apuntes del curso "Física de fronteras" para pedagogía en matemáticas y física, Universidad de Talca.
 
-Estimado estudiantado,
-
-Las diapositivas actualizadas (hasta el 03/04/24) se encuentran en [ESTE LINK!]()
+#### Unidad 2: Elementos de mecánica cuántica.
 
 Conceptos previos 
 
@@ -20,8 +18,7 @@ Conceptos previos
 * <ins>Tiempo:</ins> Magnitud física que permite ordenar la secuencia de los sucesos, estableciendo un pasado, un presente y un futuro.
 * <ins>Simetrías y cantidades conservadas:</ins> Característica de la geometría y otras definiciones abstractas, que relaciona la invariancia bajo ciertas transformaciones, como, por ejemplo, movimientos.
 
-
-#### Unidad 2: Elementos de mecánica cuántica.
+#### Contenidos a tratar:
 
 1. Brevísimo repaso de la teoría electromagnética.
 2. Las teorías clásicas fallan.
@@ -66,7 +63,7 @@ $$
 E=n\hbar \omega, n=1,2,3,...,
 $$
 
-donde $n$ es el número de cuantos, o $quanta$, desde donde proviene el nómbre de la teoría. La energía de cada uno de los cuantos $n$ esta determinada por la frecuencia:
+donde $n$ es el número de cuantos, o $quanta$, desde donde proviene el nómbre de la teoría cuántica. La energía de cada uno de los cuantos $n$ esta determinada por la frecuencia:
 
 $$
 \hbar \omega = \frac{h \omega}{2\pi} = hf ,
@@ -136,20 +133,21 @@ $R_H$ es la constante de Rydberg para el hidrógeno, y $n_1, n_2$ son enteros ta
 
 En 1913, y luego de varios intentos por desvelar los secretos del átomo, Niels Bohr propuso su modelo atómico, incluyendo las ideas de la energía cuantizada, el cual se basa en tres postulados: 
 
-1.) Los electrones describen órbitas circulares en torno al núcleo del átomo sin irradiar energía.
-2.) Las únicas órbitas permitidas para un electrón son aquellas para las cuales el [momento angular](https://es.wikipedia.org/wiki/Momento_angular){:target="_blank"} $L$ del electrón es un múltiplo entero de $\hbar$ de la forma:
+1.) Los electrones describen órbitas circulares en torno al núcleo del átomo sin irradiar energía. \\
+
+2.) Las únicas órbitas permitidas para un electrón son aquellas para las cuales el [momento angular](https://es.wikipedia.org/wiki/Momento_angular){:target="_blank"} $L$ del electrón está cuantizado, es decir, es un múltiplo entero de $\hbar$ de la forma:
 
 $$
-L = n\hbar,
+L_n = n\hbar,
 $$
 
 como en un movimiento circular (como el de las órbitas), $L$ es una constante de movimiento y puede ser descrito por las cantidades geométricas que describen el movimiento, de la forma $L = m_e v r$, donde m_e  es la masa del electrón, $v$ es la velocidad y $r$ es el radio de la órbita. Por lo tanto:
 
 $$
-L = n\hbar = m_e v r \Rightarrow r_n=\frac{n\hbar}{m_e v r},
+L_n = n\hbar = m_e v r \Rightarrow r_n=\frac{n\hbar}{m_e v r},
 $$
 
-es decir, el radio $r$ de las órbitas del electrón están $cuántizadas$, es decir, son proporcionales a un número entero $n$. Por ende, si consideramos la energía de este electrón, y en ella se utiliza la expresión del radio cuantizado $r_n$, llegaremos a la expresión de la energía cuantizada del electrón en el átomo de hidrógeno:
+por lo tanto, el radio $r$ de las órbitas del electrón está $cuántizado$, es decir, son proporcionales a un número entero $n$. Por ende, si consideramos la energía de este electrón, y en ella se utiliza la expresión del radio cuantizado $r_n$, llegaremos a la expresión de la energía cuantizada del electrón en el átomo de hidrógeno:
 
 $$
 \Rightarrow E_n = -\frac{E_0}{n^2},\ \  n=1,2,3,...,
@@ -174,11 +172,11 @@ Es decir, $\Delta E$ es la diferencia de energía entre las dos órbitas entre l
 En otras palabas, al cambiar un electrón de la órbita con número cuántico (inicial) $m$ a otro número cuántico (final) $n$, la energía del fotón asociado a la radiación electromagnética será:
 
 $$
-\hbar \omega = \Delta E = E_final - E_inicial = E_n - E_m
+\hbar \omega = \Delta E = E_{final} - E_{inicial} = E_n - E_m
 $$
 
 $$
-\hbar \omega = \Delta E = \frac{-13.6[eV]}{n^2}- \frac{-13.6[eV]}{m^2} = 13.6 [eV] \left( \frac{1}{m^2} - \frac{1}{n^2} \right)
+\Rightarrow \hbar \omega = \Delta E = \frac{-13.6[eV]}{n^2}- \frac{-13.6[eV]}{m^2} = 13.6 [eV] \left( \frac{1}{m^2} - \frac{1}{n^2} \right)
 $$
 
 Es necesario interpretar los resultados anteriores de la siguiente forma:
@@ -305,7 +303,7 @@ $$
 {\ell}^2 = \frac{1}{0.8125} \approx 1.23 \Rightarrow \ell \approx \sqrt{1.23} \approx 1.11
 $$
 
-Dado que $\ell$ debe ser un número entero y los niveles de energía en el átomo de hidrógeno corresponden a números enteros, el nivel más cercano es $\ell = 2$. ¿Cómo podría interpretarse este caso? ¿Qué sucede si en realidad aproximamos \ell=1?  ¿Se absorvió el fotón en realidad o no?
+Dado que $\ell$ debe ser un número entero y los niveles de energía en el átomo de hidrógeno corresponden a números enteros, el nivel más cercano es $\ell = 2$. ¿Cómo podría interpretarse este caso? ¿Qué sucede si en realidad aproximamos $\ell=1$?  ¿Se absorbió el fotón en realidad, o no ha ocurrido nada?
 
 #### La ecuación de Schrödinger
 
@@ -324,7 +322,7 @@ $$
 La que es una relación de propagación de ondas dispersivas. ¿Cuál es el punto de esto? Si suponemos que la materia es descrita por una onda, podemos usar una [onda plana](https://es.wikipedia.org/wiki/Onda_plana){:target="_blank"} unidimensional de la forma:
 
 $$
-{\displaystyle \psi(x,t) = Ae^{i(kx-\omega t)},
+\psi(x,t) = A\cdot e^{i(kx-\omega t)},
 $$
 
 donde $i$ es la unidad imaginaria y $A$ una constante ligada a la amplitud de la onda. Como sabemos que la ecuación de onda es de la forma:
@@ -339,13 +337,13 @@ $$
 \frac{\partial^2 \psi}{\partial x^2} - \frac{1}{v^2} \frac{\partial^2 \psi}{\partial t^2} = 0,
 $$
 
-Luego de introducir la onda de materia \psi dentro de la ecuación de onda, y considerando las expresiones combinadas clásicas-modernas (y luego de un poco de álgebra) podemos obtener la llamada $ecuación$ $de$ $Schrödinger$ unidimensional, de la forma:
+Luego de introducir la onda de materia $\psi$ dentro de la ecuación de onda, y considerando las expresiones combinadas clásicas-modernas (y luego de un poco de álgebra) podemos obtener la llamada $ecuación$ $de$ $Schrödinger$ unidimensional, de la forma:
 
 $$
 -\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2} = i \hbar \frac{\partial \psi}{\partial t}.
 $$ 
  
-¿Qué representa la ecuación de Schrödinger? Representa la evolución temporal de una "onda de materia" De forma bastante informal, la eq. de Schrödinger es la ecuación de onda de la materia.
+¿Qué representa la ecuación de Schrödinger? Representa la evolución temporal de una "onda de materia", como un electrón. De forma bastante informal, la eq. de Schrödinger es la ecuación de onda de la materia.
 
 Esta ecuación desempeña un papel en la mecánica cuántica análogo al de la segunda ley de Newton en la mecánica clásica.
 
@@ -357,7 +355,9 @@ La ecuación de Schrödinger tridimensional en coordenadas esféricas se utiliza
 
 La forma general de la eq. de Schrödinger es de la forma: 
 
+$$
 {\displaystyle i\hbar {\frac {\partial }{\partial t}}\Psi (\mathbf {r} ,t)=\left[{\frac {-\hbar ^{2}}{2\mu }}\nabla ^{2}+V(\mathbf {r} ,t)\right]\Psi (\mathbf {r} ,t)},
+$$
 
 La forma general de la ecuación de Schrödinger en coordenadas esféricas es:
 
