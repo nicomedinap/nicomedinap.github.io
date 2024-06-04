@@ -274,7 +274,7 @@ Vamos a desarrollar el tercer enunciado.
 El estado fundamental de un átomo es el estado de menor energía, por lo que el electrón está en $n=1$, entonces su energía es:
 
 $$
-E_1 = \frac{E_0}{n^2} = -13.6\ [eV].
+E_1 = -\frac{E_0}{n^2} = -13.6\ [eV].
 $$
 
 Queremos encontrar el nivel $\ell$ tal que la energía absorbida por el electrón coincida con la energía del fotón:
