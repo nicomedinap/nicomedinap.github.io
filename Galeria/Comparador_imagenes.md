@@ -36,7 +36,7 @@
 
         .controls {
             position: absolute;
-            top: 87%; /* Ajusta abajo */
+            top: 87%; /* Ajusta la posición vertical de los controles */
             left: 0;
             width: 100%;
             display: flex;
@@ -71,7 +71,7 @@
         }
 
         /* CSS para dispositivos móviles */
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 500px) {
             .controls label {
                 font-size: 6px; /* Ajusta el tamaño de la fuente según tus preferencias */
             }
@@ -80,13 +80,12 @@
                 width: 50%; /* Ajusta el tamaño de los controles si es necesario */
             }
             .controls {
-                top: 80%; /* Ajusta abajo */
+                top: 80%; /* Ajusta la posición vertical en dispositivos móviles */
             }
-
         }
 
         .extra-controls {
-            display: none;
+            display: none; /* Ocultar controles adicionales inicialmente */
         }
 
         .checkbox-container {
@@ -94,6 +93,15 @@
             justify-content: center;
             margin-bottom: 20px;
         }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 10px; /* Ancho del círculo */
+            height: 20px; /* Altura del círculo */
+            border-radius: 50%; /* Hacerlo circular */
+            background: #007bff; /* Color del círculo */
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -105,6 +113,7 @@
     <div class="container">
         <div class="controls">
             <div>
+                <!-- Controles adicionales para la Imagen 1 -->
                 <div class="extra-controls">
                     <label for="scale1">Escala Imagen 1:</label>
                     <input type="range" id="scale1" min="0.5" max="2" step="0.1" value="1.3">
@@ -118,11 +127,15 @@
                     <label for="ypos1">Pos Y Imagen 1:</label>
                     <input type="range" id="ypos1" min="-20" max="70" step="1" value="13">
                     <br>
+                    <!-- Control de opacidad para la Imagen 1 -->
+                    <label for="opacity1">Opacidad Imagen 1:</label>
+                    <input type="range" id="opacity1" min="0" max="1" step="0.1" value="1">
+                    <br>
                 </div>
-                <label for="opacity1">Opacidad Imagen 1:</label>
-                <input type="range" id="opacity1" min="0" max="1" step="0.1" value="1">
+
             </div>
             <div>
+                <!-- Controles adicionales para la Imagen 2 -->
                 <div class="extra-controls">
                     <label for="scale2">Escala Imagen 2:</label>
                     <input type="range" id="scale2" min="0.5" max="2" step="0.1" value="1.5">
@@ -131,18 +144,23 @@
                     <input type="range" id="angle2" min="-90" max="90" step="1" value="-16">
                     <br>
                     <label for="xpos2">Pos X Imagen 2:</label>
-                    <input type="range" id="xpos2" min="-50" max="50" step="1" value="-0">
+                    <input type="range" id="xpos2" min="-50" max="50" step="1" value="0">
                     <br>
                     <label for="ypos2">Pos Y Imagen 2:</label>
                     <input type="range" id="ypos2" min="-50" max="60" step="1" value="-45">
                     <br>
                 </div>
-                <label for="opacity2">Opacidad Imagen 2:</label>
-                <input type="range" id="opacity2" min="0" max="1" step="0.1" value="1">
+            <div class="controls">
+                    <label for="opacity2">Opacidad Imagen VISTA:</label>
+                    <input type="range" id="opacity2" min="0" max="1" step="0.1" value="1">
+                </div>
             </div>
         </div>
+        <!-- Imagen 1 -->
         <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg" id="image1" class="image" alt="Imagen 1">
+        <!-- Contenedor para la Imagen 2 -->
         <div class="image-container">
+            <!-- Imagen 2 -->
             <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg" id="image2" class="image" alt="Imagen 2">
         </div>
     </div>
@@ -150,23 +168,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Referencias a los elementos de la imagen 1 y sus controles
             const image1 = document.getElementById('image1');
-            const image2 = document.getElementById('image2');
             const scaleSlider1 = document.getElementById('scale1');
             const angleSlider1 = document.getElementById('angle1');
             const opacitySlider1 = document.getElementById('opacity1');
             const xposSlider1 = document.getElementById('xpos1');
             const yposSlider1 = document.getElementById('ypos1');
 
+            // Referencias a los elementos de la imagen 2 y sus controles
+            const image2 = document.getElementById('image2');
             const scaleSlider2 = document.getElementById('scale2');
             const angleSlider2 = document.getElementById('angle2');
             const opacitySlider2 = document.getElementById('opacity2');
             const xposSlider2 = document.getElementById('xpos2');
             const yposSlider2 = document.getElementById('ypos2');
 
+            // Referencia al checkbox y los controles adicionales
             const modifyParamsCheckbox = document.getElementById('modifyParams');
             const extraControls = document.querySelectorAll('.extra-controls');
 
+            // Función para actualizar la transformación de la imagen
             function updateImageTransform(image, scaleSlider, angleSlider, opacitySlider, xposSlider, yposSlider) {
                 const scale = scaleSlider.value;
                 const angle = angleSlider.value;
@@ -178,18 +200,57 @@
                 image.style.opacity = opacity;
             }
 
+            // Función para mostrar u ocultar los controles adicionales
             function toggleExtraControls() {
                 extraControls.forEach(control => {
                     control.style.display = modifyParamsCheckbox.checked ? 'block' : 'none';
                 });
             }
 
+            // Función para inicializar las transformaciones de las imágenes con diferentes valores en dispositivos móviles
+            function initializeImages() {
+                const isMobile = window.matchMedia('(max-width: 500px)').matches;
+
+                if (isMobile) {
+                    // Valores iniciales para dispositivos móviles
+                    scaleSlider1.value = '1.2';
+                    angleSlider1.value = '-2';
+                    opacitySlider1.value = '1';
+                    xposSlider1.value = '0';
+                    yposSlider1.value = '18';
+
+                    scaleSlider2.value = '1.4';
+                    angleSlider2.value = '-16';
+                    opacitySlider2.value = '1';
+                    xposSlider2.value = '-3';
+                    yposSlider2.value = '-11';
+                } else {
+                    // Valores iniciales para pantallas más grandes
+                    scaleSlider1.value = '1.3';
+                    angleSlider1.value = '-3';
+                    opacitySlider1.value = '1';
+                    xposSlider1.value = '1';
+                    yposSlider1.value = '13';
+
+                    scaleSlider2.value = '1.5';
+                    angleSlider2.value = '-16';
+                    opacitySlider2.value = '1';
+                    xposSlider2.value = '0';
+                    yposSlider2.value = '-45';
+                }
+
+                updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1);
+                updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2);
+            }
+
+            // Añadir eventos de cambio a los sliders de la imagen 1
             scaleSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             angleSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             opacitySlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             xposSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             yposSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
 
+            // Añadir eventos de cambio a los sliders de la imagen 2
             scaleSlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
             angleSlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
             opacitySlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
@@ -197,9 +258,9 @@
             yposSlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
 
             // Inicializar las transformaciones de las imágenes con los valores establecidos
-            updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1);
-            updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2);
+            initializeImages();
 
+            // Mostrar valores de las imágenes al hacer clic en el botón
             const showValuesBtn = document.getElementById('showValuesBtn');
             showValuesBtn.addEventListener('click', () => {
                 const valuesImage1 = `Valores de la Imagen 1:
@@ -219,8 +280,12 @@
                 alert(valuesImage1 + "\n\n" + valuesImage2);
             });
 
+            // Añadir evento de cambio al checkbox
             modifyParamsCheckbox.addEventListener('change', toggleExtraControls);
             toggleExtraControls(); // Inicializar el estado de los controles adicionales
+
+            // Volver a inicializar las imágenes al cambiar el tamaño de la ventana
+            window.addEventListener('resize', initializeImages);
         });
     </script>
 </body>
