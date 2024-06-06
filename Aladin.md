@@ -9,7 +9,9 @@ En la esquina superior izquierda es posible intercambiar entre bases de datos qu
 
 Esta aplicación web está inicializada para mostrar tres regiones de formación estelar ubicadas en nuestra línea de visión hacia el [centro galáctico](https://es.wikipedia.org/wiki/Centro_gal%C3%A1ctico){:target="_blank"}, dos de ellas muy emblemáticas: La [Nebulosa de la Laguna (M8)](https://es.wikipedia.org/wiki/Nebulosa_de_la_Laguna){:target="_blank"}, y la [Nebulosa Trifida](https://es.wikipedia.org/wiki/Nebulosa_Tr%C3%ADfida){:target="_blank"}. También se muestra la región de formación estelar [NGC 6559](https://en.wikipedia.org/wiki/NGC_6559){:target="_blank"}, que fue la primera región de formación estelar que estudié en búsqueda de [Objetos Estelares Jóvenes.](https://en.wikipedia.org/wiki/Young_stellar_object){:target="_blank"}. Existen muchos documentos sobre el uso de Aladin Lite, como se muestran en [este ejemplo](https://aladin.cds.unistra.fr/AladinLite/doc/API/examples/){:target="_blank"}
 
-Tómate un tiempo, y explora nuestra galaxia y el universo!
+Nota: Por razones que desconozco, no funciona si tu navegador es Safari  ¯\ \_(ツ)_/¯
+
+Tómate un tiempo, y explora nuestra galaxia y el universo! (Si es que no estás usando Safari)
 
 
 
