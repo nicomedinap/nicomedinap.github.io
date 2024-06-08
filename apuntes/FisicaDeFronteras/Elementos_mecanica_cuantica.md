@@ -116,7 +116,7 @@ lo que es deducible si consideramos que los fotones no tienen masa. Si además c
 
 #### Principio de correspondencia
 
-Con todas las nuevas ideas que daban vueltas, era dificl que todos los físicos estuvieran felices, ya que era dificl asumir el hecho que, esta realidad atómica debiera ser descrita por menos grados de libertad. Por ende, se propuso que cualquier efecto cuántico debe tener su contraparte clásica, pero cuando la escala de la realidad es ajustada. Me explico: Si en un problema cuántico se realiza el límite donde $h\rightarrow 0$ (o sea, que los estados cuantizados no son relevantes, o que la mecánica cuántica se vuelve continua), debemos tener un efecto clásico. 
+Con todas las nuevas ideas que daban vueltas, era dificl que todas las personas estuvieran felices con los rumbos que la física estaba tomando. Debe ser dificil asumir el hecho que una nueva realidad atómica es descrita con menos grados de libertad. Por ende, se propuso que cualquier efecto cuántico debe tener su contraparte clásica, pero cuando la escala de la realidad es ajustada. Me explico: Si en un problema cuántico se realiza el límite donde $h\rightarrow 0$ (o sea, que los estados cuantizados no son relevantes, o que la mecánica cuántica se vuelve continua), debemos tener un efecto clásico. 
 
 Planteado de otra forma: Si el número cuántico tiende a infinito (un estado de alta energía, más parecido a la mecánica Newtoniana), el resultado cuántico debe coincidir con el resultado clásico. Esta idea llevo a la concepción de numerosos modelos atómicos, pero uno en particular fue muy exitoso.
 
