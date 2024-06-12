@@ -18,7 +18,7 @@ Las siguientes son algunas implementaciones básicas que he logrado avanzar e im
 3. [Pelota que responde al teclado](https://nicomedinap.github.io/apuntes/pyscript/Pelota_Interactiva.html
 ){:target="_blank"}
 
-4. [Juego Camara Nieble](https://nicomedinap.github.io/apuntes/pyscript/JuegoCamaraNiebla.html){:target="_blank"}
+4. [Juego Camara Niebla](https://nicomedinap.github.io/apuntes/pyscript/JuegoCamaraNiebla.html){:target="_blank"}
 
 4. [Probando cosas: actualmente implementando el problema de los n cuerpos](https://nicomedinap.github.io/apuntes/pyscript/Tests_PyScript.html){:target="_blank"}
 

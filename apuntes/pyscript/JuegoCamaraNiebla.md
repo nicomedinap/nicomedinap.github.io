@@ -37,7 +37,7 @@ telescopio: none
     </style>
 </head>
 <body>
-    <h1>Camara de nieble que resultó ser un juego</h1>
+    <h1>Camara de niebla que resultó ser un juego</h1>
     <canvas id="my-canvas" width="300" height="600"></canvas>
     <div id="info">
         <div id="timer">Tiempo: 0s</div>
@@ -205,7 +205,7 @@ telescopio: none
             global player_x, player_y, particles, start_time, game_interval, particle_interval
             player_x, player_y = player_start_x, player_start_y
             particles = []
-            Element("status").element.innerText = "Status: Playing"
+            Element("status").element.innerText = "Status: jugandoooo"
             clearInterval(game_interval)
             clearInterval(particle_interval)
             start_animation()
