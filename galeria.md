@@ -112,7 +112,7 @@ Los telescopios son verdaderas máquinas del tiempo
 <!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
 <div class="galeria" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/JWST.html';">
     <div class="foto">
-        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/0.jpg" width="400" height="300">
+        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/LDN1527.jpg" width="400" height="200">
     </div>
     <div class="pie">
         <p> Telescopio espacial James Webb (JWST)</p>
@@ -133,7 +133,7 @@ Los telescopios son verdaderas máquinas del tiempo
         <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/HST/M17_SFR0.png" width="100" height="600">
     </div>
     <div class="pie">
-        <p> Telescopio espacia Hubble (HST)</p>
+        <p> Telescopio espacial Hubble (HST)</p>
     </div>
 </div>
 
@@ -154,6 +154,16 @@ Los telescopios son verdaderas máquinas del tiempo
         <p> Telescopio UKIRT</p>
     </div>
 </div>
+
+<!-- Nueva columna para la página de comparaciones -->
+<div class="galeria" onclick="location.href='https://nicomedinap.github.io/Galeria/Comparaciones.html';">
+		<div class="foto">
+			<img src="ruta/a/tu/imagen.jpg" alt="Descripción de la imagen">
+		</div>
+		<div class="pie">
+			<p>Página de Comparaciones</p>
+		</div>
+	</div>
 
 
 </body>
