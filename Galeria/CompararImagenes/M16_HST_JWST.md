@@ -105,7 +105,7 @@
     </style>
 </head>
 <body>
-    <h1>Nebulosa del Aguila, usando el Hubble y el JWST</h1>
+    <h1>Nebulosa de la tarántula, usando el VISTA y el JWST</h1>
     <div class="checkbox-container">
         <label for="modifyParams">Modificar Parámetros:</label>
         <input type="checkbox" id="modifyParams">
@@ -122,10 +122,10 @@
                     <input type="range" id="angle1" min="-90" max="90" step="1" value="-3">
                     <br>
                     <label for="xpos1">Pos X Imagen 1:</label>
-                    <input type="range" id="xpos1" min="-150" max="150" step="1" value="1">
+                    <input type="range" id="xpos1" min="-150" max="250" step="1" value="1">
                     <br>
                     <label for="ypos1">Pos Y Imagen 1:</label>
-                    <input type="range" id="ypos1" min="-120" max="170" step="1" value="13">
+                    <input type="range" id="ypos1" min="-120" max="270" step="1" value="13">
                     <br>
                     <!-- Control de opacidad para la Imagen 1 -->
                     <label for="opacity1">Opacidad Imagen 1:</label>
@@ -144,14 +144,14 @@
                     <input type="range" id="angle2" min="-90" max="90" step="1" value="-16">
                     <br>
                     <label for="xpos2">Pos X Imagen 2:</label>
-                    <input type="range" id="xpos2" min="-50" max="50" step="1" value="0">
+                    <input type="range" id="xpos2" min="-150" max="50" step="1" value="0">
                     <br>
                     <label for="ypos2">Pos Y Imagen 2:</label>
-                    <input type="range" id="ypos2" min="-50" max="60" step="1" value="-45">
+                    <input type="range" id="ypos2" min="-150" max="60" step="1" value="-45">
                     <br>
                 </div>
             <div class="controls">
-                    <label for="opacity2">Opacidad Imagen Hubble:</label>
+                    <label for="opacity2">Opacidad Imagen VISTA:</label>
                     <input type="range" id="opacity2" min="0" max="1" step="0.1" value="1">
                 </div>
             </div>
@@ -213,30 +213,30 @@
 
                 if (isMobile) {
                     // Valores iniciales para dispositivos móviles
-                    scaleSlider1.value = '2';
-                    angleSlider1.value = '35';
+                    scaleSlider1.value = '0.2';
+                    angleSlider1.value = '-2';
                     opacitySlider1.value = '1';
-                    xposSlider1.value = '62';
-                    yposSlider1.value = '55';
+                    xposSlider1.value = '0';
+                    yposSlider1.value = '18';
 
-                    scaleSlider2.value = '1.1';
-                    angleSlider2.value = '-10';
-                    opacitySlider2.value = '1';
-                    xposSlider2.value = '5';
-                    yposSlider2.value = '-50';
-                } else {
-                    // Valores iniciales para pantallas más grandes
-                    scaleSlider1.value = '1.3';
-                    angleSlider1.value = '-3';
-                    opacitySlider1.value = '1';
-                    xposSlider1.value = '1';
-                    yposSlider1.value = '13';
-
-                    scaleSlider2.value = '0.5';
+                    scaleSlider2.value = '1.4';
                     angleSlider2.value = '-16';
                     opacitySlider2.value = '1';
-                    xposSlider2.value = '0';
-                    yposSlider2.value = '-45';
+                    xposSlider2.value = '-3';
+                    yposSlider2.value = '-11';
+                } else {
+                    // Valores iniciales para pantallas más grandes
+                    scaleSlider1.value = '1.8';
+                    angleSlider1.value = '31';
+                    opacitySlider1.value = '1';
+                    xposSlider1.value = '117';
+                    yposSlider1.value = '170';
+
+                    scaleSlider2.value = '1.1';
+                    angleSlider2.value = '-15';
+                    opacitySlider2.value = '1';
+                    xposSlider2.value = '-67';
+                    yposSlider2.value = '-150';
                 }
 
                 updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1);
