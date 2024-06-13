@@ -112,7 +112,7 @@ Los telescopios son verdaderas máquinas del tiempo
 <!-- <h1 style="font-size:3vw">Composiciones de imágenes astronómicas</h1> -->
 <div class="galeria" target="_blank" onclick="location.href='https://nicomedinap.github.io/Galeria/JWST.html';">
     <div class="foto">
-        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/LDN1527/LDN1527.jpg" width="400" height="200">
+        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/LDN1527/LDN1527.jpg" width="400" height="200">
     </div>
     <div class="pie">
         <p> Telescopio espacial James Webb (JWST)</p>
