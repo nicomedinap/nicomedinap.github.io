@@ -222,8 +222,8 @@
                     scaleSlider2.value = '1.1';
                     angleSlider2.value = '-25';
                     opacitySlider2.value = '1';
-                    xposSlider2.value = '4';
-                    yposSlider2.value = '-82';
+                    xposSlider2.value = '6';
+                    yposSlider2.value = '-84';
                 } else {
                     // Valores iniciales para pantallas más grandes
                     scaleSlider1.value = '1.8';
