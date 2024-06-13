@@ -213,17 +213,17 @@
 
                 if (isMobile) {
                     // Valores iniciales para dispositivos móviles
-                    scaleSlider1.value = '0.2';
-                    angleSlider1.value = '-2';
+                    scaleSlider1.value = '2';
+                    angleSlider1.value = '19';
                     opacitySlider1.value = '1';
-                    xposSlider1.value = '0';
-                    yposSlider1.value = '18';
+                    xposSlider1.value = '47';
+                    yposSlider1.value = '40';
 
-                    scaleSlider2.value = '1.4';
-                    angleSlider2.value = '-16';
+                    scaleSlider2.value = '1.1';
+                    angleSlider2.value = '-25';
                     opacitySlider2.value = '1';
-                    xposSlider2.value = '-3';
-                    yposSlider2.value = '-11';
+                    xposSlider2.value = '4';
+                    yposSlider2.value = '-82';
                 } else {
                     // Valores iniciales para pantallas más grandes
                     scaleSlider1.value = '1.8';
