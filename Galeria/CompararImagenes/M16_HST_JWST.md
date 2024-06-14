@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nebulosa de la tarántula, usando el VISTA y el JWST</title>
+    <title>Nebulosa del Águila (M16), usando el Hubble y el JWST</title>
     <style>
         .container {
             position: relative;
