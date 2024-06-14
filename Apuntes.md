@@ -20,3 +20,7 @@ Espacio de pruebas para pyscript
 
 Linea temporal de eventos
 * [(2023)](https://nicomedinap.github.io/apuntes/LineaTemporal.html)
+
+Comparadores de imágenes:
+* [La tarántula](https://nicomedinap.github.io/Galeria/CompararImagenes/Tarantula_VISTA_JWST.html)
+* [M16](https://nicomedinap.github.io/Galeria/CompararImagenes/M16_HST_JWST.html)

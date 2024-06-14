@@ -155,7 +155,7 @@ Los telescopios son verdaderas máquinas del tiempo
     </div>
 </div>
 
-<!-- Nueva columna para la página de comparaciones -->
+<!-- Nueva columna para la página de comparaciones 
 <div class="galeria" onclick="location.href='https://nicomedinap.github.io/Galeria/Comparaciones.html';">
 		<div class="foto">
 			<img src="ruta/a/tu/imagen.jpg" alt="Descripción de la imagen">
@@ -164,7 +164,7 @@ Los telescopios son verdaderas máquinas del tiempo
 			<p>Página de Comparaciones</p>
 		</div>
 	</div>
-
+-->
 
 </body>
 </html>

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -151,7 +150,7 @@
                     <br>
                 </div>
             <div class="controls">
-                    <label for="opacity2">Opacidad Imagen VISTA:</label>
+                    <label for="opacity2">Opacidad Imagen HST:</label>
                     <input type="range" id="opacity2" min="0" max="1" step="0.1" value="1">
                 </div>
             </div>
