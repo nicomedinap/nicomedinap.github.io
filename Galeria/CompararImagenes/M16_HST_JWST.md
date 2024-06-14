@@ -216,14 +216,14 @@
                     scaleSlider1.value = '2';
                     angleSlider1.value = '19';
                     opacitySlider1.value = '1';
-                    xposSlider1.value = '47';
-                    yposSlider1.value = '40';
+                    xposSlider1.value = '53';
+                    yposSlider1.value = '69';
 
                     scaleSlider2.value = '1.1';
                     angleSlider2.value = '-25';
                     opacitySlider2.value = '1';
-                    xposSlider2.value = '6';
-                    yposSlider2.value = '-84';
+                    xposSlider2.value = '-24';
+                    yposSlider2.value = '-38';
                 } else {
                     // Valores iniciales para pantallas más grandes
                     scaleSlider1.value = '1.8';
