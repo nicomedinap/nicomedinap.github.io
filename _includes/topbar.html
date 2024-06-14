@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        .navbar h2, .navbar p {
+            margin: 0;
+            text-align: center;
+        }
+
+        .navbar img {
+            max-width: 100px;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar .fa {
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+        }
+
+        .navbar .fa:hover {
+            opacity: 0.7;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #f8f8f8;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        @media (min-width: 600px) {
+            .navbar {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 10px 20px;
+            }
+            .navbar h2, .navbar p {
+                text-align: left;
+            }
+            .navbar img {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-about">
+            <a href="https://nicomedinap.github.io"><h2>{{ site.title }}</h2></a>
+            <p>{{ site.description }}</p>
+        </div>
+        <div class="navbar-nav">
+            <a href="https://nicomedinap.github.io/Entradas.html" {% if page.title == "Home" %} class="active-section"{% endif %}>Entradas</a>
+            {% assign pages_list = site.pages %}
+            {% for node in pages_list %}
+                {% if node.title != null %}
+                    {% if node.layout == "page" or node.layout == "galeria" %}
+                        <a href="{{ node.url }}" {% if page.url == node.url %} class="active-section"{% endif %}>{{ node.title }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="navbar-social">
+            &copy; {{ site.time | date: '%Y' }} 
+            <a href="https://www.instagram.com/nicomediap/" target="_blank" class="fa fa-instagram"></a>
+            <a href="https://www.youtube.com/channel/UC27Vv11KAnccwb0UVy7aXtQ?view_as=subscriber" target="_blank" class="fa fa-youtube"></a>
+        </div>
+    </div>
+
+    <main>
+        {{ content }}
+    </main>
+
+    <footer>
+        <p>© {{ site.time | date: '%Y' }} Your Site. All rights reserved.</p>
+    </footer>
+</body>
+</html>
