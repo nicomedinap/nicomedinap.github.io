@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,81 +10,65 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .navbar {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
             background-color: #333;
             color: white;
-            padding: 10px;
+            padding: 10px 20px;
+            width: 100%;
         }
 
-        .navbar h2, .navbar p {
+        .navbar-title {
+            font-size: 1.5em;
             margin: 0;
-            text-align: center;
         }
 
-        .navbar img {
-            max-width: 100px;
-            height: auto;
-            margin: 10px 0;
+        .navbar-nav {
+            display: flex;
+            align-items: center;
         }
 
-        .navbar a {
+        .navbar-nav a {
             color: white;
             text-decoration: none;
             padding: 5px 10px;
+            margin: 0 5px;
         }
 
-        .navbar a:hover {
+        .navbar-nav a:hover {
             text-decoration: underline;
         }
 
-        .navbar .fa {
+        .navbar-nav .fa {
             color: white;
             font-size: 20px;
-            margin: 0 10px;
+            margin: 0 5px;
         }
 
-        .navbar .fa:hover {
+        .navbar-nav .fa:hover {
             opacity: 0.7;
         }
 
         main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-        }
-
-        footer {
-            background-color: #f8f8f8;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        @media (min-width: 600px) {
-            .navbar {
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 10px 20px;
-            }
-            .navbar h2, .navbar p {
-                text-align: left;
-            }
-            .navbar img {
-                max-width: 200px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <div class="navbar-about">
-            <a href="https://nicomedinap.github.io"><h2>{{ site.title }}</h2></a>
-            <p>{{ site.description }}</p>
+        <div class="navbar-title">
+            <a href="https://nicomedinap.github.io">{{ site.title }}</a>
         </div>
         <div class="navbar-nav">
             <a href="https://nicomedinap.github.io/Entradas.html" {% if page.title == "Home" %} class="active-section"{% endif %}>Entradas</a>
@@ -97,9 +80,6 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-        </div>
-        <div class="navbar-social">
-            &copy; {{ site.time | date: '%Y' }} 
             <a href="https://www.instagram.com/nicomediap/" target="_blank" class="fa fa-instagram"></a>
             <a href="https://www.youtube.com/channel/UC27Vv11KAnccwb0UVy7aXtQ?view_as=subscriber" target="_blank" class="fa fa-youtube"></a>
         </div>
@@ -108,9 +88,5 @@
     <main>
         {{ content }}
     </main>
-
-    <footer>
-        <p>© {{ site.time | date: '%Y' }} Your Site. All rights reserved.</p>
-    </footer>
 </body>
 </html>
