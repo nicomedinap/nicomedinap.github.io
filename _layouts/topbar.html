@@ -15,11 +15,11 @@
 
         .topbar {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
             background-color: #333;
             color: white;
-            padding: 10px 20px;
+            padding: 5px 10px;
             width: 100%;
             position: fixed;
             top: 0;
@@ -28,14 +28,13 @@
         }
 
         .topbar-title {
-            font-size: 1.5em;
+            font-size: 1.2em;
             margin: 0;
             padding: 5px 0;
         }
 
         .topbar-nav {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
         }
@@ -44,7 +43,8 @@
             color: white;
             text-decoration: none;
             padding: 5px 10px;
-            margin: 5px 2px;
+            margin: 0 5px;
+            font-size: 0.9em;
         }
 
         .topbar-nav a:hover {
@@ -53,7 +53,7 @@
 
         .topbar-nav .fa {
             color: white;
-            font-size: 20px;
+            font-size: 18px;
             margin: 0 5px;
         }
 
@@ -62,20 +62,37 @@
         }
 
         main {
-            padding-top: 80px; /* Space for the fixed top bar */
+            padding-top: 50px; /* Space for the fixed top bar */
+        }
+
+        @media (max-width: 600px) {
+            .topbar-title {
+                font-size: 1em;
+            }
+
+            .topbar-nav a {
+                font-size: 0.8em;
+                padding: 5px;
+                margin: 0 3px;
+            }
+
+            .topbar-nav .fa {
+                font-size: 16px;
+                margin: 0 3px;
+            }
+
+            main {
+                padding-top: 60px; /* Adjusted padding for the smaller top bar */
+            }
         }
 
         @media (min-width: 600px) {
             .topbar {
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 10px 20px;
-                font-size: 0.5em;
+                padding: 5px 20px;
             }
 
             .topbar-title {
-                font-size: 1.5em;
-                margin: 0;
+                font-size: 1.2em;
             }
 
             .topbar-nav {
