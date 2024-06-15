@@ -55,7 +55,7 @@ layout: topbar
         }
 
         .controls input[type="range"] {
-            width: 150px;
+            width: 450px;
         }
 
         #showValuesBtn {
