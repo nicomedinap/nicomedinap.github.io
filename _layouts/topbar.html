@@ -25,18 +25,21 @@
             top: 0;
             left: 0;
             z-index: 1000;
+            box-sizing: border-box;
+            white-space: nowrap;
+            transition: top 0.3s;
         }
 
         .topbar-title {
-            font-size: 1.2em;
+            font-size: 1em;
             margin: 0;
             padding: 5px 0;
         }
 
         .topbar-nav {
             display: flex;
-            justify-content: center;
             align-items: center;
+            overflow-x: auto;
         }
 
         .topbar-nav a {
@@ -44,7 +47,7 @@
             text-decoration: none;
             padding: 5px 10px;
             margin: 0 5px;
-            font-size: 0.9em;
+            font-size: 0.8em;
         }
 
         .topbar-nav a:hover {
@@ -53,7 +56,7 @@
 
         .topbar-nav .fa {
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             margin: 0 5px;
         }
 
@@ -62,60 +65,64 @@
         }
 
         main {
-            padding-top: 50px; /* Space for the fixed top bar */
+            padding-top: 40px; /* Space for the fixed top bar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            min-height: 80vh;
+            box-sizing: border-box;
         }
 
         @media (max-width: 600px) {
             .topbar-title {
-                font-size: 1em;
+                font-size: 0.8em;
             }
 
             .topbar-nav a {
-                font-size: 0.8em;
-                padding: 5px;
+                font-size: 0.6em;
+                padding: 5px 5px;
                 margin: 0 3px;
             }
 
             .topbar-nav .fa {
-                font-size: 16px;
-                margin: 0 3px;
+                font-size: 14px;
             }
 
             main {
-                padding-top: 60px; /* Adjusted padding for the smaller top bar */
+                padding-top: 50px; /* Adjusted padding for the smaller top bar */
             }
         }
 
-        @media (min-width: 600px) {
-            .topbar {
-                padding: 5px 20px;
-            }
-
+        @media (max-width: 400px) {
             .topbar-title {
-                font-size: 1.2em;
+                font-size: 0.7em;
             }
 
-            .topbar-nav {
-                justify-content: flex-end;
+            .topbar-nav a {
+                font-size: 0.5em;
+                padding: 5px 3px;
+                margin: 0 2px;
+            }
+
+            .topbar-nav .fa {
+                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="topbar">
+    <div class="topbar" id="topbar">
         <div class="topbar-title">
             <a href="https://nicomedinap.github.io">{{ site.title }}</a>
         </div>
         <div class="topbar-nav">
-            <a href="https://nicomedinap.github.io/Entradas.html" {% if page.title == "Home" %} class="active-section"{% endif %}>Entradas</a>
-            {% assign pages_list = site.pages %}
-            {% for node in pages_list %}
-                {% if node.title != null %}
-                    {% if node.layout == "page" or node.layout == "galeria" %}
-                        <a href="{{ node.url }}" {% if page.url == node.url %} class="active-section"{% endif %}>{{ node.title }}</a>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
+            <a href="https://nicomedinap.github.io/Fotometro.html" {% if page.title == "Fotómetro" %} class="active-section"{% endif %}>Fotómetro</a>
+            <a href="https://nicomedinap.github.io/Entradas.html" {% if page.title == "Entradas" %} class="active-section"{% endif %}>Entradas</a>
+            <a href="https://nicomedinap.github.io/Apuntes.html" {% if page.title == "Apuntes" %} class="active-section"{% endif %}>Apuntes</a>
+            <a href="https://nicomedinap.github.io/Composiciones.html" {% if page.title == "Composiciones" %} class="active-section"{% endif %}>Composiciones</a>
+             <a href="https://nicomedinap.github.io/links.html" {% if page.title == "Composiciones" %} class="active-section"{% endif %}>Links</a>
             <a href="https://www.instagram.com/nicomediap/" target="_blank" class="fa fa-instagram"></a>
             <a href="https://www.youtube.com/channel/UC27Vv11KAnccwb0UVy7aXtQ?view_as=subscriber" target="_blank" class="fa fa-youtube"></a>
         </div>
@@ -124,5 +131,22 @@
     <main>
         {{ content }}
     </main>
+
+    <script>
+        let lastScrollTop = 0;
+        const topbar = document.getElementById('topbar');
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scroll Down
+                topbar.style.top = '-60px'; // Adjust as necessary
+            } else {
+                // Scroll Up
+                topbar.style.top = '0';
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
 </body>
 </html>
