@@ -122,7 +122,6 @@
             <a href="https://nicomedinap.github.io/Entradas.html" {% if page.title == "Entradas" %} class="active-section"{% endif %}>Entradas</a>
             <a href="https://nicomedinap.github.io/Apuntes.html" {% if page.title == "Apuntes" %} class="active-section"{% endif %}>Apuntes</a>
             <a href="https://nicomedinap.github.io/Composiciones.html" {% if page.title == "Composiciones" %} class="active-section"{% endif %}>Composiciones</a>
-             <a href="https://nicomedinap.github.io/links.html" {% if page.title == "Composiciones" %} class="active-section"{% endif %}>Links</a>
             <a href="https://www.instagram.com/nicomediap/" target="_blank" class="fa fa-instagram"></a>
             <a href="https://www.youtube.com/channel/UC27Vv11KAnccwb0UVy7aXtQ?view_as=subscriber" target="_blank" class="fa fa-youtube"></a>
         </div>
@@ -138,12 +137,16 @@
 
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
-                // Scroll Down
-                topbar.style.top = '-60px'; // Adjust as necessary
+            if (window.innerWidth <= 600) { // Only apply for screens 600px wide or less
+                if (scrollTop > lastScrollTop) {
+                    // Scroll Down
+                    topbar.style.top = '-60px'; // Adjust as necessary
+                } else {
+                    // Scroll Up
+                    topbar.style.top = '0';
+                }
             } else {
-                // Scroll Up
-                topbar.style.top = '0';
+                topbar.style.top = '0'; // Always show on wider screens
             }
             lastScrollTop = scrollTop;
         });
