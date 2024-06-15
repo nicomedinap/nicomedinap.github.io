@@ -25,7 +25,6 @@
             top: 0;
             left: 0;
             z-index: 1000;
-            box-sizing: border-box;
         }
 
         .topbar-title {
@@ -38,7 +37,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .topbar-nav a {
@@ -65,27 +63,6 @@
 
         main {
             padding-top: 50px; /* Space for the fixed top bar */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            min-height: 80vh;
-            box-sizing: border-box;
-        }
-
-        @media (max-width: 900px) {
-            .topbar-title {
-                font-size: 1.1em;
-            }
-
-            .topbar-nav a {
-                font-size: 0.85em;
-            }
-
-            .topbar-nav .fa {
-                font-size: 16px;
-            }
         }
 
         @media (max-width: 600px) {
@@ -95,10 +72,13 @@
 
             .topbar-nav a {
                 font-size: 0.8em;
+                padding: 5px;
+                margin: 0 3px;
             }
 
             .topbar-nav .fa {
-                font-size: 14px;
+                font-size: 16px;
+                margin: 0 3px;
             }
 
             main {
@@ -106,19 +86,17 @@
             }
         }
 
-        @media (max-width: 400px) {
+        @media (min-width: 600px) {
+            .topbar {
+                padding: 5px 20px;
+            }
+
             .topbar-title {
-                font-size: 0.9em;
+                font-size: 1.2em;
             }
 
-            .topbar-nav a {
-                font-size: 0.75em;
-                padding: 5px 5px;
-                margin: 0 3px;
-            }
-
-            .topbar-nav .fa {
-                font-size: 12px;
+            .topbar-nav {
+                justify-content: flex-end;
             }
         }
     </style>

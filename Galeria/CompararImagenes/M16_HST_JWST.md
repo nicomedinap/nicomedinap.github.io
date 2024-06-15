@@ -108,7 +108,7 @@ layout: topbar
     </style>
 </head>
 <body>
-    <h1>Nebulosa del Águila (M16), usando el Hubble y el JWST</h1>
+    <h1>Nebulosa del Águila (M16) a través de los telescopios Hubble y JWST</h1>
     <div class="checkbox-container">
         <label for="modifyParams">Modificar Parámetros:</label>
         <input type="checkbox" id="modifyParams">
@@ -222,7 +222,7 @@ layout: topbar
                     xposSlider1.value = '58';
                     yposSlider1.value = '61';
 
-                    scaleSlider2.value = '1.1';
+                    scaleSlider2.value = '1.2';
                     angleSlider2.value = '-25';
                     opacitySlider2.value = '1';
                     xposSlider2.value = '-6';
