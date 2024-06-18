@@ -1,43 +1,46 @@
----
-layout: topbar
----
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 3D Raycasting</title>
+    <title>3D Raycasting</title>
     <style>
-        @import "compass/css3";
-
         body, html {
             background: black;
-            text-align: center;
             color: white;
             font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-        h1 {
-            margin-bottom: 0;
+        .topbar {
+            text-align: center;
+            background: #222;
+            color: white;
+            width: 100%;
+            padding: 10px;
         }
-        p {
-            color: #444;
-            font-size: 10pt;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-
         canvas {
-            margin: 10px auto;
             display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <h1>3D Raycasting</h1>
-    <p>Use the arrow keys to move around.</p>
+    <div class="topbar">
+        <h1>3D Raycasting</h1>
+        <p>Use the arrow keys to move around.</p>
+    </div>
+    <canvas id="gameCanvas"></canvas>
     <script>
         (function(doc) {
-            var canvas = document.createElement('canvas'),
+            var canvas = doc.getElementById('gameCanvas'),
+                context = canvas.getContext("2d"),
                 mapData = [
                     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -52,67 +55,62 @@ layout: topbar
                     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
                     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
                 ],
-                context = canvas.getContext("2d"),
-                screenStrips = [],
-                screen = doc.createElement("canvas"),
-                screenCtx = screen.getContext("2d"),
+                screenCtx = canvas.getContext("2d"),
                 player,
                 map,
                 options = {
-                    scale: 16,
-                    screenWidth: 320,
-                    screenHeight: 1000,
+                    scale: 18,
                     stripWidth: 3,
                     rayCount: 120,
                 },
                 colors = ["#aaa", "#red"],
                 fov = 70 * Math.PI / 180,
-                numRays = Math.ceil(options.screenWidth / options.stripWidth),
-                viewDistance = (options.screenWidth / 2) / Math.tan((fov / 2));
+                viewDistance,
+                numRays;
 
-            // Initialize
+            function adjustCanvasSize() {
+                // Ajustar el tamaño del canvas
+                canvas.width = 400; // Ancho deseado en píxeles
+                canvas.height = 1000; // Alto deseado en píxeles
+
+                // Opcional: Ajustar otros parámetros relacionados con el tamaño del juego
+                options.screenWidth = canvas.width;
+                options.screenHeight = canvas.height;
+                viewDistance = (options.screenWidth/2) / Math.tan((fov/2));
+                numRays = Math.ceil(options.screenWidth / options.stripWidth);
+            }
+
             window.onload = function init() {
                 map = new Map(mapData);
                 player = new Player();
 
-                canvas.width = map.width * options.scale;
-                canvas.height = map.height * options.scale;
-
-                // setup screen
-                screen.id = "screen";
-                screen.width = options.screenWidth;
-                screen.height = options.screenHeight;
-
-                doc.body.appendChild(screen);
+                adjustCanvasSize();
+                window.addEventListener('resize', adjustCanvasSize);
 
                 player.turnDirection = 1;
                 setTimeout(function() {
                     player.turnDirection = 0;
                 }, 1500);
-                window.requestAnimFrame(mainLoop);
+                window.requestAnimationFrame(mainLoop);
             };
 
             function mainLoop() {
-                context.fillStyle = "black";
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                screenCtx.clearRect(0, 0, screen.width, screen.height);
+                screenCtx.clearRect(0, 0, canvas.width, canvas.height);
                 player.update();
                 map.draw();
                 player.draw();
                 raycaster.castAll();
-
-                window.requestAnimFrame(mainLoop);
+                window.requestAnimationFrame(mainLoop);
             }
 
-            // Keybindings
             doc.onkeydown = function(e) {
                 e = e || window.event;
 
-                switch (e.keyCode) { // which key was pressed?
-                    case 38: player.speed = 1; break; // up
-                    case 40: player.speed = -1; break; // down
-                    case 37: player.turnDirection = -1; break; // left
-                    case 39: player.turnDirection = 1; break; // right
+                switch (e.keyCode) {
+                    case 38: player.speed = 1; break;
+                    case 40: player.speed = -1; break;
+                    case 37: player.turnDirection = -1; break;
+                    case 39: player.turnDirection = 1; break;
                 }
             }
 
@@ -120,22 +118,21 @@ layout: topbar
                 e = e || window.event;
 
                 switch (e.keyCode) {
-                    case 38: // fall through
+                    case 38:
                     case 40: player.speed = 0; break;
 
-                    case 37: // fall through
+                    case 37:
                     case 39: player.turnDirection = 0; break;
                 }
             }
 
-            // Player
             function Player() {
                 this.position = [11.4, 1.4];
                 this.turnDirection = 0;
                 this.rotation = 0.73;
                 this.speed = 0;
                 this.moveSpeed = 0.05;
-                this.rotationSpeed = 2 * Math.TAU / 180;
+                this.rotationSpeed = 2 * Math.PI / 180;
             }
 
             Player.prototype = {
@@ -150,7 +147,6 @@ layout: topbar
                     y = this.position[1] + (Math.sin(this.rotation) * step);
 
                     if (!map.isPassableAt(x, y)) {
-                        // not passable
                         return;
                     }
 
@@ -163,7 +159,7 @@ layout: topbar
                     context.beginPath();
                     context.arc(
                         this.position[0] * options.scale, this.position[1] * options.scale,
-                        2, 0, Math.TAU
+                        2, 0, Math.PI * 2
                     );
                     context.fill();
                 }
@@ -175,16 +171,15 @@ layout: topbar
                     leftOffset = stripID * options.stripWidth,
                     alpha = (0.5 / distance) * 6;
 
-                screenCtx.fillStyle = "hsla(198, 50%, 50%," + alpha + ")";
+                screenCtx.fillStyle = "hsla(198, 90%, 50%," + alpha + ")";
                 screenCtx.fillRect(
-                    fround(leftOffset),
-                    fround(topOffset),
-                    fround(options.stripWidth),
-                    fround(height)
+                    Math.round(leftOffset),
+                    Math.round(topOffset),
+                    Math.round(options.stripWidth),
+                    Math.round(height)
                 );
             }
 
-            // Map
             function Map(map) {
                 this.map = map;
                 this.height = map.length;
@@ -222,10 +217,8 @@ layout: topbar
                 }
             };
 
-            // raycaster
             raycaster = {
                 castAll: function castAll() {
-                    var strip = 0;
                     for (var i = 0; i < options.rayCount; i++) {
                         var rayPosition = (-options.rayCount / 2 + i) * options.stripWidth,
                             rayViewDist = pythagoras(rayPosition, viewDistance),
@@ -237,18 +230,15 @@ layout: topbar
 
                 cast: function(_angle, stripID) {
                     var angle = normalizeAngle(_angle),
-                        right = (angle > Math.TAU * 0.75 || angle < Math.TAU * 0.25),
+                        right = (angle > Math.PI * 1.5 || angle < Math.PI * 0.5),
                         up = (angle < 0 || angle > Math.PI),
                         angleSin = Math.sin(angle),
                         angleCos = Math.cos(angle),
                         distanceVertical = 0,
                         distanceHorizontal = 0,
                         distance,
-                        hit = [0, 0],
-                        texture = [0, 0],
-                        wall = [0, 0];
+                        hit = [0, 0];
 
-                    // check vertical walls
                     var slope = angleSin / angleCos,
                         _x = right ? 1 : -1,
                         _y = _x * slope,
@@ -261,16 +251,13 @@ layout: topbar
                                 x - player.position[0],
                                 y - player.position[1]
                             );
-
                             hit = [x, y];
                             break;
                         }
-
                         x += _x;
                         y += _y;
                     }
 
-                    // check horizontal walls
                     slope = angleCos / angleSin;
                     _y = up ? -1 : 1;
                     _x = _y * slope;
@@ -288,10 +275,8 @@ layout: topbar
                                 distance = distanceHorizontal;
                                 hit = [x, y];
                             }
-
                             break;
                         }
-
                         x += _x;
                         y += _y;
                     }
@@ -299,7 +284,7 @@ layout: topbar
                     if (distance) {
                         renderStrip(stripID, perpendicularDistance(
                             Math.sqrt(distance), player.rotation - angle
-                        ), texture[0]);
+                        ));
                         this.draw(hit);
                     }
                 },
@@ -318,11 +303,10 @@ layout: topbar
                 }
             };
 
-            // convenience methods
             function fround(v) { return (0.5 + v) | 0; }
             function normalizeAngle(angle) {
-                angle %= Math.TAU;
-                if (angle < 0) angle += Math.TAU;
+                angle %= Math.PI * 2;
+                if (angle < 0) angle += Math.PI * 2;
                 return angle;
             }
             function perpendicularDistance(distance, angle) {
@@ -335,8 +319,10 @@ layout: topbar
                 return Math.sqrt(pythagorasSquared(a, b));
             }
 
+
+
             Math.TAU = Math.PI * 2;
-            window.requestAnimFrame = function() {
+            window.requestAnimationFrame = function() {
                 return window.requestAnimationFrame ||
                     window.webkitRequestAnimationFrame ||
                     window.mozRequestAnimationFrame ||
