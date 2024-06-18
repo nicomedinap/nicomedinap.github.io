@@ -21,7 +21,7 @@ layout: topbar
             justify-content: center;
             height: 100vh;
         }
-        .header {
+        .topbar {
             text-align: center;
             background: #222;
             color: white;
@@ -35,7 +35,7 @@ layout: topbar
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="topbar">
         <h1>3D Raycasting</h1>
         <p>Use the arrow keys to move around.</p>
     </div>
@@ -62,26 +62,23 @@ layout: topbar
                 player,
                 map,
                 options = {
-                    scale: 18,
-                    stripWidth: 3,
-                    rayCount: 120,
+                    scale: 12,
+                    stripWidth: 8,
+                    rayCount: 100,
                 },
                 colors = ["#aaa", "#red"],
                 fov = 70 * Math.PI / 180,
                 viewDistance,
                 numRays;
 
-
-
             function adjustCanvasSize() {
-                // Ajustar el tamaño del canvas
-                canvas.width = 400; // Ancho deseado en píxeles
-                canvas.height = 1000; // Alto deseado en píxeles
+                canvas.width = 800; // Ancho deseado en píxeles
+                canvas.height = 1600; // Alto deseado en píxeles
 
                 // Opcional: Ajustar otros parámetros relacionados con el tamaño del juego
                 options.screenWidth = canvas.width;
                 options.screenHeight = canvas.height;
-                viewDistance = (options.screenWidth/2) / Math.tan((fov/2));
+                viewDistance = (options.screenWidth) / Math.tan((fov));
                 numRays = Math.ceil(options.screenWidth / options.stripWidth);
             }
 
@@ -226,6 +223,7 @@ layout: topbar
                 castAll: function castAll() {
                     for (var i = 0; i < options.rayCount; i++) {
                         var rayPosition = (-options.rayCount / 2 + i) * options.stripWidth,
+                           
                             rayViewDist = pythagoras(rayPosition, viewDistance),
                             rayAngle = Math.asin(rayPosition / rayViewDist);
 
@@ -308,7 +306,6 @@ layout: topbar
                 }
             };
 
-            function fround(v) { return (0.5 + v) | 0; }
             function normalizeAngle(angle) {
                 angle %= Math.PI * 2;
                 if (angle < 0) angle += Math.PI * 2;
@@ -324,8 +321,6 @@ layout: topbar
                 return Math.sqrt(pythagorasSquared(a, b));
             }
 
-
-
             Math.TAU = Math.PI * 2;
             window.requestAnimationFrame = function() {
                 return window.requestAnimationFrame ||
@@ -335,7 +330,7 @@ layout: topbar
                     window.msRequestAnimationFrame ||
                     function(a) {
                         window.setTimeout(a, 1E3 / 60);
-                    }
+                    };
             }();
         }(document));
     </script>
