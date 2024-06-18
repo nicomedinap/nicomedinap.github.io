@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+---
+layout: topbar
+---
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -67,6 +70,8 @@
                 fov = 70 * Math.PI / 180,
                 viewDistance,
                 numRays;
+
+            
 
             function adjustCanvasSize() {
                 // Ajustar el tamaño del canvas
