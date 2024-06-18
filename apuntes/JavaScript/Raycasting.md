@@ -59,9 +59,9 @@ layout: topbar
                 player,
                 map,
                 options = {
-                    scale: 64,
-                    screenWidth: 620,
-                    screenHeight: 800,
+                    scale: 16,
+                    screenWidth: 320,
+                    screenHeight: 1000,
                     stripWidth: 3,
                     rayCount: 120,
                 },
