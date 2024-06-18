@@ -2,7 +2,6 @@
 layout: topbar
 ---
 
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,7 +37,7 @@ layout: topbar
 <body>
     <div class="header">
         <h1>3D Raycasting</h1>
-        <p>Use the arrow keys to move around.</p>
+        <p>Usa las flechas del teclado para moverte.</p>
     </div>
     <canvas id="gameCanvas"></canvas>
     <script>
@@ -74,7 +73,7 @@ layout: topbar
 
             function adjustCanvasSize() {
                 canvas.width = 800; // Ancho deseado en píxeles
-                canvas.height = 600; // Alto deseado en píxeles
+                canvas.height = 700; // Alto deseado en píxeles
 
                 // Opcional: Ajustar otros parámetros relacionados con el tamaño del juego
                 options.screenWidth = canvas.width;
