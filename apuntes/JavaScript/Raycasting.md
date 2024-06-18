@@ -6,7 +6,7 @@ layout: topbar
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raycasting Game</title>
+    <title> 3D Raycasting</title>
     <style>
         @import "compass/css3";
 
@@ -33,7 +33,7 @@ layout: topbar
     </style>
 </head>
 <body>
-    <h1>Raycasting Game</h1>
+    <h1>3D Raycasting</h1>
     <p>Use the arrow keys to move around.</p>
     <script>
         (function(doc) {
@@ -59,7 +59,7 @@ layout: topbar
                 player,
                 map,
                 options = {
-                    scale: 32,
+                    scale: 64,
                     screenWidth: 620,
                     screenHeight: 800,
                     stripWidth: 3,
