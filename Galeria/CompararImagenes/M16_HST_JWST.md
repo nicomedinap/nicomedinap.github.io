@@ -85,6 +85,10 @@ layout: topbar
             .controls {
                 top: 80%; /* Ajusta la posición vertical en dispositivos móviles */
             }
+
+            .h1 {
+                
+            }
         }
 
         .extra-controls {
@@ -215,7 +219,7 @@ layout: topbar
                 const isMobile = window.matchMedia('(max-width: 500px)').matches;
 
                 if (isMobile) {
-                    // Valores iniciales para dispositivos móviles
+                    // Valores iniciales para celu
                     scaleSlider1.value = '2';
                     angleSlider1.value = '20';
                     opacitySlider1.value = '1';
