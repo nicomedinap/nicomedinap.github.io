@@ -36,7 +36,7 @@ layout: topbar
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="topbar">
         <h1>3D Raycasting</h1>
         <p>Use the arrow keys to move around.</p>
     </div>
@@ -63,18 +63,18 @@ layout: topbar
                 player,
                 map,
                 options = {
-                    scale: 12,
+                    scale: 7,
                     stripWidth: 8,
-                    rayCount: 100,
+                    rayCount: 120,
                 },
                 colors = ["#aaa", "#red"],
-                fov = 70 * Math.PI / 180,
+                fov = 50 * Math.PI / 180,
                 viewDistance,
                 numRays;
 
             function adjustCanvasSize() {
                 canvas.width = 800; // Ancho deseado en píxeles
-                canvas.height = 1600; // Alto deseado en píxeles
+                canvas.height = 1000; // Alto deseado en píxeles
 
                 // Opcional: Ajustar otros parámetros relacionados con el tamaño del juego
                 options.screenWidth = canvas.width;
