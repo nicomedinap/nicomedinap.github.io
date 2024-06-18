@@ -2,6 +2,7 @@
 layout: topbar
 ---
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +22,7 @@ layout: topbar
             justify-content: center;
             height: 100vh;
         }
-        .topbar {
+        .header {
             text-align: center;
             background: #222;
             color: white;
@@ -35,7 +36,7 @@ layout: topbar
     </style>
 </head>
 <body>
-    <div class="topbar">
+    <div class="header">
         <h1>3D Raycasting</h1>
         <p>Use the arrow keys to move around.</p>
     </div>
