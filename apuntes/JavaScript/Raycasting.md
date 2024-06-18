@@ -32,7 +32,7 @@ layout: topbar
         canvas {
             display: block;
             margin: 0 auto;
-            width: 100vh;
+            width: 120vh;
         }
     </style>
 </head>
@@ -64,7 +64,7 @@ layout: topbar
                 player,
                 map,
                 options = {
-                    scale: 7,
+                    scale: 4,
                     stripWidth: 5,
                     rayCount: 120,
                 },
@@ -75,7 +75,7 @@ layout: topbar
 
             function adjustCanvasSize() {
                 canvas.width = 600; // Ancho deseado en píxeles
-                canvas.height = 500; // Alto deseado en píxeles
+                canvas.height = 400; // Alto deseado en píxeles
 
                 // Opcional: Ajustar otros parámetros relacionados con el tamaño del juego
                 options.screenWidth = canvas.width;
