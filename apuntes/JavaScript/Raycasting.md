@@ -20,6 +20,7 @@ layout: topbar
             align-items: center;
             justify-content: center;
             height: 100vh;
+            
         }
         .header {
             text-align: center;
@@ -31,6 +32,7 @@ layout: topbar
         canvas {
             display: block;
             margin: 0 auto;
+            width: 100vh;
         }
     </style>
 </head>
@@ -63,22 +65,22 @@ layout: topbar
                 map,
                 options = {
                     scale: 7,
-                    stripWidth: 8,
+                    stripWidth: 5,
                     rayCount: 120,
                 },
                 colors = ["#aaa", "#red"],
-                fov = 60 * Math.PI / 180,
+                fov = 70 * Math.PI / 180,
                 viewDistance,
                 numRays;
 
             function adjustCanvasSize() {
-                canvas.width = 800; // Ancho deseado en píxeles
-                canvas.height = 700; // Alto deseado en píxeles
+                canvas.width = 600; // Ancho deseado en píxeles
+                canvas.height = 500; // Alto deseado en píxeles
 
                 // Opcional: Ajustar otros parámetros relacionados con el tamaño del juego
                 options.screenWidth = canvas.width;
                 options.screenHeight = canvas.height;
-                viewDistance = (options.screenWidth) / Math.tan((fov));
+                viewDistance = (options.screenWidth/2) / Math.tan((fov/2));
                 numRays = Math.ceil(options.screenWidth / options.stripWidth);
             }
 
@@ -99,9 +101,9 @@ layout: topbar
             function mainLoop() {
                 screenCtx.clearRect(0, 0, canvas.width, canvas.height);
                 player.update();
-                map.draw();
-                player.draw();
                 raycaster.castAll();
+                player.draw();
+                map.draw(); // Dibujar el mapa después de los rayos y el jugador
                 window.requestAnimationFrame(mainLoop);
             }
 
@@ -173,7 +175,7 @@ layout: topbar
                     leftOffset = stripID * options.stripWidth,
                     alpha = (0.5 / distance) * 6;
 
-                screenCtx.fillStyle = "hsla(198, 90%, 50%," + alpha + ")";
+                screenCtx.fillStyle = "hsla(198, 90%, 90%," + alpha + ")";
                 screenCtx.fillRect(
                     Math.round(leftOffset),
                     Math.round(topOffset),
@@ -202,11 +204,14 @@ layout: topbar
                 },
 
                 draw: function() {
-                    context.fillStyle = "hsla(0, 0%, 5%, 1)";
+                    // Cambiar el color de relleno del minimapa para mayor contraste
+                    context.fillStyle = "rgba(0, 0, 0, 0.5)"; // Fondo del minimapa
+                    context.fillRect(0, 0, map.width * options.scale, map.height * options.scale);
 
-                    for (var y = 0; y < this.height; y++) {
-                        for (var x = 0; x < this.width; x++) {
-                            if (this.map[y][x] != 0) {
+                    context.fillStyle = "hsla(0, 0%, 75%, 1)"; // Color de las paredes en el minimapa
+                    for (var y = 0; y < this.map.length; y++) {
+                        for (var x = 0; x < this.map[y].length; x++) {
+                            if (this.map[y][x] > 0) {
                                 context.fillRect(
                                     x * options.scale,
                                     y * options.scale,
@@ -219,11 +224,10 @@ layout: topbar
                 }
             };
 
-            raycaster = {
-                castAll: function castAll() {
+            var raycaster = {
+                castAll: function() {
                     for (var i = 0; i < options.rayCount; i++) {
                         var rayPosition = (-options.rayCount / 2 + i) * options.stripWidth,
-                           
                             rayViewDist = pythagoras(rayPosition, viewDistance),
                             rayAngle = Math.asin(rayPosition / rayViewDist);
 
@@ -311,25 +315,29 @@ layout: topbar
                 if (angle < 0) angle += Math.PI * 2;
                 return angle;
             }
+
             function perpendicularDistance(distance, angle) {
                 return distance * Math.cos(angle);
             }
+
             function pythagorasSquared(a, b) {
                 return (a * a) + (b * b);
             }
+
             function pythagoras(a, b) {
                 return Math.sqrt(pythagorasSquared(a, b));
             }
 
             Math.TAU = Math.PI * 2;
+
             window.requestAnimationFrame = function() {
                 return window.requestAnimationFrame ||
                     window.webkitRequestAnimationFrame ||
                     window.mozRequestAnimationFrame ||
                     window.oRequestAnimationFrame ||
                     window.msRequestAnimationFrame ||
-                    function(a) {
-                        window.setTimeout(a, 1E3 / 60);
+                    function(callback) {
+                        window.setTimeout(callback, 1000 / 60);
                     };
             }();
         }(document));
