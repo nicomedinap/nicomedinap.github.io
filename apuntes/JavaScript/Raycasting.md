@@ -56,9 +56,9 @@
                 player,
                 map,
                 options = {
-                    scale: 16,
+                    scale: 32,
                     screenWidth: 620,
-                    screenHeight: 1200,
+                    screenHeight: 800,
                     stripWidth: 3,
                     rayCount: 120,
                 },
