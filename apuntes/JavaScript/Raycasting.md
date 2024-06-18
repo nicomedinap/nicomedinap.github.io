@@ -74,7 +74,7 @@ layout: topbar
 
             function adjustCanvasSize() {
                 canvas.width = 800; // Ancho deseado en píxeles
-                canvas.height = 1000; // Alto deseado en píxeles
+                canvas.height = 800; // Alto deseado en píxeles
 
                 // Opcional: Ajustar otros parámetros relacionados con el tamaño del juego
                 options.screenWidth = canvas.width;
