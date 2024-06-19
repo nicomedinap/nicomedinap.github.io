@@ -46,20 +46,7 @@ layout: topbar
         (function(doc) {
             var canvas = doc.getElementById('gameCanvas'),
                 context = canvas.getContext("2d"),
-                mapData = [
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                    [1,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1],
-                    [1,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1],
-                    [1,0,2,0,2,0,0,0,0,1,0,1,0,0,0,0,1,0,1,0,1],
-                    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                    [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-                    [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
-                    [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
-                    [1,0,0,0,1,0,1,1,0,1,1,1,0,1,1,0,1,0,0,0,1],
-                    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-                ],
+                mapData = generateMaze(15, 180), // Generate a 15x50 maze
                 screenCtx = canvas.getContext("2d"),
                 player,
                 map,
@@ -72,6 +59,57 @@ layout: topbar
                 fov = 70 * Math.PI / 180,
                 viewDistance,
                 numRays;
+
+            function generateMaze(rows, columns) {
+                var maze = [];
+
+                // Initialize maze with walls
+                for (var i = 0; i < rows; i++) {
+                    maze[i] = [];
+                    for (var j = 0; j < columns; j++) {
+                        maze[i][j] = 1;
+                    }
+                }
+
+                // Generate maze paths using recursive backtracking
+                function recursiveBacktrack(x, y) {
+                    var directions = [[0, -2], [0, 2], [-2, 0], [2, 0]],
+                        direction, nx, ny;
+
+                    shuffleArray(directions);
+
+                    for (var i = 0; i < directions.length; i++) {
+                        direction = directions[i];
+                        nx = x + direction[0];
+                        ny = y + direction[1];
+
+                        if (nx >= 0 && ny >= 0 && nx < columns && ny < rows && maze[ny][nx] === 1) {
+                            maze[y + direction[1] / 2][x + direction[0] / 2] = 0;
+                            maze[ny][nx] = 0;
+                            recursiveBacktrack(nx, ny);
+                        }
+                    }
+                }
+
+                // Helper function to shuffle an array (Fisher-Yates algorithm)
+                function shuffleArray(array) {
+                    for (var i = array.length - 1; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        var temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                }
+
+                // Start generating maze from a random cell
+                recursiveBacktrack(1, 1);
+
+                // Set the entrance and exit
+                maze[1][0] = 0;
+                maze[rows - 2][columns - 1] = 0;
+
+                return maze;
+            }
 
             function adjustCanvasSize() {
                 canvas.width = 600; // Ancho deseado en píxeles
