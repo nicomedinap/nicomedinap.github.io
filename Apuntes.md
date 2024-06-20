@@ -12,6 +12,7 @@ A lo largo de los años he escrito sobre variadas cosas y acá pondré algunos t
 * [El atractor de Lorenz (2018)](https://nicomedinap.github.io/2018/11/09/Motivacion.html#El-atractor-de-Lorenz:)
 * [Mapa sismologico de sudamérica (2018)](https://nicomedinap.github.io/2018/11/09/Motivacion.html#Un-mapa-sismológico-de-Sudamérica)
 * [Ajustando la distribución normal (2022)](https://nicomedinap.github.io/2022/12/15/AjustandoUnaDistribucionNormal.html)
+* [Comandos útiles para programación y accesos a bases de datos(2023)](https://nicomedinap.github.io/apuntes/ComandosUtiles.html)
 
 Espacio de pruebas para pyscript
 * [PyScript (2023)](https://nicomedinap.github.io/apuntes/PyScript.html)
@@ -20,10 +21,9 @@ Pyscript es bastante limitado aún, así que también tengo un espacio de prueba
 * [Atractor de Lorenz (2024)](https://nicomedinap.github.io/apuntes/JavaScript/AtractorLorenz.html)
 * [Raycasting en 3D (2024)](https://nicomedinap.github.io/apuntes/JavaScript/Raycasting.html)
 
-* [Comandos útiles para programación y accesos a bases de datos(2023)](https://nicomedinap.github.io/apuntes/ComandosUtiles.html)
 
 Linea temporal de eventos
-* [(2023)](https://nicomedinap.github.io/apuntes/LineaTemporal.html)
+* [Mecánica cuántica (2023)](https://nicomedinap.github.io/apuntes/LineaTemporal.html)
 
 Comparadores de imágenes:
 * [La tarántula](https://nicomedinap.github.io/Galeria/CompararImagenes/Tarantula_VISTA_JWST.html)
