@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+---
+layout: topbar
+---
+
 <html lang="es">
 <head>
     <script defer src="https://pyscript.net/alpha/pyscript.min.js"></script>

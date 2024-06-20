@@ -16,6 +16,10 @@ A lo largo de los años he escrito sobre variadas cosas y acá pondré algunos t
 Espacio de pruebas para pyscript
 * [PyScript (2023)](https://nicomedinap.github.io/apuntes/PyScript.html)
 
+Pyscript es bastante limitado aún, así que también tengo un espacio de pruebas para Javascript:
+* [Atractor de Lorenz (2024)](https://nicomedinap.github.io/apuntes/JavaScript/AtractorLorenz.html)
+* [Raycasting en 3D (2024)](https://nicomedinap.github.io/apuntes/JavaScript/Raycasting.html)
+
 * [Comandos útiles para programación y accesos a bases de datos(2023)](https://nicomedinap.github.io/apuntes/ComandosUtiles.html)
 
 Linea temporal de eventos

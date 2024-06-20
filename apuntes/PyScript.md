@@ -12,11 +12,9 @@ Las siguientes son algunas implementaciones básicas que he logrado avanzar e im
 
 1. [Pelotas que colisionan de forma elástica](https://nicomedinap.github.io/apuntes/pyscript/PelotasElasticas.html){:target="_blank"}
 
-2. [Pelotas que "resuelven" un laberinto](https://nicomedinap.github.io/apuntes/pyscript/Laberinto.html
-){:target="_blank"}
+2. [Pelotas que "resuelven" un laberinto](https://nicomedinap.github.io/apuntes/pyscript/Laberinto.html){:target="_blank"}
 
-3. [Pelota que responde al teclado](https://nicomedinap.github.io/apuntes/pyscript/Pelota_Interactiva.html
-){:target="_blank"}
+3. [Pelota que responde al teclado](https://nicomedinap.github.io/apuntes/pyscript/Pelota_Interactiva.html){:target="_blank"}
 
 4. [Juego Camara Niebla](https://nicomedinap.github.io/apuntes/pyscript/JuegoCamaraNiebla.html){:target="_blank"}
 

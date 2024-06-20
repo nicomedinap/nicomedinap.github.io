@@ -2,6 +2,8 @@
 layout: topbar
 ---
 
+Basado en el código disponible en [CodePen](https://codepen.io/nocksock/pen/kGpwbX){:target="_blank"}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
