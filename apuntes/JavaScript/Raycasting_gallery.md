@@ -2,12 +2,11 @@
 layout: topbar
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raycasting Example</title>
+    <title>Virtual Museum</title>
     <style>
         body, html {
             margin: 0;
@@ -17,23 +16,55 @@ layout: topbar
         canvas {
             display: block;
         }
+        #roomIndicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #minimap {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #minimap canvas {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
     <canvas id="gameCanvas"></canvas>
+    <div id="roomIndicator">Room: 1</div>
+    <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
+        const roomIndicator = document.getElementById('roomIndicator');
+        const minimapCanvas = document.getElementById('minimapCanvas');
+        const minimapCtx = minimapCanvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        minimapCanvas.width = 150;
+        minimapCanvas.height = 150;
 
         const map = [
-            [1, 1, 1, 1, 1, 1],
-            [1, 0, 1, 0, 0, 3],
-            [1, 0, 0, 0, 0, 2],
-            [1, 0, 0, 0, 0, 4],
-            [1, 0, 0, 0, 0, 5],
-            [1, 2, 3, 6, 1, 1]
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 2, 3, 4, 5, 6, 7, 8, 1, 1]
         ];
 
         const player = {
@@ -42,30 +73,49 @@ layout: topbar
             angle: 0,
             speed: 0,
             turnSpeed: 0,
-            minDistanceToWall: 1, // Minimum distance player can get to a wall
-            maxDistanceToTexture: 5  // Maximum distance to render texture without stretching
+            minDistanceToWall: 1,
+            maxDistanceToTexture: 10
         };
 
-        const textures = {
-            2: new Image(),
-            3: new Image(),
-            4: new Image(),
-            5: new Image(),
-            6: new Image()
+        const roomTextures = {
+            2: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/201.jpg',
+            3: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/210.jpg',
+            4: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/021.jpg',
+            5: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/120.jpg',
+            6: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/201.jpg',
+            7: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/210.jpg',
+            8: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/021.jpg'
         };
-        textures[2].src = 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/201.jpg';
-        textures[3].src = 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/210.jpg';
-        textures[4].src = 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/021.jpg';
-        textures[5].src = 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/120.jpg';
-        textures[6].src = 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/012.jpg';
+
+        let currentRoom = null;
+        const textures = {};
+
+        function preloadTextures(urls) {
+            const promises = Object.entries(urls).map(([key, url]) => {
+                return new Promise((resolve, reject) => {
+                    if (textures[key]) {
+                        resolve();
+                    } else {
+                        const img = new Image();
+                        img.src = url;
+                        img.onload = () => {
+                            textures[key] = img;
+                            resolve();
+                        };
+                        img.onerror = reject;
+                    }
+                });
+            });
+            return Promise.all(promises);
+        }
 
         function handleInput() {
             window.addEventListener('keydown', (e) => {
                 switch (e.keyCode) {
-                    case 37: player.turnSpeed = -0.05; break; // Left
-                    case 39: player.turnSpeed = 0.05; break; // Right
-                    case 38: player.speed = 0.1; break; // Up
-                    case 40: player.speed = -0.1; break; // Down
+                    case 37: player.turnSpeed = -0.05; break;
+                    case 39: player.turnSpeed = 0.05; break;
+                    case 38: player.speed = 0.1; break;
+                    case 40: player.speed = -0.1; break;
                 }
             });
 
@@ -89,15 +139,15 @@ layout: topbar
                 player.x = newX;
                 player.y = newY;
             }
+
+            checkRoomTransition();
         }
 
         function isValidMove(newX, newY) {
-            // Check if the new position is within the map bounds
             if (newX < 0 || newX >= map[0].length || newY < 0 || newY >= map.length) {
                 return false;
             }
 
-            // Check if the new position is too close to a wall
             const mapX = Math.floor(newX);
             const mapY = Math.floor(newY);
             if (map[mapY][mapX] !== 0) {
@@ -108,6 +158,19 @@ layout: topbar
             }
 
             return true;
+        }
+
+        function checkRoomTransition() {
+            const mapX = Math.floor(player.x);
+            const mapY = Math.floor(player.y);
+            const room = map[mapY][mapX];
+            if (room !== currentRoom && room !== 0 && roomTextures[room]) {
+                currentRoom = room;
+                roomIndicator.innerText = `Room: ${room}`;
+                preloadTextures({ [room]: roomTextures[room] }).then(() => {
+                    draw();
+                });
+            }
         }
 
         function castRay(angle) {
@@ -147,10 +210,8 @@ layout: topbar
                 const wallTop = (canvas.height - wallHeight) / 2;
 
                 if (texture) {
-                    // Calculate the texture coordinates correctly
                     let textureX = Math.floor(hitOffset * texture.width);
-                    
-                    // Adjust textureX if too close to the wall to avoid stretching
+
                     const distToWall = Math.sqrt((mapX - player.x) ** 2 + (mapY - player.y) ** 2);
                     if (distToWall < player.minDistanceToWall) {
                         textureX = Math.floor((i / numRays) * texture.width);
@@ -158,16 +219,34 @@ layout: topbar
                         textureX = Math.floor((i / numRays) * texture.width * (player.maxDistanceToTexture / distToWall));
                     }
 
-                    // Draw four columns for the four faces of the projection
                     ctx.drawImage(texture, textureX, 0, 1, texture.height, i, wallTop, 1, wallHeight);
-                    ctx.drawImage(texture, textureX, 0, 1, texture.height, i, wallTop + wallHeight, 1, -wallHeight); // Bottom face
-                    ctx.drawImage(texture, textureX, 0, 1, texture.height, i, canvas.height - wallTop - wallHeight, 1, wallHeight); // Top face
-                    ctx.drawImage(texture, textureX, 0, 1, texture.height, i, canvas.height - wallTop, 1, -wallHeight); // Back face
                 } else {
                     ctx.fillStyle = 'gray';
                     ctx.fillRect(i, wallTop, 1, wallHeight);
                 }
             }
+
+            drawMinimap();
+        }
+
+        function drawMinimap() {
+            minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
+
+            const scale = minimapCanvas.width / map[0].length;
+
+            for (let y = 0; y < map.length; y++) {
+                for (let x = 0; x < map[0].length; x++) {
+                    if (map[y][x] !== 0) {
+                        minimapCtx.fillStyle = 'gray';
+                        minimapCtx.fillRect(x * scale, y * scale, scale, scale);
+                    }
+                }
+            }
+
+            minimapCtx.fillStyle = 'red';
+            minimapCtx.beginPath();
+            minimapCtx.arc(player.x * scale, player.y * scale, scale / 2, 0, 2 * Math.PI);
+            minimapCtx.fill();
         }
 
         function mainLoop() {
@@ -176,18 +255,12 @@ layout: topbar
             requestAnimationFrame(mainLoop);
         }
 
-        textures[2].onload = function() {
-            textures[3].onload = function() {
-                textures[4].onload = function() {
-                    textures[5].onload = function() {
-                        textures[6].onload = function() {
-                            handleInput();
-                            mainLoop();
-                        };
-                    };
-                };
-            };
-        };
+        preloadTextures(roomTextures).then(() => {
+            handleInput();
+            mainLoop();
+        }).catch((error) => {
+            console.error('Error loading textures:', error);
+        });
     </script>
 </body>
 </html>
