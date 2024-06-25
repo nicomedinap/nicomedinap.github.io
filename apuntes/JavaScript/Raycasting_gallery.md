@@ -1,7 +1,4 @@
----
-layout: topbar
----
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -73,7 +70,7 @@ layout: topbar
             angle: 0,
             speed: 0,
             turnSpeed: 0,
-            minDistanceToWall: 1,
+            minDistanceToWall: 0.1,
             maxDistanceToTexture: 10
         };
 
@@ -87,8 +84,13 @@ layout: topbar
             8: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/021.jpg'
         };
 
+        const skyTextureUrl = 'https://content.nationalgeographic.com.es/medio/2018/01/22/la-via-lactea-es-mayormente-plana_9fd1ebf7.jpg';
+        const floorTextureUrl = 'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2023/05/solid-oak-flooring.jpeg-1-e1684409736918.jpg';
+
         let currentRoom = null;
         const textures = {};
+        let skyTexture = null;
+        let floorTexture = null;
 
         function preloadTextures(urls) {
             const promises = Object.entries(urls).map(([key, url]) => {
@@ -99,7 +101,7 @@ layout: topbar
                         const img = new Image();
                         img.src = url;
                         img.onload = () => {
-                            textures[key] = img;
+                            textures[key] = createMipmaps(img);
                             resolve();
                         };
                         img.onerror = reject;
@@ -107,6 +109,41 @@ layout: topbar
                 });
             });
             return Promise.all(promises);
+        }
+
+        function preloadSkyAndFloorTextures(skyUrl, floorUrl) {
+            return new Promise((resolve, reject) => {
+                const skyImg = new Image();
+                skyImg.src = skyUrl;
+                skyImg.onload = () => {
+                    skyTexture = skyImg;
+                    const floorImg = new Image();
+                    floorImg.src = floorUrl;
+                    floorImg.onload = () => {
+                        floorTexture = floorImg;
+                        resolve();
+                    };
+                    floorImg.onerror = reject;
+                };
+                skyImg.onerror = reject;
+            });
+        }
+
+        function createMipmaps(image) {
+            const mipmaps = [image];
+            let width = image.width / 2;
+            let height = image.height / 2;
+            while (width >= 1 && height >= 1) {
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(image, 0, 0, width, height);
+                mipmaps.push(canvas);
+                width /= 2;
+                height /= 2;
+            }
+            return mipmaps;
         }
 
         function handleInput() {
@@ -144,19 +181,14 @@ layout: topbar
         }
 
         function isValidMove(newX, newY) {
+            const mapX = Math.floor(newX);
+            const mapY = Math.floor(newY);
             if (newX < 0 || newX >= map[0].length || newY < 0 || newY >= map.length) {
                 return false;
             }
-
-            const mapX = Math.floor(newX);
-            const mapY = Math.floor(newY);
             if (map[mapY][mapX] !== 0) {
-                const distToWall = Math.sqrt((newX - player.x) ** 2 + (newY - player.y) ** 2);
-                if (distToWall < player.minDistanceToWall) {
-                    return false;
-                }
+                return false;
             }
-
             return true;
         }
 
@@ -198,6 +230,16 @@ layout: topbar
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Dibujar cielo
+            if (skyTexture) {
+                ctx.drawImage(skyTexture, 0, 0, canvas.width, canvas.height / 2);
+            }
+
+            // Dibujar suelo
+            if (floorTexture) {
+                ctx.drawImage(floorTexture, 0, canvas.height / 2, canvas.width, canvas.height / 2);
+            }
+
             const fov = Math.PI / 4;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
@@ -210,16 +252,11 @@ layout: topbar
                 const wallTop = (canvas.height - wallHeight) / 2;
 
                 if (texture) {
-                    let textureX = Math.floor(hitOffset * texture.width);
+                    const mipLevel = Math.min(Math.floor(dist / 2), texture.length - 1);
+                    const mipTexture = texture[mipLevel];
+                    const textureX = Math.floor(hitOffset * mipTexture.width);
 
-                    const distToWall = Math.sqrt((mapX - player.x) ** 2 + (mapY - player.y) ** 2);
-                    if (distToWall < player.minDistanceToWall) {
-                        textureX = Math.floor((i / numRays) * texture.width);
-                    } else if (distToWall > player.maxDistanceToTexture) {
-                        textureX = Math.floor((i / numRays) * texture.width * (player.maxDistanceToTexture / distToWall));
-                    }
-
-                    ctx.drawImage(texture, textureX, 0, 1, texture.height, i, wallTop, 1, wallHeight);
+                    ctx.drawImage(mipTexture, textureX, 0, 1, mipTexture.height, i, wallTop, 1, wallHeight);
                 } else {
                     ctx.fillStyle = 'gray';
                     ctx.fillRect(i, wallTop, 1, wallHeight);
@@ -234,15 +271,21 @@ layout: topbar
 
             const scale = minimapCanvas.width / map[0].length;
 
+            // Dibujar el fondo del minimapa
+            minimapCtx.fillStyle = 'white';
+            minimapCtx.fillRect(0, 0, minimapCanvas.width, minimapCanvas.height);
+
+            // Dibujar las paredes
             for (let y = 0; y < map.length; y++) {
                 for (let x = 0; x < map[0].length; x++) {
                     if (map[y][x] !== 0) {
-                        minimapCtx.fillStyle = 'gray';
+                        minimapCtx.fillStyle = 'black';
                         minimapCtx.fillRect(x * scale, y * scale, scale, scale);
                     }
                 }
             }
 
+            // Dibujar el jugador
             minimapCtx.fillStyle = 'red';
             minimapCtx.beginPath();
             minimapCtx.arc(player.x * scale, player.y * scale, scale / 2, 0, 2 * Math.PI);
@@ -256,6 +299,8 @@ layout: topbar
         }
 
         preloadTextures(roomTextures).then(() => {
+            return preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl);
+        }).then(() => {
             handleInput();
             mainLoop();
         }).catch((error) => {
