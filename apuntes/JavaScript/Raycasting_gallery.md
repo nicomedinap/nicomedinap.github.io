@@ -88,7 +88,7 @@ layout: topbar
         };
 
         const skyTextureUrl = 'https://content.nationalgeographic.com.es/medio/2018/01/22/la-via-lactea-es-mayormente-plana_9fd1ebf7.jpg';
-        const floorTextureUrl = 'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2023/05/solid-oak-flooring.jpeg-1-e1684409736918.jpg';
+        const floorTextureUrl = 'https://img.freepik.com/free-photo/black-painted-wall-textured-background_53876-110728.jpg';
 
         let currentRoom = null;
         const textures = {};
