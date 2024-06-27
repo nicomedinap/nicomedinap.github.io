@@ -28,3 +28,4 @@ Linea temporal de eventos
 Comparadores de imágenes:
 * [La tarántula](https://nicomedinap.github.io/Galeria/CompararImagenes/Tarantula_VISTA_JWST.html)
 * [M16](https://nicomedinap.github.io/Galeria/CompararImagenes/M16_HST_JWST.html)
+* [Galeria de comparaciones] (https://nicomedinap.github.io/Galeria/CompararImagenes/GaleriaComparaciones.html)
