@@ -26,6 +26,6 @@ Linea temporal de eventos
 * [Mecánica cuántica (2023)](https://nicomedinap.github.io/apuntes/LineaTemporal.html)
 
 Comparadores de imágenes:
+* [Galeria de comparaciones](https://nicomedinap.github.io/Galeria/CompararImagenes/GaleriaComparaciones.html)
 * [La tarántula](https://nicomedinap.github.io/Galeria/CompararImagenes/Tarantula_VISTA_JWST.html)
 * [M16](https://nicomedinap.github.io/Galeria/CompararImagenes/M16_HST_JWST.html)
-* [Galeria de comparaciones] (https://nicomedinap.github.io/Galeria/CompararImagenes/GaleriaComparaciones.html)

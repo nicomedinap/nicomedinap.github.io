@@ -1,7 +1,6 @@
 ---
 layout: topbar
 ---
-<!DOCTYPE html>
 <html lang="en">
 
 <style>
@@ -64,7 +63,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .article-preview {
@@ -77,6 +76,9 @@ body {
     height: 14rem;
     overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
 
@@ -93,7 +95,7 @@ body {
     <div class="articles">
         <!-- Artículo 1 con cambio de imagen al pasar el mouse -->
         <a href="https://nicomedinap.github.io/Galeria/CompararImagenes/M16_HST_JWST.html">
-            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg')">
+            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg')" ontouchstart="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg')" ontouchend="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg')">
                 <figure>
                     <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg" alt="M16">
                 </figure>
@@ -107,7 +109,7 @@ body {
         </a>
         <!-- Artículo 2 con cambio de imagen al pasar el mouse -->
         <a href="https://nicomedinap.github.io/Galeria/CompararImagenes/Tarantula_VISTA_JWST.html">
-            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg')">
+            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg')" ontouchstart="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg')" ontouchend="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg')">
                 <figure>
                     <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg" alt="Nebulosa de la tarántula">
                 </figure>
@@ -122,24 +124,24 @@ body {
     </div>
 
     <script>
-        // Función para cambiar la imagen al pasar el mouse
+        // Función para cambiar la imagen al pasar el mouse o tocar en dispositivos móviles
         function changeImage(element, newImage) {
             const img = element.querySelector('img');
             img.style.opacity = 0;
             setTimeout(() => {
                 img.src = newImage;
                 img.style.opacity = 1;
-            }, 500);
+            }, 200);
         }
 
-        // Función para revertir la imagen al quitar el mouse
+        // Función para revertir la imagen al quitar el mouse o dejar de tocar en dispositivos móviles
         function revertImage(element, originalImage) {
             const img = element.querySelector('img');
             img.style.opacity = 0;
             setTimeout(() => {
                 img.src = originalImage;
                 img.style.opacity = 1;
-            }, 500);
+            }, 200);
         }
     </script>
 </body>
