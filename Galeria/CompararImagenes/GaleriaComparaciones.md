@@ -47,7 +47,7 @@ body {
     cursor: pointer;
     position: relative;
     display: block;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.2s ease-in-out;
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -65,7 +65,7 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: opacity 0.1s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .article-preview {
@@ -97,7 +97,7 @@ body {
     <div class="articles">
         <!-- Artículo 1 con cambio de imagen al pasar el mouse -->
         <a href="https://nicomedinap.github.io/Galeria/CompararImagenes/M16_HST_JWST.html">
-            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg')" ontouchstart="handleTouchStart(event, this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg')" ontouchend="handleTouchEnd(event, this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg')">
+            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg')">
                 <figure>
                     <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg" alt="M16">
                 </figure>
@@ -111,7 +111,7 @@ body {
         </a>
         <!-- Artículo 2 con cambio de imagen al pasar el mouse -->
         <a href="https://nicomedinap.github.io/Galeria/CompararImagenes/Tarantula_VISTA_JWST.html">
-            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg')" ontouchstart="handleTouchStart(event, this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg')" ontouchend="handleTouchEnd(event, this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg')">
+            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg')">
                 <figure>
                     <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg" alt="Nebulosa de la tarántula">
                 </figure>
@@ -133,7 +133,7 @@ body {
             setTimeout(() => {
                 img.src = newImage;
                 img.style.opacity = 1;
-            }, 150);
+            }, 200);
         }
 
         // Función para revertir la imagen al quitar el mouse o dejar de tocar en dispositivos móviles
@@ -143,20 +143,20 @@ body {
             setTimeout(() => {
                 img.src = originalImage;
                 img.style.opacity = 1;
-            }, 150);
+            }, 200);
         }
 
-        // Función para manejar el toque inicial en dispositivos móviles
-        function handleTouchStart(event, element, newImage) {
-            event.preventDefault();
-            changeImage(element, newImage);
-        }
-
-        // Función para manejar el final del toque en dispositivos móviles
-        function handleTouchEnd(event, element, originalImage) {
-            event.preventDefault();
-            revertImage(element, originalImage);
-        }
+        // Manejar el toque inicial en dispositivos móviles
+        document.querySelectorAll('article').forEach(article => {
+            article.addEventListener('touchstart', function(event) {
+                const img = article.querySelector('img').src;
+                changeImage(article, img);
+            });
+            article.addEventListener('touchend', function(event) {
+                const img = article.querySelector('img').src;
+                revertImage(article, img);
+            });
+        });
     </script>
 </body>
 
