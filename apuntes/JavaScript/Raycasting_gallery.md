@@ -6,7 +6,7 @@ layout: topbar
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Museum</title>
+    <title>Galería virtual astronómica</title>
     <style>
         body, html {
             margin: 0;
@@ -58,7 +58,7 @@ layout: topbar
 
         // Player settings
         const player = {
-            x: 2,
+            x: 15,
             y: 2,
             angle: 0,
             speed: 0,
@@ -79,7 +79,7 @@ layout: topbar
         };
 
         const skyTextureUrl = 'https://content.nationalgeographic.com.es/medio/2018/01/22/la-via-lactea-es-mayormente-plana_9fd1ebf7.jpg';
-        const floorTextureUrl = 'https://img.freepik.com/free-photo/black-painted-wall-textured-background_53876-110728.jpg';
+        const floorTextureUrl = 'https://cdn.pixabay.com/photo/2014/06/16/23/39/black-370118_1280.png';
 
         let currentRoom = null;
         const textures = {};
