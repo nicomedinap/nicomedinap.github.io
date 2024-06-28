@@ -10,7 +10,7 @@ layout: topbar
     <style>
         :root {
             --background: #252525;
-            --text: #2C2C2C;
+            --text: white;
         }
 
         body {
