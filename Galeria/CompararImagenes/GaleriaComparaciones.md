@@ -1,6 +1,7 @@
 ---
 layout: topbar
 ---
+<!DOCTYPE html>
 <html lang="en">
 
 <style>
@@ -50,7 +51,7 @@ body {
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    height: 25rem;
+    height: 30rem; /* Altura del contenedor */
 }
 
 .articles article h2, .articles article p {
@@ -65,6 +66,9 @@ body {
     background-size: cover;
     background-position: center;
     transition: opacity 0.1s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .article-preview {
@@ -72,13 +76,18 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejor legibilidad */
     z-index: 1;
 }
 </style>
 
 <head>
     <meta charset="UTF-8">
-    <title>Galeria de comparaciones</title>
+    <title>Cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" type='text/css'>
 </head>
 
 <body>
@@ -89,7 +98,7 @@ body {
                 <div class="article-image" style="background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/M16/210.jpg');"></div>
                 <div class="article-preview">
                     <h2>Nebulosa del Águila (M16)</h2>
-                    <p>HUBBLE-JWST</p>
+                    <p>M16</p>
                 </div>
             </article>
         </a>
@@ -99,7 +108,7 @@ body {
                 <div class="article-image" style="background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/VISTA/VMC/Tarantula/012.jpg');"></div>
                 <div class="article-preview">
                     <h2>Nebulosa de la tarántula</h2>
-                    <p>VISTA-JWST</p>
+                    <p>La Tarántula</p>
                 </div>
             </article>
         </a>
