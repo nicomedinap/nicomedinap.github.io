@@ -83,8 +83,8 @@ layout: topbar
 
 
         const player = {
-            x: 2,
-            y: 2,
+            x: 15,
+            y: 4,
             angle: 0,
             speed: 0,
             turnSpeed: 0,
