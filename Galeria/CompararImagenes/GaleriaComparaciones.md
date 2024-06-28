@@ -2,7 +2,6 @@
 layout: topbar
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +9,7 @@ layout: topbar
     <title>Galeria de comparaciones</title>
     <style>
         :root {
-            --background: black;
+            --background: #252525;
             --text: #2C2C2C;
         }
 
@@ -82,6 +81,18 @@ layout: topbar
             color: var(--text);
             transition: color 0.15s ease-out; /* Transición de color del texto */
         }
+
+        /* Media query para ajustar el ancho de las imágenes en móvil */
+        @media (max-width: 600px) {
+            .articles article .article-image {
+                width: 100%; /* Ajuste el ancho según sea necesario */
+                max-width: 100%; /* Ajuste el máximo ancho según sea necesario */
+            }
+
+            .article-preview {
+                padding: 1rem; /* Ajuste el padding del preview en móvil */
+            }
+        }
     </style>
 </head>
 <body>
@@ -131,4 +142,3 @@ layout: topbar
     </script>
 </body>
 </html>
-
