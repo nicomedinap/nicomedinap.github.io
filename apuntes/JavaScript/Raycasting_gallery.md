@@ -6,7 +6,7 @@ layout: topbar
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria virtual</title>
+    <title>Virtual Museum</title>
     <style>
         body, html {
             margin: 0;
@@ -27,8 +27,8 @@ layout: topbar
         }
         #minimap {
             position: absolute;
-            top: 60px;
-            right: 30px;
+            top: 50px;
+            right: 20px;
             width: 150px;
             height: 150px;
             background-color: rgba(0, 0, 0, 0.5);
@@ -51,40 +51,15 @@ layout: topbar
         const minimapCtx = minimapCanvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        minimapCanvas.width = 150;
-        minimapCanvas.height = 150;
+        minimapCanvas.width = 100;
+        minimapCanvas.height = 100;
 
-        const map = [
-  [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 6, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4],
-  [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-  [8, 0, 3, 3, 0, 0, 0, 0, 0, 8, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6],
-  [8, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6],
-  [8, 0, 3, 3, 0, 0, 0, 0, 0, 8, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-  [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 4, 0, 0, 0, 0, 0, 6, 6, 6, 0, 6, 4, 6],
-  [8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 6, 0, 0, 0, 0, 0, 6],
-  [7, 7, 7, 7, 0, 7, 7, 7, 7, 0, 8, 0, 8, 0, 8, 0, 8, 4, 0, 4, 0, 6, 0, 6],
-  [7, 7, 0, 0, 0, 0, 0, 0, 7, 8, 0, 8, 0, 8, 0, 8, 8, 6, 0, 0, 0, 0, 0, 6],
-  [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 6, 0, 0, 0, 0, 0, 4],
-  [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 6, 0, 6, 0, 6, 0, 6],
-  [7, 7, 0, 0, 0, 0, 0, 0, 7, 8, 0, 8, 0, 8, 0, 8, 8, 6, 4, 6, 0, 6, 6, 6],
-  [7, 7, 7, 7, 0, 7, 7, 7, 7, 8, 8, 4, 0, 6, 8, 4, 8, 3, 3, 3, 0, 3, 3, 3],
-  [2, 2, 2, 2, 0, 2, 2, 2, 2, 4, 6, 4, 0, 0, 6, 0, 6, 3, 0, 0, 0, 0, 0, 3],
-  [2, 2, 0, 0, 0, 0, 0, 2, 2, 4, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 3],
-  [2, 0, 0, 0, 0, 0, 0, 0, 2, 4, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 3],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 6, 0, 6, 3, 3, 0, 0, 0, 3, 3],
-  [2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 1, 2, 2, 2, 6, 6, 0, 0, 5, 0, 5, 0, 5],
-  [2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 0, 5, 0, 5, 0, 0, 0, 5, 5],
-  [2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 5, 0, 5, 0, 5, 0, 5, 0, 5],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
-  [2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 5, 0, 5, 0, 5, 0, 5, 0, 5],
-  [2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 0, 5, 0, 5, 0, 0, 0, 5, 5],
-  [2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5]
-];
+        let map = [];
 
-
+        // Player settings
         const player = {
-            x: 15,
-            y: 4,
+            x: 2,
+            y: 2,
             angle: 0,
             speed: 0,
             turnSpeed: 0,
@@ -92,6 +67,7 @@ layout: topbar
             maxDistanceToTexture: 1
         };
 
+        // Predefined textures
         const roomTextures = {
             2: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/201.jpg',
             3: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/210.jpg',
@@ -264,66 +240,69 @@ layout: topbar
 
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - fov / 2 + i * rayAngleStep;
-                const { dist, texture, hitOffset, mapX, mapY } = castRay(rayAngle);
-
-                const wallHeight = Math.min(canvas.height / dist, canvas.height);
-                const wallTop = (canvas.height - wallHeight) / 2;
+                const { dist, texture, hitOffset } = castRay(rayAngle);
+                const lineHeight = Math.min(canvas.height, canvas.height / dist);
+                const lineOffset = (canvas.height - lineHeight) / 2;
 
                 if (texture) {
-                    const mipLevel = Math.min(Math.max(0, Math.floor(Math.log2(dist))), texture.length - 1);
-                    const mipTexture = texture[mipLevel];
-                    const textureX = Math.floor(hitOffset * mipTexture.width);
+                    const textureX = Math.floor(hitOffset * texture[0].width);
+                    const textureY = 0;
+                    const textureWidth = 1;
+                    const textureHeight = texture[0].height;
 
-                    ctx.drawImage(mipTexture, textureX, 0, 1, mipTexture.height, i, wallTop, 1, wallHeight);
+                    ctx.drawImage(
+                        texture[0],
+                        textureX, textureY, textureWidth, textureHeight,
+                        i, lineOffset, 1, lineHeight
+                    );
                 } else {
-                    ctx.fillStyle = 'gray';
-                    ctx.fillRect(i, wallTop, 1, wallHeight);
+                    ctx.fillStyle = 'black';
+                    ctx.fillRect(i, lineOffset, 1, lineHeight);
                 }
             }
 
-            drawMinimap();
-        }
-
-        function drawMinimap() {
+            // Dibujar minimapa
             minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
-
             const scale = minimapCanvas.width / map[0].length;
-
-            // Dibujar el fondo del minimapa
             minimapCtx.fillStyle = 'white';
-            minimapCtx.fillRect(0, 0, minimapCanvas.width, minimapCanvas.height);
-
-            // Dibujar las paredes
             for (let y = 0; y < map.length; y++) {
-                for (let x = 0; x < map[0].length; x++) {
+                for (let x = 0; x < map[y].length; x++) {
                     if (map[y][x] !== 0) {
-                        minimapCtx.fillStyle = 'black';
                         minimapCtx.fillRect(x * scale, y * scale, scale, scale);
                     }
                 }
             }
-
-            // Dibujar el jugador
             minimapCtx.fillStyle = 'red';
-            minimapCtx.beginPath();
-            minimapCtx.arc(player.x * scale, player.y * scale, scale / 2, 0, 2 * Math.PI);
-            minimapCtx.fill();
+            minimapCtx.fillRect(player.x * scale - scale / 4, player.y * scale - scale / 4, scale / 2, scale / 2);
         }
 
-        function mainLoop() {
+        function gameLoop() {
             update();
             draw();
-            requestAnimationFrame(mainLoop);
+            requestAnimationFrame(gameLoop);
         }
 
-        preloadTextures(roomTextures).then(() => {
-            return preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl);
-        }).then(() => {
+        function init() {
             handleInput();
-            mainLoop();
-        }).catch((error) => {
-            console.error('Error loading textures:', error);
-        });
+            preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl)
+                .then(() => preloadTextures(roomTextures))
+                .then(() => fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js'))
+                .then(response => response.text())
+                .then(script => {
+                    const mapaMatch = script.match(/const map = (\[[\s\S]*?\]);/);
+                    if (mapaMatch) {
+                        map = JSON.parse(mapaMatch[1]);
+                        currentRoom = map[Math.floor(player.y)][Math.floor(player.x)];
+                        roomIndicator.innerText = `Room: ${currentRoom}`;
+                        gameLoop();
+                    } else {
+                        throw new Error('No se pudo encontrar el mapa en el script.');
+                    }
+                })
+                .catch(console.error);
+        }
+
+        init();
     </script>
 </body>
 </html>
