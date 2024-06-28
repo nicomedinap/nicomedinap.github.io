@@ -1,6 +1,8 @@
 ---
 layout: topbar
 ---
+
+<html lang="en">
 <style>
 :root {
     --background: #F8F8FF;
