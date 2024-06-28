@@ -27,8 +27,8 @@ layout: topbar
         }
         #minimap {
             position: absolute;
-            top: 40px;
-            right: 20px;
+            top: 60px;
+            right: 30px;
             width: 150px;
             height: 150px;
             background-color: rgba(0, 0, 0, 0.5);
