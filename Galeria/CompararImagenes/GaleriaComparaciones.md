@@ -1,3 +1,7 @@
+---
+layout: topbar
+---
+
 <html lang="en">
 <style>
 :root {
