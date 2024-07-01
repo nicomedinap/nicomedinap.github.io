@@ -1,7 +1,4 @@
----
-layout: topbar
----
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -66,20 +63,6 @@ layout: topbar
             minDistanceToWall: 0.1,
             maxDistanceToTexture: 1
         };
-
-        // Predefined textures
-        const roomTextures = {
-            2: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/201.jpg',
-            3: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/210.jpg',
-            4: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/021.jpg',
-            5: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/120.jpg',
-            6: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/201.jpg',
-            7: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/210.jpg',
-            8: 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/021.jpg'
-        };
-
-        const skyTextureUrl = 'https://content.nationalgeographic.com.es/medio/2018/01/22/la-via-lactea-es-mayormente-plana_9fd1ebf7.jpg';
-        const floorTextureUrl = 'https://cdn.pixabay.com/photo/2014/06/16/23/39/black-370118_1280.png';
 
         let currentRoom = null;
         const textures = {};
@@ -273,6 +256,7 @@ layout: topbar
                 }
             }
             minimapCtx.fillStyle = 'red';
+            
             minimapCtx.fillRect(player.x * scale - scale / 4, player.y * scale - scale / 4, scale / 2, scale / 2);
         }
 
@@ -284,7 +268,15 @@ layout: topbar
 
         function init() {
             handleInput();
-            preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl)
+            fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
+                .then(response => response.json())
+                .then(data => {
+                    skyTextureUrl = data.skyTexture;
+                    floorTextureUrl = data.floorTexture;
+                    roomTextures = data.roomTextures;
+
+                    return preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl);
+                })
                 .then(() => preloadTextures(roomTextures))
                 .then(() => fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js'))
                 .then(response => response.text())
