@@ -235,7 +235,9 @@ layout: topbar
             }
 
             // Dibujar paredes
-            const fov = Math.PI / 2;
+            //Tamaño de la proyeccion en la pantalla
+            const fov = Math.PI;
+            
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
