@@ -41,12 +41,12 @@ layout: topbar
 </head>
 <body>
     <canvas id="gameCanvas"></canvas>
-    <div id="roomIndicator">Room: 1</div>
+    <!-- <div id="roomIndicator">Room: 1</div> -->
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const roomIndicator = document.getElementById('roomIndicator');
+        //const roomIndicator = document.getElementById('roomIndicator');
         const minimapCanvas = document.getElementById('minimapCanvas');
         const minimapCtx = minimapCanvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -157,7 +157,7 @@ layout: topbar
                 player.y = newY;
             }
 
-            checkRoomTransition();
+//            checkRoomTransition();
         }
 
         function isValidMove(newX, newY) {
@@ -172,18 +172,18 @@ layout: topbar
             return true;
         }
 
-        function checkRoomTransition() {
-            const mapX = Math.floor(player.x);
-            const mapY = Math.floor(player.y);
-            const room = map[mapY][mapX];
-            if (room !== currentRoom && room !== 0 && roomTextures[room]) {
-                currentRoom = room;
-                roomIndicator.innerText = `Room: ${room}`;
-                preloadTextures({ [room]: roomTextures[room] }).then(() => {
-                    draw();
-                });
-            }
-        }
+//        function checkRoomTransition() {
+//            const mapX = Math.floor(player.x);
+//           const mapY = Math.floor(player.y);
+//            const room = map[mapY][mapX];
+//            if (room !== currentRoom && room !== 0 && roomTextures[room]) {
+//                currentRoom = room;
+//                roomIndicator.innerText = `Room: ${room}`;
+//                preloadTextures({ [room]: roomTextures[room] }).then(() => {
+//                    draw();
+//                });
+//            }
+//        }
 
         function castRay(angle) {
             let x = player.x;
@@ -214,7 +214,7 @@ layout: topbar
             if (skyTexture) {
                 const skyWidth = skyTexture.width;
                 const skyHeight = skyTexture.height;
-                const skyOffset = ((player.angle + 8* Math.PI) / (2 * Math.PI)) * skyWidth % skyWidth;
+                const skyOffset = ((player.angle*0.1 + 8* Math.PI) / (2 * Math.PI)) * skyWidth % skyWidth;
 
                 ctx.drawImage(skyTexture, skyOffset, 0, skyWidth - skyOffset, skyHeight, 0, 0, canvas.width, canvas.height / 2);
                 if (skyOffset > 0) {
@@ -226,7 +226,7 @@ layout: topbar
             if (floorTexture) {
                 const floorWidth = floorTexture.width;
                 const floorHeight = floorTexture.height;
-                const floorOffset = ((player.angle + 8* Math.PI) / (2 * Math.PI)) * floorWidth % floorWidth;
+                const floorOffset = ((player.angle*0.1 + 8* Math.PI) / (2 * Math.PI)) * floorWidth % floorWidth;
 
                 ctx.drawImage(floorTexture, floorOffset, 0, floorWidth - floorOffset, floorHeight, 0, canvas.height / 2, canvas.width, canvas.height / 2);
                 if (floorOffset > 0) {
@@ -251,12 +251,7 @@ layout: topbar
                     const textureWidth = 1;
                     const textureHeight = texture[0].height;
 
-                    ctx.drawImage(
-                        texture[0
-                        ],
-                        textureX, textureY, textureWidth, textureHeight,
-                        i, lineOffset, 1, lineHeight
-                    );
+                    ctx.drawImage(texture[0],textureX, textureY, textureWidth, textureHeight,i, lineOffset, 1,lineHeight);
                 } else {
                     ctx.fillStyle = 'black';
                     ctx.fillRect(i, lineOffset, 1, lineHeight);
@@ -275,7 +270,10 @@ layout: topbar
                 }
             }
             minimapCtx.fillStyle = 'red';
-            minimapCtx.fillRect(player.x * scale - scale / 4, player.y * scale - scale / 4, scale / 2, scale / 2);
+            minimapCtx.fillRect(player.x * scale - scale, player.y * scale - scale, scale, scale);
+
+            // Falta agregarle el display del FoV
+
         }
 
         function gameLoop() {
@@ -302,8 +300,8 @@ layout: topbar
                     const mapaMatch = script.match(/const map = (\[[\s\S]*?\]);/);
                     if (mapaMatch) {
                         map = JSON.parse(mapaMatch[1]);
-                        currentRoom = map[Math.floor(player.y)][Math.floor(player.x)];
-                        roomIndicator.innerText = `Room: ${currentRoom}`;
+                        //currentRoom = map[Math.floor(player.y)][Math.floor(player.x)];
+                        //roomIndicator.innerText = `Room: ${currentRoom}`;
                         gameLoop();
                     } else {
                         throw new Error('No se pudo encontrar el mapa en el script.');
