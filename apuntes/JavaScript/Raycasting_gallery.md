@@ -58,9 +58,9 @@ layout: topbar
 
         // Player settings
         const player = {
-            x: 15,
+            x: 20,
             y: 2,
-            angle: 0,
+            angle: 1,
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
