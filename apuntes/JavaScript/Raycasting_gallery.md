@@ -226,7 +226,7 @@ layout: topbar
             if (floorTexture) {
                 const floorWidth = floorTexture.width;
                 const floorHeight = floorTexture.height;
-                const floorOffset = ((player.angle*0.1 + 8* Math.PI) / (2 * Math.PI)) * floorWidth % floorWidth;
+                const floorOffset = ((player.angle*0.3 + 8* Math.PI) / (2 * Math.PI)) * floorWidth % floorWidth;
 
                 ctx.drawImage(floorTexture, floorOffset, 0, floorWidth - floorOffset, floorHeight, 0, canvas.height / 2, canvas.width, canvas.height / 2);
                 if (floorOffset > 0) {
