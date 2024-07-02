@@ -210,17 +210,32 @@ layout: topbar
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Dibujar cielo
+            // Dibujar cielo rotado
             if (skyTexture) {
-                ctx.drawImage(skyTexture, 0, 0, canvas.width, canvas.height / 2);
+                const skyWidth = skyTexture.width;
+                const skyHeight = skyTexture.height;
+                const skyOffset = ((player.angle + 8* Math.PI) / (2 * Math.PI)) * skyWidth % skyWidth;
+
+                ctx.drawImage(skyTexture, skyOffset, 0, skyWidth - skyOffset, skyHeight, 0, 0, canvas.width, canvas.height / 2);
+                if (skyOffset > 0) {
+                    ctx.drawImage(skyTexture, 0, 0, skyOffset, skyHeight, canvas.width - (skyOffset / skyWidth) * canvas.width, 0, (skyOffset / skyWidth) * canvas.width, canvas.height / 2);
+                }
             }
 
-            // Dibujar suelo
+            // Dibujar suelo rotado
             if (floorTexture) {
-                ctx.drawImage(floorTexture, 0, canvas.height / 2, canvas.width, canvas.height / 2);
+                const floorWidth = floorTexture.width;
+                const floorHeight = floorTexture.height;
+                const floorOffset = ((player.angle + 8* Math.PI) / (2 * Math.PI)) * floorWidth % floorWidth;
+
+                ctx.drawImage(floorTexture, floorOffset, 0, floorWidth - floorOffset, floorHeight, 0, canvas.height / 2, canvas.width, canvas.height / 2);
+                if (floorOffset > 0) {
+                    ctx.drawImage(floorTexture, 0, 0, floorOffset, floorHeight, canvas.width - (floorOffset / floorWidth) * canvas.width, canvas.height / 2, (floorOffset / floorWidth) * canvas.width, canvas.height / 2);
+                }
             }
 
-            const fov = Math.PI / 4;
+            // Dibujar paredes
+            const fov = Math.PI / 2;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
@@ -237,7 +252,8 @@ layout: topbar
                     const textureHeight = texture[0].height;
 
                     ctx.drawImage(
-                        texture[0],
+                        texture[0
+                        ],
                         textureX, textureY, textureWidth, textureHeight,
                         i, lineOffset, 1, lineHeight
                     );
@@ -259,7 +275,6 @@ layout: topbar
                 }
             }
             minimapCtx.fillStyle = 'red';
-            
             minimapCtx.fillRect(player.x * scale - scale / 4, player.y * scale - scale / 4, scale / 2, scale / 2);
         }
 
