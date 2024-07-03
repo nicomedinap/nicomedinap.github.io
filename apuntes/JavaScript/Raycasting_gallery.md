@@ -58,7 +58,7 @@ layout: topbar
 
         // Player settings
         const player = {
-            x: 20,
+            x: 5,
             y: 2,
             angle: 1,
             speed: 0,
@@ -237,7 +237,7 @@ layout: topbar
             // Dibujar paredes
             //Tamaño de la proyeccion en la pantalla
             const fov = Math.PI;
-            
+
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
