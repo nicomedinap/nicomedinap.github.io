@@ -41,12 +41,10 @@ layout: topbar
 </head>
 <body>
     <canvas id="gameCanvas"></canvas>
-    <!-- <div id="roomIndicator">Room: 1</div> -->
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        //const roomIndicator = document.getElementById('roomIndicator');
         const minimapCanvas = document.getElementById('minimapCanvas');
         const minimapCtx = minimapCanvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -56,7 +54,6 @@ layout: topbar
 
         let map = [];
 
-        // Player settings
         const player = {
             x: 5,
             y: 2,
@@ -156,8 +153,6 @@ layout: topbar
                 player.x = newX;
                 player.y = newY;
             }
-
-//            checkRoomTransition();
         }
 
         function isValidMove(newX, newY) {
@@ -171,19 +166,6 @@ layout: topbar
             }
             return true;
         }
-
-//        function checkRoomTransition() {
-//            const mapX = Math.floor(player.x);
-//           const mapY = Math.floor(player.y);
-//            const room = map[mapY][mapX];
-//            if (room !== currentRoom && room !== 0 && roomTextures[room]) {
-//                currentRoom = room;
-//                roomIndicator.innerText = `Room: ${room}`;
-//                preloadTextures({ [room]: roomTextures[room] }).then(() => {
-//                    draw();
-//                });
-//            }
-//        }
 
         function castRay(angle) {
             let x = player.x;
@@ -210,11 +192,10 @@ layout: topbar
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Dibujar cielo rotado
             if (skyTexture) {
                 const skyWidth = skyTexture.width;
                 const skyHeight = skyTexture.height;
-                const skyOffset = ((player.angle*0.1 + 8* Math.PI) / (2 * Math.PI)) * skyWidth % skyWidth;
+                const skyOffset = ((player.angle * 0.1 + 8 * Math.PI) / (2 * Math.PI)) * skyWidth % skyWidth;
 
                 ctx.drawImage(skyTexture, skyOffset, 0, skyWidth - skyOffset, skyHeight, 0, 0, canvas.width, canvas.height / 2);
                 if (skyOffset > 0) {
@@ -222,11 +203,10 @@ layout: topbar
                 }
             }
 
-            // Dibujar suelo rotado
             if (floorTexture) {
                 const floorWidth = floorTexture.width;
                 const floorHeight = floorTexture.height;
-                const floorOffset = ((player.angle*0.3 + 8* Math.PI) / (2 * Math.PI)) * floorWidth % floorWidth;
+                const floorOffset = ((player.angle * 0.3 + 8 * Math.PI) / (2 * Math.PI)) * floorWidth % floorWidth;
 
                 ctx.drawImage(floorTexture, floorOffset, 0, floorWidth - floorOffset, floorHeight, 0, canvas.height / 2, canvas.width, canvas.height / 2);
                 if (floorOffset > 0) {
@@ -234,21 +214,18 @@ layout: topbar
                 }
             }
 
-            // Dibujar paredes
-            //Tamaño de la proyeccion en la pantalla
             const fov = Math.PI;
-
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - fov / 2 + i * rayAngleStep;
                 const { dist, texture, hitOffset } = castRay(rayAngle);
-                const lineHeight = Math.min(canvas.height, canvas.height / dist);
+                const lineHeight = canvas.height / dist;
                 const lineOffset = (canvas.height - lineHeight) / 2;
 
                 if (texture) {
-                     const textureX = Math.floor(hitOffset * texture[0].width);
+                    const textureX = Math.floor(hitOffset * texture[0].width);
                     const textureY = 0;
                     const textureWidth = 1;
                     const textureHeight = texture[0].height;
@@ -260,7 +237,6 @@ layout: topbar
                 }
             }
 
-            // Dibujar minimapa
             minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
             const scale = minimapCanvas.width / map[0].length;
             minimapCtx.fillStyle = 'white';
@@ -301,7 +277,7 @@ layout: topbar
                 .then(() => fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js'))
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Error al cargar Mapa.js');
+                        throw new Error('Error al cargar CalleLarga.js');
                     }
                     return response.text();
                 })
