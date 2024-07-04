@@ -1,0 +1,62 @@
+[
+  {
+    "question": "¿Cuál es el planeta más grande del Sistema Solar?",
+    "options": ["Tierra", "Marte", "Júpiter", "Saturno"],
+    "answer": "Júpiter"
+  },
+  {
+    "question": "¿Qué tipo de estrella es el Sol?",
+    "options": ["Enana roja", "Gigante roja", "Enana amarilla", "Supergigante azul"],
+    "answer": "Enana amarilla"
+  },
+  {
+    "question": "¿Cuál es el satélite natural más grande de Saturno?",
+    "options": ["Europa", "Ganímedes", "Titán", "Calisto"],
+    "answer": "Titán"
+  },
+  {
+    "question": "¿Qué galaxia es la más cercana a la Vía Láctea?",
+    "options": ["Galaxia de Andrómeda", "Galaxia del Triángulo", "Galaxia de Sombrero", "Galaxia de Bode"],
+    "answer": "Galaxia de Andrómeda"
+  },
+  {
+    "question": "¿Qué es un agujero negro?",
+    "options": [
+      "Una estrella en explosión",
+      "Un área en el espacio donde la gravedad es tan fuerte que ni siquiera la luz puede escapar",
+      "Un planeta muy grande",
+      "Una nube de gas y polvo"
+    ],
+    "answer": "Un área en el espacio donde la gravedad es tan fuerte que ni siquiera la luz puede escapar"
+  },
+  {
+    "question": "¿Qué son las Pléyades?",
+    "options": ["Un tipo de estrella", "Un cúmulo de estrellas", "Una galaxia", "Un planeta"],
+    "answer": "Un cúmulo de estrellas"
+  },
+  {
+    "question": "¿Qué planeta tiene un sistema de anillos prominente?",
+    "options": ["Mercurio", "Venus", "Tierra", "Saturno"],
+    "answer": "Saturno"
+  },
+  {
+    "question": "¿Qué es la Nebulosa de Orión?",
+    "options": ["Un agujero negro", "Una estrella enana", "Una nube de gas y polvo", "Un planeta"],
+    "answer": "Una nube de gas y polvo"
+  },
+  {
+    "question": "¿Cuál es el nombre de la primera sonda espacial que aterrizó en Marte?",
+    "options": ["Voyager 1", "Mariner 4", "Viking 1", "Pioneer 10"],
+    "answer": "Viking 1"
+  },
+  {
+    "question": "¿Qué es la radiación cósmica de fondo?",
+    "options": [
+      "La radiación emitida por el Sol",
+      "La radiación emitida por las estrellas",
+      "La radiación remanente del Big Bang",
+      "La radiación emitida por los agujeros negros"
+    ],
+    "answer": "La radiación remanente del Big Bang"
+  }
+]
