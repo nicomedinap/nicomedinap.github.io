@@ -287,7 +287,12 @@ layout: topbar
         function init() {
             handleInput();
             fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar textures.json');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     skyTextureUrl = data.skyTexture;
                     floorTextureUrl = data.floorTexture;
@@ -297,19 +302,24 @@ layout: topbar
                 })
                 .then(() => preloadTextures(roomTextures))
                 .then(() => fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js'))
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar Mapa.js');
+                    }
+                    return response.text();
+                })
                 .then(script => {
                     const mapaMatch = script.match(/const map = (\[[\s\S]*?\]);/);
                     if (mapaMatch) {
                         map = JSON.parse(mapaMatch[1]);
-                        //currentRoom = map[Math.floor(player.y)][Math.floor(player.x)];
-                        //roomIndicator.innerText = `Room: ${currentRoom}`;
                         gameLoop();
                     } else {
                         throw new Error('No se pudo encontrar el mapa en el script.');
                     }
                 })
-                .catch(console.error);
+                .catch(error => {
+                    console.error('Error durante la inicialización:', error);
+                });
         }
 
         init();
