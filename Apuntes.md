@@ -34,5 +34,5 @@ Comparadores de imágenes:
 * [La tarántula](https://nicomedinap.github.io/Galeria/CompararImagenes/Tarantula_VISTA_JWST.html)
 * [M16](https://nicomedinap.github.io/Galeria/CompararImagenes/M16_HST_JWST.html)
 
-[Sugerir preguntas](hhttps://nicomedinap.github.io/apuntes/JavaScript/SugerirPreguntas/SugerirPreguntas.html)
+[Sugerir preguntas](https://nicomedinap.github.io/apuntes/JavaScript/SugerirPreguntas/SugerirPreguntas.html)
 
