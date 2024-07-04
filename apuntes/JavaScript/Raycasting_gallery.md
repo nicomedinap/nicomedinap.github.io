@@ -29,8 +29,8 @@ layout: topbar
             position: absolute;
             top: 50px;
             right: 20px;
-            width: 150px;
-            height: 150px;
+            width: 50px;
+            height: 250px;
             background-color: rgba(0, 0, 0, 0.5);
         }
         #minimap canvas {
@@ -52,7 +52,7 @@ layout: topbar
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         minimapCanvas.width = 100;
-        minimapCanvas.height = 100;
+        minimapCanvas.height = 600;
 
         let map = [];
 
@@ -248,12 +248,12 @@ layout: topbar
                 const lineOffset = (canvas.height - lineHeight) / 2;
 
                 if (texture) {
-                    const textureX = Math.floor(hitOffset * texture[0].width);
+                     const textureX = Math.floor(hitOffset * texture[0].width);
                     const textureY = 0;
                     const textureWidth = 1;
                     const textureHeight = texture[0].height;
 
-                    ctx.drawImage(texture[0],textureX, textureY, textureWidth, textureHeight,i, lineOffset, 1,lineHeight);
+                    ctx.drawImage(texture[0], textureX, textureY, textureWidth, textureHeight, i, lineOffset, 1, lineHeight);
                 } else {
                     ctx.fillStyle = 'black';
                     ctx.fillRect(i, lineOffset, 1, lineHeight);
@@ -273,9 +273,6 @@ layout: topbar
             }
             minimapCtx.fillStyle = 'red';
             minimapCtx.fillRect(player.x * scale - scale, player.y * scale - scale, scale, scale);
-
-            // Falta agregarle el display del FoV
-
         }
 
         function gameLoop() {
@@ -294,14 +291,14 @@ layout: topbar
                     return response.json();
                 })
                 .then(data => {
-                    skyTextureUrl = data.skyTexture;
-                    floorTextureUrl = data.floorTexture;
-                    roomTextures = data.roomTextures;
+                    const skyTextureUrl = data.skyTexture;
+                    const floorTextureUrl = data.floorTexture;
+                    const roomTextures = data.roomTextures;
 
-                    return preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl);
+                    return preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl)
+                        .then(() => preloadTextures(roomTextures));
                 })
-                .then(() => preloadTextures(roomTextures))
-                .then(() => fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js'))
+                .then(() => fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js'))
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Error al cargar Mapa.js');
