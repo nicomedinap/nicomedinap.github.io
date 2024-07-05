@@ -75,7 +75,7 @@ layout: topbar
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
-            maxDistanceToTexture: 3 // Distancia máxima para texturizar las paredes
+            maxDistanceToTexture: 2 // Distancia máxima para texturizar las paredes
         };
 
         let currentRoom = null;
@@ -228,7 +228,7 @@ layout: topbar
                 }
             }
 
-            const fov = Math.PI;
+            const fov = Math.PI/2;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
@@ -266,9 +266,12 @@ layout: topbar
         }
 
         function gameLoop() {
-            update();
-            draw();
-            requestAnimationFrame(gameLoop);
+            update(); // Actualiza la lógica del juego
+            draw(); // Renderiza el juego en pantalla
+
+            setTimeout(() => {
+                requestAnimationFrame(gameLoop);
+            }, 1000 / 60); // Limita a aproximadamente 60 FPS
         }
 
         function loadMap(mapUrl) {
