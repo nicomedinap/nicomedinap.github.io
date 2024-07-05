@@ -50,8 +50,8 @@ layout: topbar
 </head>
 <body>
     <select id="mapSelect">
-        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 3</option>
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/test_mapa.js">Mapa 1</option>
     </select>
     <canvas id="gameCanvas"></canvas>
@@ -238,7 +238,7 @@ layout: topbar
                 }
             }
 
-            const fov = Math.PI/2;
+            const fov = Math.PI/4;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
