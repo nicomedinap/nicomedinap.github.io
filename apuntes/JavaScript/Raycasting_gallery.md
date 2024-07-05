@@ -53,7 +53,6 @@ layout: topbar
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 3</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/test_mapa.js">Mapa 1</option>
-
     </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
@@ -76,7 +75,7 @@ layout: topbar
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
-            maxDistanceToTexture: 1
+            maxDistanceToTexture: 3 // Distancia máxima para texturizar las paredes
         };
 
         let currentRoom = null;
@@ -239,7 +238,7 @@ layout: topbar
                 const lineHeight = canvas.height / dist;
                 const lineOffset = (canvas.height - lineHeight) / 2;
 
-                if (texture) {
+                if (dist <= player.maxDistanceToTexture && texture) {
                     const textureX = Math.floor(hitOffset * texture[0].width);
                     const textureY = 0;
                     const textureWidth = 1;
@@ -330,4 +329,3 @@ layout: topbar
     </script>
 </body>
 </html>
-
