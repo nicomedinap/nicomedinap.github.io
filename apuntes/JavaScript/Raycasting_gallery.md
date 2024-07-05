@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+---
+layout: topbar
+---
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,7 +27,7 @@
         }
         #minimap {
             position: absolute;
-            top: 50px;
+            top: 70px;
             right: 20px;
             width: 50px;
             height: 250px;
@@ -36,7 +39,7 @@
         }
         #mapSelect {
             position: absolute;
-            top: 10px;
+            top: 30px;
             right: 10px;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
