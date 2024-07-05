@@ -75,7 +75,7 @@ layout: topbar
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
-            maxDistanceToTexture: 2 // Distancia máxima para texturizar las paredes
+            maxDistanceToTexture: 5 // Distancia máxima para texturizar las paredes
         };
 
         let currentRoom = null;
@@ -186,21 +186,31 @@ layout: topbar
             let y = player.y;
             const sin = Math.sin(angle);
             const cos = Math.cos(angle);
+            let hitOffset = 0; // Offset de la intersección del rayo con la celda
 
             while (true) {
-                x += cos * 0.01;
-                y += sin * 0.01;
+                x += cos * 0.03;
+                y += sin * 0.03;
                 const mapX = Math.floor(x);
                 const mapY = Math.floor(y);
 
                 if (map[mapY][mapX] !== 0) {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
-                    const hitX = x - mapX;
-                    const hitY = y - mapY;
-                    const hitOffset = Math.abs(hitX) > Math.abs(hitY) ? hitX : hitY;
+
+                    // Determina el offset de la intersección (hitOffset) para aplicar la textura
+                    if (Math.abs(cos) > Math.abs(sin)) {
+                        hitOffset = y - Math.floor(y); // Ajusta hitOffset según la dirección vertical
+                    } else {
+                        hitOffset = x - Math.floor(x); // Ajusta hitOffset según la dirección horizontal
+                    }
+
+                    // Asegura que hitOffset esté en el rango [0, 1)
+                    if (hitOffset < 0) hitOffset += 1;
+
                     return { dist, texture: textures[map[mapY][mapX]], hitOffset, mapX, mapY };
                 }
             }
+
         }
 
         function draw() {
