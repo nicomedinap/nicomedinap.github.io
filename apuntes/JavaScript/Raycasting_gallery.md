@@ -1,7 +1,4 @@
----
-layout: topbar
----
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,9 +34,24 @@ layout: topbar
             width: 100%;
             height: 100%;
         }
+        #mapSelect {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
+    <select id="mapSelect">
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 3</option>
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/test_mapa.js">Mapa 1</option>
+
+    </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
     <script>
@@ -257,8 +269,36 @@ layout: topbar
             requestAnimationFrame(gameLoop);
         }
 
+        function loadMap(mapUrl) {
+            fetch(mapUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar el mapa');
+                    }
+                    return response.text();
+                })
+                .then(script => {
+                    const mapaMatch = script.match(/const map = (\[[\s\S]*?\]);/);
+                    if (mapaMatch) {
+                        map = JSON.parse(mapaMatch[1]);
+                        gameLoop();
+                    } else {
+                        throw new Error('No se pudo encontrar el mapa en el script.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar el mapa:', error);
+                });
+        }
+
         function init() {
             handleInput();
+            const mapSelect = document.getElementById('mapSelect');
+            mapSelect.addEventListener('change', (event) => {
+                const selectedMap = event.target.value;
+                loadMap(selectedMap);
+            });
+
             fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
                 .then(response => {
                     if (!response.ok) {
@@ -274,21 +314,9 @@ layout: topbar
                     return preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl)
                         .then(() => preloadTextures(roomTextures));
                 })
-                .then(() => fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js'))
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al cargar CalleLarga.js');
-                    }
-                    return response.text();
-                })
-                .then(script => {
-                    const mapaMatch = script.match(/const map = (\[[\s\S]*?\]);/);
-                    if (mapaMatch) {
-                        map = JSON.parse(mapaMatch[1]);
-                        gameLoop();
-                    } else {
-                        throw new Error('No se pudo encontrar el mapa en el script.');
-                    }
+                .then(() => {
+                    const initialMap = mapSelect.value;
+                    loadMap(initialMap);
                 })
                 .catch(error => {
                     console.error('Error durante la inicialización:', error);
@@ -299,3 +327,4 @@ layout: topbar
     </script>
 </body>
 </html>
+
