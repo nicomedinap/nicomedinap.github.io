@@ -186,7 +186,7 @@ layout: topbar
             let y = player.y;
             const sin = Math.sin(angle);
             const cos = Math.cos(angle);
-            const stepSize = 0.015;
+            const stepSize = 0.02;
 
             while (true) {
                 x += cos * stepSize;
@@ -195,9 +195,9 @@ layout: topbar
                 const mapY = Math.floor(y);
 
                 // Verificar si los índices están dentro del rango del mapa
-                if (mapY < 0 || mapY >= map.length || mapX < 0 || mapX >= map[0].length) {
-                    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY }; // Retornar una distancia infinita si está fuera del mapa
-                }
+                //if (mapY < 0 || mapY >= map.length || mapX < 0 || mapX >= map[0].length) {
+                //    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY }; // Retornar una distancia infinita si está fuera del mapa
+                //}
 
                 if (map[mapY][mapX] !== 0) {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);

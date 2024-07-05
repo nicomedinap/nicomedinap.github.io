@@ -1,6 +1,6 @@
 {
     "skyTexture": "https://content.nationalgeographic.com.es/medio/2018/01/22/la-via-lactea-es-mayormente-plana_9fd1ebf7.jpg",
-    "floorTexture": "https://images.unsplash.com/photo-1700583610959-77205bbc1309?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZsb29yJTIwdGV4dHVyZXxlbnwwfHwwfHx8MA%3D%3D",
+    "floorTexture": "https://cdn.pixabay.com/photo/2014/06/16/23/39/black-370118_1280.png",
     "roomTextures": {
     "2": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/201.jpg",
     "3": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC1087/012.jpg",
@@ -8,7 +8,7 @@
     "5": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/120.jpg",
     "6": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/LDN1527/5.jpg",
     "7": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/210.jpg",
-    "8": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/LDN1527/2.jpg"
- }
+    "8": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/LDN1527/1.jpg"
+}
 
 }
