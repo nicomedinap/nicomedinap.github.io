@@ -186,22 +186,33 @@ layout: topbar
             let y = player.y;
             const sin = Math.sin(angle);
             const cos = Math.cos(angle);
-            let hitOffset = 0; // Offset de la intersección del rayo con la celda
+            const stepSize = 0.015;
 
             while (true) {
-                x += cos * 0.03;
-                y += sin * 0.03;
+                x += cos * stepSize;
+                y += sin * stepSize;
                 const mapX = Math.floor(x);
                 const mapY = Math.floor(y);
+
+                // Verificar si los índices están dentro del rango del mapa
+                if (mapY < 0 || mapY >= map.length || mapX < 0 || mapX >= map[0].length) {
+                    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY }; // Retornar una distancia infinita si está fuera del mapa
+                }
 
                 if (map[mapY][mapX] !== 0) {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
 
                     // Determina el offset de la intersección (hitOffset) para aplicar la textura
-                    if (Math.abs(cos) > Math.abs(sin)) {
-                        hitOffset = y - Math.floor(y); // Ajusta hitOffset según la dirección vertical
+                    let hitOffset;
+                    const deltaX = x - mapX;
+                    const deltaY = y - mapY;
+
+                    if (Math.abs(deltaX) < stepSize) {
+                        hitOffset = deltaY % 1;
+                        if (cos < 0) hitOffset = 1 - hitOffset; // Cara izquierda
                     } else {
-                        hitOffset = x - Math.floor(x); // Ajusta hitOffset según la dirección horizontal
+                        hitOffset = deltaX % 1;
+                        if (sin < 0) hitOffset = 1 - hitOffset; // Cara superior
                     }
 
                     // Asegura que hitOffset esté en el rango [0, 1)
@@ -210,8 +221,8 @@ layout: topbar
                     return { dist, texture: textures[map[mapY][mapX]], hitOffset, mapX, mapY };
                 }
             }
-
         }
+
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
