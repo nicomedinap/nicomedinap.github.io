@@ -27,7 +27,7 @@ layout: topbar
         }
         #minimap {
             position: absolute;
-            top: 70px;
+            top: 90px;
             right: 20px;
             width: 50px;
             height: 250px;
@@ -39,7 +39,7 @@ layout: topbar
         }
         #mapSelect {
             position: absolute;
-            top: 30px;
+            top: 50px;
             right: 10px;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
