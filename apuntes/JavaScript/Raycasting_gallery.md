@@ -215,8 +215,8 @@ layout: topbar
                         if (sin < 0) hitOffset = 1 - hitOffset; // Cara superior
                     }
 
-                    // Asegura que hitOffset esté en el rango [0, 1)
-                    //if (hitOffset < 0) hitOffset += 1;
+                     Asegura que hitOffset esté en el rango [0, 1)
+                    if (hitOffset < 0) hitOffset += 1;
 
                     return { dist, texture: textures[map[mapY][mapX]], hitOffset, mapX, mapY };
                 }
