@@ -249,7 +249,7 @@ layout: topbar
                 }
             }
 
-            const fov = Math.PI/4;
+            const fov = Math.PI/2;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
