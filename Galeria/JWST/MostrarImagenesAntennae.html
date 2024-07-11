@@ -1,0 +1,65 @@
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
+<!-- CSS Publico -->
+<link rel="stylesheet" href="/public/css/galeria.css">
+
+<body>
+
+	<div class="Boton_volver">
+		<a href="https://nicomedinap.github.io/Galeria/JWST.html">A la galeria</a>
+	</div>
+
+	<div class="BarraBotones">
+		<a href=" ">Anterior</a>
+		<a class="active" href="#home">SNH0pe-2b</a>
+		<a href=" ">Siguiente</a>
+	</div>
+
+	<div class="Contenido">
+		<div class="CajaInfo" > 
+			<h1 class="page_title"> El Campo de galaxias SNH0pe-2b </h1>
+
+			<p> 
+			Una de las características más interesantes de los cúmulos de galaxias masivos es que actúa como un "lente gravitatorio" y, así dobla, magnifica y distorsiona la luz de objetos más distantes detrás de él, creando imágenes semi coherentes distorsionadas y magnificadas de los objetos de fondo.
+			</p>
+
+			<p> 
+			Es posible utilizar estas imágenes distorsionadas para estudiar la distribución de masa en los cúmulos de galaxias, así como para investigar la naturaleza de la materia oscura, una forma de materia que no emite luz pero que se cree que es responsable de la mayor parte de la masa del universo.
+			</p>
+
+			<p> 
+			En este caso, el campo de galaxias etiquetado como "SNH0pe-2b". Liberada el día 23 de abril del 2023, no hay mayor información sobre su origen. Indagando en internet y de <a href="https://www.astrobin.com/dzfyf7/" target="_blank"> manera no oficial</a>, se informa que la NIRCAM está siendo utilizado en el marco del proyecto "SN H0pe" para medir la constante de Hubble de manera independiente. Para ello, están observando la supernova SNH0pe-2b en un cúmulo gravitacionalmente lentificado, lo que permite ver la misma supernova, pero a diferentes desplazamientos al rojo de manera simultánea. Esta técnica se basa en el retraso temporal de las imágenes de la supernova debida al efecto de lente gravitatoria del cúmulo, lo que permite medir la constante de Hubble de manera independiente.
+			</p>
+		</div>
+
+		<div class="imagen">
+
+			<div class="imagen-chica">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/SNH0pe-2b/012.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/SNH0pe-2b/021.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/SNH0pe-2b/102.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/SNH0pe-2b/120.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/SNH0pe-2b/201.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/SNH0pe-2b/210.jpg" onclick="Desplegar(this)">
+			</div>
+
+			<div class="imagen-grande">
+				<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/SNH0pe-2b/012.jpg" >
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function Desplegar(ImagenChica){
+			var ImagenGrande = document.getElementById("CajaDeImagenes");
+			ImagenGrande.src = ImagenChica.src; 
+		}
+	</script>
+</body>
+
+</html>
