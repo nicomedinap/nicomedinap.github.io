@@ -37,15 +37,9 @@ layout: topbar
             transition: transform 0.3s ease, opacity 0.3s ease; /* Agrega transición para la opacidad */
         }
 
-        /* Espejar la imagen 1 */
-        #image1 {
-            transform: scaleX(-1);
-            transform: scaleY(-1)
-        }
-
         .controls {
             position: absolute;
-            top: 80%; /* Ajusta la posición vertical de los controles */
+            top: 0%; /* Ajusta la posición vertical de los controles */
             left: 0;
             width: 100%;
             display: flex;
@@ -61,7 +55,7 @@ layout: topbar
         }
 
         .controls input[type="range"] {
-            width: 400px;
+            width: 100px;
         }
 
         #showValuesBtn {
@@ -86,10 +80,10 @@ layout: topbar
             }
 
             .controls input[type="range"] {
-                width: 50%; /* Ajusta el tamaño de los controles si es necesario */
+                width: 40%; /* Ajusta el tamaño de los controles si es necesario */
             }
             .controls {
-                top: 80%; /* Ajusta la posición vertical en dispositivos móviles */
+                top: 60%; /* Ajusta la posición vertical en dispositivos móviles */
             }
 
             .h1 {
@@ -108,7 +102,7 @@ layout: topbar
         }
 
         input[type="range"]::-moz-range-thumb {
-            width: 10px; /* Ancho del círculo */
+            width: 20px; /* Ancho del círculo */
             height: 20px; /* Altura del círculo */
             border-radius: 50%; /* Hacerlo circular */
             background: #007bff; /* Color del círculo */
@@ -226,7 +220,7 @@ layout: topbar
 
                 if (isMobile) {
                     // Valores iniciales para celu
-                    scaleSlider1.value = '1.35';
+                    scaleSlider1.value = '1.3';
                     angleSlider1.value = '19.5';
                     opacitySlider1.value = '1';
                     xposSlider1.value = '10';
@@ -235,8 +229,8 @@ layout: topbar
                     scaleSlider2.value = '2';
                     angleSlider2.value = '3';
                     opacitySlider2.value = '1';
-                    xposSlider2.value = '-30';
-                    yposSlider2.value = '65';
+                    xposSlider2.value = '-23';
+                    yposSlider2.value = '55';
                 } else {
                     // Valores iniciales para pantallas más grandes
                     scaleSlider1.value = '1.1';
