@@ -101,7 +101,7 @@ layout: topbar
             <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/Antennae/012.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies/012.jpg')" ontouchstart="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg')" ontouchend="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies/012.jpg')" oncontextmenu="return false;">
                 <img class="article-image" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies/012.jpg" alt="Antennae">
                 <div class="article-preview">
-                    <h2>Nebulosa de la tarántula</h2>
+                    <h2>Galaxias de las antenas</h2>
                     <p>HST-JWST</p>
                 </div>
             </article>
