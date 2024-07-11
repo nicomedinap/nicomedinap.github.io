@@ -37,9 +37,15 @@ layout: topbar
             transition: transform 0.3s ease, opacity 0.3s ease; /* Agrega transición para la opacidad */
         }
 
+        /* Espejar la imagen 1 */
+        #image1 {
+            transform: scaleX(-1);
+            transform: scaleY(-1)
+        }
+
         .controls {
             position: absolute;
-            top: 87%; /* Ajusta la posición vertical de los controles */
+            top: 80%; /* Ajusta la posición vertical de los controles */
             left: 0;
             width: 100%;
             display: flex;
@@ -51,15 +57,15 @@ layout: topbar
 
         .controls label {
             font-weight: bold;
-            font-size: 15px;
+            font-size: 10px;
         }
 
         .controls input[type="range"] {
-            width: 450px;
+            width: 400px;
         }
 
         #showValuesBtn {
-            margin-top: 20px;
+            margin-top: 40px;
             margin-left: 40%;
             padding: 10px 20px;
             background-color: #007bff;
@@ -123,16 +129,16 @@ layout: topbar
                 <!-- Controles adicionales para la Imagen 1 -->
                 <div class="extra-controls">
                     <label for="scale1">Escala Imagen 1:</label>
-                    <input type="range" id="scale1" min="0.5" max="2" step="0.1" value="1.3">
+                    <input type="range" id="scale1" min="0.5" max="2" step="0.05" value="1">
                     <br>
                     <label for="angle1">Ángulo Imagen 1:</label>
-                    <input type="range" id="angle1" min="-90" max="90" step="1" value="-3">
+                    <input type="range" id="angle1" min="-90" max="90" step="0.5" value="19.5">
                     <br>
                     <label for="xpos1">Pos X Imagen 1:</label>
-                    <input type="range" id="xpos1" min="-150" max="250" step="1" value="1">
+                    <input type="range" id="xpos1" min="-150" max="250" step="1" value="33">
                     <br>
                     <label for="ypos1">Pos Y Imagen 1:</label>
-                    <input type="range" id="ypos1" min="-120" max="270" step="1" value="13">
+                    <input type="range" id="ypos1" min="-120" max="270" step="1" value="20">
                     <br>
                     <!-- Control de opacidad para la Imagen 1 -->
                     <label for="opacity1">Opacidad Imagen 1:</label>
@@ -145,16 +151,16 @@ layout: topbar
                 <!-- Controles adicionales para la Imagen 2 -->
                 <div class="extra-controls">
                     <label for="scale2">Escala Imagen 2:</label>
-                    <input type="range" id="scale2" min="0.5" max="2" step="0.1" value="1.5">
+                    <input type="range" id="scale2" min="0.5" max="2" step="0.05" value="1.55">
                     <br>
                     <label for="angle2">Ángulo Imagen 2:</label>
-                    <input type="range" id="angle2" min="-90" max="90" step="1" value="-16">
+                    <input type="range" id="angle2" min="-90" max="90" step="0.5" value="3">
                     <br>
                     <label for="xpos2">Pos X Imagen 2:</label>
-                    <input type="range" id="xpos2" min="-150" max="50" step="1" value="0">
+                    <input type="range" id="xpos2" min="-100" max="100" step="1" value="-27">
                     <br>
                     <label for="ypos2">Pos Y Imagen 2:</label>
-                    <input type="range" id="ypos2" min="-150" max="60" step="1" value="-45">
+                    <input type="range" id="ypos2" min="-100" max="100" step="1" value="60">
                     <br>
                 </div>
             <div class="controls">
@@ -220,30 +226,30 @@ layout: topbar
 
                 if (isMobile) {
                     // Valores iniciales para celu
-                    scaleSlider1.value = '2';
-                    angleSlider1.value = '20';
+                    scaleSlider1.value = '1.7';
+                    angleSlider1.value = '19.5';
                     opacitySlider1.value = '1';
-                    xposSlider1.value = '58';
-                    yposSlider1.value = '61';
+                    xposSlider1.value = '33';
+                    yposSlider1.value = '20';
 
-                    scaleSlider2.value = '1.2';
-                    angleSlider2.value = '-25';
+                    scaleSlider2.value = '2';
+                    angleSlider2.value = '3';
                     opacitySlider2.value = '1';
-                    xposSlider2.value = '-6';
-                    yposSlider2.value = '-80';
+                    xposSlider2.value = '-27';
+                    yposSlider2.value = '60';
                 } else {
                     // Valores iniciales para pantallas más grandes
-                    scaleSlider1.value = '1.8';
-                    angleSlider1.value = '31';
+                    scaleSlider1.value = '1.1';
+                    angleSlider1.value = '19.5';
                     opacitySlider1.value = '1';
-                    xposSlider1.value = '117';
-                    yposSlider1.value = '170';
+                    xposSlider1.value = '33';
+                    yposSlider1.value = '20';
 
-                    scaleSlider2.value = '1.1';
-                    angleSlider2.value = '-15';
+                    scaleSlider2.value = '1.7';
+                    angleSlider2.value = '3';
                     opacitySlider2.value = '1';
-                    xposSlider2.value = '-67';
-                    yposSlider2.value = '-150';
+                    xposSlider2.value = '-27';
+                    yposSlider2.value = '60';
                 }
 
                 updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1);
