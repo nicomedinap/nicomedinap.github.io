@@ -18,7 +18,7 @@ telescopio: JWST
 
 <style>
 /* Link a imágenes ========== */
-.box-12 .inner {
+.box-13 .inner {
     background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/Antennae/portada.jpg');
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -131,7 +131,7 @@ telescopio: JWST
                 </div>
             </div>
 
-            <div class="test_box box-12 col-xs-6 col-md-4">
+            <div class="test_box box-13 col-xs-6 col-md-4">
                 <div class="inner">
                     <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesAntennae.html" class="test_click">
                         <div class="flex_this">
