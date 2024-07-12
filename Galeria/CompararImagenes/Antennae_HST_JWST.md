@@ -39,7 +39,7 @@ layout: topbar
 
         .controls {
             position: absolute;
-            top: 0%; /* Ajusta la posición vertical de los controles */
+            top: 85%; /* Ajusta la posición vertical de los controles */
             left: 0;
             width: 100%;
             display: flex;
@@ -83,7 +83,7 @@ layout: topbar
                 width: 40%; /* Ajusta el tamaño de los controles si es necesario */
             }
             .controls {
-                top: 60%; /* Ajusta la posición vertical en dispositivos móviles */
+                top: 80%; /* Ajusta la posición vertical en dispositivos móviles */
             }
 
             .h1 {
