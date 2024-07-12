@@ -39,14 +39,14 @@ layout: topbar
 
         .controls {
             position: absolute;
-            top: 85%; /* Ajusta la posición vertical de los controles */
+            top: 88%; /* Ajusta la posición vertical de los controles */
             left: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
             padding: 0 0px;
             z-index: 3;
-            background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco transparente */
+            background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco transparente */
         }
 
         .controls label {
@@ -55,7 +55,7 @@ layout: topbar
         }
 
         .controls input[type="range"] {
-            width: 100px;
+            width: 50%;
         }
 
         #showValuesBtn {
@@ -76,14 +76,14 @@ layout: topbar
         /* CSS para dispositivos móviles */
         @media screen and (max-width: 500px) {
             .controls label {
-                font-size: 6px; /* Ajusta el tamaño de la fuente según tus preferencias */
+                font-size: 5px; /* Ajusta el tamaño de la fuente según tus preferencias */
             }
 
             .controls input[type="range"] {
-                width: 40%; /* Ajusta el tamaño de los controles si es necesario */
+                width: 45%; /* Ajusta el tamaño de los controles si es necesario */
             }
             .controls {
-                top: 80%; /* Ajusta la posición vertical en dispositivos móviles */
+                top: 88%; /* Ajusta la posición vertical en dispositivos móviles */
             }
 
             .h1 {
@@ -145,7 +145,7 @@ layout: topbar
                 <!-- Controles adicionales para la Imagen 2 -->
                 <div class="extra-controls">
                     <label for="scale2">Escala Imagen 2:</label>
-                    <input type="range" id="scale2" min="0.5" max="2" step="0.05" value="1.55">
+                    <input type="range" id="scale2" min="0.5" max="4" step="0.05" value="1.55">
                     <br>
                     <label for="angle2">Ángulo Imagen 2:</label>
                     <input type="range" id="angle2" min="-90" max="90" step="0.5" value="3">
