@@ -46,7 +46,7 @@ layout: topbar
             justify-content: space-between;
             padding: 0 0px;
             z-index: 3;
-            background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco transparente */
+            background-color: rgba(255, 255, 255, 0.4); /* Fondo blanco transparente */
         }
 
         .controls label {
@@ -112,7 +112,7 @@ layout: topbar
     </style>
 </head>
 <body>
-    <h1>Galaxias de las antenas o "Antennae galaxies" a través de los telescopios Hubble y JWST</h1>
+    <h2>Galaxias de las antenas o "Antennae galaxies" a través de los telescopios Hubble y JWST</h2>
     <div class="checkbox-container">
         <label for="modifyParams">Modificar Parámetros:</label>
         <input type="checkbox" id="modifyParams">
