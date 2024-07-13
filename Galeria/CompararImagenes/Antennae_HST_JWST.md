@@ -46,7 +46,7 @@ layout: topbar
             justify-content: space-between;
             padding: 0 0px;
             z-index: 3;
-            background-color: rgba(255, 255, 255, 0.4); /* Fondo blanco transparente */
+            background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco transparente */
         }
 
         .controls label {
@@ -109,9 +109,50 @@ layout: topbar
             cursor: pointer;
         }
 
+                .info-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+        }
+
+        .info-column {
+            flex: 1; /* Each column takes equal space */
+            padding: 10px;
+            border-right: 1px solid #ccc; /* Border between columns */
+        }
+
+        .info-column:last-child {
+            border-right: none; /* Remove border on the last column */
+        }
+
+        .info-column h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .info-column p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        @media screen and (max-width: 500px) {
+            .info-container {
+                flex-direction: column; /* Stack columns vertically on small screens */
+            }
+            .info-column {
+                border-right: none; /* Remove border between columns on small screens */
+                margin-bottom: 10px; /* Add margin between columns on small screens */
+                font-size: 10px;
+            }
+        }
+
     </style>
 </head>
 <body>
+
     <h2>Galaxias de las antenas o "Antennae galaxies" a través de los telescopios Hubble y JWST</h2>
     <div class="checkbox-container">
         <label for="modifyParams">Modificar Parámetros:</label>
@@ -295,5 +336,23 @@ layout: topbar
             window.addEventListener('resize', initializeImages);
         });
     </script>
+
+    <div class="info-container">
+        <div class="info-column">
+            <h2>Información Técnica</h2>
+            <p>Imagen de fondo: Telescopio James Webb (JWST)</p>
+            <p><strong>Fecha de Observación:</strong> 2023</p>
+            <p><strong>Instrumento:</strong>NIRcam</p>
+            <p><strong>Filtros:</strong> f150w, f187n</p>
+        </div>
+        <div class="info-column">
+            <h2>&nbsp;</h2>
+            <p>Imagen superior: Telescopio Hubble (HST)</p>
+            <p><strong>Fecha de Observación:</strong> 1996</p>
+            <p><strong>Instrumento:</strong> ACS/WFC</p>
+            <p><strong>Filtros:</strong> 502n, 656n, 673n</p>
+        </div>
+    </div>
+
 </body>
 </html>
