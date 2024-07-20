@@ -18,6 +18,13 @@ telescopio: JWST
 
 <style>
 /* Link a imágenes ========== */
+
+.box-14 .inner {
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/AGP142/APG142_cover.jpg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .box-13 .inner {
     background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/Antennae/portada.jpg');
     background-position: 50% 50%;
@@ -119,6 +126,17 @@ telescopio: JWST
    
     <div class="row">
         <div class="container">
+
+            <div class="test_box box-14 col-xs-6 col-md-4">
+                <div class="inner">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesAPG142.html" class="test_click">
+                        <div class="flex_this">
+                            <h1 class="test_title">LDN1527</h1>
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
 
             <div class="test_box box-01 col-xs-6 col-md-4">
                 <div class="inner">
