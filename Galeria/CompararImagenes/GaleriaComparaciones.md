@@ -97,6 +97,18 @@ layout: topbar
 </head>
 <body>
     <div class="articles">
+
+        <a href="https://nicomedinap.github.io/Galeria/CompararImagenes/APG142_HST_JWST.html">
+            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/APG142/012.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/APG142/012.jpg')" ontouchstart="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/APG142/021.jpg')" ontouchend="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/APG142/012.jpg')" oncontextmenu="return false;">
+                <img class="article-image" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/APG142/012.jpg" alt="Antennae">
+                <div class="article-preview">
+                    <h2>Interacción de galaxias APG 142</h2>
+                    <p>HST-JWST</p>
+                </div>
+            </article>
+        </a>
+
+
         <a href="https://nicomedinap.github.io/Galeria/CompararImagenes/Antennae_HST_JWST.html">
             <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/Antennae/012.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies/012.jpg')" ontouchstart="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC2070/4.jpg')" ontouchend="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies/012.jpg')" oncontextmenu="return false;">
                 <img class="article-image" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/AntennaeGalaxies/012.jpg" alt="Antennae">
