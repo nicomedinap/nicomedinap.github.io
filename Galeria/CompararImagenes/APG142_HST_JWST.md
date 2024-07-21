@@ -261,17 +261,17 @@ layout: topbar
 
                 if (isMobile) {
                     // Valores iniciales para celu
-                    scaleSlider1.value = '1.3';
-                    angleSlider1.value = '19.5';
+                    scaleSlider1.value = '1.55';
+                    angleSlider1.value = '14';
                     opacitySlider1.value = '1';
-                    xposSlider1.value = '10';
-                    yposSlider1.value = '56';
+                    xposSlider1.value = '-13';
+                    yposSlider1.value = '54';
 
-                    scaleSlider2.value = '2';
-                    angleSlider2.value = '3';
+                    scaleSlider2.value = '1.6';
+                    angleSlider2.value = '-15';
                     opacitySlider2.value = '1';
-                    xposSlider2.value = '-23';
-                    yposSlider2.value = '55';
+                    xposSlider2.value = '-29';
+                    yposSlider2.value = '0';
                 } else {
                     // Valores iniciales para pantallas más grandes
                     scaleSlider1.value = '1.95';
