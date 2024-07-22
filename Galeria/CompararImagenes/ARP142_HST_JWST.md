@@ -347,7 +347,7 @@ layout: topbar
         <div class="info-column">
             <h2>&nbsp;</h2>
             <p>Imagen superior: Telescopio Hubble (HST)</p>
-            <p><strong>Fecha de Observación:</strong> 1996</p>
+            <p><strong>Fecha de Observación:</strong> 2013</p>
             <p><strong>Instrumento:</strong> ACS/WFC</p>
             <p><strong>Filtros:</strong> f475w, f606w, f814w</p>
         </div>
