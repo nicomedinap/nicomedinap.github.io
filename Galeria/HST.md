@@ -19,7 +19,7 @@ telescopio: HUBBLE
 
 <style>
     .box-08 .inner {
-        background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/APG142/APG142.jpg');
+        background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/ARP142/ARP142.jpg');
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -92,9 +92,9 @@ telescopio: HUBBLE
 
             <div class="test_box box-08 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesAPG142.html" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/HST/MostrarImagenesARP142.html" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">APG 142</h1>
+                            <h1 class="test_title">ARP 142</h1>
                         </div>
                     </a>
                 </div>
@@ -174,10 +174,6 @@ telescopio: HUBBLE
                     </a>
                 </div>
             </div>
-
-
-
-
         </div>
     </div>
 

@@ -20,7 +20,7 @@ telescopio: JWST
 /* Link a imágenes ========== */
 
 .box-14 .inner {
-    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/APG142/APG142_cover.jpg');
+    background-image: url('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/ARP142/ARP142_cover.jpg');
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -129,9 +129,9 @@ telescopio: JWST
 
             <div class="test_box box-14 col-xs-6 col-md-4">
                 <div class="inner">
-                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesAPG142.html" class="test_click">
+                    <a href="https://nicomedinap.github.io/Galeria/JWST/MostrarImagenesARP142.html" class="test_click">
                         <div class="flex_this">
-                            <h1 class="test_title">APG 142</h1>
+                            <h1 class="test_title">ARP 142</h1>
                             
                         </div>
                     </a>
