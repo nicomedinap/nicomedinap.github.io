@@ -98,11 +98,11 @@ layout: topbar
 <body>
     <div class="articles">
 
-        <a href="https://nicomedinap.github.io/Galeria/CompararImagenes/APG142_HST_JWST.html">
-            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/APG142/012.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/APG142/012.jpg')" ontouchstart="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/APG142/021.jpg')" ontouchend="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/APG142/012.jpg')" oncontextmenu="return false;">
-                <img class="article-image" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/APG142/012.jpg" alt="Antennae">
+        <a href="https://nicomedinap.github.io/Galeria/CompararImagenes/ARP142_HST_JWST.html">
+            <article onmouseover="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/ARP142/012.jpg')" onmouseout="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/ARP142/012.jpg')" ontouchstart="changeImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/ARP142/021.jpg')" ontouchend="revertImage(this, 'https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/ARP142/012.jpg')" oncontextmenu="return false;">
+                <img class="article-image" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/ARP142/012.jpg" alt="Antennae">
                 <div class="article-preview">
-                    <h2>Interacción de galaxias APG 142</h2>
+                    <h2>Interacción de galaxias ARP 142</h2>
                     <p>HST-JWST</p>
                 </div>
             </article>

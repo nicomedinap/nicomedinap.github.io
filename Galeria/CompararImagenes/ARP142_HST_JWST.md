@@ -6,8 +6,7 @@ layout: topbar
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxias de las antenas o "Antennae galaxies"</title>
-    <style>
+    <title>Galaxias de interacción ARP 142
         .container {
             position: relative;
             width: 100%;
@@ -109,7 +108,7 @@ layout: topbar
             cursor: pointer;
         }
 
-                .info-container {
+        .info-container {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
@@ -153,7 +152,7 @@ layout: topbar
 </head>
 <body>
 
-    <h2>La interacción de galaxias APG 142, o "El Pinguino", usando el telescopio Hubble y JWST</h2>
+    <h2>La interacción de galaxias ARP 142, o "El Pinguino", usando el telescopio Hubble y JWST</h2>
     <div class="checkbox-container">
         <label for="modifyParams">Modificar Parámetros:</label>
         <input type="checkbox" id="modifyParams">
@@ -205,11 +204,11 @@ layout: topbar
             </div>
         </div>
         <!-- Imagen 1 -->
-        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/APG142/APG142.jpg" id="image1" class="image" alt="Imagen 1">
+        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/ARP142/ARP142.jpg" id="image1" class="image" alt="Imagen 1">
         <!-- Contenedor para la Imagen 2 -->
         <div class="image-container">
             <!-- Imagen 2 -->
-            <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/APG142/012.jpg" id="image2" class="image" alt="Imagen 2">
+            <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/ARP142/012.jpg" id="image2" class="image" alt="Imagen 2">
         </div>
     </div>
     <button id="showValuesBtn">Mostrar Valores</button>
@@ -343,14 +342,14 @@ layout: topbar
             <p>Imagen de fondo: Telescopio James Webb (JWST)</p>
             <p><strong>Fecha de Observación:</strong> 2023</p>
             <p><strong>Instrumento:</strong>NIRcam</p>
-            <p><strong>Filtros:</strong> f150w, f187n</p>
+            <p><strong>Filtros:</strong> f090w, f150w, f200w</p>
         </div>
         <div class="info-column">
             <h2>&nbsp;</h2>
             <p>Imagen superior: Telescopio Hubble (HST)</p>
             <p><strong>Fecha de Observación:</strong> 1996</p>
             <p><strong>Instrumento:</strong> ACS/WFC</p>
-            <p><strong>Filtros:</strong> 502n, 656n, 673n</p>
+            <p><strong>Filtros:</strong> f475w, f606w, f814w</p>
         </div>
     </div>
 
