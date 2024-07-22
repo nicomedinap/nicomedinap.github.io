@@ -2,16 +2,18 @@
 layout: topbar
 ---
 
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxias de interacción ARP 142
+    <title>Galaxias de interacción ARP 142</title>
+    <style>
         .container {
             position: relative;
             width: 100%;
-            max-width: 800px; /* Limitar el ancho máximo para que se vea bien en diferentes pantallas */
-            margin: 0 auto; /* Centrar el contenedor */
+            max-width: 800px;
+            margin: 0 auto;
             overflow: hidden;
         }
 
@@ -31,21 +33,21 @@ layout: topbar
             display: block;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Asegura que la imagen no se corte */
-            transform-origin: center center; /* Establece el punto de transformación en el centro de la imagen */
-            transition: transform 0.3s ease, opacity 0.3s ease; /* Agrega transición para la opacidad */
+            object-fit: contain;
+            transform-origin: center center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .controls {
             position: absolute;
-            top: 88%; /* Ajusta la posición vertical de los controles */
+            top: 88%;
             left: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 0px;
+            padding: 0 10px;
             z-index: 3;
-            background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco transparente */
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         .controls label {
@@ -72,26 +74,22 @@ layout: topbar
             background-color: #0056b3;
         }
 
-        /* CSS para dispositivos móviles */
         @media screen and (max-width: 500px) {
             .controls label {
-                font-size: 5px; /* Ajusta el tamaño de la fuente según tus preferencias */
+                font-size: 5px;
             }
 
             .controls input[type="range"] {
-                width: 45%; /* Ajusta el tamaño de los controles si es necesario */
-            }
-            .controls {
-                top: 88%; /* Ajusta la posición vertical en dispositivos móviles */
+                width: 45%;
             }
 
-            .h1 {
-                
+            .controls {
+                top: 88%;
             }
         }
 
         .extra-controls {
-            display: none; /* Ocultar controles adicionales inicialmente */
+            display: none;
         }
 
         .checkbox-container {
@@ -101,10 +99,10 @@ layout: topbar
         }
 
         input[type="range"]::-moz-range-thumb {
-            width: 20px; /* Ancho del círculo */
-            height: 20px; /* Altura del círculo */
-            border-radius: 50%; /* Hacerlo circular */
-            background: #007bff; /* Color del círculo */
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
             cursor: pointer;
         }
 
@@ -118,13 +116,13 @@ layout: topbar
         }
 
         .info-column {
-            flex: 1; /* Each column takes equal space */
+            flex: 1;
             padding: 10px;
-            border-right: 1px solid #ccc; /* Border between columns */
+            border-right: 1px solid #ccc;
         }
 
         .info-column:last-child {
-            border-right: none; /* Remove border on the last column */
+            border-right: none;
         }
 
         .info-column h2 {
@@ -139,15 +137,15 @@ layout: topbar
 
         @media screen and (max-width: 500px) {
             .info-container {
-                flex-direction: column; /* Stack columns vertically on small screens */
+                flex-direction: column;
             }
+
             .info-column {
-                border-right: none; /* Remove border between columns on small screens */
-                margin-bottom: 10px; /* Add margin between columns on small screens */
+                border-right: none;
+                margin-bottom: 10px;
                 font-size: 10px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -160,7 +158,6 @@ layout: topbar
     <div class="container">
         <div class="controls">
             <div>
-                <!-- Controles adicionales para la Imagen 1 -->
                 <div class="extra-controls">
                     <label for="scale1">Escala Imagen 1:</label>
                     <input type="range" id="scale1" min="0.5" max="2" step="0.05" value="1">
@@ -174,15 +171,12 @@ layout: topbar
                     <label for="ypos1">Pos Y Imagen 1:</label>
                     <input type="range" id="ypos1" min="-120" max="270" step="1" value="20">
                     <br>
-                    <!-- Control de opacidad para la Imagen 1 -->
                     <label for="opacity1">Opacidad Imagen 1:</label>
                     <input type="range" id="opacity1" min="0" max="1" step="0.1" value="1">
                     <br>
                 </div>
-
             </div>
             <div>
-                <!-- Controles adicionales para la Imagen 2 -->
                 <div class="extra-controls">
                     <label for="scale2">Escala Imagen 2:</label>
                     <input type="range" id="scale2" min="0.5" max="4" step="0.05" value="1.55">
@@ -197,17 +191,14 @@ layout: topbar
                     <input type="range" id="ypos2" min="-100" max="100" step="1" value="60">
                     <br>
                 </div>
-            <div class="controls">
+                <div class="controls">
                     <label for="opacity2">Opacidad Imagen HST:</label>
                     <input type="range" id="opacity2" min="0" max="1" step="0.1" value="1">
                 </div>
             </div>
         </div>
-        <!-- Imagen 1 -->
         <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/ARP142/ARP142.jpg" id="image1" class="image" alt="Imagen 1">
-        <!-- Contenedor para la Imagen 2 -->
         <div class="image-container">
-            <!-- Imagen 2 -->
             <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/ARP142/012.jpg" id="image2" class="image" alt="Imagen 2">
         </div>
     </div>
@@ -215,7 +206,6 @@ layout: topbar
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Referencias a los elementos de la imagen 1 y sus controles
             const image1 = document.getElementById('image1');
             const scaleSlider1 = document.getElementById('scale1');
             const angleSlider1 = document.getElementById('angle1');
@@ -223,7 +213,6 @@ layout: topbar
             const xposSlider1 = document.getElementById('xpos1');
             const yposSlider1 = document.getElementById('ypos1');
 
-            // Referencias a los elementos de la imagen 2 y sus controles
             const image2 = document.getElementById('image2');
             const scaleSlider2 = document.getElementById('scale2');
             const angleSlider2 = document.getElementById('angle2');
@@ -231,11 +220,9 @@ layout: topbar
             const xposSlider2 = document.getElementById('xpos2');
             const yposSlider2 = document.getElementById('ypos2');
 
-            // Referencia al checkbox y los controles adicionales
             const modifyParamsCheckbox = document.getElementById('modifyParams');
             const extraControls = document.querySelectorAll('.extra-controls');
 
-            // Función para actualizar la transformación de la imagen
             function updateImageTransform(image, scaleSlider, angleSlider, opacitySlider, xposSlider, yposSlider) {
                 const scale = scaleSlider.value;
                 const angle = angleSlider.value;
@@ -247,92 +234,65 @@ layout: topbar
                 image.style.opacity = opacity;
             }
 
-            // Función para mostrar u ocultar los controles adicionales
-            function toggleExtraControls() {
-                extraControls.forEach(control => {
-                    control.style.display = modifyParamsCheckbox.checked ? 'block' : 'none';
-                });
-            }
-
-            // Función para inicializar las transformaciones de las imágenes con diferentes valores en dispositivos móviles
             function initializeImages() {
-                const isMobile = window.matchMedia('(max-width: 500px)').matches;
-
-                if (isMobile) {
-                    // Valores iniciales para celu
-                    scaleSlider1.value = '1.55';
-                    angleSlider1.value = '14';
-                    opacitySlider1.value = '1';
-                    xposSlider1.value = '-13';
-                    yposSlider1.value = '54';
-
-                    scaleSlider2.value = '1.6';
-                    angleSlider2.value = '-15';
-                    opacitySlider2.value = '1';
-                    xposSlider2.value = '-29';
-                    yposSlider2.value = '0';
-                } else {
-                    // Valores iniciales para pantallas más grandes
-                    scaleSlider1.value = '1.95';
-                    angleSlider1.value = '-4';
-                    opacitySlider1.value = '1';
-                    xposSlider1.value = '-60';
-                    yposSlider1.value = '75';
-
-                    scaleSlider2.value = '1.95';
-                    angleSlider2.value = '-35.5';
-                    opacitySlider2.value = '1';
-                    xposSlider2.value = '-86';
-                    yposSlider2.value = '-53';
-                }
-
                 updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1);
                 updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2);
             }
 
-            // Añadir eventos de cambio a los sliders de la imagen 1
+            window.addEventListener('resize', () => {
+                // Evitar ejecutar initializeImages si no hay cambios significativos en el tamaño de la ventana
+                const container = document.querySelector('.container');
+                const currentWidth = container.offsetWidth;
+                const currentHeight = container.offsetHeight;
+
+                if (window.prevWidth !== currentWidth || window.prevHeight !== currentHeight) {
+                    window.prevWidth = currentWidth;
+                    window.prevHeight = currentHeight;
+                    initializeImages();
+                }
+            });
+
+            // Inicializar dimensiones previas
+            window.prevWidth = document.querySelector('.container').offsetWidth;
+            window.prevHeight = document.querySelector('.container').offsetHeight;
+
+            modifyParamsCheckbox.addEventListener('change', () => {
+                extraControls.forEach(control => {
+                    control.style.display = modifyParamsCheckbox.checked ? 'block' : 'none';
+                });
+            });
+
             scaleSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             angleSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             opacitySlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             xposSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
             yposSlider1.addEventListener('input', () => updateImageTransform(image1, scaleSlider1, angleSlider1, opacitySlider1, xposSlider1, yposSlider1));
 
-            // Añadir eventos de cambio a los sliders de la imagen 2
             scaleSlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
             angleSlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
             opacitySlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
             xposSlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
             yposSlider2.addEventListener('input', () => updateImageTransform(image2, scaleSlider2, angleSlider2, opacitySlider2, xposSlider2, yposSlider2));
 
-            // Inicializar las transformaciones de las imágenes con los valores establecidos
-            initializeImages();
-
-            // Mostrar valores de las imágenes al hacer clic en el botón
+            // Botón para mostrar valores actuales
             const showValuesBtn = document.getElementById('showValuesBtn');
             showValuesBtn.addEventListener('click', () => {
-                const valuesImage1 = `Valores de la Imagen 1:
-                    Escala: ${scaleSlider1.value}
-                    Ángulo: ${angleSlider1.value}
-                    Opacidad: ${opacitySlider1.value}
-                    Posición X: ${xposSlider1.value}
-                    Posición Y: ${yposSlider1.value}`;
+                console.log("Valores de la imagen 1:");
+                console.log("Escala:", scaleSlider1.value);
+                console.log("Ángulo:", angleSlider1.value);
+                console.log("Opacidad:", opacitySlider1.value);
+                console.log("Posición X:", xposSlider1.value);
+                console.log("Posición Y:", yposSlider1.value);
 
-                const valuesImage2 = `Valores de la Imagen 2:
-                    Escala: ${scaleSlider2.value}
-                    Ángulo: ${angleSlider2.value}
-                    Opacidad: ${opacitySlider2.value}
-                    Posición X: ${xposSlider2.value}
-                    Posición Y: ${yposSlider2.value}`;
-
-                alert(valuesImage1 + "\n\n" + valuesImage2);
+                console.log("Valores de la imagen 2:");
+                console.log("Escala:", scaleSlider2.value);
+                console.log("Ángulo:", angleSlider2.value);
+                console.log("Opacidad:", opacitySlider2.value);
+                console.log("Posición X:", xposSlider2.value);
+                console.log("Posición Y:", yposSlider2.value);
             });
 
-            // Añadir evento de cambio al checkbox
-            modifyParamsCheckbox.addEventListener('change', toggleExtraControls);
-            toggleExtraControls(); // Inicializar el estado de los controles adicionales
-
-            // Volver a inicializar las imágenes al cambiar el tamaño de la ventana
-            window.addEventListener('resize', initializeImages);
+            initializeImages();
         });
     </script>
 
