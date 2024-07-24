@@ -258,8 +258,8 @@ layout: topbar
                     scaleSlider1.value = '2.3';
                     angleSlider1.value = '20.5';
                     opacitySlider1.value = '1';
-                    xposSlider1.value = '-11';
-                    yposSlider1.value = '11';
+                    xposSlider1.value = '-30';
+                    yposSlider1.value = '-35';
 
                     scaleSlider2.value = '2.35';
                     angleSlider2.value = '-9.5';
