@@ -47,3 +47,4 @@ Algunas palabras [sobre mi, el autor](https://nicomedinap.github.io/about.html){
 * [aeropython](https://nbviewer.org/github/barbagroup/AeroPython/tree/master/lessons/){:target="_blank"} : aerodinamica con python
 * [Visualización del catálogo messier](https://kosmoved.ru/messier/messier-catalog.php?lang=spa){:target="_blank"}
 * http://flothesof.github.io Visualizacion de datos.
+* [Comprehensive Python Cheatsheet](https://gto76.github.io/python-cheatsheet/){:target="_blank"}
