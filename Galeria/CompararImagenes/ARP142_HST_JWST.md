@@ -109,7 +109,7 @@ layout: topbar
             cursor: pointer;
         }
 
-                .info-container {
+        .info-container {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
