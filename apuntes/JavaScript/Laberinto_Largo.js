@@ -1,4 +1,4 @@
-const finalMap = [
+const map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 1, 0, 0, 0, 1, 0, 1],
     [1, 0, 1, 1, 1, 0, 1, 0, 1],
@@ -50,4 +50,4 @@ const finalMap = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
-export { finalMap };
+export { mapa };
