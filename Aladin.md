@@ -16,22 +16,52 @@ Tómate un tiempo, y explora nuestra galaxia y el universo! (Si es que no estás
 
 
 <!-- insert this snippet where you want Aladin Lite viewer to appear -->
-<div id="aladin-lite-div" style="width:350px;height:650px;"></div>
 
-<input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color<label>
-<input id="DSS-blue" type="radio" name="survey" value="P/DSS2/blue"><label for="DSS-blue">DSS blue<label>
-<input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS<label>
-<input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE<label>
+<head>
+    <title>AladinLite Markers from JSON</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="aladin-lite-div" style="width:350px;height:650px;"></div>
 
+    <div>
+        <input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color</label>
+        <input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS</label>
+        <input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE</label>
+    </div>
 
-<script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
+    <script>
+    $(document).ready(function() {
+        // Initialize AladinLite
+        let aladin = A.aladin('#aladin-lite-div', {
+            survey: "P/DSS2/color",
+            fov: 3.5,
+            target: "18 06 03 -23 41 20"
+        });
 
-<script type="text/javascript">
-let aladin;
-A.init.then(() => {
-    aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:3.5, target: "18 06 03 -23 41 20"});
-});
-    $('input[name=survey]').change(function() {
-    aladin.setImageSurvey($(this).val());
+        // Fetch the JSON data
+        $.getJSON('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/V4_html/Test_DB.json')
+        .done(function(data) {
+            // Process the data and create markers
+            let markers = data.data.map(item => A.marker(item[0], item[1], {popupTitle: item[2], popupDesc: 'Object details'}));
+
+            // Create a marker layer and add markers
+            let markerLayer = A.catalog();
+            markerLayer.addSources(markers);
+
+            // Add marker layer to AladinLite
+            aladin.addCatalog(markerLayer);
+        })
+        .fail(function() {
+            console.error("Failed to fetch data from JSON.");
+        });
+        
+        // Update survey image on radio button change
+        $('input[name=survey]').change(function() {
+            aladin.setImageSurvey($(this).val());
+        });
     });
-</script>
+    </script>
+</body>
+</html>
