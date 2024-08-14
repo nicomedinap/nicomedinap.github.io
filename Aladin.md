@@ -16,22 +16,16 @@ Tómate un tiempo, y explora nuestra galaxia y el universo! (Si es que no estás
 
 
 <!-- insert this snippet where you want Aladin Lite viewer to appear -->
+<div id="aladin-lite-div" style="width:350px;height:650px;"></div>
 
-<head>
-    <title>AladinLite Markers from JSON</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
-</head>
-<body>
-    <div id="aladin-lite-div" style="width:350px;height:650px;"></div>
+<input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color<label>
+<input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS<label>
+<input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE<label>
 
-    <div>
-        <input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color</label>
-        <input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS</label>
-        <input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE</label>
-    </div>
+<script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
+<script>
     $(document).ready(function() {
         // Initialize AladinLite
         let aladin = A.aladin('#aladin-lite-div', {
@@ -62,6 +56,4 @@ Tómate un tiempo, y explora nuestra galaxia y el universo! (Si es que no estás
             aladin.setImageSurvey($(this).val());
         });
     });
-    </script>
-</body>
-</html>
+</script>
