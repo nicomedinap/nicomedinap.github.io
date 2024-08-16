@@ -13,7 +13,7 @@ Telescopios relativamente pequeños han estado escaneando el cielo desde princip
 
 Es necesario enfocar esfuerzos para discutir y desarrollar estrategias de análisis sistemático de la información disponible, con un enfoque estadístico que logre construir un set de información fundamental que caracterice una fuente estelar, y que a su vez permita reducir el volumen de datos.
 
-El Catálogo V⁴ contendrá la información que he sa recolectado usando el método descrito en [medina et al. 2018](https://arxiv.org/pdf/1806.04061.pdf){:target="_blank"}, usando los datos disponibles en la base de datos VVV.
+El Catálogo V⁴ contiene la información que he sa recolectado usando el método descrito en [medina et al. 2018](https://arxiv.org/pdf/1806.04061.pdf){:target="_blank"}, usando los datos disponibles en la base de datos VVV.
 
 Son más de 1000 estrellas que han sido identificadas principalmente por su notorio cambio de brillo.
 
@@ -26,4 +26,7 @@ Para cada tile analizado, habrá un link donde estarán disponibles todas las cu
 * [d046]
 * [d083]
 * [d084]
+
+* [SFR3:](https://nicomedinap.github.io/V4_html/SFR3/SFR3.html){:target="_blank"}
+
 
