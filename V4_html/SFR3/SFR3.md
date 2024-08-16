@@ -10,16 +10,24 @@ layout: topbar
     <style>
         /* Default styles for PC */
         #aladin-lite-div {
-            width: 100%;
-            height: 100%;
+            width: 900px;
+            height: 1000px;
+            margin: auto;
         }
 
         /* Styles for smaller screens (phones) */
         @media only screen and (max-width: 600px) {
             #aladin-lite-div {
                 width: 100%;
-                height: 800px;
+                height: 700px;
             }
+        }
+
+        /* Survey selection buttons inline */
+        .survey-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -33,9 +41,14 @@ layout: topbar
     <div id="aladin-lite-div"></div>
 
     <!-- Survey selection -->
-    <input id="DSS" type="radio" name="survey" value="P/DSS2/color"><label for="DSS">DSS color</label>
-    <input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS</label>
-    <input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE</label>
+    <div class="survey-buttons">
+        <input id="DSS" type="radio" name="survey" value="P/DSS2/color">
+        <label for="DSS">DSS color</label>
+        <input id="2MASS" type="radio" name="survey" value="P/2MASS/color">
+        <label for="2MASS">2MASS</label>
+        <input id="allwise" type="radio" name="survey" value="P/allWISE/color">
+        <label for="allwise">AllWISE</label>
+    </div>
 
     <!-- JavaScript -->
     <script>
