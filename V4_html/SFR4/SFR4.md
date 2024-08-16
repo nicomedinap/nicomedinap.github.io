@@ -4,7 +4,7 @@ layout: topbar
 
 <html>
 <head>
-    <title>La Región de formación estelar 3 (SFR3)</title>
+    <title>La Región de formación estelar 4 (SFR4)</title>
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
