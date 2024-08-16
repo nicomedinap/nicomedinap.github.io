@@ -4,7 +4,7 @@ layout: topbar
 
 <html>
 <head>
-    <title>Aladin Lite</title>
+    <title>La Región de formación estelar 3 (SFR3)</title>
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -18,18 +18,16 @@ layout: topbar
         @media only screen and (max-width: 600px) {
             #aladin-lite-div {
                 width: 100%;
-                height: 400px;
+                height: 800px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Page content -->
-    <h1>Aladin Lite</h1>
-    <p>
-        <a href="http://aladin.u-strasbg.fr/aladin.gml" target="_blank">Aladin</a>
-    </p>
-    <p>La Región de formación estelar 3:</p>
+    <h1>La Región de formación estelar 3 (SFR3)</h1>
+
+    <p>NGC 6357 y NGC 6334:</p>
 
     <!-- Aladin Lite viewer -->
     <div id="aladin-lite-div"></div>
