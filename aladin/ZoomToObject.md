@@ -8,16 +8,45 @@ layout: topbar
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        /* Default styles */
         #aladin-lite-div {
-            width: 400px;
+            width: 500px;
             height: 800px;
             margin: auto;
+        }
+
+        /* Survey buttons container */
+        .survey-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .survey-buttons input {
+            margin: 0 10px;
+        }
+
+        /* Styles for smaller screens (phones) */
+        @media only screen and (max-width: 600px) {
+            #aladin-lite-div {
+                width: 100%;
+                height: 600px;
+            }
+            
+            .survey-buttons {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .survey-buttons input {
+                margin: 5px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Page content -->
-    <h1>Zoom en aladin</h1>
+    <h1>Zoom en Aladin</h1>
 
     <!-- Aladin Lite viewer -->
     <div id="aladin-lite-div"></div>
