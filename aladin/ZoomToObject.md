@@ -4,7 +4,7 @@ layout: topbar
 
 <html>
 <head>
-    <title>Zoom a objeto astronómico usando Aladin</title>
+    <title>Zoom en Aladin</title>
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -13,6 +13,11 @@ layout: topbar
             width: 500px;
             height: 800px;
             margin: auto;
+        }
+
+        /* Centered title */
+        h1 {
+            text-align: center;
         }
 
         /* Survey buttons container */
@@ -24,12 +29,6 @@ layout: topbar
         .survey-buttons input {
             margin: 0 10px;
         }
-
-        /* Centered title */
-        h1 {
-            text-align: center;
-        }
-
 
         /* Coordinates input and button */
         .coord-input {
@@ -50,14 +49,14 @@ layout: topbar
                 flex-wrap: wrap;
             }
 
-            .survey-buttons input, .coord-input input {
+            .survey-buttons input, .coord-input input, .coord-input select {
                 margin: 5px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Page content -->
+    <!-- Centered title -->
     <h1>Zoom a objeto astronómico usando Aladin</h1>
 
     <!-- Aladin Lite viewer -->
@@ -70,8 +69,15 @@ layout: topbar
         <input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE</label>
     </div>
 
-    <!-- Coordinate input fields and button -->
+    <!-- Coordinate input fields, suggestions, and button -->
     <div class="coord-input">
+        <select id="object-select">
+            <option value="" disabled selected>Elige un objeto popular</option>
+            <option value="10.6847083 41.2690650">Andrómeda (M31)</option>
+            <option value="201.3650633 -43.0191122">Omega Centauri</option>
+            <option value="83.8220833 -5.3911111">Nebulosa de Orión (M42)</option>
+            <option value="187.2779159 2.0523872">Cúmulo de Virgo (M87)</option>
+        </select>
         <input id="ra" type="text" placeholder="Enter RA (degrees)" />
         <input id="dec" type="text" placeholder="Enter Dec (degrees)" />
         <button id="start-zoom">Hacer Zoom</button>
@@ -124,6 +130,13 @@ layout: topbar
                 } else {
                     alert("Please enter valid RA and Dec coordinates.");
                 }
+            });
+
+            // Event handler for the object selection dropdown
+            $('#object-select').change(function() {
+                let coords = $(this).val().split(" ");
+                $('#ra').val(coords[0]);
+                $('#dec').val(coords[1]);
             });
 
             // Update survey image on radio button change
