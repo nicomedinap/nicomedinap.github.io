@@ -1,6 +1,6 @@
 ---
 layout: topbar
----
+--- 
 
 <html>
 <head>
@@ -77,6 +77,22 @@ layout: topbar
             <option value="201.3650633 -43.0191122">Omega Centauri</option>
             <option value="83.8220833 -5.3911111">Nebulosa de Orión (M42)</option>
             <option value="187.2779159 2.0523872">Cúmulo de Virgo (M87)</option>
+            <option value="271.259639 -24.417031">SMACS 0723</option>
+            <option value="344.076 -60.375">NGC 3132 - Nebulosa del Anillo del Sur</option>
+            <option value="56.625 24.175">Stephan's Quintet</option>
+            <option value="330.765 41.438">NGC 6822</option>
+            <option value="314.972 -73.296">NGC 104 - 47 Tucanae</option>
+            <option value="210.802 54.348">M13 - Cúmulo de Hércules</option>
+            <option value="202.469 47.195">M51 - Galaxia del Remolino</option>
+            <option value="266.416 -29.007">Sagittarius A*</option>
+            <option value="287.466 43.946">NGC 6946 - Galaxia del Fuegos Artificiales</option>
+            <option value="37.768 -13.503">NGC 2024 - Nebulosa de la Flama</option>
+            <option value="204.253 48.691">M101 - Galaxia del Molinete</option>
+            <option value="149.417 2.080">NGC 4038/4039 - Galaxias Antena</option>
+            <option value="52.712 -27.691">GN-z11</option>
+            <option value="343.00 -17.50">NGC 1365</option>
+            <option value="150.025 2.087">MACS J1149.5+2223</option>
+            <option value="83.633083 -5.3911111">Trapezium Cluster (Theta1 Ori)</option>
         </select>
         <input id="ra" type="text" placeholder="Enter RA (degrees)" />
         <input id="dec" type="text" placeholder="Enter Dec (degrees)" />
