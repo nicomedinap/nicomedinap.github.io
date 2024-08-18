@@ -4,7 +4,7 @@ layout: topbar
 
 <html>
 <head>
-    <title>Zoom en Aladin</title>
+    <title>Zoom a objeto astronómico usando Aladin</title>
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -25,20 +25,32 @@ layout: topbar
             margin: 0 10px;
         }
 
+        /* Centered title */
+        h1 {
+            text-align: center;
+        }
+
+
+        /* Coordinates input and button */
+        .coord-input {
+            text-align: center;
+            margin-top: 20px;
+        }
+
         /* Styles for smaller screens (phones) */
         @media only screen and (max-width: 600px) {
             #aladin-lite-div {
                 width: 100%;
                 height: 600px;
             }
-            
-            .survey-buttons {
+
+            .survey-buttons, .coord-input {
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
             }
 
-            .survey-buttons input {
+            .survey-buttons input, .coord-input input {
                 margin: 5px;
             }
         }
@@ -46,7 +58,7 @@ layout: topbar
 </head>
 <body>
     <!-- Page content -->
-    <h1>Zoom en Aladin</h1>
+    <h1>Zoom a objeto astronómico usando Aladin</h1>
 
     <!-- Aladin Lite viewer -->
     <div id="aladin-lite-div"></div>
@@ -58,6 +70,13 @@ layout: topbar
         <input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE</label>
     </div>
 
+    <!-- Coordinate input fields and button -->
+    <div class="coord-input">
+        <input id="ra" type="text" placeholder="Enter RA (degrees)" />
+        <input id="dec" type="text" placeholder="Enter Dec (degrees)" />
+        <button id="start-zoom">Hacer Zoom</button>
+    </div>
+
     <!-- JavaScript -->
     <script>
         $(document).ready(function() {
@@ -65,27 +84,47 @@ layout: topbar
             let aladin = A.aladin('#aladin-lite-div', {
                 survey: "P/DSS2/color",
                 fov: 60,  // Start with a large FoV (60 degrees)
-                target: "271.259639 -24.417031"  // Coordinates to center on
+                target: "271.259639 -24.417031"  // Initial coordinates to center on
             });
 
-            let targetCoords = "271.259639 -24.417031";
             let finalFov = 0.1;  // Final FoV after zooming in
             let zoomSpeed = 0.98;  // Zoom speed factor (closer to 1 means slower zoom)
             let intervalTime = 50;  // Time in milliseconds between each zoom step
+            let zoomInterval;
 
-            let zoomInterval = setInterval(function() {
-                let currentFov = aladin.getFov()[0];  // Get the current FoV
+            // Function to start the zoom animation
+            function startZoom(targetCoords) {
+                clearInterval(zoomInterval);  // Clear any previous zoom intervals
+                aladin.gotoObject(targetCoords);  // Go to the new coordinates
+                aladin.setFov(60);  // Reset the FoV to the initial large value
+
+                zoomInterval = setInterval(function() {
+                    let currentFov = aladin.getFov()[0];  // Get the current FoV
+                    
+                    if (currentFov > finalFov) {
+                        // Zoom in by reducing the FoV
+                        aladin.setFov(currentFov * zoomSpeed);
+                    } else {
+                        // Stop the zooming animation
+                        clearInterval(zoomInterval);
+                        // Optionally, center precisely on the target object
+                        aladin.gotoObject(targetCoords);
+                    }
+                }, intervalTime);
+            }
+
+            // Event handler for the Start Zoom button
+            $('#start-zoom').click(function() {
+                let ra = $('#ra').val().trim();
+                let dec = $('#dec').val().trim();
                 
-                if (currentFov > finalFov) {
-                    // Zoom in by reducing the FoV
-                    aladin.setFov(currentFov * zoomSpeed);
+                if (ra && dec) {
+                    let targetCoords = `${ra} ${dec}`;
+                    startZoom(targetCoords);
                 } else {
-                    // Stop the zooming animation
-                    clearInterval(zoomInterval);
-                    // Optionally, center precisely on the target object
-                    aladin.gotoObject(targetCoords);
+                    alert("Please enter valid RA and Dec coordinates.");
                 }
-            }, intervalTime);
+            });
 
             // Update survey image on radio button change
             $('input[name=survey]').change(function() {
