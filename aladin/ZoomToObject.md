@@ -40,7 +40,7 @@ layout: topbar
         @media only screen and (max-width: 600px) {
             #aladin-lite-div {
                 width: 100%;
-                height: 600px;
+                height: 700px;
             }
 
             .survey-buttons, .coord-input {
