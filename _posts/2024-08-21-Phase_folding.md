@@ -10,7 +10,7 @@ title:  "Luces Periodicas"
 <div class="text_cell_render border-box-sizing rendered_html">
 
 <p>La ciencia es, en su esencia, la búsqueda de patrones. A lo largo de la historia, hemos aprendido a reconocer estos patrones en todo lo que nos rodea, desde nuestro pulso hasta la órbitas de las estrellas alrededor de agujeros negros. Uno de los patrones más fundamentales y omnipresentes en la naturaleza es la periodicidad. Entender cómo y por qué algo se repite de manera regular nos permite no solo describir fenómenos naturales, sino también predecirlos.</p>
-<p>Es que &quot;asumir&quot; que un ciclo se volverá a repetir es trae grandes beneficios: Si asumimos que los días se repetiran uno tras otro tras otro sin pausa ni averías, tendremos ciudades con ritmos de vida frenéticos y personas con rutinas bien definidas, en función del horario en el que suceda este increible fenómeno físico llamado &quot;órbita&quot;.</p>
+<p>Es que &quot;asumir&quot; que un ciclo se volverá a repetir trae grandes beneficios: Si asumimos que los días se repetiran uno tras otro tras otro sin pausa ni averías, tendremos ciudades con ritmos de vida frenéticos y personas con rutinas bien definidas, en función del horario en el que suceda este increible fenómeno físico llamado &quot;órbita&quot;.</p>
 <p>Este concepto de periodicidad es clave en muchos campos de la ciencias, y sin dudas la astronomía es uno de esos campos. Las estrellas, que desde la antigüedad han sido observadas como puntos de luz fijos en el cielo, en realidad nos envían señales que varían con el tiempo. Entre todos los tipos de variaciones que estas estrellas pueden experimentar, existen el cambio de brillo periódico, y su luz puede ser analizada para obtener información sobre la física de dicha estrella, su composición, su ciclo de vida, etc. Dicho de otra forma: hasta a las estrellas es posible robarle uno y que otro secreto.</p>
 <p>¿Cómo cuantificamos la periodicidad de algo? Bueno, decimos que la función que depende del tiempo $f(t)$, que podría describir  es periódica si existe un número positivo $P$, llamado período, tal que:</p>
 $$
@@ -163,7 +163,7 @@ $$<p>donde $int()$ es la parte entera del argumento. Es decir, reducimos a un es
 <p>Si una señal tiene un comportamiento periódico, es conveniente describirla en términos de su &quot;espacio de fase&quot;, nombre que se le da al gráfico entre el parámetro en cuestión y la fase $\phi$, desde donde podremos interpretar la forma de su ciclo, y qué parámetros podrían influir en su forma. En astrofísica, medir este tipo de pulsos puede hablarnos sobre la densidad de los objetos, sobre el mecanismo físico detrás de esta señal</p>
 <h3 id="Se%C3%B1ales-desde-las-estrellas">Se&#241;ales desde las estrellas<a class="anchor-link" href="#Se%C3%B1ales-desde-las-estrellas"></a></h3><p>Imagina que estás observando una estrella que cambia su brillo de forma periódica. Si realizaras fotometría a sus observaciones, medirías el cambio de luminosidad en el tiempo, es posible obtiene una señal periodica en formato de serie de tiempo $\{x_n\}$. Es decir, una colección de observaciones de cierto suceso que ocurre en el cielo.</p>
 <p>En astronomía este concepto se adapta para analizar la evolución temporal del brillo de las estrellas (galaxias también pero es más complejo). En general, para cada estrella conocida existe una serie de tiempo $\{x_n\}$ que es posible estudiar y determinar qué eventos ocurren en dicha estrella. Entonces, en nuestro caso, <strong>asumiendo que podría existir un periodo</strong> sus series de tiempo son escudriñadas para encontrar dichos periodos.</p>
-<p>Veamos un caso de la vida real: la estrella periodica <a href="http://simbad.cds.unistra.fr/simbad/sim-id?Ident=%406288459&amp;Name=2MASS%20J17222333-3644037&amp;submit=submit">2MASS J17222333-3644037</a>{:target=&quot;_blank&quot;} ha sido reportada como una Cepheida de tipo II. Yo la he encontrado de forma independiente, y la he llamado SFR3_pv12 (prefiero eso a que 2MASS J17222333-3644037).</p>
+<p>Veamos un caso de la vida real: la estrella periodica <a href="http://simbad.cds.unistra.fr/simbad/sim-id?Ident=%406288459&amp;Name=2MASS%20J17222333-3644037&amp;submit=submit">2MASS J17222333-3644037</a> ha sido reportada como una Cepheida de tipo II. Yo la he encontrado de forma independiente, y la he llamado SFR3_pv12 (prefiero eso a que 2MASS J17222333-3644037).</p>
 <p>SFR3_pv12 es una estrella Cefeida de tipo II, una de esas estrellas que nos ayuda a determinar distancias cósmicas. El telescopio VISTA ha hecho 75 mediciones de la luz de este objeto astronómico a lo largo de aproximadamente 5 años (1752 días), y con esta información se ha generado la siguiente serie de tiempo $\{x_n\}$, de la magnitud infrarroja de SFR3_pv12 versus el tiempo:</p>
 
 </div>
@@ -386,7 +386,7 @@ $$<p>donde $m_i$ son las magnitudes y $t_i$ son los tiempos dentro de la serie d
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Existe muchas implementaciones de diferentes periodogramas, uno de los más populares es el <a href="https://docs.astropy.org/en/stable/timeseries/lombscargle.html">Periodograma Generalizado de Lomb-Scargle</a>{:target=&quot;_blank&quot;} que sin duda realiza un buen trabajo para series de tiempo muestreadas.</p>
+<p>Existe muchas implementaciones de diferentes periodogramas, uno de los más populares es el <a href="https://docs.astropy.org/en/stable/timeseries/lombscargle.html">Periodograma Generalizado de Lomb-Scargle</a> que sin duda realiza un buen trabajo para series de tiempo "suficientemente" muestreadas.</p>
 <p>Finalmente, haré una animación para ver cómo las frecuencias que maximizan el periodograma es, a su vez, el que da coherencia al espacio de fase.</p>
 <p>Un pseudo algoritmo para implementar la búsqued de periodos en una fuente astronomíca se describe a continuación:</p>
 <ol>
@@ -558,7 +558,7 @@ $$<p>donde $m_i$ son las magnitudes y $t_i$ son los tiempos dentro de la serie d
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<iframe width="315" height="600" src="https://www.youtube.com/embed/1eSr9jzxmaM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="350" height="600" src="https://www.youtube.com/embed/1eSr9jzxmaM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 </div>
