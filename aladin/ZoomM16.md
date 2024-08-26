@@ -1,3 +1,7 @@
+---
+layout: topbar
+--- 
+
 <html>
 <head>
     <title>Zoom en Aladin</title>
