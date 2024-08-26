@@ -1,5 +1,5 @@
 ---
-layout: topbar
+layout: none
 --- 
 
 <html>
@@ -56,8 +56,6 @@ layout: topbar
     </style>
 </head>
 <body>
-    <!-- Centered title -->
-    <h1>Zoom a objeto astronómico usando Aladin</h1>
 
     <!-- Aladin Lite viewer -->
     <div id="aladin-lite-div"></div>
