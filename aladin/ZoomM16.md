@@ -89,7 +89,7 @@ layout: none
             let aladin = A.aladin('#aladin-lite-div', {
                 survey: "P/DSS2/color",
                 fov: 60,  // Start with a large FoV (60 degrees)
-                target: "271.259639 -24.417031"  // Initial coordinates to center on
+                target: "274.7209 -13.8389"  // Initial coordinates to center on
             });
 
             let finalFov = 0.1;  // Final FoV after zooming in
