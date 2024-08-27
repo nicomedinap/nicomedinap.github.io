@@ -25,7 +25,6 @@
 			display: flex;
 			width: 100%;
 			height: 100%;
-			gap: 10px;
 		}
 
 		.imagen-chica {
@@ -34,6 +33,7 @@
 			gap: 10px;
 			overflow-y: auto;
 			max-height: 100%;
+			align-items: center; /* Alinea las miniaturas en el centro verticalmente */
 		}
 
 		.imagen-chica img {
@@ -41,6 +41,7 @@
 			max-height: 100px;
 			cursor: pointer;
 			transition: transform 0.2s;
+			object-fit: cover; /* Asegura que la imagen mantenga su proporción */
 		}
 
 		.imagen-chica img:hover {
