@@ -198,7 +198,7 @@ $$<p>Además, el término $\eta\ (t)$ agrega una perturbación aleatoria en la d
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<iframe width="350" height="300" src="https://www.youtube.com/embed/AQeqIJLC8lM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="350" height="600" src="https://www.youtube.com/embed/AQeqIJLC8lM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 </div>
