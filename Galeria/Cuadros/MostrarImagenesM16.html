@@ -32,15 +32,19 @@
 			display: flex;
 			flex-direction: column;
 			gap: 10px;
+			overflow-y: auto;
 			max-height: 100%;
 		}
 
 		.imagen-chica img {
-			width: 70px;
-			height: 110px;
+			max-width: 100px;
+			max-height: 100px;
 			cursor: pointer;
-			object-fit: cover;
 			transition: transform 0.2s;
+		}
+
+		.imagen-chica img:hover {
+			transform: scale(1.1);
 		}
 
 		.imagen-grande {
@@ -63,12 +67,12 @@
 	<div class="Contenido">
 		<div class="imagen">
 			<div class="imagen-chica">
-				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_1.jpg" onclick="Desplegar(this)" loading="lazy">
-				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_2.jpg" onclick="Desplegar(this)" loading="lazy">
-				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_3.jpg" onclick="Desplegar(this)" loading="lazy">
-				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_4.jpg" onclick="Desplegar(this)" loading="lazy">
-				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_5.jpg" onclick="Desplegar(this)" loading="lazy">
-				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" onclick="Desplegar(this)" loading="lazy">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_1.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_2.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_3.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_4.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_5.jpg" onclick="Desplegar(this)">
+				<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg" onclick="Desplegar(this)">
 			</div>
 			<div class="imagen-grande">
 				<img id="CajaDeImagenes" src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_6.jpg">
@@ -78,7 +82,7 @@
 
 	<script>
 		function Desplegar(ImagenChica) {
-			const ImagenGrande = document.getElementById("CajaDeImagenes");
+			var ImagenGrande = document.getElementById("CajaDeImagenes");
 			ImagenGrande.src = ImagenChica.src; 
 		}
 	</script>
