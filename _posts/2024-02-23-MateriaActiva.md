@@ -173,8 +173,8 @@ $$<p>Además, el término $\eta\ (t)$ agrega una perturbación aleatoria en la d
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 
-<span class="c1"># Reemplaza &#39;1eSr9jzxmaM&#39; con el ID real del YouTube Short</span>
-<span class="n">video_id</span> <span class="o">=</span> <span class="s1">&#39;1eSr9jzxmaM&#39;</span>
+<span class="c1"># Reemplaza &#39;AQeqIJLC8lM&#39; con el ID real del YouTube Short</span>
+<span class="n">video_id</span> <span class="o">=</span> <span class="s1">&#39;AQeqIJLC8lM&#39;</span>
 
 <span class="c1"># Crear la URL del iframe</span>
 <span class="n">html_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
@@ -198,7 +198,7 @@ $$<p>Además, el término $\eta\ (t)$ agrega una perturbación aleatoria en la d
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<iframe width="350" height="300" src="https://youtube.com/shorts/AQeqIJLC8lM?si=nZDsxqtYNFptX0RF" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="350" height="300" src="https://www.youtube.com/embed/AQeqIJLC8lM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 </div>
