@@ -120,7 +120,7 @@ layout: none
 
             // Automatic zoom to M16 after 5 seconds
             setTimeout(function() {
-                let targetCoords = "274.700000 -13.806944";  // Coordinates for M16
+                let targetCoords = "274.724700 -13.8385";  // Coordinates for M16
                 startZoom(targetCoords);
             }, 5000);
 
