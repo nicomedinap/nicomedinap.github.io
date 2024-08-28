@@ -29,19 +29,21 @@
         .imagen-chica {
             display: flex;
             flex-direction: column;
-            gap: 0px;
-            width: 95px; /* Ancho fijo para la columna de imágenes pequeñas */
+            gap: 10px; /* Espaciado entre imágenes pequeñas */
+            width: 75px; /* Ancho fijo para la columna de imágenes pequeñas */
+            max-width: 100%;
             background-color: #333; /* Fondo gris oscuro para la columna de imágenes pequeñas */
             padding: 10px;
             height: 100%; /* Asegura que tome toda la altura disponible */
             box-sizing: border-box;
-            align-items: center; /* Centra las imágenes pequeñas en la columna */
-            overflow-y: auto; /* Permite el scroll si hay más imágenes de las que caben */
+            align-items: center; /* Centra horizontalmente las imágenes pequeñas */
+            justify-content: center; /* Centra verticalmente las imágenes pequeñas */
         }
 
         .imagen-chica img {
-            width: 130%;
+            width: 95%;
             height: auto; /* Ajusta la altura según el ancho */
+            max-width: 100%;
             cursor: pointer;
             transition: transform 0.2s, border 0.2s;
             object-fit: contain; /* Mantiene la proporción de las imágenes */
@@ -77,9 +79,13 @@
 
         /* Media Query para pantallas grandes */
         @media screen and (min-width: 769px) {
+
+            .imagen-chica {
+                width: 95px;
+            }
             .imagen-chica img {
                 border: none; /* Esconde el borde dorado en pantallas grandes */
-                width: 70%;
+                width: 100%;
                 height: auto;
             }
         }
