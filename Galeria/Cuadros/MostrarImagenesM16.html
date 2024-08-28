@@ -40,7 +40,7 @@
         }
 
         .imagen-chica img {
-            width: 100%;
+            width: 130%;
             height: auto; /* Ajusta la altura según el ancho */
             cursor: pointer;
             transition: transform 0.2s, border 0.2s;
@@ -64,22 +64,22 @@
             background-color: #000; /* Fondo negro para la imagen grande */
             padding: 10px; /* Espaciado interno para la imagen grande */
             box-sizing: border-box;
+            overflow: auto; /* Muestra barras de desplazamiento si la imagen es más grande que el contenedor */
+            width: 100%;
+            height: 100%;
         }
 
         .imagen-grande img {
-            height: 100%; /* Ajusta la imagen grande a la altura disponible */
-            width: auto; /* Mantiene la proporción */
-            max-width: 100%; /* No excede el ancho disponible */
+            max-height: 100%; /* Limita la altura máxima al contenedor */
+            max-width: 100%; /* Limita el ancho máximo al contenedor */
+            object-fit: contain; /* Ajusta la imagen sin deformar */
         }
 
         /* Media Query para pantallas grandes */
         @media screen and (min-width: 769px) {
-            .imagen-chica {
-                width: 45px;
-            }
             .imagen-chica img {
                 border: none; /* Esconde el borde dorado en pantallas grandes */
-                width: 100%;
+                width: 70%;
                 height: auto;
             }
         }
