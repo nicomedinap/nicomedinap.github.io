@@ -77,6 +77,30 @@
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
         }
 
+        /* Caja de información */
+        .CajaInfo {
+            max-width: 80%;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(40, 44, 52, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .CajaInfo h1 {
+            margin-top: 0;
+            font-size: 1.8em;
+            color: #ffcc00;
+        }
+
+        .CajaInfo p {
+            margin-bottom: 15px;
+        }
+
         /* Estilos para el contenido relacionado superpuesto */
         .related-content {
             position: absolute;
@@ -148,24 +172,14 @@
 
 <body>
 
-    <div class="CajaInfo" > 
-        <h1 class="page_title">La región de formación estelar M16</h1>
-
-        <p> Los "pilares de la creación" son una parte de la region de formación estelar conocida como M16 o Nebulosa del aguila. Los pilares son columnas de polvo donde la gravedad ensambla constantemente nueas estrellas. Formalmente a este tipo de estructuras se les conoce como "pilares moleculares fríos", como también "trompas de elefante".</p>
-
-        <p>Ya el hecho de que tenga nombre propio habla de la popularidad e impacto que tuvo esta imágen alrededor del mundoo. Estas imágenes están hechas usando la cámara NIRcam abordo del telescopio espacial James Webb, usando una serie de filtros de banda estrecha (narrow filters) los cuales se encargan de medir la luz emitida por un elemento en particular, el cual emite radiación en una longuitud de onda específica del rango electromagnético. Esta emisión es la que se colorea finalmente.
-        </p>
-    </div>
-
-    <div class="tab-container">
-        <div class="tab" onclick="toggleContent('related1', this)">Versiones alternativas</div>
-        <div class="tab" onclick="toggleContent('related2', this)">Aladin</div>
-        <div class="tab" onclick="toggleContent('related3', this)">Información técnica</div>
-    </div>
-
     <div class="main-content">
-        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_4.jpg"
-            alt="Imagen Principal">
+        <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/M16/M16_4.jpg" alt="Imagen Principal">
+
+        <div class="CajaInfo">
+            <h1 class="page_title">La región de formación estelar M16</h1>
+            <p>Los "pilares de la creación" son una parte de la región de formación estelar conocida como M16 o Nebulosa del águila. Los pilares son columnas de polvo donde la gravedad ensambla constantemente nuevas estrellas. Formalmente a este tipo de estructuras se les conoce como "pilares moleculares fríos", como también "trompas de elefante".</p>
+            <p>Ya el hecho de que tenga nombre propio habla de la popularidad e impacto que tuvo esta imagen alrededor del mundo. Estas imágenes están hechas usando la cámara NIRcam a bordo del telescopio espacial James Webb, usando una serie de filtros de banda estrecha (narrow filters) que se encargan de medir la luz emitida por un elemento en particular, el cual emite radiación en una longitud de onda específica del rango electromagnético. Esta emisión es la que se colorea finalmente.</p>
+        </div>
 
         <div id="related1" class="related-content">
             <iframe src="https://nicomedinap.github.io/Galeria/Cuadros/MostrarImagenesM16.html"></iframe>
@@ -177,8 +191,15 @@
 
         <div id="related3" class="related-content">
             <h1>Aplicación 3</h1>
-            <p>Contenido de la aplicación 3.</p>
+            <p>Propiedades:</p>
+            <p>Dimensiones:</p>
         </div>
+    </div>
+
+    <div class="tab-container">
+        <div class="tab" onclick="toggleContent('related1', this)">Versiones alternativas</div>
+        <div class="tab" onclick="toggleContent('related2', this)">Aladin</div>
+        <div class="tab" onclick="toggleContent('related3', this)">Información técnica</div>
     </div>
 
     <script>
