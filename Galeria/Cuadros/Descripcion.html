@@ -39,6 +39,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            display: none; /* Ocultar por defecto */
         }
         .description {
             position: absolute;
@@ -115,6 +116,13 @@
             const svg = document.getElementById('polygonOverlay');
             svg.innerHTML = ''; // Limpiar los rectángulos actuales
 
+            if (window.innerWidth > 520) {
+                svg.style.display = 'none'; // Ocultar los rectángulos si el ancho de la ventana es mayor a 520px
+                return;
+            }
+
+            svg.style.display = 'block'; // Mostrar los rectángulos si el ancho de la ventana es menor o igual a 520px
+
             Object.keys(rectangles).forEach(category => {
                 if (document.getElementById(`toggle${category.charAt(0).toUpperCase() + category.slice(1)}`).checked) {
                     rectangles[category].forEach(rect => {
@@ -141,13 +149,16 @@
                 default: return 'black';
             }
         }
+
+        window.addEventListener('resize', drawRectangles);
+
         document.querySelectorAll('.category-toggle input').forEach(input => {
             input.addEventListener('change', () => {
                 drawRectangles();
-                updateDescription();
             });
         });
 
+        // Llamada inicial para dibujar rectángulos y actualizar la descripción
         drawRectangles();
         updateDescription();
     </script>
