@@ -18,17 +18,17 @@
         .container {
             position: relative;
             width: 100%;
-            height: 100vh; /* Ajusta la altura al 100% de la ventana */
+            height: 100%; /* Ajusta la altura al 100% de la ventana */
             max-width: 1200px;
-            min-width: 100%;
             display: flex;
-            flex-direction: column; /* Permite que el contenido se ajuste en una columna */
+            justify-content: center;
+            align-items: center;
         }
         #mainImage {
-            flex: 1; /* Ocupa el espacio restante disponible */
-            width: 100%;
-            height: 100%; /* Ajusta la altura para llenar el contenedor */
-            object-fit: cover; /* Ajusta la imagen para que cubra el contenedor */
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
             display: block;
         }
         .polygon-overlay {
