@@ -22,9 +22,11 @@
         .imagen-chica {
             display: flex;
             flex-direction: column;
-            max-width: 80%;
-            background-color: #333; /* Fondo gris oscuro para la columna de imágenes pequeñas */
-            padding: 10px;
+            gap: 0px; /* Espaciado entre imágenes pequeñas */
+            width: 35px; /* Ancho fijo para la columna de imágenes pequeñas */
+            max-width: 100%;
+            background-color: transparent; /* Fondo transparente para la columna de imágenes pequeñas */
+            padding: 0px;
             box-sizing: border-box;
             align-items: center; /* Centra horizontalmente las imágenes pequeñas */
             justify-content: center; /* Centra verticalmente las imágenes pequeñas */
@@ -35,11 +37,10 @@
         .imagen-chica img {
             width: 100%;
             height: auto; /* Ajusta la altura según el ancho */
-            max-width: 100%;
             cursor: pointer;
             transition: transform 0.2s, border 0.2s;
             object-fit: contain; /* Mantiene la proporción de las imágenes */
-            border: 3px solid transparent; /* Borde inicial transparente */
+            border: 0px solid transparent; /* Borde inicial transparente */
         }
 
         .imagen-chica img:hover {
@@ -55,7 +56,7 @@
             align-items: center;
             justify-content: center;
             background-color: #000; /* Fondo negro para la imagen grande */
-            padding: 10px; /* Espaciado interno para la imagen grande */
+            padding: 0px; /* Espaciado interno para la imagen grande */
             box-sizing: border-box;
             overflow: auto; /* Muestra barras de desplazamiento si la imagen es más grande que el contenedor */
         }
