@@ -22,6 +22,8 @@ Para cada tile analizado, habrá un link donde estarán disponibles todas las cu
 * [d001](https://nicomedinap.github.io/V4_html/Variables_d001.html){:target="_blank"}
 * [d002](https://nicomedinap.github.io/V4_html/Variables_d002.html){:target="_blank"}
 
+Región de formación estelar G305, asociado al paper: 
+
 * [d045]
 * [d046]
 * [d083]
