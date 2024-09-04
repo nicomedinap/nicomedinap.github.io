@@ -40,7 +40,7 @@ Galerías De-Cosmos:
 * [Nebulosa de la Tarántula](https://nicomedinap.github.io/decosmos/Tarantula/JWST/02Septiembre2024/Tarantula.html)
 * [Los pilares de la creación](https://nicomedinap.github.io/decosmos/M16/JWST/30Agosto2024/M16.html)
 * [Región de formación estelar NGC 3324](https://nicomedinap.github.io/decosmos/NGC3324/JWST/01Septiembre2024/NGC3324.html)
-* [Galaxia NGC 1566]()
+* [Galaxia NGC 1566](https://nicomedinap.github.io/decosmos/NGC1566/JWST/03Septiembre2024/NGC1566.html)
 * [Galaxia NGC 1672]()
 * [Galaxia NGC 1365]()
 * [Galaxia NGC 4254]()
