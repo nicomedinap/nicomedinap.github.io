@@ -43,7 +43,7 @@ Galerías De-Cosmos:
 * [Galaxia NGC 1566](https://nicomedinap.github.io/decosmos/NGC1566/JWST/03Septiembre2024/NGC1566.html)
 * [Galaxia NGC 1672]()
 * [Galaxia NGC 1365]()
-* [Galaxia NGC 4254](https://nicomedinap.github.io/decosmos/NGC1566/JWST/04Septiembre2024/NGC4254.html)
+* [Galaxia NGC 4254](https://nicomedinap.github.io/decosmos/NGC4254/JWST/04Septiembre2024/NGC4254.html)
 
 
 
