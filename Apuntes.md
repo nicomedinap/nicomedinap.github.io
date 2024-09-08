@@ -37,13 +37,13 @@ Comparadores de imágenes:
 [Sugerir preguntas](https://nicomedinap.github.io/apuntes/JavaScript/SugerirPreguntas/SugerirPreguntas.html)
 
 Galerías De-Cosmos:
-* [Nebulosa de la Tarántula](https://nicomedinap.github.io/decosmos/Tarantula/JWST/02Septiembre2024/Tarantula.html)
-* [Los pilares de la creación](https://nicomedinap.github.io/decosmos/M16/JWST/30Agosto2024/M16.html)
-* [Región de formación estelar NGC 3324](https://nicomedinap.github.io/decosmos/NGC3324/JWST/01Septiembre2024/NGC3324.html)
-* [Galaxia NGC 1566](https://nicomedinap.github.io/decosmos/NGC1566/JWST/03Septiembre2024/NGC1566.html)
+* [Nebulosa de la Tarántula](https://nicomedinap.github.io/decosmos/Tarantula/JWST/02Septiembre2024/Tarantula.html){:target="_blank"}
+* [Los pilares de la creación](https://nicomedinap.github.io/decosmos/M16/JWST/30Agosto2024/M16.html){:target="_blank"}
+* [Región de formación estelar NGC 3324](https://nicomedinap.github.io/decosmos/NGC3324/JWST/01Septiembre2024/NGC3324.html){:target="_blank"}
+* [Galaxia NGC 1566](https://nicomedinap.github.io/decosmos/NGC1566/JWST/03Septiembre2024/NGC1566.html){:target="_blank"}
 * [Galaxia NGC 1672]()
 * [Galaxia NGC 1365]()
-* [Galaxia NGC 4254](https://nicomedinap.github.io/decosmos/NGC4254/JWST/04Septiembre2024/NGC4254.html)
+* [Galaxia NGC 4254](https://nicomedinap.github.io/decosmos/NGC4254/JWST/04Septiembre2024/NGC4254.html){:target="_blank"}
 
 
 
