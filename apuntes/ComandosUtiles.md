@@ -121,6 +121,5 @@ sudo apt install gfortran
 sudo apt-get install python3-scipy
 sudo apt-get install python3-pip
 sudo apt install iraf xgterm
-sudo apt install wcstools
-sudo apt-get install python3-astroml
 sudo apt-get install openjdk-7-jre
+
