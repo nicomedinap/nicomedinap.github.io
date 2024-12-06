@@ -3,15 +3,15 @@ layout: topbar
 ---
 
 Hola! Me llamo Nicolás Medina Peña. Soy Licenciado en Astronomía [(UdeC)](http://www.udec.cl/pexterno/){:target="_blank"}, Magíster en Astrofísica y Doctor en Astrofísica [(UV)](http://uv.cl/){:target="_blank"}. Me gusta la música extraña y conversar sobre cosas aparentemente no relevantes. 
-Realizo investigación sobre [variabilidad estelar](https://es.wikipedia.org/wiki/Estrella_variable){:target="_blank"}. Trabajé el telescopio DuPont como observer/plugger del proyecto [Apogee-2 south](http://www.sdss.org/surveys/apogee-2/){:target="_blank"}, alojado en el [Observatorio Las Campanas.](https://es.wikipedia.org/wiki/Observatorio_Las_Campanas){:target="_blank"}. 
-
-Agradecido de su tiempo.
+Realizo investigación sobre [variabilidad estelar](https://es.wikipedia.org/wiki/Estrella_variable){:target="_blank"}. Trabajé el telescopio DuPont como observer/plugger del proyecto [Apogee-2 south](http://www.sdss.org/surveys/apogee-2/){:target="_blank"}, alojado en el [Observatorio Las Campanas.](https://es.wikipedia.org/wiki/Observatorio_Las_Campanas){:target="_blank"}. He sido profesor en la Universidad de Valparaíso, en la Universidad de Talca, y quizá qué más haga en un tiempo más.
 
 <p align="center">
 <figure>
 <img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/imagenes/workshop_mas_2018.jpg" alt="Charla"  width="500" height="350" /> <figcaption align = "center"><b> Figura 1: Persona sindicada como el autor de este blog, en el año 2018, hablando sobre estrellas variables.</b></figcaption>
 </figure>
 </p>
+
+Agradecido de su tiempo.
 
 ## Sobre el proyecto Fotómetro
 
