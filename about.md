@@ -1,6 +1,5 @@
 ---
-layout: default
-title: Sobre el autor
+layout: topbar
 ---
 
 Hola! Me llamo Nicolás Medina Peña. Soy Licenciado en Astronomía [(UdeC)](http://www.udec.cl/pexterno/){:target="_blank"}, Magíster en Astrofísica y Doctor en Astrofísica [(UV)](http://uv.cl/){:target="_blank"}. Me gusta la música extraña y conversar sobre cosas aparentemente no relevantes. 
