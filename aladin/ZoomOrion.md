@@ -92,7 +92,7 @@ layout: none
                 target: "83.8220833 -5.3911111"  // Initial coordinates to center on
             });
 
-            let finalFov = 0.5;  // Final FoV after zooming in
+            let finalFov = 1.5;  // Final FoV after zooming in
             let zoomSpeed = 0.98;  // Zoom speed factor (closer to 1 means slower zoom)
             let intervalTime = 50;  // Time in milliseconds between each zoom step
             let zoomInterval;
