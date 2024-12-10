@@ -1,5 +1,5 @@
 ---
-layout: none
+layout: topbar
 --- 
 
 <html>
@@ -91,6 +91,9 @@ layout: none
                 fov: 360,  // Start with a large FoV (60 degrees)
                 target: "83.8220833 -5.3911111"  // Initial coordinates to center on
             });
+
+            // Rotar el FoV 180 grados
+            aladin.view.setRotation(Math.PI);
 
             let finalFov = 1.5;  // Final FoV after zooming in
             let zoomSpeed = 0.98;  // Zoom speed factor (closer to 1 means slower zoom)
