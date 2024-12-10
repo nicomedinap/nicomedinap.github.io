@@ -70,7 +70,7 @@ layout: topbar
         let map = [];
 
         const player = {
-            x: 3,
+            x: 2,
             y: 2,
             angle: 1,
             speed: 0,
