@@ -88,7 +88,7 @@ layout: none
             // Initialize AladinLite with a large FoV
             let aladin = A.aladin('#aladin-lite-div', {
                 survey: "P/DSS2/color",
-                fov: 60,  // Start with a large FoV (60 degrees)
+                fov: 360,  // Start with a large FoV (60 degrees)
                 target: "83.8220833 -5.3911111"  // Initial coordinates to center on
             });
 
