@@ -10,8 +10,8 @@ layout: none
     <style>
         /* Default styles */
         #aladin-lite-div {
-            width: 500px;
-            height: 800px;
+            width: 100%;
+            height: 70vh; /* Use relative height for better fit */
             margin: auto;
         }
 
