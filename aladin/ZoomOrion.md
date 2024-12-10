@@ -101,7 +101,7 @@ layout: topbar
             function startZoom(targetCoords) {
                 clearInterval(zoomInterval);  // Clear any previous zoom intervals
                 aladin.gotoObject(targetCoords);  // Go to the new coordinates
-                aladin.setFov(60);  // Reset the FoV to the initial large value
+                aladin.setFov(360);  // Reset the FoV to the initial large value
 
                 zoomInterval = setInterval(function() {
                     let currentFov = aladin.getFov()[0];  // Get the current FoV
