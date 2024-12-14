@@ -1,8 +1,6 @@
 ---
 layout: topbar
 ---
-
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -79,7 +77,7 @@ layout: topbar
 </head>
 <body>
     <header>
-        <h1>Explora los Telescopios Espaciales</h1>
+        <h1>Sobre los telescopios</h1>
         <p>Descubre más sobre el Hubble, el JWST y VISTA</p>
     </header>
     <div class="container">
