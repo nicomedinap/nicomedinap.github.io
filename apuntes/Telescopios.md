@@ -94,12 +94,12 @@ layout: topbar
                     <li><b>Filtros:</b> Visible, ultravioleta y cercano al infrarrojo.</li>
                     <li><b>Objetivo:</b> Estudio de galaxias, agujeros negros y exoplanetas.</li>
                 </ul>
-                <a href="https://www.nasa.gov/mission_pages/hubble/main/index.html" target="_blank">Más información sobre el Hubble</a>
+                <a href="https://science.nasa.gov/mission/hubble" target="_blank">Más información sobre el Hubble</a>
             </div>
         </div>
         <!-- Tarjeta JWST -->
         <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/JWST_in_space.jpg/800px-JWST_in_space.jpg" alt="Telescopio Espacial James Webb">
+            <img src="https://cf-img-a-in.tosshub.com/sites/visualstory/wp/2024/06/james-webb-telescope-pictures-mqx4ltsbjytvsfbp.jpeg?size=*:900" alt="Telescopio Espacial James Webb">
             <div class="card-content">
                 <h3>Telescopio Espacial James Webb (JWST)</h3>
                 <p>El JWST, lanzado en 2021, es el telescopio infrarrojo más avanzado, diseñado para explorar las primeras etapas del universo.</p>
@@ -108,12 +108,12 @@ layout: topbar
                     <li><b>Filtros:</b> Espectro infrarrojo medio y cercano.</li>
                     <li><b>Objetivo:</b> Formación de galaxias, estrellas y análisis de atmósferas de exoplanetas.</li>
                 </ul>
-                <a href="https://www.nasa.gov/content/james-webb-space-telescope" target="_blank">Más información sobre el JWST</a>
+                <a href="https://science.nasa.gov/mission/webb/" target="_blank">Más información sobre el JWST</a>
             </div>
         </div>
         <!-- Tarjeta VISTA -->
         <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/VISTA_Infrared_Telescope.jpg" alt="Telescopio VISTA">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp1Y5pRBnW0849E4AHJa7UGlL5JXkEj01usw&s" alt="Telescopio VISTA">
             <div class="card-content">
                 <h3>Telescopio VISTA</h3>
                 <p>Ubicado en Chile, el telescopio terrestre VISTA explora el universo infrarrojo y realiza mapeos del cielo para revelar nuevas estrellas y galaxias.</p>
@@ -122,7 +122,7 @@ layout: topbar
                     <li><b>Filtros:</b> Espectro infrarrojo cercano.</li>
                     <li><b>Objetivo:</b> Estudio de formación estelar, galaxias y mapeos 3D del universo.</li>
                 </ul>
-                <a href="https://www.eso.org/public/teles-instr/paranal-observatory/vista/" target="_blank">Más información sobre VISTA</a>
+                <a href="https://www.eso.org/public/teles-instr/paranal-observatory/surveytelescopes/vista/" target="_blank">Más información sobre VISTA</a>
             </div>
         </div>
     </div>
