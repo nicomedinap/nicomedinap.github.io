@@ -14,49 +14,61 @@ layout: topbar
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
         header {
             text-align: center;
             background: #222;
             color: #fff;
-            padding: 10px 0;
+            padding: 20px 0;
+            width: 100%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
         .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
+            max-width: 800px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
+            padding: 20px;
         }
         .card {
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 90%;
+            display: flex;
+            align-items: center;
             overflow: hidden;
             transition: transform 0.2s;
         }
         .card:hover {
-            transform: scale(1.05);
+            transform: scale(1.01);
         }
         .card img {
-            width: 100%;
-            height: 200px;
+            width: 40%;
+            height: 100%;
             object-fit: cover;
         }
         .card-content {
-            padding: 20px;
+            padding: 15px;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .card-content h3 {
             margin: 0 0 10px;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #222;
         }
         .card-content p {
             margin: 0 0 15px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #555;
         }
         .card-content ul {
@@ -64,6 +76,7 @@ layout: topbar
             margin: 0 0 15px;
             color: #555;
             font-size: 0.9rem;
+            text-align: left;
         }
         .card-content a {
             text-decoration: none;
@@ -114,7 +127,7 @@ layout: topbar
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp1Y5pRBnW0849E4AHJa7UGlL5JXkEj01usw&s" alt="Telescopio VISTA">
             <div class="card-content">
                 <h3>Telescopio VISTA</h3>
-                <p>Ubicado en Chile, el telescopio terrestre VISTA explora el universo infrarrojo y realiza mapeos del cielo para revelar nuevas estrellas y galaxias.</p>
+                <p>Ubicado en el observatorio Paranal, Chile. El telescopio VISTA explora el universo infrarrojo y realiza mapeos del cielo para revelar los misterios que están escondidos en el polvo galáctico.</p>
                 <ul>
                     <li><b>Ubicación:</b> Observatorio Paranal, Chile.</li>
                     <li><b>Filtros:</b> Espectro infrarrojo cercano.</li>
