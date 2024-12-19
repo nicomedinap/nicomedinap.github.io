@@ -1,10 +1,11 @@
 ---
 layout: post
-mathjax: true
 title:  "La ciudad y los astros"
 ---
 
-Este texto fue escrito para la [primera Bienal de la ciudad de San Fernando](https://municipalidadsanfernando.cl/2024/08/28/municipalidad-de-san-fernando-organiza-primera-bienal-internacional-de-arquitectura-patrimonio-y-urbanismo/){:target="_blank"}, haciendo un esfuerzo de hacer dialogar la ciudad moderna con la astronomía 
+*Este texto fue escrito para la [primera Bienal de la ciudad de San Fernando](https://municipalidadsanfernando.cl/2024/08/28/municipalidad-de-san-fernando-organiza-primera-bienal-internacional-de-arquitectura-patrimonio-y-urbanismo/){:target="_blank"}, con el fin de crear un diálogo entre la ciudad moderna con la astronomía.*
+
+
 
 Hace un tiempo tomé un Uber, abordé el automóvil y el altavoz menciona que yo iba al departamento de videojuegos de la Universidad de Talca. La persona que manejaba se sorprendió y me preguntó qué iba a hacer ahí. Le dije que era científico y que tenía que hacer clases de física.
 
