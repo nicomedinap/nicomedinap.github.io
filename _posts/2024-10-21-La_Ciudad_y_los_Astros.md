@@ -9,7 +9,7 @@ Hace un tiempo tomé un Uber, abordé el automóvil y el altavoz menciona que yo
 
 -¿Y dónde está la física en el día a día?- Me pregunta de vuelta. Mientras esa persona iba atenta a la trayectoria y velocidad de cada automóvil en el camino, mientras en su teléfono se activaban y desactivaba miles de millones de transistores en cada interacción, mientras los satélites en órbita recibían las señales y triangulaban con una exactitud ridícula nuestra posición en el mapa.
 
-Mientras todo esto pasaba, entendí que el mayor éxito de la física (y de las ciencias en general) es que son implícitas: Es una especie de magia, de superpoder que algunas personas desarrollan y en el camino se vuelven locos mientras hablan el lenguaje de la realidad.
+Mientras todo esto pasaba, entendí que el mayor éxito de la física (y de las ciencias en general) es que son implícitas: ya no es necesario saber con completo detalles de qué trata, es una especie de magia, de superpoder que algunas personas desarrollan y en el camino se van desconectando del lenguaje humano para pensar en otros idiomas.
 
 La astronomía está en el origen de la Humanidad, en los cimientos de toda nuestra vida. Cada pueblo originario que se enfrentó a la abrumadora realidad tuvo que realizar un esfuerzos mentales gigantescos para poder explicar la vida, encajar los eventos naturales en este relato y crear cohesión entre todos los eventos que eran presenciados (terremotos, tormentas, volcanes, tornados, cometas, etc). Los cazadores recolectores dependían completamente de su conocimiento de la realidad para poder sobrevivir, y esto incluía observar el cosmos con mucha detención para saber qué comer y dónde encontrarlo. 
 
