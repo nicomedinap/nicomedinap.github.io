@@ -1,7 +1,4 @@
----
-layout: topbar
----
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -85,7 +82,7 @@ layout: topbar
     </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
-    
+
     <!-- Botones de control -->
     <button id="upButton" class="control-button">↑</button>
     <button id="downButton" class="control-button">↓</button>
@@ -212,12 +209,23 @@ layout: topbar
             });
 
             // Manejar eventos de los botones de control
+            upButton.addEventListener('touchstart', () => player.speed = 0.1);
+            upButton.addEventListener('touchend', () => player.speed = 0);
             upButton.addEventListener('mousedown', () => player.speed = 0.1);
             upButton.addEventListener('mouseup', () => player.speed = 0);
+
+            downButton.addEventListener('touchstart', () => player.speed = -0.1);
+            downButton.addEventListener('touchend', () => player.speed = 0);
             downButton.addEventListener('mousedown', () => player.speed = -0.1);
             downButton.addEventListener('mouseup', () => player.speed = 0);
+
+            leftButton.addEventListener('touchstart', () => player.turnSpeed = -0.05);
+            leftButton.addEventListener('touchend', () => player.turnSpeed = 0);
             leftButton.addEventListener('mousedown', () => player.turnSpeed = -0.05);
             leftButton.addEventListener('mouseup', () => player.turnSpeed = 0);
+
+            rightButton.addEventListener('touchstart', () => player.turnSpeed = 0.05);
+            rightButton.addEventListener('touchend', () => player.turnSpeed = 0);
             rightButton.addEventListener('mousedown', () => player.turnSpeed = 0.05);
             rightButton.addEventListener('mouseup', () => player.turnSpeed = 0);
         }
