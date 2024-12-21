@@ -58,15 +58,19 @@ layout: topbar
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
     <script>
+        // Obtener referencias a los elementos del canvas
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const minimapCanvas = document.getElementById('minimapCanvas');
         const minimapCtx = minimapCanvas.getContext('2d');
+
+        // Establecer dimensiones del canvas
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         minimapCanvas.width = 100;
         minimapCanvas.height = 600;
 
+        // Inicializar variables
         let map = [];
 
         const player = {
@@ -84,6 +88,7 @@ layout: topbar
         let skyTexture = null;
         let floorTexture = null;
 
+        // Pre-cargar texturas
         function preloadTextures(urls) {
             const promises = Object.entries(urls).map(([key, url]) => {
                 return new Promise((resolve, reject) => {
@@ -103,6 +108,7 @@ layout: topbar
             return Promise.all(promises);
         }
 
+        // Pre-cargar texturas de cielo y piso
         function preloadSkyAndFloorTextures(skyUrl, floorUrl) {
             return new Promise((resolve, reject) => {
                 const skyImg = new Image();
@@ -121,6 +127,7 @@ layout: topbar
             });
         }
 
+        // Crear mipmaps para las texturas
         function createMipmaps(image) {
             const mipmaps = [image];
             let width = image.width / 2;
@@ -138,6 +145,7 @@ layout: topbar
             return mipmaps;
         }
 
+        // Manejar entrada del usuario
         function handleInput() {
             window.addEventListener('keydown', (e) => {
                 switch (e.keyCode) {
@@ -158,6 +166,7 @@ layout: topbar
             });
         }
 
+        // Actualizar estado del jugador
         function update() {
             player.angle += player.turnSpeed;
             const moveStep = player.speed;
@@ -170,6 +179,7 @@ layout: topbar
             }
         }
 
+        // Validar movimiento del jugador
         function isValidMove(newX, newY) {
             const mapX = Math.floor(newX);
             const mapY = Math.floor(newY);
@@ -182,6 +192,7 @@ layout: topbar
             return true;
         }
 
+        // Lanzar un rayo para detectar colisiones
         function castRay(angle) {
             let x = player.x;
             let y = player.y;
@@ -195,15 +206,13 @@ layout: topbar
                 const mapX = Math.floor(x);
                 const mapY = Math.floor(y);
 
-                // Verificar si los índices están dentro del rango del mapa
-                //if (mapY < 0 || mapY >= map.length || mapX < 0 || mapX >= map[0].length) {
-                //    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY }; // Retornar una distancia infinita si está fuera del mapa
-                //}
+                if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
+                    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY }; // Retornar una distancia infinita si está fuera del mapa
+                }
 
                 if (map[mapY][mapX] !== 0) {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
 
-                    // Determina el offset de la intersección (hitOffset) para aplicar la textura
                     let hitOffset;
                     const deltaX = x - mapX;
                     const deltaY = y - mapY;
@@ -216,7 +225,6 @@ layout: topbar
                         if (sin < 0) hitOffset = 1 - hitOffset; // Cara superior
                     }
 
-                    //Asegura que hitOffset esté en el rango [0, 1)
                     if (hitOffset < 0) hitOffset += 1;
 
                     return { dist, texture: textures[map[mapY][mapX]], hitOffset, mapX, mapY };
@@ -224,7 +232,7 @@ layout: topbar
             }
         }
 
-
+        // Dibujar la escena
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -250,7 +258,7 @@ layout: topbar
                 }
             }
 
-            const fov = Math.PI/2;
+            const fov = Math.PI/1.5;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
@@ -284,9 +292,23 @@ layout: topbar
                 }
             }
             minimapCtx.fillStyle = 'red';
-            minimapCtx.fillRect(player.x * scale - scale, player.y * scale - scale, scale, scale);
+            minimapCtx.fillRect(player.x * scale - scale / 2, player.y * scale - scale / 2, scale, scale);
+
+            // Dibujar el campo de visión en el minimapa
+            minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.6)'; // Color amarillo translúcido
+            minimapCtx.beginPath();
+            minimapCtx.moveTo(player.x * scale, player.y * scale);
+            for (let i = 0; i <= numRays; i++) {
+                const rayAngle = player.angle - fov / 2 + i * rayAngleStep;
+                const endX = player.x + Math.cos(rayAngle) * 4;
+                const endY = player.y + Math.sin(rayAngle) * 4;
+                minimapCtx.lineTo(endX * scale, endY * scale);
+            }
+            minimapCtx.closePath();
+            minimapCtx.fill();
         }
 
+        // Bucle principal del juego
         function gameLoop() {
             update(); // Actualiza la lógica del juego
             draw(); // Renderiza el juego en pantalla
@@ -296,6 +318,7 @@ layout: topbar
             }, 1000 / 60); // Limita a aproximadamente 60 FPS
         }
 
+        // Cargar el mapa desde una URL
         function loadMap(mapUrl) {
             fetch(mapUrl)
                 .then(response => {
@@ -318,6 +341,7 @@ layout: topbar
                 });
         }
 
+        // Inicializar el juego
         function init() {
             handleInput();
             const mapSelect = document.getElementById('mapSelect');
@@ -350,6 +374,7 @@ layout: topbar
                 });
         }
 
+        // Ejecutar la inicialización
         init();
     </script>
 </body>
