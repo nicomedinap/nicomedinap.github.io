@@ -46,6 +46,34 @@ layout: topbar
             font-family: Arial, sans-serif;
             padding: 5px;
         }
+        .control-button {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 30px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 60px;
+            user-select: none;
+        }
+        #upButton {
+            bottom: 80px;
+            right: 10px;
+        }
+        #downButton {
+            bottom: 10px;
+            right: 10px;
+        }
+        #leftButton {
+            bottom: 45px;
+            left: 10px;
+        }
+        #rightButton {
+            bottom: 45px;
+            left: 80px;
+        }
     </style>
 </head>
 <body>
@@ -57,12 +85,23 @@ layout: topbar
     </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
+    
+    <!-- Botones de control -->
+    <button id="upButton" class="control-button">↑</button>
+    <button id="downButton" class="control-button">↓</button>
+    <button id="leftButton" class="control-button">←</button>
+    <button id="rightButton" class="control-button">→</button>
+
     <script>
-        // Obtener referencias a los elementos del canvas
+        // Obtener referencias a los elementos del canvas y botones
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const minimapCanvas = document.getElementById('minimapCanvas');
         const minimapCtx = minimapCanvas.getContext('2d');
+        const upButton = document.getElementById('upButton');
+        const downButton = document.getElementById('downButton');
+        const leftButton = document.getElementById('leftButton');
+        const rightButton = document.getElementById('rightButton');
 
         // Establecer dimensiones del canvas
         canvas.width = window.innerWidth;
@@ -87,6 +126,13 @@ layout: topbar
         const textures = {};
         let skyTexture = null;
         let floorTexture = null;
+
+        // Detectar dispositivo móvil y forzar orientación horizontal
+        function detectMobileAndLockOrientation() {
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                screen.orientation.lock('landscape').catch(err => console.log(err));
+            }
+        }
 
         // Pre-cargar texturas
         function preloadTextures(urls) {
@@ -164,6 +210,16 @@ layout: topbar
                     case 40: player.speed = 0; break;
                 }
             });
+
+            // Manejar eventos de los botones de control
+            upButton.addEventListener('mousedown', () => player.speed = 0.1);
+            upButton.addEventListener('mouseup', () => player.speed = 0);
+            downButton.addEventListener('mousedown', () => player.speed = -0.1);
+            downButton.addEventListener('mouseup', () => player.speed = 0);
+            leftButton.addEventListener('mousedown', () => player.turnSpeed = -0.05);
+            leftButton.addEventListener('mouseup', () => player.turnSpeed = 0);
+            rightButton.addEventListener('mousedown', () => player.turnSpeed = 0.05);
+            rightButton.addEventListener('mouseup', () => player.turnSpeed = 0);
         }
 
         // Actualizar estado del jugador
@@ -258,7 +314,7 @@ layout: topbar
                 }
             }
 
-            const fov = Math.PI/1.5;
+            const fov = Math.PI / 2;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
@@ -295,7 +351,7 @@ layout: topbar
             minimapCtx.fillRect(player.x * scale - scale / 2, player.y * scale - scale / 2, scale, scale);
 
             // Dibujar el campo de visión en el minimapa
-            minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.6)'; // Color amarillo translúcido
+            minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Color amarillo translúcido
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
             for (let i = 0; i <= numRays; i++) {
@@ -343,6 +399,7 @@ layout: topbar
 
         // Inicializar el juego
         function init() {
+            detectMobileAndLockOrientation();
             handleInput();
             const mapSelect = document.getElementById('mapSelect');
             mapSelect.addEventListener('change', (event) => {
