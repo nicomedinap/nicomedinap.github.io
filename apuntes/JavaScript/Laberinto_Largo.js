@@ -1,6 +1,6 @@
 // mapa.js
 
-const _ = false; // Definiendo _ como False para facilitar la visualización
+const _ = 0;
 
 const map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1],
