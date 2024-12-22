@@ -118,7 +118,7 @@ layout: none
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
-            maxDistanceToTexture: 30 // Distancia máxima para texturizar las paredes
+            maxDistanceToTexture: 10 // Distancia máxima para texturizar las paredes
         };
 
         let currentRoom = null;
