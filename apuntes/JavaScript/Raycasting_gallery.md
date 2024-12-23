@@ -1,6 +1,10 @@
+<<<<<<< Updated upstream
 ---
 layout: none
 ---
+=======
+<!DOCTYPE html>
+>>>>>>> Stashed changes
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +19,7 @@ layout: none
         canvas {
             display: block;
         }
-        #roomIndicator {
+        #roomIndicator, #mapSelect {
             position: absolute;
             top: 10px;
             left: 10px;
@@ -36,14 +40,33 @@ layout: none
             width: 100%;
             height: 100%;
         }
-        #mapSelect {
+        .control-button {
             position: absolute;
-            top: 50px;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 30px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 60px;
+            user-select: none;
+        }
+        #upButton {
+            bottom: 80px;
             right: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-family: Arial, sans-serif;
-            padding: 5px;
+        }
+        #downButton {
+            bottom: 10px;
+            right: 10px;
+        }
+        #leftButton {
+            bottom: 45px;
+            left: 10px;
+        }
+        #rightButton {
+            bottom: 45px;
+            left: 80px;
         }
         .control-button {
             position: absolute;
@@ -102,7 +125,10 @@ layout: none
         const leftButton = document.getElementById('leftButton');
         const rightButton = document.getElementById('rightButton');
 
+<<<<<<< Updated upstream
         // Establecer dimensiones del canvas
+=======
+>>>>>>> Stashed changes
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         minimapCanvas.width = 100;
@@ -110,7 +136,6 @@ layout: none
 
         // Inicializar variables
         let map = [];
-
         const player = {
             x: 2.5,
             y: 2.5,
@@ -118,7 +143,11 @@ layout: none
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
+<<<<<<< Updated upstream
             maxDistanceToTexture: 10 // Distancia máxima para texturizar las paredes
+=======
+            maxDistanceToTexture: 30
+>>>>>>> Stashed changes
         };
 
         let currentRoom = null;
@@ -126,14 +155,20 @@ layout: none
         let skyTexture = null;
         let floorTexture = null;
 
+<<<<<<< Updated upstream
         // Detectar dispositivo móvil y forzar orientación horizontal
+=======
+>>>>>>> Stashed changes
         function detectMobileAndLockOrientation() {
             if (/Mobi|Android/i.test(navigator.userAgent)) {
                 screen.orientation.lock('landscape').catch(err => console.log(err));
             }
         }
 
+<<<<<<< Updated upstream
         // Pre-cargar texturas
+=======
+>>>>>>> Stashed changes
         function preloadTextures(urls) {
             const promises = Object.entries(urls).map(([key, url]) => {
                 return new Promise((resolve, reject) => {
@@ -210,6 +245,7 @@ layout: none
                 }
             });
 
+<<<<<<< Updated upstream
             // Manejar eventos de los botones de control
             upButton.addEventListener('touchstart', () => player.speed = 0.1);
             upButton.addEventListener('touchend', () => player.speed = 0);
@@ -230,6 +266,28 @@ layout: none
             rightButton.addEventListener('touchend', () => player.turnSpeed = 0);
             rightButton.addEventListener('mousedown', () => player.turnSpeed = 0.05);
             rightButton.addEventListener('mouseup', () => player.turnSpeed = 0);
+=======
+            const touchStartHandler = (e, speed, turnSpeed) => {
+                e.preventDefault();
+                player.speed = speed || player.speed;
+                player.turnSpeed = turnSpeed || player.turnSpeed;
+            };
+
+            const touchEndHandler = (e) => {
+                e.preventDefault();
+                player.speed = 0;
+                player.turnSpeed = 0;
+            };
+
+            upButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0.1, 0));
+            upButton.addEventListener('touchend', touchEndHandler);
+            downButton.addEventListener('touchstart', (e) => touchStartHandler(e, -0.1, 0));
+            downButton.addEventListener('touchend', touchEndHandler);
+            leftButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0, -0.05));
+            leftButton.addEventListener('touchend', touchEndHandler);
+            rightButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0, 0.05));
+            rightButton.addEventListener('touchend', touchEndHandler);
+>>>>>>> Stashed changes
         }
 
         // Actualizar estado del jugador
@@ -249,10 +307,7 @@ layout: none
         function isValidMove(newX, newY) {
             const mapX = Math.floor(newX);
             const mapY = Math.floor(newY);
-            if (newX < 0 || newX >= map[0].length || newY < 0 || newY >= map.length) {
-                return false;
-            }
-            if (map[mapY][mapX] !== 0) {
+            if (newX < 0 || newX >= map[0].length || newY < 0 || newY >= map.length || map[mapY][mapX] !== 0) {
                 return false;
             }
             return true;
@@ -273,7 +328,11 @@ layout: none
                 const mapY = Math.floor(y);
 
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
+<<<<<<< Updated upstream
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY }; // Retornar una distancia infinita si está fuera del mapa
+=======
+                    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
+>>>>>>> Stashed changes
                 }
 
                 if (map[mapY][mapX] !== 0) {
@@ -285,10 +344,10 @@ layout: none
 
                     if (Math.abs(deltaX) < stepSize) {
                         hitOffset = deltaY % 1;
-                        if (cos < 0) hitOffset = 1 - hitOffset; // Cara izquierda
+                        if (cos < 0) hitOffset = 1 - hitOffset;
                     } else {
                         hitOffset = deltaX % 1;
-                        if (sin < 0) hitOffset = 1 - hitOffset; // Cara superior
+                        if (sin < 0) hitOffset = 1 - hitOffset;
                     }
 
                     if (hitOffset < 0) hitOffset += 1;
@@ -298,7 +357,10 @@ layout: none
             }
         }
 
+<<<<<<< Updated upstream
         // Dibujar la escena
+=======
+>>>>>>> Stashed changes
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -360,8 +422,12 @@ layout: none
             minimapCtx.fillStyle = 'red';
             minimapCtx.fillRect(player.x * scale - scale / 2, player.y * scale - scale / 2, scale, scale);
 
+<<<<<<< Updated upstream
             // Dibujar el campo de visión en el minimapa
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Color amarillo translúcido
+=======
+            minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
+>>>>>>> Stashed changes
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
             for (let i = 0; i <= numRays; i++) {
@@ -376,21 +442,18 @@ layout: none
 
         // Bucle principal del juego
         function gameLoop() {
-            update(); // Actualiza la lógica del juego
-            draw(); // Renderiza el juego en pantalla
-
+            update();
+            draw();
             setTimeout(() => {
                 requestAnimationFrame(gameLoop);
-            }, 1000 / 60); // Limita a aproximadamente 60 FPS
+            }, 1000 / 60);
         }
 
         // Cargar el mapa desde una URL
         function loadMap(mapUrl) {
             fetch(mapUrl)
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al cargar el mapa');
-                    }
+                    if (!response.ok) throw new Error('Error al cargar el mapa');
                     return response.text();
                 })
                 .then(script => {
@@ -419,9 +482,7 @@ layout: none
 
             fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al cargar textures.json');
-                    }
+                    if (!response.ok) throw new Error('Error al cargar textures.json');
                     return response.json();
                 })
                 .then(data => {
