@@ -1,7 +1,7 @@
 ---
 layout: none
 ---
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -65,34 +65,6 @@ layout: none
             bottom: 45px;
             left: 80px;
         }
-        .control-button {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: none;
-            border-radius: 30px;
-            font-size: 24px;
-            text-align: center;
-            line-height: 60px;
-            user-select: none;
-        }
-        #upButton {
-            bottom: 80px;
-            right: 10px;
-        }
-        #downButton {
-            bottom: 10px;
-            right: 10px;
-        }
-        #leftButton {
-            bottom: 45px;
-            left: 10px;
-        }
-        #rightButton {
-            bottom: 45px;
-            left: 80px;
-        }
     </style>
 </head>
 <body>
@@ -112,7 +84,6 @@ layout: none
     <button id="rightButton" class="control-button">→</button>
 
     <script>
-        // Obtener referencias a los elementos del canvas y botones
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const minimapCanvas = document.getElementById('minimapCanvas');
@@ -122,13 +93,11 @@ layout: none
         const leftButton = document.getElementById('leftButton');
         const rightButton = document.getElementById('rightButton');
 
-        // Establecer dimensiones del canvas
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         minimapCanvas.width = 100;
         minimapCanvas.height = 600;
 
-        // Inicializar variables
         let map = [];
         const player = {
             x: 2.5,
@@ -137,7 +106,6 @@ layout: none
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
-            maxDistanceToTexture: 10 // Distancia máxima para texturizar las paredes
             maxDistanceToTexture: 30
         };
 
@@ -146,14 +114,12 @@ layout: none
         let skyTexture = null;
         let floorTexture = null;
 
-        // Detectar dispositivo móvil y forzar orientación horizontal
         function detectMobileAndLockOrientation() {
             if (/Mobi|Android/i.test(navigator.userAgent)) {
                 screen.orientation.lock('landscape').catch(err => console.log(err));
             }
         }
 
-        // Pre-cargar texturas
         function preloadTextures(urls) {
             const promises = Object.entries(urls).map(([key, url]) => {
                 return new Promise((resolve, reject) => {
@@ -173,7 +139,6 @@ layout: none
             return Promise.all(promises);
         }
 
-        // Pre-cargar texturas de cielo y piso
         function preloadSkyAndFloorTextures(skyUrl, floorUrl) {
             return new Promise((resolve, reject) => {
                 const skyImg = new Image();
@@ -192,7 +157,6 @@ layout: none
             });
         }
 
-        // Crear mipmaps para las texturas
         function createMipmaps(image) {
             const mipmaps = [image];
             let width = image.width / 2;
@@ -210,7 +174,6 @@ layout: none
             return mipmaps;
         }
 
-        // Manejar entrada del usuario
         function handleInput() {
             window.addEventListener('keydown', (e) => {
                 switch (e.keyCode) {
@@ -230,26 +193,6 @@ layout: none
                 }
             });
 
-            // Manejar eventos de los botones de control
-            upButton.addEventListener('touchstart', () => player.speed = 0.1);
-            upButton.addEventListener('touchend', () => player.speed = 0);
-            upButton.addEventListener('mousedown', () => player.speed = 0.1);
-            upButton.addEventListener('mouseup', () => player.speed = 0);
-
-            downButton.addEventListener('touchstart', () => player.speed = -0.1);
-            downButton.addEventListener('touchend', () => player.speed = 0);
-            downButton.addEventListener('mousedown', () => player.speed = -0.1);
-            downButton.addEventListener('mouseup', () => player.speed = 0);
-
-            leftButton.addEventListener('touchstart', () => player.turnSpeed = -0.05);
-            leftButton.addEventListener('touchend', () => player.turnSpeed = 0);
-            leftButton.addEventListener('mousedown', () => player.turnSpeed = -0.05);
-            leftButton.addEventListener('mouseup', () => player.turnSpeed = 0);
-
-            rightButton.addEventListener('touchstart', () => player.turnSpeed = 0.05);
-            rightButton.addEventListener('touchend', () => player.turnSpeed = 0);
-            rightButton.addEventListener('mousedown', () => player.turnSpeed = 0.05);
-            rightButton.addEventListener('mouseup', () => player.turnSpeed = 0);
             const touchStartHandler = (e, speed, turnSpeed) => {
                 e.preventDefault();
                 player.speed = speed || player.speed;
@@ -272,7 +215,6 @@ layout: none
             rightButton.addEventListener('touchend', touchEndHandler);
         }
 
-        // Actualizar estado del jugador
         function update() {
             player.angle += player.turnSpeed;
             const moveStep = player.speed;
@@ -285,7 +227,6 @@ layout: none
             }
         }
 
-        // Validar movimiento del jugador
         function isValidMove(newX, newY) {
             const mapX = Math.floor(newX);
             const mapY = Math.floor(newY);
@@ -295,7 +236,6 @@ layout: none
             return true;
         }
 
-        // Lanzar un rayo para detectar colisiones
         function castRay(angle) {
             let x = player.x;
             let y = player.y;
@@ -310,7 +250,6 @@ layout: none
                 const mapY = Math.floor(y);
 
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
-                    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY }; // Retornar una distancia infinita si está fuera del mapa
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
                 }
 
@@ -335,8 +274,6 @@ layout: none
                 }
             }
         }
-
-        // Dibujar la escena
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -399,8 +336,6 @@ layout: none
             minimapCtx.fillStyle = 'red';
             minimapCtx.fillRect(player.x * scale - scale / 2, player.y * scale - scale / 2, scale, scale);
 
-            // Dibujar el campo de visión en el minimapa
-            minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Color amarillo translúcido
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
@@ -414,7 +349,6 @@ layout: none
             minimapCtx.fill();
         }
 
-        // Bucle principal del juego
         function gameLoop() {
             update();
             draw();
@@ -423,7 +357,6 @@ layout: none
             }, 1000 / 60);
         }
 
-        // Cargar el mapa desde una URL
         function loadMap(mapUrl) {
             fetch(mapUrl)
                 .then(response => {
@@ -444,7 +377,6 @@ layout: none
                 });
         }
 
-        // Inicializar el juego
         function init() {
             detectMobileAndLockOrientation();
             handleInput();
@@ -476,7 +408,6 @@ layout: none
                 });
         }
 
-        // Ejecutar la inicialización
         init();
     </script>
 </body>
