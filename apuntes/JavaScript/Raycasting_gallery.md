@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
 ---
 layout: none
 ---
-=======
 <!DOCTYPE html>
->>>>>>> Stashed changes
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -125,10 +122,7 @@ layout: none
         const leftButton = document.getElementById('leftButton');
         const rightButton = document.getElementById('rightButton');
 
-<<<<<<< Updated upstream
         // Establecer dimensiones del canvas
-=======
->>>>>>> Stashed changes
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         minimapCanvas.width = 100;
@@ -143,11 +137,8 @@ layout: none
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
-<<<<<<< Updated upstream
             maxDistanceToTexture: 10 // Distancia máxima para texturizar las paredes
-=======
             maxDistanceToTexture: 30
->>>>>>> Stashed changes
         };
 
         let currentRoom = null;
@@ -155,20 +146,14 @@ layout: none
         let skyTexture = null;
         let floorTexture = null;
 
-<<<<<<< Updated upstream
         // Detectar dispositivo móvil y forzar orientación horizontal
-=======
->>>>>>> Stashed changes
         function detectMobileAndLockOrientation() {
             if (/Mobi|Android/i.test(navigator.userAgent)) {
                 screen.orientation.lock('landscape').catch(err => console.log(err));
             }
         }
 
-<<<<<<< Updated upstream
         // Pre-cargar texturas
-=======
->>>>>>> Stashed changes
         function preloadTextures(urls) {
             const promises = Object.entries(urls).map(([key, url]) => {
                 return new Promise((resolve, reject) => {
@@ -245,7 +230,6 @@ layout: none
                 }
             });
 
-<<<<<<< Updated upstream
             // Manejar eventos de los botones de control
             upButton.addEventListener('touchstart', () => player.speed = 0.1);
             upButton.addEventListener('touchend', () => player.speed = 0);
@@ -266,7 +250,6 @@ layout: none
             rightButton.addEventListener('touchend', () => player.turnSpeed = 0);
             rightButton.addEventListener('mousedown', () => player.turnSpeed = 0.05);
             rightButton.addEventListener('mouseup', () => player.turnSpeed = 0);
-=======
             const touchStartHandler = (e, speed, turnSpeed) => {
                 e.preventDefault();
                 player.speed = speed || player.speed;
@@ -287,7 +270,6 @@ layout: none
             leftButton.addEventListener('touchend', touchEndHandler);
             rightButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0, 0.05));
             rightButton.addEventListener('touchend', touchEndHandler);
->>>>>>> Stashed changes
         }
 
         // Actualizar estado del jugador
@@ -328,11 +310,8 @@ layout: none
                 const mapY = Math.floor(y);
 
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
-<<<<<<< Updated upstream
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY }; // Retornar una distancia infinita si está fuera del mapa
-=======
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
->>>>>>> Stashed changes
                 }
 
                 if (map[mapY][mapX] !== 0) {
@@ -357,10 +336,8 @@ layout: none
             }
         }
 
-<<<<<<< Updated upstream
         // Dibujar la escena
-=======
->>>>>>> Stashed changes
+
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -422,12 +399,9 @@ layout: none
             minimapCtx.fillStyle = 'red';
             minimapCtx.fillRect(player.x * scale - scale / 2, player.y * scale - scale / 2, scale, scale);
 
-<<<<<<< Updated upstream
             // Dibujar el campo de visión en el minimapa
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Color amarillo translúcido
-=======
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
->>>>>>> Stashed changes
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
             for (let i = 0; i <= numRays; i++) {
