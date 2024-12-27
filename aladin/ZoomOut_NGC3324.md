@@ -1,7 +1,6 @@
 ---
 layout: topbar
 --- 
-<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -48,7 +47,7 @@ layout: topbar
         });
 
         let initialFov = 0.1;  // Initial small FoV
-        let maxFov = 360;  // Maximum FoV after zooming out
+        let maxFov = 180;  // Maximum FoV after zooming out
         let zoomSpeed = 1.02;  // Zoom speed factor (greater than 1 means zooming out)
         let intervalTime = 50;  // Time in milliseconds between each zoom step
         let zoomInterval;
@@ -87,7 +86,7 @@ layout: topbar
         setTimeout(function() {
             let targetCoords = "159.21271 -58.62052";  // Coordinates 
             startZoomOut(targetCoords);
-        }, 8000);
+        }, 6000);
 
         // Event handler for the Start Zoom button
         $('#start-zoom').click(function() {
