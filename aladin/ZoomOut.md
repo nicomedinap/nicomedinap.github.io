@@ -87,7 +87,7 @@ layout: topbar
         setTimeout(function() {
             let targetCoords = "159.21271 -58.62052";  // Coordinates 
             startZoomOut(targetCoords);
-        }, 5000);
+        }, 8000);
 
         // Event handler for the Start Zoom button
         $('#start-zoom').click(function() {
