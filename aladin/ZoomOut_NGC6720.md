@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+---
+layout: topbar
+--- 
 <html lang="es">
 
 <head>
