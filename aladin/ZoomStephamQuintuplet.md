@@ -88,7 +88,7 @@ layout: topbar
                 target: "339.0015 33.9640"  // Initial coordinates to center on
             });
 
-            let finalFov = 0.7;  // Final FoV after zooming in
+            let finalFov = 0.3;  // Final FoV after zooming in
             let zoomSpeed = 0.98;  // Zoom speed factor (closer to 1 means slower zoom)
             let intervalTime = 50;  // Time in milliseconds between each zoom step
             let zoomInterval;
