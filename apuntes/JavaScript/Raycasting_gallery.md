@@ -1,7 +1,4 @@
----
-layout: none
----
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,10 +24,8 @@ layout: none
         }
         #minimap {
             position: absolute;
-            top: 90px;
-            right: 20px;
-            width: 50px;
-            height: 250px;
+            top: 10px;
+            right: 10px;
             background-color: rgba(0, 0, 0, 0.5);
         }
         #minimap canvas {
@@ -76,13 +71,11 @@ layout: none
     </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
-
     <!-- Botones de control -->
     <button id="upButton" class="control-button">↑</button>
     <button id="downButton" class="control-button">↓</button>
     <button id="leftButton" class="control-button">←</button>
     <button id="rightButton" class="control-button">→</button>
-
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
@@ -93,10 +86,13 @@ layout: none
         const leftButton = document.getElementById('leftButton');
         const rightButton = document.getElementById('rightButton');
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        minimapCanvas.width = 100;
-        minimapCanvas.height = 600;
+        // Ajustar el tamaño del canvas según el dispositivo
+        const setCanvasSize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
 
         let map = [];
         const player = {
@@ -109,7 +105,6 @@ layout: none
             maxDistanceToTexture: 30
         };
 
-        let currentRoom = null;
         const textures = {};
         let skyTexture = null;
         let floorTexture = null;
@@ -175,44 +170,36 @@ layout: none
         }
 
         function handleInput() {
+            const setPlayerMovement = (speed, turnSpeed) => {
+                player.speed = speed !== undefined ? speed : player.speed;
+                player.turnSpeed = turnSpeed !== undefined ? turnSpeed : player.turnSpeed;
+            };
+
             window.addEventListener('keydown', (e) => {
                 switch (e.keyCode) {
-                    case 37: player.turnSpeed = -0.05; break;
-                    case 39: player.turnSpeed = 0.05; break;
-                    case 38: player.speed = 0.1; break;
-                    case 40: player.speed = -0.1; break;
+                    case 37: setPlayerMovement(undefined, -0.05); break;
+                    case 39: setPlayerMovement(undefined, 0.05); break;
+                    case 38: setPlayerMovement(0.1); break;
+                    case 40: setPlayerMovement(-0.1); break;
                 }
             });
 
             window.addEventListener('keyup', (e) => {
                 switch (e.keyCode) {
-                    case 37:
-                    case 39: player.turnSpeed = 0; break;
-                    case 38:
-                    case 40: player.speed = 0; break;
+                    case 37: case 39: setPlayerMovement(undefined, 0); break;
+                    case 38: case 40: setPlayerMovement(0); break;
                 }
             });
 
-            const touchStartHandler = (e, speed, turnSpeed) => {
-                e.preventDefault();
-                player.speed = speed || player.speed;
-                player.turnSpeed = turnSpeed || player.turnSpeed;
+            const addTouchEvents = (button, speed, turnSpeed) => {
+                button.addEventListener('touchstart', (e) => { e.preventDefault(); setPlayerMovement(speed, turnSpeed); });
+                button.addEventListener('touchend', (e) => { e.preventDefault(); setPlayerMovement(0, 0); });
             };
 
-            const touchEndHandler = (e) => {
-                e.preventDefault();
-                player.speed = 0;
-                player.turnSpeed = 0;
-            };
-
-            upButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0.1, 0));
-            upButton.addEventListener('touchend', touchEndHandler);
-            downButton.addEventListener('touchstart', (e) => touchStartHandler(e, -0.1, 0));
-            downButton.addEventListener('touchend', touchEndHandler);
-            leftButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0, -0.05));
-            leftButton.addEventListener('touchend', touchEndHandler);
-            rightButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0, 0.05));
-            rightButton.addEventListener('touchend', touchEndHandler);
+            addTouchEvents(upButton, 0.1);
+            addTouchEvents(downButton, -0.1);
+            addTouchEvents(leftButton, undefined, -0.05);
+            addTouchEvents(rightButton, undefined, 0.05);
         }
 
         function update() {
@@ -230,10 +217,7 @@ layout: none
         function isValidMove(newX, newY) {
             const mapX = Math.floor(newX);
             const mapY = Math.floor(newY);
-            if (newX < 0 || newX >= map[0].length || newY < 0 || newY >= map.length || map[mapY][mapX] !== 0) {
-                return false;
-            }
-            return true;
+            return !(newX < 0 || newX >= map[0].length || newY < 0 || newY >= map.length || map[mapY][mapX] !== 0);
         }
 
         function castRay(angle) {
@@ -323,8 +307,21 @@ layout: none
                 }
             }
 
+            drawMinimap();
+        }
+
+        function drawMinimap() {
+            // Ajustar el tamaño del minimapa según el tamaño del mapa
+            const minimapMaxSize = 200; // Tamaño máximo del minimapa
+            const mapWidth = map[0].length;
+            const mapHeight = map.length;
+            const scale = Math.min(minimapMaxSize / mapWidth, minimapMaxSize / mapHeight);
+
+            // Ajustar el tamaño del canvas del minimapa
+            minimapCanvas.width = mapWidth * scale;
+            minimapCanvas.height = mapHeight * scale;
+
             minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
-            const scale = minimapCanvas.width / map[0].length;
             minimapCtx.fillStyle = 'white';
             for (let y = 0; y < map.length; y++) {
                 for (let x = 0; x < map[y].length; x++) {
@@ -333,12 +330,16 @@ layout: none
                     }
                 }
             }
+
             minimapCtx.fillStyle = 'red';
             minimapCtx.fillRect(player.x * scale - scale / 2, player.y * scale - scale / 2, scale, scale);
 
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
+            const fov = Math.PI / 2;
+            const numRays = 30; // Número de rayos para el campo de visión en el minimapa
+            const rayAngleStep = fov / numRays;
             for (let i = 0; i <= numRays; i++) {
                 const rayAngle = player.angle - fov / 2 + i * rayAngleStep;
                 const endX = player.x + Math.cos(rayAngle) * 4;
