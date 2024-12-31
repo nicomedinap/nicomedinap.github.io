@@ -73,11 +73,13 @@ layout: none
     </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
+
     <!-- Botones de control -->
     <button id="upButton" class="control-button">↑</button>
     <button id="downButton" class="control-button">↓</button>
     <button id="leftButton" class="control-button">←</button>
     <button id="rightButton" class="control-button">→</button>
+
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
@@ -193,15 +195,34 @@ layout: none
                 }
             });
 
-            const addTouchEvents = (button, speed, turnSpeed) => {
-                button.addEventListener('touchstart', (e) => { e.preventDefault(); setPlayerMovement(speed, turnSpeed); });
-                button.addEventListener('touchend', (e) => { e.preventDefault(); setPlayerMovement(0, 0); });
+            const activeTouches = new Set();
+
+            const touchStartHandler = (e, speed, turnSpeed) => {
+                e.preventDefault();
+                for (const touch of e.changedTouches) {
+                    activeTouches.add(touch.identifier);
+                }
+                setPlayerMovement(speed, turnSpeed);
             };
 
-            addTouchEvents(upButton, 0.1);
-            addTouchEvents(downButton, -0.1);
-            addTouchEvents(leftButton, undefined, -0.05);
-            addTouchEvents(rightButton, undefined, 0.05);
+            const touchEndHandler = (e) => {
+                e.preventDefault();
+                for (const touch of e.changedTouches) {
+                    activeTouches.delete(touch.identifier);
+                }
+                if (activeTouches.size === 0) {
+                    setPlayerMovement(0, 0);
+                }
+            };
+
+            upButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0.1, undefined));
+            upButton.addEventListener('touchend', touchEndHandler);
+            downButton.addEventListener('touchstart', (e) => touchStartHandler(e, -0.1, undefined));
+            downButton.addEventListener('touchend', touchEndHandler);
+            leftButton.addEventListener('touchstart', (e) => touchStartHandler(e, undefined, -0.05));
+            leftButton.addEventListener('touchend', touchEndHandler);
+            rightButton.addEventListener('touchstart', (e) => touchStartHandler(e, undefined, 0.05));
+            rightButton.addEventListener('touchend', touchEndHandler);
         }
 
         function update() {
