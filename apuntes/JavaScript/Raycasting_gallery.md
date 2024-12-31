@@ -122,17 +122,18 @@ layout: none
         function preloadTextures(urls) {
             const promises = Object.entries(urls).map(([key, url]) => {
                 return new Promise((resolve, reject) => {
-                    if (textures[key]) {
-                        resolve();
-                    } else {
-                        const img = new Image();
-                        img.src = url;
-                        img.onload = () => {
+                    const img = new Image();
+                    img.src = url;
+                    img.onload = () => {
+                        if (img.width <= 2000 && img.height <= 2000) {
                             textures[key] = createMipmaps(img);
                             resolve();
-                        };
-                        img.onerror = reject;
-                    }
+                        } else {
+                            console.warn(`Texture ${key} is too large (${img.width}x${img.height}) and will not be used.`);
+                            resolve(); // Resolve even if we don't use the texture
+                        }
+                    };
+                    img.onerror = reject;
                 });
             });
             return Promise.all(promises);
@@ -143,11 +144,19 @@ layout: none
                 const skyImg = new Image();
                 skyImg.src = skyUrl;
                 skyImg.onload = () => {
-                    skyTexture = skyImg;
+                    if (skyImg.width <= 2000 && skyImg.height <= 2000) {
+                        skyTexture = skyImg;
+                    } else {
+                        console.warn(`Sky texture is too large (${skyImg.width}x${skyImg.height}) and will not be used.`);
+                    }
                     const floorImg = new Image();
                     floorImg.src = floorUrl;
                     floorImg.onload = () => {
-                        floorTexture = floorImg;
+                        if (floorImg.width <= 2000 && floorImg.height <= 2000) {
+                            floorTexture = floorImg;
+                        } else {
+                            console.warn(`Floor texture is too large (${floorImg.width}x${floorImg.height}) and will not be used.`);
+                        }
                         resolve();
                     };
                     floorImg.onerror = reject;
@@ -268,14 +277,12 @@ layout: none
                     const deltaY = y - mapY;
 
                     if (Math.abs(deltaX) < stepSize) {
-                        hitOffset = deltaY % 1;
-                        if (cos < 0) hitOffset = 1 - hitOffset;
+                        hitOffset = y - mapY;
+                        if (cos < 0) hitOffset = 1 - hitOffset; // Left wall
                     } else {
-                        hitOffset = deltaX % 1;
-                        if (sin < 0) hitOffset = 1 - hitOffset;
+                        hitOffset = x - mapX;
+                        if (sin < 0) hitOffset = 1 - hitOffset; // Top wall
                     }
-
-                    if (hitOffset < 0) hitOffset += 1;
 
                     return { dist, texture: textures[map[mapY][mapX]], hitOffset, mapX, mapY };
                 }
