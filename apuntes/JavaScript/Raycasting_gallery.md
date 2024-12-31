@@ -122,18 +122,22 @@ layout: none
         function preloadTextures(urls) {
             const promises = Object.entries(urls).map(([key, url]) => {
                 return new Promise((resolve, reject) => {
-                    const img = new Image();
-                    img.src = url;
-                    img.onload = () => {
-                        if (img.width <= 2000 && img.height <= 2000) {
-                            textures[key] = createMipmaps(img);
-                            resolve();
-                        } else {
-                            console.warn(`Texture ${key} is too large (${img.width}x${img.height}) and will not be used.`);
-                            resolve(); // Resolve even if we don't use the texture
-                        }
-                    };
-                    img.onerror = reject;
+                    if (textures[key]) {
+                        resolve();
+                    } else {
+                        const img = new Image();
+                        img.src = url;
+                        img.onload = () => {
+                            if (img.width > 2000 || img.height > 2000) {
+                                console.warn(`Texture ${key} is too large and will not be used.`);
+                                resolve();
+                            } else {
+                                textures[key] = createMipmaps(img);
+                                resolve();
+                            }
+                        };
+                        img.onerror = reject;
+                    }
                 });
             });
             return Promise.all(promises);
@@ -144,19 +148,11 @@ layout: none
                 const skyImg = new Image();
                 skyImg.src = skyUrl;
                 skyImg.onload = () => {
-                    if (skyImg.width <= 2000 && skyImg.height <= 2000) {
-                        skyTexture = skyImg;
-                    } else {
-                        console.warn(`Sky texture is too large (${skyImg.width}x${skyImg.height}) and will not be used.`);
-                    }
+                    skyTexture = skyImg;
                     const floorImg = new Image();
                     floorImg.src = floorUrl;
                     floorImg.onload = () => {
-                        if (floorImg.width <= 2000 && floorImg.height <= 2000) {
-                            floorTexture = floorImg;
-                        } else {
-                            console.warn(`Floor texture is too large (${floorImg.width}x${floorImg.height}) and will not be used.`);
-                        }
+                        floorTexture = floorImg;
                         resolve();
                     };
                     floorImg.onerror = reject;
@@ -265,10 +261,12 @@ layout: none
                 const mapX = Math.floor(x);
                 const mapY = Math.floor(y);
 
+                // Verificar si los valores están fuera del mapa
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
                 }
 
+                // Detectar colisión con una pared
                 if (map[mapY][mapX] !== 0) {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
 
@@ -276,15 +274,27 @@ layout: none
                     const deltaX = x - mapX;
                     const deltaY = y - mapY;
 
-                    if (Math.abs(deltaX) < stepSize) {
+                    // Determinar si se golpeó una pared vertical u horizontal
+                    let isVerticalWall;
+                    if (Math.abs(deltaX - 0.5) > Math.abs(deltaY - 0.5)) {
+                        // Es una pared vertical
+                        isVerticalWall = true;
                         hitOffset = y - mapY;
-                        if (cos < 0) hitOffset = 1 - hitOffset; // Left wall
+                        // Ajustar hitOffset para paredes izquierda y derecha
+                        if (cos < 0) hitOffset = 1 - hitOffset;
                     } else {
+                        // Es una pared horizontal
+                        isVerticalWall = false;
                         hitOffset = x - mapX;
-                        if (sin < 0) hitOffset = 1 - hitOffset; // Top wall
+                        // Ajustar hitOffset para paredes superior e inferior
+                        if (sin < 0) hitOffset = 1 - hitOffset;
                     }
 
-                    return { dist, texture: textures[map[mapY][mapX]], hitOffset, mapX, mapY };
+                    // Asegurarse de que el hitOffset esté en el rango [0, 1]
+                    if (hitOffset < 0) hitOffset += 1;
+                    if (hitOffset > 1) hitOffset -= 1;
+
+                    return { dist, texture: textures[map[mapY][mapX]], hitOffset, mapX, mapY, isVerticalWall };
                 }
             }
         }
@@ -320,7 +330,7 @@ layout: none
 
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - fov / 2 + i * rayAngleStep;
-                const { dist, texture, hitOffset } = castRay(rayAngle);
+                const { dist, texture, hitOffset, isVerticalWall } = castRay(rayAngle);
                 const lineHeight = canvas.height / dist;
                 const lineOffset = (canvas.height - lineHeight) / 2;
 
@@ -339,7 +349,6 @@ layout: none
 
             drawMinimap();
         }
-
         function drawMinimap() {
             // Ajustar el tamaño del minimapa según el tamaño del mapa
             const minimapMaxSize = 200; // Tamaño máximo del minimapa
