@@ -113,11 +113,11 @@ layout: none
         let skyTexture = null;
         let floorTexture = null;
 
-//       function detectMobileAndLockOrientation() {
-//           if (/Mobi|Android/i.test(navigator.userAgent)) {
-//              screen.orientation.lock('landscape').catch(err => console.log(err));
-//          }
-//       }
+        function detectMobileAndLockOrientation() {
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                screen.orientation.lock('landscape').catch(err => console.log(err));
+            }
+        }
 
         function preloadTextures(urls) {
             const promises = Object.entries(urls).map(([key, url]) => {
@@ -128,7 +128,7 @@ layout: none
                         const img = new Image();
                         img.src = url;
                         img.onload = () => {
-                            if (img.width > 2000 || img.height > 2500) {
+                            if (img.width > 2000 || img.height > 2300) {
                                 console.warn(`Texture ${key} is too large and will not be used.`);
                                 resolve();
                             } else {
