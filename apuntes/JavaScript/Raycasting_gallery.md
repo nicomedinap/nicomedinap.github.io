@@ -1,6 +1,7 @@
 ---
 layout: none
 ---
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -69,7 +70,6 @@ layout: none
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo.js">Laberinto</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 1</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
-     <!---   <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/test_mapa.js">Test</option> --->
     </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
@@ -184,10 +184,6 @@ layout: none
                 player.turnSpeed = turnSpeed !== undefined ? turnSpeed : player.turnSpeed;
             };
 
-            // Asegurarse de eliminar manejadores antiguos
-            window.removeEventListener('keydown', keyDownHandler);
-            window.removeEventListener('keyup', keyUpHandler);
-
             function keyDownHandler(e) {
                 switch (e.keyCode) {
                     case 37: setPlayerMovement(undefined, -0.05); break;
@@ -209,7 +205,6 @@ layout: none
             window.addEventListener('keydown', keyDownHandler);
             window.addEventListener('keyup', keyUpHandler);
         }
-
 
         function update() {
             player.angle += player.turnSpeed;
@@ -330,6 +325,7 @@ layout: none
 
             drawMinimap();
         }
+
         function drawMinimap() {
             // Ajustar el tamaño del minimapa según el tamaño del mapa
             const minimapMaxSize = 200; // Tamaño máximo del minimapa
@@ -380,11 +376,14 @@ layout: none
 
         document.addEventListener('DOMContentLoaded', () => {
             const mapSelect = document.getElementById('mapSelect');
-            loadMap(mapSelect.value).then(() => handleInput());
+            loadMap(mapSelect.value).then(() => {
+                handleInput();
+                gameLoop();
+            });
         });
 
         function loadMap(mapUrl) {
-            fetch(mapUrl)
+            return fetch(mapUrl)
                 .then(response => {
                     if (!response.ok) throw new Error('Error al cargar el mapa');
                     return response.text();
@@ -393,7 +392,6 @@ layout: none
                     const mapaMatch = script.match(/const map = (\[[\s\S]*?\]);/);
                     if (mapaMatch) {
                         map = JSON.parse(mapaMatch[1]);
-                        gameLoop();
                     } else {
                         throw new Error('No se pudo encontrar el mapa en el script.');
                     }
@@ -405,13 +403,15 @@ layout: none
 
         function init() {
             detectMobileAndLockOrientation();
-            handleInput();
             const mapSelect = document.getElementById('mapSelect');
-            
+
             mapSelect.addEventListener('change', (event) => {
                 const selectedMap = event.target.value;
-                loadMap(selectedMap);
-                handleInput();
+                loadMap(selectedMap).then(() => {
+                    // Reset player properties to avoid speed accumulation
+                    player.speed = 0;
+                    player.turnSpeed = 0;
+                });
             });
 
             fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
@@ -429,7 +429,10 @@ layout: none
                 })
                 .then(() => {
                     const initialMap = mapSelect.value;
-                    loadMap(initialMap);
+                    loadMap(initialMap).then(() => {
+                        handleInput();
+                        gameLoop();
+                    });
                 })
                 .catch(error => {
                     console.error('Error durante la inicialización:', error);
