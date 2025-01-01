@@ -184,51 +184,32 @@ layout: none
                 player.turnSpeed = turnSpeed !== undefined ? turnSpeed : player.turnSpeed;
             };
 
-            window.addEventListener('keydown', (e) => {
+            // Asegurarse de eliminar manejadores antiguos
+            window.removeEventListener('keydown', keyDownHandler);
+            window.removeEventListener('keyup', keyUpHandler);
+
+            function keyDownHandler(e) {
                 switch (e.keyCode) {
                     case 37: setPlayerMovement(undefined, -0.05); break;
                     case 39: setPlayerMovement(undefined, 0.05); break;
                     case 38: setPlayerMovement(0.1); break;
                     case 40: setPlayerMovement(-0.1); break;
                 }
-            });
+            }
 
-            window.addEventListener('keyup', (e) => {
+            function keyUpHandler(e) {
                 switch (e.keyCode) {
-                    case 37: case 39: setPlayerMovement(undefined, 0); break;
-                    case 38: case 40: setPlayerMovement(0); break;
+                    case 37:
+                    case 39: setPlayerMovement(undefined, 0); break;
+                    case 38:
+                    case 40: setPlayerMovement(0); break;
                 }
-            });
+            }
 
-            const activeTouches = new Set();
-
-            const touchStartHandler = (e, speed, turnSpeed) => {
-                e.preventDefault();
-                for (const touch of e.changedTouches) {
-                    activeTouches.add(touch.identifier);
-                }
-                setPlayerMovement(speed, turnSpeed);
-            };
-
-            const touchEndHandler = (e) => {
-                e.preventDefault();
-                for (const touch of e.changedTouches) {
-                    activeTouches.delete(touch.identifier);
-                }
-                if (activeTouches.size === 0) {
-                    setPlayerMovement(0, 0);
-                }
-            };
-
-            upButton.addEventListener('touchstart', (e) => touchStartHandler(e, 0.1, undefined));
-            upButton.addEventListener('touchend', touchEndHandler);
-            downButton.addEventListener('touchstart', (e) => touchStartHandler(e, -0.1, undefined));
-            downButton.addEventListener('touchend', touchEndHandler);
-            leftButton.addEventListener('touchstart', (e) => touchStartHandler(e, undefined, -0.05));
-            leftButton.addEventListener('touchend', touchEndHandler);
-            rightButton.addEventListener('touchstart', (e) => touchStartHandler(e, undefined, 0.05));
-            rightButton.addEventListener('touchend', touchEndHandler);
+            window.addEventListener('keydown', keyDownHandler);
+            window.addEventListener('keyup', keyUpHandler);
         }
+
 
         function update() {
             player.angle += player.turnSpeed;
@@ -397,6 +378,11 @@ layout: none
             }, 1000 / 60);
         }
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const mapSelect = document.getElementById('mapSelect');
+            loadMap(mapSelect.value).then(() => handleInput());
+        });
+
         function loadMap(mapUrl) {
             fetch(mapUrl)
                 .then(response => {
@@ -421,9 +407,11 @@ layout: none
             detectMobileAndLockOrientation();
             handleInput();
             const mapSelect = document.getElementById('mapSelect');
+            
             mapSelect.addEventListener('change', (event) => {
                 const selectedMap = event.target.value;
                 loadMap(selectedMap);
+                handleInput();
             });
 
             fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
