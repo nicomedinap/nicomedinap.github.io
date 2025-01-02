@@ -66,9 +66,9 @@ layout: none
 </head>
 <body>
     <select id="mapSelect">
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo.js">Laberinto</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 1</option>
-        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
     </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
@@ -310,7 +310,7 @@ layout: none
                 }
             }
 
-            const fov = Math.PI / 2;
+            const fov = 3*Math.PI / 2;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
@@ -363,7 +363,7 @@ layout: none
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
-            const fov = Math.PI / 2;
+            const fov = 3*Math.PI / 2;
             const numRays = 30; // Número de rayos para el campo de visión en el minimapa
             const rayAngleStep = fov / numRays;
             for (let i = 0; i <= numRays; i++) {
