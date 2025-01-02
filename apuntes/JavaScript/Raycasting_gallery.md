@@ -72,7 +72,6 @@ layout: none
     </select>
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
-
     <!-- Botones de control -->
     <button id="upButton" class="control-button">↑</button>
     <button id="downButton" class="control-button">↓</button>
@@ -90,10 +89,14 @@ layout: none
         const rightButton = document.getElementById('rightButton');
         const mapSelect = document.getElementById('mapSelect');
 
+        let isMobile = /Mobi|Android/i.test(navigator.userAgent);
+        let numRays = isMobile ? Math.floor(window.innerWidth / 2) : window.innerWidth;  // Reduce rays for mobile
+
         // Ajustar el tamaño del canvas según el dispositivo
         const setCanvasSize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            numRays = isMobile ? Math.floor(window.innerWidth / 2) : window.innerWidth;  // Adjust rays on resize
         };
         setCanvasSize();
         window.addEventListener('resize', setCanvasSize);
@@ -105,7 +108,7 @@ layout: none
             angle: 1,
             speed: 0,
             turnSpeed: 0,
-            minDistanceToWall: 0.1,
+            minDistanceToWall: 1,
             maxDistanceToTexture: 15
         };
 
@@ -114,7 +117,7 @@ layout: none
         let floorTexture = null;
 
         function detectMobileAndLockOrientation() {
-            if (/Mobi|Android/i.test(navigator.userAgent)) {
+            if (isMobile) {
                 screen.orientation.lock('landscape').catch(err => console.log(err));
             }
         }
@@ -128,13 +131,8 @@ layout: none
                         const img = new Image();
                         img.src = url;
                         img.onload = () => {
-                            if (img.width > 2000 || img.height > 2300) {
-                                console.warn(`Texture ${key} is too large and will not be used.`);
-                                resolve();
-                            } else {
-                                textures[key] = createMipmaps(img);
-                                resolve();
-                            }
+                            textures[key] = createMipmaps(img);
+                            resolve();
                         };
                         img.onerror = reject;
                     }
@@ -310,8 +308,7 @@ layout: none
                 }
             }
 
-            const fov = Math.PI /2;
-            const numRays = canvas.width;
+            const fov = Math.PI/2;
             const rayAngleStep = fov / numRays;
 
             for (let i = 0; i < numRays; i++) {
@@ -363,7 +360,7 @@ layout: none
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
-            const fov = Math.PI / 3;
+            const fov = Math.PI / 2;
             const numRays = 30; // Número de rayos para el campo de visión en el minimapa
             const rayAngleStep = fov / numRays;
             for (let i = 0; i <= numRays; i++) {
@@ -388,6 +385,10 @@ layout: none
                 loadMap(selectedMap).then(() => {
                     player.speed = 0;
                     player.turnSpeed = 0;
+                    // Reset player position to initial coordinates
+                    player.x = 2.5;
+                    player.y = 2.5;
+                    player.angle = 1;
                 });
             });
 
