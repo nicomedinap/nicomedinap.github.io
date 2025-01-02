@@ -388,6 +388,10 @@ layout: none
                 loadMap(selectedMap).then(() => {
                     player.speed = 0;
                     player.turnSpeed = 0;
+                    // Reset player position to initial coordinates
+                    player.x = 2.5;
+                    player.y = 2.5;
+                    player.angle = 1;
                 });
             });
 
