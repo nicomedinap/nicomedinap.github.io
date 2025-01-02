@@ -363,7 +363,7 @@ layout: none
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
-            const fov = 3*Math.PI / 2;
+            const fov = Math.PI / 2;
             const numRays = 30; // Número de rayos para el campo de visión en el minimapa
             const rayAngleStep = fov / numRays;
             for (let i = 0; i <= numRays; i++) {
