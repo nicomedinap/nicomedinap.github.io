@@ -1,5 +1,5 @@
 ---
-layout: topbar
+layout: none
 ---
 <html lang="en">
 <head>
