@@ -310,7 +310,7 @@ layout: none
                 }
             }
 
-            const fov = 3*Math.PI / 2;
+            const fov = 3*Math.PI /2;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
