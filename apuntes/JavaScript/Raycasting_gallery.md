@@ -1,7 +1,6 @@
 ---
-layout: none
+layout: topbar
 ---
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -89,6 +88,7 @@ layout: none
         const downButton = document.getElementById('downButton');
         const leftButton = document.getElementById('leftButton');
         const rightButton = document.getElementById('rightButton');
+        const mapSelect = document.getElementById('mapSelect');
 
         // Ajustar el tamaño del canvas según el dispositivo
         const setCanvasSize = () => {
@@ -204,6 +204,16 @@ layout: none
 
             window.addEventListener('keydown', keyDownHandler);
             window.addEventListener('keyup', keyUpHandler);
+
+            // Manejo de eventos táctiles para dispositivos móviles
+            upButton.addEventListener('touchstart', () => setPlayerMovement(0.1));
+            upButton.addEventListener('touchend', () => setPlayerMovement(0));
+            downButton.addEventListener('touchstart', () => setPlayerMovement(-0.1));
+            downButton.addEventListener('touchend', () => setPlayerMovement(0));
+            leftButton.addEventListener('touchstart', () => setPlayerMovement(undefined, -0.05));
+            leftButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
+            rightButton.addEventListener('touchstart', () => setPlayerMovement(undefined, 0.05));
+            rightButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
         }
 
         function update() {
@@ -369,14 +379,20 @@ layout: none
         function gameLoop() {
             update();
             draw();
-            setTimeout(() => {
-                requestAnimationFrame(gameLoop);
-            }, 1000 / 60);
+            requestAnimationFrame(gameLoop);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const mapSelect = document.getElementById('mapSelect');
-            loadMap(mapSelect.value).then(() => {
+            mapSelect.addEventListener('change', (event) => {
+                const selectedMap = event.target.value;
+                loadMap(selectedMap).then(() => {
+                    player.speed = 0;
+                    player.turnSpeed = 0;
+                });
+            });
+
+            const initialMap = mapSelect.value;
+            loadMap(initialMap).then(() => {
                 handleInput();
                 gameLoop();
             });
@@ -403,16 +419,6 @@ layout: none
 
         function init() {
             detectMobileAndLockOrientation();
-            const mapSelect = document.getElementById('mapSelect');
-
-            mapSelect.addEventListener('change', (event) => {
-                const selectedMap = event.target.value;
-                loadMap(selectedMap).then(() => {
-                    // Reset player properties to avoid speed accumulation
-                    player.speed = 0;
-                    player.turnSpeed = 0;
-                });
-            });
 
             fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
                 .then(response => {
