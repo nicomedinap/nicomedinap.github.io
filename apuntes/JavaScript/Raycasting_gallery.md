@@ -106,7 +106,7 @@ layout: none
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 0.1,
-            maxDistanceToTexture: 30
+            maxDistanceToTexture: 15
         };
 
         const textures = {};
