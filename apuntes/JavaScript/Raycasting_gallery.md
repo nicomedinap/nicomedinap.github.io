@@ -338,7 +338,7 @@ layout: none
 
         function drawMinimap() {
             // Ajustar el tamaño del minimapa según el tamaño del mapa
-            const minimapMaxSize = 200; // Tamaño máximo del minimapa
+            const minimapMaxSize = 100; // Tamaño máximo del minimapa
             const mapWidth = map[0].length;
             const mapHeight = map.length;
             const scale = Math.min(minimapMaxSize / mapWidth, minimapMaxSize / mapHeight);
