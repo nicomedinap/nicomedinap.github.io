@@ -105,7 +105,7 @@ layout: none
             angle: 1,
             speed: 0,
             turnSpeed: 0,
-            minDistanceToWall: 0.1,
+            minDistanceToWall: 1
             maxDistanceToTexture: 15
         };
 
