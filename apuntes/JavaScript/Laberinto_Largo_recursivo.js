@@ -27,17 +27,12 @@ function generateMap(width, height) {
     return map;
 }
 
-// Función para generar y obtener un mapa de 30x100
-function getMap() {
-    return generateMap(30, 100);
-}
-
-// Generar el mapa y asignarlo a una constante
-const mapa = getMap();
+// Generar el mapa de 30x100
+const map = generateMap(30, 100);
 
 // Imprimir el mapa en la consola
-mapa.forEach(row => {
+map.forEach(row => {
     console.log(row.join(', '));
 });
 
-export { getMap };
+export { map };
