@@ -1,43 +1,43 @@
-const columns = 9; // número de columnas en el mapa
-const rows = 50; // número de filas en el mapa
-
-// Inicialización del mapa con todas las paredes (1)
-const map = Array.from({ length: rows }, () => Array(columns).fill(1));
-
-// Helper function to shuffle an array (Fisher-Yates algorithm)
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
+// Generar un número aleatorio entre 1 y 150
+function getRandomNumber() {
+    return Math.floor(Math.random() * 150) + 1;
 }
 
-// Función recursiva para generar el laberinto usando el algoritmo de retroceso recursivo
-function recursiveBacktrack(x, y) {
-    const directions = [[0, -2], [0, 2], [-2, 0], [2, 0]];
-    shuffleArray(directions);
+// Crear un mapa de 30 columnas por 100 filas con caminos representados por ceros
+function generateMap(width, height) {
+    const map = [];
 
-    for (let i = 0; i < directions.length; i++) {
-        const [dx, dy] = directions[i];
-        const nx = x + dx;
-        const ny = y + dy;
-
-        if (nx >= 0 && ny >= 0 && nx < columns && ny < rows && map[ny][nx] === 1) {
-            map[y + dy / 2][x + dx / 2] = 0;
-            map[ny][nx] = 0;
-            recursiveBacktrack(nx, ny);
+    for (let y = 0; y < height; y++) {
+        const row = [];
+        for (let x = 0; x < width; x++) {
+            if (x === 0 || x === width - 1 || y === 0 || y === height - 1) {
+                // Bordes del mapa
+                row.push(1);
+            } else if (Math.random() < 0.1) {
+                // Crear caminos con 10% de probabilidad
+                row.push(0);
+            } else {
+                // Espacios interiores con números aleatorios
+                row.push(getRandomNumber());
+            }
         }
+        map.push(row);
     }
+
+    return map;
 }
 
-// Iniciar la generación del laberinto desde una celda específica
-map[1][1] = 0;
-recursiveBacktrack(1, 1);
+// Función para generar y obtener un mapa de 30x100
+function getMap() {
+    return generateMap(30, 100);
+}
 
-// Establecer la entrada y la salida
-map[1][0] = 0; // Punto de entrada
-map[rows - 2][columns - 1] = 0; // Punto de salida
+// Generar el mapa y asignarlo a una constante
+const mapa = getMap();
 
-console.log(map);
+// Imprimir el mapa en la consola
+mapa.forEach(row => {
+    console.log(row.join(', '));
+});
 
-export { map };
+export { getMap };
