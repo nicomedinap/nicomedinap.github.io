@@ -43,74 +43,78 @@ html {
  * out above content in mobile and later moves to the side with wider viewports.
  */
 
-.sidebar {
-  text-align: center;
-  padding: 2rem 1rem;
-  color: rgba(255,255,255,.5);
-  background-color: #202020;
-}
-@media (min-width: 48rem) {
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 18rem;
-    text-align: left;
-  }
-}
+    .fa {
+      padding: 10px;
+      font-size: 15px;
+      width: 0px;
+    }
 
-/* Sidebar links */
-.sidebar a {
-  color: #fff;
-}
+    .fa:hover {
+      opacity: 0.7;
+    }
 
-/* About section */
-.sidebar-about h1 {
-  color: #fff;
-  margin-top: 0;
-  font-family: "Abril Fatface", serif;
-  font-size: 3.05rem;
-}
+    .fa-youtube {
+      color: gray;
+    }
 
-.sidebar-about h2 {
-  color: #fff;
-  margin-top: 0;
-  font-family: "Abril Fatface", serif;
-  font-size: 3.05rem;
-}
+    .fa-instagram {
+      color: gray;
+    }
 
-/* Sidebar nav */
-.sidebar-nav {
-  padding-left: 0;
-  list-style: none;
-}
-.sidebar-nav-item {
-  display: block;
-}
-a.sidebar-nav-item:hover,
-a.sidebar-nav-item:focus {
-  text-decoration: underline;
-}
-.sidebar-nav-item.active {
-  font-weight: bold;
-}
+    .active-section {
+      text-decoration: underline;
+    }
 
-/* Sticky sidebar
- *
- * Add the `sidebar-sticky` class to the sidebar's container to affix it the
- * contents to the bottom of the sidebar in tablets and up.
- */
+    /* Sidebar styles */
+    .sidebar {
+      max-width: 50px;
+      background-color: #2C3E50;
+      padding: 10px;
+      position: fixed;
+      height: 100%;
+      overflow-y: auto;
+    }
 
-@media (min-width: 48rem) {
-  .sidebar-sticky {
-    position: absolute;
-    right:  1rem;
-    bottom: 1rem;
-    left:   1rem;
-  }
-}
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
 
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar .category {
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #2C3E50;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    .sidebar .subcategory {
+      display: none;
+      padding-left: 20px;
+    }
+
+    .sidebar .subcategory a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .sidebar .subcategory a:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar .active {
+      color: #007bff;
+      text-decoration: underline;
+    }
 
 /* Container
  *
