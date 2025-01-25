@@ -42,12 +42,12 @@ html {
  */
 
 .content {
-  padding-left: 20%;
-  max-width: 80%; /* Remove the max-width constraint */
-  margin: 0; /* Remove margin */
-  box-sizing: border-box;
+  padding-top:    4rem;
+  padding-bottom: 4rem;
+  max-width: 38rem;
+  margin-left: 2rem;
+  margin-right: 10rem;
 }
-
 
 
 /*
