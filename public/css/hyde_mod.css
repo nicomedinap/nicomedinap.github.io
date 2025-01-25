@@ -34,6 +34,16 @@
 html {
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
 }
+@media (min-width: 48rem) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (min-width: 58rem) {
+  html {
+    font-size: 20px;
+  }
+}
 
 
 /*
@@ -48,6 +58,16 @@ html {
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
   background-color: #202020;
+}
+@media (min-width: 48rem) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 18rem;
+    text-align: left;
+  }
 }
 
 /* Sidebar links */
@@ -87,17 +107,31 @@ a.sidebar-nav-item:focus {
 }
 
 
+/* Container
+ *
+ * Align the contents of the site above the proper threshold with some margin-fu
+ * with a 25%-wide `.sidebar`.
+ */
+
 .content {
   padding-top:    4rem;
   padding-bottom: 4rem;
 }
 
+@media (min-width: 48rem) {
+  .content {
+    max-width: 38rem;
+    margin-left: 20rem;
+    margin-right: 2rem;
+  }
+}
 
-/*
- * Reverse layout
- *
- * Flip the orientation of the page by placing the `.sidebar` on the right.
- */
+@media (min-width: 64rem) {
+  .content {
+    margin-left: 22rem;
+    margin-right: 4rem;
+  }
+}
 
 
 /*
