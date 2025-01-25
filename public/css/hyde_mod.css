@@ -35,13 +35,18 @@ html {
   font-size: 16px;
 }
 
+/* Container
+ *
+ * Align the contents of the site above the proper threshold with some margin-fu
+ * with a 25%-wide `.sidebar`.
+ */
 
 .content {
-  padding-top:    4rem;
-  padding-bottom: 4rem;
-  max-width: 70%;
-  margin-left: 20%;
-  margin-right: 1rem;
+  width: 80%; /* 80% width for the content */
+  padding: 4rem 2rem; /* Padding top/bottom 4rem, left/right 2rem */
+  max-width: none; /* Remove the max-width constraint */
+  margin: 0; /* Remove margin */
+  box-sizing: border-box;
 }
 
 
