@@ -67,7 +67,7 @@ html {
 
     /* Sidebar styles */
     .sidebar {
-      max-width: 50px;
+      max-width: 150px;
       background-color: #2C3E50;
       padding: 10px;
       position: fixed;
