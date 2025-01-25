@@ -42,9 +42,8 @@ html {
  */
 
 .content {
-  width: 80%; /* 80% width for the content */
   padding-left: 20%;
-  max-width: none; /* Remove the max-width constraint */
+  max-width: 80%; /* Remove the max-width constraint */
   margin: 0; /* Remove margin */
   box-sizing: border-box;
 }
