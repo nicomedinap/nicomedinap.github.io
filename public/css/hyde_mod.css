@@ -43,7 +43,8 @@ html {
 
 .content {
   width: 80%; /* 80% width for the content */
-  padding: 4rem 10rem 2rem; /* Padding top/bottom 4rem, left/right 2rem */
+  padding: 4rem 2rem; /* Padding top/bottom 4rem, left/right 2rem */
+  padding-left: 10rem;
   max-width: none; /* Remove the max-width constraint */
   margin: 0; /* Remove margin */
   box-sizing: border-box;
