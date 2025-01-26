@@ -68,6 +68,7 @@ html {
     /* Sidebar styles */
     .sidebar {
       width: 150px; /* Ancho fijo del sidebar */
+      font-size: 10px;
       background-color: #2C3E50;
       padding: 10px;
       position: fixed;
@@ -155,17 +156,19 @@ html {
 }
 
 /* Adjustments for wider screens */
-@media (min-width: 20rem) {
+@media (min-width: 10rem) {
   .content {
     margin-left: 100px; /* Mantener el margen izquierdo para el sidebar */
     max-width: calc(100% - 100px); /* Asegura que el contenido ocupe el espacio restante */
     margin-right: 2rem;
   }
+  .sidebar { width: 100px; /* Ancho fijo del sidebar */}
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 30rem) {
   .content {
     margin-left: 150px;
     margin-right: 4rem;
   }
+  .sidebar { width: 150px; /* Ancho fijo del sidebar */}
 }
