@@ -155,10 +155,10 @@ html {
 }
 
 /* Adjustments for wider screens */
-@media (min-width: 48rem) {
+@media (min-width: 20rem) {
   .content {
-    margin-left: 250px; /* Mantener el margen izquierdo para el sidebar */
-    max-width: calc(100% - 250px); /* Asegura que el contenido ocupe el espacio restante */
+    margin-left: 150px; /* Mantener el margen izquierdo para el sidebar */
+    max-width: calc(100% - 150px); /* Asegura que el contenido ocupe el espacio restante */
     margin-right: 2rem;
   }
 }
