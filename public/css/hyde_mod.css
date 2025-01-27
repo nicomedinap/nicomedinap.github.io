@@ -68,7 +68,7 @@ html {
     /* Sidebar styles */
     .sidebar {
       width: 150px; /* Ancho fijo del sidebar */
-      font-size: 10px;
+      font-size: 16px;
       background-color: #2C3E50;
       padding: 10px;
       position: fixed;
@@ -170,7 +170,7 @@ html {
   .content {
     margin-left: 150px;
     margin-right: 4rem;
-    font-size: 10px;
+    font-size: 16px;
   }
   .sidebar { width: 150px; /* Ancho fijo del sidebar */}
 }
