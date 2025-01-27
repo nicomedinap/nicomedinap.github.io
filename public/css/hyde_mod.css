@@ -111,11 +111,13 @@ html {
       background-color: #2C3E50;
       padding: 8px;
       border-radius: 5px;
+      font-size: 14px;
     }
 
     .sidebar .subcategory {
       display: none;
       padding-left: 0px;
+      font-size: 14px;
     }
 
     .sidebar .subcategory a {
@@ -165,8 +167,8 @@ html {
     font-size: 8px;
   }
   .sidebar { width: 100px; /* Ancho fijo del sidebar */}
-  .sidebar .category {font-size: 12px};
-  .sidebar .subcategory {font-size: 12px};
+  .sidebar .category {font-size: 10px};
+  .sidebar .subcategory {font-size: 10px};
 }
 
 @media (min-width: 30rem) {
@@ -176,6 +178,6 @@ html {
     font-size: 16px;
   }
   .sidebar { width: 150px; /* Ancho fijo del sidebar */}
-  .sidebar .category{font-size: 16px}
-  .sidebar .subcategory {font-size: 16px};
+  .sidebar .category{font-size: 14px}
+  .sidebar .subcategory {font-size: 14px};
 }
