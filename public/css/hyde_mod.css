@@ -161,6 +161,7 @@ html {
     margin-left: 100px; /* Mantener el margen izquierdo para el sidebar */
     max-width: calc(100% - 100px); /* Asegura que el contenido ocupe el espacio restante */
     margin-right: 2rem;
+    font-size: 8px;
   }
   .sidebar { width: 100px; /* Ancho fijo del sidebar */}
 }
@@ -169,6 +170,7 @@ html {
   .content {
     margin-left: 150px;
     margin-right: 4rem;
+    font-size: 10px;
   }
   .sidebar { width: 150px; /* Ancho fijo del sidebar */}
 }
