@@ -165,7 +165,7 @@ html {
     font-size: 8px;
   }
   .sidebar { width: 100px; /* Ancho fijo del sidebar */}
-  .sidebar h2 {font-size: 12px};
+  .sidebar .subcategory{font-size: 12px};
 }
 
 @media (min-width: 30rem) {
@@ -175,5 +175,5 @@ html {
     font-size: 16px;
   }
   .sidebar { width: 150px; /* Ancho fijo del sidebar */}
-  .sidebar h2 {font-size: 16px}
+  .sidebar .subcategory{font-size: 16px}
 }
