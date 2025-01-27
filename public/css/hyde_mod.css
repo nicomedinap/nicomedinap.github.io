@@ -167,8 +167,8 @@ html {
     font-size: 8px;
   }
   .sidebar { width: 100px; /* Ancho fijo del sidebar */}
-  .sidebar .category {font-size: 10px};
-  .sidebar .subcategory {font-size: 10px};
+  .sidebar .category {font-size: 9px};
+  .sidebar .subcategory {font-size: 9px};
 }
 
 @media (min-width: 30rem) {
