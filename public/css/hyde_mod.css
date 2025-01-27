@@ -114,7 +114,7 @@ html {
 
     .sidebar .subcategory {
       display: none;
-      padding-left: 20px;
+      padding-left: 0px;
     }
 
     .sidebar .subcategory a {
