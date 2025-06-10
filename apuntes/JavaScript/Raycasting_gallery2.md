@@ -7,8 +7,8 @@ layout: none
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería virtual astronómica</title>
     <style>
-        body, html {margin: 0; padding: 0; overflow: hidden; }
-        canvas { display: block; }
+        body, html {margin: 0; padding: 0; overflow: hidden;}
+        canvas {display: block;}
         #roomIndicator, #mapSelect {
             position: absolute;
             top: 10px;
@@ -18,8 +18,8 @@ layout: none
             color: white;
             font-family: Arial, sans-serif;
         }
-        #minimap {position: absolute;top: 10px;right: 10px;background-color: rgba(0, 0, 0, 0.5);}
-        #minimap canvas {width: 100%; height: 100%;        }
+        #minimap {position: absolute; top: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.5);}
+        #minimap canvas {width: 100%; height: 100%;}
         .control-button {
             position: absolute;
             width: 60px;
@@ -92,6 +92,23 @@ layout: none
         const wallTitle = document.getElementById('wallTitle');
         const wallDescription = document.getElementById('wallDescription');
 
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.style.position = 'fixed';
+        loadingIndicator.style.top = '10px';
+        loadingIndicator.style.right = '10px';
+        loadingIndicator.style.color = 'white';
+        loadingIndicator.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        loadingIndicator.style.padding = '5px 10px';
+        loadingIndicator.style.borderRadius = '5px';
+        document.body.appendChild(loadingIndicator);
+
+        // Update during loading:
+        loadingIndicator.textContent = 'Loading textures...';
+        // Then when done:
+        loadingIndicator.textContent = 'Ready!';
+        setTimeout(() => loadingIndicator.remove(), 2000);
+
+
         // Ajustar el tamaño del canvas según el dispositivo
         const setCanvasSize = () => {
             canvas.width = window.innerWidth;
@@ -116,13 +133,7 @@ layout: none
         let skyTexture = null;
         let floorTexture = null;
 
-        const wallInfoData = {
-            '1': { title: "Moon Wall", description: "The Moon is Earth's only natural satellite. It has a diameter about one-quarter that of Earth." },
-            '2': { title: "Mars Wall", description: "Mars is the fourth planet from the Sun. It's often called the 'Red Planet' due to its reddish appearance." },
-            '3': { title: "Jupiter Wall", description: "Jupiter is the fifth planet from the Sun and the largest in the Solar System. It's a gas giant with a strong magnetic field." },
-            '4': { title: "Saturn Wall", description: "Saturn is the sixth planet from the Sun, known for its prominent ring system made of ice and rock particles." },
-            '5': { title: "Neptune Wall", description: "Neptune is the eighth and farthest known planet from the Sun. It has the strongest winds in the Solar System." }
-        };
+        const wallInfoData = {}; // Will be populated from the loaded textures
 
         function detectMobileAndLockOrientation() {
             if (/Mobi|Android/i.test(navigator.userAgent)) {
@@ -183,25 +194,31 @@ layout: none
             }
         }
 
-        function preloadTextures(urls) {
-            const promises = Object.entries(urls).map(([key, url]) => {
+        // Remove the duplicate preloadTextures function and keep only this one:
+        function preloadTextures(textureData) {
+            const promises = Object.entries(textureData).map(([key, texture]) => {
                 return new Promise((resolve, reject) => {
-                    if (textures[key]) {
-                        resolve();
-                    } else {
-                        const img = new Image();
-                        img.src = url;
-                        img.onload = () => {
-                            if (img.width > 2000 || img.height > 2300) {
-                                console.warn(`Texture ${key} is too large and will not be used.`);
-                                resolve();
-                            } else {
-                                textures[key] = createMipmaps(img);
-                                resolve();
-                            }
-                        };
-                        img.onerror = reject;
-                    }
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous"; // Add this for CORS if needed
+                    img.src = texture.url;
+                    img.onload = () => {
+                        if (img.width > 2000 || img.height > 2300) {
+                            console.warn(`Texture ${key} is too large and will not be used.`);
+                            resolve();
+                        } else {
+                            textures[key] = createMipmaps(img);
+                            // Store the texture info in wallInfoData
+                            wallInfoData[key] = {
+                                title: texture.title,
+                                description: texture.description
+                            };
+                            resolve();
+                        }
+                    };
+                    img.onerror = (e) => {
+                        console.error(`Failed to load texture ${key}:`, e);
+                        reject(`Failed to load texture ${key}`);
+                    };
                 });
             });
             return Promise.all(promises);
@@ -491,31 +508,54 @@ layout: none
                 });
         }
 
+        // Update your init function to this:
         function init() {
             detectMobileAndLockOrientation();
 
-            fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
+            // First load the texture database
+        fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json')
                 .then(response => {
-                    if (!response.ok) throw new Error('Error al cargar textures.json');
+                    if (!response.ok) throw new Error('Network response was not ok');
                     return response.json();
                 })
-                .then(data => {
-                    const skyTextureUrl = data.skyTexture;
-                    const floorTextureUrl = data.floorTexture;
-                    const roomTextures = data.roomTextures;
+                .then(textureDatabase => {
+                    // Store the basic texture info immediately
+                    Object.entries(textureDatabase.roomTextures).forEach(([key, texture]) => {
+                        wallInfoData[key] = {
+                            title: texture.title,
+                            description: texture.description
+                        };
+                    });
 
-                    return preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl)
-                        .then(() => preloadTextures(roomTextures));
+                    // Load sky and floor textures first
+                    return Promise.all([
+                        preloadSkyAndFloorTextures(
+                            textureDatabase.skyTexture, 
+                            textureDatabase.floorTexture
+                        ),
+                        preloadTextures(textureDatabase.roomTextures)
+                    ]);
                 })
                 .then(() => {
+                    // Start the game after textures are loaded
+                    const initialMap = mapSelect.value;
+                    return loadMap(initialMap);
+                })
+                .then(() => {
+                    handleInput();
+                    gameLoop();
+                    
+                    // Add loading complete message
+                    console.log("All textures loaded successfully");
+                })
+                .catch(error => {
+                    console.error('Initialization error:', error);
+                    // Fallback to basic functionality
                     const initialMap = mapSelect.value;
                     loadMap(initialMap).then(() => {
                         handleInput();
                         gameLoop();
                     });
-                })
-                .catch(error => {
-                    console.error('Error durante la inicialización:', error);
                 });
         }
 
