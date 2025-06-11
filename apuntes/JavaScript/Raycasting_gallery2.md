@@ -7,14 +7,8 @@ layout: none
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería virtual astronómica</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        canvas {
-            display: block;
-        }
+        body, html {margin: 0; padding: 0; overflow: hidden;}
+        canvas {display: block;}
         #roomIndicator, #mapSelect {
             position: absolute;
             top: 10px;
@@ -24,16 +18,8 @@ layout: none
             color: white;
             font-family: Arial, sans-serif;
         }
-        #minimap {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        #minimap canvas {
-            width: 100%;
-            height: 100%;
-        }
+        #minimap {position: absolute; top: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.5);}
+        #minimap canvas {width: 100%; height: 100%;}
         .control-button {
             position: absolute;
             width: 60px;
@@ -46,31 +32,38 @@ layout: none
             line-height: 60px;
             user-select: none;
         }
-        #upButton {
-            bottom: 80px;
-            right: 10px;
+        #upButton {bottom: 80px; right: 10px;}
+        #downButton {bottom: 10px; right: 10px;}
+        #leftButton {bottom: 45px; left: 10px;}
+        #rightButton {bottom: 45px; left: 80px;}
+        #wallInfo {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            font-family: Arial, sans-serif;
+            max-width: 80%;
+            text-align: center;
+            transition: opacity 0.3s ease;
+            z-index: 100;
         }
-        #downButton {
-            bottom: 10px;
-            right: 10px;
-        }
-        #leftButton {
-            bottom: 45px;
-            left: 10px;
-        }
-        #rightButton {
-            bottom: 45px;
-            left: 80px;
-        }
+        #wallTitle {margin: 0 0 5px 0;}
+        #wallDescription {margin: 0;}
     </style>
 </head>
 <body>
     <select id="mapSelect">
-        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo_recursivo.js">Mapa 1</option>
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo_recursivo.js">Mapa generico</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo.js">Laberinto</option>
-        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Galeria</option>
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 1</option>
     </select>
+
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
 
@@ -79,6 +72,11 @@ layout: none
     <button id="downButton" class="control-button">↓</button>
     <button id="leftButton" class="control-button">←</button>
     <button id="rightButton" class="control-button">→</button>
+
+    <div id="wallInfo">
+        <h3 id="wallTitle"></h3>
+        <p id="wallDescription"></p>
+    </div>
 
     <script>
         const canvas = document.getElementById('gameCanvas');
@@ -90,6 +88,26 @@ layout: none
         const leftButton = document.getElementById('leftButton');
         const rightButton = document.getElementById('rightButton');
         const mapSelect = document.getElementById('mapSelect');
+        const wallInfo = document.getElementById('wallInfo');
+        const wallTitle = document.getElementById('wallTitle');
+        const wallDescription = document.getElementById('wallDescription');
+
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.style.position = 'fixed';
+        loadingIndicator.style.top = '10px';
+        loadingIndicator.style.right = '10px';
+        loadingIndicator.style.color = 'white';
+        loadingIndicator.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        loadingIndicator.style.padding = '5px 10px';
+        loadingIndicator.style.borderRadius = '5px';
+        document.body.appendChild(loadingIndicator);
+
+        // Update during loading:
+        loadingIndicator.textContent = 'Loading textures...';
+        // Then when done:
+        loadingIndicator.textContent = 'Ready!';
+        setTimeout(() => loadingIndicator.remove(), 2000);
+
 
         // Ajustar el tamaño del canvas según el dispositivo
         const setCanvasSize = () => {
@@ -107,12 +125,15 @@ layout: none
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 1,
-            maxDistanceToTexture: 15
+            maxDistanceToTexture: 15,
+            wallInfoDistance: 1.5 // Distance to show wall info
         };
 
         const textures = {};
         let skyTexture = null;
         let floorTexture = null;
+
+        const wallInfoData = {}; // Will be populated from the loaded textures
 
         function detectMobileAndLockOrientation() {
             if (/Mobi|Android/i.test(navigator.userAgent)) {
@@ -120,25 +141,84 @@ layout: none
             }
         }
 
-        function preloadTextures(urls) {
-            const promises = Object.entries(urls).map(([key, url]) => {
-                return new Promise((resolve, reject) => {
-                    if (textures[key]) {
-                        resolve();
-                    } else {
-                        const img = new Image();
-                        img.src = url;
-                        img.onload = () => {
-                            if (img.width > 2000 || img.height > 2300) {
-                                console.warn(`Texture ${key} is too large and will not be used.`);
-                                resolve();
-                            } else {
-                                textures[key] = createMipmaps(img);
-                                resolve();
-                            }
-                        };
-                        img.onerror = reject;
+        function checkNearbyWalls() {
+            // Check all walls around the player
+            const directions = [
+                { x: 0, y: -1 }, // up
+                { x: 1, y: 0 },  // right
+                { x: 0, y: 1 },  // down
+                { x: -1, y: 0 }  // left
+            ];
+            
+            let closestWall = null;
+            let minDistance = Infinity;
+            
+            directions.forEach(dir => {
+                const checkX = Math.floor(player.x + dir.x);
+                const checkY = Math.floor(player.y + dir.y);
+                
+                // Make sure we're checking within map bounds
+                if (checkY >= 0 && checkY < map.length && checkX >= 0 && checkX < map[0].length) {
+                    const wallType = map[checkY][checkX];
+                    
+                    if (wallType !== 0 && wallInfoData[wallType]) {
+                        // Calculate distance to this wall
+                        const distance = Math.sqrt(
+                            Math.pow(checkX + 0.5 - player.x, 2) + 
+                            Math.pow(checkY + 0.5 - player.y, 2)
+                        );
+                        
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestWall = wallType;
+                        }
                     }
+                }
+            });
+            
+            // If we found a nearby wall and player is close enough
+            if (closestWall && minDistance < player.wallInfoDistance) {
+                const info = wallInfoData[closestWall];
+                wallTitle.textContent = info.title;
+                wallDescription.textContent = info.description;
+                wallInfo.style.display = 'block';
+                wallInfo.style.opacity = 1;
+            } else {
+                // Fade out the info if no wall is nearby
+                wallInfo.style.opacity = 0;
+                setTimeout(() => {
+                    if (wallInfo.style.opacity === '0') {
+                        wallInfo.style.display = 'none';
+                    }
+                }, 300);
+            }
+        }
+
+        // Remove the duplicate preloadTextures function and keep only this one:
+        function preloadTextures(textureData) {
+            const promises = Object.entries(textureData).map(([key, texture]) => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous"; // Add this for CORS if needed
+                    img.src = texture.url;
+                    img.onload = () => {
+                        if (img.width > 2000 || img.height > 2300) {
+                            console.warn(`Texture ${key} is too large and will not be used.`);
+                            resolve();
+                        } else {
+                            textures[key] = createMipmaps(img);
+                            // Store the texture info in wallInfoData
+                            wallInfoData[key] = {
+                                title: texture.title,
+                                description: texture.description
+                            };
+                            resolve();
+                        }
+                    };
+                    img.onerror = (e) => {
+                        console.error(`Failed to load texture ${key}:`, e);
+                        reject(`Failed to load texture ${key}`);
+                    };
                 });
             });
             return Promise.all(promises);
@@ -227,6 +307,9 @@ layout: none
                 player.x = newX;
                 player.y = newY;
             }
+            
+            // Check for nearby walls to show info
+            checkNearbyWalls();
         }
 
         function isValidMove(newX, newY) {
@@ -285,6 +368,7 @@ layout: none
                 }
             }
         }
+
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -393,6 +477,8 @@ layout: none
                     player.x = 2.5;
                     player.y = 2.5;
                     player.angle = 1;
+                    // Hide wall info when map changes
+                    wallInfo.style.display = 'none';
                 });
             });
 
@@ -422,31 +508,54 @@ layout: none
                 });
         }
 
+        // Update your init function to this:
         function init() {
             detectMobileAndLockOrientation();
 
-            fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/textures.json')
+            // First load the texture database
+        fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json')
                 .then(response => {
-                    if (!response.ok) throw new Error('Error al cargar textures.json');
+                    if (!response.ok) throw new Error('Network response was not ok');
                     return response.json();
                 })
-                .then(data => {
-                    const skyTextureUrl = data.skyTexture;
-                    const floorTextureUrl = data.floorTexture;
-                    const roomTextures = data.roomTextures;
+                .then(textureDatabase => {
+                    // Store the basic texture info immediately
+                    Object.entries(textureDatabase.roomTextures).forEach(([key, texture]) => {
+                        wallInfoData[key] = {
+                            title: texture.title,
+                            description: texture.description
+                        };
+                    });
 
-                    return preloadSkyAndFloorTextures(skyTextureUrl, floorTextureUrl)
-                        .then(() => preloadTextures(roomTextures));
+                    // Load sky and floor textures first
+                    return Promise.all([
+                        preloadSkyAndFloorTextures(
+                            textureDatabase.skyTexture, 
+                            textureDatabase.floorTexture
+                        ),
+                        preloadTextures(textureDatabase.roomTextures)
+                    ]);
                 })
                 .then(() => {
+                    // Start the game after textures are loaded
+                    const initialMap = mapSelect.value;
+                    return loadMap(initialMap);
+                })
+                .then(() => {
+                    handleInput();
+                    gameLoop();
+                    
+                    // Add loading complete message
+                    console.log("All textures loaded successfully");
+                })
+                .catch(error => {
+                    console.error('Initialization error:', error);
+                    // Fallback to basic functionality
                     const initialMap = mapSelect.value;
                     loadMap(initialMap).then(() => {
                         handleInput();
                         gameLoop();
                     });
-                })
-                .catch(error => {
-                    console.error('Error durante la inicialización:', error);
                 });
         }
 
