@@ -1,7 +1,6 @@
 ---
 layout: none
 ---
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -109,16 +108,6 @@ layout: none
         #lensControls input {
             width: 100%;
         }
-        #centerLens {
-            margin-top: 10px;
-            padding: 5px;
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -144,14 +133,13 @@ layout: none
     </div>
 
     <div id="lensControls">
-        <h3>Gravitational Lens</h3>
+        <h3>Lente gravitatoria</h3>
         <label>
-            Strength: <input type="range" id="lensStrength" min="0" max="1.5" step="0.01" value="0.1">
+            Distorsión: <input type="range" id="lensStrength" min="0" max="1.5" step="0.01" value="0.1">
         </label>
         <label>
-            Radius: <input type="range" id="lensRadius" min="1" max="5" step="0.1" value="0.5">
+            Radio: <input type="range" id="lensRadius" min="1" max="5" step="0.1" value="0.5">
         </label>
-        <button id="centerLens">Center Lens</button>
     </div>
 
     <script>
@@ -169,7 +157,6 @@ layout: none
         const wallDescription = document.getElementById('wallDescription');
         const lensStrengthInput = document.getElementById('lensStrength');
         const lensRadiusInput = document.getElementById('lensRadius');
-        const centerLensButton = document.getElementById('centerLens');
 
         const MOVEMENT_SPEED = 0.06;    // Velocidad de movimiento
         const ROTATION_SPEED = 0.025;   // Velocidad de rotación
@@ -384,6 +371,25 @@ layout: none
             }
         }
 
+        function findLensPositions() {
+            const positions = [];
+            if (!map || map.length === 0) return positions;
+            
+            for (let y = 0; y < map.length; y++) {
+                for (let x = 0; x < map[y].length; x++) {
+                    if (map[y][x] === 10) {
+                        positions.push({ 
+                            x: x + 0.5,  // Center of cell
+                            y: y + 0.5,
+                            strength: 0.5,  // Default strength
+                            radius: 2.0     // Default radius
+                        });
+                    }
+                }
+            }
+            return positions;
+}
+
         function update() {
             player.angle += player.turnSpeed;
             const moveStep = player.speed;
@@ -402,7 +408,11 @@ layout: none
         function isValidMove(newX, newY) {
             const mapX = Math.floor(newX);
             const mapY = Math.floor(newY);
-            return !(newX < 0 || newX >= map[0].length || newY < 0 || newY >= map.length || map[mapY][mapX] !== 0);
+            // Treat cells with value 10 as empty space (not walls)
+            const cellValue = map[mapY][mapX];
+            return !(newX < 0 || newX >= map[0].length || 
+                    newY < 0 || newY >= map.length || 
+                    (cellValue !== 0 && cellValue !== 10)); // Modified this line
         }
 
         // In the castRay function, replace it with this version:
@@ -463,7 +473,7 @@ layout: none
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
                 }
 
-                if (map[mapY][mapX] !== 0) {
+                if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 10 ) {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
 
                     let hitOffset;
