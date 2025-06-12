@@ -1,6 +1,7 @@
 ---
 layout: none
 ---
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,8 +28,8 @@ layout: none
         } 
         #minimap {
             position: absolute;
-            top: 50px;
-            left: 50%;
+            top: 80px;
+            left: 15%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 100;
@@ -170,25 +171,9 @@ layout: none
         const lensRadiusInput = document.getElementById('lensRadius');
         const centerLensButton = document.getElementById('centerLens');
 
-        const MOVEMENT_SPEED = 0.04;    // Velocidad de movimiento
+        const MOVEMENT_SPEED = 0.06;    // Velocidad de movimiento
         const ROTATION_SPEED = 0.025;   // Velocidad de rotación
         const FOV = Math.PI/3
-
-        const loadingIndicator = document.createElement('div');
-        loadingIndicator.style.position = 'fixed';
-        loadingIndicator.style.top = '10px';
-        loadingIndicator.style.right = '10px';
-        loadingIndicator.style.color = 'white';
-        loadingIndicator.style.backgroundColor = 'rgba(0,0,0,0.7)';
-        loadingIndicator.style.padding = '5px 10px';
-        loadingIndicator.style.borderRadius = '5px';
-        document.body.appendChild(loadingIndicator);
-
-        // Update during loading:
-        loadingIndicator.textContent = 'Loading textures...';
-        // Then when done:
-        loadingIndicator.textContent = 'Ready!';
-        setTimeout(() => loadingIndicator.remove(), 2000);
 
         // Gravitational lens parameters
         const lens = {
@@ -288,7 +273,6 @@ layout: none
             const promises = Object.entries(textureData).map(([key, texture]) => {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
-                    img.crossOrigin = "Anonymous"; // Add this for CORS if needed
                     img.src = texture.url;
                     img.onload = () => {
                         if (img.width > 2500 || img.height > 2800) {
@@ -303,10 +287,6 @@ layout: none
                             };
                             resolve();
                         }
-                    };
-                    img.onerror = (e) => {
-                        console.error(`Failed to load texture ${key}:`, e);
-                        reject(`Failed to load texture ${key}`);
                     };
                 });
             });
@@ -612,7 +592,7 @@ layout: none
             minimapCtx.moveTo(player.x * scale, player.y * scale);
             
             const fov = FOV ;
-            const numRays = 30; // Número de rayos para el campo de visión en el minimapa
+            const numRays = 10; // Número de rayos para el campo de visión en el minimapa
             const rayAngleStep = fov / numRays;
             for (let i = 0; i <= numRays; i++) {
                 const rayAngle = player.angle - fov / 2 + i * rayAngleStep;
