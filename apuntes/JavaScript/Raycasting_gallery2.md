@@ -6,10 +6,17 @@ layout: none
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería virtual astronómica</title>
-    <style>
-        body, html {margin: 0; padding: 0; overflow: hidden;}
-        canvas {display: block;}
-        #roomIndicator, #mapSelect {
+     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+        #mapSelect {
             position: absolute;
             top: 10px;
             left: 10px;
@@ -17,9 +24,19 @@ layout: none
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
             font-family: Arial, sans-serif;
+        } 
+        #minimap {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
         }
-        #minimap {position: absolute; top: 10px; right: 10px; background-color: rgba(0, 0, 0, 0.5);}
-        #minimap canvas {width: 100%; height: 100%;}
+        #minimap canvas {
+            width: 100%;
+            height: 100%;
+        }
         .control-button {
             position: absolute;
             width: 60px;
@@ -32,10 +49,22 @@ layout: none
             line-height: 60px;
             user-select: none;
         }
-        #upButton {bottom: 80px; right: 10px;}
-        #downButton {bottom: 10px; right: 10px;}
-        #leftButton {bottom: 45px; left: 10px;}
-        #rightButton {bottom: 45px; left: 80px;}
+        #upButton {
+            bottom: 80px;
+            right: 10px;
+        }
+        #downButton {
+            bottom: 10px;
+            right: 10px;
+        }
+        #leftButton {
+            bottom: 45px;
+            left: 10px;
+        }
+        #rightButton {
+            bottom: 45px;
+            left: 80px;
+        }
         #wallInfo {
             position: absolute;
             bottom: 20px;
@@ -46,14 +75,49 @@ layout: none
             padding: 10px 20px;
             border-radius: 5px;
             display: none;
-            font-family: Arial, sans-serif;
             max-width: 80%;
             text-align: center;
             transition: opacity 0.3s ease;
             z-index: 100;
         }
-        #wallTitle {margin: 0 0 5px 0;}
-        #wallDescription {margin: 0;}
+        #wallTitle {
+            margin: 0 0 5px 0;
+        }
+        #wallDescription {
+            margin: 0;
+        }
+        #lensControls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.7);
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            width: 200px;
+        }
+        #lensControls h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        #lensControls label {
+            display: block;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        #lensControls input {
+            width: 100%;
+        }
+        #centerLens {
+            margin-top: 10px;
+            padding: 5px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +142,17 @@ layout: none
         <p id="wallDescription"></p>
     </div>
 
+    <div id="lensControls">
+        <h3>Gravitational Lens</h3>
+        <label>
+            Strength: <input type="range" id="lensStrength" min="0" max="1.5" step="0.01" value="0.1">
+        </label>
+        <label>
+            Radius: <input type="range" id="lensRadius" min="1" max="5" step="0.1" value="0.5">
+        </label>
+        <button id="centerLens">Center Lens</button>
+    </div>
+
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
@@ -91,6 +166,13 @@ layout: none
         const wallInfo = document.getElementById('wallInfo');
         const wallTitle = document.getElementById('wallTitle');
         const wallDescription = document.getElementById('wallDescription');
+        const lensStrengthInput = document.getElementById('lensStrength');
+        const lensRadiusInput = document.getElementById('lensRadius');
+        const centerLensButton = document.getElementById('centerLens');
+
+        const MOVEMENT_SPEED = 0.04;    // Velocidad de movimiento
+        const ROTATION_SPEED = 0.025;   // Velocidad de rotación
+        const FOV = Math.PI/3
 
         const loadingIndicator = document.createElement('div');
         loadingIndicator.style.position = 'fixed';
@@ -108,6 +190,14 @@ layout: none
         loadingIndicator.textContent = 'Ready!';
         setTimeout(() => loadingIndicator.remove(), 2000);
 
+        // Gravitational lens parameters
+        const lens = {
+            x: 10,
+            y: 10,
+            strength: 0.2,
+            radius: 0.5,
+            visible: true
+        };
 
         // Ajustar el tamaño del canvas según el dispositivo
         const setCanvasSize = () => {
@@ -129,11 +219,11 @@ layout: none
             wallInfoDistance: 1.5 // Distance to show wall info
         };
 
+         // Texturas
         const textures = {};
         let skyTexture = null;
         let floorTexture = null;
-
-        const wallInfoData = {}; // Will be populated from the loaded textures
+        const wallInfoData = {};
 
         function detectMobileAndLockOrientation() {
             if (/Mobi|Android/i.test(navigator.userAgent)) {
@@ -194,7 +284,6 @@ layout: none
             }
         }
 
-        // Remove the duplicate preloadTextures function and keep only this one:
         function preloadTextures(textureData) {
             const promises = Object.entries(textureData).map(([key, texture]) => {
                 return new Promise((resolve, reject) => {
@@ -202,7 +291,7 @@ layout: none
                     img.crossOrigin = "Anonymous"; // Add this for CORS if needed
                     img.src = texture.url;
                     img.onload = () => {
-                        if (img.width > 2000 || img.height > 2300) {
+                        if (img.width > 2500 || img.height > 2800) {
                             console.warn(`Texture ${key} is too large and will not be used.`);
                             resolve();
                         } else {
@@ -267,10 +356,10 @@ layout: none
 
             function keyDownHandler(e) {
                 switch (e.keyCode) {
-                    case 37: setPlayerMovement(undefined, -0.05); break;
-                    case 39: setPlayerMovement(undefined, 0.05); break;
-                    case 38: setPlayerMovement(0.1); break;
-                    case 40: setPlayerMovement(-0.1); break;
+                    case 37: setPlayerMovement(undefined, -ROTATION_SPEED); break;
+                    case 39: setPlayerMovement(undefined, ROTATION_SPEED); break;
+                    case 38: setPlayerMovement(MOVEMENT_SPEED); break;
+                    case 40: setPlayerMovement(-MOVEMENT_SPEED); break;
                 }
             }
 
@@ -287,14 +376,32 @@ layout: none
             window.addEventListener('keyup', keyUpHandler);
 
             // Manejo de eventos táctiles para dispositivos móviles
-            upButton.addEventListener('touchstart', () => setPlayerMovement(0.1));
+            upButton.addEventListener('touchstart', () => setPlayerMovement(MOVEMENT_SPEED));
             upButton.addEventListener('touchend', () => setPlayerMovement(0));
-            downButton.addEventListener('touchstart', () => setPlayerMovement(-0.1));
+            downButton.addEventListener('touchstart', () => setPlayerMovement(-MOVEMENT_SPEED));
             downButton.addEventListener('touchend', () => setPlayerMovement(0));
-            leftButton.addEventListener('touchstart', () => setPlayerMovement(undefined, -0.05));
+            leftButton.addEventListener('touchstart', () => setPlayerMovement(undefined, -ROTATION_SPEED));
             leftButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
-            rightButton.addEventListener('touchstart', () => setPlayerMovement(undefined, 0.05));
+            rightButton.addEventListener('touchstart', () => setPlayerMovement(undefined, ROTATION_SPEED));
             rightButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
+
+            // Update the lens controls event listeners
+            lensStrengthInput.addEventListener('input', (e) => {
+                lens.strength = Math.min(parseFloat(e.target.value), 5.5); // Clamp to max 5.5
+                lens.strength = Math.max(lens.strength, 0); // Ensure not negative
+            });
+
+            lensRadiusInput.addEventListener('input', (e) => {
+                lens.radius = Math.min(parseFloat(e.target.value), 10); // Clamp to max 10
+                lens.radius = Math.max(lens.radius, 0.1); // Minimum radius
+            });
+        }
+
+        function calculateLensPosition() {
+            if (map.length > 0 && map[0].length > 0) {
+                lens.x = map[0].length / 2;
+                lens.y = map.length / 2;
+            }
         }
 
         function update() {
@@ -318,25 +425,64 @@ layout: none
             return !(newX < 0 || newX >= map[0].length || newY < 0 || newY >= map.length || map[mapY][mapX] !== 0);
         }
 
+        // In the castRay function, replace it with this version:
         function castRay(angle) {
             let x = player.x;
             let y = player.y;
-            const sin = Math.sin(angle);
-            const cos = Math.cos(angle);
+            let sin = Math.sin(angle);
+            let cos = Math.cos(angle);
             const stepSize = 0.02;
+            
+            // Track original angle for texture mapping
+            let originalAngle = angle;
+            
+            // Add a maximum iteration limit to prevent freezing
+            const maxIterations = 1000;
+            let iterations = 0;
 
-            while (true) {
+            while (iterations++ < maxIterations) {
+                // Calculate distance to lens center
+                const dx = x - lens.x;
+                const dy = y - lens.y;
+                const distToLens = Math.sqrt(dx*dx + dy*dy);
+                
+                // Apply lensing effect if within lens radius and strength is non-zero
+                if (lens.visible && lens.strength > 0 && lens.radius > 0 && distToLens < lens.radius) {
+                    // Use a small epsilon to prevent division by zero
+                    const epsilon = 0.0001;
+                    const safeDist = Math.max(distToLens, epsilon);
+                    
+                    // Clamp the strength to reasonable values
+                    const clampedStrength = Math.min(lens.strength, 5.5);
+                    
+                    // Calculate bending amount (stronger when closer to center)
+                    const normalizedDist = safeDist / lens.radius;
+                    const bendFactor = clampedStrength * (1 - normalizedDist);
+                    
+                    // Calculate angle towards lens center
+                    const angleToLens = Math.atan2(dy, dx);
+                    
+                    // Bend the ray towards the lens center
+                    const angleDiff = angle - angleToLens;
+                    const newAngle = angle + bendFactor * Math.sin(angleDiff);
+                    
+                    // Only update if the change is significant
+                    if (Math.abs(newAngle - angle) > 0.0001) {
+                        sin = Math.sin(newAngle);
+                        cos = Math.cos(newAngle);
+                        angle = newAngle;
+                    }
+                }
+                
                 x += cos * stepSize;
                 y += sin * stepSize;
                 const mapX = Math.floor(x);
                 const mapY = Math.floor(y);
 
-                // Verificar si los valores están fuera del mapa
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
                 }
 
-                // Detectar colisión con una pared
                 if (map[mapY][mapX] !== 0) {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
 
@@ -344,31 +490,35 @@ layout: none
                     const deltaX = x - mapX;
                     const deltaY = y - mapY;
 
-                    // Determinar si se golpeó una pared vertical u horizontal
+                    // Use original angle for texture mapping to avoid distortion
                     let isVerticalWall;
                     if (Math.abs(deltaX - 0.5) > Math.abs(deltaY - 0.5)) {
-                        // Es una pared vertical
                         isVerticalWall = true;
                         hitOffset = y - mapY;
-                        // Ajustar hitOffset para paredes izquierda y derecha
-                        if (cos < 0) hitOffset = 1 - hitOffset;
+                        if (Math.cos(originalAngle) < 0) hitOffset = 1 - hitOffset;
                     } else {
-                        // Es una pared horizontal
                         isVerticalWall = false;
                         hitOffset = x - mapX;
-                        // Ajustar hitOffset para paredes superior e inferior
-                        if (sin < 0) hitOffset = 1 - hitOffset;
+                        if (Math.sin(originalAngle) < 0) hitOffset = 1 - hitOffset;
                     }
 
-                    // Asegurarse de que el hitOffset esté en el rango [0, 1]
                     if (hitOffset < 0) hitOffset += 1;
                     if (hitOffset > 1) hitOffset -= 1;
 
-                    return { dist, texture: textures[map[mapY][mapX]], hitOffset, mapX, mapY, isVerticalWall };
+                    return { 
+                        dist, 
+                        texture: textures[map[mapY][mapX]], 
+                        hitOffset, 
+                        mapX, 
+                        mapY, 
+                        isVerticalWall 
+                    };
                 }
             }
+            
+            // If we hit max iterations, return a default value
+            return { dist: Infinity, texture: null, hitOffset: 0, mapX: -1, mapY: -1 };
         }
-
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -395,7 +545,7 @@ layout: none
                 }
             }
 
-            const fov = Math.PI /2;
+            const fov = FOV ;
             const numRays = canvas.width;
             const rayAngleStep = fov / numRays;
 
@@ -442,13 +592,26 @@ layout: none
                 }
             }
 
+            // Draw the gravitational lens area
+            minimapCtx.fillStyle = 'rgba(100, 100, 255, 0.3)';
+            minimapCtx.beginPath();
+            minimapCtx.arc(
+                lens.x * scale, 
+                lens.y * scale, 
+                lens.radius * scale, 
+                0, 
+                Math.PI * 2
+            );
+            minimapCtx.fill();
+
             minimapCtx.fillStyle = 'red';
             minimapCtx.fillRect(player.x * scale - scale / 2, player.y * scale - scale / 2, scale, scale);
 
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
-            const fov = Math.PI / 3;
+            
+            const fov = FOV ;
             const numRays = 30; // Número de rayos para el campo de visión en el minimapa
             const rayAngleStep = fov / numRays;
             for (let i = 0; i <= numRays; i++) {
@@ -479,11 +642,14 @@ layout: none
                     player.angle = 1;
                     // Hide wall info when map changes
                     wallInfo.style.display = 'none';
+                    // Recalculate lens position for new map
+                    calculateLensPosition();
                 });
             });
 
             const initialMap = mapSelect.value;
             loadMap(initialMap).then(() => {
+                calculateLensPosition();
                 handleInput();
                 gameLoop();
             });
@@ -508,12 +674,11 @@ layout: none
                 });
         }
 
-        // Update your init function to this:
         function init() {
             detectMobileAndLockOrientation();
 
             // First load the texture database
-        fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json')
+            fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json')
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');
                     return response.json();
