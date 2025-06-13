@@ -1,16 +1,21 @@
-// minimap.js
 class Minimap {
     constructor(canvas, map, player, fov) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
-        this.map = map;
+        this.map = map || [];
         this.player = player;
         this.fov = fov;
         this.maxSize = 100;
+        this.cellColors = {
+            '0': 'black',
+            '10': 'blue',
+            'default': 'white'
+        };
     }
 
     updateMap(newMap) {
-        this.map = newMap;
+        this.map = newMap || [];
+        this.draw();
     }
 
     draw() {
@@ -32,13 +37,10 @@ class Minimap {
     drawMapCells(scale) {
         for (let y = 0; y < this.map.length; y++) {
             for (let x = 0; x < this.map[y].length; x++) {
-                if (this.map[y][x] === 10) {
-                    this.ctx.fillStyle = 'blue';
-                    this.ctx.fillRect(x * scale, y * scale, scale, scale);
-                } else if (this.map[y][x] !== 0) {
-                    this.ctx.fillStyle = 'white';
-                    this.ctx.fillRect(x * scale, y * scale, scale, scale);
-                }
+                const cellValue = this.map[y][x].toString();
+                const color = this.cellColors[cellValue] || this.cellColors['default'];
+                this.ctx.fillStyle = color;
+                this.ctx.fillRect(x * scale, y * scale, scale, scale);
             }
         }
     }
@@ -73,9 +75,8 @@ class Minimap {
     }
 }
 
-// Exportamos la clase para poder usarla en el script principal
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Minimap; // Para Node.js
+    module.exports = Minimap;
 } else {
-    window.Minimap = Minimap; // Para navegador
+    window.Minimap = Minimap;
 }
