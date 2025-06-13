@@ -163,13 +163,7 @@ layout: none
         const FOV = Math.PI/3
 
         // Gravitational lens parameters
-        const lens = {
-            x: 10,
-            y: 10,
-            strength: 0.2,
-            radius: 0.5,
-            visible: true
-        };
+        let lenses = [];
 
         // Ajustar el tamaño del canvas según el dispositivo
         const setCanvasSize = () => {
@@ -187,7 +181,7 @@ layout: none
             speed: 0,
             turnSpeed: 0,
             minDistanceToWall: 1,
-            maxDistanceToTexture: 15,
+            maxDistanceToTexture: 150,
             wallInfoDistance: 1.5 // Distance to show wall info
         };
 
@@ -354,13 +348,17 @@ layout: none
 
             // Update the lens controls event listeners
             lensStrengthInput.addEventListener('input', (e) => {
-                lens.strength = Math.min(parseFloat(e.target.value), 5.5); // Clamp to max 5.5
-                lens.strength = Math.max(lens.strength, 0); // Ensure not negative
+                const newStrength = parseFloat(e.target.value);
+                lenses.forEach(lens => {
+                    lens.strength = newStrength;
+                });
             });
 
             lensRadiusInput.addEventListener('input', (e) => {
-                lens.radius = Math.min(parseFloat(e.target.value), 10); // Clamp to max 10
-                lens.radius = Math.max(lens.radius, 0.1); // Minimum radius
+                const newRadius = parseFloat(e.target.value);
+                lenses.forEach(lens => {
+                    lens.radius = newRadius;
+                });
             });
         }
 
@@ -405,14 +403,15 @@ layout: none
             checkNearbyWalls();
         }
 
+
+        // Update the isValidMove function to allow moving through lens markers (value 10)
         function isValidMove(newX, newY) {
             const mapX = Math.floor(newX);
             const mapY = Math.floor(newY);
-            // Treat cells with value 10 as empty space (not walls)
-            const cellValue = map[mapY][mapX];
+            const cellValue = map[mapY] && map[mapY][mapX];
             return !(newX < 0 || newX >= map[0].length || 
                     newY < 0 || newY >= map.length || 
-                    (cellValue !== 0 && cellValue !== 10)); // Modified this line
+                    (cellValue !== 0 && cellValue !== 10));
         }
 
         // In the castRay function, replace it with this version:
@@ -423,44 +422,32 @@ layout: none
             let cos = Math.cos(angle);
             const stepSize = 0.02;
             
-            // Track original angle for texture mapping
             let originalAngle = angle;
-            
-            // Add a maximum iteration limit to prevent freezing
             const maxIterations = 1000;
             let iterations = 0;
 
             while (iterations++ < maxIterations) {
-                // Calculate distance to lens center
-                const dx = x - lens.x;
-                const dy = y - lens.y;
-                const distToLens = Math.sqrt(dx*dx + dy*dy);
-                
-                // Apply lensing effect if within lens radius and strength is non-zero
-                if (lens.visible && lens.strength > 0 && lens.radius > 0 && distToLens < lens.radius) {
-                    // Use a small epsilon to prevent division by zero
-                    const epsilon = 0.0001;
-                    const safeDist = Math.max(distToLens, epsilon);
+                // Apply all lens effects
+                for (const lens of lenses) {
+                    if (!lens.visible) continue;
                     
-                    // Clamp the strength to reasonable values
-                    const clampedStrength = Math.min(lens.strength, 5.5);
+                    const dx = x - lens.x;
+                    const dy = y - lens.y;
+                    const distToLens = Math.sqrt(dx*dx + dy*dy);
                     
-                    // Calculate bending amount (stronger when closer to center)
-                    const normalizedDist = safeDist / lens.radius;
-                    const bendFactor = clampedStrength * (1 - normalizedDist);
-                    
-                    // Calculate angle towards lens center
-                    const angleToLens = Math.atan2(dy, dx);
-                    
-                    // Bend the ray towards the lens center
-                    const angleDiff = angle - angleToLens;
-                    const newAngle = angle + bendFactor * Math.sin(angleDiff);
-                    
-                    // Only update if the change is significant
-                    if (Math.abs(newAngle - angle) > 0.0001) {
-                        sin = Math.sin(newAngle);
-                        cos = Math.cos(newAngle);
-                        angle = newAngle;
+                    if (distToLens < lens.radius) {
+                        const epsilon = 0.0001;
+                        const safeDist = Math.max(distToLens, epsilon);
+                        const normalizedDist = safeDist / lens.radius;
+                        const bendFactor = lens.strength * (1 - normalizedDist);
+                        const angleToLens = Math.atan2(dy, dx);
+                        const newAngle = angle + bendFactor * Math.sin(angle - angleToLens);
+                        
+                        if (Math.abs(newAngle - angle) > 0.0001) {
+                            sin = Math.sin(newAngle);
+                            cos = Math.cos(newAngle);
+                            angle = newAngle;
+                        }
                     }
                 }
                 
@@ -473,14 +460,13 @@ layout: none
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
                 }
 
-                if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 10 ) {
+                // Ignore cells with value 10 when checking for walls
+                if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 10) {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
-
                     let hitOffset;
                     const deltaX = x - mapX;
                     const deltaY = y - mapY;
 
-                    // Use original angle for texture mapping to avoid distortion
                     let isVerticalWall;
                     if (Math.abs(deltaX - 0.5) > Math.abs(deltaY - 0.5)) {
                         isVerticalWall = true;
@@ -505,8 +491,6 @@ layout: none
                     };
                 }
             }
-            
-            // If we hit max iterations, return a default value
             return { dist: Infinity, texture: null, hitOffset: 0, mapX: -1, mapY: -1 };
         }
 
@@ -562,50 +546,58 @@ layout: none
         }
 
         function drawMinimap() {
-            // Ajustar el tamaño del minimapa según el tamaño del mapa
-            const minimapMaxSize = 100; // Tamaño máximo del minimapa
+            const minimapMaxSize = 100;
             const mapWidth = map[0].length;
             const mapHeight = map.length;
             const scale = Math.min(minimapMaxSize / mapWidth, minimapMaxSize / mapHeight);
 
-            // Ajustar el tamaño del canvas del minimapa
             minimapCanvas.width = mapWidth * scale;
             minimapCanvas.height = mapHeight * scale;
 
             minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
-            minimapCtx.fillStyle = 'white';
+            
+            // Draw walls (white) and lens markers (blue)
             for (let y = 0; y < map.length; y++) {
                 for (let x = 0; x < map[y].length; x++) {
-                    if (map[y][x] !== 0) {
+                    if (map[y][x] === 10) {
+                        minimapCtx.fillStyle = 'blue';
+                        minimapCtx.fillRect(x * scale, y * scale, scale, scale);
+                    } else if (map[y][x] !== 0) {
+                        minimapCtx.fillStyle = 'white';
                         minimapCtx.fillRect(x * scale, y * scale, scale, scale);
                     }
                 }
             }
 
-            // Draw the gravitational lens area
-            minimapCtx.fillStyle = 'rgba(100, 100, 255, 0.3)';
-            minimapCtx.beginPath();
-            minimapCtx.arc(
-                lens.x * scale, 
-                lens.y * scale, 
-                lens.radius * scale, 
-                0, 
-                Math.PI * 2
-            );
-            minimapCtx.fill();
+            // Draw lens effects
+            for (const lens of lenses) {
+                if (lens.visible) {
+                    minimapCtx.fillStyle = 'rgba(100, 100, 255, 0.3)';
+                    minimapCtx.beginPath();
+                    minimapCtx.arc(
+                        lens.x * scale, 
+                        lens.y * scale, 
+                        lens.radius * scale, 
+                        0, 
+                        Math.PI * 2
+                    );
+                    minimapCtx.fill();
+                }
+            }
 
+            // Draw player
             minimapCtx.fillStyle = 'red';
             minimapCtx.fillRect(player.x * scale - scale / 2, player.y * scale - scale / 2, scale, scale);
 
+            // Draw FOV
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
-            
-            const fov = FOV ;
-            const numRays = 10; // Número de rayos para el campo de visión en el minimapa
-            const rayAngleStep = fov / numRays;
+
+            const numRays = 4;
+            const rayAngleStep = FOV / numRays;
             for (let i = 0; i <= numRays; i++) {
-                const rayAngle = player.angle - fov / 2 + i * rayAngleStep;
+                const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
                 const endX = player.x + Math.cos(rayAngle) * 4;
                 const endY = player.y + Math.sin(rayAngle) * 4;
                 minimapCtx.lineTo(endX * scale, endY * scale);
@@ -655,6 +647,33 @@ layout: none
                     const mapaMatch = script.match(/const map = (\[[\s\S]*?\]);/);
                     if (mapaMatch) {
                         map = JSON.parse(mapaMatch[1]);
+                        
+                        // Find all positions with value 10 (lens markers)
+                        lenses = [];
+                        for (let y = 0; y < map.length; y++) {
+                            for (let x = 0; x < map[y].length; x++) {
+                                if (map[y][x] === 10) {
+                                    lenses.push({
+                                        x: x + 0.5,  // Center of the cell
+                                        y: y + 0.5,
+                                        strength: parseFloat(lensStrengthInput.value),
+                                        radius: parseFloat(lensRadiusInput.value),
+                                        visible: true
+                                    });
+                                }
+                            }
+                        }
+                        
+                        // If no lenses found, create a default one at center
+                        if (lenses.length === 0) {
+                            lenses.push({
+                                x: x + 0.5,
+                                y: y + 0.5,
+                                strength: parseFloat(lensStrengthInput.value), // Usa el valor del control
+                                radius: parseFloat(lensRadiusInput.value),     // Usa el valor del control
+                                visible: true
+                            });
+                        }
                     } else {
                         throw new Error('No se pudo encontrar el mapa en el script.');
                     }
