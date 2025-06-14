@@ -7,76 +7,19 @@ layout: none
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería virtual astronómica</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
-        canvas {
-            display: block;
-        }
-        #mapSelect {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 5px 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-family: Arial, sans-serif;
-        } 
-        #minimap {
-            position: absolute;
-            top: 80px;
-            left: 15%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 100;
-        }
-        .control-button {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: none;
-            border-radius: 30px;
-            font-size: 24px;
-            text-align: center;
-            line-height: 60px;
-            user-select: none;
-        }
+        body, html { margin: 0; padding: 0; overflow: hidden; font-family: Arial, sans-serif; }
+        canvas { display: block; }
+        #mapSelect { position: absolute; top: 10px; left: 10px; padding: 5px 10px; background: rgba(0,0,0,0.5); color: white; }
+        #minimap { position: absolute; top: 80px; left: 15%; transform: translateX(-50%); background: rgba(0,0,0,0.5); z-index: 100; }
+        .control-button { position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.5); border: none; border-radius: 30px; font-size: 24px; text-align: center; line-height: 60px; user-select: none; }
         #upButton { bottom: 80px; right: 10px; }
         #downButton { bottom: 10px; right: 10px; }
         #leftButton { bottom: 45px; left: 10px; }
         #rightButton { bottom: 45px; left: 80px; }
-        #wallInfo {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0,0,0,0.7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: none;
-            max-width: 80%;
-            text-align: center;
-            transition: opacity 0.3s ease;
-            z-index: 100;
-        }
+        #wallInfo { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 5px; display: none; max-width: 80%; text-align: center; transition: opacity 0.3s; z-index: 100; }
         #wallTitle { margin: 0 0 5px 0; }
         #wallDescription { margin: 0; }
-        #lensControls {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0,0,0,0.7);
-            padding: 10px;
-            border-radius: 5px;
-            color: white;
-            width: 200px;
-            display: none; /* Oculto por defecto */
-        }
+        #lensControls { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; color: white; width: 200px; display: none; }
         #lensControls h3 { margin-top: 0; margin-bottom: 10px; }
         #lensControls label { display: block; margin: 5px 0; font-size: 14px; }
         #lensControls input { width: 100%; }
@@ -113,15 +56,21 @@ layout: none
         // Constants
         const MOVEMENT_SPEED = 0.06;
         const ROTATION_SPEED = 0.025;
-        const FOV = Math.PI/3;
+        const FOV = Math.PI/4;
         const MAX_TEXTURE_SIZE = 2800;
         const MINIMAP_MAX_SIZE = 100;
         const WALL_INFO_DISTANCE = 1.5;
         const MAX_DISTANCE_TO_TEXTURE = 50;
+        const WALL_MARGIN = 0.85; // Distancia mínima permitida a la muralla
+
+        // --- Raycasting params will be set after map load ---
+        let STEPSIZE = 0.02;
+        let MAX_ITERATIONS = 400;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d', { alpha: false });
+        const ctx = canvas.getContext('2d', { alpha: false, willReadFrequently: false });
+        ctx.imageSmoothingEnabled = false;
         const minimapCanvas = document.getElementById('minimapCanvas');
         const minimapCtx = minimapCanvas.getContext('2d');
         const upButton = document.getElementById('upButton');
@@ -151,6 +100,14 @@ layout: none
         let floorTexture = null;
         let lenses = [];
 
+        function updateRaycastingParams() {
+            if (!map || !map.length) return;
+            const maxMapDist = Math.sqrt(map[0].length ** 2 + map.length ** 2);
+            // Elige el stepSize más grande que no salte paredes delgadas (<<1)
+            STEPSIZE = Math.min(0.25, 1 / Math.max(map[0].length, map.length));
+            MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
+        }
+
         // Initialize game
         function init() {
             setCanvasSize();
@@ -167,7 +124,7 @@ layout: none
 
         function detectMobileAndLockOrientation() {
             if (/Mobi|Android/i.test(navigator.userAgent)) {
-                screen.orientation.lock('landscape').catch(console.error);
+                screen.orientation.lock('landscape').catch(()=>{});
             }
         }
 
@@ -175,24 +132,18 @@ layout: none
             try {
                 const textureResponse = await fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json');
                 const textureDatabase = await textureResponse.json();
-                
-                // Store texture info
                 Object.entries(textureDatabase.roomTextures).forEach(([key, texture]) => {
                     wallInfoData[key] = {
                         title: texture.title,
                         description: texture.description
                     };
                 });
-
-                // Load textures in parallel
                 await Promise.all([
                     loadSkyAndFloor(textureDatabase.skyTexture, textureDatabase.floorTexture),
                     loadRoomTextures(textureDatabase.roomTextures)
                 ]);
-
                 await loadMap(mapSelect.value);
                 gameLoop();
-                console.log("All textures loaded successfully");
             } catch (error) {
                 console.error('Initialization error:', error);
                 await loadMap(mapSelect.value);
@@ -219,7 +170,7 @@ layout: none
 
         function loadImage(src) {
             return new Promise((resolve, reject) => {
-                const img = new Image();
+                const img = new window.Image();
                 img.onload = () => resolve(img);
                 img.onerror = reject;
                 img.src = src;
@@ -230,7 +181,6 @@ layout: none
             const mipmaps = [image];
             let width = image.width / 2;
             let height = image.height / 2;
-            
             while (width >= 1 && height >= 1) {
                 const canvas = document.createElement('canvas');
                 canvas.width = width;
@@ -241,13 +191,11 @@ layout: none
                 width /= 2;
                 height /= 2;
             }
-            
             return mipmaps;
         }
 
         function updateLensControlsVisibility() {
             const lensControls = document.getElementById('lensControls');
-            
             if (lenses.length > 0) {
                 lensControls.style.display = 'block';
                 setupLensEventListeners();
@@ -268,11 +216,8 @@ layout: none
         }
 
         function setupEventListeners() {
-            // Keyboard controls
             window.addEventListener('keydown', handleKeyDown);
             window.addEventListener('keyup', handleKeyUp);
-            
-            // Touch controls
             upButton.addEventListener('touchstart', () => setPlayerMovement(MOVEMENT_SPEED));
             upButton.addEventListener('touchend', () => setPlayerMovement(0));
             downButton.addEventListener('touchstart', () => setPlayerMovement(-MOVEMENT_SPEED));
@@ -281,8 +226,6 @@ layout: none
             leftButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
             rightButton.addEventListener('touchstart', () => setPlayerMovement(undefined, ROTATION_SPEED));
             rightButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
-                       
-            // Map selection
             mapSelect.addEventListener('change', async (event) => {
                 await loadMap(event.target.value);
                 resetPlayerPosition();
@@ -314,7 +257,6 @@ layout: none
         function updateLensParameters() {
             const strength = parseFloat(lensStrengthInput.value);
             const radius = parseFloat(lensRadiusInput.value);
-            
             lenses.forEach(lens => {
                 lens.strength = strength;
                 lens.radius = radius;
@@ -326,18 +268,14 @@ layout: none
                 const response = await fetch(mapUrl);
                 if (!response.ok) throw new Error('Error al cargar el mapa');
                 const script = await response.text();
-                
-                // Extrae el contenido del mapa directamente del módulo
                 const mapMatch = script.match(/const map = (\[[\s\S]*?\]);/);
                 if (!mapMatch) throw new Error('No se pudo encontrar el mapa en el script.');
-                
-                // Usamos Function para evaluar el mapa correctamente
                 const getMap = new Function(`${mapMatch[0]} return map;`);
                 map = getMap();
-                
                 lenses = findLensPositions();
                 updateLensControlsVisibility();
-                
+                // --- recalcular parámetros de raycasting según el mapa actual ---
+                updateRaycastingParams();
             } catch (error) {
                 console.error('Error al cargar el mapa:', error);
             }
@@ -345,7 +283,6 @@ layout: none
 
         function findLensPositions() {
             const positions = [];
-            
             for (let y = 0; y < map.length; y++) {
                 for (let x = 0; x < map[y].length; x++) {
                     if (map[y][x] === 'L') {
@@ -359,7 +296,6 @@ layout: none
                     }
                 }
             }
-            
             return positions;
         }
 
@@ -374,50 +310,65 @@ layout: none
         function update() {
             player.angle += player.turnSpeed;
             const moveStep = player.speed;
-            const newX = player.x + Math.cos(player.angle) * moveStep;
-            const newY = player.y + Math.sin(player.angle) * moveStep;
-
-            if (isValidMove(newX, newY)) {
+            let newX = player.x + Math.cos(player.angle) * moveStep;
+            let newY = player.y + Math.sin(player.angle) * moveStep;
+            let moved = false;
+            if (isValidMove(newX, player.y)) {
                 player.x = newX;
-                player.y = newY;
+                moved = true;
             }
-            
+            if (isValidMove(player.x, newY)) {
+                player.y = newY;
+                moved = true;
+            }
             checkNearbyWalls();
         }
 
         function isValidMove(x, y) {
+            if (x < 0 || x >= map[0].length || y < 0 || y >= map.length) return false;
             const mapX = Math.floor(x);
             const mapY = Math.floor(y);
             const cellValue = map[mapY] && map[mapY][mapX];
-            
-            return !(x < 0 || x >= map[0].length || 
-                   y < 0 || y >= map.length || 
-                   (cellValue !== 0 && cellValue !== 'L'));
+            if (cellValue !== 0 && cellValue !== 'L') return false;
+            const directions = [
+                { x: 0, y: -1 }, { x: 1, y: 0 },
+                { x: 0, y: 1 },  { x: -1, y: 0 }
+            ];
+            for (const dir of directions) {
+                const nx = Math.floor(x + dir.x);
+                const ny = Math.floor(y + dir.y);
+                if (ny >= 0 && ny < map.length && nx >= 0 && nx < map[0].length) {
+                    const neighborType = map[ny][nx];
+                    if (neighborType !== 0 && neighborType !== 'L' && textures[neighborType]) {
+                        const dist = Math.sqrt(
+                            Math.pow(nx + 0.5 - x, 2) +
+                            Math.pow(ny + 0.5 - y, 2)
+                        );
+                        if (dist < WALL_MARGIN) return false;
+                    }
+                }
+            }
+            return true;
         }
 
         function checkNearbyWalls() {
             const directions = [
                 { x: 0, y: -1 }, { x: 1, y: 0 },
-                { x: 0, y: 1 }, { x: -1, y: 0 }
+                { x: 0, y: 1 },  { x: -1, y: 0 }
             ];
-            
             let closestWall = null;
             let minDistance = Infinity;
-            
             for (const dir of directions) {
                 const checkX = Math.floor(player.x + dir.x);
                 const checkY = Math.floor(player.y + dir.y);
-                
                 if (checkY >= 0 && checkY < map.length && 
                     checkX >= 0 && checkX < map[0].length) {
                     const wallType = map[checkY][checkX];
-                    
-                    if (wallType !== 0 && wallInfoData[wallType]) {
+                    if (wallType !== 0 && wallInfoData[wallType] && textures[wallType]) {
                         const distance = Math.sqrt(
                             Math.pow(checkX + 0.5 - player.x, 2) + 
                             Math.pow(checkY + 0.5 - player.y, 2)
                         );
-                        
                         if (distance < minDistance) {
                             minDistance = distance;
                             closestWall = wallType;
@@ -425,7 +376,6 @@ layout: none
                     }
                 }
             }
-            
             if (closestWall && minDistance < WALL_INFO_DISTANCE) {
                 const info = wallInfoData[closestWall];
                 wallTitle.textContent = info.title;
@@ -447,45 +397,33 @@ layout: none
             let y = player.y;
             let sin = Math.sin(angle);
             let cos = Math.cos(angle);
-            const stepSize = 0.05;
+            const stepSize = STEPSIZE;
             const originalAngle = angle;
-            const maxIterations = 600;
+            const maxIterations = MAX_ITERATIONS;
             let iterations = 0;
-
             while (iterations++ < maxIterations) {
                 applyLensEffects();
-                
                 x += cos * stepSize;
                 y += sin * stepSize;
                 const mapX = Math.floor(x);
                 const mapY = Math.floor(y);
-
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
                 }
-
                 if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 'L') {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
                     const hitData = calculateHitData(x, y, mapX, mapY, originalAngle);
-                    
-                    return { 
-                        dist, 
-                        texture: textures[map[mapY][mapX]], 
-                        ...hitData
-                    };
+                    return { dist, texture: textures[map[mapY][mapX]], ...hitData };
                 }
             }
-            
             return { dist: Infinity, texture: null, hitOffset: 0, mapX: -1, mapY: -1 };
 
             function applyLensEffects() {
                 for (const lens of lenses) {
                     if (!lens.visible) continue;
-                    
                     const dx = x - lens.x;
                     const dy = y - lens.y;
                     const distToLens = Math.sqrt(dx*dx + dy*dy);
-                    
                     if (distToLens < lens.radius) {
                         const epsilon = 0.0001;
                         const safeDist = Math.max(distToLens, epsilon);
@@ -493,7 +431,6 @@ layout: none
                         const bendFactor = lens.strength * (1 - normalizedDist);
                         const angleToLens = Math.atan2(dy, dx);
                         const newAngle = angle + bendFactor * Math.sin(angle - angleToLens);
-                        
                         if (Math.abs(newAngle - angle) > 0.0001) {
                             sin = Math.sin(newAngle);
                             cos = Math.cos(newAngle);
@@ -507,7 +444,6 @@ layout: none
                 const deltaX = x - mapX;
                 const deltaY = y - mapY;
                 let hitOffset, isVerticalWall;
-
                 if (Math.abs(deltaX - 0.5) > Math.abs(deltaY - 0.5)) {
                     isVerticalWall = true;
                     hitOffset = y - mapY;
@@ -517,9 +453,7 @@ layout: none
                     hitOffset = x - mapX;
                     if (Math.sin(originalAngle) < 0) hitOffset = 1 - hitOffset;
                 }
-
                 hitOffset = (hitOffset < 0) ? hitOffset + 1 : (hitOffset > 1) ? hitOffset - 1 : hitOffset;
-
                 return { hitOffset, mapX, mapY, isVerticalWall };
             }
         }
@@ -538,7 +472,6 @@ layout: none
         function drawTiledTexture(texture, angleOffset, yPos, height) {
             const width = texture.width;
             const offset = ((angleOffset + 8 * Math.PI) / (2 * Math.PI)) * width % width;
-
             ctx.drawImage(texture, offset, 0, width - offset, texture.height, 0, yPos, canvas.width, height);
             if (offset > 0) {
                 ctx.drawImage(texture, 0, 0, offset, texture.height, canvas.width - (offset / width) * canvas.width, yPos, (offset / width) * canvas.width, height);
@@ -548,29 +481,26 @@ layout: none
         function drawWalls() {
             const numRays = canvas.width;
             const rayAngleStep = FOV / numRays;
-            const maxWallHeight = canvas.height * 2; // máximo permitido
-
+            const maxWallHeight = canvas.height * 2;
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
                 const { dist, texture, hitOffset } = castRay(rayAngle);
-
                 if (dist <= MAX_DISTANCE_TO_TEXTURE) {
-                    let lineHeight = canvas.height / dist;
-                    lineHeight = Math.min(lineHeight, maxWallHeight); // CLAMP
-
+                    let lineHeight = Math.min(canvas.height / dist, maxWallHeight);
                     const lineOffset = (canvas.height - lineHeight) / 2;
-
                     if (texture) {
-                        // --- MIPMAP SELECTION ---
                         let mipLevel = 0;
                         let targetHeight = Math.abs(lineHeight);
-                        while (mipLevel + 1 < texture.length && texture[mipLevel].height > targetHeight * 1.5) {
+                        while (
+                            mipLevel + 1 < texture.length &&
+                            texture[mipLevel].height > targetHeight * 1.5
+                        ) {
                             mipLevel++;
                         }
                         const textureX = Math.floor(hitOffset * texture[mipLevel].width);
                         ctx.drawImage(
-                            texture[mipLevel],
-                            textureX, 0, 1, texture[mipLevel].height,
+                            texture[mipLevel], 
+                            textureX, 0, 1, texture[mipLevel].height, 
                             i, lineOffset, 1, lineHeight
                         );
                     } else {
@@ -583,14 +513,11 @@ layout: none
 
         function drawMinimap() {
             if (!map.length) return;
-            
             const mapWidth = map[0].length;
             const mapHeight = map.length;
             const scale = 1.5*Math.min(MINIMAP_MAX_SIZE / mapWidth, MINIMAP_MAX_SIZE / mapHeight);
-
             minimapCanvas.width = mapWidth * scale;
             minimapCanvas.height = mapHeight * scale;
-
             minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
             drawMapCells();
             drawLensEffects();
@@ -610,7 +537,6 @@ layout: none
                     }
                 }
             }
-
             function drawLensEffects() {
                 for (const lens of lenses) {
                     if (lens.visible) {
@@ -621,7 +547,6 @@ layout: none
                     }
                 }
             }
-
             function drawPlayer() {
                 minimapCtx.fillStyle = 'red';
                 minimapCtx.fillRect(
@@ -631,22 +556,18 @@ layout: none
                     scale
                 );
             }
-
             function drawPlayerFOV() {
                 minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
                 minimapCtx.beginPath();
                 minimapCtx.moveTo(player.x * scale, player.y * scale);
-
                 const numRays = 4;
                 const rayAngleStep = FOV / numRays;
-                
                 for (let i = 0; i <= numRays; i++) {
                     const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
                     const endX = player.x + Math.cos(rayAngle) * 4;
                     const endY = player.y + Math.sin(rayAngle) * 4;
                     minimapCtx.lineTo(endX * scale, endY * scale);
                 }
-                
                 minimapCtx.closePath();
                 minimapCtx.fill();
             }
