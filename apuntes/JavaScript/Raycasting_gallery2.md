@@ -227,6 +227,11 @@ layout: none
         }
 
         function createMipmaps(image) {
+
+            if (isMobile) {
+                return [image]; // Skip mipmaps on mobile for performance
+            }
+            
             const mipmaps = [image];
             let width = image.width / 2;
             let height = image.height / 2;
