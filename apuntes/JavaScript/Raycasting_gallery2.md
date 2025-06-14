@@ -1,7 +1,6 @@
 ---
 layout: none
----
-<html lang="en">
+---<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +27,7 @@ layout: none
         #minimap {
             position: absolute;
             top: 80px;
-            left: 10%;
+            left: 15%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 100;
@@ -117,11 +116,11 @@ layout: none
         const MAX_TEXTURE_SIZE = 2800;
         const MINIMAP_MAX_SIZE = 100;
         const WALL_INFO_DISTANCE = 1.5;
-        const MAX_DISTANCE_TO_TEXTURE = 150;
+        const MAX_DISTANCE_TO_TEXTURE = 50;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: false });
         const minimapCanvas = document.getElementById('minimapCanvas');
         const minimapCtx = minimapCanvas.getContext('2d');
         const upButton = document.getElementById('upButton');
@@ -281,11 +280,7 @@ layout: none
             leftButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
             rightButton.addEventListener('touchstart', () => setPlayerMovement(undefined, ROTATION_SPEED));
             rightButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
-            
-            // Lens controls
-            //lensStrengthInput.addEventListener('input', updateLensParameters);
-            //lensRadiusInput.addEventListener('input', updateLensParameters);
-            
+                       
             // Map selection
             mapSelect.addEventListener('change', async (event) => {
                 await loadMap(event.target.value);
@@ -331,13 +326,15 @@ layout: none
                 if (!response.ok) throw new Error('Error al cargar el mapa');
                 const script = await response.text();
                 
-                const mapaMatch = script.match(/const map = (\[[\s\S]*?\]);/);
-                if (!mapaMatch) throw new Error('No se pudo encontrar el mapa en el script.');
+                // Extrae el contenido del mapa directamente del módulo
+                const mapMatch = script.match(/const map = (\[[\s\S]*?\]);/);
+                if (!mapMatch) throw new Error('No se pudo encontrar el mapa en el script.');
                 
-                map = JSON.parse(mapaMatch[1]);
+                // Usamos Function para evaluar el mapa correctamente
+                const getMap = new Function(`${mapMatch[0]} return map;`);
+                map = getMap();
+                
                 lenses = findLensPositions();
-
-                // Actualizar visibilidad de controles de lente
                 updateLensControlsVisibility();
                 
             } catch (error) {
@@ -350,7 +347,7 @@ layout: none
             
             for (let y = 0; y < map.length; y++) {
                 for (let x = 0; x < map[y].length; x++) {
-                    if (map[y][x] === 10) {
+                    if (map[y][x] === 'L') {
                         positions.push({
                             x: x + 0.5,
                             y: y + 0.5,
@@ -394,7 +391,7 @@ layout: none
             
             return !(x < 0 || x >= map[0].length || 
                    y < 0 || y >= map.length || 
-                   (cellValue !== 0 && cellValue !== 10));
+                   (cellValue !== 0 && cellValue !== 'L'));
         }
 
         function checkNearbyWalls() {
@@ -449,9 +446,9 @@ layout: none
             let y = player.y;
             let sin = Math.sin(angle);
             let cos = Math.cos(angle);
-            const stepSize = 0.02;
+            const stepSize = 0.07;
             const originalAngle = angle;
-            const maxIterations = 1000;
+            const maxIterations = 600;
             let iterations = 0;
 
             while (iterations++ < maxIterations) {
@@ -466,7 +463,7 @@ layout: none
                     return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
                 }
 
-                if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 10) {
+                if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 'L') {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
                     const hitData = calculateHitData(x, y, mapX, mapY, originalAngle);
                     
@@ -581,7 +578,7 @@ layout: none
             
             const mapWidth = map[0].length;
             const mapHeight = map.length;
-            const scale = Math.min(MINIMAP_MAX_SIZE / mapWidth, MINIMAP_MAX_SIZE / mapHeight);
+            const scale = 1.5*Math.min(MINIMAP_MAX_SIZE / mapWidth, MINIMAP_MAX_SIZE / mapHeight);
 
             minimapCanvas.width = mapWidth * scale;
             minimapCanvas.height = mapHeight * scale;
@@ -595,7 +592,7 @@ layout: none
             function drawMapCells() {
                 for (let y = 0; y < map.length; y++) {
                     for (let x = 0; x < map[y].length; x++) {
-                        if (map[y][x] === 10) {
+                        if (map[y][x] === 'L') {
                             minimapCtx.fillStyle = 'blue';
                             minimapCtx.fillRect(x * scale, y * scale, scale, scale);
                         } else if (map[y][x] !== 0) {
