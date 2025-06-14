@@ -63,10 +63,6 @@ layout: none
         const MAX_DISTANCE_TO_TEXTURE = 50;
         const WALL_MARGIN = 0.85; // Distancia mínima permitida a la muralla
 
-        // --- Raycasting params will be set after map load ---
-        let STEPSIZE = 0.02;
-        let MAX_ITERATIONS = 400;
-
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d', { alpha: false, willReadFrequently: false });
@@ -103,8 +99,7 @@ layout: none
         function updateRaycastingParams() {
             if (!map || !map.length) return;
             const maxMapDist = Math.sqrt(map[0].length ** 2 + map.length ** 2);
-            // Elige el stepSize más grande que no salte paredes delgadas (<<1)
-            STEPSIZE = Math.min(0.25, 1 / Math.max(map[0].length, map.length));
+            STEPSIZE = Math.min(0.05, 1 / Math.max(map[0].length, map.length));
             MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
         }
 
