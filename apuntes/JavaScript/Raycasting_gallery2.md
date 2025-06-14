@@ -447,7 +447,7 @@ layout: none
             let y = player.y;
             let sin = Math.sin(angle);
             let cos = Math.cos(angle);
-            const stepSize = 0.07;
+            const stepSize = 0.05;
             const originalAngle = angle;
             const maxIterations = 600;
             let iterations = 0;
@@ -548,25 +548,32 @@ layout: none
         function drawWalls() {
             const numRays = canvas.width;
             const rayAngleStep = FOV / numRays;
+            const maxWallHeight = canvas.height * 2; // máximo permitido
 
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
-                const { dist, texture, hitOffset, mapX, mapY } = castRay(rayAngle);
-                
+                const { dist, texture, hitOffset } = castRay(rayAngle);
+
                 if (dist <= MAX_DISTANCE_TO_TEXTURE) {
-                    const lineHeight = canvas.height / dist;
+                    let lineHeight = canvas.height / dist;
+                    lineHeight = Math.min(lineHeight, maxWallHeight); // CLAMP
+
                     const lineOffset = (canvas.height - lineHeight) / 2;
-                    
+
                     if (texture) {
-                        // Draw textured wall
-                        const textureX = Math.floor(hitOffset * texture[0].width);
+                        // --- MIPMAP SELECTION ---
+                        let mipLevel = 0;
+                        let targetHeight = Math.abs(lineHeight);
+                        while (mipLevel + 1 < texture.length && texture[mipLevel].height > targetHeight * 1.5) {
+                            mipLevel++;
+                        }
+                        const textureX = Math.floor(hitOffset * texture[mipLevel].width);
                         ctx.drawImage(
-                            texture[0], 
-                            textureX, 0, 1, texture[0].height, 
+                            texture[mipLevel],
+                            textureX, 0, 1, texture[mipLevel].height,
                             i, lineOffset, 1, lineHeight
                         );
                     } else {
-                        // Draw solid black wall for any non-zero value without texture
                         ctx.fillStyle = 'black';
                         ctx.fillRect(i, lineOffset, 1, lineHeight);
                     }
