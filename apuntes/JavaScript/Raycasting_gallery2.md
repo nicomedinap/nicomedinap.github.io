@@ -1,7 +1,6 @@
 ---
 layout: none
 ---
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,14 +51,8 @@ layout: none
     <div id="lensControls">
         <h3>Lente gravitatoria</h3>
         <p id="lensLabel" style="font-size:13px;margin-bottom:4px;"></p>
-        <label>Distorsión: <input type="range" id="lensStrength" min="0" max="0.2" step="0.001" value="0.05"></label>
-        <label>Radio: <input type="range" id="lensRadius" min="0.3" max="2" step="0.01" value="1."></label>
-        <div id="lensMoveGroup">
-            <button id="moveLensLeft">&larr; X-</button>
-            <button id="moveLensRight">X+ &rarr;</button>
-            <button id="moveLensUp">&uarr; Y-</button>
-            <button id="moveLensDown">Y+ &darr;</button>
-        </div>
+        <label>Distorsión: <input type="range" id="lensStrength" min="0." max="0.1" step="0.001" value="0.01"></label>
+        <label>Radio: <input type="range" id="lensRadius" min="0.3" max="15" step="0.01" value="1."></label>
     </div>
 
     <script>
@@ -72,10 +65,6 @@ layout: none
         const WALL_INFO_DISTANCE = 1.5;
         const MAX_DISTANCE_TO_TEXTURE = 50;
         const WALL_MARGIN = 0.85; // Distancia mínima permitida a la muralla
-
-        // --- Raycasting params will be set after map load ---
-        let STEPSIZE = 0.02;
-        let MAX_ITERATIONS = 400;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
@@ -94,13 +83,9 @@ layout: none
         const lensStrengthInput = document.getElementById('lensStrength');
         const lensRadiusInput = document.getElementById('lensRadius');
         const lensLabel = document.getElementById('lensLabel');
-        const moveLensLeft = document.getElementById('moveLensLeft');
-        const moveLensRight = document.getElementById('moveLensRight');
-        const moveLensUp = document.getElementById('moveLensUp');
-        const moveLensDown = document.getElementById('moveLensDown');
 
         // Game State
-        const player = { x: 2.5, y: 2.5, angle: 1, speed: 0, turnSpeed: 0 };
+        const player = { x: 2, y: 2, angle: 70, speed: 0, turnSpeed: 0 };
         const textures = {};
         const wallInfoData = {};
         let map = [];
@@ -115,17 +100,17 @@ layout: none
             // Lente "objetivo" (entrada)
             const lens1 = {
                 x: 2.5,
-                y: 4.5,
-                strength: 0.20,
-                radius: 1.0,
+                y: 5.5,
+                strength: 0.013,
+                radius: 11.33,
                 visible: true
             };
             // Lente "ocular" (salida)
             const lens2 = {
-                x: 8.5,
-                y: 4.5,
-                strength: -0.10,
-                radius: 0.7,
+                x: 2.5,
+                y: 15.5,
+                strength: 0.004,
+                radius: 15.0,
                 visible: true
             };
             lenses = [lens1, lens2];
@@ -159,7 +144,6 @@ layout: none
             detectMobileAndLockOrientation();
             loadTexturesAndStart();
             setupEventListeners();
-            setupLensMoveEvents();
         }
 
         function setCanvasSize() {
@@ -245,20 +229,7 @@ layout: none
         function setupLensEventListeners() {
             lensStrengthInput.addEventListener('input', updateLensParameters);
             lensRadiusInput.addEventListener('input', updateLensParameters);
-        }
-
-        function setupLensMoveEvents() {
-            moveLensLeft.addEventListener('click', () => moveLens('x', -0.1));
-            moveLensRight.addEventListener('click', () => moveLens('x', 0.1));
-            moveLensUp.addEventListener('click', () => moveLens('y', -0.1));
-            moveLensDown.addEventListener('click', () => moveLens('y', 0.1));
-        }
-
-        function moveLens(axis, delta) {
-            if (currentLensIndex === -1) return;
-            let lens = lenses[currentLensIndex];
-            lens[axis] += delta;
-        }
+        } 
 
         function setupEventListeners() {
             window.addEventListener('keydown', handleKeyDown);
@@ -316,8 +287,8 @@ layout: none
                 if (!mapMatch) throw new Error('No se pudo encontrar el mapa en el script.');
                 const getMap = new Function(`${mapMatch[0]} return map;`);
                 map = getMap();
-                lenses = findLensPositions()
-                //setTelescopeLenses();
+                //lenses = findLensPositions()
+                setTelescopeLenses();
                 updateLensControlsVisibility();
                 updateRaycastingParams();
             } catch (error) {
@@ -367,7 +338,11 @@ layout: none
                 // Sincroniza sliders y etiqueta
                 lensStrengthInput.value = lenses[idx].strength;
                 lensRadiusInput.value = lenses[idx].radius;
-                lensLabel.textContent = `Editando lente #${idx + 1}  (x=${lenses[idx].x.toFixed(2)}, y=${lenses[idx].y.toFixed(2)})`;
+                // Aquí va la línea modificada:
+                lensLabel.textContent =
+                `Editando lente #${idx + 1}\n` +
+                `Radio: ${lenses[idx].radius.toFixed(2)} | ` +
+                `Distorsión: ${lenses[idx].strength.toFixed(3)}`;
                 lensControls.style.display = "block";
             } else {
                 lensControls.style.display = "none";
