@@ -1,6 +1,7 @@
 ---
 layout: none
 ---
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,6 +24,8 @@ layout: none
         #lensControls h3 { margin-top: 0; margin-bottom: 10px; }
         #lensControls label { display: block; margin: 5px 0; font-size: 14px; }
         #lensControls input { width: 100%; }
+        #lensMoveGroup { margin-top: 10px; display: flex; gap: 3px; flex-wrap: wrap;}
+        #lensMoveGroup button { flex: 1 1 45%; margin: 2px; padding: 3px 0; border-radius: 3px; border: 1px solid #333; background: #444; color: #fff;}
     </style>
 </head>
 <body>
@@ -48,8 +51,15 @@ layout: none
 
     <div id="lensControls">
         <h3>Lente gravitatoria</h3>
-        <label>Distorsión: <input type="range" id="lensStrength" min="0" max="0.5" step="0.01" value="0.05"></label>
-        <label>Radio: <input type="range" id="lensRadius" min="1" max="5" step="0.1" value="1."></label>
+        <p id="lensLabel" style="font-size:13px;margin-bottom:4px;"></p>
+        <label>Distorsión: <input type="range" id="lensStrength" min="0" max="0.2" step="0.001" value="0.05"></label>
+        <label>Radio: <input type="range" id="lensRadius" min="0.3" max="2" step="0.01" value="1."></label>
+        <div id="lensMoveGroup">
+            <button id="moveLensLeft">&larr; X-</button>
+            <button id="moveLensRight">X+ &rarr;</button>
+            <button id="moveLensUp">&uarr; Y-</button>
+            <button id="moveLensDown">Y+ &darr;</button>
+        </div>
     </div>
 
     <script>
@@ -62,6 +72,10 @@ layout: none
         const WALL_INFO_DISTANCE = 1.5;
         const MAX_DISTANCE_TO_TEXTURE = 50;
         const WALL_MARGIN = 0.85; // Distancia mínima permitida a la muralla
+
+        // --- Raycasting params will be set after map load ---
+        let STEPSIZE = 0.02;
+        let MAX_ITERATIONS = 400;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
@@ -79,16 +93,14 @@ layout: none
         const wallDescription = document.getElementById('wallDescription');
         const lensStrengthInput = document.getElementById('lensStrength');
         const lensRadiusInput = document.getElementById('lensRadius');
+        const lensLabel = document.getElementById('lensLabel');
+        const moveLensLeft = document.getElementById('moveLensLeft');
+        const moveLensRight = document.getElementById('moveLensRight');
+        const moveLensUp = document.getElementById('moveLensUp');
+        const moveLensDown = document.getElementById('moveLensDown');
 
         // Game State
-        const player = {
-            x: 2.5,
-            y: 2.5,
-            angle: 1,
-            speed: 0,
-            turnSpeed: 0
-        };
-
+        const player = { x: 2.5, y: 2.5, angle: 1, speed: 0, turnSpeed: 0 };
         const textures = {};
         const wallInfoData = {};
         let map = [];
@@ -96,10 +108,47 @@ layout: none
         let floorTexture = null;
         let lenses = [];
 
+        // Para controles de lente cerca
+        let currentLensIndex = -1;
+
+        function setTelescopeLenses() {
+            // Lente "objetivo" (entrada)
+            const lens1 = {
+                x: 2.5,
+                y: 4.5,
+                strength: 0.20,
+                radius: 1.0,
+                visible: true
+            };
+            // Lente "ocular" (salida)
+            const lens2 = {
+                x: 8.5,
+                y: 4.5,
+                strength: -0.10,
+                radius: 0.7,
+                visible: true
+            };
+            lenses = [lens1, lens2];
+        }
+
+        function lensNearPlayer(threshold = 1.5) {
+            let closest = -1, minD = 99;
+            for (let i = 0; i < lenses.length; i++) {
+                const dx = player.x - lenses[i].x;
+                const dy = player.y - lenses[i].y;
+                const d = Math.sqrt(dx*dx + dy*dy);
+                if (d < threshold && d < minD) {
+                    closest = i;
+                    minD = d;
+                }
+            }
+            return closest;
+        }
+
         function updateRaycastingParams() {
             if (!map || !map.length) return;
             const maxMapDist = Math.sqrt(map[0].length ** 2 + map.length ** 2);
-            STEPSIZE = Math.min(0.05, 1 / Math.max(map[0].length, map.length));
+            STEPSIZE = Math.min(0.04, 1 / Math.max(map[0].length, map.length));
             MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
         }
 
@@ -110,6 +159,7 @@ layout: none
             detectMobileAndLockOrientation();
             loadTexturesAndStart();
             setupEventListeners();
+            setupLensMoveEvents();
         }
 
         function setCanvasSize() {
@@ -128,10 +178,7 @@ layout: none
                 const textureResponse = await fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json');
                 const textureDatabase = await textureResponse.json();
                 Object.entries(textureDatabase.roomTextures).forEach(([key, texture]) => {
-                    wallInfoData[key] = {
-                        title: texture.title,
-                        description: texture.description
-                    };
+                    wallInfoData[key] = { title: texture.title, description: texture.description };
                 });
                 await Promise.all([
                     loadSkyAndFloor(textureDatabase.skyTexture, textureDatabase.floorTexture),
@@ -191,13 +238,8 @@ layout: none
 
         function updateLensControlsVisibility() {
             const lensControls = document.getElementById('lensControls');
-            if (lenses.length > 0) {
-                lensControls.style.display = 'block';
-                setupLensEventListeners();
-            } else {
-                lensControls.style.display = 'none';
-                removeLensEventListeners();
-            }
+            // Mostrado/ocultado se gestiona por update()
+            lensControls.style.display = "none";
         }
 
         function setupLensEventListeners() {
@@ -205,9 +247,17 @@ layout: none
             lensRadiusInput.addEventListener('input', updateLensParameters);
         }
 
-        function removeLensEventListeners() {
-            lensStrengthInput.removeEventListener('input', updateLensParameters);
-            lensRadiusInput.removeEventListener('input', updateLensParameters);
+        function setupLensMoveEvents() {
+            moveLensLeft.addEventListener('click', () => moveLens('x', -0.1));
+            moveLensRight.addEventListener('click', () => moveLens('x', 0.1));
+            moveLensUp.addEventListener('click', () => moveLens('y', -0.1));
+            moveLensDown.addEventListener('click', () => moveLens('y', 0.1));
+        }
+
+        function moveLens(axis, delta) {
+            if (currentLensIndex === -1) return;
+            let lens = lenses[currentLensIndex];
+            lens[axis] += delta;
         }
 
         function setupEventListeners() {
@@ -226,6 +276,8 @@ layout: none
                 resetPlayerPosition();
                 wallInfo.style.display = 'none';
             });
+
+            setupLensEventListeners();
         }
 
         function handleKeyDown(e) {
@@ -250,12 +302,9 @@ layout: none
         }
 
         function updateLensParameters() {
-            const strength = parseFloat(lensStrengthInput.value);
-            const radius = parseFloat(lensRadiusInput.value);
-            lenses.forEach(lens => {
-                lens.strength = strength;
-                lens.radius = radius;
-            });
+            if (currentLensIndex === -1) return;
+            lenses[currentLensIndex].strength = parseFloat(lensStrengthInput.value);
+            lenses[currentLensIndex].radius = parseFloat(lensRadiusInput.value);
         }
 
         async function loadMap(mapUrl) {
@@ -267,15 +316,13 @@ layout: none
                 if (!mapMatch) throw new Error('No se pudo encontrar el mapa en el script.');
                 const getMap = new Function(`${mapMatch[0]} return map;`);
                 map = getMap();
-                lenses = findLensPositions();
+                lenses = findLensPositions()
+                //setTelescopeLenses();
                 updateLensControlsVisibility();
-                // --- recalcular parámetros de raycasting según el mapa actual ---
                 updateRaycastingParams();
             } catch (error) {
                 console.error('Error al cargar el mapa:', error);
             }
-        }
-
         function findLensPositions() {
             const positions = [];
             for (let y = 0; y < map.length; y++) {
@@ -293,6 +340,7 @@ layout: none
             }
             return positions;
         }
+        }
 
         function resetPlayerPosition() {
             player.x = 2.5;
@@ -307,16 +355,24 @@ layout: none
             const moveStep = player.speed;
             let newX = player.x + Math.cos(player.angle) * moveStep;
             let newY = player.y + Math.sin(player.angle) * moveStep;
-            let moved = false;
-            if (isValidMove(newX, player.y)) {
-                player.x = newX;
-                moved = true;
-            }
-            if (isValidMove(player.x, newY)) {
-                player.y = newY;
-                moved = true;
-            }
+            if (isValidMove(newX, player.y)) player.x = newX;
+            if (isValidMove(player.x, newY)) player.y = newY;
             checkNearbyWalls();
+
+            // Mostrar controles de lente al acercarse
+            const idx = lensNearPlayer();
+            const lensControls = document.getElementById('lensControls');
+            if (idx !== -1) {
+                currentLensIndex = idx;
+                // Sincroniza sliders y etiqueta
+                lensStrengthInput.value = lenses[idx].strength;
+                lensRadiusInput.value = lenses[idx].radius;
+                lensLabel.textContent = `Editando lente #${idx + 1}  (x=${lenses[idx].x.toFixed(2)}, y=${lenses[idx].y.toFixed(2)})`;
+                lensControls.style.display = "block";
+            } else {
+                lensControls.style.display = "none";
+                currentLensIndex = -1;
+            }
         }
 
         function isValidMove(x, y) {
@@ -396,22 +452,39 @@ layout: none
             const originalAngle = angle;
             const maxIterations = MAX_ITERATIONS;
             let iterations = 0;
+            let magnification = 1.0
+            
             while (iterations++ < maxIterations) {
+
+                for (const lens of lenses) {
+                    if (!lens.visible) continue;
+                    const dx = x - lens.x;
+                    const dy = y - lens.y;
+                    const distToLens = Math.sqrt(dx*dx + dy*dy);
+                    if (distToLens < lens.radius) {
+                        const normalizedDist = distToLens / lens.radius;
+                        // Efecto máximo en el centro, suave en los bordes
+                        const localMagnification = 1 + lens.strength * (1 - normalizedDist);
+                        magnification *= localMagnification;
+                    }
+                }
+
                 applyLensEffects();
+
                 x += cos * stepSize;
                 y += sin * stepSize;
                 const mapX = Math.floor(x);
                 const mapY = Math.floor(y);
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
-                    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY };
+                    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY, magnification };
                 }
                 if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 'L') {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
                     const hitData = calculateHitData(x, y, mapX, mapY, originalAngle);
-                    return { dist, texture: textures[map[mapY][mapX]], ...hitData };
+                    return { dist, texture: textures[map[mapY][mapX]], ...hitData, magnification };
                 }
             }
-            return { dist: Infinity, texture: null, hitOffset: 0, mapX: -1, mapY: -1 };
+            return { dist: Infinity, texture: null, hitOffset: 0, mapX: -1, mapY: -1, magnification };
 
             function applyLensEffects() {
                 for (const lens of lenses) {
@@ -479,9 +552,10 @@ layout: none
             const maxWallHeight = canvas.height * 2;
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
-                const { dist, texture, hitOffset } = castRay(rayAngle);
+                const { dist, texture, hitOffset, magnification } = castRay(rayAngle);
                 if (dist <= MAX_DISTANCE_TO_TEXTURE) {
                     let lineHeight = Math.min(canvas.height / dist, maxWallHeight);
+                    lineHeight *= magnification || 1.0; // Aplica el factor de magnificación
                     const lineOffset = (canvas.height - lineHeight) / 2;
                     if (texture) {
                         let mipLevel = 0;
