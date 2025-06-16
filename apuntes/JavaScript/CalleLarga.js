@@ -1,6 +1,6 @@
 var mapData = {
   map: [
-    [1,1,1,1,1],
+    [1,1,2,1,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
@@ -19,10 +19,10 @@ var mapData = {
     [1,0,0,0,1],
     [1,0,0,0,1],
     [1,0,0,0,1],
-    [1,1,1,1,1]
+    [1,1,3,1,1]
   ],
   lenses: [
-    { x: 2.5, y: 5.5, strength: 0.08, radius: 1.1, visible: true },
-    { x: 2.5, y: 15.5, strength: -0.04, radius: 0.8, visible: true }
+    { x: 2.5, y: 5.5, strength: 0.013, radius: 11.33, visible: true },
+    { x: 2.5, y: 15.5, strength: 0.004, radius: 15, visible: true }
   ]
 };
