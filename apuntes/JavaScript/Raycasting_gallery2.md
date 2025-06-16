@@ -29,10 +29,10 @@ layout: none
 </head>
 <body>
     <select id="mapSelect">
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 1</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo_recursivo.js">Mapa genérico</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo.js">Laberinto</option>
-        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 1</option>
     </select>
 
     <canvas id="gameCanvas"></canvas>
@@ -59,7 +59,7 @@ layout: none
         // Constants
         const MOVEMENT_SPEED = 0.06;
         const ROTATION_SPEED = 0.025;
-        const FOV = Math.PI/4;
+        const FOV = Math.PI/3;
         const MAX_TEXTURE_SIZE = 2800;
         const MINIMAP_MAX_SIZE = 100;
         const WALL_INFO_DISTANCE = 1.5;
@@ -92,31 +92,13 @@ layout: none
         let skyTexture = null;
         let floorTexture = null;
         let lenses = [];
+        let customRoomTextures = null;
+        let customSkyTexture = null;
+        let customFloorTexture = null;
 
-        // Para controles de lente cerca
         let currentLensIndex = -1;
 
-        function setTelescopeLenses() {
-            // Lente "objetivo" (entrada)
-            const lens1 = {
-                x: 2.5,
-                y: 5.5,
-                strength: 0.013,
-                radius: 11.33,
-                visible: true
-            };
-            // Lente "ocular" (salida)
-            const lens2 = {
-                x: 2.5,
-                y: 15.5,
-                strength: 0.004,
-                radius: 15.0,
-                visible: true
-            };
-            lenses = [lens1, lens2];
-        }
-
-        function lensNearPlayer(threshold = 1.5) {
+        function lensNearPlayer(threshold = 2.5) {
             let closest = -1, minD = 99;
             for (let i = 0; i < lenses.length; i++) {
                 const dx = player.x - lenses[i].x;
@@ -137,13 +119,16 @@ layout: none
             MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
         }
 
-        // Initialize game
-        function init() {
+        // Cambiado: Inicialización robusta
+        async function init() {
             setCanvasSize();
             window.addEventListener('resize', setCanvasSize);
             detectMobileAndLockOrientation();
-            loadTexturesAndStart();
             setupEventListeners();
+
+            await loadMap(mapSelect.value);
+            await loadTexturesAndStart();
+            gameLoop();
         }
 
         function setCanvasSize() {
@@ -159,27 +144,36 @@ layout: none
 
         async function loadTexturesAndStart() {
             try {
-                const textureResponse = await fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json');
-                const textureDatabase = await textureResponse.json();
-                Object.entries(textureDatabase.roomTextures).forEach(([key, texture]) => {
+                // Si el mapa tiene texturas propias, úsalas, si no, usa el JSON global
+                let textureDatabase = null;
+
+                // Si faltan texturas propias, carga el JSON global como fallback
+                if (!customRoomTextures || !customSkyTexture || !customFloorTexture) {
+                    const textureResponse = await fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json');
+                    textureDatabase = await textureResponse.json();
+                }
+
+                const roomTextures = customRoomTextures || (textureDatabase && textureDatabase.roomTextures) || {};
+                const skyTextureUrl = customSkyTexture || (textureDatabase && textureDatabase.skyTexture);
+                const floorTextureUrl = customFloorTexture || (textureDatabase && textureDatabase.floorTexture);
+
+                // Info de muros para mostrar nombres y descripciones
+                Object.entries(roomTextures).forEach(([key, texture]) => {
                     wallInfoData[key] = { title: texture.title, description: texture.description };
                 });
+
                 await Promise.all([
-                    loadSkyAndFloor(textureDatabase.skyTexture, textureDatabase.floorTexture),
-                    loadRoomTextures(textureDatabase.roomTextures)
+                    loadSkyAndFloor(skyTextureUrl, floorTextureUrl),
+                    loadRoomTextures(roomTextures)
                 ]);
-                await loadMap(mapSelect.value);
-                gameLoop();
             } catch (error) {
                 console.error('Initialization error:', error);
-                await loadMap(mapSelect.value);
-                gameLoop();
             }
         }
 
         async function loadSkyAndFloor(skyUrl, floorUrl) {
-            skyTexture = await loadImage(skyUrl);
-            floorTexture = await loadImage(floorUrl);
+            if (skyUrl) skyTexture = await loadImage(skyUrl);
+            if (floorUrl) floorTexture = await loadImage(floorUrl);
         }
 
         async function loadRoomTextures(textureData) {
@@ -222,7 +216,6 @@ layout: none
 
         function updateLensControlsVisibility() {
             const lensControls = document.getElementById('lensControls');
-            // Mostrado/ocultado se gestiona por update()
             lensControls.style.display = "none";
         }
 
@@ -246,6 +239,7 @@ layout: none
                 await loadMap(event.target.value);
                 resetPlayerPosition();
                 wallInfo.style.display = 'none';
+                await loadTexturesAndStart();
             });
 
             setupLensEventListeners();
@@ -280,37 +274,27 @@ layout: none
 
         async function loadMap(mapUrl) {
             try {
+                // Limpia texturas custom cada vez
+                customRoomTextures = null;
+                customSkyTexture = null;
+                customFloorTexture = null;
+
                 const response = await fetch(mapUrl);
                 if (!response.ok) throw new Error('Error al cargar el mapa');
                 const script = await response.text();
-                const mapMatch = script.match(/const map = (\[[\s\S]*?\]);/);
-                if (!mapMatch) throw new Error('No se pudo encontrar el mapa en el script.');
-                const getMap = new Function(`${mapMatch[0]} return map;`);
-                map = getMap();
-                //lenses = findLensPositions()
-                setTelescopeLenses();
+                window.eval(script);  // Scope global
+                if (typeof mapData === "undefined") throw new Error('mapData no está definido');
+                map = mapData.map;
+                lenses = mapData.lenses || [];
+                // Si el mapa tiene sus propias texturas, guárdalas
+                if (mapData.roomTextures) customRoomTextures = mapData.roomTextures;
+                if (mapData.skyTexture) customSkyTexture = mapData.skyTexture;
+                if (mapData.floorTexture) customFloorTexture = mapData.floorTexture;
                 updateLensControlsVisibility();
                 updateRaycastingParams();
             } catch (error) {
                 console.error('Error al cargar el mapa:', error);
             }
-        function findLensPositions() {
-            const positions = [];
-            for (let y = 0; y < map.length; y++) {
-                for (let x = 0; x < map[y].length; x++) {
-                    if (map[y][x] === 'L') {
-                        positions.push({
-                            x: x + 0.5,
-                            y: y + 0.5,
-                            strength: parseFloat(lensStrengthInput.value),
-                            radius: parseFloat(lensRadiusInput.value),
-                            visible: true
-                        });
-                    }
-                }
-            }
-            return positions;
-        }
         }
 
         function resetPlayerPosition() {
@@ -335,10 +319,8 @@ layout: none
             const lensControls = document.getElementById('lensControls');
             if (idx !== -1) {
                 currentLensIndex = idx;
-                // Sincroniza sliders y etiqueta
                 lensStrengthInput.value = lenses[idx].strength;
                 lensRadiusInput.value = lenses[idx].radius;
-                // Aquí va la línea modificada:
                 lensLabel.textContent =
                 `Editando lente #${idx + 1}\n` +
                 `Radio: ${lenses[idx].radius.toFixed(2)} | ` +
@@ -438,7 +420,6 @@ layout: none
                     const distToLens = Math.sqrt(dx*dx + dy*dy);
                     if (distToLens < lens.radius) {
                         const normalizedDist = distToLens / lens.radius;
-                        // Efecto máximo en el centro, suave en los bordes
                         const localMagnification = 1 + lens.strength * (1 - normalizedDist);
                         magnification *= localMagnification;
                     }
@@ -530,7 +511,7 @@ layout: none
                 const { dist, texture, hitOffset, magnification } = castRay(rayAngle);
                 if (dist <= MAX_DISTANCE_TO_TEXTURE) {
                     let lineHeight = Math.min(canvas.height / dist, maxWallHeight);
-                    lineHeight *= magnification || 1.0; // Aplica el factor de magnificación
+                    lineHeight *= magnification || 1.0;
                     const lineOffset = (canvas.height - lineHeight) / 2;
                     if (texture) {
                         let mipLevel = 0;
