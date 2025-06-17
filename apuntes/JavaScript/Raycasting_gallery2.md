@@ -25,6 +25,7 @@ layout: none
         #lensControls input { width: 100%; }
         #lensMoveGroup { margin-top: 10px; display: flex; gap: 3px; flex-wrap: wrap;}
         #lensMoveGroup button { flex: 1 1 45%; margin: 2px; padding: 3px 0; border-radius: 3px; border: 1px solid #333; background: #444; color: #fff;}
+        #toggleLensesBtn { position: absolute; top: 10px; right: 220px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -54,6 +55,7 @@ layout: none
         <label>Distorsión: <input type="range" id="lensStrength" min="0." max="0.1" step="0.001" value="0.01"></label>
         <label>Radio: <input type="range" id="lensRadius" min="0.3" max="15" step="0.01" value="1."></label>
     </div>
+    <button id="toggleLensesBtn">Desactivar lentes</button>
 
     <script>
         // Constants
@@ -64,7 +66,15 @@ layout: none
         const MINIMAP_MAX_SIZE = 100;
         const WALL_INFO_DISTANCE = 1.5;
         const MAX_DISTANCE_TO_TEXTURE = 50;
-        const WALL_MARGIN = 0.85; // Distancia mínima permitida a la muralla
+        const WALL_MARGIN = 0.75; // Distancia mínima permitida a la muralla
+
+        // --- Render scale setup ---
+        const RENDER_SCALE = 0.7;
+
+        // Internal render canvas for low-res rendering
+        let renderCanvas = document.createElement('canvas');
+        let renderCtx = renderCanvas.getContext('2d', { alpha: false, willReadFrequently: false });
+        renderCtx.imageSmoothingEnabled = false;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
@@ -83,6 +93,7 @@ layout: none
         const lensStrengthInput = document.getElementById('lensStrength');
         const lensRadiusInput = document.getElementById('lensRadius');
         const lensLabel = document.getElementById('lensLabel');
+        const toggleLensesBtn = document.getElementById('toggleLensesBtn');
 
         // Game State
         const player = { x: 2, y: 2, angle: 70, speed: 0, turnSpeed: 0 };
@@ -97,6 +108,16 @@ layout: none
         let customFloorTexture = null;
 
         let currentLensIndex = -1;
+        let lensesActive = true;
+
+        function updateLensesButton() {
+            toggleLensesBtn.textContent = lensesActive ? "Desactivar lentes" : "Activar lentes";
+        }
+        toggleLensesBtn.addEventListener('click',()=>{
+            lensesActive = !lensesActive;
+            for (const lens of lenses) lens.visible = lensesActive;
+            updateLensesButton();
+        });
 
         function lensNearPlayer(threshold = 2.5) {
             let closest = -1, minD = 99;
@@ -119,7 +140,6 @@ layout: none
             MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
         }
 
-        // Cambiado: Inicialización robusta
         async function init() {
             setCanvasSize();
             window.addEventListener('resize', setCanvasSize);
@@ -134,6 +154,9 @@ layout: none
         function setCanvasSize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            // Also set internal low-res render canvas
+            renderCanvas.width = Math.floor(canvas.width * RENDER_SCALE);
+            renderCanvas.height = Math.floor(canvas.height * RENDER_SCALE);
         }
 
         function detectMobileAndLockOrientation() {
@@ -157,7 +180,6 @@ layout: none
                 const skyTextureUrl = customSkyTexture || (textureDatabase && textureDatabase.skyTexture);
                 const floorTextureUrl = customFloorTexture || (textureDatabase && textureDatabase.floorTexture);
 
-                // Info de muros para mostrar nombres y descripciones
                 Object.entries(roomTextures).forEach(([key, texture]) => {
                     wallInfoData[key] = { title: texture.title, description: texture.description };
                 });
@@ -274,7 +296,6 @@ layout: none
 
         async function loadMap(mapUrl) {
             try {
-                // Limpia texturas custom cada vez
                 customRoomTextures = null;
                 customSkyTexture = null;
                 customFloorTexture = null;
@@ -285,13 +306,13 @@ layout: none
                 window.eval(script);  // Scope global
                 if (typeof mapData === "undefined") throw new Error('mapData no está definido');
                 map = mapData.map;
-                lenses = mapData.lenses || [];
-                // Si el mapa tiene sus propias texturas, guárdalas
+                lenses = (mapData.lenses || []).map(l => ({ ...l, visible: lensesActive }));
                 if (mapData.roomTextures) customRoomTextures = mapData.roomTextures;
                 if (mapData.skyTexture) customSkyTexture = mapData.skyTexture;
                 if (mapData.floorTexture) customFloorTexture = mapData.floorTexture;
                 updateLensControlsVisibility();
                 updateRaycastingParams();
+                updateLensesButton();
             } catch (error) {
                 console.error('Error al cargar el mapa:', error);
             }
@@ -482,37 +503,47 @@ layout: none
             }
         }
 
+        // --- MODIFICADO: RENDER EN BAJA RESOLUCIÓN Y UPSCALE AL CANVAS FINAL ---
         function draw() {
-            drawSkyAndFloor();
-            drawWalls();
+            // 1. Dibuja todo en renderCanvas (baja res)
+            renderCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
+
+            // Adaptar drawSkyAndFloor y drawWalls para renderCanvas
+            drawSkyAndFloorCustom(renderCtx, renderCanvas);
+            drawWallsCustom(renderCtx, renderCanvas);
+
+            // 2. Escala la imagen resultante al canvas principal
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(renderCanvas, 0, 0, canvas.width, canvas.height);
+
+            // 3. Dibuja el minimapa encima
             drawMinimap();
         }
 
-        function drawSkyAndFloor() {
-            if (skyTexture) drawTiledTexture(skyTexture, player.angle * 0.1, 0, canvas.height / 2);
-            if (floorTexture) drawTiledTexture(floorTexture, player.angle * 0.3, canvas.height / 2, canvas.height / 2);
+        // Modificación: funciones draw* para usar renderCanvas
+        function drawSkyAndFloorCustom(ctxOut, canvasOut) {
+            if (skyTexture) drawTiledTextureCustom(ctxOut, skyTexture, player.angle * 0.1, 0, canvasOut.height / 2, canvasOut.width);
+            if (floorTexture) drawTiledTextureCustom(ctxOut, floorTexture, player.angle * 0.3, canvasOut.height / 2, canvasOut.height / 2, canvasOut.width);
         }
-
-        function drawTiledTexture(texture, angleOffset, yPos, height) {
+        function drawTiledTextureCustom(ctxOut, texture, angleOffset, yPos, height, outWidth) {
             const width = texture.width;
             const offset = ((angleOffset + 8 * Math.PI) / (2 * Math.PI)) * width % width;
-            ctx.drawImage(texture, offset, 0, width - offset, texture.height, 0, yPos, canvas.width, height);
+            ctxOut.drawImage(texture, offset, 0, width - offset, texture.height, 0, yPos, outWidth, height);
             if (offset > 0) {
-                ctx.drawImage(texture, 0, 0, offset, texture.height, canvas.width - (offset / width) * canvas.width, yPos, (offset / width) * canvas.width, height);
+                ctxOut.drawImage(texture, 0, 0, offset, texture.height, outWidth - (offset / width) * outWidth, yPos, (offset / width) * outWidth, height);
             }
         }
-
-        function drawWalls() {
-            const numRays = canvas.width;
+        function drawWallsCustom(ctxOut, canvasOut) {
+            const numRays = canvasOut.width;
             const rayAngleStep = FOV / numRays;
-            const maxWallHeight = canvas.height * 2;
+            const maxWallHeight = canvasOut.height * 2;
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
                 const { dist, texture, hitOffset, magnification } = castRay(rayAngle);
                 if (dist <= MAX_DISTANCE_TO_TEXTURE) {
-                    let lineHeight = Math.min(canvas.height / dist, maxWallHeight);
+                    let lineHeight = Math.min(canvasOut.height / dist, maxWallHeight);
                     lineHeight *= magnification || 1.0;
-                    const lineOffset = (canvas.height - lineHeight) / 2;
+                    const lineOffset = (canvasOut.height - lineHeight) / 2;
                     if (texture) {
                         let mipLevel = 0;
                         let targetHeight = Math.abs(lineHeight);
@@ -523,14 +554,14 @@ layout: none
                             mipLevel++;
                         }
                         const textureX = Math.floor(hitOffset * texture[mipLevel].width);
-                        ctx.drawImage(
+                        ctxOut.drawImage(
                             texture[mipLevel], 
                             textureX, 0, 1, texture[mipLevel].height, 
                             i, lineOffset, 1, lineHeight
                         );
                     } else {
-                        ctx.fillStyle = 'black';
-                        ctx.fillRect(i, lineOffset, 1, lineHeight);
+                        ctxOut.fillStyle = 'black';
+                        ctxOut.fillRect(i, lineOffset, 1, lineHeight);
                     }
                 }
             }
@@ -609,4 +640,5 @@ layout: none
 
     </script>
 </body>
+</html>
 </html>
