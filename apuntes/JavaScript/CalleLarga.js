@@ -27,7 +27,7 @@ var mapData = {
   ],
   roomTextures: {
       "2": {
-          "title": "NGC 3132", "description": "Nebulosa planetaria",
+          "title": "NGC 3132", "Material con densidad $\\rho = 2.33\\ g/cm^3$",
           "url": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/NGC3132/201.jpg"
       },
       "3": {
