@@ -71,7 +71,7 @@ layout: none
         const WALL_MARGIN = 0.85;
         const RENDER_SCALE = 0.8
         const TARGET_FPS = 20;
-        const STEPSIZE = 0.04 //Math.min(0.02, 1 / Math.max(map[0].length, map.length));
+        const STEPSIZE = 0.05 //Math.min(0.02, 1 / Math.max(map[0].length, map.length));
 
 
         // DOM Elements
@@ -372,30 +372,26 @@ layout: none
 
         function isValidMove(x, y) {
             if (x < 0 || x >= map[0].length || y < 0 || y >= map.length) return false;
-            const mapX = Math.floor(x);
-            const mapY = Math.floor(y);
-            const cellValue = map[mapY] && map[mapY][mapX];
-            if (cellValue !== 0 && cellValue !== 'L') return false;
-
-            const directions = [
-                { x: 0, y: -1 }, { x: 1, y: 0 },
-                ];
-            for (const dir of directions) {
-                const nx = Math.floor(x + dir.x);
-                const ny = Math.floor(y + dir.y);
-                if (ny >= 0 && ny < map.length && nx >= 0 && nx < map[0].length) {
-                    const neighborType = map[ny][nx];
-                    if (neighborType !== 0 && neighborType !== 'L' && textures[neighborType]) {
-                        const dist = Math.sqrt(
-                            Math.pow(nx + 0.5 - x, 2) +
-                            Math.pow(ny + 0.5 - y, 2)
-                        );
-                        if (dist < WALL_MARGIN) return false;
+            for (let offsetY = -1; offsetY <= 1; offsetY++) {
+                for (let offsetX = -1; offsetX <= 1; offsetX++) {
+                    const nx = Math.floor(x) + offsetX;
+                    const ny = Math.floor(y) + offsetY;
+                    if (ny >= 0 && ny < map.length && nx >= 0 && nx < map[0].length) {
+                        const cell = map[ny][nx];
+                        if (cell !== 0) {
+                            // Calcula la distancia desde el centro del jugador al centro de la celda de pared
+                            const dist = Math.sqrt(
+                                Math.pow(nx + 0.5 - x, 2) + 
+                                Math.pow(ny + 0.5 - y, 2)
+                            );
+                            if (dist < WALL_MARGIN) return false;
+                        }
                     }
                 }
             }
             return true;
         }
+
 
         function checkNearbyWalls() {
             // Solo 2 direcciones para acelerar
