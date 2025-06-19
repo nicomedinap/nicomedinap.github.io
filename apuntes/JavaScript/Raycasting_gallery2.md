@@ -1,7 +1,6 @@
 ---
 layout: none
 ---
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -379,10 +378,10 @@ layout: none
             const mapY = Math.floor(y);
             const cellValue = map[mapY] && map[mapY][mapX];
             if (cellValue !== 0 && cellValue !== 'L') return false;
-            // Chequeo simple, menos direcciones
+
             const directions = [
-                { x: 0, y: -1 }, { x: 1, y: 0 }
-            ];
+                { x: 0, y: -1 }, { x: 1, y: 0 },
+                ];
             for (const dir of directions) {
                 const nx = Math.floor(x + dir.x);
                 const ny = Math.floor(y + dir.y);
@@ -403,8 +402,9 @@ layout: none
         function checkNearbyWalls() {
             // Solo 2 direcciones para acelerar
             const directions = [
-                { x: 0, y: -1 }, { x: 1, y: 0 }
-            ];
+                { x: 0, y: -1 }, { x: 1, y: 0 },
+                { x: 0, y: 1 },  { x: -1, y: 0 }
+                ];
             let closestWall = null;
             let minDistance = Infinity;
             for (const dir of directions) {
