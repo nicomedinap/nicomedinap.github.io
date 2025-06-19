@@ -30,8 +30,8 @@ layout: none
 </head>
 <body>
     <select id="mapSelect">
-        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 1</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo_recursivo.js">Mapa genérico</option>
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 1</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo.js">Laberinto</option>
     </select>
@@ -65,13 +65,13 @@ layout: none
         const ROTATION_SPEED = 0.025;
         const FOV = Math.PI/3;
         const MAX_TEXTURE_SIZE = 1024; 
-        const MINIMAP_MAX_SIZE = 120;   // Menor tamaño para menos draw calls
+        const MINIMAP_MAX_SIZE = 140;   // Menor tamaño para menos draw calls
         const WALL_INFO_DISTANCE = 1.5;
         const MAX_DISTANCE_TO_TEXTURE = 30; 
         const WALL_MARGIN = 0.85;
-        const RENDER_SCALE = 1
-        const TARGET_FPS = 30;
-        const STEPSIZE = 0.05 //Math.min(0.02, 1 / Math.max(map[0].length, map.length));
+        const RENDER_SCALE = 0.8
+        const TARGET_FPS = 20;
+        const STEPSIZE = 0.04 //Math.min(0.02, 1 / Math.max(map[0].length, map.length));
 
 
         // DOM Elements
@@ -551,7 +551,7 @@ layout: none
             // Menos rayos para hardware bajo
             const numRays = Math.floor(canvasToUse.width * 1); 
             const rayAngleStep = FOV / numRays;
-            const maxWallHeight = canvasToUse.height * 8;
+            const maxWallHeight = canvasToUse.height * 2;
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
                 const { dist, texture, hitOffset, magnification } = castRay(rayAngle);
