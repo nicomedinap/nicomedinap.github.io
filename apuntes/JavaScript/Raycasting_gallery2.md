@@ -1,6 +1,4 @@
----
-layout: none
----
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -58,28 +56,20 @@ layout: none
     <button id="toggleLensesBtn">Desactivar lentes</button>
 
     <script>
+        // --- OPTIMIZACIONES PARA HARDWARE BAJO ---
+
         // Constants
         const MOVEMENT_SPEED = 0.06;
         const ROTATION_SPEED = 0.025;
         const FOV = Math.PI/3;
-        const MAX_TEXTURE_SIZE = 2800;
-        const MINIMAP_MAX_SIZE = 100;
+        const MAX_TEXTURE_SIZE = 1024; // Reducido para ahorrar RAM/GPU
+        const MINIMAP_MAX_SIZE = 80;   // Menor tamaño para menos draw calls
         const WALL_INFO_DISTANCE = 1.5;
-        const MAX_DISTANCE_TO_TEXTURE = 50;
-        const WALL_MARGIN = 0.75;
-        const STEPSIZE = 0.05;
+        const MAX_DISTANCE_TO_TEXTURE = 30; // Menor distancia de render
+        const WALL_MARGIN = 0.85;
 
-        // --- Render scale setup ---
-        const RENDER_SCALE = 0.8;
-
-        // Internal render canvas for low-res rendering
-        let renderCanvas = document.createElement('canvas');
-        let renderCtx = renderCanvas.getContext('2d', { alpha: false, willReadFrequently: false });
-        renderCtx.imageSmoothingEnabled = false;
-
-        // FPS control
-        const TARGET_FPS = 30; // Cambia aquí el FPS deseado
-        let lastFrameTime = 0;
+        // --- BAJA RESOLUCION RENDER INTERNA ---
+        const RENDER_SCALE = 0.5; // 0.5 = 50% resolución (probar 0.4, 0.6 según hardware)
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
@@ -100,6 +90,11 @@ layout: none
         const lensLabel = document.getElementById('lensLabel');
         const toggleLensesBtn = document.getElementById('toggleLensesBtn');
 
+        // --- RENDER CANVAS INTERNO (BAJA RES) ---
+        let renderCanvas = document.createElement('canvas');
+        let renderCtx = renderCanvas.getContext('2d', { alpha: false, willReadFrequently: false });
+        renderCtx.imageSmoothingEnabled = false;
+
         // Game State
         const player = { x: 2, y: 2, angle: 70, speed: 0, turnSpeed: 0 };
         const textures = {};
@@ -114,6 +109,10 @@ layout: none
 
         let currentLensIndex = -1;
         let lensesActive = true;
+
+        // --- BAJA FRECUENCIA DE ACTUALIZACION ---
+        const TARGET_FPS = 30;
+        let lastDrawTime = 0;
 
         function updateLensesButton() {
             toggleLensesBtn.textContent = lensesActive ? "Desactivar lentes" : "Activar lentes";
@@ -141,6 +140,8 @@ layout: none
         function updateRaycastingParams() {
             if (!map || !map.length) return;
             const maxMapDist = Math.sqrt(map[0].length ** 2 + map.length ** 2);
+            // Menos pasos, menos iteraciones
+            STEPSIZE = Math.min(0.08, 1 / Math.max(map[0].length, map.length));
             MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
         }
 
@@ -152,12 +153,13 @@ layout: none
 
             await loadMap(mapSelect.value);
             await loadTexturesAndStart();
-            requestAnimationFrame(gameLoop); // Cambiado aquí
+            gameLoop();
         }
 
         function setCanvasSize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            // --- Render interno ---
             renderCanvas.width = Math.floor(canvas.width * RENDER_SCALE);
             renderCanvas.height = Math.floor(canvas.height * RENDER_SCALE);
         }
@@ -202,7 +204,16 @@ layout: none
             const promises = Object.entries(textureData).map(async ([key, texture]) => {
                 if (texture.url) {
                     const img = await loadImage(texture.url);
-                    if (img.width <= MAX_TEXTURE_SIZE && img.height <= MAX_TEXTURE_SIZE) {
+                    // --- Reduce dimensiones si es muy grande ---
+                    if (img.width > MAX_TEXTURE_SIZE || img.height > MAX_TEXTURE_SIZE) {
+                        const scale = Math.min(MAX_TEXTURE_SIZE / img.width, MAX_TEXTURE_SIZE / img.height, 1);
+                        const tempCanvas = document.createElement('canvas');
+                        tempCanvas.width = Math.floor(img.width * scale);
+                        tempCanvas.height = Math.floor(img.height * scale);
+                        const tempCtx = tempCanvas.getContext('2d');
+                        tempCtx.drawImage(img, 0, 0, tempCanvas.width, tempCanvas.height);
+                        textures[key] = createMipmaps(tempCanvas);
+                    } else {
                         textures[key] = createMipmaps(img);
                     }
                 }
@@ -219,19 +230,22 @@ layout: none
             });
         }
 
+        // --- Genera solo 3 mipmaps máximo para ahorrar RAM ---
         function createMipmaps(image) {
             const mipmaps = [image];
             let width = image.width / 2;
             let height = image.height / 2;
-            while (width >= 1 && height >= 1) {
+            let mipCount = 0;
+            while (width >= 1 && height >= 1 && mipCount < 2) {
                 const canvas = document.createElement('canvas');
-                canvas.width = width;
-                canvas.height = height;
+                canvas.width = Math.floor(width);
+                canvas.height = Math.floor(height);
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(image, 0, 0, width, height);
                 mipmaps.push(canvas);
                 width /= 2;
                 height /= 2;
+                mipCount++;
             }
             return mipmaps;
         }
@@ -244,7 +258,7 @@ layout: none
         function setupLensEventListeners() {
             lensStrengthInput.addEventListener('input', updateLensParameters);
             lensRadiusInput.addEventListener('input', updateLensParameters);
-        } 
+        }
 
         function setupEventListeners() {
             window.addEventListener('keydown', handleKeyDown);
@@ -299,11 +313,10 @@ layout: none
                 customRoomTextures = null;
                 customSkyTexture = null;
                 customFloorTexture = null;
-
                 const response = await fetch(mapUrl);
                 if (!response.ok) throw new Error('Error al cargar el mapa');
                 const script = await response.text();
-                window.eval(script);  // Scope global
+                window.eval(script);
                 if (typeof mapData === "undefined") throw new Error('mapData no está definido');
                 map = mapData.map;
                 lenses = (mapData.lenses || []).map(l => ({ ...l, visible: lensesActive }));
@@ -326,6 +339,8 @@ layout: none
             player.turnSpeed = 0;
         }
 
+        // --- NO ACTUALIZAR EL HUD EN TODOS LOS FRAMES ---
+        let hudUpdateSkip = 0;
         function update() {
             player.angle += player.turnSpeed;
             const moveStep = player.speed;
@@ -333,23 +348,25 @@ layout: none
             let newY = player.y + Math.sin(player.angle) * moveStep;
             if (isValidMove(newX, player.y)) player.x = newX;
             if (isValidMove(player.x, newY)) player.y = newY;
-            checkNearbyWalls();
 
-            // Mostrar controles de lente al acercarse
-            const idx = lensNearPlayer();
-            const lensControls = document.getElementById('lensControls');
-            if (idx !== -1) {
-                currentLensIndex = idx;
-                lensStrengthInput.value = lenses[idx].strength;
-                lensRadiusInput.value = lenses[idx].radius;
-                lensLabel.textContent =
-                `Editando lente #${idx + 1}\n` +
-                `Radio: ${lenses[idx].radius.toFixed(2)} | ` +
-                `Distorsión: ${lenses[idx].strength.toFixed(3)}`;
-                lensControls.style.display = "block";
-            } else {
-                lensControls.style.display = "none";
-                currentLensIndex = -1;
+            // HUD cada 4 frames
+            if (++hudUpdateSkip % 4 === 0) {
+                checkNearbyWalls();
+                const idx = lensNearPlayer();
+                const lensControls = document.getElementById('lensControls');
+                if (idx !== -1) {
+                    currentLensIndex = idx;
+                    lensStrengthInput.value = lenses[idx].strength;
+                    lensRadiusInput.value = lenses[idx].radius;
+                    lensLabel.textContent =
+                    `Editando lente #${idx + 1}\n` +
+                    `Radio: ${lenses[idx].radius.toFixed(2)} | ` +
+                    `Distorsión: ${lenses[idx].strength.toFixed(3)}`;
+                    lensControls.style.display = "block";
+                } else {
+                    lensControls.style.display = "none";
+                    currentLensIndex = -1;
+                }
             }
         }
 
@@ -359,9 +376,9 @@ layout: none
             const mapY = Math.floor(y);
             const cellValue = map[mapY] && map[mapY][mapX];
             if (cellValue !== 0 && cellValue !== 'L') return false;
+            // Chequeo simple, menos direcciones
             const directions = [
-                { x: 0, y: -1 }, { x: 1, y: 0 },
-                { x: 0, y: 1 },  { x: -1, y: 0 }
+                { x: 0, y: -1 }, { x: 1, y: 0 }
             ];
             for (const dir of directions) {
                 const nx = Math.floor(x + dir.x);
@@ -381,9 +398,9 @@ layout: none
         }
 
         function checkNearbyWalls() {
+            // Solo 2 direcciones para acelerar
             const directions = [
-                { x: 0, y: -1 }, { x: 1, y: 0 },
-                { x: 0, y: 1 },  { x: -1, y: 0 }
+                { x: 0, y: -1 }, { x: 1, y: 0 }
             ];
             let closestWall = null;
             let minDistance = Infinity;
@@ -421,6 +438,7 @@ layout: none
             }
         }
 
+        // --- FAST RAYCAST: Menos rayos, menos iteraciones, early exit ---
         function castRay(angle) {
             let x = player.x;
             let y = player.y;
@@ -431,9 +449,9 @@ layout: none
             const maxIterations = MAX_ITERATIONS;
             let iterations = 0;
             let magnification = 1.0
-            
-            while (iterations++ < maxIterations) {
 
+            // Early out si fuera de mapa
+            while (iterations++ < maxIterations) {
                 for (const lens of lenses) {
                     if (!lens.visible) continue;
                     const dx = x - lens.x;
@@ -453,7 +471,7 @@ layout: none
                 const mapX = Math.floor(x);
                 const mapY = Math.floor(y);
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) {
-                    return { dist: Infinity, texture: null, hitOffset: 0, mapX, mapY, magnification };
+                    break;
                 }
                 if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 'L') {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
@@ -503,38 +521,44 @@ layout: none
             }
         }
 
+        // --- RENDER EN BAJA RESOLUCION Y HACER UPSCALE ---
         function draw() {
+            // Limpiar canvas interno
             renderCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
-            drawSkyAndFloorCustom(renderCtx, renderCanvas);
-            drawWallsCustom(renderCtx, renderCanvas);
+            drawSkyAndFloor(renderCtx, renderCanvas);
+            drawWalls(renderCtx, renderCanvas);
+            // Upscale
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(renderCanvas, 0, 0, canvas.width, canvas.height);
             drawMinimap();
         }
 
-        function drawSkyAndFloorCustom(ctxOut, canvasOut) {
-            if (skyTexture) drawTiledTextureCustom(ctxOut, skyTexture, player.angle * 0.1, 0, canvasOut.height / 2, canvasOut.width);
-            if (floorTexture) drawTiledTextureCustom(ctxOut, floorTexture, player.angle * 0.3, canvasOut.height / 2, canvasOut.height / 2, canvasOut.width);
+        function drawSkyAndFloor(ctxToUse, canvasToUse) {
+            if (skyTexture) drawTiledTexture(ctxToUse, skyTexture, player.angle * 0.1, 0, canvasToUse.height / 2, canvasToUse.width);
+            if (floorTexture) drawTiledTexture(ctxToUse, floorTexture, player.angle * 0.3, canvasToUse.height / 2, canvasToUse.height / 2, canvasToUse.width);
         }
-        function drawTiledTextureCustom(ctxOut, texture, angleOffset, yPos, height, outWidth) {
+
+        function drawTiledTexture(ctxToUse, texture, angleOffset, yPos, height, outWidth) {
             const width = texture.width;
             const offset = ((angleOffset + 8 * Math.PI) / (2 * Math.PI)) * width % width;
-            ctxOut.drawImage(texture, offset, 0, width - offset, texture.height, 0, yPos, outWidth, height);
+            ctxToUse.drawImage(texture, offset, 0, width - offset, texture.height, 0, yPos, outWidth, height);
             if (offset > 0) {
-                ctxOut.drawImage(texture, 0, 0, offset, texture.height, outWidth - (offset / width) * outWidth, yPos, (offset / width) * outWidth, height);
+                ctxToUse.drawImage(texture, 0, 0, offset, texture.height, outWidth - (offset / width) * outWidth, yPos, (offset / width) * outWidth, height);
             }
         }
-        function drawWallsCustom(ctxOut, canvasOut) {
-            const numRays = canvasOut.width;
+
+        function drawWalls(ctxToUse, canvasToUse) {
+            // Menos rayos para hardware bajo
+            const numRays = Math.floor(canvasToUse.width * 1); // ej: 60% de pixeles
             const rayAngleStep = FOV / numRays;
-            const maxWallHeight = canvasOut.height * 2;
+            const maxWallHeight = canvasToUse.height * 2;
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
                 const { dist, texture, hitOffset, magnification } = castRay(rayAngle);
                 if (dist <= MAX_DISTANCE_TO_TEXTURE) {
-                    let lineHeight = Math.min(canvasOut.height / dist, maxWallHeight);
+                    let lineHeight = Math.min(canvasToUse.height / dist, maxWallHeight);
                     lineHeight *= magnification || 1.0;
-                    const lineOffset = (canvasOut.height - lineHeight) / 2;
+                    const lineOffset = (canvasToUse.height - lineHeight) / 2;
                     if (texture) {
                         let mipLevel = 0;
                         let targetHeight = Math.abs(lineHeight);
@@ -545,14 +569,14 @@ layout: none
                             mipLevel++;
                         }
                         const textureX = Math.floor(hitOffset * texture[mipLevel].width);
-                        ctxOut.drawImage(
+                        ctxToUse.drawImage(
                             texture[mipLevel], 
                             textureX, 0, 1, texture[mipLevel].height, 
                             i, lineOffset, 1, lineHeight
                         );
                     } else {
-                        ctxOut.fillStyle = 'black';
-                        ctxOut.fillRect(i, lineOffset, 1, lineHeight);
+                        ctxToUse.fillStyle = 'black';
+                        ctxToUse.fillRect(i, lineOffset, 1, lineHeight);
                     }
                 }
             }
@@ -574,10 +598,7 @@ layout: none
             function drawMapCells() {
                 for (let y = 0; y < map.length; y++) {
                     for (let x = 0; x < map[y].length; x++) {
-                        if (map[y][x] === 'L') {
-                            minimapCtx.fillStyle = 'blue';
-                            minimapCtx.fillRect(x * scale, y * scale, scale, scale);
-                        } else if (map[y][x] !== 0) {
+                        if (map[y][x] !== 0) {
                             minimapCtx.fillStyle = 'white';
                             minimapCtx.fillRect(x * scale, y * scale, scale, scale);
                         }
@@ -607,7 +628,7 @@ layout: none
                 minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
                 minimapCtx.beginPath();
                 minimapCtx.moveTo(player.x * scale, player.y * scale);
-                const numRays = 4;
+                const numRays = 2; // Menos rayos en el minimapa
                 const rayAngleStep = FOV / numRays;
                 for (let i = 0; i <= numRays; i++) {
                     const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
@@ -620,19 +641,17 @@ layout: none
             }
         }
 
-        // --- FPS CONTROL: solo dibuja si ha pasado suficiente tiempo desde el último frame ---
+        // --- BAJA FRECUENCIA DE DIBUJO: 30 FPS ---
         function gameLoop(now) {
             update();
-            if (!lastFrameTime || now - lastFrameTime >= 1000 / TARGET_FPS) {
+            if (!lastDrawTime || now - lastDrawTime > 1000 / TARGET_FPS) {
                 draw();
-                lastFrameTime = now;
+                lastDrawTime = now || 0;
             }
-            requestAnimationFrame(ameLoop);
+            requestAnimationFrame(gameLoop);
         }
 
-        // Start the game
         init();
-
     </script>
 </body>
 </html>
