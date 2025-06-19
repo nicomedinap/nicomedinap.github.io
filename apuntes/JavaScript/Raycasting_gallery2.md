@@ -1,6 +1,7 @@
 ---
 layout: none
 ---
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,129 +11,22 @@ layout: none
         body, html { margin: 0; padding: 0; overflow: hidden; font-family: Arial, sans-serif; }
         canvas { display: block; }
         #mapSelect { position: absolute; top: 10px; left: 10px; padding: 5px 10px; background: rgba(0,0,0,0.5); color: white; }
-        #minimap { position: absolute; top: 80px; left: 18%; transform: translateX(-50%); background: rgba(0,0,0,0.5); z-index: 100; }
+        #minimap { position: absolute; top: 80px; left: 15%; transform: translateX(-50%); background: rgba(0,0,0,0.5); z-index: 100; }
         .control-button { position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.5); border: none; border-radius: 30px; font-size: 24px; text-align: center; line-height: 60px; user-select: none; }
         #upButton { bottom: 80px; right: 10px; }
         #downButton { bottom: 10px; right: 10px; }
         #leftButton { bottom: 45px; left: 10px; }
         #rightButton { bottom: 45px; left: 80px; }
-        
-        /* Futuristic Wall Info Display */
-        #wallInfo {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 20, 30, 0.85);
-            color: #0ff;
-            padding: 15px 25px;
-            border-radius: 8px;
-            display: none;
-            max-width: 80%;
-            text-align: left;
-            transition: opacity 0.3s;
-            z-index: 100;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-            font-family: 'Courier New', monospace;
-            min-width: 300px;
-        }
-
-        #wallTitle {
-            margin: 0 0 10px 0;
-            color: #0ff;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-            padding-bottom: 8px;
-        }
-
-        #wallDescription {
-            margin: 10px 0;
-            color: #ccc;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        #scanningOverlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                rgba(0, 255, 255, 0) 0%, 
-                rgba(0, 255, 255, 0.1) 50%, 
-                rgba(0, 255, 255, 0) 100%);
-            background-size: 200% 100%;
-            animation: scanning 2s linear infinite;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-            border-radius: 8px;
-        }
-
-        #scanProgress {
-            height: 3px;
-            background: rgba(0, 255, 255, 0.2);
-            width: 0;
-            margin-bottom: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #scanProgress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 30%;
-            background: #0ff;
-            animation: progressScan 1.5s ease-in-out infinite;
-        }
-
-        #textureAnalysis {
-            margin-top: 15px;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-            padding-top: 10px;
-        }
-
-        .analysisRow {
-            display: flex;
-            justify-content: space-between;
-            margin: 8px 0;
-            font-size: 13px;
-        }
-
-        .paramLabel {
-            color: #0ff;
-            font-weight: bold;
-        }
-
-        .paramValue {
-            color: #fff;
-            text-align: right;
-        }
-
-        @keyframes scanning {
-            0% { background-position: -100% 0; }
-            100% { background-position: 100% 0; }
-        }
-
-        @keyframes progressScan {
-            0% { left: -30%; }
-            100% { left: 100%; }
-        }
-    
-        #toggleLensesBtn { position: absolute; top: 10px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
+        #wallInfo { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 5px; display: none; max-width: 80%; text-align: center; transition: opacity 0.3s; z-index: 100; }
+        #wallTitle { margin: 0 0 5px 0; }
+        #wallDescription { margin: 0; }
         #lensControls { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; color: white; width: 200px; display: none; }
         #lensControls h3 { margin-top: 0; margin-bottom: 10px; }
         #lensControls label { display: block; margin: 5px 0; font-size: 14px; }
         #lensControls input { width: 100%; }
         #lensMoveGroup { margin-top: 10px; display: flex; gap: 3px; flex-wrap: wrap;}
         #lensMoveGroup button { flex: 1 1 45%; margin: 2px; padding: 3px 0; border-radius: 3px; border: 1px solid #333; background: #444; color: #fff;}
+        #toggleLensesBtn { position: absolute; top: 10px; right: 220px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -152,26 +46,8 @@ layout: none
     <button id="rightButton" class="control-button">→</button>
 
     <div id="wallInfo">
-        <div id="scanningOverlay"></div>
         <h3 id="wallTitle"></h3>
-        <div id="scanProgress"></div>
-        <div id="wallData">
-            <p id="wallDescription"></p>
-            <div id="textureAnalysis">
-                <div class="analysisRow">
-                    <span class="paramLabel">COMPOSITION:</span>
-                    <span class="paramValue" id="compositionValue">ANALYZING...</span>
-                </div>
-                <div class="analysisRow">
-                    <span class="paramLabel">DENSITY:</span>
-                    <span class="paramValue" id="densityValue">ANALYZING...</span>
-                </div>
-                <div class="analysisRow">
-                    <span class="paramLabel">REFLECTIVITY:</span>
-                    <span class="paramValue" id="reflectivityValue">ANALYZING...</span>
-                </div>
-            </div>
-        </div>
+        <p id="wallDescription"></p>
     </div>
 
     <div id="lensControls">
@@ -217,10 +93,6 @@ layout: none
         const lensRadiusInput = document.getElementById('lensRadius');
         const lensLabel = document.getElementById('lensLabel');
         const toggleLensesBtn = document.getElementById('toggleLensesBtn');
-        const scanningOverlay = document.getElementById('scanningOverlay');
-        const compositionValue = document.getElementById('compositionValue');
-        const densityValue = document.getElementById('densityValue');
-        const reflectivityValue = document.getElementById('reflectivityValue');
 
         // RENDER CANVAS INTERNO
         let renderCanvas = document.createElement('canvas');
@@ -312,13 +184,7 @@ layout: none
                 const floorTextureUrl = customFloorTexture || (textureDatabase && textureDatabase.floorTexture);
 
                 Object.entries(roomTextures).forEach(([key, texture]) => {
-                    wallInfoData[key] = { 
-                        title: texture.title, 
-                        description: texture.description,
-                        composition: texture.composition || "UNKNOWN",
-                        density: texture.density || "UNKNOWN",
-                        reflectivity: texture.reflectivity || "UNKNOWN"
-                    };
+                    wallInfoData[key] = { title: texture.title, description: texture.description };
                 });
 
                 await Promise.all([
@@ -556,33 +422,12 @@ layout: none
             }
             if (closestWall && minDistance < WALL_INFO_DISTANCE) {
                 const info = wallInfoData[closestWall];
-                wallTitle.textContent = info.title.toUpperCase();
+                wallTitle.textContent = info.title;
                 wallDescription.textContent = info.description;
-                
-                // Show scanning animation
-                scanningOverlay.style.opacity = '1';
-                
-                // Reset analysis values
-                compositionValue.textContent = 'ANALYZING...';
-                densityValue.textContent = 'ANALYZING...';
-                reflectivityValue.textContent = 'ANALYZING...';
-                
-                // Show wall info with animation
                 wallInfo.style.display = 'block';
-                wallInfo.style.opacity = '1';
-                
-                // Simulate analysis after delay
-                setTimeout(() => {
-                    scanningOverlay.style.opacity = '0';
-                    
-                    // Set actual analysis values from texture data
-                    compositionValue.textContent = info.composition || "UNKNOWN";
-                    densityValue.textContent = info.density || "UNKNOWN";
-                    reflectivityValue.textContent = info.reflectivity || "UNKNOWN";
-                }, 1500);
-                
+                wallInfo.style.opacity = 1;
             } else {
-                wallInfo.style.opacity = '0';
+                wallInfo.style.opacity = 0;
                 setTimeout(() => {
                     if (wallInfo.style.opacity === '0') {
                         wallInfo.style.display = 'none';
