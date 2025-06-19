@@ -1,7 +1,6 @@
 ---
 layout: none
 ---
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,13 +19,13 @@ layout: none
         #wallInfo { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 5px; display: none; max-width: 80%; text-align: center; transition: opacity 0.3s; z-index: 100; }
         #wallTitle { margin: 0 0 5px 0; }
         #wallDescription { margin: 0; }
+        #toggleLensesBtn { position: absolute; top: 10px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
         #lensControls { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; color: white; width: 200px; display: none; }
         #lensControls h3 { margin-top: 0; margin-bottom: 10px; }
         #lensControls label { display: block; margin: 5px 0; font-size: 14px; }
         #lensControls input { width: 100%; }
         #lensMoveGroup { margin-top: 10px; display: flex; gap: 3px; flex-wrap: wrap;}
         #lensMoveGroup button { flex: 1 1 45%; margin: 2px; padding: 3px 0; border-radius: 3px; border: 1px solid #333; background: #444; color: #fff;}
-        #toggleLensesBtn { position: absolute; top: 10px; right: 220px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
