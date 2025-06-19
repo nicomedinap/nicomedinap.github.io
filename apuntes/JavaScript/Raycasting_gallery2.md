@@ -66,15 +66,20 @@ layout: none
         const MINIMAP_MAX_SIZE = 100;
         const WALL_INFO_DISTANCE = 1.5;
         const MAX_DISTANCE_TO_TEXTURE = 50;
-        const WALL_MARGIN = 0.75; // Distancia mínima permitida a la muralla
+        const WALL_MARGIN = 0.75;
+        const STEPSIZE = 0.05;
 
         // --- Render scale setup ---
-        const RENDER_SCALE = 0.7;
+        const RENDER_SCALE = 0.8;
 
         // Internal render canvas for low-res rendering
         let renderCanvas = document.createElement('canvas');
         let renderCtx = renderCanvas.getContext('2d', { alpha: false, willReadFrequently: false });
         renderCtx.imageSmoothingEnabled = false;
+
+        // FPS control
+        const TARGET_FPS = 30; // Cambia aquí el FPS deseado
+        let lastFrameTime = 0;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
@@ -136,7 +141,6 @@ layout: none
         function updateRaycastingParams() {
             if (!map || !map.length) return;
             const maxMapDist = Math.sqrt(map[0].length ** 2 + map.length ** 2);
-            STEPSIZE = Math.min(0.04, 1 / Math.max(map[0].length, map.length));
             MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
         }
 
@@ -148,13 +152,12 @@ layout: none
 
             await loadMap(mapSelect.value);
             await loadTexturesAndStart();
-            gameLoop();
+            requestAnimationFrame(gameLoop); // Cambiado aquí
         }
 
         function setCanvasSize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            // Also set internal low-res render canvas
             renderCanvas.width = Math.floor(canvas.width * RENDER_SCALE);
             renderCanvas.height = Math.floor(canvas.height * RENDER_SCALE);
         }
@@ -167,10 +170,7 @@ layout: none
 
         async function loadTexturesAndStart() {
             try {
-                // Si el mapa tiene texturas propias, úsalas, si no, usa el JSON global
                 let textureDatabase = null;
-
-                // Si faltan texturas propias, carga el JSON global como fallback
                 if (!customRoomTextures || !customSkyTexture || !customFloorTexture) {
                     const textureResponse = await fetch('https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/interactive_textures.json');
                     textureDatabase = await textureResponse.json();
@@ -503,24 +503,15 @@ layout: none
             }
         }
 
-        // --- MODIFICADO: RENDER EN BAJA RESOLUCIÓN Y UPSCALE AL CANVAS FINAL ---
         function draw() {
-            // 1. Dibuja todo en renderCanvas (baja res)
             renderCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
-
-            // Adaptar drawSkyAndFloor y drawWalls para renderCanvas
             drawSkyAndFloorCustom(renderCtx, renderCanvas);
             drawWallsCustom(renderCtx, renderCanvas);
-
-            // 2. Escala la imagen resultante al canvas principal
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(renderCanvas, 0, 0, canvas.width, canvas.height);
-
-            // 3. Dibuja el minimapa encima
             drawMinimap();
         }
 
-        // Modificación: funciones draw* para usar renderCanvas
         function drawSkyAndFloorCustom(ctxOut, canvasOut) {
             if (skyTexture) drawTiledTextureCustom(ctxOut, skyTexture, player.angle * 0.1, 0, canvasOut.height / 2, canvasOut.width);
             if (floorTexture) drawTiledTextureCustom(ctxOut, floorTexture, player.angle * 0.3, canvasOut.height / 2, canvasOut.height / 2, canvasOut.width);
@@ -629,10 +620,14 @@ layout: none
             }
         }
 
-        function gameLoop() {
+        // --- FPS CONTROL: solo dibuja si ha pasado suficiente tiempo desde el último frame ---
+        function gameLoop(now) {
             update();
-            draw();
-            requestAnimationFrame(gameLoop);
+            if (!lastFrameTime || now - lastFrameTime >= 1000 / TARGET_FPS) {
+                draw();
+                lastFrameTime = now;
+            }
+            requestAnimationFrame(ameLoop);
         }
 
         // Start the game
@@ -640,5 +635,4 @@ layout: none
 
     </script>
 </body>
-</html>
 </html>
