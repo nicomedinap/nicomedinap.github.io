@@ -39,7 +39,7 @@ var mapData = {
     "4": {
       "title": "NGC 3132",
       "description": "Nebulosa planetaria",
-      "url": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/ARP142/120.jpg"
+      "url": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/JWST/ARP107/021.jpg"
     },
     "5": {
       "title": "NGC 3132",
