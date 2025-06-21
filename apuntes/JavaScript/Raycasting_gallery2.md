@@ -6,6 +6,39 @@ layout: none
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería virtual astronómica</title>
+    <!-- Configuración MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                packages: {'[+]': ['physics']}
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/physics']
+            },
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                    console.log('MathJax está listo');
+                    // Procesar cualquier contenido pendiente
+                    if (window.mathJaxQueue && window.mathJaxQueue.length > 0) {
+                        MathJax.typesetPromise(window.mathJaxQueue);
+                        window.mathJaxQueue = [];
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <style>
         body, html { margin: 0; padding: 0; overflow: hidden; font-family: Arial, sans-serif; }
         canvas { display: block; }
@@ -16,9 +49,76 @@ layout: none
         #downButton { bottom: 10px; right: 10px; }
         #leftButton { bottom: 45px; left: 10px; }
         #rightButton { bottom: 45px; left: 80px; }
-        #wallInfo { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 5px; display: none; max-width: 80%; text-align: center; transition: opacity 0.3s; z-index: 100; }
-        #wallTitle { margin: 0 0 5px 0; }
-        #wallDescription { margin: 0; }
+        
+        /* Estilo mejorado para wallInfo con soporte LaTeX */
+        #wallInfo {
+            position: absolute;
+            bottom: 150px; /* Más espacio para botones móviles */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 20, 30, 0.85);
+            color: #0ff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: none;
+            max-width: 80%;
+            text-align: left;
+            transition: opacity 0.3s;
+            z-index: 100;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            font-family: 'Courier New', monospace;
+            min-width: 300px;
+        }
+
+        /* Estilos para móviles */
+        @media (max-width: 768px) {
+            #wallInfo {
+                bottom: 180px;
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #wallInfo {
+                bottom: 200px;
+                font-size: 0.9em;
+            }
+            .control-button {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                line-height: 50px;
+            }
+        }
+
+        #wallTitle {
+            margin: 0 0 10px 0;
+            color: #0ff;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        #wallDescription {
+            margin: 10px 0;
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Estilos para ecuaciones MathJax */
+        .MathJax {
+            font-size: 0.9em !important;
+            color: #0ff !important;
+            background: rgba(0, 50, 70, 0.3);
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block !important;
+        }
+        
         #toggleLensesBtn { position: absolute; top: 10px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
         #lensControls { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; color: white; width: 200px; display: none; }
         #lensControls h3 { margin-top: 0; margin-bottom: 10px; }
@@ -46,7 +146,7 @@ layout: none
 
     <div id="wallInfo">
         <h3 id="wallTitle"></h3>
-        <p id="wallDescription"></p>
+        <p id="wallDescription" class="tex2jax_process"></p>
     </div>
 
     <div id="lensControls">
@@ -58,21 +158,37 @@ layout: none
     <button id="toggleLensesBtn">Desactivar lentes</button>
 
     <script>
-        // --- OPTIMIZACIONES PARA HARDWARE BAJO ---
+        // Variable global para cola de elementos a renderizar
+        window.mathJaxQueue = [];
+        
+        // Función para renderizar LaTeX de forma segura
+        function renderLaTeX(element, content) {
+            element.innerHTML = content;
+            if (typeof MathJax !== 'undefined' && MathJax.typeset) {
+                MathJax.typesetPromise([element]).catch(err => {
+                    console.log('Error al renderizar MathJax:', err);
+                    // Reintentar después de un breve retraso
+                    setTimeout(() => MathJax.typesetPromise([element]), 500);
+                });
+            } else {
+                // Si MathJax no está listo, agregar a la cola
+                window.mathJaxQueue.push(element);
+            }
+        }
 
+        // --- OPTIMIZACIONES PARA HARDWARE BAJO ---
         // Constants
         const MOVEMENT_SPEED = 0.06;
         const ROTATION_SPEED = 0.025;
         const FOV = Math.PI/3;
         const MAX_TEXTURE_SIZE = 1024; 
-        const MINIMAP_MAX_SIZE = 140;   // Menor tamaño para menos draw calls
+        const MINIMAP_MAX_SIZE = 140;
         const WALL_INFO_DISTANCE = 1.5;
         const MAX_DISTANCE_TO_TEXTURE = 30; 
         const WALL_MARGIN = 0.85;
-        const RENDER_SCALE = 0.8
+        const RENDER_SCALE = 0.8;
         const TARGET_FPS = 20;
-        const STEPSIZE = 0.05 //Math.min(0.02, 1 / Math.max(map[0].length, map.length));
-
+        const STEPSIZE = 0.05;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
@@ -109,9 +225,17 @@ layout: none
         let customRoomTextures = null;
         let customSkyTexture = null;
         let customFloorTexture = null;
+        let sprites = [];
 
         let currentLensIndex = -1;
         let lensesActive = true;
+
+        async function loadSprites() {
+          for (const s of sprites) {
+            s.img = await loadImage(s.imageUrl);
+          }
+        }       
+
 
         // BAJA FRECUENCIA DE ACTUALIZACION ---
         let lastDrawTime = 0;
@@ -153,13 +277,13 @@ layout: none
 
             await loadMap(mapSelect.value);
             await loadTexturesAndStart();
+            await loadSprites();
             gameLoop();
         }
 
         function setCanvasSize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            // --- Render interno ---
             renderCanvas.width = Math.floor(canvas.width * RENDER_SCALE);
             renderCanvas.height = Math.floor(canvas.height * RENDER_SCALE);
         }
@@ -183,7 +307,13 @@ layout: none
                 const floorTextureUrl = customFloorTexture || (textureDatabase && textureDatabase.floorTexture);
 
                 Object.entries(roomTextures).forEach(([key, texture]) => {
-                    wallInfoData[key] = { title: texture.title, description: texture.description };
+                    wallInfoData[key] = { 
+                        title: texture.title, 
+                        description: texture.description || "",
+                        composition: texture.composition || "$\\text{COMPOSICIÓN DESCONOCIDA}$",
+                        density: texture.density || "$\\rho = \\text{?}$",
+                        reflectivity: texture.reflectivity || "$R = \\frac{I_r}{I_i}$"
+                    };
                 });
 
                 await Promise.all([
@@ -204,7 +334,6 @@ layout: none
             const promises = Object.entries(textureData).map(async ([key, texture]) => {
                 if (texture.url) {
                     const img = await loadImage(texture.url);
-                    // --- Reduce dimensiones si es muy grande ---
                     if (img.width > MAX_TEXTURE_SIZE || img.height > MAX_TEXTURE_SIZE) {
                         const scale = Math.min(MAX_TEXTURE_SIZE / img.width, MAX_TEXTURE_SIZE / img.height, 1);
                         const tempCanvas = document.createElement('canvas');
@@ -235,7 +364,6 @@ layout: none
             let width = image.width / 2;
             let height = image.height / 2;
             let mipCount = 0;
-            // --- Genera solo 3 mipmaps máximo para ahorrar RAM ---
             while (width >= 1 && height >= 1 && mipCount < 2) {
                 const canvas = document.createElement('canvas');
                 canvas.width = Math.floor(width);
@@ -271,11 +399,13 @@ layout: none
             leftButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
             rightButton.addEventListener('touchstart', () => setPlayerMovement(undefined, ROTATION_SPEED));
             rightButton.addEventListener('touchend', () => setPlayerMovement(undefined, 0));
+            
             mapSelect.addEventListener('change', async (event) => {
                 await loadMap(event.target.value);
                 resetPlayerPosition();
                 wallInfo.style.display = 'none';
                 await loadTexturesAndStart();
+                await loadSprites();
             });
 
             setupLensEventListeners();
@@ -323,6 +453,14 @@ layout: none
                 if (mapData.roomTextures) customRoomTextures = mapData.roomTextures;
                 if (mapData.skyTexture) customSkyTexture = mapData.skyTexture;
                 if (mapData.floorTexture) customFloorTexture = mapData.floorTexture;
+
+                // --------- NUEVO: sprites del mapa ---------
+                sprites = [];
+                if (Array.isArray(mapData.sprites)) {
+                    // Copia profunda para no "mutar" el mapa original
+                    sprites = mapData.sprites.map(s => ({...s}));
+                }
+
                 updateLensControlsVisibility();
                 updateRaycastingParams();
                 updateLensesButton();
@@ -379,7 +517,6 @@ layout: none
                     if (ny >= 0 && ny < map.length && nx >= 0 && nx < map[0].length) {
                         const cell = map[ny][nx];
                         if (cell !== 0) {
-                            // Calcula la distancia desde el centro del jugador al centro de la celda de pared
                             const dist = Math.sqrt(
                                 Math.pow(nx + 0.5 - x, 2) + 
                                 Math.pow(ny + 0.5 - y, 2)
@@ -392,15 +529,14 @@ layout: none
             return true;
         }
 
-
         function checkNearbyWalls() {
-            // Solo 2 direcciones para acelerar
             const directions = [
                 { x: 0, y: -1 }, { x: 1, y: 0 },
                 { x: 0, y: 1 },  { x: -1, y: 0 }
-                ];
+            ];
             let closestWall = null;
             let minDistance = Infinity;
+            
             for (const dir of directions) {
                 const checkX = Math.floor(player.x + dir.x);
                 const checkY = Math.floor(player.y + dir.y);
@@ -419,10 +555,14 @@ layout: none
                     }
                 }
             }
+            
             if (closestWall && minDistance < WALL_INFO_DISTANCE) {
                 const info = wallInfoData[closestWall];
                 wallTitle.textContent = info.title;
-                wallDescription.textContent = info.description;
+                
+                // Usar renderLaTeX en lugar de textContent/innerHTML directo
+                renderLaTeX(wallDescription, info.description || "");
+                
                 wallInfo.style.display = 'block';
                 wallInfo.style.opacity = 1;
             } else {
@@ -444,9 +584,8 @@ layout: none
             const originalAngle = angle;
             const maxIterations = MAX_ITERATIONS;
             let iterations = 0;
-            let magnification = 1.0
+            let magnification = 1.0;
 
-            // Early out si fuera de mapa
             while (iterations++ < maxIterations) {
                 for (const lens of lenses) {
                     if (!lens.visible) continue;
@@ -517,13 +656,11 @@ layout: none
             }
         }
 
-        // --- RENDER EN BAJA RESOLUCION Y HACER UPSCALE ---
         function draw() {
-            // Limpiar canvas interno
             renderCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
             drawSkyAndFloor(renderCtx, renderCanvas);
             drawWalls(renderCtx, renderCanvas);
-            // Upscale
+            drawSprites(renderCtx, renderCanvas); // <-- Dibuja el Hubble
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(renderCanvas, 0, 0, canvas.width, canvas.height);
             drawMinimap();
@@ -544,7 +681,6 @@ layout: none
         }
 
         function drawWalls(ctxToUse, canvasToUse) {
-            // Menos rayos para hardware bajo
             const numRays = Math.floor(canvasToUse.width * 1); 
             const rayAngleStep = FOV / numRays;
             const maxWallHeight = canvasToUse.height * 2;
@@ -578,6 +714,61 @@ layout: none
             }
         }
 
+
+        // ----------- DIBUJAR SPRITES EN 3D ------------
+        function drawSprites(ctxOut, canvasOut) {
+        for (const s of sprites) {
+            if (!s.img) continue;
+
+            const dx = s.x - player.x;
+            const dy = s.y - player.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 0.2 || dist > 30) continue;
+
+            let spriteAngle = Math.atan2(dy, dx) - player.angle;
+            while (spriteAngle < -Math.PI) spriteAngle += 2 * Math.PI;
+            while (spriteAngle > Math.PI) spriteAngle -= 2 * Math.PI;
+
+            if (Math.abs(spriteAngle) < FOV / 2 + 0.2) {
+            const screenX = canvasOut.width / 2 + Math.tan(spriteAngle) * (canvasOut.width / 2) / Math.tan(FOV/2);
+            const spriteSize = Math.min(canvasOut.height / dist, canvasOut.height * 0.45);
+            const yBase = (canvasOut.height - spriteSize) / 2;
+            const imgWidth = s.img.width;
+            const imgHeight = s.img.height;
+
+            // Para cada columna vertical del sprite en pantalla
+            for (let i = 0; i < spriteSize; i++) {
+                // X en pantalla
+                const colScreenX = screenX - spriteSize / 2 + i;
+                const relAngle = Math.atan2(i - spriteSize / 2, canvasOut.width / (2 * Math.tan(FOV / 2)));
+                const rayAngle = player.angle + spriteAngle + relAngle * 0.9; // 0.9 para ajustar forma
+
+                // Distancia al sprite en esta columna
+                const spriteDistAtCol = dist;
+                // Lanza rayo
+                const ray = castRay(rayAngle);
+
+                // Si la pared está antes que el sprite, columna tapada
+                if (ray.dist < spriteDistAtCol - 0.05) continue;
+
+                // Calcula qué columna del sprite corresponde
+                const spriteCol = Math.floor(i * imgWidth / spriteSize);
+
+                ctxOut.save();
+                // Si quieres opacidad suave según cercanía a la pared:
+                // let alpha = 1.0 - Math.max(0, Math.min(1, (spriteDistAtCol - ray.dist)/0.2));
+                // ctxOut.globalAlpha = Math.max(0.25, alpha);
+                ctxOut.globalAlpha = 0.98;
+                ctxOut.drawImage(s.img,
+                spriteCol, 0, 1, imgHeight, // fuente
+                colScreenX, yBase, 1, spriteSize // destino
+                );
+                ctxOut.restore();
+            }
+            }
+        }
+        }
+
         function drawMinimap() {
             if (!map.length) return;
             const mapWidth = map[0].length;
@@ -590,6 +781,17 @@ layout: none
             drawLensEffects();
             drawPlayer();
             drawPlayerFOV();
+
+
+            for (const s of sprites) {
+                minimapCtx.save();
+                minimapCtx.fillStyle = "#0ff";
+                minimapCtx.beginPath();
+                minimapCtx.arc(s.x * scale, s.y * scale, scale * 0.45, 0, Math.PI * 2);
+                minimapCtx.fill();
+                minimapCtx.restore();
+            }
+
 
             function drawMapCells() {
                 for (let y = 0; y < map.length; y++) {
@@ -624,7 +826,7 @@ layout: none
                 minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
                 minimapCtx.beginPath();
                 minimapCtx.moveTo(player.x * scale, player.y * scale);
-                const numRays = 2; // Menos rayos en el minimapa
+                const numRays = 2;
                 const rayAngleStep = FOV / numRays;
                 for (let i = 0; i <= numRays; i++) {
                     const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
@@ -637,7 +839,6 @@ layout: none
             }
         }
 
-        // --- BAJA FRECUENCIA DE DIBUJO: 30 FPS ---
         function gameLoop(now) {
             update();
             if (!lastDrawTime || now - lastDrawTime > 1000 / TARGET_FPS) {
