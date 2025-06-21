@@ -25,6 +25,12 @@ var mapData = {
     { x: 2.5, y: 5.5, strength: 0.013, radius: 11.33, visible: true },
     { x: 2.5, y: 15.5, strength: 0.004, radius: 15, visible: true }
   ],
+    sprites: [
+    {type: "hubble",x: 2.5, y: 5.5, img: null,
+      imageUrl: "https://www.pngplay.com/wp-content/uploads/13/Black-Hole-PNG-Background.png"},
+    {type: "hubble",x: 2.5, y: 15.5, img: null,
+      imageUrl: "https://www.pngplay.com/wp-content/uploads/13/Black-Hole-PNG-Background.png"}
+  ],
   roomTextures: {
     "2": {
       "title": "NGC 3132",
