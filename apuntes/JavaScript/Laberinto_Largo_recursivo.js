@@ -12,7 +12,7 @@ var mapData = {
   lenses: [
     { x: 4, y: 3, strength: 0.05, radius: 1.5, visible: true }
   ],
-  const sprites = [
+  sprites = [
     {type: "hubble",x: 4, y: 3, img: null,
       imageUrl: "https://www.pngplay.com/wp-content/uploads/13/Black-Hole-PNG-Background.png"}
   ]
