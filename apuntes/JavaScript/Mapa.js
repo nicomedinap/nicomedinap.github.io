@@ -2,7 +2,7 @@
 // 0: espacio vacío, 1: pared/sala principal, 2-5: salas temáticas de arte
 // L: zona de lente gravitatoria (efecto especial)
 // El jugador comienza en (2.5, 2.5)
-const mapData = {
+var mapData = {
   map: [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1],
@@ -59,6 +59,6 @@ const mapData = {
       y: 2.5,
       imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3d/HST-SM4.jpeg",
       description: "Telescopio Hubble: pionero de la observación astronómica orbital.",
-    },
-  ],
+    }
+  ]
 };
