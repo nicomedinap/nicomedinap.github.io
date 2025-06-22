@@ -17,7 +17,7 @@ var mapData = {
     { x: 15.5, y: 8.5, radius: 1.2, strength: 0.07, visible: true }
   ],
   sprites: [
-    {type: "hubble",x: 5.5, y: 2.5, img: null,
+    {type: "hubble",x: 3.5, y: 2.5, img: null,
       imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3d/HST-SM4.jpeg"}
   ],
   roomTextures: {
