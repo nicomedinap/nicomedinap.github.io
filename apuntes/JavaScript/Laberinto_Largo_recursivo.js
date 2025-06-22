@@ -15,7 +15,7 @@ var mapData = {
   sprites: [
     {type: "hubble",x: 4, y: 3, img: null,
       imageUrl: "https://www.pngplay.com/wp-content/uploads/13/Black-Hole-PNG-Background.png"},
-    {type: "asd", x:8 ,y:8, img: null,
+    {type: "asd", x:6 ,y:6, img: null,
       imageUrl: "https://banner2.cleanpng.com/lnd/20250109/yc/b0b17b316171ec00e568657c7a41ee.webp"}  
   ]
 };
