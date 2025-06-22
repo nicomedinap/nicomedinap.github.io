@@ -31,7 +31,7 @@ var mapData = {
     {type: "hubble",x: 2.5, y: 15.5, img: null,
       imageUrl: "https://www.pngplay.com/wp-content/uploads/13/Black-Hole-PNG-Background.png"}
   ],
-  roomTextures: {
+  "roomTextures": {
     "2": {
       "title": "NGC 3132",
       "description": "Material con densidad $\\rho = 2.33\\ g/cm^3$",
