@@ -1,7 +1,3 @@
-// Mapa de museo virtual astronómico 12 x 21
-// 0: espacio vacío, 1: pared/sala principal, 2-5: salas temáticas de arte
-// L: zona de lente gravitatoria (efecto especial)
-// El jugador comienza en (2.5, 2.5)
 var mapData = {
   map: [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -19,21 +15,13 @@ var mapData = {
   ],
   lenses: [
     { x: 9.5, y: 3.5, radius: 2, strength: 0.04, visible: true },
-    { x: 15.5, y: 8.5, radius: 1.2, strength: 0.07, visible: true },
+    { x: 15.5, y: 8.5, radius: 1.2, strength: 0.07, visible: true }
   ],
   sprites: [
-    {
-      x: 5.5,
-      y: 2.5,
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3d/HST-SM4.jpeg",
-      description: "Telescopio Hubble: pionero de la observación astronómica orbital.",
-    }
+    {type: "hubble",x: 5.5, y: 2.5, img: null,
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3d/HST-SM4.jpeg"}
+  ],
   roomTextures: {
-    "1": {
-      "title": "Pasillo Principal",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/ESO_-_Milky_Way.jpg",
-      "description": "Pasillo de ingreso, con vistas panorámicas de la Vía Láctea y paneles introductorios a la astronomía.",
-    },
     "2": {
       "title": "Sala de Nebulosas",
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/NGC_7293_%28The_Helix_Nebula%29.jpg",
