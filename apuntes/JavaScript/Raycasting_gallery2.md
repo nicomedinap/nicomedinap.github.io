@@ -454,7 +454,7 @@ layout: none
                 if (mapData.skyTexture) customSkyTexture = mapData.skyTexture;
                 if (mapData.floorTexture) customFloorTexture = mapData.floorTexture;
 
-                // --------- NUEVO: sprites del mapa ---------
+                // --------- sprites del mapa ---------
                 sprites = [];
                 if (Array.isArray(mapData.sprites)) {
                     // Copia profunda para no "mutar" el mapa original
@@ -470,8 +470,8 @@ layout: none
         }
 
         function resetPlayerPosition() {
-            player.x = 2.5;
-            player.y = 2.5;
+            player.x = 1.5;
+            player.y = 1.5;
             player.angle = 1;
             player.speed = 0;
             player.turnSpeed = 0;
@@ -714,59 +714,63 @@ layout: none
             }
         }
 
-
         // ----------- DIBUJAR SPRITES EN 3D ------------
         function drawSprites(ctxOut, canvasOut) {
-        for (const s of sprites) {
-            if (!s.img) continue;
+            for (const s of sprites) {
+                if (!s.img) continue;
 
-            const dx = s.x - player.x;
-            const dy = s.y - player.y;
-            const dist = Math.sqrt(dx*dx + dy*dy);
-            if (dist < 0.2 || dist > 30) continue;
+                const dx = s.x - player.x;
+                const dy = s.y - player.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                
+                // Si el sprite está demasiado cerca o demasiado lejos, no lo dibujamos
+                if (dist < 0.2 || dist > 30) continue;
 
-            let spriteAngle = Math.atan2(dy, dx) - player.angle;
-            while (spriteAngle < -Math.PI) spriteAngle += 2 * Math.PI;
-            while (spriteAngle > Math.PI) spriteAngle -= 2 * Math.PI;
+                let spriteAngle = Math.atan2(dy, dx) - player.angle;
+                while (spriteAngle < -Math.PI) spriteAngle += 2 * Math.PI;
+                while (spriteAngle > Math.PI) spriteAngle -= 2 * Math.PI;
 
-            if (Math.abs(spriteAngle) < FOV / 2 + 0.2) {
-            const screenX = canvasOut.width / 2 + Math.tan(spriteAngle) * (canvasOut.width / 2) / Math.tan(FOV/2);
-            const spriteSize = Math.min(canvasOut.height / dist, canvasOut.height * 0.45);
-            const yBase = (canvasOut.height - spriteSize) / 2;
-            const imgWidth = s.img.width;
-            const imgHeight = s.img.height;
+                if (Math.abs(spriteAngle) < FOV / 2 + 0.2) {
+                    const screenX = canvasOut.width / 2 + Math.tan(spriteAngle) * (canvasOut.width / 2) / Math.tan(FOV/2);
+                    const spriteSize = Math.min(canvasOut.height / dist, canvasOut.height * 0.45);
+                    const yBase = (canvasOut.height - spriteSize) / 2;
+                    const imgWidth = s.img.width;
+                    const imgHeight = s.img.height;
 
-            // Para cada columna vertical del sprite en pantalla
-            for (let i = 0; i < spriteSize; i++) {
-                // X en pantalla
-                const colScreenX = screenX - spriteSize / 2 + i;
-                const relAngle = Math.atan2(i - spriteSize / 2, canvasOut.width / (2 * Math.tan(FOV / 2)));
-                const rayAngle = player.angle + spriteAngle + relAngle * 0.9; // 0.9 para ajustar forma
+                    // Calcular opacidad basada en la distancia
+                    let opacity = 1.0;
+                    const fadeStartDistance = 1.5; // Distancia a la que comienza a desvanecerse
+                    const fadeEndDistance = 0.5;   // Distancia a la que está completamente transparente
+                    
+                    if (dist < fadeStartDistance) {
+                        // Interpolación lineal para el desvanecimiento
+                        opacity = (dist - fadeEndDistance) / (fadeStartDistance - fadeEndDistance);
+                        opacity = Math.max(0, Math.min(1, opacity)); // Asegurar que esté entre 0 y 1
+                    }
 
-                // Distancia al sprite en esta columna
-                const spriteDistAtCol = dist;
-                // Lanza rayo
-                const ray = castRay(rayAngle);
+                    // Para cada columna vertical del sprite en pantalla
+                    for (let i = 0; i < spriteSize; i++) {
+                        const colScreenX = screenX - spriteSize / 2 + i;
+                        const relAngle = Math.atan2(i - spriteSize / 2, canvasOut.width / (2 * Math.tan(FOV / 2)));
+                        const rayAngle = player.angle + spriteAngle + relAngle * 0.9;
+                        const spriteDistAtCol = dist;
+                        const ray = castRay(rayAngle);
 
-                // Si la pared está antes que el sprite, columna tapada
-                if (ray.dist < spriteDistAtCol - 0.05) continue;
+                        if (ray.dist < spriteDistAtCol - 0.05) continue;
 
-                // Calcula qué columna del sprite corresponde
-                const spriteCol = Math.floor(i * imgWidth / spriteSize);
+                        const spriteCol = Math.floor(i * imgWidth / spriteSize);
 
-                ctxOut.save();
-                // Si quieres opacidad suave según cercanía a la pared:
-                // let alpha = 1.0 - Math.max(0, Math.min(1, (spriteDistAtCol - ray.dist)/0.2));
-                // ctxOut.globalAlpha = Math.max(0.25, alpha);
-                ctxOut.globalAlpha = 0.98;
-                ctxOut.drawImage(s.img,
-                spriteCol, 0, 1, imgHeight, // fuente
-                colScreenX, yBase, 1, spriteSize // destino
-                );
-                ctxOut.restore();
+                        ctxOut.save();
+                        // Aplicar opacidad basada en la distancia
+                        ctxOut.globalAlpha = opacity * 0.98; // Multiplicar por el alpha original (0.98)
+                        ctxOut.drawImage(s.img,
+                            spriteCol, 0, 1, imgHeight,
+                            colScreenX, yBase, 1, spriteSize
+                        );
+                        ctxOut.restore();
+                    }
+                }
             }
-            }
-        }
         }
 
         function drawMinimap() {
