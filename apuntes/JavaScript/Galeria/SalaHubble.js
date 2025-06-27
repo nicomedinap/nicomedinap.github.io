@@ -1,5 +1,5 @@
 var mapData = {
-  map = [
+  map : [
       [1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
       [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
@@ -25,10 +25,6 @@ var mapData = {
       [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
       [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]   
-  ],
-  sprites: [
-    {type: "hubble",x: 4, y: 3, img: null,
-      imageUrl: "https://www.pngplay.com/wp-content/uploads/13/Black-Hole-PNG-Background.png"} 
   ],
   "roomTextures": {
     "2": {
