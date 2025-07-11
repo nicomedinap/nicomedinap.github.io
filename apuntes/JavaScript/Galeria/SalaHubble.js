@@ -45,7 +45,7 @@ var mapData = {
     "5": {
       "title": "Objetos Herbi Haro",
       "description": "Región de formacion estelar",
-      "url": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/HH901/012.jpg"
+      "url": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/HH901/012.jpg",
       "actions": {
         "appUrl": "https://ejemplo.com/app-galaxia-antennae",
         "infoUrl": "https://es.wikipedia.org/wiki/Galaxias_Antennae"
