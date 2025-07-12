@@ -47,7 +47,7 @@ var mapData = {
       "description": "Región de formacion estelar",
       "url": "https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/Galeria/HST/HH901/012.jpg",
       "actions": {
-        "appUrl": "https://ejemplo.com/app-galaxia-antennae",
+        "appUrl": "https://nicomedinap.github.io/decosmos/HH901/HST/19Diciembre2024/HH901.html",
         "infoUrl": "https://es.wikipedia.org/wiki/Galaxias_Antennae"
       }
     },
