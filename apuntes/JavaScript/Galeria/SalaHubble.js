@@ -42,7 +42,7 @@ var mapData = {
 
   sprites: [
     {type: "hubble",x: 6.5, y: 17.5, img: null,
-      imageUrl: "https://www.citypng.com/public/uploads/preview/png-info-information-round-red-icon-symbol-701751694973876xfiprw0edv.png"}
+      imageUrl: "https://icon-library.com/images/information-icon-white/information-icon-white-23.jpg"}
   ],
 
   "roomTextures": {
