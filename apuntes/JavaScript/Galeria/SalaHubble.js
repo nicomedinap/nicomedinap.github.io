@@ -42,7 +42,7 @@ var mapData = {
 
   sprites: [
     {type: "hubble",x: 6.5, y: 17.5, img: null,
-      imageUrl: "https://www.iconsdb.com/icons/preview/green/about-xxl.png"}
+      imageUrl: "https://toppng.com/uploads/preview/free-icons-info-icon-11553443890pmaubjcmu1.png"}
   ],
 
   "roomTextures": {
