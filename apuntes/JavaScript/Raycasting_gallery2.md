@@ -27,7 +27,6 @@ layout: none
                 ready: () => {
                     MathJax.startup.defaultReady();
                     console.log('MathJax está listo');
-                    // Procesar cualquier contenido pendiente
                     if (window.mathJaxQueue && window.mathJaxQueue.length > 0) {
                         MathJax.typesetPromise(window.mathJaxQueue);
                         window.mathJaxQueue = [];
@@ -36,7 +35,7 @@ layout: none
             }
         };
     </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- Compatibilidad con navegadores viejos -->
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
@@ -50,10 +49,9 @@ layout: none
         #leftButton { bottom: 45px; left: 10px; }
         #rightButton { bottom: 45px; left: 80px; }
         
-        /* Estilo mejorado para wallInfo con soporte LaTeX */
         #wallInfo {
             position: absolute;
-            bottom: 150px; /* Más espacio para botones móviles */
+            bottom: 150px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 20, 30, 0.85);
@@ -70,15 +68,12 @@ layout: none
             font-family: 'Courier New', monospace;
             min-width: 300px;
         }
-
-        /* Estilos para móviles */
         @media (max-width: 768px) {
             #wallInfo {
                 bottom: 180px;
                 max-width: 90%;
             }
         }
-
         @media (max-width: 480px) {
             #wallInfo {
                 bottom: 200px;
@@ -91,7 +86,6 @@ layout: none
                 line-height: 50px;
             }
         }
-
         #wallTitle {
             margin: 0 0 10px 0;
             color: #0ff;
@@ -101,15 +95,12 @@ layout: none
             border-bottom: 1px solid rgba(0, 255, 255, 0.3);
             padding-bottom: 8px;
         }
-
         #wallDescription {
             margin: 10px 0;
             color: #ccc;
             font-size: 14px;
             line-height: 1.4;
         }
-
-        /* Estilos para ecuaciones MathJax */
         .MathJax {
             font-size: 0.9em !important;
             color: #0ff !important;
@@ -126,6 +117,50 @@ layout: none
         #lensControls input { width: 100%; }
         #lensMoveGroup { margin-top: 10px; display: flex; gap: 3px; flex-wrap: wrap;}
         #lensMoveGroup button { flex: 1 1 45%; margin: 2px; padding: 3px 0; border-radius: 3px; border: 1px solid #333; background: #444; color: #fff;}
+        
+        #textureActionsContainer {
+            position: absolute;
+            left: 50%;
+            bottom: 60px;
+            transform: translateX(-50%);
+            z-index: 120;
+            display: none;
+            background: rgba(0, 20, 30, 0.93);
+            border-radius: 10px;
+            padding: 10px 20px;
+            box-shadow: 0 0 16px 0 rgba(0,255,255,0.17);
+            border: 1px solid rgba(0,255,255,0.25);
+        }
+        .texture-action-btn {
+            margin: 6px 12px 6px 0;
+            padding: 7px 16px;
+            border-radius: 6px;
+            border: 1px solid #0ff;
+            background: #012b36;
+            color: #0ff;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+        }
+        .texture-action-btn:hover {
+            background: #0ff;
+            color: #012b36;
+        }
+        @media (max-width: 768px) {
+            #textureActionsContainer {
+                bottom: 85px;
+                padding: 7px 8px;
+            }
+            .texture-action-btn {
+                font-size: 13px;
+                padding: 5px 9px;
+            }
+        }
+        /* Modal enriquecido */
+        #enrichedAppModal { position:fixed;top:0;left:0;width:100vw;height:100vh;display:none;z-index:9999;background:rgba(0,0,0,0.95);align-items:center;justify-content:center; }
+        #enrichedAppModal iframe { width:90vw; height:90vh; border:none; border-radius:12px; box-shadow:0 0 20px #000; background:#111;}
+        #enrichedAppModal button.close-modal {position:absolute;top:15px;right:25px;z-index:10001;font-size:2em;color:#fff;background:none;border:none;cursor:pointer;}
     </style>
 </head>
 <body>
@@ -134,11 +169,11 @@ layout: none
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/CalleLarga.js">Mapa 1</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Mapa.js">Mapa 2</option>
         <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Laberinto_Largo.js">Laberinto</option>
+        <option value="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/master/apuntes/JavaScript/Galeria/SalaHubble.js">Sala Hubble</option>
     </select>
 
     <canvas id="gameCanvas"></canvas>
     <div id="minimap"><canvas id="minimapCanvas"></canvas></div>
-
     <button id="upButton" class="control-button">↑</button>
     <button id="downButton" class="control-button">↓</button>
     <button id="leftButton" class="control-button">←</button>
@@ -149,6 +184,12 @@ layout: none
         <p id="wallDescription" class="tex2jax_process"></p>
     </div>
 
+    <div id="textureActionsContainer">
+        <button class="texture-action-btn" id="btnAbrirApp">Abrir App</button>
+        <button class="texture-action-btn" id="btnVerInfo">Ver info</button>
+        <button class="texture-action-btn" id="btnCerrarAcciones">Cerrar</button>
+    </div>
+
     <div id="lensControls">
         <h3>Lente gravitatoria</h3>
         <p id="lensLabel" style="font-size:13px;margin-bottom:4px;"></p>
@@ -157,43 +198,44 @@ layout: none
     </div>
     <button id="toggleLensesBtn">Desactivar lentes</button>
 
+    <!-- Modal enriquecido para las apps -->
+    <div id="enrichedAppModal">
+        <button onclick="closeAppModal()" class="close-modal">×</button>
+        <iframe id="enrichedAppIframe" src="" allowfullscreen></iframe>
+    </div>
+
     <script>
         // Variable global para cola de elementos a renderizar
         window.mathJaxQueue = [];
-        
-        // Función para renderizar LaTeX de forma segura
+
         function renderLaTeX(element, content) {
             element.innerHTML = content;
             if (typeof MathJax !== 'undefined' && MathJax.typeset) {
                 MathJax.typesetPromise([element]).catch(err => {
-                    console.log('Error al renderizar MathJax:', err);
-                    // Reintentar después de un breve retraso
                     setTimeout(() => MathJax.typesetPromise([element]), 500);
                 });
             } else {
-                // Si MathJax no está listo, agregar a la cola
                 window.mathJaxQueue.push(element);
             }
         }
 
         // --- OPTIMIZACIONES PARA HARDWARE BAJO ---
-        // Constants
         const MOVEMENT_SPEED = 0.06;
         const ROTATION_SPEED = 0.025;
-        const FOV = Math.PI/3;
-        const MAX_TEXTURE_SIZE = 1024; 
-        const MINIMAP_MAX_SIZE = 140;
+        const FOV = Math.PI/2;
+        const MAX_TEXTURE_SIZE = 1024;
+        const MINIMAP_MAX_SIZE = 190;
         const WALL_INFO_DISTANCE = 1.5;
-        const MAX_DISTANCE_TO_TEXTURE = 30; 
+        const MAX_DISTANCE_TO_TEXTURE = 35;
         const WALL_MARGIN = 0.85;
         const RENDER_SCALE = 0.8;
-        const TARGET_FPS = 20;
+        const TARGET_FPS = 25;
         const STEPSIZE = 0.05;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d', { alpha: false, willReadFrequently: false });
-        ctx.imageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = true;
         const minimapCanvas = document.getElementById('minimapCanvas');
         const minimapCtx = minimapCanvas.getContext('2d');
         const upButton = document.getElementById('upButton');
@@ -208,11 +250,19 @@ layout: none
         const lensRadiusInput = document.getElementById('lensRadius');
         const lensLabel = document.getElementById('lensLabel');
         const toggleLensesBtn = document.getElementById('toggleLensesBtn');
+        const textureActionsContainer = document.getElementById('textureActionsContainer');
+        const btnAbrirApp = document.getElementById('btnAbrirApp');
+        const btnVerInfo = document.getElementById('btnVerInfo');
+        const btnCerrarAcciones = document.getElementById('btnCerrarAcciones');
+
+        // Modal enriquecido
+        const enrichedAppModal = document.getElementById('enrichedAppModal');
+        const enrichedAppIframe = document.getElementById('enrichedAppIframe');
 
         // RENDER CANVAS INTERNO
         let renderCanvas = document.createElement('canvas');
         let renderCtx = renderCanvas.getContext('2d', { alpha: false, willReadFrequently: false });
-        renderCtx.imageSmoothingEnabled = false;
+        renderCtx.imageSmoothingEnabled = true;
 
         // Game State
         const player = { x: 2, y: 2, angle: 70, speed: 0, turnSpeed: 0 };
@@ -230,12 +280,65 @@ layout: none
         let currentLensIndex = -1;
         let lensesActive = true;
 
-        async function loadSprites() {
-          for (const s of sprites) {
-            s.img = await loadImage(s.imageUrl);
-          }
-        }       
+        // --- NUEVA LÓGICA PARA DETECTAR MIRADA FIJA SOBRE TEXTURA ---
+        let lastLookedTexture = null;
+        let lookStartTime = null;
+        const LOOK_INTEREST_THRESHOLD = 3000; // 3 segundos
+        let currentlyPointedWallType = null;
 
+        // Mapeo de texturas a apps enriquecidas
+        const textureAppUrls = {
+            "NGC3324": "https://nicomedinap.github.io/decosmos/Tarantula/JWST/02Septiembre2024/Tarantula.html"
+            // Ejemplo: "OtraNebulosa": "otra-app.html"
+        };
+
+        function openAppModal(appUrl) {
+            enrichedAppIframe.src = appUrl;
+            enrichedAppModal.style.display = 'flex';
+        }
+        function closeAppModal() {
+            enrichedAppModal.style.display = 'none';
+            enrichedAppIframe.src = '';
+        }
+
+        btnAbrirApp.addEventListener('click', () => {
+            let url = null;
+            if (currentlyPointedWallType) {
+                // Intenta obtener el link desde la base de datos de texturas
+                const textureInfo = customRoomTextures?.[currentlyPointedWallType];
+                url =
+                textureInfo?.actions?.appUrl ||
+                textureAppUrls[currentlyPointedWallType] ||
+                "https://nicomedinap.github.io/decosmos/Tarantula/JWST/02Septiembre2024/Tarantula.html";
+            }
+            if (url) openAppModal(url);
+            hideTextureActions();
+        });
+
+        btnVerInfo.addEventListener('click', () => {
+            if (currentlyPointedWallType && wallInfoData[currentlyPointedWallType]) {
+                const textureInfo = customRoomTextures?.[currentlyPointedWallType];
+                const url = textureInfo?.actions?.infoUrl;
+                if (url) {
+                    window.open(url, "_blank");
+                } else {
+                    wallInfo.style.display = 'block';
+                    wallInfo.style.opacity = 1;
+                }
+            }
+            hideTextureActions();
+        });
+        
+        btnCerrarAcciones.addEventListener('click', hideTextureActions);
+
+        function showTextureActions(wallType) {
+            currentlyPointedWallType = wallType;
+            textureActionsContainer.style.display = "block";
+        }
+        function hideTextureActions() {            
+            textureActionsContainer.style.display = "none";
+            currentlyPointedWallType = null;
+        }
 
         // BAJA FRECUENCIA DE ACTUALIZACION ---
         let lastDrawTime = 0;
@@ -267,6 +370,12 @@ layout: none
             if (!map || !map.length) return;
             const maxMapDist = Math.sqrt(map[0].length ** 2 + map.length ** 2);
             MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
+        }
+
+        async function loadSprites() {
+          for (const s of sprites) {
+            s.img = await loadImage(s.imageUrl);
+          }
         }
 
         async function init() {
@@ -453,14 +562,10 @@ layout: none
                 if (mapData.roomTextures) customRoomTextures = mapData.roomTextures;
                 if (mapData.skyTexture) customSkyTexture = mapData.skyTexture;
                 if (mapData.floorTexture) customFloorTexture = mapData.floorTexture;
-
-                // --------- sprites del mapa ---------
                 sprites = [];
                 if (Array.isArray(mapData.sprites)) {
-                    // Copia profunda para no "mutar" el mapa original
                     sprites = mapData.sprites.map(s => ({...s}));
                 }
-
                 updateLensControlsVisibility();
                 updateRaycastingParams();
                 updateLensesButton();
@@ -488,7 +593,7 @@ layout: none
             if (isValidMove(player.x, newY)) player.y = newY;
 
             // HUD cada 8 frames
-            if (++hudUpdateSkip % 8 === 0) {
+            if (++hudUpdateSkip % 20 === 0) {
                 checkNearbyWalls();
                 const idx = lensNearPlayer();
                 const lensControls = document.getElementById('lensControls');
@@ -529,6 +634,7 @@ layout: none
             return true;
         }
 
+        // --- DETECCIÓN DE MIRADA FIJA Y BOTONES DE ACCIONES ---
         function checkNearbyWalls() {
             const directions = [
                 { x: 0, y: -1 }, { x: 1, y: 0 },
@@ -536,7 +642,10 @@ layout: none
             ];
             let closestWall = null;
             let minDistance = Infinity;
-            
+            let playerViewDir = { x: Math.cos(player.angle), y: Math.sin(player.angle) };
+            let bestAlignment = -1;
+            let bestWall = null;
+
             for (const dir of directions) {
                 const checkX = Math.floor(player.x + dir.x);
                 const checkY = Math.floor(player.y + dir.y);
@@ -544,34 +653,48 @@ layout: none
                     checkX >= 0 && checkX < map[0].length) {
                     const wallType = map[checkY][checkX];
                     if (wallType !== 0 && wallInfoData[wallType] && textures[wallType]) {
-                        const distance = Math.sqrt(
-                            Math.pow(checkX + 0.5 - player.x, 2) + 
-                            Math.pow(checkY + 0.5 - player.y, 2)
-                        );
-                        if (distance < minDistance) {
-                            minDistance = distance;
-                            closestWall = wallType;
+                        // Vector de la pared respecto al jugador
+                        const wallVec = { x: checkX + 0.5 - player.x, y: checkY + 0.5 - player.y };
+                        const wallDist = Math.sqrt(wallVec.x * wallVec.x + wallVec.y * wallVec.y);
+                        // Coseno del ángulo entre mirada y pared
+                        const alignment = (wallVec.x * playerViewDir.x + wallVec.y * playerViewDir.y) / (wallDist || 1);
+                        // Requiere estar cerca y mirando bastante frontalmente (coseno > 0.8)
+                        if (wallDist < WALL_INFO_DISTANCE && alignment > 0.8 && alignment > bestAlignment) {
+                            bestAlignment = alignment;
+                            bestWall = wallType;
+                            minDistance = wallDist;
                         }
                     }
                 }
             }
-            
-            if (closestWall && minDistance < WALL_INFO_DISTANCE) {
-                const info = wallInfoData[closestWall];
+
+            // --- NUEVO: lógica de "mirada fija" ---
+            if (bestWall) {
+                const info = wallInfoData[bestWall];
                 wallTitle.textContent = info.title;
-                
-                // Usar renderLaTeX en lugar de textContent/innerHTML directo
                 renderLaTeX(wallDescription, info.description || "");
-                
                 wallInfo.style.display = 'block';
                 wallInfo.style.opacity = 1;
+
+                if (lastLookedTexture === bestWall) {
+                    if (lookStartTime && performance.now() - lookStartTime > LOOK_INTEREST_THRESHOLD) {
+                        if (textureActionsContainer.style.display !== "block") {
+                            showTextureActions(bestWall);
+                        }
+                    }
+                } else {
+                    lastLookedTexture = bestWall;
+                    lookStartTime = performance.now();
+                    hideTextureActions();
+                }
             } else {
                 wallInfo.style.opacity = 0;
                 setTimeout(() => {
-                    if (wallInfo.style.opacity === '0') {
-                        wallInfo.style.display = 'none';
-                    }
+                    if (wallInfo.style.opacity === '0') wallInfo.style.display = 'none';
                 }, 300);
+                lastLookedTexture = null;
+                lookStartTime = null;
+                hideTextureActions();
             }
         }
 
@@ -660,7 +783,7 @@ layout: none
             renderCtx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
             drawSkyAndFloor(renderCtx, renderCanvas);
             drawWalls(renderCtx, renderCanvas);
-            drawSprites(renderCtx, renderCanvas); // <-- Dibuja el Hubble
+            drawSprites(renderCtx, renderCanvas);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(renderCanvas, 0, 0, canvas.width, canvas.height);
             drawMinimap();
@@ -670,7 +793,6 @@ layout: none
             if (skyTexture) drawTiledTexture(ctxToUse, skyTexture, player.angle * 0.1, 0, canvasToUse.height / 2, canvasToUse.width);
             if (floorTexture) drawTiledTexture(ctxToUse, floorTexture, player.angle * 0.3, canvasToUse.height / 2, canvasToUse.height / 2, canvasToUse.width);
         }
-
         function drawTiledTexture(ctxToUse, texture, angleOffset, yPos, height, outWidth) {
             const width = texture.width;
             const offset = ((angleOffset + 8 * Math.PI) / (2 * Math.PI)) * width % width;
@@ -679,10 +801,11 @@ layout: none
                 ctxToUse.drawImage(texture, 0, 0, offset, texture.height, outWidth - (offset / width) * outWidth, yPos, (offset / width) * outWidth, height);
             }
         }
-
         function drawWalls(ctxToUse, canvasToUse) {
-            const numRays = Math.floor(canvasToUse.width * 1); 
+            const RAYS_PER_PIXEL = 0.5; // 1 = 1 
+            const numRays = Math.floor(canvasToUse.width * RAYS_PER_PIXEL);
             const rayAngleStep = FOV / numRays;
+            const pixelPerRay = canvasToUse.width / numRays;
             const maxWallHeight = canvasToUse.height * 2;
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
@@ -701,78 +824,62 @@ layout: none
                             mipLevel++;
                         }
                         const textureX = Math.floor(hitOffset * texture[mipLevel].width);
+                        // Asignar la posición y el ancho correcto para cada franja:
+                        const x = Math.round(i * pixelPerRay);
+                        const w = Math.ceil(pixelPerRay);
                         ctxToUse.drawImage(
-                            texture[mipLevel], 
-                            textureX, 0, 1, texture[mipLevel].height, 
-                            i, lineOffset, 1, lineHeight
+                            texture[mipLevel],
+                            textureX, 0, 1, texture[mipLevel].height,
+                            x, lineOffset, w, lineHeight
                         );
                     } else {
+                        const x = Math.round(i * pixelPerRay);
+                        const w = Math.ceil(pixelPerRay);
                         ctxToUse.fillStyle = 'black';
-                        ctxToUse.fillRect(i, lineOffset, 1, lineHeight);
+                        ctxToUse.fillRect(x, lineOffset, w, lineHeight);
                     }
                 }
             }
         }
 
-        // ----------- DIBUJAR SPRITES EN 3D ------------
         function drawSprites(ctxOut, canvasOut) {
             for (const s of sprites) {
                 if (!s.img) continue;
-
-                const dx = s.x - player.x;
-                const dy = s.y - player.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                
-                // Si el sprite está demasiado cerca o demasiado lejos, no lo dibujamos
+                const dx = s.x - player.x, dy = s.y - player.y, dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < 0.2 || dist > 30) continue;
-
                 let spriteAngle = Math.atan2(dy, dx) - player.angle;
                 while (spriteAngle < -Math.PI) spriteAngle += 2 * Math.PI;
                 while (spriteAngle > Math.PI) spriteAngle -= 2 * Math.PI;
-
                 if (Math.abs(spriteAngle) < FOV / 2 + 0.2) {
                     const screenX = canvasOut.width / 2 + Math.tan(spriteAngle) * (canvasOut.width / 2) / Math.tan(FOV/2);
                     const spriteSize = Math.min(canvasOut.height / dist, canvasOut.height * 0.45);
                     const yBase = (canvasOut.height - spriteSize) / 2;
-                    const imgWidth = s.img.width;
-                    const imgHeight = s.img.height;
-
-                    // Calcular opacidad basada en la distancia
+                    const imgWidth = s.img.width, imgHeight = s.img.height;
                     let opacity = 1.0;
-                    const fadeStartDistance = 1.5; // Distancia a la que comienza a desvanecerse
-                    const fadeEndDistance = 0.5;   // Distancia a la que está completamente transparente
-                    
+                    const fadeStartDistance = 1.5, fadeEndDistance = 0.5;
                     if (dist < fadeStartDistance) {
-                        // Interpolación lineal para el desvanecimiento
                         opacity = (dist - fadeEndDistance) / (fadeStartDistance - fadeEndDistance);
-                        opacity = Math.max(0, Math.min(1, opacity)); // Asegurar que esté entre 0 y 1
+                        opacity = Math.max(0, Math.min(1, opacity));
                     }
 
-                    // Para cada columna vertical del sprite en pantalla
+                    
                     for (let i = 0; i < spriteSize; i++) {
                         const colScreenX = screenX - spriteSize / 2 + i;
                         const relAngle = Math.atan2(i - spriteSize / 2, canvasOut.width / (2 * Math.tan(FOV / 2)));
                         const rayAngle = player.angle + spriteAngle + relAngle * 0.9;
                         const spriteDistAtCol = dist;
                         const ray = castRay(rayAngle);
-
                         if (ray.dist < spriteDistAtCol - 0.05) continue;
-
                         const spriteCol = Math.floor(i * imgWidth / spriteSize);
-
                         ctxOut.save();
-                        // Aplicar opacidad basada en la distancia
-                        ctxOut.globalAlpha = opacity * 0.98; // Multiplicar por el alpha original (0.98)
-                        ctxOut.drawImage(s.img,
-                            spriteCol, 0, 1, imgHeight,
-                            colScreenX, yBase, 1, spriteSize
-                        );
+                        ctxOut.globalAlpha = opacity * 0.98;
+                        ctxOut.drawImage(s.img, spriteCol, 0, 1, imgHeight, colScreenX, yBase, 1, spriteSize);
                         ctxOut.restore();
                     }
                 }
             }
         }
-
+        
         function drawMinimap() {
             if (!map.length) return;
             const mapWidth = map[0].length;
@@ -785,8 +892,6 @@ layout: none
             drawLensEffects();
             drawPlayer();
             drawPlayerFOV();
-
-
             for (const s of sprites) {
                 minimapCtx.save();
                 minimapCtx.fillStyle = "#0ff";
@@ -795,8 +900,6 @@ layout: none
                 minimapCtx.fill();
                 minimapCtx.restore();
             }
-
-
             function drawMapCells() {
                 for (let y = 0; y < map.length; y++) {
                     for (let x = 0; x < map[y].length; x++) {
@@ -827,10 +930,10 @@ layout: none
                 );
             }
             function drawPlayerFOV() {
-                minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.3)';
+                minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.4)';
                 minimapCtx.beginPath();
                 minimapCtx.moveTo(player.x * scale, player.y * scale);
-                const numRays = 2;
+                const numRays = 4;
                 const rayAngleStep = FOV / numRays;
                 for (let i = 0; i <= numRays; i++) {
                     const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
