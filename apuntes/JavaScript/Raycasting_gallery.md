@@ -134,7 +134,7 @@ layout: none
         WALL_INFO_DISTANCE = 1.5, 
         MAX_DISTANCE_TO_TEXTURE = 35, 
         WALL_MARGIN = 0.85, 
-        RENDER_SCALE = 0.8, 
+        RENDER_SCALE = 1, 
         TARGET_FPS = 25, 
         STEPSIZE = 0.05;
         
