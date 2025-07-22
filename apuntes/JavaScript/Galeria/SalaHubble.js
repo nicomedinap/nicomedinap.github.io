@@ -42,7 +42,9 @@ var mapData = {
 
   sprites: [
     {type: "hubble",x: 6.5, y: 17.5, scale: 0.7,
-      imageUrl: "https://icones.pro/wp-content/uploads/2021/04/icones-de-localisation-de-la-carte-verte.png"}
+      imageUrl: "https://icones.pro/wp-content/uploads/2021/04/icones-de-localisation-de-la-carte-verte.png"},
+    {type: "hubble", x: 6, y: 20, scale: 0.9, 
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/87/Hubble_Space_Telescope_spacecraft_model.png"}
   ],
 
   "roomTextures": {
