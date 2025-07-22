@@ -41,7 +41,7 @@ var mapData = {
   ],
 
   sprites: [
-    {type: "info",x: 6.5, y: 17.5, img: scale: 0.7,
+    {type: "hubble",x: 6.5, y: 17.5, scale: 0.7,
       imageUrl: "https://icones.pro/wp-content/uploads/2021/04/icones-de-localisation-de-la-carte-verte.png"}
   ],
 
