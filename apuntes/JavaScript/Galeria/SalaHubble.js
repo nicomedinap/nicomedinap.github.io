@@ -42,7 +42,7 @@ var mapData = {
 
   sprites: [
     {type: "hubble",x: 6.5, y: 17.5, img: null,
-      imageUrl: "https://banner2.cleanpng.com/20240227/ifz/transparent-blue-circle-blue-circle-with-number-1-1710861571249.webp"}
+      imageUrl: "https://icones.pro/wp-content/uploads/2021/04/icones-de-localisation-de-la-carte-verte.png"}
   ],
 
   "roomTextures": {
