@@ -140,9 +140,9 @@ layout: none
         MAX_DISTANCE_TO_TEXTURE = 35, 
         WALL_MARGIN = 0.85, 
         // RENDER_SCALE menor en móvil para menos píxeles procesados
-        RENDER_SCALE = IS_MOBILE ? 0.8 : 1, 
-        TARGET_FPS = IS_MOBILE ? 20 : 25, 
-        STEPSIZE = IS_MOBILE ? 0.095: 0.05;
+        RENDER_SCALE = IS_MOBILE ? 0.7 : 1, 
+        TARGET_FPS = IS_MOBILE ? 20 : 30, 
+        STEPSIZE = IS_MOBILE ? 0.1: 0.05;
 
 
         // DOM Elements
@@ -662,6 +662,7 @@ layout: none
             minimapCtx.fillStyle = 'rgba(255, 255, 0, 0.4)';
             minimapCtx.beginPath();
             minimapCtx.moveTo(player.x * scale, player.y * scale);
+
             const numRays = 4, rayAngleStep = FOV / numRays;
             for (let i = 0; i <= numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
