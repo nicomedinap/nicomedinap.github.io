@@ -142,7 +142,7 @@ layout: none
         // RENDER_SCALE menor en móvil para menos píxeles procesados
         RENDER_SCALE = IS_MOBILE ? 0.8 : 1, 
         TARGET_FPS = IS_MOBILE ? 20 : 25, 
-        STEPSIZE = 0.05;
+        STEPSIZE = IS_MOBILE ? 0.095: 0.05;
 
 
         // DOM Elements
