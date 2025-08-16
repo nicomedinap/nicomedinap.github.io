@@ -499,38 +499,21 @@ layout: none
                 lastLookedTexture = null; lookStartTime = null; hideTextureActions();
             }
         }
-        
         function castRay(angle) {
-            let x = player.x, y = player.y,
-                stepSize = IS_MOBILE ? STEPSIZE * 1.25 : STEPSIZE,
-                maxIterations = IS_MOBILE ? Math.min(MAX_ITERATIONS, 32) : MAX_ITERATIONS,
-                iterations = 0,
-                magnification = 1.0,
-                totalBend = 0;
-
-            // En móvil: suma los efectos de todos los lentes de forma simplificada
+            let x = player.x, y = player.y, 
+            stepSize = STEPSIZE, 
+            maxIterations = MAX_ITERATIONS, 
+            iterations = 0, 
+            magnification = 1.0;
             while (iterations++ < maxIterations) {
-                let currentBend = 0;
                 for (const lens of lenses) {
                     if (!lens.visible) continue;
-                    const dx = x - lens.x, dy = y - lens.y, distToLens = Math.sqrt(dx*dx + dy*dy);
-                    if (distToLens < lens.radius) {
-                        // Suma todos los efectos, pero con menor precisión
-                        const effect = lens.strength * (1 - distToLens / lens.radius);
-                        magnification *= (1 + effect);
-                        // Acumula el "bend" para todos los lentes
-                        currentBend += effect * Math.sin(angle - Math.atan2(dy, dx));
-                    }
+                    const dx = x - lens.x, dy = y - lens.y, 
+                    distToLens = Math.sqrt(dx*dx + dy*dy);
+                    if (distToLens < lens.radius) magnification *= (1 + lens.strength * (1 - (distToLens/lens.radius)));
                 }
-                // En móvil, aplica la suma de bend sólo cada 5 pasos (menos iteraciones de ángulo)
-                if (IS_MOBILE && iterations % 5 === 0 && Math.abs(currentBend) > 0.0001) {
-                    angle += currentBend * 0.65; // Suaviza el efecto para evitar artefactos
-                }
-                // En escritorio, aplica en cada paso (es la física original)
-                if (!IS_MOBILE && Math.abs(currentBend) > 0.0001) {
-                    angle += currentBend;
-                }
-                x += Math.cos(angle) * stepSize;
+                applyLensEffects();
+                x += Math.cos(angle) * stepSize; 
                 y += Math.sin(angle) * stepSize;
                 const mapX = Math.floor(x), mapY = Math.floor(y);
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) break;
@@ -541,7 +524,7 @@ layout: none
                 }
             }
             return { dist: Infinity, texture: null, hitOffset: 0, mapX: -1, mapY: -1, magnification };
-
+            
             function applyLensEffects() {
                 for (const lens of lenses) {
                     if (!lens.visible) continue;
