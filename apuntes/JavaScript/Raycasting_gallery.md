@@ -126,17 +126,23 @@ layout: none
             else window.mathJaxQueue.push(element);
         }
         // --- OPTIMIZACIONES PARA HARDWARE BAJO ---
-        const MOVEMENT_SPEED = 0.055, 
-        ROTATION_SPEED = 0.022, 
+        // --- DETECCIÓN DE MÓVIL ---
+        const IS_MOBILE = /Mobi|Android/i.test(navigator.userAgent);
+
+        // --- OPTIMIZACIONES PARA HARDWARE BAJO O MÓVIL ---
+        const MOVEMENT_SPEED = IS_MOBILE ? 0.044 : 0.055, 
+        ROTATION_SPEED = IS_MOBILE ? 0.018 : 0.022, 
         FOV = Math.PI/2,
-        MAX_TEXTURE_SIZE = 768, 
-        MINIMAP_MAX_SIZE = 190, 
+        MAX_TEXTURE_SIZE = IS_MOBILE ? 480 : 768, 
+        MINIMAP_MAX_SIZE = IS_MOBILE ? 120 : 190, 
         WALL_INFO_DISTANCE = 1.5, 
         MAX_DISTANCE_TO_TEXTURE = 35, 
         WALL_MARGIN = 0.85, 
-        RENDER_SCALE = 1, 
-        TARGET_FPS = 25, 
-        STEPSIZE = 0.05;
+        // RENDER_SCALE menor en móvil para menos píxeles procesados
+        RENDER_SCALE = IS_MOBILE ? 0.74 : 1, 
+        // FPS menor en móvil para ahorrar batería y evitar lags
+        TARGET_FPS = IS_MOBILE ? 16 : 25, 
+        STEPSIZE = IS_MOBILE ? 0.07 : 0.05;
         
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
