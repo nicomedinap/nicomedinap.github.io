@@ -28,8 +28,8 @@ layout: none
         html, body { margin: 0; padding: 0; overflow: hidden; font-family: Arial, sans-serif; }
         canvas { display: block; }
         #mapSelect { position: absolute; top: 10px; left: 10px; padding: 5px 10px; background: rgba(0,0,0,0.5); color: white; }
-        #minimap { position: absolute; top: 80px; left: 15%; transform: translateX(-50%); background: rgba(0,0,0,0.5); z-index: 100; }
-        .control-button { position: absolute; width: 54px; height: 54px; background: rgba(255,255,255,0.5); border: none; border-radius: 30px; font-size: 22px; text-align: center; line-height: 54px; user-select: none; }
+        #minimap { position: absolute; top: 80px; left: 20%; transform: translateX(-50%); background: rgba(0,0,0,0.5); z-index: 100; }
+        .control-button { position: absolute; width: 70px; height: 70px; background: rgba(255,255,255,0.5); border: none; border-radius: 30px; font-size: 22px; text-align: center; line-height: 54px; user-select: none; }
         #upButton { bottom: 80px; right: 10px; }
         #downButton { bottom: 10px; right: 10px; }
         #leftButton { bottom: 45px; left: 10px; }
@@ -46,7 +46,8 @@ layout: none
         }
         @media (max-width: 480px) {
             #wallInfo { bottom: 200px; font-size: .9em; }
-            .control-button { width: 44px; height: 44px; font-size: 18px; line-height: 44px; }
+            .control-button { width: 64px; height: 64px; font-size: 18px; line-height: 44px; }
+            #minimap {left: 25vw;}
         }
         #wallTitle {
             margin: 0 0 8px 0; color: #0ff; font-size: 17px; text-transform: uppercase;
@@ -59,8 +60,8 @@ layout: none
             font-size: 0.95em !important; color: #0ff !important;
             background: rgba(0, 50, 70, 0.3); padding: 1.5px 4px; border-radius: 3px; display: inline-block !important;
         }
-        #toggleLensesBtn { position: absolute; top: 10px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
-        #lensControls { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; color: white; width: 200px; display: none; }
+        #toggleLensesBtn { position: absolute; top: 10px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 12px; cursor: pointer; }
+        #lensControls { position: absolute; top: 40px; right: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; color: white; width: 130px; display: none; }
         #lensControls h3 { margin-top: 0; margin-bottom: 10px; }
         #lensControls label { display: block; margin: 5px 0; font-size: 14px; }
         #lensControls input { width: 100%; }
@@ -125,7 +126,7 @@ layout: none
             if (typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typesetPromise([element]).catch(()=>{});
             else window.mathJaxQueue.push(element);
         }
-
+        
         // --- DETECCIÓN DE MÓVIL ---
         const IS_MOBILE = /Mobi|Android/i.test(navigator.userAgent);
 
@@ -140,10 +141,10 @@ layout: none
         WALL_MARGIN = 0.85, 
         // RENDER_SCALE menor en móvil para menos píxeles procesados
         RENDER_SCALE = IS_MOBILE ? 0.8 : 1, 
-        TARGET_FPS = IS_MOBILE ? 16 : 25, 
+        TARGET_FPS = IS_MOBILE ? 20 : 25, 
         STEPSIZE = 0.05;
 
-        
+
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d', { alpha: false });
@@ -499,15 +500,21 @@ layout: none
             }
         }
         function castRay(angle) {
-            let x = player.x, y = player.y, sin = Math.sin(angle), cos = Math.cos(angle), stepSize = STEPSIZE, maxIterations = MAX_ITERATIONS, iterations = 0, magnification = 1.0;
+            let x = player.x, y = player.y, 
+            stepSize = STEPSIZE, 
+            maxIterations = MAX_ITERATIONS, 
+            iterations = 0, 
+            magnification = 1.0;
             while (iterations++ < maxIterations) {
                 for (const lens of lenses) {
                     if (!lens.visible) continue;
-                    const dx = x - lens.x, dy = y - lens.y, distToLens = Math.sqrt(dx*dx + dy*dy);
+                    const dx = x - lens.x, dy = y - lens.y, 
+                    distToLens = Math.sqrt(dx*dx + dy*dy);
                     if (distToLens < lens.radius) magnification *= (1 + lens.strength * (1 - (distToLens/lens.radius)));
                 }
                 applyLensEffects();
-                x += cos * stepSize; y += sin * stepSize;
+                x += Math.cos(angle) * stepSize; 
+                y += Math.sin(angle) * stepSize;
                 const mapX = Math.floor(x), mapY = Math.floor(y);
                 if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) break;
                 if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 'L') {
@@ -522,7 +529,9 @@ layout: none
                     if (!lens.visible) continue;
                     const dx = x - lens.x, dy = y - lens.y, distToLens = Math.sqrt(dx*dx + dy*dy);
                     if (distToLens < lens.radius) {
-                        const epsilon = 0.0001, safeDist = Math.max(distToLens, epsilon), normalizedDist = safeDist / lens.radius;
+                        const epsilon = 0.0001, 
+                        safeDist = Math.max(distToLens, epsilon), 
+                        normalizedDist = safeDist / lens.radius;
                         const bendFactor = lens.strength * (1 - normalizedDist);
                         const angleToLens = Math.atan2(dy, dx);
                         const newAngle = angle + bendFactor * Math.sin(angle - angleToLens);
@@ -565,7 +574,15 @@ layout: none
             }
         }
         function drawWalls(ctxToUse, canvasToUse) {
-            const RAYS_PER_PIXEL = 0.39, numRays = Math.floor(canvasToUse.width * RAYS_PER_PIXEL), rayAngleStep = FOV / numRays, pixelPerRay = canvasToUse.width / numRays, maxWallHeight = canvasToUse.height * 2;
+            // usamos el numero de lentes en el mapa para controlar el numero de rayos  
+            const RAYS_PER_PIXEL = lenses.length > 2 ? 0.32 : 0.8;
+            if (IS_MOBILE) { const RAYS_PER_PIXEL = lenses.length > 2 ? 0.22 : 0.32;}
+            
+            numRays = Math.floor(canvasToUse.width * RAYS_PER_PIXEL), 
+            rayAngleStep = FOV / numRays, 
+            pixelPerRay = canvasToUse.width / numRays, 
+            maxWallHeight = canvasToUse.height * 2;
+            
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
                 const { dist, texture, hitOffset, magnification } = castRay(rayAngle);
