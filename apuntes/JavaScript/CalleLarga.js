@@ -22,7 +22,7 @@ var mapData = {
     [1,4,3,6,1]
   ],
   lenses: [
-    { x: 2.5, y: 5.5, strength: 0.013, radius: 11.33, visible: true },
+    { x: 2.5, y: 5.5, strength: 0.012, radius: 15., visible: true },
     { x: 2.5, y: 15.5, strength: 0.004, radius: 15, visible: true }
   ],
   sprites: [
