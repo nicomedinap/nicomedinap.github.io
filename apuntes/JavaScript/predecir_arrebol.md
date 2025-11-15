@@ -4,7 +4,7 @@ layout: none
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>🌇 Predictor de Arrebol</title>
 <script src="https://unpkg.com/suncalc"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -22,14 +22,15 @@ layout: none
     color:white;
     min-height:100vh;
     overflow-x:hidden;
+    font-size: 16px; /* Tamaño base para móviles */
   }
 
   /* === Pantalla de menú === */
   #cityMenu {
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:18px;
-    padding:30px;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:14px;
+    padding:20px 15px;
     min-height:100vh;
     box-sizing:border-box;
   }
@@ -37,28 +38,49 @@ layout: none
     background:rgba(255,255,255,0.06);
     border-radius:14px;
     text-align:center;
-    padding:20px;
+    padding:18px 12px;
     cursor:pointer;
     transition:all .3s ease;
     box-shadow:0 4px 16px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
   }
   .city-card:hover {
     transform:translateY(-5px);
     background:rgba(255,255,255,0.1);
   }
   .city-name {
-    font-size:1.2rem;
+    font-size:1.1rem;
     font-weight:600;
+    position: relative;
+    z-index: 2;
   }
   .city-region {
-    font-size:.9rem;
+    font-size:.85rem;
     opacity:.8;
+    position: relative;
+    z-index: 2;
+  }
+  .city-probability {
+    margin-top:6px; 
+    font-size:0.9rem; 
+    opacity:0.85;
+    position: relative;
+    z-index: 2;
+  }
+  .probability-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #FFC107, #F44336);
+    transition: width 0.5s ease;
   }
 
   /* === Contenedor principal === */
   #appContainer {
     display:none;
-    padding:20px;
+    padding:15px;
     max-width:1000px;
     margin:auto;
   }
@@ -68,9 +90,10 @@ layout: none
     border:1px solid rgba(255,255,255,0.3);
     border-radius:8px;
     color:white;
-    padding:6px 12px;
-    margin-bottom:10px;
+    padding:10px 15px;
+    margin-bottom:15px;
     cursor:pointer;
+    font-size: 1rem;
   }
 
   .data-block {
@@ -83,6 +106,7 @@ layout: none
     background:rgba(255,255,255,0.05);
     border-radius:12px;
     padding:8px;
+    max-width: 100%;
   }
   img.sat {
     max-width:100%;
@@ -96,7 +120,7 @@ layout: none
     margin:0 auto;
     background: rgba(0,0,0,0.25);
     border-radius:14px;
-    padding:18px;
+    padding:15px;
     box-shadow:0 6px 30px rgba(0,0,0,0.5);
   }
 
@@ -109,7 +133,7 @@ layout: none
 
   .satellite-wrapper img {
     display: block;
-    width: 90%;
+    width: 100%;
     max-width: 500px;
     height: auto;
     border-radius: 10px;
@@ -121,6 +145,7 @@ layout: none
     color: white;
     font-family: Arial, sans-serif;
     text-shadow: 0 0 4px rgba(0,0,0,0.8);
+    font-size: 0.9rem;
   }
 
   .overlay.orientation {
@@ -128,7 +153,7 @@ layout: none
     left: 50%;
     transform: translateX(-50%);
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1em;
   }
 
   .overlay.scale {
@@ -141,7 +166,7 @@ layout: none
   }
 
   .scale-bar {
-    width: 100px;
+    width: 80px;
     height: 6px;
     background: white;
     border: 1px solid #ccc;
@@ -151,58 +176,298 @@ layout: none
   .overlay.instrument {
     bottom: 8px;
     right: 14px;
-    font-size: 0.85em;
+    font-size: 0.8em;
     opacity: 0.8;
   }
 
-  h1 { margin:0 0 8px 0; font-size:1.6rem; }
-  p.lead { margin:0 0 12px 0; opacity:0.9; }
-
-  .controls { display:flex; gap:10px; flex-wrap:wrap; margin:12px 0; }
-
-  select, button, input, textarea {
-    padding:10px;
-    border-radius:8px;
-    border:none;
-    font-size:0.95rem;
-    box-sizing:border-box;
+  h1 { 
+    margin:0 0 8px 0; 
+    font-size:1.5rem; 
+  }
+  p.lead { 
+    margin:0 0 12px 0; 
+    opacity:0.9; 
+    font-size: 0.95rem;
   }
 
-  select, input { background: rgba(255,255,255,0.06); color: #fff; min-width:220px; }
+  .controls { 
+    display:flex; 
+    gap:10px; 
+    flex-wrap:wrap; 
+    margin:12px 0; 
+  }
 
-  button { background:var(--accent); color:#fff; cursor:pointer; font-weight:600; }
+  select, button, input, textarea {
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    font-size:1rem;
+    box-sizing:border-box;
+    min-height: 44px; /* Tamaño mínimo para tocar fácilmente */
+  }
 
-  button.ghost { background: transparent; border:1px solid rgba(255,255,255,0.08); }
+  select, input { 
+    background: rgba(255,255,255,0.06); 
+    color: #fff; 
+    width: 100%;
+  }
 
-  .grid { display:grid; grid-template-columns:1fr 420px; gap:16px; align-items:start; }
+  button { 
+    background:var(--accent); 
+    color:#fff; 
+    cursor:pointer; 
+    font-weight:600; 
+    flex: 1;
+    min-width: 140px;
+  }
 
-  .panel { background:var(--card); padding:12px; border-radius:10px; }
+  button.ghost { 
+    background: transparent; 
+    border:1px solid rgba(255,255,255,0.08); 
+  }
 
-  #result { min-height:120px; }
+  .grid { 
+    display:grid; 
+    grid-template-columns:1fr 420px; 
+    gap:16px; 
+    align-items:start; 
+  }
 
-  .sun-times { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-start; margin:10px 0; }
-  .sun-time { background: rgba(255,255,255,0.04); padding:8px 12px; border-radius:8px; }
+  .panel { 
+    background:var(--card); 
+    padding:15px; 
+    border-radius:10px; 
+  }
 
-  .data-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:8px; margin-top:8px; }
-  .data-item { background: rgba(255,255,255,0.02); padding:8px; border-radius:8px; text-align:center; }
+  #result { 
+    min-height:120px; 
+  }
 
-  .predictions { display:flex; gap:8px; margin-top:12px; }
-  .probability { padding:10px; border-radius:8px; min-width:130px; text-align:center; font-weight:700; }
-  .high-prob { background: rgba(255,204,0,0.18); color:#ffd24d; }
-  .medium-prob { background: rgba(255,153,102,0.12); color:#ffb07a; }
-  .low-prob { background: rgba(204,102,51,0.12); color:#e09b79; }
+  .sun-times { 
+    display:flex; 
+    gap:8px; 
+    flex-wrap:wrap; 
+    justify-content:flex-start; 
+    margin:10px 0; 
+  }
+  .sun-time { 
+    background: rgba(255,255,255,0.04); 
+    padding:10px 12px; 
+    border-radius:8px; 
+    font-size: 0.95rem;
+  }
 
-  #satelliteImage { width:500px; height:500px; object-fit:cover; border-radius:8px; display:block; margin-top:8px; }
+  .data-grid { 
+    display:grid; 
+    grid-template-columns: repeat(2,1fr); 
+    gap:10px; 
+    margin-top:10px; 
+  }
+  .data-item { 
+    background: rgba(255,255,255,0.02); 
+    padding:10px; 
+    border-radius:8px; 
+    text-align:center; 
+    font-size: 0.9rem;
+  }
 
-  .loading { display:inline-block; width:18px; height:18px; border:3px solid rgba(255,255,255,0.2); border-top-color:#fff; border-radius:50%; animation:spin 1s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  .predictions { 
+    display:flex; 
+    gap:10px; 
+    margin-top:15px;
+    flex-wrap: wrap;
+  }
+  .probability { 
+    padding:12px; 
+    border-radius:8px; 
+    min-width:130px; 
+    text-align:center; 
+    font-weight:700; 
+    flex: 1;
+    font-size: 0.95rem;
+  }
+  .high-prob { 
+    background: rgba(255,204,0,0.18); 
+    color:#ffd24d; 
+  }
+  .medium-prob { 
+    background: rgba(255,153,102,0.12); 
+    color:#ffb07a; 
+  }
+  .low-prob { 
+    background: rgba(204,102,51,0.12); 
+    color:#e09b79; 
+  }
 
-  .charts { display:flex; gap:12px; flex-direction:column; margin-top:10px; }
-  canvas { background: rgba(255,255,255,0.02); border-radius:8px; padding:8px; }
+  #satelliteImage { 
+    width:100%; 
+    height:auto; 
+    max-height: 300px;
+    object-fit:cover; 
+    border-radius:8px; 
+    display:block; 
+    margin-top:8px; 
+  }
 
-  @media (max-width:900px) {
-    .grid { grid-template-columns: 1fr; }
-    select, input { min-width:100%; }
+  .loading { 
+    display:inline-block; 
+    width:18px; 
+    height:18px; 
+    border:3px solid rgba(255,255,255,0.2); 
+    border-top-color:#fff; 
+    border-radius:50%; 
+    animation:spin 1s linear infinite; 
+  }
+  @keyframes spin { 
+    to { transform: rotate(360deg); } 
+  }
+
+  .charts { 
+    display:flex; 
+    gap:12px; 
+    flex-direction:column; 
+    margin-top:15px; 
+  }
+
+  /* === MEDIA QUERIES PARA MÓVIL === */
+  @media (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+    
+    #cityMenu {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      padding: 15px 10px;
+    }
+    
+    .city-card {
+      padding: 15px 8px;
+    }
+    
+    .city-name {
+      font-size: 1rem;
+    }
+    
+    .city-region {
+      font-size: 0.8rem;
+    }
+    
+    .container {
+      padding: 12px;
+    }
+    
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    
+    .panel {
+      padding: 12px;
+    }
+    
+    h1 {
+      font-size: 1.3rem;
+    }
+    
+    p.lead {
+      font-size: 0.9rem;
+    }
+    
+    .controls {
+      flex-direction: column;
+    }
+    
+    button {
+      width: 100%;
+    }
+    
+    .data-grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    
+    .predictions {
+      flex-direction: column;
+    }
+    
+    .probability {
+      width: 100%;
+      min-width: auto;
+    }
+    
+    .sun-times {
+      justify-content: space-between;
+    }
+    
+    .sun-time {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .overlay {
+      font-size: 0.8rem;
+    }
+    
+    .overlay.scale {
+      bottom: 15px;
+    }
+    
+    .scale-bar {
+      width: 60px;
+    }
+    
+    .overlay.instrument {
+      font-size: 0.7rem;
+    }
+    
+    #satelliteImage {
+      max-height: 250px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #cityMenu {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .container {
+      padding: 10px;
+    }
+    
+    .panel {
+      padding: 10px;
+    }
+    
+    h1 {
+      font-size: 1.2rem;
+    }
+    
+    .data-item {
+      padding: 8px;
+      font-size: 0.85rem;
+    }
+    
+    .probability {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+    
+    #satelliteImage {
+      max-height: 200px;
+    }
+    
+    .overlay.orientation {
+      font-size: 0.9rem;
+    }
+    
+    .overlay.scale {
+      font-size: 0.75rem;
+    }
+    
+    .overlay.instrument {
+      font-size: 0.65rem;
+    }
   }
 </style>
 </head>
@@ -222,7 +487,7 @@ layout: none
 
     <!-- Controles: selector de ciudad y botones -->
     <div class="controls">
-      <div style="display:flex; gap:8px;">
+      <div style="display:flex; gap:8px; width: 100%; flex-wrap: wrap;">
         <button id="btnLoc" class="ghost">📍 Usar ubicación</button>
       </div>
     </div>
@@ -233,8 +498,8 @@ layout: none
         <div class="panel">
           <div id="result">
             <!-- Encabezado del resultado: ubicación y carga -->
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap;">
+              <div style="flex: 1; min-width: 200px;">
                 <div id="locationText">Seleccione ciudad o use ubicación</div>
                 <div class="sun-times" id="sunTimes"></div>
               </div>
@@ -283,7 +548,7 @@ layout: none
 
         <div class="panel" style="margin-top:12px;">
           <strong>Detalles técnicos / registro</strong>
-          <pre id="log" style="white-space:pre-wrap; font-size:0.85rem; margin:8px 0 0 0;"></pre>
+          <pre id="log" style="white-space:pre-wrap; font-size:0.85rem; margin:8px 0 0 0; max-height: 150px; overflow-y: auto;"></pre>
         </div>
       </div>
     </div>
@@ -315,73 +580,95 @@ const chileanCities = {
   "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34 },
 };
 
-async function precalcularProbabilidades() {
-  for (const [nombre, info] of Object.entries(chileanCities)) {
-
-    // Traer nubes y PM para ahora
-    const clouds = await getCloudCoverSeries(info.lat, info.lon);
-    const pm25 = await getPM25(info.lat, info.lon);
-
-    if (!clouds) {
-      info.menuProb = 0;
-      continue;
-    }
-
-    // hora del sistema → índice
-    const hora = new Date().getHours();
-    const idx = hora;
-
-    const low  = clouds.cloudcover_low[idx];
-    const mid  = clouds.cloudcover_mid[idx];
-    const high = clouds.cloudcover_high[idx];
-
-    // geometría solar
-    const sun = SunCalc.getPosition(new Date(), info.lat, info.lon);
-    const elevDeg = sun.altitude * 180 / Math.PI;
-
-    // probabilidad usando tu fórmula
-    const p = computeRedProbability(pm25, low, mid, high, elevDeg, false);
-
-    // Guardar probabilidad en objeto
-    info.menuProb = p;
-  }
-}
-
-
 /* === CREAR MENÚ (CON PROBABILIDADES PRECALCULADAS) === */
-async function crearMenu() {
-  await precalcularProbabilidades();
-
+async function initCityMenu() {
   const menu = document.getElementById('cityMenu');
-  menu.innerHTML = "";
+  
+  // Mostrar mensaje de carga
+  menu.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:20px;">Cargando probabilidades de arrebol...</div>';
 
   for (const [nombre, info] of Object.entries(chileanCities)) {
-    const p = info.menuProb ?? 0;
+    try {
+      // 1. Obtener PM2.5 y nubosidad
+      const pm = await getPM25(info.lat, info.lon);
+      const clouds = await getCloudCoverSeries(info.lat, info.lon);
 
-    let color;
-    if (p > 0.66) color = "rgba(255,120,0,0.45)";
-    else if (p > 0.33) color = "rgba(255,120,0,0.25)";
-    else color = "rgba(255,255,255,0.06)";
+      let prob = 0;
 
-    const card = document.createElement('div');
-    card.className = 'city-card';
-    card.style.background = color;
+      if (clouds) {
+        // Tomamos la hora actual para estimar la geometría solar
+        const now = new Date();
+        const sun = SunCalc.getPosition(now, info.lat, info.lon);
+        const elevDeg = sun.altitude * 180 / Math.PI;
 
-    card.innerHTML = `
-      <div class="city-name">${nombre}</div>
-      <div class="city-region">${info.region}</div>
-      <div style="margin-top:6px; font-size:0.9rem; opacity:0.9;">
-        Prob: ${(p*100).toFixed(0)}%
-      </div>
-    `;
+        // Buscar índice de la hora actual en los datos de nubes
+        const currentHour = now.toISOString().substring(0, 13) + ":00";
+        const idx = clouds.time.findIndex(t => t === currentHour);
+        
+        // Usar índice 18 (6 PM) como fallback si no encontramos la hora actual
+        const targetIdx = idx >= 0 ? idx : 18;
+        
+        const low  = clouds.cloudcover_low[targetIdx]  ?? 0;
+        const mid  = clouds.cloudcover_mid[targetIdx]  ?? 0;
+        const high = clouds.cloudcover_high[targetIdx] ?? 0;
 
-    card.onclick = () => seleccionarCiudad(nombre);
-    menu.appendChild(card);
+        prob = computeRedProbability(pm, low, mid, high, elevDeg, false);
+        prob = Math.round(prob * 100);
+      }
+
+      // 2. Crear card
+      const card = document.createElement('div');
+      card.className = 'city-card';
+      card.dataset.prob = prob;
+
+      card.innerHTML = `
+          <div class="city-name">${nombre}</div>
+          <div class="city-region">${info.region}</div>
+          <div class="city-probability">
+              Prob. arrebol: <strong>${prob}%</strong>
+          </div>
+          <div class="probability-bar" style="width: ${prob}%"></div>
+      `;
+
+      // 3. Colorear según probabilidad con gradiente suave
+      if (prob > 70) {
+        card.style.background = "rgba(255, 80, 80, 0.35)";
+        card.style.boxShadow = "0 4px 16px rgba(255, 80, 80, 0.3)";
+      } else if (prob > 50) {
+        card.style.background = "rgba(255, 165, 0, 0.3)";
+        card.style.boxShadow = "0 4px 16px rgba(255, 165, 0, 0.2)";
+      } else if (prob > 30) {
+        card.style.background = "rgba(255, 200, 0, 0.25)";
+      } else if (prob > 15) {
+        card.style.background = "rgba(200, 200, 255, 0.15)";
+      } else {
+        card.style.background = "rgba(255, 255, 255, 0.05)";
+      }
+
+      // 4. Click → abrir ciudad
+      card.onclick = () => seleccionarCiudad(nombre);
+
+      menu.appendChild(card);
+    } catch (error) {
+      console.error(`Error procesando ${nombre}:`, error);
+      
+      // Crear tarjeta con error
+      const card = document.createElement('div');
+      card.className = 'city-card';
+      card.innerHTML = `
+          <div class="city-name">${nombre}</div>
+          <div class="city-region">${info.region}</div>
+          <div class="city-probability">
+              <em>Error al cargar</em>
+          </div>
+      `;
+      card.style.background = "rgba(255, 0, 0, 0.1)";
+      card.onclick = () => seleccionarCiudad(nombre);
+      
+      menu.appendChild(card);
+    }
   }
 }
-
-crearMenu();
-
 
 /* === MANEJO DE CIUDAD === */
 
@@ -447,7 +734,7 @@ async function loadImage(src) {
 async function getSatelliteImage(lat, lon) {
   const imgEl = document.getElementById('satelliteImage');
 
-  const delta = 0.5;
+  const delta = 0.3;
 
   const sources = [
     `https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=VIIRS_SNPP_CorrectedReflectance_TrueColor&STYLES=&FORMAT=image/jpeg&HEIGHT=512&WIDTH=512&CRS=EPSG:4326&BBOX=${lat-delta},${lon-delta},${lat+delta},${lon+delta}`,
@@ -578,10 +865,22 @@ function updateCloudChart(hours, cloudVals) {
       }]
     },
     options: {
-      plugins: { legend: { position:'bottom', labels:{boxWidth:15} } },
+      plugins: { 
+        legend: { 
+          position:'bottom', 
+          labels:{
+            boxWidth:15,
+            font: {
+              size: window.innerWidth < 768 ? 10 : 12
+            }
+          } 
+        } 
+      },
       scales: {
         y: { beginAtZero:true, max:100 }
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false
     }
   });
 }
@@ -725,6 +1024,9 @@ document.getElementById('btnLoc').addEventListener('click', ()=> {
     alert('No se pudo obtener ubicación: ' + (err.message || err.code));
   }, { timeout: 10000 });
 });
+
+// Ejecutar al cargar
+initCityMenu();
 
 </script>
 </body>
