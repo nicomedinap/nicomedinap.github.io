@@ -1,6 +1,7 @@
 ---
 layout: none
 ---
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -8,6 +9,7 @@ layout: none
 <title>🌇 Predictor de Arrebol</title>
 <script src="https://unpkg.com/suncalc"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
 <style>
   :root {
     --bg1:#001933;
@@ -589,57 +591,63 @@ async function initCityMenu() {
 
   for (const [nombre, info] of Object.entries(chileanCities)) {
     try {
-      // 1. Obtener PM2.5 y nubosidad
-      const pm = await getPM25(info.lat, info.lon);
-      const clouds = await getCloudCoverSeries(info.lat, info.lon);
+      // 1. Obtener PM2.5 y nubosidad (igual que en predictRedSunset)
+      const [pm25, hourly] = await Promise.all([ 
+        getPM25(info.lat, info.lon), 
+        getCloudCoverSeries(info.lat, info.lon) 
+      ]);
 
-      let prob = 0;
+      let probAtardecer = 0;
 
-      if (clouds) {
-        // Tomamos la hora actual para estimar la geometría solar
+      if (hourly) {
+        // Calcular tiempos solares REALES (igual que en predictRedSunset)
         const now = new Date();
-        const sun = SunCalc.getPosition(now, info.lat, info.lon);
-        const elevDeg = sun.altitude * 180 / Math.PI;
-
-        // Buscar índice de la hora actual en los datos de nubes
-        const currentHour = now.toISOString().substring(0, 13) + ":00";
-        const idx = clouds.time.findIndex(t => t === currentHour);
+        const times = SunCalc.getTimes(now, info.lat, info.lon);
+        const sunset = times.sunset;
         
-        // Usar índice 18 (6 PM) como fallback si no encontramos la hora actual
-        const targetIdx = idx >= 0 ? idx : 18;
-        
-        const low  = clouds.cloudcover_low[targetIdx]  ?? 0;
-        const mid  = clouds.cloudcover_mid[targetIdx]  ?? 0;
-        const high = clouds.cloudcover_high[targetIdx] ?? 0;
+        // Elevación solar REAL del atardecer
+        const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
 
-        prob = computeRedProbability(pm, low, mid, high, elevDeg, false);
-        prob = Math.round(prob * 100);
+        // Buscar índice del atardecer REAL en los datos de nubes
+        const sunsetHour = sunset.toISOString().slice(0,13);
+        const idxSunset = hourly.time.findIndex(t => t.startsWith(sunsetHour));
+        
+        // Usar índice 18 (6 PM) como fallback si no encontramos el atardecer exacto
+        const targetIdx = idxSunset >= 0 ? idxSunset : 18;
+
+        const low_e  = hourly.cloudcover_low?.[targetIdx]  ?? (hourly.cloudcover?.[targetIdx] ?? 50);
+        const mid_e  = hourly.cloudcover_mid?.[targetIdx]  ?? (hourly.cloudcover?.[targetIdx] ?? 50);
+        const high_e = hourly.cloudcover_high?.[targetIdx] ?? (hourly.cloudcover?.[targetIdx] ?? 20);
+
+        // Calcular probabilidad del ATARDECER (igual que en predictRedSunset)
+        probAtardecer = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false);
+        probAtardecer = Math.round(probAtardecer * 100);
       }
 
-      // 2. Crear card
+      // 2. Crear card (mostrar probabilidad del ATARDECER)
       const card = document.createElement('div');
       card.className = 'city-card';
-      card.dataset.prob = prob;
+      card.dataset.prob = probAtardecer;
 
       card.innerHTML = `
           <div class="city-name">${nombre}</div>
           <div class="city-region">${info.region}</div>
           <div class="city-probability">
-              Prob. arrebol: <strong>${prob}%</strong>
+              Prob. atardecer: <strong>${probAtardecer}%</strong>
           </div>
-          <div class="probability-bar" style="width: ${prob}%"></div>
+          <div class="probability-bar" style="width: ${probAtardecer}%"></div>
       `;
 
-      // 3. Colorear según probabilidad con gradiente suave
-      if (prob > 70) {
+      // 3. Colorear según probabilidad (igual que antes)
+      if (probAtardecer > 70) {
         card.style.background = "rgba(255, 80, 80, 0.35)";
         card.style.boxShadow = "0 4px 16px rgba(255, 80, 80, 0.3)";
-      } else if (prob > 50) {
+      } else if (probAtardecer > 50) {
         card.style.background = "rgba(255, 165, 0, 0.3)";
         card.style.boxShadow = "0 4px 16px rgba(255, 165, 0, 0.2)";
-      } else if (prob > 30) {
+      } else if (probAtardecer > 30) {
         card.style.background = "rgba(255, 200, 0, 0.25)";
-      } else if (prob > 15) {
+      } else if (probAtardecer > 15) {
         card.style.background = "rgba(200, 200, 255, 0.15)";
       } else {
         card.style.background = "rgba(255, 255, 255, 0.05)";
@@ -828,59 +836,200 @@ function log(msg) {
 /* Chart instances: variables globales para Chart.js */
 let cloudChart = null;
 
-// Actualiza el gráfico de nubosidad (horario) con labels y valores por capa
-function updateCloudChart(hours, cloudVals) {
+// Actualiza el gráfico de nubosidad con indicadores de amanecer/atardecer
+function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
   const ctx = document.getElementById('cloudChart').getContext('2d');
   if (cloudChart) cloudChart.destroy();
+  
+  // Convertir horas a formato de 24h para comparación
+  const sunriseHour = sunriseTime.getHours();
+  const sunsetHour = sunsetTime.getHours();
+  
+  // Encontrar los índices más cercanos en el array de horas
+  const sunriseIndex = hours.findIndex(h => {
+    const hour = parseInt(h.split(':')[0]);
+    return hour >= sunriseHour;
+  });
+  
+  const sunsetIndex = hours.findIndex(h => {
+    const hour = parseInt(h.split(':')[0]);
+    return hour >= sunsetHour;
+  });
+
   cloudChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: hours,
-      datasets: [{
-        label: 'Nubosidad total (%)',
-        data: cloudVals.total,
-        borderWidth:2,
-        fill:false,
-        tension:0.2
-      },{
-        label: 'Bajas (%)',
-        data: cloudVals.low,
-        borderDash:[5,5],
-        borderWidth:1,
-        fill:false,
-        tension:0.2
-      },{
-        label: 'Medias (%)',
-        data: cloudVals.mid,
-        borderDash:[2,4],
-        borderWidth:1,
-        fill:false,
-        tension:0.2
-      },{
-        label: 'Altas (%)',
-        data: cloudVals.high,
-        borderWidth:1,
-        fill:false,
-        tension:0.2
-      }]
+      datasets: [
+        {
+          label: 'Nubosidad total (%)',
+          data: cloudVals.total,
+          borderWidth: 3,
+          borderColor: '#ffffff',
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          fill: true,
+          tension: 0.4,
+          pointBackgroundColor: '#ffffff',
+          pointBorderColor: '#ff6600',
+          pointBorderWidth: 2
+        },
+        {
+          label: 'Nubes bajas (%)',
+          data: cloudVals.low,
+          borderWidth: 2,
+          borderColor: '#4fc3f7',
+          backgroundColor: 'rgba(79, 195, 247, 0.1)',
+          fill: false,
+          tension: 0.4,
+          borderDash: [5, 5],
+          pointBackgroundColor: '#4fc3f7'
+        },
+        {
+          label: 'Nubes medias (%)',
+          data: cloudVals.mid,
+          borderWidth: 2,
+          borderColor: '#ffb74d',
+          backgroundColor: 'rgba(255, 183, 77, 0.1)',
+          fill: false,
+          tension: 0.4,
+          borderDash: [2, 4],
+          pointBackgroundColor: '#ffb74d'
+        },
+        {
+          label: 'Nubes altas (%)',
+          data: cloudVals.high,
+          borderWidth: 2,
+          borderColor: '#ba68c8',
+          backgroundColor: 'rgba(186, 104, 200, 0.1)',
+          fill: false,
+          tension: 0.4,
+          pointBackgroundColor: '#ba68c8'
+        }
+      ]
     },
     options: {
       plugins: { 
         legend: { 
           position:'bottom', 
           labels:{
-            boxWidth:15,
+            boxWidth: 15,
             font: {
               size: window.innerWidth < 768 ? 10 : 12
-            }
+            },
+            color: '#ffffff',
+            padding: 15
           } 
-        } 
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          borderColor: '#ff6600',
+          borderWidth: 1
+        },
+        annotation: {
+          annotations: {
+            sunriseLine: {
+              type: 'line',
+              mode: 'vertical',
+              scaleID: 'x',
+              value: sunriseIndex >= 0 ? sunriseIndex : 6,
+              borderColor: '#ffeb3b',
+              borderWidth: 3,
+              borderDash: [5, 5],
+              label: {
+                enabled: true,
+                content: '🌅 Amanecer',
+                position: 'start',
+                backgroundColor: 'rgba(255, 235, 59, 0.8)',
+                color: '#000000',
+                font: {
+                  weight: 'bold',
+                  size: 11
+                }
+              }
+            },
+            sunsetLine: {
+              type: 'line',
+              mode: 'vertical',
+              scaleID: 'x',
+              value: sunsetIndex >= 0 ? sunsetIndex : 18,
+              borderColor: '#ff9800',
+              borderWidth: 3,
+              borderDash: [5, 5],
+              label: {
+                enabled: true,
+                content: '🌇 Atardecer',
+                position: 'end',
+                backgroundColor: 'rgba(255, 152, 0, 0.8)',
+                color: '#000000',
+                font: {
+                  weight: 'bold',
+                  size: 11
+                }
+              }
+            }
+          }
+        }
       },
       scales: {
-        y: { beginAtZero:true, max:100 }
+        x: {
+          grid: {
+            color: 'rgba(255,255,255,0.1)'
+          },
+          ticks: {
+            color: '#ffffff',
+            maxRotation: 45,
+            callback: function(value, index) {
+              // Mostrar cada 3 horas para mejor legibilidad
+              return index % 3 === 0 ? this.getLabelForValue(value) : '';
+            }
+          },
+          title: {
+            display: true,
+            text: 'Hora del día',
+            color: '#ffffff',
+            font: {
+              size: 12,
+              weight: 'bold'
+            }
+          }
+        },
+        y: { 
+          beginAtZero: true, 
+          max: 100,
+          grid: {
+            color: 'rgba(255,255,255,0.1)'
+          },
+          ticks: {
+            color: '#ffffff',
+            callback: function(value) {
+              return value + '%';
+            }
+          },
+          title: {
+            display: true,
+            text: 'Nubosidad (%)',
+            color: '#ffffff',
+            font: {
+              size: 12,
+              weight: 'bold'
+            }
+          }
+        }
       },
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      },
+      elements: {
+        point: {
+          radius: 3,
+          hoverRadius: 6
+        }
+      }
     }
   });
 }
@@ -977,7 +1126,7 @@ async function predictRedSunset(lat, lon, cityName='') {
         mid: hourly.cloudcover_mid.slice(0,24).map(v => Math.round(v)),
         high: hourly.cloudcover_high.slice(0,24).map(v => Math.round(v)),
       };
-      updateCloudChart(times24, clouds);
+      updateCloudChart(times24, clouds, sunrise, sunset);
     }
 
     // Intentar cargar imagen satelital (FoV reducido)
