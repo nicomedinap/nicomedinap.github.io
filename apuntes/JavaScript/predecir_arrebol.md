@@ -1,11 +1,10 @@
 ---
 layout: none
----
-<html lang="es">
+---<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>🌇 Predictor de Arrebol</title>
+<title>Predictor de Arrebol</title>
 <script src="https://unpkg.com/suncalc"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
@@ -470,6 +469,28 @@ layout: none
       font-size: 0.65rem;
     }
   }
+
+  /* Agrega esto al CSS existente */
+.charts {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  margin-top: 15px;
+  height: 300px; /* Altura fija para móvil */
+}
+
+@media (max-width: 768px) {
+  .charts {
+    height: 280px; /* Un poco más bajo en móvil pero con buen espacio */
+  }
+}
+
+@media (max-width: 480px) {
+  .charts {
+    height: 260px; /* Ajuste para pantallas muy pequeñas */
+    margin-top: 12px;
+  }
+}
 </style>
 </head>
 <body>
@@ -835,7 +856,7 @@ function log(msg) {
 /* Chart instances: variables globales para Chart.js */
 let cloudChart = null;
 
-// Actualiza el gráfico de nubosidad con indicadores de amanecer/atardecer
+// Actualiza el gráfico de nubosidad con indicadores de amanecer/atardecer (optimizado para móvil)
 function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
   const ctx = document.getElementById('cloudChart').getContext('2d');
   if (cloudChart) cloudChart.destroy();
@@ -855,76 +876,109 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
     return hour >= sunsetHour;
   });
 
+  // Configuración responsive para móvil
+  const isMobile = window.innerWidth < 768;
+  
   cloudChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: hours,
       datasets: [
         {
-          label: 'Nubosidad total (%)',
+          label: 'Nubosidad total',
           data: cloudVals.total,
-          borderWidth: 3,
+          borderWidth: isMobile ? 1.5 : 2,
           borderColor: '#ffffff',
           backgroundColor: 'rgba(255,255,255,0.1)',
           fill: true,
-          tension: 0.4,
+          tension: 0.3,
           pointBackgroundColor: '#ffffff',
           pointBorderColor: '#ff6600',
-          pointBorderWidth: 2
+          pointBorderWidth: isMobile ? 1 : 2,
+          pointRadius: isMobile ? 1.5 : 3,
+          pointHoverRadius: isMobile ? 3 : 6
         },
         {
-          label: 'Nubes bajas (%)',
+          label: 'Nubes bajas',
           data: cloudVals.low,
-          borderWidth: 2,
+          borderWidth: isMobile ? 1 : 1.5,
           borderColor: '#4fc3f7',
           backgroundColor: 'rgba(79, 195, 247, 0.1)',
           fill: false,
-          tension: 0.4,
-          borderDash: [5, 5],
-          pointBackgroundColor: '#4fc3f7'
+          tension: 0.3,
+          borderDash: [4, 3],
+          pointBackgroundColor: '#4fc3f7',
+          pointBorderWidth: isMobile ? 0.5 : 1,
+          pointRadius: isMobile ? 1 : 2,
+          pointHoverRadius: isMobile ? 2.5 : 5
         },
         {
-          label: 'Nubes medias (%)',
+          label: 'Nubes medias',
           data: cloudVals.mid,
-          borderWidth: 2,
+          borderWidth: isMobile ? 1 : 1.5,
           borderColor: '#ffb74d',
           backgroundColor: 'rgba(255, 183, 77, 0.1)',
           fill: false,
-          tension: 0.4,
-          borderDash: [2, 4],
-          pointBackgroundColor: '#ffb74d'
+          tension: 0.3,
+          borderDash: [2, 3],
+          pointBackgroundColor: '#ffb74d',
+          pointBorderWidth: isMobile ? 0.5 : 1,
+          pointRadius: isMobile ? 1 : 2,
+          pointHoverRadius: isMobile ? 2.5 : 5
         },
         {
-          label: 'Nubes altas (%)',
+          label: 'Nubes altas',
           data: cloudVals.high,
-          borderWidth: 2,
+          borderWidth: isMobile ? 1 : 1.5,
           borderColor: '#ba68c8',
           backgroundColor: 'rgba(186, 104, 200, 0.1)',
           fill: false,
-          tension: 0.4,
-          pointBackgroundColor: '#ba68c8'
+          tension: 0.3,
+          pointBackgroundColor: '#ba68c8',
+          pointBorderWidth: isMobile ? 0.5 : 1,
+          pointRadius: isMobile ? 1 : 2,
+          pointHoverRadius: isMobile ? 2.5 : 5
         }
       ]
     },
     options: {
+      layout: {
+        padding: {
+          top: isMobile ? 10 : 15,
+          right: isMobile ? 5 : 10,
+          bottom: isMobile ? 5 : 10,
+          left: isMobile ? 5 : 10
+        }
+      },
       plugins: { 
         legend: { 
-          position:'bottom', 
-          labels:{
-            boxWidth: 15,
+          position: 'bottom',
+          align: 'center',
+          labels: {
+            boxWidth: isMobile ? 10 : 12,
+            padding: isMobile ? 12 : 15,
             font: {
-              size: window.innerWidth < 768 ? 10 : 12
+              size: isMobile ? 10 : 11,
+              weight: 'normal'
             },
             color: '#ffffff',
-            padding: 15
+            usePointStyle: true,
+            pointStyle: 'circle'
           } 
         },
         tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backgroundColor: 'rgba(0, 0, 0, 0.85)',
           titleColor: '#ffffff',
           bodyColor: '#ffffff',
           borderColor: '#ff6600',
-          borderWidth: 1
+          borderWidth: 1,
+          titleFont: {
+            size: isMobile ? 11 : 12
+          },
+          bodyFont: {
+            size: isMobile ? 10 : 11
+          },
+          padding: isMobile ? 8 : 10
         },
         annotation: {
           annotations: {
@@ -934,18 +988,19 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
               scaleID: 'x',
               value: sunriseIndex >= 0 ? sunriseIndex : 6,
               borderColor: '#ffeb3b',
-              borderWidth: 3,
-              borderDash: [5, 5],
+              borderWidth: isMobile ? 2 : 2.5,
+              borderDash: [4, 3],
               label: {
                 enabled: true,
-                content: '🌅 Amanecer',
+                content: isMobile ? '🌅' : '🌅 Amanecer',
                 position: 'start',
-                backgroundColor: 'rgba(255, 235, 59, 0.8)',
+                backgroundColor: 'rgba(255, 235, 59, 0.9)',
                 color: '#000000',
                 font: {
                   weight: 'bold',
-                  size: 11
-                }
+                  size: isMobile ? 9 : 10
+                },
+                padding: isMobile ? 3 : 4
               }
             },
             sunsetLine: {
@@ -954,18 +1009,19 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
               scaleID: 'x',
               value: sunsetIndex >= 0 ? sunsetIndex : 18,
               borderColor: '#ff9800',
-              borderWidth: 3,
-              borderDash: [5, 5],
+              borderWidth: isMobile ? 2 : 2.5,
+              borderDash: [4, 3],
               label: {
                 enabled: true,
-                content: '🌇 Atardecer',
+                content: isMobile ? '🌇' : '🌇 Atardecer',
                 position: 'end',
-                backgroundColor: 'rgba(255, 152, 0, 0.8)',
+                backgroundColor: 'rgba(255, 152, 0, 0.9)',
                 color: '#000000',
                 font: {
                   weight: 'bold',
-                  size: 11
-                }
+                  size: isMobile ? 9 : 10
+                },
+                padding: isMobile ? 3 : 4
               }
             }
           }
@@ -974,14 +1030,19 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
       scales: {
         x: {
           grid: {
-            color: 'rgba(255,255,255,0.1)'
+            color: 'rgba(255,255,255,0.08)',
+            drawTicks: false
           },
           ticks: {
             color: '#ffffff',
-            maxRotation: 45,
+            maxRotation: 0,
+            font: {
+              size: isMobile ? 15 : 18
+            },
             callback: function(value, index) {
-              // Mostrar cada 3 horas para mejor legibilidad
-              return index % 3 === 0 ? this.getLabelForValue(value) : '';
+              // En móvil mostrar cada 4 horas, en desktop cada 3
+              const interval = isMobile ? 4 : 3;
+              return index % interval === 0 ? this.getLabelForValue(value) : '';
             }
           },
           title: {
@@ -989,44 +1050,57 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
             text: 'Hora del día',
             color: '#ffffff',
             font: {
-              size: 12,
+              size: isMobile ? 15 : 18,
               weight: 'bold'
-            }
+            },
+            padding: { top: 5, bottom: 5 }
           }
         },
         y: { 
           beginAtZero: true, 
           max: 100,
+          min: 0,
           grid: {
-            color: 'rgba(255,255,255,0.1)'
+            color: 'rgba(255,255,255,0.08)',
+            drawTicks: false
           },
           ticks: {
             color: '#ffffff',
+            font: {
+              size: isMobile ? 15 : 18
+            },
             callback: function(value) {
               return value + '%';
-            }
+            },
+            // Más espacio entre ticks en móvil
+            stepSize: isMobile ? 25 : 20
           },
           title: {
             display: true,
             text: 'Nubosidad (%)',
             color: '#ffffff',
             font: {
-              size: 12,
+              size: isMobile ? 15 : 18,
               weight: 'bold'
-            }
+            },
+            padding: { top: 5, bottom: 5 }
           }
         }
       },
       responsive: true,
       maintainAspectRatio: false,
+      aspectRatio: isMobile ? 1.8 : 3.7, // Más alto en móvil
       interaction: {
         intersect: false,
         mode: 'index'
       },
       elements: {
         point: {
-          radius: 3,
-          hoverRadius: 6
+          radius: isMobile ? 1.5 : 2.5,
+          hoverRadius: isMobile ? 3 : 5
+        },
+        line: {
+          tension: 0.3 // Líneas más suaves
         }
       }
     }
