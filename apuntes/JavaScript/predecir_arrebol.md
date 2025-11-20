@@ -599,6 +599,7 @@ const chileanCities = {
   "Temuco":           { lat: -38.7359, lon: -72.5907, region: "IX Región",  altitude: 114 },
   "Valdivia":         { lat: -39.8142, lon: -73.2459, region: "XIV Región", altitude: 19 },
   "Osorno":           { lat: -40.5739, lon: -73.1310, region: "X Región",   altitude: 65 },
+  "Frutillar":       { lat: -41.1258, lon: -73.0605, region: "X Región",   altitude: 150 },
   "Puerto Montt":     { lat: -41.4689, lon: -72.9411, region: "X Región",   altitude: 85 },
   "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34 },
 };
