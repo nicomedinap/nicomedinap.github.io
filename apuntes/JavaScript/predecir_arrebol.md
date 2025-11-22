@@ -1401,11 +1401,11 @@ initCityMenu();
 </script>
 
 <footer class="footer">
-    <p>DeCosmos 2024. Nicolás Medina Peña.</p>
+    <p>[Aun sin nombre] 2025. Nicolás Medina Peña.</p>
     <nav>
         <a href="https://nicomedinap.github.io/about.html" target="_blank"> <u>Sobre el autor</u></a>
-        <a href="https://www.privacy-policy-link.com" target="_blank"> <u>Sobre las imágenes</u></a>
-        <a href="https://nicomedinap.github.io/apuntes/Telescopios.html" target="_blank"> <u>Sobre los telescopios</u></a>
+        <a href="https://www.privacy-policy-link.com" target="_blank"> <u>Sobre el modelo predictivo</u></a>
+        <a href="https://nicomedinap.github.io/apuntes/Telescopios.html" target="_blank"> <u>Sobre los datos</u></a>
         <a href="https://www.instagram.com/nicomediap/" target="_blank" class="fa fa-instagram"></a>
     </nav>
 </footer>
