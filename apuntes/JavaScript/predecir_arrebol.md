@@ -24,6 +24,7 @@ layout: none
     min-height:100vh;
     overflow-x:hidden;
     font-size: 16px; /* Tamaño base para móviles */
+    
   }
 
   /* === Pantalla de menú === */
@@ -258,18 +259,18 @@ layout: none
     font-size: 0.95rem;
   }
 
-  .data-grid { 
-    display:grid; 
-    grid-template-columns: repeat(2,1fr); 
-    gap:10px; 
-    margin-top:10px; 
+  .data-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important; /* 3 columnas */
+      grid-auto-flow: row !important; /* los items fluyen por filas */
+      gap: 10px !important;
+      width: 100% !important;
   }
-  .data-item { 
-    background: rgba(255,255,255,0.02); 
-    padding:10px; 
-    border-radius:8px; 
-    text-align:center; 
-    font-size: 0.9rem;
+  .data-item {
+      background: #2a2a2a;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 14px;
   }
 
   .predictions { 
@@ -278,15 +279,27 @@ layout: none
     margin-top:15px;
     flex-wrap: wrap;
   }
-  .probability { 
-    padding:12px; 
-    border-radius:8px; 
-    min-width:130px; 
-    text-align:center; 
-    font-weight:700; 
-    flex: 1;
-    font-size: 0.95rem;
+
+  .probability {
+      font-size: 32px;         /* 👉 Probabilidad más grande */
+      font-weight: bold;
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      width: 100%;
+      box-sizing: border-box;  /* 👉 Evita que el texto se desborde */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 👉 Centrado vertical */
+      align-items: center;     /* 👉 Centrado horizontal */
+      line-height: 1.2;        /* 👉 Evita que el texto se pegue demasiado */
   }
+
+  .probability span {
+      font-size: 40px;         /* 👉 Aún más grande si quieres separar el número */
+  }
+  
   .high-prob { 
     background: rgba(255,204,0,0.18); 
     color:#ffd24d; 
@@ -328,6 +341,67 @@ layout: none
     gap:12px; 
     flex-direction:column; 
     margin-top:15px; 
+  }
+  .footer {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+  }
+
+  .footer a {
+      margin: 0;
+      font-size: 10px;
+  }
+
+  .footer p {
+      margin: 0 0 1px 0;
+      font-size: 12px;
+  }
+
+  .footer nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 2px;
+      font-size: 12px;
+      transition: color 0.3s ease, text-decoration 0.3s ease;
+  }
+
+  .footer nav a:hover {
+      color: #1e90ff; /* Cambia a un color azul cuando el cursor está sobre el enlace */
+      text-decoration: underline; /* Subraya el enlace */
+  }
+
+  .footer nav a:active {
+      color: #f39c12; /* Cambia el color cuando se hace clic */
+  }
+
+  .footer nav .fa-instagram:hover {
+      color: #e4405f; /* Cambia el color del icono de Instagram al pasar el cursor */
+  }
+
+  .footer nav a.fa {
+      font-size: 20px;
+      margin: 0 10px;
+      transition: transform 0.3s ease;
+  }
+
+  .footer nav a.fa:hover {
+      transform: scale(1.2); /* Agranda el icono ligeramente al pasar el cursor */
+  }
+
+  .titulo-sticky {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 1.6rem;
+      border-bottom: 1px solid #ddd;
+      z-index: 10;
   }
 
   /* === MEDIA QUERIES PARA MÓVIL === */
@@ -496,6 +570,8 @@ layout: none
 </head>
 <body>
 
+<h2 style="text-align:center; margin-top:20px;">Predictor de arreboles</h2>
+
 <!-- MENÚ DE CIUDADES -->
 <div id="cityMenu"></div>
 
@@ -506,14 +582,9 @@ layout: none
   <!-- Contenedor principal del código 2 -->
   <div class="container">
     <h1 id="cityTitle">🌇 Predictor de Arrebol</h1>
-    <p class="lead">Predicción automática (PM2.5 + nubosidad por capas + geometría solar).</p>
+    <p class="lead">Predicción realizada usando los datos obtenidos de Open-Meteo (https://open-meteo.com/) y construyendo un modelo simple donde se pondera la altura de las nubes.</p>
 
-    <!-- Controles: selector de ciudad y botones -->
-    <div class="controls">
-      <div style="display:flex; gap:8px; width: 100%; flex-wrap: wrap;">
-        <button id="btnLoc" class="ghost">📍 Usar ubicación</button>
-      </div>
-    </div>
+
 
     <!-- Grid principal: lado izquierdo (funcional) y lado derecho (satélite y log) -->
     <div class="grid">
@@ -523,7 +594,7 @@ layout: none
             <!-- Encabezado del resultado: ubicación y carga -->
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap;">
               <div style="flex: 1; min-width: 200px;">
-                <div id="locationText">Seleccione ciudad o use ubicación</div>
+                <div id="locationText">Seleccione ciudad</div>
                 <div class="sun-times" id="sunTimes"></div>
               </div>
               <div id="loadingState"></div>
@@ -532,7 +603,7 @@ layout: none
             <!-- Grid de datos: nubosidad, PM2.5 y elevaciones -->
             <div class="data-grid" id="dataGrid">
               <div class="data-item">☁️ Nubosidad: <strong id="cloudVal">—</strong></div>
-              <div class="data-item">🌫 PM2.5: <strong id="pmVal">—</strong></div>
+              <div class="data-item">Cantidad de elemento particulado PM2.5: <strong id="pmVal">—</strong></div>
               <div class="data-item">⬆ Elev amanecer: <strong id="sunriseElev">—</strong></div>
               <div class="data-item">⬇ Elev atardecer: <strong id="sunsetElev">—</strong></div>
             </div>
@@ -570,13 +641,16 @@ layout: none
         </div>
 
         <div class="panel" style="margin-top:12px;">
-          <strong>Detalles técnicos / registro</strong>
+          <strong>registro</strong>
           <pre id="log" style="white-space:pre-wrap; font-size:0.85rem; margin:8px 0 0 0; max-height: 150px; overflow-y: auto;"></pre>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
 
 <script>
 /* === CIUDADES === */
@@ -599,7 +673,6 @@ const chileanCities = {
   "Temuco":           { lat: -38.7359, lon: -72.5907, region: "IX Región",  altitude: 114 },
   "Valdivia":         { lat: -39.8142, lon: -73.2459, region: "XIV Región", altitude: 19 },
   "Osorno":           { lat: -40.5739, lon: -73.1310, region: "X Región",   altitude: 65 },
-  "Frutillar":       { lat: -41.1258, lon: -73.0605, region: "X Región",   altitude: 150 },
   "Puerto Montt":     { lat: -41.4689, lon: -72.9411, region: "X Región",   altitude: 85 },
   "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34 },
 };
@@ -608,9 +681,6 @@ const chileanCities = {
 async function initCityMenu() {
   const menu = document.getElementById('cityMenu');
   
-  // Mostrar mensaje de carga
-  menu.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:20px;">Cargando probabilidades de arrebol...</div>';
-
   for (const [nombre, info] of Object.entries(chileanCities)) {
     try {
       // 1. Obtener PM2.5 y nubosidad (igual que en predictRedSunset)
@@ -622,15 +692,15 @@ async function initCityMenu() {
       let probAtardecer = 0;
 
       if (hourly) {
-        // Calcular tiempos solares REALES (igual que en predictRedSunset)
+        // Calcular tiempos solares REALES 
         const now = new Date();
         const times = SunCalc.getTimes(now, info.lat, info.lon);
         const sunset = times.sunset;
         
-        // Elevación solar REAL del atardecer
+        // Elevación solar del atardecer
         const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
 
-        // Buscar índice del atardecer REAL en los datos de nubes
+        // Buscar índice del atardecer en los datos de nubes
         const sunsetHour = sunset.toISOString().slice(0,13);
         const idxSunset = hourly.time.findIndex(t => t.startsWith(sunsetHour));
         
@@ -641,7 +711,7 @@ async function initCityMenu() {
         const mid_e  = hourly.cloudcover_mid?.[targetIdx]  ?? (hourly.cloudcover?.[targetIdx] ?? 50);
         const high_e = hourly.cloudcover_high?.[targetIdx] ?? (hourly.cloudcover?.[targetIdx] ?? 20);
 
-        // Calcular probabilidad del ATARDECER (igual que en predictRedSunset)
+        // Calcular probabilidad del ATARDECER 
         probAtardecer = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false);
         probAtardecer = Math.round(probAtardecer * 100);
       }
@@ -655,7 +725,7 @@ async function initCityMenu() {
           <div class="city-name">${nombre}</div>
           <div class="city-region">${info.region}</div>
           <div class="city-probability">
-              Prob. atardecer: <strong>${probAtardecer}%</strong>
+              Prob. arrebol: <strong>${probAtardecer}%</strong>
           </div>
           <div class="probability-bar" style="width: ${probAtardecer}%"></div>
       `;
@@ -701,7 +771,6 @@ async function initCityMenu() {
 }
 
 /* === MANEJO DE CIUDAD === */
-
 /* boton para volver a elegir ciudad */
 function volverMenu(){
   document.getElementById('appContainer').style.display='none';
@@ -711,12 +780,10 @@ function volverMenu(){
 
 async function seleccionarCiudad(nombre){
   const city=chileanCities[nombre];
-
   document.getElementById('cityMenu').style.display='none';
   document.getElementById('appContainer').style.display='block';
-  document.getElementById('cityTitle').textContent=`🌇 ${nombre}`;
+  document.getElementById('cityTitle').textContent=`Sobre ${nombre}`;
   localStorage.setItem('lastCity',nombre);
-
   await predictRedSunset(city.lat, city.lon, nombre);
 }
 
@@ -764,7 +831,7 @@ async function loadImage(src) {
 async function getSatelliteImage(lat, lon) {
   const imgEl = document.getElementById('satelliteImage');
 
-  const delta = 0.3;
+  const delta = 0.2;
 
   const sources = [
     `https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=VIIRS_SNPP_CorrectedReflectance_TrueColor&STYLES=&FORMAT=image/jpeg&HEIGHT=512&WIDTH=512&CRS=EPSG:4326&BBOX=${lat-delta},${lon-delta},${lat+delta},${lon+delta}`,
@@ -785,49 +852,65 @@ async function getSatelliteImage(lat, lon) {
   imgEl.style.display = 'none';
 }
 
-// Función principal para calcular probabilidades de arrebol
+// Función principal para calcular probabilidades de arrebol MEJORADA
 function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false) {
   const lowPct  = Math.max(0, Math.min(100, Number(low)  || 0));
   const midPct  = Math.max(0, Math.min(100, Number(mid)  || 0));
   const highPct = Math.max(0, Math.min(100, Number(high) || 0));
-  const TOTAL_CLOUD_PERCENT = (lowPct + midPct + highPct) / 3;
-  if (TOTAL_CLOUD_PERCENT < 5) return 0.0;
-
-  const cc = TOTAL_CLOUD_PERCENT;
-  const cloudPeakCenter = 50;
-  const cloudSigma = 18;
-  const cloudFactor = Math.exp(-Math.pow((cc - cloudPeakCenter) / cloudSigma, 2));
-  const cloudPenalty = (cc < 10) ? 0.05 : (cc > 85) ? 0.25 : 1.0;
-  const cloudScore = cloudFactor * cloudPenalty;
-
+  
+  // === FACTOR 1: NUBOSIDAD POR CAPAS (PESO MÁXIMO - Sunset Model) ===
+  // Basado en: "we weighted moisture the most" y "weighted high clouds the most"
   const layerScore = (
-      0.20 * (lowPct / 100) +
-      0.50 * (midPct / 100) +
-      0.90 * (highPct / 100)
+      0.15 * (lowPct / 100) +    // Nubes bajas: menos peso (restringen luz)
+      0.35 * (midPct / 100) +    // Nubes medias: peso medio  
+      0.50 * (highPct / 100)     // Nubes altas: máximo peso (como "pantalla de cine")
   );
 
+  // === FACTOR 2: GEOMETRÍA SOLAR ===
   const idealElev = -3.0;
   const geomSigma = 4.0;
-  const geomRaw = Math.exp(-Math.pow((elevDeg - idealElev) / geomSigma, 2));
-  const highSunPenalty = elevDeg > 20 ? 0.2 : 1.0;
-  const lowSunPenalty  = elevDeg < -18 ? 0.15 : 1.0;
-  const geomScore = geomRaw * highSunPenalty * lowSunPenalty;
+  const geomScore = Math.exp(-Math.pow((elevDeg - idealElev) / geomSigma, 2));
 
+  // === FACTOR 3: CALIDAD DEL AIRE (PM2.5) ===
   const idealPM = 15;
   const pmSigma = 18;
   const pmScore = Math.exp(-Math.pow((pm25 - idealPM) / pmSigma, 2));
 
-  const wCloud = 0.40;
-  const wLayer = 0.18;
-  const wGeom  = 0.30;
-  const wPM    = 0.12;
+  // === FACTOR 4: HUMEDAD (PROXY BASADO EN NUBES ALTAS) ===
+  // Basado en: "we weighted moisture the most" - usamos nubes altas como proxy de humedad alta
+  const humidityScore = highPct / 100;
 
-  const score = (wCloud * cloudScore) + (wLayer * layerScore) + (wGeom * geomScore) + (wPM * pmScore);
+  // === FACTOR 5: PRESIÓN ATMOSFÉRICA (PROXY BASADO EN ESTABILIDAD) ===
+  // Basado en: "Pressure, as well as the change in pressure over time was the next highest weighted factor"
+  // Usamos la distribución de nubes como proxy de estabilidad de presión
+  const pressureStability = 1.0 - Math.abs((lowPct + midPct) - highPct) / 200;
+  const pressureScore = Math.max(0.3, Math.min(1.0, pressureStability));
 
+  // === PESOS FINALES (basados en Sunset Model) ===
+  const wLayer = 0.40;     // Máximo peso: nubes por capas
+  const wGeom  = 0.20;     // Geometría solar
+  const wPM    = 0.10;     // Calidad del aire  
+  const wHumidity = 0.15;  // Humedad (proxy de nubes altas)
+  const wPressure = 0.15;  // Presión/estabilidad atmosférica
+
+  // Calcular score combinado
+  const score = (wLayer * layerScore) + 
+                (wGeom * geomScore) + 
+                (wPM * pmScore) + 
+                (wHumidity * humidityScore) + 
+                (wPressure * pressureScore);
+
+  // Aplicar función logística para obtener probabilidad
   const logisticK = 10.0;
   const logisticMid = 0.5;
   let p = 1 / (1 + Math.exp(-logisticK * (score - logisticMid)));
 
+  // Penalización para condiciones muy desfavorables
+  const totalCloud = (lowPct + midPct + highPct) / 3;
+  if (totalCloud > 95) p *= 0.3; // Nubosidad muy densa
+  if (highPct < 10 && totalCloud < 20) p *= 0.5; // Cielo muy despejado (sin "pantalla")
+
+  // Reducción para amanecer
   if (isSunrise) p *= 0.9;
 
   p = Math.max(0, Math.min(0.99, p));
@@ -897,7 +980,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBackgroundColor: '#ffffff',
           pointBorderColor: '#ff6600',
           pointBorderWidth: isMobile ? 1 : 2,
-          pointRadius: isMobile ? 1.5 : 3,
+          pointRadius: isMobile ? 5 : 8,
           pointHoverRadius: isMobile ? 3 : 6
         },
         {
@@ -911,7 +994,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           borderDash: [4, 3],
           pointBackgroundColor: '#4fc3f7',
           pointBorderWidth: isMobile ? 0.5 : 1,
-          pointRadius: isMobile ? 1 : 2,
+          pointRadius: isMobile ? 5 : 8,
           pointHoverRadius: isMobile ? 2.5 : 5
         },
         {
@@ -925,7 +1008,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           borderDash: [2, 3],
           pointBackgroundColor: '#ffb74d',
           pointBorderWidth: isMobile ? 0.5 : 1,
-          pointRadius: isMobile ? 1 : 2,
+          pointRadius: isMobile ? 5 : 8,
           pointHoverRadius: isMobile ? 2.5 : 5
         },
         {
@@ -938,7 +1021,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           tension: 0.3,
           pointBackgroundColor: '#ba68c8',
           pointBorderWidth: isMobile ? 0.5 : 1,
-          pointRadius: isMobile ? 1 : 2,
+          pointRadius: isMobile ? 5 : 8,
           pointHoverRadius: isMobile ? 2.5 : 5
         }
       ]
@@ -1109,24 +1192,64 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
   });
 }
 
+
+
+/* ============================
+   Workflow principal: predictRedSunset
+   ============================ */
+// Obtener datos de presión y humedad
+async function getPressureHumidity(lat, lon) {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=pressure_msl,relativehumidity_2m&timezone=auto`;
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if (data.hourly) {
+      const now = new Date();
+      const currentHour = now.toISOString().slice(0,13);
+      const currentIdx = data.hourly.time.findIndex(t => t.startsWith(currentHour));
+      
+      if (currentIdx >= 0) {
+        return {
+          pressure: data.hourly.pressure_msl?.[currentIdx] || 1013,
+          humidity: data.hourly.relativehumidity_2m?.[currentIdx] || 50,
+          timestamp: data.hourly.time?.[currentIdx] || new Date().toISOString()
+        };
+      }
+    }
+  } catch (e) {
+    console.warn('Error obteniendo presión/humedad:', e);
+  }
+  
+  return {
+    pressure: 1013,
+    humidity: 50,
+    timestamp: new Date().toISOString()
+  };
+}
+
 /* ============================
    Workflow principal: predictRedSunset
    ============================ */
 
 // Función principal: ejecuta la recolección de datos y calcula probabilidades
 async function predictRedSunset(lat, lon, cityName='') {
-  // Mostrar loading en UI
-  document.getElementById('loadingState').innerHTML = '<span class="loading"></span>';
   // Mostrar ubicación en UI (nombre de ciudad o coordenadas)
-  document.getElementById('locationText').textContent = `📍 ${cityName || `(${lat.toFixed(2)}, ${lon.toFixed(2)})`}`;
-  log(`Iniciando predicción para ${cityName || `${lat},${lon}`}`);
+  // document.getElementById('locationText').textContent = `📍 ${cityName || `(${lat.toFixed(2)}, ${lon.toFixed(2)})`}`;
+  log(`Predicción para ${cityName || `${lat},${lon}`}`);
 
   try {
-    // Obtener PM2.5 y la serie horaria de nubosidad en paralelo
-    const [pm25, hourly] = await Promise.all([ getPM25(lat, lon), getCloudCoverSeries(lat, lon) ]);
+    // Obtener PM2.5, nubosidad, presión y humedad en paralelo
+    const [pm25, hourly, pressureData] = await Promise.all([ 
+      getPM25(lat, lon), 
+      getCloudCoverSeries(lat, lon),
+      getPressureHumidity(lat, lon)
+    ]);
+    
     // Actualizar estado global
     currentState.lat = lat; currentState.lon = lon; currentState.cityName = cityName;
     currentState.hourly = hourly; currentState.pm25 = pm25;
+    currentState.pressureData = pressureData;
 
     // Calcular tiempos solares (SunCalc retorna objetos Date)
     const now = new Date();
@@ -1170,15 +1293,36 @@ async function predictRedSunset(lat, lon, cityName='') {
 
     // Actualizar UI: quitar loading y mostrar métricas
     document.getElementById('loadingState').innerHTML = '';
-    document.getElementById('cloudVal').textContent = `${Math.round(tot_e)}% (hoy)`;
-    document.getElementById('pmVal').textContent = `${pm25.toFixed(1)} µg/m³`;
-    document.getElementById('sunriseElev').textContent = `${sunriseElev.toFixed(1)}°`;
-    document.getElementById('sunsetElev').textContent = `${sunsetElev.toFixed(1)}°`;
+    
+    // Formatear fecha y hora de los datos
+    const dataTime = new Date(pressureData.timestamp);
+    const fechaStr = dataTime.toLocaleDateString('es-CL', { 
+      day: '2-digit', month: '2-digit', year: 'numeric' 
+    });
+    const horaStr = dataTime.toLocaleTimeString('es-CL', { 
+      hour: '2-digit', minute: '2-digit' 
+    });
+
+    // Actualizar el grid de datos con la nueva información
+    document.getElementById('dataGrid').innerHTML = `
+      <div class="data-item">☁️ Nubosidad: <strong>${Math.round(tot_e)}%</strong></div>
+      <div class="data-item">🌫 PM2.5: <strong>${pm25.toFixed(1)} µg/m³</strong></div>
+      <div class="data-item">📊 Presión: <strong>${pressureData.pressure.toFixed(0)} hPa</strong></div>
+      <div class="data-item">💧 Humedad: <strong>${pressureData.humidity.toFixed(0)}%</strong></div>
+      <div class="data-item">⬆ Elev amanecer: <strong>${sunriseElev.toFixed(1)}°</strong></div>
+      <div class="data-item">⬇ Elev atardecer: <strong>${sunsetElev.toFixed(1)}°</strong></div>
+    `;
+
+    // Mostrar información de fecha y hora de los datos
+    document.getElementById('locationText').innerHTML = `
+      📍 ${cityName || `(${lat.toFixed(2)}, ${lon.toFixed(2)})`}<br>
+      <small style="opacity:0.8; font-size:0.9rem;">📅 Datos: ${fechaStr} 🕒 ${horaStr}</small>
+    `;
 
     // Mostrar horarios de amanecer/atardecer en UI (formato local)
     document.getElementById('sunTimes').innerHTML = `
-      <div class="sun-time">🌅 ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
-      <div class="sun-time">🌇 ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
+      <div class="sun-time">🌅 Amanecer: ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
+      <div class="sun-time">🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
     `;
 
     // Mostrar bloques de probabilidad (estilizados)
@@ -1212,7 +1356,9 @@ async function predictRedSunset(lat, lon, cityName='') {
     currentState.predictedSunset = sunsetProb > 0.5;
 
     // Escribir log con síntesis de predicción
-    log(`Predicciones: amanecer ${(sunriseProb*100).toFixed(1)}%, atardecer ${(sunsetProb*100).toFixed(1)}%`);
+    log(`% arrebol: amanecer ${(sunriseProb*100).toFixed(1)}%, atardecer ${(sunsetProb*100).toFixed(1)}%`);
+    log(`Presión ${pressureData.pressure.toFixed(0)} hPa, Humedad ${pressureData.humidity.toFixed(0)}%`);
+    // log(`Fecha datos: ${fechaStr} ${horaStr}`);
 
   } catch (e) {
     // Manejo de errores en flujo principal
@@ -1235,7 +1381,7 @@ function probClass(p) {
 
 /* ============================
    Botones: location
-   ============================ */
+   ============================ 
 
 // Botón "Usar ubicación" (geolocalización del navegador)
 document.getElementById('btnLoc').addEventListener('click', ()=> {
@@ -1247,11 +1393,23 @@ document.getElementById('btnLoc').addEventListener('click', ()=> {
     document.getElementById('loadingState').innerHTML = '';
     alert('No se pudo obtener ubicación: ' + (err.message || err.code));
   }, { timeout: 10000 });
-});
+});*/
 
 // Ejecutar al cargar
 initCityMenu();
 
 </script>
+
+<footer class="footer">
+    <p>DeCosmos 2024. Nicolás Medina Peña.</p>
+    <nav>
+        <a href="https://nicomedinap.github.io/about.html" target="_blank"> <u>Sobre el autor</u></a>
+        <a href="https://www.privacy-policy-link.com" target="_blank"> <u>Sobre las imágenes</u></a>
+        <a href="https://nicomedinap.github.io/apuntes/Telescopios.html" target="_blank"> <u>Sobre los telescopios</u></a>
+        <a href="https://www.instagram.com/nicomediap/" target="_blank" class="fa fa-instagram"></a>
+    </nav>
+</footer>
+
+
 </body>
 </html>
