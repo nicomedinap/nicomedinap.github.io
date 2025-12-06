@@ -5,12 +5,144 @@ layout: none
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>Predictor de Arreboles (Préboles) </title>
+  <title>Predictor de Arreboles (Préboles)</title>
   <script src="https://unpkg.com/suncalc"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <!-- Leaflet para mapas interactivos -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
   <link rel="stylesheet" href="https://nicomedinap.github.io/public/css/preboles.css">
   <style>
+
+    /* MAPA CON HEXÁGONOS */
+    .map-wrapper {
+      position: relative;
+      height: 450px;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+    
+    /* LEYENDA CENTRADA ABAJO CON GRADIENTE ORIGINAL */
+    .probability-legend {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      z-index: 1000;
+      min-width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .legend-title {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    
+    .legend-gradient {
+      height: 12px;
+      width: 100%;
+      background: linear-gradient(to right, 
+        #2b83ba,  /* Azul - 0% */
+        #abdda4,  /* Verde claro - 25% */
+        #ffffbf,  /* Amarillo - 50% */
+        #fdae61,  /* Naranja - 75% */
+        #d7191c   /* Rojo - 100% */
+      );
+      margin-bottom: 8px;
+      border-radius: 6px;
+    }
+    
+    .legend-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      opacity: 0.9;
+    }
+    
+    /* CONTROLES SIMPLIFICADOS DEL MAPA */
+    .map-controls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .map-toggle {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    
+    .map-toggle.active {
+      background: #4CAF50;
+    }
+    
+    /* GRÁFICO */
+    .charts {
+      height: 250px;
+      margin-top: 15px;
+    }
+    
+    /* LOG */
+    #log {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      max-height: 100px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+    
+    
+    
+    /* MEDIA QUERIES */
+    @media (min-width: 768px) {
+      .grid {
+        flex-direction: row;
+      }
+      .grid > div {
+        flex: 1;
+      }
+      .data-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .data-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .probability-legend {
+        min-width: 200px;
+        font-size: 0.7rem;
+        padding: 8px 12px;
+      }
+    }
   </style>
 </head>
 
@@ -35,7 +167,7 @@ layout: none
     <h1 id="cityTitle">🌇 Predictor de Arrebol</h1>
     <p class="lead">Predicción realizada usando los datos obtenidos de Open-Meteo (https://open-meteo.com/) y construyendo un modelo simple donde se pondera la altura de las nubes.</p>
 
-    <!-- Grid principal: lado izquierdo (funcional) y lado derecho (satélite y log) -->
+    <!-- Grid principal: lado izquierdo (funcional) y lado derecho (mapa y log) -->
     <div class="grid">
       <div>
         <div class="panel">
@@ -68,25 +200,40 @@ layout: none
         </div>
       </div>
 
-      <!-- Columna lateral: imagen satelital y log -->
+      <!-- Columna lateral: mapa y log -->
       <div>
         <div class="panel">
-          <div><strong>Imagen satelital / nubes</strong></div>
-          <div class="satellite-wrapper">
-            <img id="satelliteImage" alt="Imagen satelital de nubes" />
+          <div><strong>Mapa de probabilidad de arrebol</strong></div>
+          <div class="map-wrapper">
+            <div id="map"></div>
+            
+            <!-- LEYENDA CENTRADA ABAJO CON GRADIENTE ORIGINAL -->
+            <div class="probability-legend">
+              <div class="legend-title">Probabilidad de arrebol</div>
+              <div class="legend-gradient"></div>
+              <div class="legend-labels">
+                <span>0%</span>
+                <span>50%</span>
+                <span>100%</span>
+              </div>
+            </div>
+            
+            <!-- CONTROLES SIMPLIFICADOS -->
+            <div class="map-controls">
+              <button class="map-toggle active" id="toggleHeatmap" onclick="toggleHeatmap()">Hexágonos</button>
+              <button class="map-toggle active" id="toggleLabels" onclick="toggleLabels()">%</button>
+            </div>
 
-            <!-- Etiquetas superpuestas -->
-            <div class="overlay orientation">N ↑</div>
-            <div class="overlay scale">
-                <div class="scale-bar"></div>
-                <span>60 km</span>
+            <div id="mapLoading" class="map-loading" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 8px;">
+              Calculando...
             </div>
-            <div class="overlay instrument">Fuente: VIIRS (NASA GIBS)</div>
-            </div>
+          </div>
 
-            <div style="font-size:0.9rem; opacity:0.9; margin-top:8px;">
-            Si falla la imagen intentará distintos proveedores. Puedes usar la imagen como referencia visual.
-            </div>
+          <div style="font-size:0.9rem; opacity:0.9; margin-top:8px;">
+            Celdas hexagonales muestran la probabilidad de arrebol en la trayectoria hacia el atardecer. 
+            Resolución proporcional a los datos de Open-Meteo.
+            Colores más cálidos indican mayor probabilidad.
+          </div>
         </div>
 
         <div class="panel" style="margin-top:12px;">
@@ -99,6 +246,15 @@ layout: none
 </div>
 
 <script>
+/* === VARIABLES GLOBALES PARA EL MAPA === */
+let map = null;
+let marker = null;
+let heatLayer = null;
+let labelLayer = null;
+let heatmapEnabled = true;
+let labelsEnabled = true;
+let weatherDataCache = {};
+
 /* === CIUDADES === */
 const chileanCities = {
   "Arica":            { lat: -18.4783, lon: -70.3126, region: "XV Región",  altitude: 30 },
@@ -261,7 +417,6 @@ async function seleccionarCiudad(nombre){
   await predictRedSunset(city.lat, city.lon, nombre);
 }
 
-
 // Obtiene PM2.5 desde OpenAQ (si disponible), o valor por defecto
 async function getPM25(lat, lon) {
   const url = `https://api.openaq.org/v2/latest?coordinates=${lat},${lon}&radius=15000&limit=20`;
@@ -289,42 +444,425 @@ async function getCloudCoverSeries(lat, lon) {
   }
 }
 
-// Helper para cargar una imagen con promesa
-async function loadImage(src) {
-  return new Promise((resolve,reject)=>{
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = ()=>resolve(img);
-    img.onerror = reject;
-    img.src = src;
-  });
+// Obtener datos de presión y humedad
+async function getPressureHumidity(lat, lon) {
+    try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=pressure_msl,relativehumidity_2m,temperature_2m&timezone=auto`;
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        if (data.hourly) {
+            const now = new Date();
+            const currentHour = now.toISOString().slice(0,13);
+            const currentIdx = data.hourly.time.findIndex(t => t.startsWith(currentHour));
+            
+            if (currentIdx >= 0) {
+                return {
+                    pressure: data.hourly.pressure_msl?.[currentIdx] || 1013,
+                    humidity: data.hourly.relativehumidity_2m?.[currentIdx] || 50,
+                    temperature: data.hourly.temperature_2m?.[currentIdx] || 20,
+                    timestamp: data.hourly.time?.[currentIdx] || new Date().toISOString()
+                };
+            }
+        }
+    } catch (e) {
+        console.warn('Error obteniendo presión/humedad/temperatura:', e);
+    }
+    
+    return {
+        pressure: 1013,
+        humidity: 50,
+        temperature: 20,
+        timestamp: new Date().toISOString()
+    };
 }
 
-// Intenta cargar una imagen satelital de varias fuentes y la muestra en el <img>
-async function getSatelliteImage(lat, lon) {
-  const imgEl = document.getElementById('satelliteImage');
+/* ========== FUNCIONES DEL MAPA CON HEXÁGONOS ========== */
 
-  const delta = 0.2;
+// Función para inicializar o actualizar el mapa
+function initMap(lat, lon, cityName) {
+  // Si el mapa ya existe, simplemente actualízalo
+  if (map) {
+    map.setView([lat, lon], 18); // Cambia de 8 a 10 (más zoom)
+    if (marker) {
+      marker.setLatLng([lat, lon]);
+    } else {
+      marker = L.marker([lat, lon]).addTo(map)
+        .bindPopup(`<b>${cityName}</b><br>Lat: ${lat.toFixed(4)}<br>Lon: ${lon.toFixed(4)}`)
+        .openPopup();
+    }
+    return;
+  }
+  
+  // Si no existe, crea el mapa
+  map = L.map('map').setView([lat, lon], 8);
+  
+  // Añadir capa de OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  
+  // Añadir marcador
+  marker = L.marker([lat, lon]).addTo(map)
+    .bindPopup(`<b>${cityName}</b><br>Lat: ${lat.toFixed(4)}<br>Lon: ${lon.toFixed(4)}`)
+    .openPopup();
+}
 
-  const sources = [
-    `https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=VIIRS_SNPP_CorrectedReflectance_TrueColor&STYLES=&FORMAT=image/jpeg&HEIGHT=512&WIDTH=512&CRS=EPSG:4326&BBOX=${lat-delta},${lon-delta},${lat+delta},${lon+delta}`,
-    `https://tile.openweathermap.org/map/clouds_new/5/${Math.floor((lon+180)/360*32)}/${Math.floor((90-lat)/180*32)}.png?appid=demo`,
+/* ===========================
+   GEODÉSICAS Y HEXÁGONOS
+   =========================== */
+
+/**
+ * Calcular punto de destino geodésico (sfera).
+ * lat, lon en grados; azimuth en grados; distanceKm en km.
+ * Devuelve { lat, lon } en grados.
+ */
+function calculateDestinationPoint(lat, lon, azimuth, distanceKm) {
+  const R = 6371; // km
+  const latRad = lat * Math.PI / 180;
+  const lonRad = lon * Math.PI / 180;
+  const azRad = azimuth * Math.PI / 180;
+  const dDivR = distanceKm / R;
+
+  const destLatRad = Math.asin(
+    Math.sin(latRad) * Math.cos(dDivR) +
+    Math.cos(latRad) * Math.sin(dDivR) * Math.cos(azRad)
+  );
+
+  const destLonRad = lonRad + Math.atan2(
+    Math.sin(azRad) * Math.sin(dDivR) * Math.cos(latRad),
+    Math.cos(dDivR) - Math.sin(latRad) * Math.sin(destLatRad)
+  );
+
+  return {
+    lat: destLatRad * 180 / Math.PI,
+    lon: destLonRad * 180 / Math.PI
+  };
+}
+
+/**
+ * Calcula azimut de la puesta de sol (0=N, 90=E, 180=S, 270=W)
+ */
+function calculateSunsetAzimuth(lat, lon) {
+  const now = new Date();
+  const times = SunCalc.getTimes(now, lat, lon);
+  const sunset = times.sunset;
+  const pos = SunCalc.getPosition(sunset, lat, lon);
+  // pos.azimuth: radians, measured from south? SunCalc returns azimuth in radians from south (-pi..pi)
+  // Formula below converts to 0=N, 90=E convention and normalizes
+  const az = (pos.azimuth * 180 / Math.PI + 180) % 360;
+  return az;
+}
+
+/**
+ * Calcula distancia entre dos puntos geodésicos (km)
+ */
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+// GENERAR 7 HEXÁGONOS BÁSICOS
+async function generate7HexagonGrid(centerLat, centerLon, sunsetAzimuth) {
+  const hexagons = [];
+  const hexRadiusKm = 10;
+  const hexWidth = Math.sqrt(3) * hexRadiusKm;
+  const hexHeight = 1.5 * hexRadiusKm;
+  const perpendicularAzimuth = (sunsetAzimuth + 90) % 360;
+  
+  // Coordenadas axiales para los 7 hexágonos
+  const hexCoordinates = [
+    // Hexágono central
+    { q: 0, r: 0 },
+    
+    // 6 hexágonos alrededor
+    { q: 1, r: 0 },   // Derecha
+    { q: 0, r: 1 },   // Abajo-derecha
+    { q: -1, r: 1 },  // Abajo-izquierda
+    { q: -1, r: 0 },  // Izquierda
+    { q: 0, r: -1 },  // Arriba-izquierda
+    { q: 1, r: -1 }   // Arriba-derecha
   ];
-
-  for (let s of sources) {
-    try {
-      await loadImage(s);
-      imgEl.src = s;
-      imgEl.style.display = 'block';
-      return;
-    } catch (e) {
-      console.warn('sat source failed', s, e);
+  
+  // Generar los 7 hexágonos
+  for (const coord of hexCoordinates) {
+    const { q, r } = coord;
+    
+    // Convertir coordenadas axiales a coordenadas cartesianas (km)
+    const x = hexWidth * (q + r/2);
+    const y = hexHeight * r;
+    
+    // Calcular punto central del hexágono
+    let hexCenter;
+    
+    if (x === 0 && y === 0) {
+      hexCenter = { lat: centerLat, lon: centerLon };
+    } else {
+      // Primero mover horizontalmente (perpendicular)
+      let tempPoint = { lat: centerLat, lon: centerLon };
+      if (x !== 0) {
+        const dirX = x > 0 ? perpendicularAzimuth : (perpendicularAzimuth + 180) % 360;
+        tempPoint = calculateDestinationPoint(centerLat, centerLon, dirX, Math.abs(x));
+      }
+      
+      // Luego mover verticalmente (dirección del atardecer)
+      if (y !== 0) {
+        const dirY = y > 0 ? sunsetAzimuth : (sunsetAzimuth + 180) % 360;
+        hexCenter = calculateDestinationPoint(tempPoint.lat, tempPoint.lon, dirY, Math.abs(y));
+      } else {
+        hexCenter = tempPoint;
+      }
+    }
+    
+    // Filtrar por caja de Chile
+    if (hexCenter.lat >= -56 && hexCenter.lat <= -17 && hexCenter.lon >= -76 && hexCenter.lon <= -66) {
+      const probability = await calculateGridPointProbability(hexCenter.lat, hexCenter.lon);
+      
+      // Calcular 6 vértices del hexágono
+      const vertices = [];
+      for (let i = 0; i < 6; i++) {
+        const angle = sunsetAzimuth + (i * 60); // 60° entre vértices
+        const vertex = calculateDestinationPoint(hexCenter.lat, hexCenter.lon, angle, hexRadiusKm);
+        vertices.push([vertex.lat, vertex.lon]);
+      }
+      
+      // Crear hexágono con el color del gradiente original
+      const hexagon = L.polygon(vertices, {
+        color: '#ffffff',
+        fillColor: getGradientColorForProbability(probability),
+        fillOpacity: 0.6,
+        weight: 1.5,
+        opacity: 0.9
+      }).addTo(heatLayer);
+      
+      // Popup
+      const distance = calculateDistance(centerLat, centerLon, hexCenter.lat, hexCenter.lon);
+      hexagon.bindPopup(`
+        <div style="text-align:center; min-width:150px;">
+          <strong>${(probability*100).toFixed(0)}% Probabilidad</strong><br>
+          Distancia: ${distance.toFixed(0)} km<br>
+          <small>${hexCenter.lat.toFixed(3)}, ${hexCenter.lon.toFixed(3)}</small>
+        </div>
+      `);
+      
+      // Efectos hover
+      hexagon.on('mouseover', function() { 
+        this.setStyle({ fillOpacity: 0.9, weight: 2.5, color: '#ffff00' }); 
+      });
+      hexagon.on('mouseout', function() { 
+        this.setStyle({ fillOpacity: 0.7, weight: 1.5, color: '#ffffff' }); 
+      });
+      
+      // Etiqueta central (porcentajes)
+      if (labelsEnabled) {
+        const percentage = (probability * 100).toFixed(0);
+        L.marker([hexCenter.lat, hexCenter.lon], {
+          icon: L.divIcon({
+            className: 'hexagon-label',
+            html: `<div style="color:white;font-weight:700;font-size:11px;text-shadow:0 2px 4px rgba(0,0,0,0.8)">${percentage}%</div>`,
+            iconSize: [35, 18],
+            iconAnchor: [17, 9]
+          })
+        }).addTo(labelLayer);
+      }
+      
+      hexagons.push({ lat: hexCenter.lat, lon: hexCenter.lon, probability });
     }
   }
-  imgEl.style.display = 'none';
+  
+  return hexagons;
 }
 
-// Función principal para calcular probabilidades de arrebol MEJORADA
+// Calcular probabilidad para un punto específico de la grilla
+async function calculateGridPointProbability(lat, lon) {
+  const cacheKey = `${lat.toFixed(2)},${lon.toFixed(2)}`;
+  
+  // Usar caché si está disponible
+  if (weatherDataCache[cacheKey]) {
+    return computeProbabilityFromData(weatherDataCache[cacheKey], lat, lon);
+  }
+  
+  try {
+    // Obtener datos meteorológicos para este punto
+    const [pm25, hourly, pressureData] = await Promise.all([
+      getPM25(lat, lon),
+      getCloudCoverSeries(lat, lon),
+      getPressureHumidity(lat, lon)
+    ]);
+    
+    const weatherData = { pm25, hourly, pressureData };
+    
+    // Guardar en caché
+    weatherDataCache[cacheKey] = weatherData;
+    
+    return computeProbabilityFromData(weatherData, lat, lon);
+  } catch (error) {
+    console.warn(`Error calculando probabilidad para ${lat}, ${lon}:`, error);
+    return 0;
+  }
+}
+
+// Calcular probabilidad a partir de datos meteorológicos
+function computeProbabilityFromData(weatherData, lat, lon) {
+  const { pm25, hourly, pressureData } = weatherData;
+  
+  if (!hourly) return 0;
+  
+  const now = new Date();
+  const times = SunCalc.getTimes(now, lat, lon);
+  const sunset = times.sunset;
+  const sunsetElev = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
+  
+  const sunsetHour = sunset.toISOString().slice(0,13);
+  const idxSunset = hourly.time.findIndex(t => t.startsWith(sunsetHour));
+  const targetIdx = idxSunset >= 0 ? idxSunset : 18;
+
+  const low_e = hourly.cloudcover_low?.[targetIdx] ?? (hourly.cloudcover?.[targetIdx] ?? 50);
+  const mid_e = hourly.cloudcover_mid?.[targetIdx] ?? (hourly.cloudcover?.[targetIdx] ?? 50);
+  const high_e = hourly.cloudcover_high?.[targetIdx] ?? (hourly.cloudcover?.[targetIdx] ?? 20);
+
+  return computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, pressureData.temperature);
+}
+
+// ACTUALIZAR MAPA DE CALOR
+async function updateHeatmap(cityLat, cityLon) {
+  if (!map || !heatmapEnabled) return;
+
+  // Remover capas existentes
+  if (heatLayer) {
+    try { map.removeLayer(heatLayer); } catch(e) {}
+  }
+  if (labelLayer) {
+    try { map.removeLayer(labelLayer); } catch(e) {}
+  }
+
+  // Crear capas nuevas
+  heatLayer = L.layerGroup().addTo(map);
+  labelLayer = L.layerGroup().addTo(map);
+
+  // Mostrar indicador de carga
+  document.getElementById('mapLoading').style.display = 'block';
+
+  try {
+    // Calcular dirección de la puesta de sol
+    const sunsetAzimuth = calculateSunsetAzimuth(cityLat, cityLon);
+    
+    // Generar grilla hexagonal
+    const hexagons = await generate7HexagonGrid(cityLat, cityLon, sunsetAzimuth);
+
+  } catch (error) {
+    console.error('Error actualizando mapa de calor:', error);
+    log('Error creando hexágonos: ' + (error && error.message));
+  } finally {
+    document.getElementById('mapLoading').style.display = 'none';
+  }
+}
+
+/* ========== FUNCIONES DE COLOR CON GRADIENTE ORIGINAL ========== */
+
+// Obtener color según probabilidad usando el gradiente original
+function getGradientColorForProbability(probability) {
+  // Gradiente original de 5 colores
+  const gradientStops = [
+    { pos: 0.0, color: '#2b83ba' },   // Azul - 0%
+    { pos: 0.25, color: '#abdda4' },  // Verde claro - 25%
+    { pos: 0.5, color: '#ffffbf' },   // Amarillo - 50%
+    { pos: 0.75, color: '#fdae61' },  // Naranja - 75%
+    { pos: 1.0, color: '#d7191c' }    // Rojo - 100%
+  ];
+  
+  // Encontrar entre qué dos stops está la probabilidad
+  for (let i = 0; i < gradientStops.length - 1; i++) {
+    const start = gradientStops[i];
+    const end = gradientStops[i + 1];
+    
+    if (probability >= start.pos && probability <= end.pos) {
+      // Calcular posición relativa entre los dos stops
+      const t = (probability - start.pos) / (end.pos - start.pos);
+      
+      // Interpolar entre los dos colores
+      return interpolateColor(start.color, end.color, t);
+    }
+  }
+  
+  // Fallback
+  return gradientStops[gradientStops.length - 1].color;
+}
+
+// Función para interpolar entre dos colores hexadecimales
+function interpolateColor(color1, color2, factor) {
+  if (factor === 0) return color1;
+  if (factor === 1) return color2;
+  
+  const r1 = parseInt(color1.substring(1, 3), 16);
+  const g1 = parseInt(color1.substring(3, 5), 16);
+  const b1 = parseInt(color1.substring(5, 7), 16);
+  
+  const r2 = parseInt(color2.substring(1, 3), 16);
+  const g2 = parseInt(color2.substring(3, 5), 16);
+  const b2 = parseInt(color2.substring(5, 7), 16);
+  
+  const r = Math.round(r1 + factor * (r2 - r1));
+  const g = Math.round(g1 + factor * (g2 - g1));
+  const b = Math.round(b1 + factor * (b2 - b1));
+  
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+}
+
+// Función alternativa simple (para compatibilidad)
+function getColorForProbability(probability) {
+  return getGradientColorForProbability(probability);
+}
+
+// Mostrar/ocultar capa de calor
+function toggleHeatmap() {
+  heatmapEnabled = !heatmapEnabled;
+  const button = document.getElementById('toggleHeatmap');
+  
+  if (heatmapEnabled && currentState.lat && currentState.lon) {
+    button.classList.add('active');
+    updateHeatmap(currentState.lat, currentState.lon);
+  } else {
+    button.classList.remove('active');
+    if (heatLayer) {
+      try { map.removeLayer(heatLayer); } catch(e) {}
+      heatLayer = null;
+    }
+    if (labelLayer) {
+      try { map.removeLayer(labelLayer); } catch(e) {}
+      labelLayer = null;
+    }
+  }
+}
+
+// Mostrar/ocultar etiquetas
+function toggleLabels() {
+  labelsEnabled = !labelsEnabled;
+  const button = document.getElementById('toggleLabels');
+  
+  if (labelsEnabled) {
+    button.classList.add('active');
+    if (labelLayer) {
+      map.addLayer(labelLayer);
+    } else if (currentState.lat && currentState.lon && heatmapEnabled) {
+      updateHeatmap(currentState.lat, currentState.lon);
+    }
+  } else {
+    button.classList.remove('active');
+    if (labelLayer) {
+      try { map.removeLayer(labelLayer); } catch(e) {}
+    }
+  }
+}
+
+/* ========== MODELO PREDICTIVO ========== */
 function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false, temperature = 20) {
   const lowPct  = Math.max(0, Math.min(100, Number(low)  || 0));
   const midPct  = Math.max(0, Math.min(100, Number(mid)  || 0));
@@ -335,12 +873,11 @@ function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false,
   const tempSigma = 8;
   const tempScore = Math.exp(-Math.pow((temperature - optimalTemp) / tempSigma, 2));
   
-  // === FACTOR NUBOSIDAD POR CAPAS (PESO MÁXIMO - Sunset Model) ===
-  // Basado en: "we weighted moisture the most" y "weighted high clouds the most"
+  // === FACTOR NUBOSIDAD POR CAPAS ===
   const layerScore = (
-      0.15 * (lowPct / 100) +    // Nubes bajas: menos peso (restringen luz)
-      0.35 * (midPct / 100) +    // Nubes medias: peso medio  
-      0.50 * (highPct / 100)     // Nubes altas: máximo peso (como "pantalla de cine")
+      0.15 * (lowPct / 100) +    
+      0.35 * (midPct / 100) +    
+      0.50 * (highPct / 100)     
   );
 
   // === FACTOR GEOMETRÍA SOLAR ===
@@ -353,23 +890,20 @@ function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false,
   const pmSigma = 18;
   const pmScore = Math.exp(-Math.pow((pm25 - idealPM) / pmSigma, 2));
 
-  // === FACTOR 4: HUMEDAD (PROXY BASADO EN NUBES ALTAS) ===
-  // Basado en: "we weighted moisture the most" - usamos nubes altas como proxy de humedad alta
+  // === FACTOR HUMEDAD ===
   const humidityScore = highPct / 100;
 
-  // === FACTOR 5: PRESIÓN ATMOSFÉRICA (PROXY BASADO EN ESTABILIDAD) ===
-  // Basado en: "Pressure, as well as the change in pressure over time was the next highest weighted factor"
-  // Usamos la distribución de nubes como proxy de estabilidad de presión
+  // === FACTOR PRESIÓN ATMOSFÉRICA ===
   const pressureStability = 1.0 - Math.abs((lowPct + midPct) - highPct) / 200;
   const pressureScore = Math.max(0.3, Math.min(1.0, pressureStability));
 
-  // === PESOS FINALES (basados en Sunset Model) ===
-  const wLayer = 0.55;     // Reducido de 0.40
-  const wGeom  = 0.25;     // Reducido de 0.20  
-  const wPM    = 0.05;     // Reducido de 0.10
-  const wHumidity = 0.05;  // Reducido de 0.15
-  const wPressure = 0.05;  // 
-  const wTemperature = 0.05; // Nuevo peso
+  // === PESOS FINALES ===
+  const wLayer = 0.55;
+  const wGeom  = 0.25;
+  const wPM    = 0.05;
+  const wHumidity = 0.05;
+  const wPressure = 0.05;
+  const wTemperature = 0.05;
 
   // Calcular score combinado
   const score = (wLayer * layerScore) + 
@@ -377,7 +911,7 @@ function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false,
                 (wPM * pmScore) + 
                 (wHumidity * humidityScore) + 
                 (wPressure * pressureScore) +
-                 (wTemperature * tempScore); 
+                (wTemperature * tempScore); 
 
   // Aplicar función logística para obtener probabilidad
   const logisticK = 10.0;
@@ -386,20 +920,15 @@ function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false,
 
   // Penalización para condiciones muy desfavorables
   const totalCloud = (lowPct + midPct + highPct) / 3;
-  if (totalCloud > 95) p *= 0.3; // Nubosidad muy densa
-  if (highPct < 10 && totalCloud < 20) p *= 0.5; // Cielo muy despejado (no hay scattering)
-
-  // Reducción para amanecer
-  // if (isSunrise) p *= 0.9;
+  if (totalCloud > 95) p *= 0.3;
+  if (highPct < 10 && totalCloud < 20) p *= 0.5;
 
   p = Math.max(0, Math.min(0.99, p));
 
   return p;
 }
 
-/* ============================
-   UI/Estado
-   ============================ */
+/* ========== INTERFAZ PRINCIPAL ========== */
 
 // Estado compartido actual
 let currentState = {
@@ -411,26 +940,147 @@ let currentState = {
 // Elemento para log visible en UI
 const logEl = document.getElementById('log');
 
-// Función auxiliar para volcar mensajes en el log y consola
+let cloudChart = null;
+
 function log(msg) {
   const line = `[${new Date().toLocaleString()}] ${msg}`;
   console.log(line);
   logEl.textContent = line + '\n' + logEl.textContent;
 }
 
-/* Chart instances: variables globales para Chart.js */
-let cloudChart = null;
+/* ============================
+   Workflow principal: predictRedSunset
+   ============================ */
 
-// Actualiza el gráfico de nubosidad con indicadores de amanecer/atardecer (optimizado para móvil)
+// Función principal: ejecuta la recolección de datos y calcula probabilidades
+async function predictRedSunset(lat, lon, cityName='') {
+  log(`Predicción para ${cityName || `${lat},${lon}`}`);
+
+  try {
+    // Inicializar o actualizar el mapa
+    initMap(lat, lon, cityName);
+    
+    // Obtener datos meteorológicos
+    const [pm25, hourly, pressureData] = await Promise.all([ 
+      getPM25(lat, lon), 
+      getCloudCoverSeries(lat, lon),
+      getPressureHumidity(lat, lon)
+    ]);
+    
+    // Actualizar estado global
+    currentState.lat = lat; 
+    currentState.lon = lon; 
+    currentState.cityName = cityName;
+    currentState.hourly = hourly; 
+    currentState.pm25 = pm25;
+    currentState.pressureData = pressureData;
+
+    // Calcular tiempos solares
+    const now = new Date();
+    const times = SunCalc.getTimes(now, lat, lon);
+    currentState.sunTimes = times;
+    const sunrise = times.sunrise;
+    const sunset  = times.sunset;
+    const sunriseElev = SunCalc.getPosition(sunrise, lat, lon).altitude * (180/Math.PI);
+    const sunsetElev  = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
+    currentState.sunriseElev = sunriseElev;
+    currentState.sunsetElev = sunsetElev;
+
+    // Encontrar índices horarios
+    const hrs = hourly?.time || [];
+    const idxSunrise = hrs.findIndex(t => t.startsWith(sunrise.toISOString().slice(0,13)));
+    const idxSunset  = hrs.findIndex(t => t.startsWith(sunset.toISOString().slice(0,13)));
+    const idxS = idxSunrise >=0 ? idxSunrise : 6;
+    const idxE = idxSunset  >=0 ? idxSunset  : 20;
+
+    // Extraer valores de nubosidad
+    const low_s  = hourly?.cloudcover_low?.[idxS]  ?? (hourly?.cloudcover?.[idxS] ?? 50);
+    const mid_s  = hourly?.cloudcover_mid?.[idxS]  ?? (hourly?.cloudcover?.[idxS] ?? 50);
+    const high_s = hourly?.cloudcover_high?.[idxS] ?? (hourly?.cloudcover?.[idxS] ?? 20);
+    const tot_s  = hourly?.cloudcover?.[idxS] ?? Math.round((low_s + mid_s + high_s)/3);
+
+    const low_e  = hourly?.cloudcover_low?.[idxE]  ?? (hourly?.cloudcover?.[idxE] ?? 50);
+    const mid_e  = hourly?.cloudcover_mid?.[idxE]  ?? (hourly?.cloudcover?.[idxE] ?? 50);
+    const high_e = hourly?.cloudcover_high?.[idxE] ?? (hourly?.cloudcover?.[idxE] ?? 20);
+    const tot_e  = hourly?.cloudcover?.[idxE] ?? Math.round((low_e + mid_e + high_e)/3);
+
+    // Calcular probabilidades
+    const sunriseProb = computeRedProbability(pm25, low_s, mid_s, high_s, sunriseElev, true, pressureData.temperature);
+    const sunsetProb  = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, pressureData.temperature);
+
+    currentState.preds.sunrise = sunriseProb;
+    currentState.preds.sunset = sunsetProb;
+
+    // Actualizar UI
+    document.getElementById('loadingState').innerHTML = '';
+    
+    const dataTime = new Date(pressureData.timestamp);
+    const fechaStr = dataTime.toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const horaStr = dataTime.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+
+    document.getElementById('dataGrid').innerHTML = `
+      <div class="data-item">☁️ Nubosidad: <strong>${Math.round(tot_e)}%</strong></div>
+      <div class="data-item">🌫 PM2.5: <strong>${pm25.toFixed(1)} µg/m³</strong></div>
+      <div class="data-item">⬆ Elev amanecer: <strong>${sunriseElev.toFixed(1)}°</strong></div>
+      <div class="data-item">⬇ Elev atardecer: <strong>${sunsetElev.toFixed(1)}°</strong></div>
+    `;
+
+    document.getElementById('locationText').innerHTML = `
+      📍 ${cityName || `(${lat.toFixed(2)}, ${lon.toFixed(2)})`}<br>
+      <small style="opacity:0.8; font-size:0.9rem;">📅 Datos: ${fechaStr} 🕒 ${horaStr}</small>
+    `;
+
+    document.getElementById('sunTimes').innerHTML = `
+      <div class="sun-time">🌅 Amanecer: ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
+      <div class="sun-time">🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
+    `;
+
+    const predBlock = document.getElementById('predictions');
+    predBlock.innerHTML = `
+      <div class="probability ${probClass(sunriseProb)}">🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%</div>
+      <div class="probability ${probClass(sunsetProb)}">🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%</div>
+    `;
+
+    // Actualizar gráfico
+    if (hourly && hourly.time) {
+      const times24 = hourly.time.slice(0,24).map(t => {
+        const d = new Date(t);
+        return d.getHours() + ':00';
+      });
+      const clouds = {
+        total: hourly.cloudcover.slice(0,24).map(v => Math.round(v)),
+        low: hourly.cloudcover_low.slice(0,24).map(v => Math.round(v)),
+        mid: hourly.cloudcover_mid.slice(0,24).map(v => Math.round(v)),
+        high: hourly.cloudcover_high.slice(0,24).map(v => Math.round(v)),
+      };
+      updateCloudChart(times24, clouds, sunrise, sunset);
+    }
+
+    // Actualizar mapa de calor
+    if (heatmapEnabled) {
+      await updateHeatmap(lat, lon);
+    }
+
+    // Escribir log
+    log(`% arrebol: amanecer ${(sunriseProb*100).toFixed(1)}%, atardecer ${(sunsetProb*100).toFixed(1)}%`);
+    log(`Presión ${pressureData.pressure.toFixed(0)} hPa, Humedad ${pressureData.humidity.toFixed(0)}%`);
+    log(`Temp: ${pressureData.temperature.toFixed(1)}°C`);
+
+  } catch (e) {
+    document.getElementById('loadingState').innerHTML = '';
+    log('Error en predictRedSunset: ' + (e && e.message));
+    alert('Error al obtener datos. Revisa la consola.');
+  }
+}
+
+// Actualizar gráfico de nubosidad con indicadores de amanecer/atardecer
 function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
   const ctx = document.getElementById('cloudChart').getContext('2d');
   if (cloudChart) cloudChart.destroy();
   
-  // Convertir horas a formato de 24h para comparación
   const sunriseHour = sunriseTime.getHours();
   const sunsetHour = sunsetTime.getHours();
   
-  // Encontrar los índices más cercanos en el array de horas
   const sunriseIndex = hours.findIndex(h => {
     const hour = parseInt(h.split(':')[0]);
     return hour >= sunriseHour;
@@ -441,7 +1091,6 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
     return hour >= sunsetHour;
   });
 
-  // Configuración responsive para móvil
   const isMobile = window.innerWidth < 768;
   
   cloudChart = new Chart(ctx, {
@@ -507,44 +1156,10 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
       ]
     },
     options: {
-      layout: {
-        padding: {
-          top: isMobile ? 10 : 15,
-          right: isMobile ? 5 : 10,
-          bottom: isMobile ? 5 : 10,
-          left: isMobile ? 5 : 10
-        }
-      },
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: { 
-        legend: { 
-          position: 'bottom',
-          align: 'center',
-          labels: {
-            boxWidth: isMobile ? 10 : 12,
-            padding: isMobile ? 12 : 15,
-            font: {
-              size: isMobile ? 10 : 11,
-              weight: 'normal'
-            },
-            color: '#ffffff',
-            usePointStyle: true,
-            pointStyle: 'circle'
-          } 
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.85)',
-          titleColor: '#ffffff',
-          bodyColor: '#ffffff',
-          borderColor: '#ff6600',
-          borderWidth: 1,
-          titleFont: {
-            size: isMobile ? 11 : 12
-          },
-          bodyFont: {
-            size: isMobile ? 10 : 11
-          },
-          padding: isMobile ? 8 : 10
-        },
+        legend: { position: 'bottom' },
         annotation: {
           annotations: {
             sunriseLine: {
@@ -553,20 +1168,8 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
               scaleID: 'x',
               value: sunriseIndex >= 0 ? sunriseIndex : 6,
               borderColor: '#ffeb3b',
-              borderWidth: isMobile ? 2 : 2.5,
-              borderDash: [4, 3],
-              label: {
-                enabled: true,
-                content: isMobile ? '🌅' : '🌅 Amanecer',
-                position: 'start',
-                backgroundColor: 'rgba(255, 235, 59, 0.9)',
-                color: '#000000',
-                font: {
-                  weight: 'bold',
-                  size: isMobile ? 9 : 10
-                },
-                padding: isMobile ? 3 : 4
-              }
+              borderWidth: 2,
+              label: { enabled: true, content: '🌅 Amanecer' }
             },
             sunsetLine: {
               type: 'line',
@@ -574,287 +1177,18 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
               scaleID: 'x',
               value: sunsetIndex >= 0 ? sunsetIndex : 18,
               borderColor: '#ff9800',
-              borderWidth: isMobile ? 2 : 2.5,
-              borderDash: [4, 3],
-              label: {
-                enabled: true,
-                content: isMobile ? '🌇' : '🌇 Atardecer',
-                position: 'end',
-                backgroundColor: 'rgba(255, 152, 0, 0.9)',
-                color: '#000000',
-                font: {
-                  weight: 'bold',
-                  size: isMobile ? 9 : 10
-                },
-                padding: isMobile ? 3 : 4
-              }
+              borderWidth: 2,
+              label: { enabled: true, content: '🌇 Atardecer' }
             }
           }
         }
       },
       scales: {
-        x: {
-          grid: {
-            color: 'rgba(255,255,255,0.08)',
-            drawTicks: false
-          },
-          ticks: {
-            color: '#ffffff',
-            maxRotation: 0,
-            font: {
-              size: isMobile ? 15 : 18
-            },
-            callback: function(value, index) {
-              // En móvil mostrar cada 4 horas, en desktop cada 3
-              const interval = isMobile ? 4 : 3;
-              return index % interval === 0 ? this.getLabelForValue(value) : '';
-            }
-          },
-          title: {
-            display: true,
-            text: 'Hora del día',
-            color: '#ffffff',
-            font: {
-              size: isMobile ? 15 : 18,
-              weight: 'bold'
-            },
-            padding: { top: 5, bottom: 5 }
-          }
-        },
-        y: { 
-          beginAtZero: true, 
-          max: 100,
-          min: 0,
-          grid: {
-            color: 'rgba(255,255,255,0.08)',
-            drawTicks: false
-          },
-          ticks: {
-            color: '#ffffff',
-            font: {
-              size: isMobile ? 15 : 18
-            },
-            callback: function(value) {
-              return value + '%';
-            },
-            // Más espacio entre ticks en móvil
-            stepSize: isMobile ? 25 : 20
-          },
-          title: {
-            display: true,
-            text: 'Nubosidad (%)',
-            color: '#ffffff',
-            font: {
-              size: isMobile ? 15 : 18,
-              weight: 'bold'
-            },
-            padding: { top: 5, bottom: 5 }
-          }
-        }
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-      aspectRatio: isMobile ? 1.8 : 3.7, // Más alto en móvil
-      interaction: {
-        intersect: false,
-        mode: 'index'
-      },
-      elements: {
-        point: {
-          radius: isMobile ? 1.5 : 2.5,
-          hoverRadius: isMobile ? 3 : 5
-        },
-        line: {
-          tension: 0.3 // Líneas más suaves
-        }
+        x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#ffffff' } },
+        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#ffffff' } }
       }
     }
   });
-}
-
-/* 
-============================
-Workflow principal: predictRedSunset
-============================ 
-*/
-// Obtener datos de presión y humedad
-
-async function getPressureHumidity(lat, lon) {
-    try {
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=pressure_msl,relativehumidity_2m,temperature_2m&timezone=auto`;
-        const res = await fetch(url);
-        const data = await res.json();
-        
-        if (data.hourly) {
-            const now = new Date();
-            const currentHour = now.toISOString().slice(0,13);
-            const currentIdx = data.hourly.time.findIndex(t => t.startsWith(currentHour));
-            
-            if (currentIdx >= 0) {
-                return {
-                    pressure: data.hourly.pressure_msl?.[currentIdx] || 1013,
-                    humidity: data.hourly.relativehumidity_2m?.[currentIdx] || 50,
-                    temperature: data.hourly.temperature_2m?.[currentIdx] || 20,
-                    timestamp: data.hourly.time?.[currentIdx] || new Date().toISOString()
-                };
-            }
-        }
-    } catch (e) {
-        console.warn('Error obteniendo presión/humedad/temperatura:', e);
-    }
-    
-    return {
-        pressure: 1013,
-        humidity: 50,
-        temperature: 20,
-        timestamp: new Date().toISOString()
-    };
-}
-
-/* ============================
-   Workflow principal: predictRedSunset
-   ============================ */
-
-// Función principal: ejecuta la recolección de datos y calcula probabilidades
-async function predictRedSunset(lat, lon, cityName='') {
-  // Mostrar ubicación en UI (nombre de ciudad o coordenadas)
-  // document.getElementById('locationText').textContent = `📍 ${cityName || `(${lat.toFixed(2)}, ${lon.toFixed(2)})`}`;
-  log(`Predicción para ${cityName || `${lat},${lon}`}`);
-
-  try {
-    // Obtener PM2.5, nubosidad, presión y humedad en paralelo
-    const [pm25, hourly, pressureData] = await Promise.all([ 
-      getPM25(lat, lon), 
-      getCloudCoverSeries(lat, lon),
-      getPressureHumidity(lat, lon)
-    ]);
-    
-    // Actualizar estado global
-    currentState.lat = lat; 
-    currentState.lon = lon; 
-    currentState.cityName = cityName;
-    currentState.hourly = hourly; 
-    currentState.pm25 = pm25;
-    currentState.pressureData = pressureData;
-
-    // Calcular tiempos solares (SunCalc retorna objetos Date)
-    const now = new Date();
-    const times = SunCalc.getTimes(now, lat, lon);
-    currentState.sunTimes = times;
-    const sunrise = times.sunrise;
-    const sunset  = times.sunset;
-    // Elevación solar en grados (SunCalc devuelve radianes)
-    const sunriseElev = SunCalc.getPosition(sunrise, lat, lon).altitude * (180/Math.PI);
-    const sunsetElev  = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
-    currentState.sunriseElev = sunriseElev;
-    currentState.sunsetElev = sunsetElev;
-
-    // localizar índices horarios cercanos a sunrise/sunset en la serie hourly
-    const hrs = hourly?.time || [];
-    const idxSunrise = hrs.findIndex(t => t.startsWith(sunrise.toISOString().slice(0,13)));
-    const idxSunset  = hrs.findIndex(t => t.startsWith(sunset.toISOString().slice(0,13)));
-
-    // Fallbacks: índices por defecto si no encontramos índice exacto
-    const idxS = idxSunrise >=0 ? idxSunrise : 6;
-    const idxE = idxSunset  >=0 ? idxSunset  : 20;
-
-    // Extraer valores por capas (low/mid/high) para amanecer (s) y atardecer (e)
-    const low_s  = hourly?.cloudcover_low?.[idxS]  ?? (hourly?.cloudcover?.[idxS] ?? 50);
-    const mid_s  = hourly?.cloudcover_mid?.[idxS]  ?? (hourly?.cloudcover?.[idxS] ?? 50);
-    const high_s = hourly?.cloudcover_high?.[idxS] ?? (hourly?.cloudcover?.[idxS] ?? 20);
-    const tot_s  = hourly?.cloudcover?.[idxS] ?? Math.round((low_s + mid_s + high_s)/3);
-
-    const low_e  = hourly?.cloudcover_low?.[idxE]  ?? (hourly?.cloudcover?.[idxE] ?? 50);
-    const mid_e  = hourly?.cloudcover_mid?.[idxE]  ?? (hourly?.cloudcover?.[idxE] ?? 50);
-    const high_e = hourly?.cloudcover_high?.[idxE] ?? (hourly?.cloudcover?.[idxE] ?? 20);
-    const tot_e  = hourly?.cloudcover?.[idxE] ?? Math.round((low_e + mid_e + high_e)/3);
-
-    // Calcular probabilidades para amanecer y atardecer usando el modelo
-    const sunriseProb = computeRedProbability(pm25, low_s, mid_s, high_s, sunriseElev, true, pressureData.temperature);
-    const sunsetProb  = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, pressureData.temperature);
-
-    // Guardar probabilidades en el estado global
-    currentState.preds.sunrise = sunriseProb;
-    currentState.preds.sunset = sunsetProb;
-
-    // Actualizar UI: quitar loading y mostrar métricas
-    document.getElementById('loadingState').innerHTML = '';
-    
-    // Formatear fecha y hora de los datos
-    const dataTime = new Date(pressureData.timestamp);
-    const fechaStr = dataTime.toLocaleDateString('es-CL', { 
-      day: '2-digit', month: '2-digit', year: 'numeric' 
-    });
-    const horaStr = dataTime.toLocaleTimeString('es-CL', { 
-      hour: '2-digit', minute: '2-digit' 
-    });
-
-    // Actualizar el grid de datos con la nueva información
-    document.getElementById('dataGrid').innerHTML = `
-      <div class="data-item">☁️ Nubosidad: <strong>${Math.round(tot_e)}%</strong></div>
-      <div class="data-item">🌫 PM2.5: <strong>${pm25.toFixed(1)} µg/m³</strong></div>
-      <div class="data-item">🌡 Temperatura: <strong>${pressureData.temperature.toFixed(1)}°C</strong></div>
-      <div class="data-item">📊 Presión: <strong>${pressureData.pressure.toFixed(0)} hPa</strong></div>
-      <div class="data-item">💧 Humedad: <strong>${pressureData.humidity.toFixed(0)}%</strong></div>
-      <div class="data-item">⬆ Elev amanecer: <strong>${sunriseElev.toFixed(1)}°</strong></div>
-      <div class="data-item">⬇ Elev atardecer: <strong>${sunsetElev.toFixed(1)}°</strong></div>
-    `;
-
-    // Mostrar información de fecha y hora de los datos
-    document.getElementById('locationText').innerHTML = `
-      📍 ${cityName || `(${lat.toFixed(2)}, ${lon.toFixed(2)})`}<br>
-      <small style="opacity:0.8; font-size:0.9rem;">📅 Datos: ${fechaStr} 🕒 ${horaStr}</small>
-    `;
-
-    // Mostrar horarios de amanecer/atardecer en UI (formato local)
-    document.getElementById('sunTimes').innerHTML = `
-      <div class="sun-time">🌅 Amanecer: ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
-      <div class="sun-time">🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
-    `;
-
-    // Mostrar bloques de probabilidad (estilizados)
-    const predBlock = document.getElementById('predictions');
-    predBlock.innerHTML = `
-      <div class="probability ${probClass(sunriseProb)}">🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%</div>
-      <div class="probability ${probClass(sunsetProb)}">🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%</div>
-    `;
-
-    // Actualizar gráfico horario si hourly está disponible
-    if (hourly && hourly.time) {
-      const times24 = hourly.time.slice(0,24).map(t => {
-        const d = new Date(t);
-        return d.getHours() + ':00';
-      });
-      // Construir objeto clouds con arrays truncados a 24h
-      const clouds = {
-        total: hourly.cloudcover.slice(0,24).map(v => Math.round(v)),
-        low: hourly.cloudcover_low.slice(0,24).map(v => Math.round(v)),
-        mid: hourly.cloudcover_mid.slice(0,24).map(v => Math.round(v)),
-        high: hourly.cloudcover_high.slice(0,24).map(v => Math.round(v)),
-      };
-      updateCloudChart(times24, clouds, sunrise, sunset);
-    }
-
-    // Intentar cargar imagen satelital (FoV reducido)
-    getSatelliteImage(lat, lon).catch(e => console.warn('sat image fail', e));
-
-    // Binarizar predicción con umbral 0.5 para almacenamiento
-    currentState.predictedSunrise = sunriseProb > 0.5;
-    currentState.predictedSunset = sunsetProb > 0.5;
-
-    // Escribir log con síntesis de predicción
-    log(`% arrebol: amanecer ${(sunriseProb*100).toFixed(1)}%, atardecer ${(sunsetProb*100).toFixed(1)}%`);
-    log(`Presión ${pressureData.pressure.toFixed(0)} hPa, Humedad ${pressureData.humidity.toFixed(0)}%`);
-    log(`Temp: ${pressureData.temperature.toFixed(1)}°C`);
-    // log(`Fecha datos: ${fechaStr} ${horaStr}`);
-
-
-  } catch (e) {
-    // Manejo de errores en flujo principal
-    document.getElementById('loadingState').innerHTML = '';
-    log('Error en predictRedSunset: ' + e.message);
-    alert('Error al obtener datos. Revisa la consola.');
-  }
 }
 
 /* ============================
@@ -867,22 +1201,6 @@ function probClass(p) {
   if (p < 0.4) return 'low-prob';
   return 'medium-prob';
 }
-
-/* ============================
-   Botones: location
-   ============================ 
-
-// Botón "Usar ubicación" (geolocalización del navegador)
-document.getElementById('btnLoc').addEventListener('click', ()=> {
-  if (!navigator.geolocation) { alert('Geolocalización no soportada'); return; }
-  document.getElementById('loadingState').innerHTML = '<span class="loading"></span>';
-  navigator.geolocation.getCurrentPosition(async pos => {
-    await predictRedSunset(pos.coords.latitude, pos.coords.longitude, 'Tu ubicación');
-  }, err => {
-    document.getElementById('loadingState').innerHTML = '';
-    alert('No se pudo obtener ubicación: ' + (err.message || err.code));
-  }, { timeout: 10000 });
-});*/
 
 // Ejecutar al cargar
 initCityMenu();
