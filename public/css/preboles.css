@@ -765,3 +765,60 @@ button.ghost {
     grid-template-columns: repeat(4, 1fr) !important;
   }
 }
+
+.lead {
+  margin: 0 0 20px 0;
+  opacity: 0.9;
+  font-size: 0.92rem;
+  padding: 14px 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 25, 51, 0.6),
+    rgba(102, 0, 0, 0.4)
+  );
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1.6;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.lead:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--accent), #ff9800);
+}
+
+.lead a {
+  color: #4fc3f7;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0 2px;
+  border-radius: 3px;
+  transition: all 0.2s;
+  background: rgba(79, 195, 247, 0.1);
+}
+
+.lead a:hover {
+  color: #ffcc00;
+  background: rgba(255, 204, 0, 0.2);
+  text-decoration: none;
+}
+
+/* Icono de información opcional */
+.lead:after {
+  content: "ⓘ";
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  opacity: 0.3;
+  font-size: 0.8rem;
+}
