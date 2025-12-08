@@ -34,7 +34,7 @@ layout: none
     /* LEYENDA CENTRADA ABAJO CON GRADIENTE ORIGINAL */
     .probability-legend {
       position: absolute;
-      bottom: 10px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(0, 0, 0, 0.85);
@@ -54,7 +54,7 @@ layout: none
     }
     
     .legend-gradient {
-      height: 12px;
+      height: 8px;
       width: 100%;
       background: linear-gradient(to right, 
         #2b83ba,  /* Azul - 0% */
@@ -193,7 +193,7 @@ layout: none
             <div class="predictions" id="predictions"></div>
 
             <!-- Gráfico de nubosidad (Chart.js) -->
-            <div class="charts">
+            <div class="charts" style="height: 350px; width: 100%;"> <!-- o 600px para más alto -->
               <canvas id="cloudChart"></canvas>
             </div>
           </div>
@@ -483,7 +483,7 @@ async function getPressureHumidity(lat, lon) {
 function initMap(lat, lon, cityName) {
   // Si el mapa ya existe, simplemente actualízalo
   if (map) {
-    map.setView([lat, lon], 18); // Cambia de 8 a 10 (más zoom)
+    map.setView([lat, lon], 10); // Cambia de 8 a 10 (más zoom)
     if (marker) {
       marker.setLatLng([lat, lon]);
     } else {
@@ -495,7 +495,7 @@ function initMap(lat, lon, cityName) {
   }
   
   // Si no existe, crea el mapa
-  map = L.map('map').setView([lat, lon], 8);
+  map = L.map('map').setView([lat, lon], 10); // Cambia de 8 a 10 (más zoom)
   
   // Añadir capa de OpenStreetMap
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -666,9 +666,9 @@ async function generate7HexagonGrid(centerLat, centerLon, sunsetAzimuth) {
         L.marker([hexCenter.lat, hexCenter.lon], {
           icon: L.divIcon({
             className: 'hexagon-label',
-            html: `<div style="color:white;font-weight:700;font-size:11px;text-shadow:0 2px 4px rgba(0,0,0,0.8)">${percentage}%</div>`,
-            iconSize: [35, 18],
-            iconAnchor: [17, 9]
+            html: `<div style="color:white;font-weight:900;font-size:18px;text-shadow:0 1px 3px rgba(0,0,0,0.8)">${percentage}%</div>`,
+            iconSize: [50, 25],
+            iconAnchor: [25, 12]
           })
         }).addTo(labelLayer);
       }
@@ -1093,101 +1093,214 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
 
   const isMobile = window.innerWidth < 768;
   
-  cloudChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: hours,
-      datasets: [
-        {
-          label: 'Nubosidad total',
-          data: cloudVals.total,
-          borderWidth: isMobile ? 1.5 : 2,
-          borderColor: '#ffffff',
-          backgroundColor: 'rgba(255,255,255,0.1)',
-          fill: true,
-          tension: 0.3,
-          pointBackgroundColor: '#ffffff',
-          pointBorderColor: '#ff6600',
-          pointBorderWidth: isMobile ? 1 : 2,
-          pointRadius: isMobile ? 5 : 8,
-          pointHoverRadius: isMobile ? 3 : 6
-        },
-        {
-          label: 'Nubes bajas',
-          data: cloudVals.low,
-          borderWidth: isMobile ? 1 : 1.5,
-          borderColor: '#4fc3f7',
-          backgroundColor: 'rgba(79, 195, 247, 0.1)',
-          fill: false,
-          tension: 0.3,
-          borderDash: [4, 3],
-          pointBackgroundColor: '#4fc3f7',
-          pointBorderWidth: isMobile ? 0.5 : 1,
-          pointRadius: isMobile ? 5 : 8,
-          pointHoverRadius: isMobile ? 2.5 : 5
-        },
-        {
-          label: 'Nubes medias',
-          data: cloudVals.mid,
-          borderWidth: isMobile ? 1 : 1.5,
-          borderColor: '#ffb74d',
-          backgroundColor: 'rgba(255, 183, 77, 0.1)',
-          fill: false,
-          tension: 0.3,
-          borderDash: [2, 3],
-          pointBackgroundColor: '#ffb74d',
-          pointBorderWidth: isMobile ? 0.5 : 1,
-          pointRadius: isMobile ? 5 : 8,
-          pointHoverRadius: isMobile ? 2.5 : 5
-        },
-        {
-          label: 'Nubes altas',
-          data: cloudVals.high,
-          borderWidth: isMobile ? 1 : 1.5,
-          borderColor: '#ba68c8',
-          backgroundColor: 'rgba(186, 104, 200, 0.1)',
-          fill: false,
-          tension: 0.3,
-          pointBackgroundColor: '#ba68c8',
-          pointBorderWidth: isMobile ? 0.5 : 1,
-          pointRadius: isMobile ? 5 : 8,
-          pointHoverRadius: isMobile ? 2.5 : 5
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { 
-        legend: { position: 'bottom' },
-        annotation: {
-          annotations: {
-            sunriseLine: {
-              type: 'line',
-              mode: 'vertical',
-              scaleID: 'x',
-              value: sunriseIndex >= 0 ? sunriseIndex : 6,
-              borderColor: '#ffeb3b',
-              borderWidth: 2,
-              label: { enabled: true, content: '🌅 Amanecer' }
-            },
-            sunsetLine: {
-              type: 'line',
-              mode: 'vertical',
-              scaleID: 'x',
-              value: sunsetIndex >= 0 ? sunsetIndex : 18,
-              borderColor: '#ff9800',
-              borderWidth: 2,
-              label: { enabled: true, content: '🌇 Atardecer' }
-            }
-          }
-        }
+    cloudChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: hours, // Mantiene el formato original de las horas
+          datasets: [
+              {
+                  label: 'Nubes bajas',
+                  data: cloudVals.low,
+                  borderWidth: isMobile ? 1 : 1.5,
+                  borderColor: '#4fc3f7',
+                  backgroundColor: 'rgba(79, 195, 247, 0.1)',
+                  fill: false,
+                  tension: 0.3,
+                  borderDash: [4, 3],
+                  pointBackgroundColor: '#4fc3f7',
+                  pointBorderWidth: isMobile ? 0.5 : 1,
+                  pointStyle: 'circle',
+                  pointRadius: isMobile ? 6 : 10, 
+                  pointHoverRadius: isMobile ? 10 : 14, 
+              },
+              {
+                  label: 'Nubes medias',
+                  data: cloudVals.mid,
+                  borderWidth: isMobile ? 1 : 1.5,
+                  borderColor: '#ffb74d',
+                  backgroundColor: 'rgba(255, 183, 77, 0.1)',
+                  fill: false,
+                  tension: 0.3,
+                  borderDash: [2, 3],
+                  pointBackgroundColor: '#ffb74d',
+                  pointBorderWidth: isMobile ? 0.5 : 1,
+                  pointStyle: 'circle',
+                  pointRadius: isMobile ? 6 : 10, 
+                  pointHoverRadius: isMobile ? 10 : 14, 
+              },
+              {
+                  label: 'Nubes altas',
+                  data: cloudVals.high,
+                  borderWidth: isMobile ? 1 : 1.5,
+                  borderColor: '#ba68c8',
+                  backgroundColor: 'rgba(186, 104, 200, 0.1)',
+                  fill: false,
+                  tension: 0.3,
+                  pointBackgroundColor: '#ba68c8',
+                  pointBorderWidth: isMobile ? 0.5 : 1,
+                  pointStyle: 'circle',
+                  pointRadius: isMobile ? 6 : 10, 
+                  pointHoverRadius: isMobile ? 10 : 14, 
+              },
+              {
+                  label: 'Nubosidad total',
+                  data: cloudVals.total,
+                  borderWidth: isMobile ? 1.5 : 2,
+                  borderColor: '#ffffff',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  fill: true,
+                  tension: 0.3,
+                  pointBackgroundColor: '#ffffff',
+                  pointBorderColor: '#ff6600',
+                  pointBorderWidth: isMobile ? 1 : 2,
+                  pointStyle: 'circle', // Puntos circulares en vez de cuadrados
+                  pointRadius: isMobile ? 7 : 11, 
+                  pointHoverRadius: isMobile ? 11 : 15, 
+              }
+          ]
       },
-      scales: {
-        x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#ffffff' } },
-        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#ffffff' } }
+      options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          aspectRatio: 1.5,
+          plugins: { 
+              title: {
+                  display: true,
+                  text: 'Nubosidad por Hora del Día',
+                  color: '#ffffff',
+                  font: {
+                      size: isMobile ? 22 : 24,
+                      weight: 'bold',
+                      family: 'Arial, sans-serif'
+                  },
+                  padding: {
+                      top: 10,
+                      bottom: 20
+                  }
+              },
+              legend: { 
+                  position: 'bottom',
+                  labels: {
+                      usePointStyle: true, // Esto hace que la leyenda use puntos en vez de cuadrados
+                      pointStyle: 'circle',
+                      boxWidth: 6,
+                      boxHeight: 6,
+                      color: '#ffffff', // Color blanco
+                      font: {
+                          size: isMobile ? 18 : 20,  // Agrandado: de 12/14 a 14/16
+                          family: 'Arial, sans-serif',
+                          weight: 'normal'
+                      },
+                      padding: isMobile ? 12 : 18
+                  }
+              },
+              annotation: {
+                  annotations: {
+                      sunriseLine: {
+                          type: 'line',
+                          mode: 'vertical',
+                          scaleID: 'x',
+                          value: sunriseIndex >= 0 ? sunriseIndex : 6,
+                          borderColor: '#ffeb3b',
+                          borderWidth: 3,
+                          borderDash: [5, 5], // Línea punteada para mejor visibilidad
+                          label: { 
+                              enabled: true, 
+                              content: '🌅 Amanecer',
+                              position: 'top',
+                              backgroundColor: 'rgba(255, 235, 59, 0.7)',
+                              color: '#333',
+                              font: { size: isMobile ? 10 : 12, weight: 'bold' },
+                              padding: { x: 6, y: 4 }
+                          }
+                      },
+                      sunsetLine: {
+                          type: 'line',
+                          mode: 'vertical',
+                          scaleID: 'x',
+                          value: sunsetIndex >= 0 ? sunsetIndex : 18,
+                          borderColor: '#ff9800',
+                          borderWidth: 3,
+                          borderDash: [5, 5], // Línea punteada para mejor visibilidad
+                          label: { 
+                              enabled: true, 
+                              content: '🌇 Atardecer',
+                              position: 'top',
+                              backgroundColor: 'rgba(255, 152, 0, 0.7)',
+                              color: '#333',
+                              font: { size: isMobile ? 10 : 12, weight: 'bold' },
+                              padding: { x: 6, y: 4 }
+                          }
+                      }
+                  }
+              },
+              tooltip: {
+                  mode: 'index',
+                  intersect: false,
+                  callbacks: {
+                      label: function(context) {
+                          return `${context.dataset.label}: ${context.parsed.y}%`;
+                      }
+                  }
+              }
+          },
+          scales: {
+              x: { 
+                  title: {
+                      display: true,
+                      text: 'Hora del día',
+                      color: '#ffffff',
+                      font: { size: isMobile ? 16 : 18, weight: 'bold' }
+                  },
+                  grid: { 
+                      color: 'rgba(255,255,255,0.08)',
+                      drawOnChartArea: true
+                  }, 
+                  ticks: { 
+                      color: '#ffffff',
+                      maxRotation: isMobile ? 45 : 0,
+                      autoSkip: true,
+                      maxTicksLimit: isMobile ? 12 : 24,
+                      font: {
+                          size: isMobile ? 14 : 16   // Agrandado: de 11/13 a 12/14
+                      }
+                  } 
+              },
+              y: { 
+                  title: {
+                      display: true,
+                      text: 'Cantidad de nubes',
+                      color: '#ffffff',
+                      font: { size: isMobile ? 16 : 18, weight: 'bold' }
+                  },
+                  beginAtZero: true, 
+                  max: 100, 
+                  grid: { 
+                      color: 'rgba(255,255,255,0.08)',
+                      drawOnChartArea: true
+                  }, 
+                  ticks: { 
+                      color: '#ffffff',
+                      callback: function(value) {
+                          return value + '%';
+                      },
+                  font: {
+                      size: isMobile ? 14 : 16   // Agrandado: de 11/13 a 12/14
+                  }
+                  } 
+              }
+          },
+          interaction: {
+              intersect: false,
+              mode: 'index'
+          },
+          elements: {
+              point: {
+                  radius: isMobile ? 4 : 6,
+                  hoverRadius: isMobile ? 8 : 12
+              }
+          }
       }
-    }
   });
 }
 
