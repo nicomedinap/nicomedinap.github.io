@@ -362,7 +362,7 @@ button.ghost {
 /* Para móvil */
 @media (max-width: 768px) {
   .charts {
-    height: 350px;
+    height: 420px;
   }
   
   .chart-time-legend {
@@ -375,7 +375,7 @@ button.ghost {
 
 @media (max-width: 480px) {
   .charts {
-    height: 320px;
+    height: 380px;
     margin-top: 12px;
   }
   
@@ -679,7 +679,7 @@ button.ghost {
   }
   
   .charts {
-    height: 280px;
+    height: 350px;
   }
 }
 
@@ -754,7 +754,7 @@ button.ghost {
   }
   
   .charts {
-    height: 260px;
+    height: 350px;
     margin-top: 12px;
   }
 }
