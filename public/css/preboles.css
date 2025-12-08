@@ -324,12 +324,83 @@ button.ghost {
   to { transform: rotate(360deg); } 
 }
 
-.charts { 
-  display:flex; 
-  gap:12px; 
-  flex-direction:column; 
-  margin-top:15px; 
+.charts {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  height: 400px; /* Altura fija para todo el contenedor */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Canvas del gráfico con altura controlada */
+#cloudChart {
+  flex: 1;
+  min-height: 0; /* Importante para que flex funcione correctamente */
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Leyenda de horas (amanecer/atardecer/hora actual) */
+.chart-time-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0 10px 0;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  z-index: 5;
+  order: 1; /* Se asegura que esté antes del gráfico */
+}
+
+/* Para móvil */
+@media (max-width: 768px) {
+  .charts {
+    height: 350px;
+  }
+  
+  .chart-time-legend {
+    gap: 8px;
+    margin: 3px 0 8px 0;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .charts {
+    height: 320px;
+    margin-top: 12px;
+  }
+  
+  .chart-time-legend {
+    gap: 6px;
+    margin: 2px 0 6px 0;
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Asegurar que el gráfico de Chart.js no se desborde */
+.chartjs-render-monitor {
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Ajustar el padding del contenedor del gráfico */
+.chartjs-container {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+}
+
 .footer {
   background-color: #1e1e1e;
   color: #e0e0e0;
@@ -392,7 +463,104 @@ button.ghost {
     z-index: 10;
 }
 
-/* === MEDIA QUERIES PARA MÓVIL === */
+/* ========== ESTILOS ESPECÍFICOS PARA MAPA Y LEYENDA ========== */
+/* MAPA CON HEXÁGONOS */
+.map-wrapper {
+  position: relative;
+  height: 450px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+/* LEYENDA CENTRADA ABAJO CON GRADIENTE ORIGINAL */
+.probability-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  z-index: 1000;
+  min-width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.legend-title {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.legend-gradient {
+  height: 8px;
+  width: 100%;
+  background: linear-gradient(to right, 
+    #2b83ba,  /* Azul - 0% */
+    #abdda4,  /* Verde claro - 25% */
+    #ffffbf,  /* Amarillo - 50% */
+    #fdae61,  /* Naranja - 75% */
+    #d7191c   /* Rojo - 100% */
+  );
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+
+.legend-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  opacity: 0.9;
+}
+
+/* CONTROLES SIMPLIFICADOS DEL MAPA */
+.map-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.map-toggle {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: none;
+  padding: 8px 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.map-toggle.active {
+  background: #4CAF50;
+}
+
+/* LOG */
+#log {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  max-height: 100px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+/* ========== MEDIA QUERIES (COMPLETAS) ========== */
 @media (max-width: 768px) {
   body {
     font-size: 14px;
@@ -457,6 +625,11 @@ button.ghost {
   .probability {
     width: 100%;
     min-width: auto;
+    font-size: 28px;
+  }
+  
+  .probability span {
+    font-size: 32px;
   }
   
   .sun-times {
@@ -466,6 +639,8 @@ button.ghost {
   .sun-time {
     flex: 1;
     text-align: center;
+    padding: 8px 10px;
+    font-size: 0.9rem;
   }
   
   .overlay {
@@ -486,6 +661,25 @@ button.ghost {
   
   #satelliteImage {
     max-height: 250px;
+  }
+  
+  /* Ajustes para el mapa en tablet */
+  .map-wrapper {
+    height: 400px;
+  }
+  
+  .probability-legend {
+    min-width: 220px;
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
+  
+  .legend-labels {
+    font-size: 0.65rem;
+  }
+  
+  .charts {
+    height: 280px;
   }
 }
 
@@ -513,7 +707,11 @@ button.ghost {
   
   .probability {
     padding: 10px;
-    font-size: 0.9rem;
+    font-size: 24px;
+  }
+  
+  .probability span {
+    font-size: 28px;
   }
   
   #satelliteImage {
@@ -531,25 +729,39 @@ button.ghost {
   .overlay.instrument {
     font-size: 0.65rem;
   }
-}
-
-.charts {
-  display: flex;
-  gap: 12px;
-  flex-direction: column;
-  margin-top: 15px;
-  height: 300px; /* Altura fija para móvil */
-}
-
-@media (max-width: 768px) {
+  
+  /* Ajustes para el mapa en móvil */
+  .map-wrapper {
+    height: 350px;
+  }
+  
+  .probability-legend {
+    min-width: 200px;
+    font-size: 0.7rem;
+    padding: 8px 12px;
+  }
+  
+  .legend-labels {
+    font-size: 0.6rem;
+  }
+  
+  .map-toggle {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    min-width: 60px; /* Ancho mínimo */
+    max-width: 100px; /* Ancho máximo */
+    width: auto; /* Se ajusta al contenido */
+  }
+  
   .charts {
-    height: 280px; /* Un poco más bajo en móvil pero con buen espacio */
+    height: 260px;
+    margin-top: 12px;
   }
 }
 
-@media (max-width: 480px) {
-  .charts {
-    height: 260px; /* Ajuste para pantallas muy pequeñas */
-    margin-top: 12px;
+/* Desktop específico - 4 columnas para .data-grid */
+@media (min-width: 769px) {
+  .data-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
   }
 }
