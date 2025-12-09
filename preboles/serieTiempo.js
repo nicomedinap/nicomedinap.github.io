@@ -1,4 +1,3 @@
-let cloudChart = null;
 function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
   const ctx = document.getElementById('cloudChart').getContext('2d');
   if (cloudChart) cloudChart.destroy();
