@@ -91,6 +91,7 @@ layout: none
       font-size: 0.9rem;
     }
   }
+  
   </style>
 </head>
 
@@ -113,7 +114,7 @@ layout: none
     ">Préboles</h2>
     
     <div style="
-        font-size: 1.2rem;
+        font-size: 1.6rem;
         color: #FFB6C1;
         margin-top: -5px;
         letter-spacing: 8px;
@@ -426,6 +427,45 @@ function updateCityCardUI(nombre, probAtardecer) {
         card.style.background = "rgba(200, 200, 255, 0.15)";
     } else {
         card.style.background = "rgba(255, 255, 255, 0.05)";
+    }
+}
+
+// Función para obtener estilos basados en probabilidad (igual que las tarjetas)
+function getProbabilityStyles(probability) {
+    const probPercent = probability * 100;
+    
+    if (probPercent > 70) {
+        return {
+            background: "rgba(255, 80, 80, 0.55)",
+            boxShadow: "0 4px 16px rgba(255, 80, 80, 0.1)",
+            border: "1px solid rgba(255, 95, 0, 0.3)",
+            color: "#ffffff"
+        };
+    } else if (probPercent > 50) {
+        return {
+            background: "rgba(255, 165, 0, 0.3)",
+            boxShadow: "0 4px 16px rgba(255, 165, 0, 0.2)",
+            border: "1px solid rgba(255, 165, 0, 0.2)",
+            color: "#ffd700"
+        };
+    } else if (probPercent > 30) {
+        return {
+            background: "rgba(255, 200, 0, 0.25)",
+            border: "1px solid rgba(255, 200, 0, 0.15)",
+            color: "#ffcc00"
+        };
+    } else if (probPercent > 15) {
+        return {
+            background: "rgba(200, 200, 255, 0.15)",
+            border: "1px solid rgba(200, 200, 255, 0.1)",
+            color: "#aaaaff"
+        };
+    } else {
+        return {
+            background: "rgba(255, 255, 255, 0.05)",
+            border: "1px solid rgba(255, 255, 255, 0.05)",
+            color: "#cccccc"
+        };
     }
 }
 
@@ -1055,11 +1095,82 @@ async function predictRedSunset(lat, lon, cityName='') {
     `;
 
     const predBlock = document.getElementById('predictions');
+
+    // Obtener estilos para cada probabilidad (igual que las tarjetas)
+    const sunriseStyles = getProbabilityStyles(sunriseProb);
+    const sunsetStyles = getProbabilityStyles(sunsetProb);
+
+    // Crear el HTML con estilos inline usando los mismos colores que las tarjetas
     predBlock.innerHTML = `
-      <div class="probability ${probClass(sunriseProb)}">🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%</div>
-      <div class="probability ${probClass(sunsetProb)}">🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%</div>
+      <div class="probability" style="
+          background: ${sunriseStyles.background};
+          border: ${sunriseStyles.border};
+          box-shadow: ${sunriseStyles.boxShadow || 'none'};
+          color: ${sunriseStyles.color};
+          padding: 15px;
+          border-radius: 10px;
+          text-align: center;
+          font-size: 1.1rem;
+          font-weight: 600;
+          transition: all 0.3s;
+          flex: 1;
+      ">
+        🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%
+        ${sunriseProb > 0.8 ? '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>' : ''}
+      </div>
+      <div class="probability" style="
+          background: ${sunsetStyles.background};
+          border: ${sunsetStyles.border};
+          box-shadow: ${sunsetStyles.boxShadow || 'none'};
+          color: ${sunsetStyles.color};
+          padding: 15px;
+          border-radius: 10px;
+          text-align: center;
+          font-size: 1.1rem;
+          font-weight: 600;
+          transition: all 0.3s;
+          flex: 1;
+      ">
+        🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%
+        ${sunsetProb > 0.8 ? '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>' : ''}
+      </div>
     `;
 
+    // Estilo del contenedor principal (opcional, para darle coherencia)
+    predBlock.style.cssText = `
+        display: flex;
+        gap: 15px;
+        margin: 20px 0;
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    `;
+
+    // Si ambas probabilidades son altas, darle un efecto especial al contenedor
+    if (sunriseProb > 0.7 && sunsetProb > 0.7) {
+        predBlock.style.background = "linear-gradient(135deg, rgba(255, 80, 80, 0.15), rgba(255, 95, 0, 0.1))";
+        predBlock.style.border = "1px solid rgba(255, 95, 0, 0.3)";
+        predBlock.style.boxShadow = "0 4px 20px rgba(255, 80, 80, 0.15)";
+    } else if (sunriseProb > 0.7 || sunsetProb > 0.7) {
+        // Si al menos una es alta
+        predBlock.style.background = "linear-gradient(135deg, rgba(255, 80, 80, 0.1), rgba(255, 165, 0, 0.05))";
+        predBlock.style.border = "1px solid rgba(255, 165, 0, 0.2)";
+    }
+
+    // Añadir animación para fuego si no está definida
+    if ((sunriseProb > 0.8 || sunsetProb > 0.8) && !document.querySelector('style#fire-animation')) {
+        const style = document.createElement('style');
+        style.id = 'fire-animation';
+        style.textContent = `
+            @keyframes fire {
+                0% { transform: scale(1); opacity: 0.8; }
+                100% { transform: scale(1.2); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
     // Actualizar gráfico
     if (meteoData.cloudSeries && meteoData.cloudSeries.time) {
       const times24 = meteoData.cloudSeries.time.slice(0,24).map(t => {
@@ -1139,7 +1250,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBackgroundColor: '#4fc3f7',
           pointBorderWidth: isMobile ? 0.5 : 1,
           pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 10, 
+          pointRadius: isMobile ? 6 : 8, 
           pointHoverRadius: isMobile ? 10 : 14, 
         },
         {
@@ -1154,7 +1265,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBackgroundColor: '#ffb74d',
           pointBorderWidth: isMobile ? 0.5 : 1,
           pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 10, 
+          pointRadius: isMobile ? 6 : 8, 
           pointHoverRadius: isMobile ? 10 : 14, 
         },
         {
@@ -1168,7 +1279,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBackgroundColor: '#ba68c8',
           pointBorderWidth: isMobile ? 0.5 : 1,
           pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 10, 
+          pointRadius: isMobile ? 6 : 8, 
           pointHoverRadius: isMobile ? 10 : 14, 
         },
         {
@@ -1183,7 +1294,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBorderColor: '#ff6600',
           pointBorderWidth: isMobile ? 1 : 2,
           pointStyle: 'circle',
-          pointRadius: isMobile ? 7 : 11, 
+          pointRadius: isMobile ? 7 : 9, 
           pointHoverRadius: isMobile ? 11 : 15, 
         }
       ]
