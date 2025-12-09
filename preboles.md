@@ -31,14 +31,75 @@ layout: none
           margin: 20px 0 15px 0 !important;
       }
   }
+
+  .lead-with-bg {
+    margin: 0 0 20px 0;  
+    max-width: calc(100% - 40px);
+    opacity: 0.95;
+    font-size: 0.95rem;
+    padding: 30px 24px;
+    background: 
+      /* Capa de color sobre la imagen para mejor legibilidad */
+      linear-gradient(
+        rgba(0, 25, 51, 0.75),  /* Azul oscuro con transparencia */
+        rgba(102, 0, 0, 0.65)   /* Rojo oscuro con transparencia */
+      ),
+      /* Imagen de fondo */
+      url('https://as2.ftcdn.net/jpg/04/31/52/97/220_F_431529701_P3LDLj8D32MgRZZ565xmaJaVByjifQ8v.jpg') 
+      center center / cover no-repeat; /* Centrada y cubriendo todo */
+    
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    line-height: 1.7;
+    box-shadow: 
+      0 6px 20px rgba(0, 0, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(2px); /* Ligero desenfoque */
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    min-height: 180px; /* Altura mínima */
+    display: flex;
+    align-items: center;
+  }
+
+  .lead-content {
+    position: relative;
+    z-index: 2; /* Asegura que el texto esté sobre las capas de fondo */
+    max-width: 100%;
+  }
+
+  /* Icono de información opcional */
+  .lead-with-bg:after {
+    content: "ⓘ";
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    opacity: 0.5;
+    font-size: 0.9rem;
+    z-index: 3;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Para móviles */
+  @media (max-width: 768px) {
+    .lead-with-bg {
+      padding: 25px 20px;
+      min-height: 160px;
+      font-size: 0.9rem;
+    }
+  }
   </style>
 </head>
 
 <body>
 
+
 <div style="text-align: center; margin: 40px 0;">
     <h2 class="title" style="
-        font-size: 4.5rem;
+        font-size: 5rem;
         font-weight: 900;
         background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
         -webkit-background-clip: text;
@@ -66,7 +127,7 @@ layout: none
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 900;
-        ">PRE</span>DICTOR DE ARRE<span style="
+        ">PRE</span>dictor de arre<span style="
             background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -76,8 +137,13 @@ layout: none
     </div>
 </div>
 
-<p class="lead"> El arrebol es el fenómeno óptico donde la luz colorea las nubes de rojo, naranjo o rosado. Las nubes reflejan diferentes colores dependiendo del tipo de nube, y con eso es posible hacer una predicción. 
-Elige tu ciudad y prueba tu suerte!! </p>
+<p class="lead-with-bg">
+  <span class="lead-content">
+    El arrebol es el fenómeno óptico donde la luz colorea las nubes de rojo, naranjo o rosado. 
+    Las nubes reflejan diferentes colores dependiendo del tipo de nube, y con eso es posible hacer una predicción. 
+    Elige tu ciudad y prueba tu suerte!!
+  </span>
+</p>
 
 <div id="loadingIndicator" style="text-align:center; padding:20px;">
   <div class="loading" style="width:40px; height:40px; margin:0 auto;"></div>
@@ -132,7 +198,7 @@ Elige tu ciudad y prueba tu suerte!! </p>
       <div>
         <div class="panel">
           <div><strong>Mapa de probabilidad de arrebol</strong></div>
-          <div class="map-wrapper">
+          <div class="map-wrapper" style="height: 500px;">
             <div id="map"></div>
             
             <!-- LEYENDA CENTRADA ABAJO CON GRADIENTE ORIGINAL -->
@@ -173,6 +239,10 @@ Elige tu ciudad y prueba tu suerte!! </p>
   </div>
 </div>
 
+
+<!-- Lista con ciudades -->
+<script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
+
 <script>
 /* === VARIABLES GLOBALES PARA EL MAPA === */
 let map = null;
@@ -183,31 +253,9 @@ let heatmapEnabled = true;
 let labelsEnabled = true;
 let weatherDataCache = {};
 
-/* === CIUDADES === */
-const chileanCities = {
-  "Arica":            { lat: -18.4783, lon: -70.3126, region: "XV Región",  altitude: 30 },
-  "Iquique":          { lat: -20.2146, lon: -70.1524, region: "I Región",   altitude: 56 },
-  "Antofagasta":      { lat: -23.6509, lon: -70.3975, region: "II Región",  altitude: 40 },
-  "Calama":           { lat: -22.4544, lon: -68.9294, region: "II Región",  altitude: 2260 },
-  "Copiapó":          { lat: -27.3667, lon: -70.3333, region: "III Región", altitude: 390 },
-  "La Serena":        { lat: -29.9027, lon: -71.2519, region: "IV Región",  altitude: 28 },
-  "Coquimbo":         { lat: -29.9533, lon: -71.3436, region: "IV Región",  altitude: 15 },
-  "San Felipe":       { lat: -32.7497, lon: -70.7258, region: "V Región",   altitude: 656 },
-  "Valparaíso":       { lat: -33.0458, lon: -71.6197, region: "V Región",   altitude: 40 },
-  "Viña del Mar":     { lat: -33.0245, lon: -71.5518, region: "V Región",   altitude: 20 },
-  "Santiago":         { lat: -33.4489, lon: -70.6693, region: "RM",         altitude: 570 },
-  "Rancagua":         { lat: -34.1701, lon: -70.7406, region: "VI Región",  altitude: 572 },
-  "Talca":            { lat: -35.4264, lon: -71.6554, region: "VII Región", altitude: 102 },
-  "Linares":          { lat: -35.8454, lon: -71.5979, region: "VII Región", altitude: 165 },
-  "Chillán":          { lat: -36.6066, lon: -72.1034, region: "Ñuble",      altitude: 124 },
-  "Concepción":       { lat: -36.8269, lon: -73.0498, region: "VIII Región", altitude: 12 },
-  "Los Ángeles":      { lat: -37.4697, lon: -72.3536, region: "VIII Región", altitude: 139 },
-  "Temuco":           { lat: -38.7359, lon: -72.5907, region: "IX Región",  altitude: 114 },
-  "Valdivia":         { lat: -39.8142, lon: -73.2459, region: "XIV Región", altitude: 19 },
-  "Osorno":           { lat: -40.5739, lon: -73.1310, region: "X Región",   altitude: 65 },
-  "Puerto Montt":     { lat: -41.4689, lon: -72.9411, region: "X Región",   altitude: 85 },
-  "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34 },
-};
+
+
+
 
 /* ========== FUNCIÓN UNIFICADA PARA OBTENER DATOS METEOROLÓGICOS ========== */
 
@@ -311,7 +359,7 @@ function createCityCardSkeleton(nombre, info) {
 async function loadAllCityData() {
     const cities = Object.entries(chileanCities);
     const BATCH_SIZE = 3;
-    const DELAY = 500;
+    const DELAY = 300;
     
     for (let i = 0; i < cities.length; i += BATCH_SIZE) {
         const batch = cities.slice(i, i + BATCH_SIZE);
@@ -1044,7 +1092,6 @@ async function predictRedSunset(lat, lon, cityName='') {
   }
 }
 
-// Actualizar gráfico de nubosidad con indicadores de amanecer/atardecer y hora actual
 function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
   const ctx = document.getElementById('cloudChart').getContext('2d');
   if (cloudChart) cloudChart.destroy();
@@ -1313,6 +1360,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           }, 
           ticks: { 
             color: '#ffffff',
+            stepSize: 20, // Esto fuerza incrementos de 20%
             callback: function(value) {
               return value + '%';
             },
@@ -1389,6 +1437,10 @@ function createChartLegend(sunriseTime, sunsetTime, currentHour) {
     chartsContainer.appendChild(legendContainer);
   }
 }
+
+// Exportar funciones de gráficos
+window.updateCloudChart = updateCloudChart;
+window.createChartLegend = createChartLegend;
 
 /* ============================
    Small helpers
