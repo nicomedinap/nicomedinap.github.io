@@ -26,7 +26,7 @@ layout: none
 
   @media (max-width: 480px) {
       .title {
-          font-size: 2.2rem !important;
+          font-size: 2.6rem !important;
           letter-spacing: 0.5px !important;
           margin: 20px 0 15px 0 !important;
       }
@@ -58,10 +58,25 @@ layout: none
         letter-spacing: 8px;
         font-weight: 300;
         opacity: 0.8;
-    ">PREDICTOR DE ARREBOLES</div>
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    ">
+        <span style="
+            background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        ">PRE</span>DICTOR DE ARRE<span style="
+            background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        ">BOLES</span>
+    </div>
 </div>
 
-<p class="lead"> Un arrebol es el fenómeno óptico que colorea las nubes de rojo, naranjo o rosado durante el amancer o atardecer. Básicamente las nubes reflejan los primeros o últimos rayos del sol, y dependiendo de qué están hechas las nubes, depende de los colores que vemos. 
+<p class="lead"> El arrebol es el fenómeno óptico donde la luz colorea las nubes de rojo, naranjo o rosado. Las nubes reflejan diferentes colores dependiendo del tipo de nube, y con eso es posible hacer una predicción. 
 Elige tu ciudad y prueba tu suerte!! </p>
 
 <div id="loadingIndicator" style="text-align:center; padding:20px;">
@@ -792,22 +807,26 @@ function toggleLabels() {
   }
 }
 
-/* ========== MODELO PREDICTIVO ========== */
+/* ========== MODELO PREDICTIVO MEJORADO ========== */
 function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false, temperature = 20) {
   const lowPct  = Math.max(0, Math.min(100, Number(low)  || 0));
   const midPct  = Math.max(0, Math.min(100, Number(mid)  || 0));
   const highPct = Math.max(0, Math.min(100, Number(high) || 0));
 
-  //Factor temperatura
+  // Factor temperatura
   const optimalTemp = 20;
   const tempSigma = 8;
   const tempScore = Math.exp(-Math.pow((temperature - optimalTemp) / tempSigma, 2));
   
-  // === FACTOR NUBOSIDAD POR CAPAS ===
+  // === NUEVO: PENALIZACIÓN AGREGADA POR NUBES BAJAS ===
+  // Las nubes bajas son críticas porque bloquean la visibilidad
+  const lowCloudPenalty = Math.pow(lowPct / 100, 2); // Penalización cuadrática
+  
+  // === FACTOR NUBOSIDAD POR CAPAS (MODIFICADO) ===
   const layerScore = (
-      0.15 * (lowPct / 100) +    
-      0.35 * (midPct / 100) +    
-      0.50 * (highPct / 100)     
+      0.10 * (lowPct / 100) +    // Reducido de 0.15 a 0.10
+      0.30 * (midPct / 100) +    // Reducido de 0.35 a 0.30
+      0.60 * (highPct / 100)     // Aumentado de 0.50 a 0.60
   );
 
   // === FACTOR GEOMETRÍA SOLAR ===
@@ -827,13 +846,14 @@ function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false,
   const pressureStability = 1.0 - Math.abs((lowPct + midPct) - highPct) / 200;
   const pressureScore = Math.max(0.3, Math.min(1.0, pressureStability));
 
-  // === PESOS FINALES ===
-  const wLayer = 0.55;
+  // === PESOS FINALES (ACTUALIZADOS) ===
+  const wLayer = 0.45;      // Reducido de 0.55
   const wGeom  = 0.25;
   const wPM    = 0.05;
   const wHumidity = 0.05;
   const wPressure = 0.05;
   const wTemperature = 0.05;
+  const wLowPenalty = 0.10; // NUEVO: peso para penalización de nubes bajas
 
   // Calcular score combinado
   const score = (wLayer * layerScore) + 
@@ -841,19 +861,41 @@ function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false,
                 (wPM * pmScore) + 
                 (wHumidity * humidityScore) + 
                 (wPressure * pressureScore) +
-                (wTemperature * tempScore); 
+                (wTemperature * tempScore) - 
+                (wLowPenalty * lowCloudPenalty); // RESTA la penalización
 
   // Aplicar función logística para obtener probabilidad
   const logisticK = 10.0;
   const logisticMid = 0.5;
   let p = 1 / (1 + Math.exp(-logisticK * (score - logisticMid)));
 
-  // Penalización para condiciones muy desfavorables
+  // === NUEVAS PENALIZACIONES ADICIONALES ===
+  
+  // 1. Penalización fuerte por nubes bajas altas
+  if (lowPct > 60) {
+    p *= Math.max(0.1, 1 - (lowPct / 100)); // Mínimo 10% de probabilidad
+  }
+  
+  // 2. Penalización por cobertura total muy alta
   const totalCloud = (lowPct + midPct + highPct) / 3;
-  if (totalCloud > 95) p *= 0.3;
-  if (highPct < 10 && totalCloud < 20) p *= 0.5;
+  if (totalCloud > 90) {
+    p *= 0.2; // Reducción del 80% si cielo muy cubierto
+  } else if (totalCloud > 70) {
+    p *= 0.5; // Reducción del 50% si cielo bastante cubierto
+  }
+  
+  // 3. Condición especial: muchas nubes bajas = visibilidad nula
+  if (lowPct > 80 && totalCloud > 60) {
+    p = Math.min(p, 0.15); // Máximo 15% si hay muchas nubes bajas
+  }
+  
+  // 4. Condición óptima: pocas nubes bajas pero nubes altas
+  if (lowPct < 20 && highPct > 50) {
+    p = Math.min(0.99, p * 1.2); // Bonus del 20%
+  }
 
-  p = Math.max(0, Math.min(0.99, p));
+  // Asegurar límites
+  p = Math.max(0.01, Math.min(0.99, p)); // Mínimo 1%, máximo 99%
 
   return p;
 }
