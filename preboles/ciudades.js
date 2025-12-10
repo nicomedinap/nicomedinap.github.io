@@ -17,6 +17,7 @@ const chileanCities = {
   "Chillán":          { lat: -36.6066, lon: -72.1034, region: "Ñuble",      altitude: 124 },
   "Concepción":       { lat: -36.8269, lon: -73.0498, region: "VIII Región", altitude: 12 },
   "Los Ángeles":      { lat: -37.4697, lon: -72.3536, region: "VIII Región", altitude: 139 },
+  "Antuco":           { lat: -37.333 , lon: -71.683 , region: "VIII Región", altitude: 2979 },
   "Temuco":           { lat: -38.7359, lon: -72.5907, region: "IX Región",  altitude: 114 },
   "Valdivia":         { lat: -39.8142, lon: -73.2459, region: "XIV Región", altitude: 19 },
   "Osorno":           { lat: -40.5739, lon: -73.1310, region: "X Región",   altitude: 65 },
