@@ -1,6 +1,23 @@
-function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
+// chart-functions.js - Funciones para gráficos de series de tiempo
+
+// Variables globales para el gráfico
+let cloudChart = null;
+
+/**
+ * Actualiza el gráfico de nubosidad con los datos proporcionados
+ * @param {Array} hours - Horas del día (24 elementos)
+ * @param {Object} cloudVals - Objeto con total, low, mid, high
+ * @param {Date} sunriseTime - Hora del amanecer
+ * @param {Date} sunsetTime - Hora del atardecer
+ * @param {String} cityName - Nombre de la ciudad (opcional)
+ */
+function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime, cityName = '') {
   const ctx = document.getElementById('cloudChart').getContext('2d');
-  if (cloudChart) cloudChart.destroy();
+  
+  // Destruir gráfico anterior si existe
+  if (cloudChart) {
+    cloudChart.destroy();
+  }
   
   const sunriseHour = sunriseTime.getHours();
   const sunsetHour = sunsetTime.getHours();
@@ -25,8 +42,13 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
 
   const isMobile = window.innerWidth < 768;
   
-  // Primero crear la leyenda explicativa
+  // Crear leyenda explicativa
   createChartLegend(sunriseTime, sunsetTime, currentHour);
+  
+  // Configurar título dinámico
+  const chartTitle = cityName 
+    ? `Nubosidad por Hora del Día en ${cityName}`
+    : 'Nubosidad por Hora del Día';
   
   cloudChart = new Chart(ctx, {
     type: 'line',
@@ -45,7 +67,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBackgroundColor: '#4fc3f7',
           pointBorderWidth: isMobile ? 0.5 : 1,
           pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 10, 
+          pointRadius: isMobile ? 6 : 8, 
           pointHoverRadius: isMobile ? 10 : 14, 
         },
         {
@@ -60,7 +82,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBackgroundColor: '#ffb74d',
           pointBorderWidth: isMobile ? 0.5 : 1,
           pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 10, 
+          pointRadius: isMobile ? 6 : 8, 
           pointHoverRadius: isMobile ? 10 : 14, 
         },
         {
@@ -74,7 +96,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBackgroundColor: '#ba68c8',
           pointBorderWidth: isMobile ? 0.5 : 1,
           pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 10, 
+          pointRadius: isMobile ? 6 : 8, 
           pointHoverRadius: isMobile ? 10 : 14, 
         },
         {
@@ -89,7 +111,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           pointBorderColor: '#ff6600',
           pointBorderWidth: isMobile ? 1 : 2,
           pointStyle: 'circle',
-          pointRadius: isMobile ? 7 : 11, 
+          pointRadius: isMobile ? 7 : 9, 
           pointHoverRadius: isMobile ? 11 : 15, 
         }
       ]
@@ -101,7 +123,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
       plugins: { 
         title: {
           display: true,
-          text: 'Nubosidad por Hora del Día en %ciudad',
+          text: chartTitle,
           color: '#ffffff',
           font: {
             size: isMobile ? 18 : 20,
@@ -110,7 +132,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           },
           padding: {
             top: 5,
-            bottom: 2 // Reducido para dejar espacio a la leyenda
+            bottom: 2
           }
         },
         legend: { 
@@ -194,12 +216,10 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
             label: function(context) {
               return `${context.dataset.label}: ${context.parsed.y}%`;
             },
-            // Añadir información adicional en el tooltip
             afterBody: function(context) {
               const index = context[0].dataIndex;
               const hour = hours[index];
               
-              // Verificar si esta hora coincide con eventos importantes
               const lines = [];
               
               if (index === sunriseIndex) {
@@ -237,7 +257,6 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
             font: {
               size: isMobile ? 14 : 16
             },
-            // Destacar horas importantes en las etiquetas
             callback: function(value, index) {
               const hour = hours[index];
               if (index === sunriseIndex) {
@@ -266,7 +285,7 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
           }, 
           ticks: { 
             color: '#ffffff',
-            stepSize: 20, // Esto fuerza incrementos de 20%
+            stepSize: 20,
             callback: function(value) {
               return value + '%';
             },
@@ -290,6 +309,12 @@ function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
   });
 }
 
+/**
+ * Crea una leyenda explicativa para el gráfico
+ * @param {Date} sunriseTime - Hora del amanecer
+ * @param {Date} sunsetTime - Hora del atardecer
+ * @param {Number} currentHour - Hora actual
+ */
 function createChartLegend(sunriseTime, sunsetTime, currentHour) {
   // Formatear horas
   const sunriseStr = sunriseTime.toLocaleTimeString('es-CL', { 
@@ -316,18 +341,32 @@ function createChartLegend(sunriseTime, sunsetTime, currentHour) {
   const legendContainer = document.createElement('div');
   legendContainer.className = 'chart-time-legend';
   
-  // Elementos de la leyenda MÁS COMPACTA
+  // Estilos para la leyenda
+  legendContainer.style.cssText = `
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+  `;
+  
+  // Elementos de la leyenda
   legendContainer.innerHTML = `
-    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-      <div style="width: 12px; height: 3px; background: #ffeb3b; border-radius: 1px;"></div>
+    <div style="display: flex; align-items: center; gap: 8px; white-space: nowrap;">
+      <div style="width: 15px; height: 3px; background: #ffeb3b; border-radius: 1px;"></div>
       <span>🌅 Amanecer ${sunriseStr}</span>
     </div>
-    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-      <div style="width: 12px; height: 3px; background: #ff9800; border-radius: 1px;"></div>
+    <div style="display: flex; align-items: center; gap: 8px; white-space: nowrap;">
+      <div style="width: 15px; height: 3px; background: #ff9800; border-radius: 1px;"></div>
       <span>🌇 Puesta de sol ${sunsetStr}</span>
     </div>
-    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-      <div style="width: 12px; height: 3px; background: #4CAF50; border-radius: 1px;"></div>
+    <div style="display: flex; align-items: center; gap: 8px; white-space: nowrap;">
+      <div style="width: 15px; height: 3px; background: #4CAF50; border-radius: 1px;"></div>
       <span>🕐 Ahora ${currentStr}</span>
     </div>
   `;
@@ -336,7 +375,6 @@ function createChartLegend(sunriseTime, sunsetTime, currentHour) {
   const chartsContainer = document.querySelector('.charts');
   const canvas = document.getElementById('cloudChart');
   
-  // Insertar al principio del contenedor (antes del canvas)
   if (chartsContainer.firstChild) {
     chartsContainer.insertBefore(legendContainer, chartsContainer.firstChild);
   } else {
@@ -344,6 +382,63 @@ function createChartLegend(sunriseTime, sunsetTime, currentHour) {
   }
 }
 
-// Exportar funciones de gráficos
-window.updateCloudChart = updateCloudChart;
-window.createChartLegend = createChartLegend;
+/**
+ * Prepara datos para el gráfico a partir de los datos meteorológicos
+ * @param {Object} meteoData - Datos meteorológicos
+ * @returns {Object} Objeto con hours y cloudVals
+ */
+function prepareChartData(meteoData) {
+  if (!meteoData.cloudSeries || !meteoData.cloudSeries.time) {
+    return null;
+  }
+  
+  const times24 = meteoData.cloudSeries.time.slice(0, 24).map(t => {
+    const d = new Date(t);
+    return d.getHours() + ':00';
+  });
+  
+  const clouds = {
+    total: meteoData.cloudSeries.cloudcover.slice(0, 24).map(v => Math.round(v)),
+    low: meteoData.cloudSeries.cloudcover_low.slice(0, 24).map(v => Math.round(v)),
+    mid: meteoData.cloudSeries.cloudcover_mid.slice(0, 24).map(v => Math.round(v)),
+    high: meteoData.cloudSeries.cloudcover_high.slice(0, 24).map(v => Math.round(v)),
+  };
+  
+  return { hours: times24, cloudVals: clouds };
+}
+
+/**
+ * Limpia el gráfico (elimina la instancia)
+ */
+function clearCloudChart() {
+  if (cloudChart) {
+    cloudChart.destroy();
+    cloudChart = null;
+  }
+  
+  // Eliminar leyenda
+  const oldLegend = document.querySelector('.chart-time-legend');
+  if (oldLegend) {
+    oldLegend.remove();
+  }
+}
+
+/**
+ * Función para actualizar solo el título del gráfico
+ * @param {String} cityName - Nombre de la ciudad
+ */
+function updateChartTitle(cityName) {
+  if (cloudChart && cloudChart.options.plugins.title) {
+    cloudChart.options.plugins.title.text = `Nubosidad por Hora del Día en ${cityName}`;
+    cloudChart.update();
+  }
+}
+
+// Exportar funciones para uso global
+if (typeof window !== 'undefined') {
+  window.updateCloudChart = updateCloudChart;
+  window.createChartLegend = createChartLegend;
+  window.prepareChartData = prepareChartData;
+  window.clearCloudChart = clearCloudChart;
+  window.updateChartTitle = updateChartTitle;
+}
