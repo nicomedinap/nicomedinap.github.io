@@ -1573,9 +1573,7 @@ initCityMenu();
     <p>Préboles 2025. Nicolás Medina Peña.</p>
     <nav>
         <a href="https://nicomedinap.github.io/about.html" target="_blank"> <u>Sobre el autor</u></a>
-        <a href="https://www.privacy-policy-link.com" target="_blank"> <u>Sobre el modelo predictivo</u></a>
-        <a href="https://nicomedinap.github.io/apuntes/Telescopios.html" target="_blank"> <u>Sobre los datos</u></a>
-        <a href="https://www.instagram.com/nicomediap/" target="_blank" class="fa fa-instagram"></a>
+        <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank"> <u>Sobre el modelo predictivo y los datos</u></a>
     </nav>
 </footer>
 
