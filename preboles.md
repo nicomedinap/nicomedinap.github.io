@@ -244,6 +244,9 @@ layout: none
 <!-- Lista con ciudades -->
 <script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
 
+<!--redprob-->
+<script src="https://nicomedinap.github.io/preboles/redProbability.js"></script>
+
 <script>
 /* === VARIABLES GLOBALES PARA EL MAPA === */
 let map = null;
@@ -810,7 +813,10 @@ function getGradientColorForProbability(probability) {
     { pos: 0.75, color: '#fdae61' },  // Naranja - 75%
     { pos: 1.0, color: '#d7191c' }    // Rojo - 100%
   ];
-  
+  // Función alternativa simple (para compatibilidad)
+function getColorForProbability(probability) {
+  return getGradientColorForProbability(probability);
+}
   // Encontrar entre qué dos stops está la probabilidad
   for (let i = 0; i < gradientStops.length - 1; i++) {
     const start = gradientStops[i];
@@ -895,98 +901,7 @@ function toggleLabels() {
   }
 }
 
-/* ========== MODELO PREDICTIVO MEJORADO ========== */
-function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false, temperature = 20) {
-  const lowPct  = Math.max(0, Math.min(100, Number(low)  || 0));
-  const midPct  = Math.max(0, Math.min(100, Number(mid)  || 0));
-  const highPct = Math.max(0, Math.min(100, Number(high) || 0));
 
-  // Factor temperatura
-  const optimalTemp = 20;
-  const tempSigma = 8;
-  const tempScore = Math.exp(-Math.pow((temperature - optimalTemp) / tempSigma, 2));
-  
-  // === NUEVO: PENALIZACIÓN AGREGADA POR NUBES BAJAS ===
-  // Las nubes bajas son críticas porque bloquean la visibilidad
-  const lowCloudPenalty = Math.pow(lowPct / 100, 2); // Penalización cuadrática
-  
-  // === FACTOR NUBOSIDAD POR CAPAS (MODIFICADO) ===
-  const layerScore = (
-      0.10 * (lowPct / 100) +    // Reducido de 0.15 a 0.10
-      0.30 * (midPct / 100) +    // Reducido de 0.35 a 0.30
-      0.60 * (highPct / 100)     // Aumentado de 0.50 a 0.60
-  );
-
-  // === FACTOR GEOMETRÍA SOLAR ===
-  const idealElev = -3.0;
-  const geomSigma = 4.0;
-  const geomScore = Math.exp(-Math.pow((elevDeg - idealElev) / geomSigma, 2));
-
-  // === FACTOR CALIDAD DEL AIRE (PM2.5) ===
-  const idealPM = 15;
-  const pmSigma = 18;
-  const pmScore = Math.exp(-Math.pow((pm25 - idealPM) / pmSigma, 2));
-
-  // === FACTOR HUMEDAD ===
-  const humidityScore = highPct / 100;
-
-  // === FACTOR PRESIÓN ATMOSFÉRICA ===
-  const pressureStability = 1.0 - Math.abs((lowPct + midPct) - highPct) / 200;
-  const pressureScore = Math.max(0.3, Math.min(1.0, pressureStability));
-
-  // === PESOS FINALES (ACTUALIZADOS) ===
-  const wLayer = 0.45;      // Reducido de 0.55
-  const wGeom  = 0.25;
-  const wPM    = 0.05;
-  const wHumidity = 0.05;
-  const wPressure = 0.05;
-  const wTemperature = 0.05;
-  const wLowPenalty = 0.10; // NUEVO: peso para penalización de nubes bajas
-
-  // Calcular score combinado
-  const score = (wLayer * layerScore) + 
-                (wGeom * geomScore) + 
-                (wPM * pmScore) + 
-                (wHumidity * humidityScore) + 
-                (wPressure * pressureScore) +
-                (wTemperature * tempScore) - 
-                (wLowPenalty * lowCloudPenalty); // RESTA la penalización
-
-  // Aplicar función logística para obtener probabilidad
-  const logisticK = 10.0;
-  const logisticMid = 0.5;
-  let p = 1 / (1 + Math.exp(-logisticK * (score - logisticMid)));
-
-  // === NUEVAS PENALIZACIONES ADICIONALES ===
-  
-  // 1. Penalización fuerte por nubes bajas altas
-  if (lowPct > 60) {
-    p *= Math.max(0.1, 1 - (lowPct / 100)); // Mínimo 10% de probabilidad
-  }
-  
-  // 2. Penalización por cobertura total muy alta
-  const totalCloud = (lowPct + midPct + highPct) / 3;
-  if (totalCloud > 90) {
-    p *= 0.2; // Reducción del 80% si cielo muy cubierto
-  } else if (totalCloud > 70) {
-    p *= 0.5; // Reducción del 50% si cielo bastante cubierto
-  }
-  
-  // 3. Condición especial: muchas nubes bajas = visibilidad nula
-  if (lowPct > 80 && totalCloud > 60) {
-    p = Math.min(p, 0.15); // Máximo 15% si hay muchas nubes bajas
-  }
-  
-  // 4. Condición óptima: pocas nubes bajas pero nubes altas
-  if (lowPct < 20 && highPct > 50) {
-    p = Math.min(0.99, p * 1.2); // Bonus del 20%
-  }
-
-  // Asegurar límites
-  p = Math.max(0.01, Math.min(0.99, p)); // Mínimo 1%, máximo 99%
-
-  return p;
-}
 
 /* ========== INTERFAZ PRINCIPAL ========== */
 

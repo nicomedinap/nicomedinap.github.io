@@ -51,5 +51,5 @@ function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false,
   return Math.max(0.01, Math.min(0.99, p));
 }
 
-// 🔴 IMPORTANTE: exponerla globalmente
+//Exponer globalmente
 window.computeRedProbability = computeRedProbability;
