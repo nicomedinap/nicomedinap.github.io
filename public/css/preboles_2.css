@@ -1,0 +1,897 @@
+    /* ==========================================================================
+       VARIABLES Y BASE
+       ========================================================================== */
+    :root {
+      --bg1: #001933;
+      --bg2: #660000;
+      --accent: #ff6600;
+      --card: rgba(255, 255, 255, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg1), var(--bg2));
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+
+    /* ==========================================================================
+       TÍTULOS Y ENCABEZADOS
+       ========================================================================== */
+    .title-container {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .title {
+      font-size: 5rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .subtitle {
+      font-size: 1.6rem;
+      color: #FFB6C1;
+      margin-top: -5px;
+      letter-spacing: 8px;
+      font-weight: 300;
+      opacity: 0.8;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+    }
+
+    h1 { margin: 0 0 8px 0; font-size: 1.5rem; }
+    h2 { margin: 0 0 15px 0; font-size: 1.3rem; color: var(--accent); }
+
+    /* ==========================================================================
+       SISTEMA DE PESTAÑAS
+       ========================================================================== */
+    .tabs-container {
+      max-width: 1000px;
+      margin: 0 auto 20px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 14px;
+      padding: 15px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .tabs-header {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: none;
+      border-radius: 8px;
+      color: #ccc;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .tab-btn:hover { background: rgba(255, 255, 255, 0.1); color: white; }
+    .tab-btn.active {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       CONTENEDORES PRINCIPALES
+       ========================================================================== */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 14px;
+      padding: 15px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .grid { 
+      display: grid; 
+      grid-template-columns: 1fr 420px; 
+      gap: 16px; 
+      align-items: start; 
+    }
+
+    .panel { 
+      background: var(--card); 
+      padding: 15px; 
+      border-radius: 10px; 
+    }
+
+    .data-block {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 10px 0;
+    }
+
+    /* ==========================================================================
+       MENÚ DE CIUDADES
+       ========================================================================== */
+    #cityMenu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      padding: 20px 15px;
+      min-height: 100vh;
+    }
+
+    .city-card {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      text-align: center;
+      padding: 18px 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .city-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .city-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
+    }
+
+    .city-region {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      position: relative;
+      z-index: 2;
+    }
+
+    .city-probability {
+      margin-top: 6px; 
+      font-size: 0.9rem; 
+      opacity: 0.85;
+      position: relative;
+      z-index: 2;
+    }
+
+    .probability-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #4CAF50, #FFC107, #F44336);
+      transition: width 0.5s ease;
+    }
+
+    /* ==========================================================================
+       CONTENIDO PRINCIPAL DE LA APP
+       ========================================================================== */
+    #appContainer {
+      display: none;
+      padding: 15px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    /* ==========================================================================
+       CONTROLES Y FORMULARIOS
+       ========================================================================== */
+    .controls { 
+      display: flex; 
+      gap: 10px; 
+      flex-wrap: wrap; 
+      margin: 12px 0; 
+    }
+
+    select, button, input, textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      min-height: 44px;
+    }
+
+    select, input { 
+      background: rgba(255, 255, 255, 0.06); 
+      color: #fff; 
+      width: 100%;
+    }
+
+    button { 
+      background: var(--accent); 
+      color: #fff; 
+      cursor: pointer; 
+      font-weight: 600; 
+      flex: 1;
+      min-width: 140px;
+    }
+
+    button.back {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: white;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button.ghost { 
+      background: transparent; 
+      border: 1px solid rgba(255, 255, 255, 0.08); 
+    }
+
+    .map-toggle {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .map-toggle.active { background: #4CAF50; }
+
+    /* ==========================================================================
+       TEXTO DESTACADO
+       ========================================================================== */
+    .lead,
+    .lead-with-bg,
+    p.lead { 
+      margin: 0 auto 20px;
+      max-width: calc(100% - 40px);
+      opacity: 0.95;
+      font-size: 0.95rem;
+      padding: 30px 24px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      line-height: 1.7;
+      box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.25),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      color: white;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .lead {
+      background: linear-gradient(135deg, rgba(0, 25, 51, 0.7), rgba(102, 0, 0, 0.5));
+    }
+
+    .lead-with-bg {
+      background: 
+        linear-gradient(rgba(0, 25, 51, 0.75), rgba(102, 0, 0, 0.65)),
+        url('https://as2.ftcdn.net/jpg/04/31/52/97/220_F_431529701_P3LDLj8D32MgRZZ565xmaJaVByjifQ8v.jpg') center/cover no-repeat;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      backdrop-filter: blur(2px);
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .lead-content {
+      position: relative;
+      z-index: 2;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .lead:after,
+    .lead-with-bg:after {
+      content: "ⓘ";
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      opacity: 0.5;
+      font-size: 0.9rem;
+      z-index: 3;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    p.lead { 
+      margin: 0 0 12px; 
+      opacity: 0.9; 
+      font-size: 0.95rem;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    /* ==========================================================================
+       DATOS Y GRID
+       ========================================================================== */
+    .data-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      grid-auto-flow: row !important;
+      gap: 10px !important;
+      width: 100% !important;
+    }
+
+    .data-item {
+      background: #2a2a2a;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .sun-times { 
+      display: flex; 
+      gap: 8px; 
+      flex-wrap: wrap; 
+      justify-content: flex-start; 
+      margin: 10px 0; 
+    }
+
+    .sun-time { 
+      background: rgba(255, 255, 255, 0.04); 
+      padding: 10px 12px; 
+      border-radius: 8px; 
+      font-size: 0.95rem;
+    }
+
+    .predictions { 
+      display: flex; 
+      gap: 10px; 
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .probability {
+      font-size: 32px;         
+      font-weight: bold;
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; 
+      align-items: center;     
+      line-height: 1.2;        
+    }
+
+    .probability span { font-size: 40px; }
+    .high-prob { background: rgba(255, 204, 0, 0.18); color: #ffd24d; }
+    .medium-prob { background: rgba(255, 153, 102, 0.12); color: #ffb07a; }
+    .low-prob { background: rgba(204, 102, 51, 0.12); color: #e09b79; }
+
+    #result { min-height: 120px; }
+
+    #log {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      max-height: 100px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    /* ==========================================================================
+       GRÁFICOS Y CANVAS
+       ========================================================================== */
+    canvas {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 8px;
+      max-width: 100%;
+    }
+
+    .charts {
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+      height: 400px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #cloudChart {
+      flex: 1;
+      min-height: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .chart-time-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      margin: 5px 0 10px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.85rem;
+      z-index: 5;
+      order: 1;
+    }
+
+    .chartjs-render-monitor {
+      position: relative !important;
+      height: 100% !important;
+      width: 100% !important;
+    }
+
+    .chartjs-container { flex: 1; position: relative; min-height: 0; }
+
+    /* ==========================================================================
+       IMÁGENES SATELITALES
+       ========================================================================== */
+    img.sat,
+    #satelliteImage,
+    .satellite-wrapper img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-top: 8px;
+      height: auto;
+    }
+
+    #satelliteImage { 
+      width: 100%; 
+      height: auto; 
+      max-height: 300px;
+      object-fit: cover; 
+      border-radius: 8px; 
+      display: block; 
+      margin-top: 8px; 
+    }
+
+    .satellite-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .satellite-wrapper img {
+      display: block;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ==========================================================================
+       OVERLAYS DE IMÁGENES
+       ========================================================================== */
+    .overlay {
+      position: absolute;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+      font-size: 0.9rem;
+    }
+
+    .overlay.orientation {
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    .overlay.scale {
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scale-bar {
+      width: 80px;
+      height: 6px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+    }
+
+    .overlay.instrument {
+      bottom: 8px;
+      right: 14px;
+      font-size: 0.8em;
+      opacity: 0.8;
+    }
+
+    /* ==========================================================================
+       MAPA Y LEYENDA
+       ========================================================================== */
+    .map-wrapper {
+      position: relative;
+      height: 450px;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    #map { height: 100%; width: 100%; }
+
+    .map-controls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .probability-legend {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      z-index: 1000;
+      min-width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .legend-title { margin-bottom: 8px; font-weight: bold; }
+
+    .legend-gradient {
+      height: 8px;
+      width: 100%;
+      background: linear-gradient(to right, 
+        #2b83ba,  /* Azul - 0% */
+        #abdda4,  /* Verde claro - 25% */
+        #ffffbf,  /* Amarillo - 50% */
+        #fdae61,  /* Naranja - 75% */
+        #d7191c   /* Rojo - 100% */
+      );
+      margin-bottom: 8px;
+      border-radius: 6px;
+    }
+
+    .legend-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      opacity: 0.9;
+    }
+
+    /* ==========================================================================
+       LOADING
+       ========================================================================== */
+    .loading { 
+      display: inline-block; 
+      width: 18px; 
+      height: 18px; 
+      border: 3px solid rgba(255, 255, 255, 0.2); 
+      border-top-color: #fff; 
+      border-radius: 50%; 
+      animation: spin 1s linear infinite; 
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .footer {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+      bottom: 0px;
+      width: 100%;
+    }
+
+    .footer a { margin: 0; font-size: 10px; }
+    .footer p { margin: 0 0 1px 0; font-size: 12px; }
+
+    .footer nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 2px;
+      font-size: 12px;
+      transition: color 0.3s ease, text-decoration 0.3s ease;
+    }
+
+    .footer nav a:hover { color: #1e90ff; text-decoration: underline; }
+    .footer nav a:active { color: #f39c12; }
+    .footer nav .fa-instagram:hover { color: #e4405f; }
+
+    .footer nav a.fa {
+      font-size: 20px;
+      margin: 0 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .footer nav a.fa:hover { transform: scale(1.2); }
+
+    /* ==========================================================================
+       ESTILOS PARA PESTAÑAS ESPECÍFICAS
+       ========================================================================== */
+    .info-section {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .info-section h3 {
+      margin-top: 0;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .info-card h4 { margin-top: 0; color: #ffcc00; font-size: 1rem; }
+    .info-card ul { padding-left: 20px; margin: 10px 0; }
+    .info-card li { margin-bottom: 5px; }
+
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    .ranking-table th {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .ranking-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .ranking-table tr:hover { background: rgba(255, 255, 255, 0.05); }
+    .ranking-table .rank { font-weight: bold; color: #ffcc00; width: 50px; }
+
+    .observatory-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .observatory-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .observatory-card h4 { margin-top: 0; color: #4fc3f7; font-size: 1.1rem; }
+
+    /* ==========================================================================
+       MEDIA QUERIES
+       ========================================================================== */
+    @media (max-width: 768px) {
+      body { font-size: 14px; }
+      
+      #cityMenu {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+        padding: 15px 10px;
+      }
+      
+      .city-card { padding: 15px 8px; }
+      .city-name { font-size: 1rem; }
+      .city-region { font-size: 0.8rem; }
+      
+      .container, .tabs-container { padding: 12px; }
+      .grid { grid-template-columns: 1fr; gap: 12px; }
+      .panel { padding: 12px; }
+      
+      h1 { font-size: 1.3rem; }
+      
+      .title {
+        font-size: 3.6rem !important;
+        letter-spacing: 7px !important;
+        margin: 25px 0 20px !important;
+      }
+      
+      .subtitle { font-size: 1.3rem; letter-spacing: 5px; }
+      p.lead { font-size: 0.9rem; }
+      
+      .controls { flex-direction: column; }
+      button { width: 100%; }
+      
+      .tab-btn {
+        min-width: 100px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+      
+      .data-grid { grid-template-columns: 1fr; gap: 8px; }
+      .predictions { flex-direction: column; }
+      
+      .probability {
+        width: 100%;
+        min-width: auto;
+        font-size: 28px;
+      }
+      
+      .probability span { font-size: 32px; }
+      .sun-times { justify-content: space-between; }
+      
+      .sun-time {
+        flex: 1;
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 0.9rem;
+      }
+      
+      .overlay { font-size: 0.8rem; }
+      .overlay.scale { bottom: 15px; }
+      .scale-bar { width: 60px; }
+      .overlay.instrument { font-size: 0.7rem; }
+      
+      #satelliteImage { max-height: 250px; }
+      .map-wrapper { height: 400px; }
+      
+      .probability-legend {
+        min-width: 220px;
+        font-size: 0.75rem;
+        padding: 8px 12px;
+      }
+      
+      .legend-labels { font-size: 0.65rem; }
+      .charts { height: 350px; }
+      
+      .lead-with-bg {
+        padding: 25px 20px;
+        min-height: 160px;
+        font-size: 0.9rem;
+        max-width: calc(100% - 30px);
+      }
+      
+      .chart-time-legend {
+        gap: 8px;
+        margin: 3px 0 8px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #cityMenu { grid-template-columns: repeat(2, 1fr); }
+      .container, .tabs-container { padding: 10px; }
+      .panel { padding: 10px; }
+      h1 { font-size: 1.2rem; }
+      
+      .title {
+        font-size: 3.3rem !important;
+        letter-spacing: 0.5px !important;
+        margin: 20px 0 15px !important;
+      }
+      
+      .subtitle { font-size: 1.7rem; letter-spacing: 3px; }
+      .data-item { padding: 8px; font-size: 0.85rem; }
+      
+      .probability { padding: 10px; font-size: 24px; }
+      .probability span { font-size: 28px; }
+      
+      #satelliteImage { max-height: 200px; }
+      .overlay.orientation { font-size: 0.9rem; }
+      .overlay.scale { font-size: 0.75rem; }
+      .overlay.instrument { font-size: 0.65rem; }
+      
+      .map-wrapper { height: 350px; }
+      
+      .probability-legend {
+        min-width: 200px;
+        font-size: 0.7rem;
+        padding: 8px 12px;
+      }
+      
+      .legend-labels { font-size: 0.6rem; }
+      
+      .map-toggle {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        min-width: 60px;
+        max-width: 100px;
+        width: auto;
+      }
+      
+      .charts { height: 350px; margin-top: 12px; }
+      
+      .chart-time-legend {
+        gap: 6px;
+        margin: 2px 0 6px;
+        padding: 5px 8px;
+        font-size: 0.75rem;
+      }
+      
+      .tab-btn {
+        min-width: 80px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .data-grid { grid-template-columns: repeat(4, 1fr) !important; }
+    }
