@@ -3,93 +3,87 @@
  * Archivo: https://nicomedinap.github.io/preboles/chartUtils.js
  */
 
-// Variable global para el gráfico
-let cloudChart = null;
-
-// Función para crear o actualizar el gráfico de nubes
-function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, currentTime) {
-    const ctx = document.getElementById(canvasId).getContext('2d');
+(function() {
+    'use strict';
     
-    // Destruir gráfico existente si existe
-    if (cloudChart) {
-        cloudChart.destroy();
+    let cloudChart = null;
+    const FALLBACK_CLOUD_VALUE = 50;
+    
+    // Función principal para actualizar gráficos
+    window.updateCharts = function(meteoData, sunriseTime, sunsetTime) {
+        if (!meteoData?.cloudSeries?.time) return;
+        
+        const chartData = prepareChartData(meteoData.cloudSeries);
+        createCloudChart('cloudChart', chartData, sunriseTime, sunsetTime, new Date());
+    };
+    
+    // Crear gráfico de nubes
+    function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, currentTime) {
+        const ctx = document.getElementById(canvasId)?.getContext('2d');
+        if (!ctx) return;
+        
+        if (cloudChart) cloudChart.destroy();
+        
+        const isMobile = window.innerWidth < 768;
+        const sunriseHour = sunriseTime.getHours();
+        const sunsetHour = sunsetTime.getHours();
+        const currentHour = currentTime.getHours();
+        
+        const sunriseIndex = findHourIndex(chartData.time, sunriseHour);
+        const sunsetIndex = findHourIndex(chartData.time, sunsetHour);
+        const currentIndex = findHourIndex(chartData.time, currentHour);
+        
+        createChartLegend(sunriseTime, sunsetTime, currentHour);
+        
+        cloudChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartData.time,
+                datasets: createChartDatasets(chartData.clouds, isMobile)
+            },
+            options: getChartOptions(isMobile, chartData.time, sunriseIndex, sunsetIndex, currentIndex)
+        });
     }
     
-    const isMobile = window.innerWidth < 768;
-    const sunriseHour = sunriseTime.getHours();
-    const sunsetHour = sunsetTime.getHours();
-    const currentHour = currentTime.getHours();
+    // Encontrar índice de hora
+    function findHourIndex(hours, targetHour) {
+        return hours.findIndex(h => parseInt(h.split(':')[0]) >= targetHour);
+    }
     
-    const sunriseIndex = chartData.time.findIndex(h => parseInt(h.split(':')[0]) >= sunriseHour);
-    const sunsetIndex = chartData.time.findIndex(h => parseInt(h.split(':')[0]) >= sunsetHour);
-    const currentIndex = chartData.time.findIndex(h => parseInt(h.split(':')[0]) >= currentHour);
+    // Crear datasets
+    function createChartDatasets(cloudData, isMobile) {
+        return [
+            createDataset('Nubes bajas', cloudData.low, '#4fc3f7', [4, 3], isMobile),
+            createDataset('Nubes medias', cloudData.mid, '#ffb74d', [2, 3], isMobile),
+            createDataset('Nubes altas', cloudData.high, '#ba68c8', null, isMobile),
+            createTotalDataset('Nubosidad total', cloudData.total, isMobile)
+        ];
+    }
     
-    // Crear leyenda
-    createChartLegend(sunriseTime, sunsetTime, currentHour);
-    
-    // Crear nuevo gráfico
-    cloudChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: chartData.time,
-            datasets: createChartDatasets(chartData.clouds, isMobile)
-        },
-        options: getChartOptions(isMobile, chartData.time, sunriseIndex, sunsetIndex, currentIndex)
-    });
-    
-    return cloudChart;
-}
-
-// Crear datasets para el gráfico
-function createChartDatasets(cloudData, isMobile) {
-    return [
-        {
-            label: 'Nubes bajas',
-            data: cloudData.low,
+    // Crear dataset individual
+    function createDataset(label, data, color, borderDash, isMobile) {
+        return {
+            label,
+            data,
             borderWidth: isMobile ? 1 : 1.5,
-            borderColor: '#4fc3f7',
-            backgroundColor: 'rgba(79, 195, 247, 0.1)',
+            borderColor: color,
+            backgroundColor: `${color}1a`,
             fill: false,
             tension: 0.3,
-            borderDash: [4, 3],
-            pointBackgroundColor: '#4fc3f7',
+            borderDash: borderDash || undefined,
+            pointBackgroundColor: color,
             pointBorderWidth: isMobile ? 0.5 : 1,
             pointStyle: 'circle',
             pointRadius: isMobile ? 6 : 8,
             pointHoverRadius: isMobile ? 10 : 14
-        },
-        {
-            label: 'Nubes medias',
-            data: cloudData.mid,
-            borderWidth: isMobile ? 1 : 1.5,
-            borderColor: '#ffb74d',
-            backgroundColor: 'rgba(255, 183, 77, 0.1)',
-            fill: false,
-            tension: 0.3,
-            borderDash: [2, 3],
-            pointBackgroundColor: '#ffb74d',
-            pointBorderWidth: isMobile ? 0.5 : 1,
-            pointStyle: 'circle',
-            pointRadius: isMobile ? 6 : 8,
-            pointHoverRadius: isMobile ? 10 : 14
-        },
-        {
-            label: 'Nubes altas',
-            data: cloudData.high,
-            borderWidth: isMobile ? 1 : 1.5,
-            borderColor: '#ba68c8',
-            backgroundColor: 'rgba(186, 104, 200, 0.1)',
-            fill: false,
-            tension: 0.3,
-            pointBackgroundColor: '#ba68c8',
-            pointBorderWidth: isMobile ? 0.5 : 1,
-            pointStyle: 'circle',
-            pointRadius: isMobile ? 6 : 8,
-            pointHoverRadius: isMobile ? 10 : 14
-        },
-        {
-            label: 'Nubosidad total',
-            data: cloudData.total,
+        };
+    }
+    
+    // Crear dataset para nubosidad total
+    function createTotalDataset(label, data, isMobile) {
+        return {
+            label,
+            data,
             borderWidth: isMobile ? 1.5 : 2,
             borderColor: '#ffffff',
             backgroundColor: 'rgba(255,255,255,0.1)',
@@ -101,292 +95,229 @@ function createChartDatasets(cloudData, isMobile) {
             pointStyle: 'circle',
             pointRadius: isMobile ? 7 : 9,
             pointHoverRadius: isMobile ? 11 : 15
-        }
-    ];
-}
-
-// Obtener opciones del gráfico
-function getChartOptions(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex) {
-    return {
-        responsive: true,
-        maintainAspectRatio: false,
-        aspectRatio: isMobile ? 1.2 : 1.3,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Nubosidad por Hora del Día',
-                color: '#ffffff',
-                font: {
-                    size: isMobile ? 18 : 20,
-                    weight: 'bold',
-                    family: 'Arial, sans-serif'
-                },
-                padding: { top: 5, bottom: 2 }
-            },
-            legend: {
-                position: 'bottom',
-                labels: {
-                    usePointStyle: true,
-                    pointStyle: 'circle',
-                    boxWidth: 6,
-                    boxHeight: 6,
+        };
+    }
+    
+    // Obtener opciones del gráfico
+    function getChartOptions(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex) {
+        return {
+            responsive: true,
+            maintainAspectRatio: false,
+            aspectRatio: isMobile ? 1.2 : 1.3,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Nubosidad por Hora del Día',
                     color: '#ffffff',
-                    font: {
-                        size: isMobile ? 18 : 18,
-                        family: 'Arial, sans-serif',
-                        weight: 'normal'
-                    },
-                    padding: isMobile ? 8 : 19
+                    font: { size: isMobile ? 18 : 20, weight: 'bold' },
+                    padding: { top: 5, bottom: 2 }
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        pointStyle: 'circle',
+                        boxWidth: 6,
+                        boxHeight: 6,
+                        color: '#ffffff',
+                        font: { size: isMobile ? 18 : 18 },
+                        padding: isMobile ? 8 : 19
+                    }
+                },
+                annotation: {
+                    annotations: createChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile)
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: createTooltipCallbacks(hours, sunriseIndex, sunsetIndex, currentIndex)
                 }
             },
-            annotation: {
-                annotations: getChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile)
-            },
-            tooltip: {
-                mode: 'index',
-                intersect: false,
-                callbacks: getTooltipCallbacks(hours, sunriseIndex, sunsetIndex, currentIndex)
-            }
-        },
-        scales: getChartScales(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex),
-        interaction: { intersect: false, mode: 'index' },
-        elements: { point: { radius: isMobile ? 4 : 6, hoverRadius: isMobile ? 8 : 12 } }
-    };
-}
-
-// Crear anotaciones para el gráfico
-function getChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile) {
-    return {
-        sunriseLine: {
+            scales: createChartScales(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex),
+            interaction: { intersect: false, mode: 'index' },
+            elements: { point: { radius: isMobile ? 4 : 6, hoverRadius: isMobile ? 8 : 12 } }
+        };
+    }
+    
+    // Crear anotaciones
+    function createChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile) {
+        const annotations = {};
+        
+        if (sunriseIndex >= 0) {
+            annotations.sunriseLine = createAnnotation(sunriseIndex, '#ffeb3b', '🌅 Amanecer', isMobile);
+        }
+        
+        if (sunsetIndex >= 0) {
+            annotations.sunsetLine = createAnnotation(sunsetIndex, '#ff9800', '🌇 Atardecer', isMobile);
+        }
+        
+        if (currentIndex >= 0) {
+            annotations.currentTimeLine = createAnnotation(currentIndex, '#4CAF50', '🕐 Ahora', isMobile, [3, 3]);
+        }
+        
+        return annotations;
+    }
+    
+    // Crear anotación individual
+    function createAnnotation(value, color, content, isMobile, borderDash = [5, 5]) {
+        return {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x',
-            value: sunriseIndex >= 0 ? sunriseIndex : 6,
-            borderColor: '#ffeb3b',
+            value,
+            borderColor: color,
             borderWidth: 3,
-            borderDash: [5, 5],
+            borderDash,
             label: {
                 enabled: true,
-                content: '🌅 Amanecer',
+                content,
                 position: 'top',
-                backgroundColor: 'rgba(255, 235, 59, 0.7)',
+                backgroundColor: `${color}b3`,
                 color: '#333',
-                font: {
-                    size: isMobile ? 10 : 12,
-                    weight: 'bold'
-                },
+                font: { size: isMobile ? 10 : 12, weight: 'bold' },
                 padding: { x: 6, y: 4 }
             }
-        },
-        sunsetLine: {
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x',
-            value: sunsetIndex >= 0 ? sunsetIndex : 18,
-            borderColor: '#ff9800',
-            borderWidth: 3,
-            borderDash: [5, 5],
-            label: {
-                enabled: true,
-                content: '🌇 Atardecer',
-                position: 'top',
-                backgroundColor: 'rgba(255, 152, 0, 0.7)',
-                color: '#333',
-                font: {
-                    size: isMobile ? 10 : 12,
-                    weight: 'bold'
-                },
-                padding: { x: 6, y: 4 }
+        };
+    }
+    
+    // Callbacks para tooltips
+    function createTooltipCallbacks(hours, sunriseIndex, sunsetIndex, currentIndex) {
+        return {
+            label: context => `${context.dataset.label}: ${context.parsed.y}%`,
+            afterBody: context => {
+                const index = context[0].dataIndex;
+                const lines = [];
+                if (index === sunriseIndex) lines.push('🌅 Hora del amanecer');
+                if (index === sunsetIndex) lines.push('🌇 Hora del atardecer');
+                if (index === currentIndex) lines.push('🕐 Hora actual aproximada');
+                return lines;
             }
-        },
-        currentTimeLine: {
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x',
-            value: currentIndex >= 0 ? currentIndex : 12,
-            borderColor: '#4CAF50',
-            borderWidth: 3,
-            borderDash: [3, 3],
-            label: {
-                enabled: true,
-                content: '🕐 Ahora',
-                position: 'top',
-                backgroundColor: 'rgba(76, 175, 80, 0.7)',
-                color: '#333',
-                font: {
-                    size: isMobile ? 10 : 12,
-                    weight: 'bold'
+        };
+    }
+    
+    // Configurar escalas
+    function createChartScales(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex) {
+        return {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Hora del día',
+                    color: '#ffffff',
+                    font: { size: isMobile ? 16 : 18, weight: 'bold' }
                 },
-                padding: { x: 6, y: 4 }
-            }
-        }
-    };
-}
-
-// Callbacks para tooltips
-function getTooltipCallbacks(hours, sunriseIndex, sunsetIndex, currentIndex) {
-    return {
-        label: context => `${context.dataset.label}: ${context.parsed.y}%`,
-        afterBody: context => {
-            const index = context[0].dataIndex;
-            const lines = [];
-            if (index === sunriseIndex) lines.push('🌅 Hora del amanecer');
-            if (index === sunsetIndex) lines.push('🌇 Hora del atardecer');
-            if (index === currentIndex) lines.push('🕐 Hora actual aproximada');
-            return lines;
-        }
-    };
-}
-
-// Configurar escalas del gráfico
-function getChartScales(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex) {
-    return {
-        x: {
-            title: {
-                display: true,
-                text: 'Hora del día',
-                color: '#ffffff',
-                font: {
-                    size: isMobile ? 16 : 18,
-                    weight: 'bold'
+                grid: { color: 'rgba(255,255,255,0.08)', drawOnChartArea: true },
+                ticks: {
+                    color: '#ffffff',
+                    maxRotation: isMobile ? 45 : 0,
+                    autoSkip: true,
+                    maxTicksLimit: isMobile ? 12 : 24,
+                    font: { size: isMobile ? 14 : 16 },
+                    callback: (value, index) => {
+                        const hour = hours[index];
+                        if (index === sunriseIndex) return `🌅 ${hour}`;
+                        if (index === sunsetIndex) return `🌇 ${hour}`;
+                        if (index === currentIndex) return `🕐 ${hour}`;
+                        return hour;
+                    }
                 }
             },
-            grid: { color: 'rgba(255,255,255,0.08)', drawOnChartArea: true },
-            ticks: {
-                color: '#ffffff',
-                maxRotation: isMobile ? 45 : 0,
-                autoSkip: true,
-                maxTicksLimit: isMobile ? 12 : 24,
-                font: { size: isMobile ? 14 : 16 },
-                callback: (value, index) => {
-                    const hour = hours[index];
-                    if (index === sunriseIndex) return `🌅 ${hour}`;
-                    if (index === sunsetIndex) return `🌇 ${hour}`;
-                    if (index === currentIndex) return `🕐 ${hour}`;
-                    return hour;
+            y: {
+                title: {
+                    display: true,
+                    text: 'Cantidad de nubes',
+                    color: '#ffffff',
+                    font: { size: isMobile ? 16 : 18, weight: 'bold' }
+                },
+                beginAtZero: true,
+                max: 100,
+                grid: { color: 'rgba(255,255,255,0.08)', drawOnChartArea: true },
+                ticks: {
+                    color: '#ffffff',
+                    stepSize: 20,
+                    callback: value => `${value}%`,
+                    font: { size: isMobile ? 14 : 16 }
                 }
             }
-        },
-        y: {
-            title: {
-                display: true,
-                text: 'Cantidad de nubes',
-                color: '#ffffff',
-                font: {
-                    size: isMobile ? 16 : 18,
-                    weight: 'bold'
-                }
-            },
-            beginAtZero: true,
-            max: 100,
-            grid: { color: 'rgba(255,255,255,0.08)', drawOnChartArea: true },
-            ticks: {
-                color: '#ffffff',
-                stepSize: 20,
-                callback: value => value + '%',
-                font: { size: isMobile ? 14 : 16 }
+        };
+    }
+    
+    // Crear leyenda
+    function createChartLegend(sunriseTime, sunsetTime, currentHour) {
+        const oldLegend = document.querySelector('.chart-time-legend');
+        if (oldLegend) oldLegend.remove();
+        
+        const sunriseStr = formatTime(sunriseTime);
+        const sunsetStr = formatTime(sunsetTime);
+        const currentStr = `${currentHour.toString().padStart(2, '0')}:00`;
+        
+        const legendContainer = document.createElement('div');
+        legendContainer.className = 'chart-time-legend';
+        legendContainer.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                <div style="width: 12px; height: 3px; background: #ffeb3b; border-radius: 1px;"></div>
+                <span>🌅 Amanecer ${sunriseStr}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                <div style="width: 12px; height: 3px; background: #ff9800; border-radius: 1px;"></div>
+                <span>🌇 Puesta de sol ${sunsetStr}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                <div style="width: 12px; height: 3px; background: #4CAF50; border-radius: 1px;"></div>
+                <span>🕐 Ahora ${currentStr}</span>
+            </div>
+        `;
+        
+        const chartsContainer = document.querySelector('.charts');
+        if (chartsContainer) {
+            chartsContainer.insertBefore(legendContainer, chartsContainer.firstChild);
+        }
+    }
+    
+    // Formatear hora
+    function formatTime(date) {
+        return date.toLocaleTimeString('es-CL', { 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            hour12: false 
+        });
+    }
+    
+    // Preparar datos para gráficos
+    function prepareChartData(cloudSeries, hours = 24) {
+        if (!cloudSeries?.time) {
+            return createFallbackChartData(hours);
+        }
+        
+        const slicedTime = cloudSeries.time.slice(0, hours);
+        const slicedClouds = {
+            total: cloudSeries.cloudcover?.slice(0, hours).map(v => Math.round(v || FALLBACK_CLOUD_VALUE)) || [],
+            low: cloudSeries.cloudcover_low?.slice(0, hours).map(v => Math.round(v || FALLBACK_CLOUD_VALUE)) || [],
+            mid: cloudSeries.cloudcover_mid?.slice(0, hours).map(v => Math.round(v || FALLBACK_CLOUD_VALUE)) || [],
+            high: cloudSeries.cloudcover_high?.slice(0, hours).map(v => Math.round(v || Math.max(0, FALLBACK_CLOUD_VALUE - 30))) || []
+        };
+        
+        return {
+            time: slicedTime.map(t => {
+                const d = new Date(t);
+                return `${d.getHours()}:00`;
+            }),
+            clouds: slicedClouds
+        };
+    }
+    
+    // Crear datos de fallback
+    function createFallbackChartData(hours) {
+        const timeArray = Array.from({ length: hours }, (_, i) => `${i}:00`);
+        const cloudArray = Array(hours).fill(FALLBACK_CLOUD_VALUE);
+        
+        return {
+            time: timeArray,
+            clouds: {
+                total: [...cloudArray],
+                low: [...cloudArray],
+                mid: [...cloudArray],
+                high: cloudArray.map(v => Math.max(0, v - 30))
             }
-        }
-    };
-}
-
-// Crear leyenda para el gráfico
-function createChartLegend(sunriseTime, sunsetTime, currentHour) {
-    const oldLegend = document.querySelector('.chart-time-legend');
-    if (oldLegend) oldLegend.remove();
-    
-    const sunriseStr = sunriseTime.toLocaleTimeString('es-CL', { 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        hour12: false 
-    });
-    const sunsetStr = sunsetTime.toLocaleTimeString('es-CL', { 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        hour12: false 
-    });
-    const currentStr = `${currentHour.toString().padStart(2, '0')}:00`;
-    
-    const legendContainer = document.createElement('div');
-    legendContainer.className = 'chart-time-legend';
-    legendContainer.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-            <div style="width: 12px; height: 3px; background: #ffeb3b; border-radius: 1px;"></div>
-            <span>🌅 Amanecer ${sunriseStr}</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-            <div style="width: 12px; height: 3px; background: #ff9800; border-radius: 1px;"></div>
-            <span>🌇 Puesta de sol ${sunsetStr}</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-            <div style="width: 12px; height: 3px; background: #4CAF50; border-radius: 1px;"></div>
-            <span>🕐 Ahora ${currentStr}</span>
-        </div>
-    `;
-    
-    const chartsContainer = document.querySelector('.charts');
-    if (chartsContainer.firstChild) {
-        chartsContainer.insertBefore(legendContainer, chartsContainer.firstChild);
-    } else {
-        chartsContainer.appendChild(legendContainer);
+        };
     }
-}
-
-// Función para preparar datos para gráficos (compatible con el código existente)
-function prepareChartData(cloudSeries, hours = 24) {
-    if (!cloudSeries || !cloudSeries.time) {
-        return createFallbackChartData(hours);
-    }
-    
-    const slicedTime = cloudSeries.time.slice(0, hours);
-    const slicedClouds = {
-        total: cloudSeries.cloudcover.slice(0, hours).map(v => Math.round(v)),
-        low: cloudSeries.cloudcover_low.slice(0, hours).map(v => Math.round(v)),
-        mid: cloudSeries.cloudcover_mid.slice(0, hours).map(v => Math.round(v)),
-        high: cloudSeries.cloudcover_high.slice(0, hours).map(v => Math.round(v))
-    };
-    
-    // Formatear horas para el gráfico
-    const formattedTime = slicedTime.map(t => {
-        const d = new Date(t);
-        return d.getHours() + ':00';
-    });
-    
-    return {
-        time: formattedTime,
-        clouds: slicedClouds
-    };
-}
-
-// Función para crear datos de fallback para gráficos
-function createFallbackChartData(hours) {
-    const timeArray = [];
-    const cloudArray = Array(hours).fill(50);
-    
-    for (let i = 0; i < hours; i++) {
-        timeArray.push(`${i}:00`);
-    }
-    
-    return {
-        time: timeArray,
-        clouds: {
-            total: cloudArray,
-            low: cloudArray,
-            mid: cloudArray,
-            high: cloudArray.map(v => Math.max(0, v - 30))
-        }
-    };
-}
-
-// Función para actualizar gráficos (mantiene compatibilidad con el código existente)
-function updateCharts(meteoData, sunriseTime, sunsetTime) {
-    if (!meteoData.cloudSeries || !meteoData.cloudSeries.time) return;
-    
-    const chartData = prepareChartData(meteoData.cloudSeries);
-    createCloudChart('cloudChart', chartData, sunriseTime, sunsetTime, new Date());
-}
-
-// Hacer funciones disponibles globalmente
-window.updateCharts = updateCharts;
-window.createCloudChart = createCloudChart;
-window.prepareChartData = prepareChartData;
+})();
