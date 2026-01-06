@@ -24,6 +24,88 @@ const chileanCities = {
   "Osorno":           { lat: -40.5739, lon: -73.1310, region: "X Región",   altitude: 65 },
   "Puerto Montt":     { lat: -41.4689, lon: -72.9411, region: "X Región",   altitude: 85 },
   "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34 },
+
+  /* === OBSERVATORIOS ASTRONÓMICOS === */
+  "Observatorio Paranal": {
+    lat: -24.6270,
+    lon: -70.4045,
+    region: "Antofagasta",
+    type: "observatory",
+    operator: "ESO",
+    altitude: 2635
+  },
+  "Observatorio La Silla": {
+    lat: -29.2567,
+    lon: -70.7386,
+    region: "Coquimbo",
+    type: "observatory",
+    operator: "ESO",
+    altitude: 2400
+  },
+  "Observatorio Cerro Tololo": {
+    lat: -30.1690,
+    lon: -70.8047,
+    region: "Coquimbo",
+    type: "observatory",
+    operator: "AURA",
+    altitude: 2200
+  },
+  "Observatorio Las Campanas": {
+    lat: -29.0083,
+    lon: -70.6933,
+    region: "Atacama",
+    type: "observatory",
+    operator: "Carnegie Institution",
+    altitude: 2282
+  },
+  "Observatorio Cerro Armazones": {
+    lat: -24.5989,
+    lon: -70.1914,
+    region: "Antofagasta",
+    type: "observatory",
+    operator: "ESO",
+    altitude: 3060
+  },
+  "Observatorio APEX": {
+    lat: -23.0064,
+    lon: -67.7547,
+    region: "Antofagasta",
+    type: "observatory",
+    operator: "ESO",
+    altitude: 5105
+  },
+  "Observatorio ALMA": {
+    lat: -23.0193,
+    lon: -67.7532,
+    region: "Antofagasta",
+    type: "observatory",
+    operator: "Internacional",
+    altitude: 5058
+  },
+  "Observatorio Cerro Pachón": {
+    lat: -30.2389,
+    lon: -70.7336,
+    region: "Coquimbo",
+    type: "observatory",
+    operator: "Gemini/AURA",
+    altitude: 2715
+  },
+  "Observatorio Mamalluca": {
+    lat: -30.1889,
+    lon: -70.6950,
+    region: "Coquimbo",
+    type: "observatory",
+    operator: "Municipal",
+    altitude: 1120
+  },
+  "Observatorio Collowara": {
+    lat: -31.7833,
+    lon: -71.2333,
+    region: "Coquimbo",
+    type: "observatory",
+    operator: "Privado",
+    altitude: 1300
+  }
 };
 
 // Exportar ciudades
