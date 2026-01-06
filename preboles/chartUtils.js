@@ -1,14 +1,18 @@
 /**
  * Módulo para funciones relacionadas con gráficos
+ * Archivo: https://nicomedinap.github.io/preboles/chartUtils.js
  */
 
+// Variable global para el gráfico
+let cloudChart = null;
+
 // Función para crear o actualizar el gráfico de nubes
-export function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, currentTime) {
+function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, currentTime) {
     const ctx = document.getElementById(canvasId).getContext('2d');
     
     // Destruir gráfico existente si existe
-    if (window.cloudChart) {
-        window.cloudChart.destroy();
+    if (cloudChart) {
+        cloudChart.destroy();
     }
     
     const isMobile = window.innerWidth < 768;
@@ -24,7 +28,7 @@ export function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, c
     createChartLegend(sunriseTime, sunsetTime, currentHour);
     
     // Crear nuevo gráfico
-    window.cloudChart = new Chart(ctx, {
+    cloudChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: chartData.time,
@@ -33,7 +37,7 @@ export function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, c
         options: getChartOptions(isMobile, chartData.time, sunriseIndex, sunsetIndex, currentIndex)
     });
     
-    return window.cloudChart;
+    return cloudChart;
 }
 
 // Crear datasets para el gráfico
@@ -199,7 +203,7 @@ function getChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile) 
             type: 'line',
             mode: 'vertical',
             scaleID: 'x',
-            value: currentIndex >= 0 ? currentIndex : hours.length / 2,
+            value: currentIndex >= 0 ? currentIndex : 12,
             borderColor: '#4CAF50',
             borderWidth: 3,
             borderDash: [3, 3],
@@ -327,3 +331,62 @@ function createChartLegend(sunriseTime, sunsetTime, currentHour) {
         chartsContainer.appendChild(legendContainer);
     }
 }
+
+// Función para preparar datos para gráficos (compatible con el código existente)
+function prepareChartData(cloudSeries, hours = 24) {
+    if (!cloudSeries || !cloudSeries.time) {
+        return createFallbackChartData(hours);
+    }
+    
+    const slicedTime = cloudSeries.time.slice(0, hours);
+    const slicedClouds = {
+        total: cloudSeries.cloudcover.slice(0, hours).map(v => Math.round(v)),
+        low: cloudSeries.cloudcover_low.slice(0, hours).map(v => Math.round(v)),
+        mid: cloudSeries.cloudcover_mid.slice(0, hours).map(v => Math.round(v)),
+        high: cloudSeries.cloudcover_high.slice(0, hours).map(v => Math.round(v))
+    };
+    
+    // Formatear horas para el gráfico
+    const formattedTime = slicedTime.map(t => {
+        const d = new Date(t);
+        return d.getHours() + ':00';
+    });
+    
+    return {
+        time: formattedTime,
+        clouds: slicedClouds
+    };
+}
+
+// Función para crear datos de fallback para gráficos
+function createFallbackChartData(hours) {
+    const timeArray = [];
+    const cloudArray = Array(hours).fill(50);
+    
+    for (let i = 0; i < hours; i++) {
+        timeArray.push(`${i}:00`);
+    }
+    
+    return {
+        time: timeArray,
+        clouds: {
+            total: cloudArray,
+            low: cloudArray,
+            mid: cloudArray,
+            high: cloudArray.map(v => Math.max(0, v - 30))
+        }
+    };
+}
+
+// Función para actualizar gráficos (mantiene compatibilidad con el código existente)
+function updateCharts(meteoData, sunriseTime, sunsetTime) {
+    if (!meteoData.cloudSeries || !meteoData.cloudSeries.time) return;
+    
+    const chartData = prepareChartData(meteoData.cloudSeries);
+    createCloudChart('cloudChart', chartData, sunriseTime, sunsetTime, new Date());
+}
+
+// Hacer funciones disponibles globalmente
+window.updateCharts = updateCharts;
+window.createCloudChart = createCloudChart;
+window.prepareChartData = prepareChartData;
