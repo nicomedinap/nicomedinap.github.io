@@ -91,6 +91,3 @@ const chileanObservatories = {
     description: "Observatorio turístico en la Región de Coquimbo."
   }
 };
-
-// Exportar ciudades
-window.chileanObservatories = chileanObservatories;
