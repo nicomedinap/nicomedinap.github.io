@@ -1,13 +1,13 @@
 /**
  * Módulo para funciones relacionadas con gráficos
  * Archivo: https://nicomedinap.github.io/preboles/chartUtils.js
+ * VERSIÓN CORREGIDA - Sin valores por defecto inventados
  */
 
 (function() {
     'use strict';
     
     let cloudChart = null;
-    const FALLBACK_CLOUD_VALUE = 50;
     
     // Función principal para actualizar gráficos
     window.updateCharts = function(meteoData, sunriseTime, sunsetTime) {
@@ -35,14 +35,24 @@
         
         createChartLegend(sunriseTime, sunsetTime, currentHour);
         
-        cloudChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: chartData.time,
-                datasets: createChartDatasets(chartData.clouds, isMobile)
-            },
-            options: getChartOptions(isMobile, chartData.time, sunriseIndex, sunsetIndex, currentIndex)
-        });
+        // Solo crear gráfico si tenemos datos
+        if (chartData.hasData) {
+            cloudChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartData.time,
+                    datasets: createChartDatasets(chartData.clouds, isMobile)
+                },
+                options: getChartOptions(isMobile, chartData.time, sunriseIndex, sunsetIndex, currentIndex)
+            });
+        } else {
+            // Mostrar mensaje de no datos
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('No hay datos de nubes disponibles', ctx.canvas.width/2, ctx.canvas.height/2);
+        }
     }
     
     // Encontrar índice de hora
@@ -52,12 +62,26 @@
     
     // Crear datasets
     function createChartDatasets(cloudData, isMobile) {
-        return [
-            createDataset('Nubes bajas', cloudData.low, '#4fc3f7', [4, 3], isMobile),
-            createDataset('Nubes medias', cloudData.mid, '#ffb74d', [2, 3], isMobile),
-            createDataset('Nubes altas', cloudData.high, '#ba68c8', null, isMobile),
-            createTotalDataset('Nubosidad total', cloudData.total, isMobile)
-        ];
+        const datasets = [];
+        
+        // Solo agregar datasets que tengan datos
+        if (cloudData.low && cloudData.low.some(v => v !== null)) {
+            datasets.push(createDataset('Nubes bajas', cloudData.low, '#4fc3f7', [4, 3], isMobile));
+        }
+        
+        if (cloudData.mid && cloudData.mid.some(v => v !== null)) {
+            datasets.push(createDataset('Nubes medias', cloudData.mid, '#ffb74d', [2, 3], isMobile));
+        }
+        
+        if (cloudData.high && cloudData.high.some(v => v !== null)) {
+            datasets.push(createDataset('Nubes altas', cloudData.high, '#ba68c8', null, isMobile));
+        }
+        
+        if (cloudData.total && cloudData.total.some(v => v !== null)) {
+            datasets.push(createTotalDataset('Nubosidad total', cloudData.total, isMobile));
+        }
+        
+        return datasets;
     }
     
     // Crear dataset individual
@@ -282,42 +306,32 @@
         });
     }
     
-    // Preparar datos para gráficos
+    // Preparar datos para gráficos - VERSIÓN CORREGIDA
     function prepareChartData(cloudSeries, hours = 24) {
         if (!cloudSeries?.time) {
-            return createFallbackChartData(hours);
+            return { hasData: false };
         }
         
         const slicedTime = cloudSeries.time.slice(0, hours);
         const slicedClouds = {
-            total: cloudSeries.cloudcover?.slice(0, hours).map(v => Math.round(v || FALLBACK_CLOUD_VALUE)) || [],
-            low: cloudSeries.cloudcover_low?.slice(0, hours).map(v => Math.round(v || FALLBACK_CLOUD_VALUE)) || [],
-            mid: cloudSeries.cloudcover_mid?.slice(0, hours).map(v => Math.round(v || FALLBACK_CLOUD_VALUE)) || [],
-            high: cloudSeries.cloudcover_high?.slice(0, hours).map(v => Math.round(v || Math.max(0, FALLBACK_CLOUD_VALUE - 30))) || []
+            total: cloudSeries.cloudcover?.slice(0, hours).map(v => v !== undefined ? Math.round(v) : null) || Array(hours).fill(null),
+            low: cloudSeries.cloudcover_low?.slice(0, hours).map(v => v !== undefined ? Math.round(v) : null) || Array(hours).fill(null),
+            mid: cloudSeries.cloudcover_mid?.slice(0, hours).map(v => v !== undefined ? Math.round(v) : null) || Array(hours).fill(null),
+            high: cloudSeries.cloudcover_high?.slice(0, hours).map(v => v !== undefined ? Math.round(v) : null) || Array(hours).fill(null)
         };
         
+        // Verificar si hay al menos algún dato
+        const hasData = Object.values(slicedClouds).some(dataArray => 
+            dataArray.some(v => v !== null)
+        );
+        
         return {
+            hasData,
             time: slicedTime.map(t => {
                 const d = new Date(t);
                 return `${d.getHours()}:00`;
             }),
             clouds: slicedClouds
-        };
-    }
-    
-    // Crear datos de fallback
-    function createFallbackChartData(hours) {
-        const timeArray = Array.from({ length: hours }, (_, i) => `${i}:00`);
-        const cloudArray = Array(hours).fill(FALLBACK_CLOUD_VALUE);
-        
-        return {
-            time: timeArray,
-            clouds: {
-                total: [...cloudArray],
-                low: [...cloudArray],
-                mid: [...cloudArray],
-                high: cloudArray.map(v => Math.max(0, v - 30))
-            }
         };
     }
 })();
