@@ -1,5 +1,6 @@
 // redProbability.js
-function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false, temperature = 20) {
+function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, temperature = 20) {
+
   const lowPct  = Math.max(0, Math.min(100, Number(low)  || 0));
   const midPct  = Math.max(0, Math.min(100, Number(mid)  || 0));
   const highPct = Math.max(0, Math.min(100, Number(high) || 0));
@@ -20,22 +21,22 @@ function computeRedProbability(pm25, low, mid, high, elevDeg, isSunrise = false,
   const geomSigma = 4.0;
   const geomScore = Math.exp(-Math.pow((elevDeg - idealElev) / geomSigma, 2));
 
-  const idealPM = 15;
-  const pmSigma = 18;
-  const pmScore = Math.exp(-Math.pow((pm25 - idealPM) / pmSigma, 2));
+//  const idealPM = 15;
+//  const pmSigma = 18;
+//  const pmScore = Math.exp(-Math.pow((pm25 - idealPM) / pmSigma, 2));
 
   const humidityScore = highPct / 100;
   const pressureStability = 1.0 - Math.abs((lowPct + midPct) - highPct) / 200;
   const pressureScore = Math.max(0.3, Math.min(1.0, pressureStability));
 
   const score =
-    0.45 * layerScore +
+    0.5 * layerScore +
     0.25 * geomScore +
-    0.05 * pmScore +
     0.05 * humidityScore +
     0.05 * pressureScore +
     0.05 * tempScore -
     0.10 * lowCloudPenalty;
+    //    0.05 * pmScore +
 
   let p = 1 / (1 + Math.exp(-10 * (score - 0.5)));
 
