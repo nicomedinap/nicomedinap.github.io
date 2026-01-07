@@ -1,7 +1,6 @@
 ---
 layout: none
 ---
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -17,7 +16,126 @@ layout: none
   <link rel="stylesheet" href="https://nicomedinap.github.io/public/css/preboles_2.css">
 
   <style>
+    .observatories-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+      height: calc(100vh - 250px);
+      min-height: 600px;
+    }
+
+    @media (max-width: 1024px) {
+      .observatories-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+    }
+
+    .observatory-icon {
+      background: transparent !important;
+      border: none !important;
+    }
+
+    .observatory-popup .leaflet-popup-content {
+      min-width: 200px !important;
+    }
+
+    #observatoriesMap {
+      width: 100%;
+      height: 100%;
+      min-height: 550px;
+      border-radius: 8px;
+    }
+
+    .map-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      height: 100%;
+    }
+
+    #observatoryMenu {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      overflow-y: auto;
+      max-height: 100%;
+      padding-right: 10px;
+    }
+
+    #observatoryMenu .city-card {
+      width: 100%;
+      margin: 0;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    #observatoryMenu .city-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    #observatoryMenu .city-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    #observatoryMenu .city-region {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    #observatoryMenu::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #observatoryMenu::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    #observatoryMenu::-webkit-scrollbar-thumb {
+      background: rgba(255, 152, 0, 0.5);
+      border-radius: 3px;
+    }
+
+    #observatoryMenu::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 152, 0, 0.7);
+    }
+
+    /* Indicador visual del tipo de ubicación */
+    .location-type-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
     
+    .badge-observatory {
+      background: linear-gradient(135deg, #ff9800, #ff6600);
+      color: white;
+    }
+    
+    .badge-park {
+      background: linear-gradient(135deg, #4CAF50, #2E7D32);
+      color: white;
+    }
+    
+    .badge-city {
+      background: linear-gradient(135deg, #2196F3, #0D47A1);
+      color: white;
+    }
+    
+    /* Ajustes para el título */
+    #cityTitle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   </style>
   
 </head>
@@ -45,12 +163,12 @@ layout: none
 
   <!-- CONTENEDOR PRINCIPAL CON PESTAÑAS -->
   <div class="tabs-container">
-    <div class="tabs-header">
-      <button class="tab-btn active" onclick="switchTab('cities')">🏙️ Ciudades</button>
-      <button class="tab-btn" onclick="switchTab('observatories')">🔭 Observatorios</button>
-      <button class="tab-btn" onclick="switchTab('ranking')">📊 Ranking</button>
-      <button class="tab-btn" onclick="switchTab('info')">ℹ️ Información</button>
-    </div>
+  <div class="tabs-header">
+    <button class="tab-btn active" data-tab="cities" onclick="switchTab('cities')">🏙️ Ciudades</button>
+    <button class="tab-btn" data-tab="observatories" onclick="switchTab('observatories')">🔭 Observatorios</button>
+    <button class="tab-btn" data-tab="ranking" onclick="switchTab('ranking')">📊 Ranking</button>
+    <button class="tab-btn" data-tab="info" onclick="switchTab('info')">ℹ️ Información</button>
+  </div>
     
     <!-- Pestaña 1: Ciudades -->
     <div id="tab-cities" class="tab-content active">
@@ -72,7 +190,6 @@ layout: none
                   </div>
                   <div class="data-grid" id="dataGrid">
                     <div class="data-item">☁️ Nubosidad: <strong id="cloudVal">—</strong></div>
-                    <div class="data-item">Cantidad de elemento particulado PM2.5: <strong id="pmVal">—</strong></div>
                     <div class="data-item">⬆ Elev amanecer: <strong id="sunriseElev">—</strong></div>
                     <div class="data-item">⬇ Elev atardecer: <strong id="sunsetElev">—</strong></div>
                   </div>
@@ -127,9 +244,25 @@ layout: none
         <h2>🔭 Observatorios Astronómicos en Chile</h2>
         <p class="lead">Chile es la capital mundial de la astronomía. Selecciona un observatorio para ver la probabilidad de arrebol.</p>
         
-        <!-- MENÚ DE OBSERVATORIOS (igual que ciudades) -->
-        <div id="observatoryMenu" class="city-menu"></div>
-      
+        <div class="observatories-grid">
+          <!-- MENÚ DE OBSERVATORIOS -->
+          <div id="observatoryMenu" class="city-menu"></div>
+          
+          <!-- MAPA DE OBSERVATORIOS -->
+          <div class="panel" style="height: 600px;">
+            <div><strong>📍 Ubicación de Observatorios</strong></div>
+            <div class="map-wrapper" style="height: 550px;">
+              <div id="observatoriesMap"></div>
+              <div class="map-legend" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 8px 12px; border-radius: 6px; color: white; font-size: 0.85rem;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <div style="width: 16px; height: 16px; background: #ff9800; border-radius: 50%; border: 2px solid white;"></div>
+                  <span>Observatorio astronómico</span>
+                </div>
+                <div style="font-size: 0.8rem; opacity: 0.9;">Haz clic en un marcador para ver detalles</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
@@ -178,7 +311,6 @@ layout: none
               <ul>
                 <li>Nubes altas o medias</li>
                 <li>Cielo parcialmente nublado</li>
-                <li>Baja contaminación atmosférica</li>
                 <li>Elevación solar entre -6° y 6°</li>
                 <li>Humedad relativa moderada</li>
               </ul>
@@ -187,7 +319,6 @@ layout: none
               <h4>⚙️ Factores analizados</h4>
               <ul>
                 <li>Nubosidad a diferentes alturas</li>
-                <li>Calidad del aire (PM2.5)</li>
                 <li>Posición solar</li>
                 <li>Presión atmosférica</li>
                 <li>Temperatura y humedad</li>
@@ -229,11 +360,15 @@ layout: none
     </div>
   </div>
 
-  <!-- Scripts externos -->
-  <script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
-  <script src="https://nicomedinap.github.io/preboles/redProbability.js"></script>
+<!-- Scripts externos -->
+<script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
+<script src="https://nicomedinap.github.io/preboles/redProbability.js"></script>
 
-  <script>
+<!-- AÑADE ESTA LÍNEA -->
+<script src="https://nicomedinap.github.io/preboles/chartUtils.js"></script>
+
+<!-- Script principal -->
+<script>
     /* ==========================================================================
        CONFIGURACIONES Y CONSTANTES
        ========================================================================== */
@@ -241,54 +376,217 @@ layout: none
     const DELAY = 300;
     const API_CACHE = {};
     
-  /* ==========================================================================
-    SISTEMA DE PESTAÑAS
-    ========================================================================== */
-  function switchTab(tabName) {
-    // 1. Ocultar todas las pestañas
-    document.querySelectorAll('.tab-content').forEach(tab => {
-      tab.classList.remove('active');
-    });
+    /* ==========================================================================
+       VARIABLES GLOBALES PARA EL MAPA Y ESTADO
+       ========================================================================== */
+    let map = null, marker = null, heatLayer = null, labelLayer = null;
+    let heatmapEnabled = true, labelsEnabled = true, weatherDataCache = {};
     
-    // 2. Desactivar todos los botones
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    
-    // 3. Activar la pestaña correspondiente
-    const tabElement = document.getElementById(`tab-${tabName}`);
-    if (tabElement) {
-      tabElement.classList.add('active');
-    }
-     
-    // 4. Activar el botón correspondiente
-    // Mapeo de nombres de pestañas a texto de botones
-    const tabButtonMap = {
-      'cities': '🏙️ Ciudades',
-      'observatories': '🔭 Observatorios',
-      'ranking': '📊 Ranking',
-      'info': 'ℹ️ Información'
+    /* ==========================================================================
+       ESTADO DE LA APLICACIÓN
+       ========================================================================== */
+    let currentState = {
+      lat: null, lon: null, cityName: '', hourly: null,
+      preds: { sunrise: 0, sunset: 0 }, sunTimes: null, 
+      sunriseElev: null, sunsetElev: null, meteoData: null
     };
-    
-    // Buscar el botón con el texto correcto
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    tabButtons.forEach(btn => {
-      if (btn.textContent.trim() === tabButtonMap[tabName]) {
-        btn.classList.add('active');
-      }
-    });
-    
-    // 5. Inicializar contenido si es necesario
-    if (tabName === 'observatories') {
-      initObservatoryMenu();
-    }
-    if (tabName === 'ranking') {
-      calculateRankings();
-    }
-  }
+
+    let currentLocation = {
+      type: null, // 'city', 'observatory', 'park', etc.
+      name: '',
+      lat: null,
+      lon: null,
+      data: null,
+      originalTab: null // Para recordar desde qué pestaña venimos
+    };
+
+    const logEl = document.getElementById('log');
+    // REMOVER: let cloudChart = null; // Ya está definido en chartUtils.js
 
     /* ==========================================================================
-       FUNCIONES PARA CARGAR OBSERVATORIOS
+       FUNCIONES DE REGISTRO
+       ========================================================================== */
+    function log(msg) {
+      const line = `[${new Date().toLocaleString()}] ${msg}`;
+      console.log(line);
+      logEl.textContent = line + '\n' + logEl.textContent;
+    }
+
+    /* ==========================================================================
+      SISTEMA DE PESTAÑAS MEJORADO (CORREGIDO)
+      ========================================================================== */
+    function switchTab(tabName) {
+      // 1. Ocultar todas las pestañas
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // 2. Desactivar todos los botones
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // 3. Activar la pestaña correspondiente
+      const tabElement = document.getElementById(`tab-${tabName}`);
+      if (tabElement) {
+        tabElement.classList.add('active');
+      }
+      
+      // 4. Activar el botón correspondiente
+      const tabButtonMap = {
+        'cities': '🏙️ Ciudades',
+        'observatories': '🔭 Observatorios',
+        'ranking': '📊 Ranking',
+        'info': 'ℹ️ Información'
+      };
+      
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(btn => {
+        if (btn.textContent.trim() === tabButtonMap[tabName]) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // 5. SI ESTAMOS EN PREDICCIÓN, SOLO MANEJAR EL CAMBIO DE PESTAÑA
+      // NO OCULTAR/MOSTRAR NADA AUTOMÁTICAMENTE
+      const isViewingPrediction = document.getElementById('appContainer').style.display === 'block';
+      
+      if (isViewingPrediction) {
+        // Si estamos viendo una predicción y cambiamos de pestaña,
+        // solo cambiar la pestaña pero mantener la predicción visible si estamos en "cities"
+        if (tabName !== 'cities') {
+          // Si cambiamos a otra pestaña que no sea "cities", ocultar la predicción
+          document.getElementById('appContainer').style.display = 'none';
+          
+          // Pero NO mostrar automáticamente ningún menú
+          // El menú se mostrará cuando el usuario haga clic en "Volver"
+        }
+        // Si cambiamos a "cities" y estamos viendo una predicción, mantenerla visible
+      } else {
+        // Si NO estamos viendo una predicción, manejar los menús normalmente
+        if (tabName === 'cities') {
+          document.getElementById('cityMenu').style.display = 'grid';
+          document.getElementById('appContainer').style.display = 'none';
+        } else if (tabName === 'observatories') {
+          // Para observatorios, solo asegurarnos de que el menú de ciudades esté oculto
+          document.getElementById('cityMenu').style.display = 'none';
+          document.getElementById('appContainer').style.display = 'none';
+        } else {
+          // Para otras pestañas, ocultar ambos
+          document.getElementById('cityMenu').style.display = 'none';
+          document.getElementById('appContainer').style.display = 'none';
+        }
+      }
+      
+      // 6. Inicializar contenido si es necesario
+      if (tabName === 'observatories') {
+        setTimeout(() => {
+          initObservatoryMenu();
+        }, 50);
+      }
+      if (tabName === 'ranking') {
+        calculateRankings();
+      }
+    }
+
+    /* ==========================================================================
+       FUNCION UNIVERSAL PARA MOSTRAR PREDICCIÓN
+       ========================================================================== */
+    async function showPrediction(locationName, locationType = 'city') {
+      const location = chileanCities[locationName];
+      if (!location) return;
+      
+      // Guardar el tipo de ubicación y la pestaña original
+      currentLocation = {
+        type: locationType,
+        name: locationName,
+        lat: location.lat,
+        lon: location.lon,
+        data: location,
+        originalTab: getCurrentTab()
+      };
+      
+      // Cambiar a la pestaña de ciudades (donde está la interfaz de predicción)
+      switchTab('cities');
+      
+      // Ocultar menú de ciudades y mostrar el predictor
+      document.getElementById('cityMenu').style.display = 'none';
+      document.getElementById('appContainer').style.display = 'block';
+      
+      // Actualizar el título según el tipo de ubicación
+      let titlePrefix = '';
+      let badgeClass = '';
+      switch(locationType) {
+        case 'observatory':
+          titlePrefix = '🔭 ';
+          badgeClass = 'badge-observatory';
+          break;
+        case 'park':
+          titlePrefix = '🌳 ';
+          badgeClass = 'badge-park';
+          break;
+        default:
+          titlePrefix = '🌇 ';
+          badgeClass = 'badge-city';
+      }
+      
+      const badge = badgeClass ? `<span class="location-type-badge ${badgeClass}">${locationType === 'observatory' ? 'Observatorio' : locationType === 'park' ? 'Parque' : 'Ciudad'}</span>` : '';
+      document.getElementById('cityTitle').innerHTML = `${titlePrefix}${locationName} ${badge}`;
+      
+      localStorage.setItem('lastCity', locationName);
+      localStorage.setItem('locationType', locationType);
+      
+      await predictRedSunset(location.lat, location.lon, locationName);
+    }
+
+    // Función para obtener la pestaña actual
+    function getCurrentTab() {
+      const activeTab = document.querySelector('.tab-content.active');
+      if (!activeTab) return 'cities';
+      
+      const tabId = activeTab.id;
+      if (tabId === 'tab-cities') return 'cities';
+      if (tabId === 'tab-observatories') return 'observatories';
+      if (tabId === 'tab-ranking') return 'ranking';
+      if (tabId === 'tab-info') return 'info';
+      return 'cities';
+    }
+
+    // Modificar la función volverMenu para que regrese a la pestaña original
+    function volverMenu() {
+      // Ocultar el predictor
+      document.getElementById('appContainer').style.display = 'none';
+      
+      // Mostrar el menú correspondiente
+      if (currentLocation.originalTab === 'cities') {
+        document.getElementById('cityMenu').style.display = 'grid';
+        // Si estábamos en ciudades, mantener esa pestaña activa
+        switchTab('cities');
+      } else if (currentLocation.originalTab === 'observatories') {
+        // Si veníamos de observatorios, regresar a esa pestaña
+        switchTab('observatories');
+      } else {
+        // Por defecto, mostrar ciudades
+        document.getElementById('cityMenu').style.display = 'grid';
+        switchTab('cities');
+      }
+      
+      // Limpiar el estado
+      currentLocation = {
+        type: null,
+        name: '',
+        lat: null,
+        lon: null,
+        data: null,
+        originalTab: null
+      };
+      
+      localStorage.removeItem('lastCity');
+      localStorage.removeItem('locationType');
+    }
+
+    /* ==========================================================================
+       FUNCIONES PARA CARGAR OBSERVATORIOS (ACTUALIZADAS)
        ========================================================================== */
     let observatoriesLoading = false;
 
@@ -296,19 +594,16 @@ layout: none
       const menu = document.getElementById('observatoryMenu');
       if (!menu) return;
       
-      // Si ya se está cargando, no hacer nada
       if (observatoriesLoading) return;
       
       observatoriesLoading = true;
       menu.innerHTML = '<p>Cargando observatorios...</p>';
       
       try {
-        // Filtrar solo observatorios del array de ciudades
         const observatories = Object.entries(chileanCities).filter(([nombre, info]) => 
           info.type === 'observatory'
         );
         
-        // Crear tarjetas usando la misma función que para ciudades
         menu.innerHTML = '';
         for (const [nombre, info] of observatories) {
           const card = document.createElement('div');
@@ -319,14 +614,18 @@ layout: none
             <div class="city-probability"><span class="loading"></span> Calculando...</div>
             <div class="probability-bar" style="width: 0%"></div>
           `;
-          card.onclick = () => seleccionarObservatorio(nombre);
+          card.onclick = () => showPrediction(nombre, 'observatory');
           menu.appendChild(card);
         }
         
-        // Cargar datos de probabilidad (solo cuando esté activa la pestaña)
         if (document.getElementById('tab-observatories').classList.contains('active')) {
           await loadObservatoryData(observatories);
-          initObservatoriesMap();
+          
+          setTimeout(() => {
+            if (document.getElementById('tab-observatories').classList.contains('active')) {
+              initObservatoriesMap();
+            }
+          }, 100);
         }
       } catch (error) {
         console.error('Error inicializando menú de observatorios:', error);
@@ -340,13 +639,11 @@ layout: none
       const BATCH_SIZE = 3;
       const DELAY = 300;
       
-      // Verificar que todavía estamos en la pestaña de observatorios
       if (!document.getElementById('tab-observatories').classList.contains('active')) {
         return;
       }
       
       for (let i = 0; i < observatories.length; i += BATCH_SIZE) {
-        // Verificar nuevamente antes de cada lote
         if (!document.getElementById('tab-observatories').classList.contains('active')) {
           break;
         }
@@ -366,12 +663,11 @@ layout: none
     }
 
     async function updateObservatoryCardData(nombre, info) {
-      // Verificar que todavía estamos en la pestaña de observatorios
       if (!document.getElementById('tab-observatories').classList.contains('active')) {
         return;
       }
       
-      const [pm25, meteoData] = await Promise.all([getPM25(info.lat, info.lon), getMeteoData(info.lat, info.lon)]);
+      const meteoData = await getMeteoData(info.lat, info.lon);
       if (!meteoData.cloudSeries) return;
 
       const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
@@ -380,16 +676,24 @@ layout: none
       const idxSunset = meteoData.cloudSeries.time.findIndex(t => t.startsWith(sunsetHour));
       const targetIdx = idxSunset >= 0 ? idxSunset : 18;
 
-      const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-      const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-      const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 20);
-
-      const probAtardecer = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature);
-      updateObservatoryCardUI(nombre, Math.round(probAtardecer * 100), info);
+      // USAR SOLO DATOS REALES - Si no hay datos, no calcular
+      const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx];
+      const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx];
+      const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx];
+      
+      // Si no tenemos datos específicos por altura, usar nubosidad total
+      const cloudcover_total = meteoData.cloudSeries.cloudcover?.[targetIdx];
+      
+      // Solo calcular si tenemos datos
+      if ((low_e !== undefined || mid_e !== undefined || high_e !== undefined) || cloudcover_total !== undefined) {
+        // Pasar los datos reales (pueden ser undefined)
+        const probAtardecer = computeRedProbability(low_e, mid_e, high_e, cloudcover_total, sunsetElev, false, meteoData.current.temperature);
+        updateObservatoryCardUI(nombre, Math.round(probAtardecer * 100), info);
+      }
     }
 
+
     function updateObservatoryCardUI(nombre, probAtardecer, info) {
-      // Verificar que todavía estamos en la pestaña de observatorios
       if (!document.getElementById('tab-observatories').classList.contains('active')) {
         return;
       }
@@ -430,12 +734,10 @@ layout: none
         attribution: '© OpenStreetMap contributors'
       }).addTo(obsMap);
       
-      // Filtrar solo observatorios
       const observatories = Object.entries(chileanCities).filter(([nombre, info]) => 
         info.type === 'observatory'
       );
       
-      // Agregar marcadores
       for (const [name, obs] of observatories) {
         const customIcon = L.divIcon({
           className: 'observatory-icon',
@@ -453,7 +755,7 @@ layout: none
               <hr style="margin: 5px 0; opacity: 0.3;">
               <strong>Altitud:</strong> ${obs.altitude ? obs.altitude.toLocaleString() : 'N/A'} m<br>
               ${obs.operator ? `<strong>Operador:</strong> ${obs.operator}<br>` : ''}
-              <button onclick="seleccionarObservatorio('${name}')" style="margin-top: 5px; padding: 5px 10px; background: #ff6600; border: none; border-radius: 4px; color: white; cursor: pointer; font-size: 12px; width: 100%;">
+              <button onclick="showPrediction('${name}', 'observatory')" style="margin-top: 5px; padding: 5px 10px; background: #ff6600; border: none; border-radius: 4px; color: white; cursor: pointer; font-size: 12px; width: 100%;">
                 Ver predicción
               </button>
             </div>
@@ -465,164 +767,15 @@ layout: none
       }).addTo(obsMap);
     }
 
-    // Función para seleccionar observatorio
-    async function seleccionarObservatorio(nombre) {
-      const city = chileanCities[nombre];
-      if (!city) return;
-      
-      // Cambiar a la pestaña de ciudades para mostrar el predictor
-      switchTab('cities');
-      
-      // Ocultar menú de ciudades y mostrar el predictor
-      document.getElementById('cityMenu').style.display = 'none';
-      document.getElementById('appContainer').style.display = 'block';
-      document.getElementById('cityTitle').textContent = `🔭 ${nombre}`;
-      
-      localStorage.setItem('lastCity', nombre);
-      await predictRedSunset(city.lat, city.lon, nombre);
-    }
-
     /* ==========================================================================
-       FUNCIONES PARA RANKING
-       ========================================================================== */
-    async function calculateRankings() {
-      const topRanking = document.getElementById('topRanking');
-      const bottomRanking = document.getElementById('bottomRanking');
-      const rankingStats = document.getElementById('rankingStats');
-      const regionsRanking = document.getElementById('regionsRanking');
-      
-      if (!topRanking || !bottomRanking) return;
-      
-      topRanking.innerHTML = bottomRanking.innerHTML = '<p>Calculando ranking...</p>';
-      const cityProbabilities = [];
-      
-      // Solo calcular para ciudades (no observatorios)
-      const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
-        !info.type || info.type !== 'observatory'
-      );
-      
-      for (const [cityName, cityInfo] of citiesOnly) {
-        try {
-          const [pm25, meteoData] = await Promise.all([getPM25(cityInfo.lat, cityInfo.lon), getMeteoData(cityInfo.lat, cityInfo.lon)]);
-          if (meteoData.cloudSeries) {
-            const sunset = SunCalc.getTimes(new Date(), cityInfo.lat, cityInfo.lon).sunset;
-            const sunsetElev = SunCalc.getPosition(sunset, cityInfo.lat, cityInfo.lon).altitude * (180/Math.PI);
-            const sunsetHour = sunset.toISOString().slice(0,13);
-            const idxSunset = meteoData.cloudSeries.time.findIndex(t => t.startsWith(sunsetHour));
-            const targetIdx = idxSunset >= 0 ? idxSunset : 18;
-
-            const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-            const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-            const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 20);
-
-            const probability = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature);
-            cityProbabilities.push({ name: cityName, region: cityInfo.region, probability, percent: Math.round(probability * 100) });
-          }
-        } catch (error) { console.warn(`Error calculando probabilidad para ${cityName}:`, error); }
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-      
-      cityProbabilities.sort((a, b) => b.probability - a.probability);
-      updateRankingTables(cityProbabilities, topRanking, bottomRanking);
-      updateRankingStats(cityProbabilities, rankingStats);
-      updateRegionsRanking(cityProbabilities, regionsRanking);
-    }
-
-    function updateRankingTables(cityProbabilities, topRanking, bottomRanking) {
-      const top10 = cityProbabilities.slice(0, 10);
-      const bottom10 = cityProbabilities.slice(-10).reverse();
-      
-      topRanking.innerHTML = createRankingTable(top10, cityProbabilities.length, true);
-      bottomRanking.innerHTML = createRankingTable(bottom10, cityProbabilities.length, false);
-    }
-
-    function createRankingTable(cities, totalCities, isTop) {
-      let html = '<table class="ranking-table"><tr><th>#</th><th>Ciudad</th><th>Región</th><th>Probabilidad</th></tr>';
-      cities.forEach((city, index) => {
-        const rank = isTop ? index + 1 : totalCities - index;
-        const color = getProbabilityColor(city.percent);
-        html += `
-          <tr onclick="selectCityFromRanking('${city.name}')" style="cursor: pointer;">
-            <td class="rank">${rank}</td>
-            <td>${city.name}</td>
-            <td>${city.region}</td>
-            <td style="color: ${color}"><strong>${city.percent}%</strong></td>
-          </tr>
-        `;
-      });
-      return html + '</table>';
-    }
-
-    function getProbabilityColor(percent) {
-      if (percent > 70) return '#d7191c';
-      if (percent > 50) return '#fdae61';
-      if (percent > 30) return '#ffffbf';
-      return '#abdda4';
-    }
-
-    function updateRankingStats(cityProbabilities, rankingStats) {
-      const total = cityProbabilities.length;
-      const average = cityProbabilities.reduce((sum, city) => sum + city.percent, 0) / total;
-      const highest = cityProbabilities[0];
-      const lowest = cityProbabilities[cityProbabilities.length - 1];
-      
-      rankingStats.innerHTML = `
-        <div class="data-item">Ciudad más alta: <strong>${highest.name} (${highest.percent}%)</strong></div>
-        <div class="data-item">Ciudad más baja: <strong>${lowest.name} (${lowest.percent}%)</strong></div>
-        <div class="data-item">Promedio nacional: <strong>${average.toFixed(1)}%</strong></div>
-        <div class="data-item">Total analizado: <strong>${total} ciudades</strong></div>
-      `;
-    }
-
-    function updateRegionsRanking(cityProbabilities, regionsRanking) {
-      const regions = {};
-      cityProbabilities.forEach(city => {
-        if (!regions[city.region]) regions[city.region] = { total: 0, sum: 0, cities: [] };
-        regions[city.region].total++;
-        regions[city.region].sum += city.percent;
-        regions[city.region].cities.push(city);
-      });
-      
-      const regionAverages = Object.entries(regions).map(([name, data]) => ({
-        name,
-        average: data.sum / data.total,
-        count: data.total,
-        bestCity: data.cities[0]
-      })).sort((a, b) => b.average - a.average);
-      
-      let regionsHtml = '<table class="ranking-table"><tr><th>Región</th><th>Promedio</th><th>Ciudades</th><th>Mejor Ciudad</th></tr>';
-      regionAverages.forEach(region => {
-        regionsHtml += `
-          <tr>
-            <td><strong>${region.name}</strong></td>
-            <td>${region.average.toFixed(1)}%</td>
-            <td>${region.count}</td>
-            <td>${region.bestCity.name} (${region.bestCity.percent}%)</td>
-          </tr>
-        `;
-      });
-      regionsRanking.innerHTML = regionsHtml + '</table>';
-    }
-
-    function selectCityFromRanking(cityName) {
-      switchTab('cities');
-      setTimeout(() => chileanCities[cityName] && seleccionarCiudad(cityName), 100);
-    }
-
-    /* ==========================================================================
-       VARIABLES GLOBALES PARA EL MAPA
-       ========================================================================== */
-    let map = null, marker = null, heatLayer = null, labelLayer = null;
-    let heatmapEnabled = true, labelsEnabled = true, weatherDataCache = {};
-
-    /* ==========================================================================
-       FUNCIONES PRINCIPALES DE LA APLICACIÓN
+       FUNCIONES PRINCIPALES DE LA APLICACIÓN (ACTUALIZADAS)
        ========================================================================== */
     async function getMeteoData(lat, lon) {
       const cacheKey = `meteo_${lat.toFixed(2)}_${lon.toFixed(2)}`;
       if (API_CACHE[cacheKey]) return API_CACHE[cacheKey];
       
       try {
+        // SOLO solicitamos los datos que realmente necesitamos
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=cloudcover,cloudcover_low,cloudcover_mid,cloudcover_high,pressure_msl,relativehumidity_2m,temperature_2m&timezone=auto`;
         const res = await fetch(url);
         const data = await res.json();
@@ -656,27 +809,13 @@ layout: none
       };
     }
 
-    async function getPM25(lat, lon) {
-      try {
-        const url = `https://api.openaq.org/v2/latest?coordinates=${lat},${lon}&radius=15000&limit=20`;
-        const res = await fetch(url);
-        const data = await res.json();
-        const pm = data.results?.flatMap(r => r.measurements || []).find(m => m.parameter === 'pm25');
-        return pm ? pm.value : 12;
-      } catch (e) {
-        console.warn('OpenAQ error', e);
-        return 12;
-      }
-    }
-
     /* ==========================================================================
-       INTERFAZ DE USUARIO - CIUDADES
+       INTERFAZ DE USUARIO - CIUDADES (ACTUALIZADAS)
        ========================================================================== */
     async function initCityMenu() {
       const menu = document.getElementById('cityMenu');
       const loadingIndicator = document.getElementById('loadingIndicator');
       
-      // Solo cargar ciudades (no observatorios)
       const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
         !info.type || info.type !== 'observatory'
       );
@@ -702,12 +841,11 @@ layout: none
         <div class="city-probability"><span class="loading"></span> Calculando...</div>
         <div class="probability-bar" style="width: 0%"></div>
       `;
-      card.onclick = () => seleccionarCiudad(nombre);
+      card.onclick = () => showPrediction(nombre, 'city');
       return card;
     }
 
     async function loadAllCityData() {
-      // Solo cargar ciudades (no observatorios)
       const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
         !info.type || info.type !== 'observatory'
       );
@@ -723,7 +861,7 @@ layout: none
     }
 
     async function updateCityCardData(nombre, info) {
-      const [pm25, meteoData] = await Promise.all([getPM25(info.lat, info.lon), getMeteoData(info.lat, info.lon)]);
+      const meteoData = await getMeteoData(info.lat, info.lon);
       if (!meteoData.cloudSeries) return;
 
       const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
@@ -732,12 +870,17 @@ layout: none
       const idxSunset = meteoData.cloudSeries.time.findIndex(t => t.startsWith(sunsetHour));
       const targetIdx = idxSunset >= 0 ? idxSunset : 18;
 
-      const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-      const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-      const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 20);
-
-      const probAtardecer = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature);
-      updateCityCardUI(nombre, Math.round(probAtardecer * 100));
+      // USAR SOLO DATOS REALES
+      const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx];
+      const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx];
+      const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx];
+      const cloudcover_total = meteoData.cloudSeries.cloudcover?.[targetIdx];
+      
+      // Solo calcular si tenemos datos
+      if ((low_e !== undefined || mid_e !== undefined || high_e !== undefined) || cloudcover_total !== undefined) {
+        const probAtardecer = computeRedProbability(low_e, mid_e, high_e, cloudcover_total, sunsetElev, false, meteoData.current.temperature);
+        updateCityCardUI(nombre, Math.round(probAtardecer * 100));
+      }
     }
 
     function updateCityCardUI(nombre, probAtardecer) {
@@ -760,21 +903,6 @@ layout: none
       if (probPercent > 30) return { background: "rgba(255, 200, 0, 0.25)" };
       if (probPercent > 15) return { background: "rgba(200, 200, 255, 0.15)" };
       return { background: "rgba(255, 255, 255, 0.05)" };
-    }
-
-    function volverMenu() {
-      document.getElementById('appContainer').style.display = 'none';
-      document.getElementById('cityMenu').style.display = 'grid';
-      localStorage.removeItem('lastCity');
-    }
-
-    async function seleccionarCiudad(nombre) {
-      const city = chileanCities[nombre];
-      document.getElementById('cityMenu').style.display = 'none';
-      document.getElementById('appContainer').style.display = 'block';
-      document.getElementById('cityTitle').textContent = `Sobre ${nombre}`;
-      localStorage.setItem('lastCity', nombre);
-      await predictRedSunset(city.lat, city.lon, nombre);
     }
 
     /* ==========================================================================
@@ -915,8 +1043,8 @@ layout: none
       if (weatherDataCache[cacheKey]) return computeProbabilityFromData(weatherDataCache[cacheKey], lat, lon);
       
       try {
-        const [pm25, meteoData] = await Promise.all([getPM25(lat, lon), getMeteoData(lat, lon)]);
-        const weatherData = { pm25, meteoData };
+        const meteoData = await getMeteoData(lat, lon);
+        const weatherData = { meteoData };
         weatherDataCache[cacheKey] = weatherData;
         return computeProbabilityFromData(weatherData, lat, lon);
       } catch (error) {
@@ -926,7 +1054,7 @@ layout: none
     }
 
     function computeProbabilityFromData(weatherData, lat, lon) {
-      const { pm25, meteoData } = weatherData;
+      const { meteoData } = weatherData;
       if (!meteoData.cloudSeries) return 0;
       
       const sunset = SunCalc.getTimes(new Date(), lat, lon).sunset;
@@ -935,11 +1063,18 @@ layout: none
       const idxSunset = meteoData.cloudSeries.time.findIndex(t => t.startsWith(sunsetHour));
       const targetIdx = idxSunset >= 0 ? idxSunset : 18;
 
-      const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-      const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-      const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 20);
+      // USAR SOLO DATOS REALES
+      const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx];
+      const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx];
+      const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx];
+      const cloudcover_total = meteoData.cloudSeries.cloudcover?.[targetIdx];
 
-      return computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature);
+      // Solo devolver 0 si realmente no hay datos
+      if (low_e === undefined && mid_e === undefined && high_e === undefined && cloudcover_total === undefined) {
+        return 0;
+      }
+      
+      return computeRedProbability(low_e, mid_e, high_e, cloudcover_total, sunsetElev, false, meteoData.current.temperature);
     }
 
     async function updateHeatmap(cityLat, cityLon) {
@@ -1028,31 +1163,16 @@ layout: none
     }
 
     /* ==========================================================================
-       INTERFAZ PRINCIPAL
+       PREDICCIÓN PRINCIPAL
        ========================================================================== */
-    let currentState = {
-      lat: null, lon: null, cityName: '', hourly: null, pm25: null, 
-      preds: { sunrise: 0, sunset: 0 }, sunTimes: null, 
-      sunriseElev: null, sunsetElev: null, meteoData: null
-    };
-
-    const logEl = document.getElementById('log');
-    let cloudChart = null;
-
-    function log(msg) {
-      const line = `[${new Date().toLocaleString()}] ${msg}`;
-      console.log(line);
-      logEl.textContent = line + '\n' + logEl.textContent;
-    }
-
     async function predictRedSunset(lat, lon, cityName = '') {
       log(`Predicción para ${cityName || `${lat},${lon}`}`);
 
       try {
         initMap(lat, lon, cityName);
-        const [pm25, meteoData] = await Promise.all([getPM25(lat, lon), getMeteoData(lat, lon)]);
+        const meteoData = await getMeteoData(lat, lon);
         
-        currentState = { ...currentState, lat, lon, cityName, hourly: meteoData.cloudSeries, pm25, meteoData };
+        currentState = { ...currentState, lat, lon, cityName, hourly: meteoData.cloudSeries, meteoData };
         
         const now = new Date();
         const times = SunCalc.getTimes(now, lat, lon);
@@ -1070,21 +1190,29 @@ layout: none
         const idxS = idxSunrise >=0 ? idxSunrise : 6;
         const idxE = idxSunset >=0 ? idxSunset : 20;
 
-        const low_s = meteoData.cloudSeries?.cloudcover_low?.[idxS] ?? (meteoData.cloudSeries?.cloudcover?.[idxS] ?? 50);
-        const mid_s = meteoData.cloudSeries?.cloudcover_mid?.[idxS] ?? (meteoData.cloudSeries?.cloudcover?.[idxS] ?? 50);
-        const high_s = meteoData.cloudSeries?.cloudcover_high?.[idxS] ?? (meteoData.cloudSeries?.cloudcover?.[idxS] ?? 20);
-        const tot_s = meteoData.cloudSeries?.cloudcover?.[idxS] ?? Math.round((low_s + mid_s + high_s)/3);
+        // USAR SOLO DATOS REALES - pueden ser undefined
+        const low_s = meteoData.cloudSeries?.cloudcover_low?.[idxS];
+        const mid_s = meteoData.cloudSeries?.cloudcover_mid?.[idxS];
+        const high_s = meteoData.cloudSeries?.cloudcover_high?.[idxS];
+        const cloudcover_total_s = meteoData.cloudSeries?.cloudcover?.[idxS];
+        const tot_s = cloudcover_total_s ?? (low_s !== undefined || mid_s !== undefined || high_s !== undefined ? 
+                  Math.round(((low_s || 0) + (mid_s || 0) + (high_s || 0))/3) : 0);
 
-        const low_e = meteoData.cloudSeries?.cloudcover_low?.[idxE] ?? (meteoData.cloudSeries?.cloudcover?.[idxE] ?? 50);
-        const mid_e = meteoData.cloudSeries?.cloudcover_mid?.[idxE] ?? (meteoData.cloudSeries?.cloudcover?.[idxE] ?? 50);
-        const high_e = meteoData.cloudSeries?.cloudcover_high?.[idxE] ?? (meteoData.cloudSeries?.cloudcover?.[idxE] ?? 20);
-        const tot_e = meteoData.cloudSeries?.cloudcover?.[idxE] ?? Math.round((low_e + mid_e + high_e)/3);
+        const low_e = meteoData.cloudSeries?.cloudcover_low?.[idxE];
+        const mid_e = meteoData.cloudSeries?.cloudcover_mid?.[idxE];
+        const high_e = meteoData.cloudSeries?.cloudcover_high?.[idxE];
+        const cloudcover_total_e = meteoData.cloudSeries?.cloudcover?.[idxE];
+        const tot_e = cloudcover_total_e ?? (low_e !== undefined || mid_e !== undefined || high_e !== undefined ? 
+                  Math.round(((low_e || 0) + (mid_e || 0) + (high_e || 0))/3) : 0);
 
-        const sunriseProb = computeRedProbability(pm25, low_s, mid_s, high_s, sunriseElev, true, meteoData.current.temperature);
-        const sunsetProb = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature);
+        // Usar los datos reales (pueden ser undefined)
+        const sunriseProb = computeRedProbability(low_s, mid_s, high_s, cloudcover_total_s, sunriseElev, true, meteoData.current.temperature);
+        const sunsetProb = computeRedProbability(low_e, mid_e, high_e, cloudcover_total_e, sunsetElev, false, meteoData.current.temperature);
         currentState.preds = { sunrise: sunriseProb, sunset: sunsetProb };
 
-        updateUI(cityName, lat, lon, meteoData, sunrise, sunset, sunriseElev, sunsetElev, tot_e, pm25, sunriseProb, sunsetProb);
+        updateUI(cityName, lat, lon, meteoData, sunrise, sunset, sunriseElev, sunsetElev, tot_e, sunriseProb, sunsetProb);
+        
+        // ACTUALIZAR GRÁFICOS USANDO LA FUNCIÓN DEL MÓDULO
         updateCharts(meteoData, sunrise, sunset);
         
         if (heatmapEnabled) await updateHeatmap(lat, lon);
@@ -1100,7 +1228,10 @@ layout: none
       }
     }
 
-    function updateUI(cityName, lat, lon, meteoData, sunrise, sunset, sunriseElev, sunsetElev, tot_e, pm25, sunriseProb, sunsetProb) {
+    /* ==========================================================================
+       FUNCIONES DE INTERFAZ DE USUARIO (ACTUALIZADAS)
+       ========================================================================== */
+    function updateUI(cityName, lat, lon, meteoData, sunrise, sunset, sunriseElev, sunsetElev, tot_e, sunriseProb, sunsetProb) {
       document.getElementById('loadingState').innerHTML = '';
       
       const dataTime = new Date(meteoData.current.timestamp);
@@ -1109,7 +1240,6 @@ layout: none
 
       document.getElementById('dataGrid').innerHTML = `
         <div class="data-item">☁️ Nubosidad: <strong>${Math.round(tot_e)}%</strong></div>
-        <div class="data-item">🌫 PM2.5: <strong>${pm25.toFixed(1)} µg/m³</strong></div>
         <div class="data-item">⬆ Elev amanecer: <strong>${sunriseElev.toFixed(1)}°</strong></div>
         <div class="data-item">⬇ Elev atardecer: <strong>${sunsetElev.toFixed(1)}°</strong></div>
       `;
@@ -1117,11 +1247,19 @@ layout: none
       const locationInfo = chileanCities[cityName];
       let locationHTML = `📍 ${cityName}`;
       
-      // Si es un observatorio, mostrar información adicional
-      if (locationInfo && locationInfo.type === 'observatory') {
+      // Mostrar información específica según el tipo
+      if (locationInfo) {
         locationHTML += `<br><small style="opacity:0.8; font-size:0.9rem;">`;
+        
+        if (locationInfo.type === 'observatory') {
+          locationHTML += `🔭 Observatorio Astronómico<br>`;
+        } else if (locationInfo.type === 'park') {
+          locationHTML += `🌳 Parque Nacional<br>`;
+        }
+        
         if (locationInfo.altitude) locationHTML += `Altitud: ${locationInfo.altitude.toLocaleString()} m • `;
-        if (locationInfo.operator) locationHTML += `Operador: ${locationInfo.operator}`;
+        if (locationInfo.operator) locationHTML += `Operador: ${locationInfo.operator} • `;
+        locationHTML += `Región: ${locationInfo.region}`;
         locationHTML += `</small>`;
       }
       
@@ -1181,162 +1319,177 @@ layout: none
       }
     }
 
-    function updateCharts(meteoData, sunriseTime, sunsetTime) {
-      if (!meteoData.cloudSeries || !meteoData.cloudSeries.time) return;
+    /* ==========================================================================
+       FUNCIONES PARA RANKING (ACTUALIZADAS)
+       ========================================================================== */
+    async function calculateRankings() {
+      const topRanking = document.getElementById('topRanking');
+      const bottomRanking = document.getElementById('bottomRanking');
+      const rankingStats = document.getElementById('rankingStats');
+      const regionsRanking = document.getElementById('regionsRanking');
       
-      const times24 = meteoData.cloudSeries.time.slice(0,24).map(t => {
-        const d = new Date(t);
-        return d.getHours() + ':00';
-      });
+      if (!topRanking || !bottomRanking) return;
       
-      const clouds = {
-        total: meteoData.cloudSeries.cloudcover.slice(0,24).map(v => Math.round(v)),
-        low: meteoData.cloudSeries.cloudcover_low.slice(0,24).map(v => Math.round(v)),
-        mid: meteoData.cloudSeries.cloudcover_mid.slice(0,24).map(v => Math.round(v)),
-        high: meteoData.cloudSeries.cloudcover_high.slice(0,24).map(v => Math.round(v)),
-      };
+      topRanking.innerHTML = bottomRanking.innerHTML = '<p>Calculando ranking...</p>';
+      const cityProbabilities = [];
       
-      updateCloudChart(times24, clouds, sunriseTime, sunsetTime);
-    }
+      const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
+        !info.type || info.type !== 'observatory'
+      );
+      
+      for (const [cityName, cityInfo] of citiesOnly) {
+        try {
+          const meteoData = await getMeteoData(cityInfo.lat, cityInfo.lon);
+          
+          if (meteoData.cloudSeries) {
+            const sunset = SunCalc.getTimes(new Date(), cityInfo.lat, cityInfo.lon).sunset;
+            const sunsetElev = SunCalc.getPosition(sunset, cityInfo.lat, cityInfo.lon).altitude * (180/Math.PI);
+            const sunsetHour = sunset.toISOString().slice(0,13);
+            const idxSunset = meteoData.cloudSeries.time.findIndex(t => t.startsWith(sunsetHour));
+            const targetIdx = idxSunset >= 0 ? idxSunset : 18;
 
-    function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
-      const ctx = document.getElementById('cloudChart').getContext('2d');
-      if (cloudChart) cloudChart.destroy();
-      
-      const sunriseHour = sunriseTime.getHours();
-      const sunsetHour = sunsetTime.getHours();
-      const now = new Date();
-      const currentHour = now.getHours();
-      
-      const sunriseIndex = hours.findIndex(h => parseInt(h.split(':')[0]) >= sunriseHour);
-      const sunsetIndex = hours.findIndex(h => parseInt(h.split(':')[0]) >= sunsetHour);
-      const currentIndex = hours.findIndex(h => parseInt(h.split(':')[0]) >= currentHour);
-      const isMobile = window.innerWidth < 768;
-      
-      createChartLegend(sunriseTime, sunsetTime, currentHour);
-      
-      cloudChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: hours,
-          datasets: [
-            { label: 'Nubes bajas', data: cloudVals.low, borderWidth: isMobile ? 1 : 1.5, borderColor: '#4fc3f7', backgroundColor: 'rgba(79, 195, 247, 0.1)', fill: false, tension: 0.3, borderDash: [4, 3], pointBackgroundColor: '#4fc3f7', pointBorderWidth: isMobile ? 0.5 : 1, pointStyle: 'circle', pointRadius: isMobile ? 6 : 8, pointHoverRadius: isMobile ? 10 : 14 },
-            { label: 'Nubes medias', data: cloudVals.mid, borderWidth: isMobile ? 1 : 1.5, borderColor: '#ffb74d', backgroundColor: 'rgba(255, 183, 77, 0.1)', fill: false, tension: 0.3, borderDash: [2, 3], pointBackgroundColor: '#ffb74d', pointBorderWidth: isMobile ? 0.5 : 1, pointStyle: 'circle', pointRadius: isMobile ? 6 : 8, pointHoverRadius: isMobile ? 10 : 14 },
-            { label: 'Nubes altas', data: cloudVals.high, borderWidth: isMobile ? 1 : 1.5, borderColor: '#ba68c8', backgroundColor: 'rgba(186, 104, 200, 0.1)', fill: false, tension: 0.3, pointBackgroundColor: '#ba68c8', pointBorderWidth: isMobile ? 0.5 : 1, pointStyle: 'circle', pointRadius: isMobile ? 6 : 8, pointHoverRadius: isMobile ? 10 : 14 },
-            { label: 'Nubosidad total', data: cloudVals.total, borderWidth: isMobile ? 1.5 : 2, borderColor: '#ffffff', backgroundColor: 'rgba(255,255,255,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#ffffff', pointBorderColor: '#ff6600', pointBorderWidth: isMobile ? 1 : 2, pointStyle: 'circle', pointRadius: isMobile ? 7 : 9, pointHoverRadius: isMobile ? 11 : 15 }
-          ]
-        },
-        options: getChartOptions(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex)
-      });
-    }
-
-    function getChartOptions(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex) {
-      return {
-        responsive: true,
-        maintainAspectRatio: false,
-        aspectRatio: isMobile ? 1.2 : 1.3,
-        plugins: { 
-          title: { display: true, text: 'Nubosidad por Hora del Día', color: '#ffffff', font: { size: isMobile ? 18 : 20, weight: 'bold', family: 'Arial, sans-serif' }, padding: { top: 5, bottom: 2 } },
-          legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', boxWidth: 6, boxHeight: 6, color: '#ffffff', font: { size: isMobile ? 18 : 18, family: 'Arial, sans-serif', weight: 'normal' }, padding: isMobile ? 8 : 19 } },
-          annotation: { annotations: getChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile) },
-          tooltip: { mode: 'index', intersect: false, callbacks: getTooltipCallbacks(hours, sunriseIndex, sunsetIndex, currentIndex) }
-        },
-        scales: getChartScales(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex),
-        interaction: { intersect: false, mode: 'index' },
-        elements: { point: { radius: isMobile ? 4 : 6, hoverRadius: isMobile ? 8 : 12 } }
-      };
-    }
-
-    function getChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile) {
-      return {
-        sunriseLine: { type: 'line', mode: 'vertical', scaleID: 'x', value: sunriseIndex >= 0 ? sunriseIndex : 6, borderColor: '#ffeb3b', borderWidth: 3, borderDash: [5, 5], label: { enabled: true, content: '🌅 Amanecer', position: 'top', backgroundColor: 'rgba(255, 235, 59, 0.7)', color: '#333', font: { size: isMobile ? 10 : 12, weight: 'bold' }, padding: { x: 6, y: 4 } } },
-        sunsetLine: { type: 'line', mode: 'vertical', scaleID: 'x', value: sunsetIndex >= 0 ? sunsetIndex : 18, borderColor: '#ff9800', borderWidth: 3, borderDash: [5, 5], label: { enabled: true, content: '🌇 Atardecer', position: 'top', backgroundColor: 'rgba(255, 152, 0, 0.7)', color: '#333', font: { size: isMobile ? 10 : 12, weight: 'bold' }, padding: { x: 6, y: 4 } } },
-        currentTimeLine: { type: 'line', mode: 'vertical', scaleID: 'x', value: currentIndex >= 0 ? currentIndex : hours.length / 2, borderColor: '#4CAF50', borderWidth: 3, borderDash: [3, 3], label: { enabled: true, content: '🕐 Ahora', position: 'top', backgroundColor: 'rgba(76, 175, 80, 0.7)', color: '#333', font: { size: isMobile ? 10 : 12, weight: 'bold' }, padding: { x: 6, y: 4 } } }
-      };
-    }
-
-    function getTooltipCallbacks(hours, sunriseIndex, sunsetIndex, currentIndex) {
-      return {
-        label: context => `${context.dataset.label}: ${context.parsed.y}%`,
-        afterBody: context => {
-          const index = context[0].dataIndex;
-          const lines = [];
-          if (index === sunriseIndex) lines.push('🌅 Hora del amanecer');
-          if (index === sunsetIndex) lines.push('🌇 Hora del atardecer');
-          if (index === currentIndex) lines.push('🕐 Hora actual aproximada');
-          return lines;
-        }
-      };
-    }
-
-    function getChartScales(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex) {
-      return {
-        x: { 
-          title: { display: true, text: 'Hora del día', color: '#ffffff', font: { size: isMobile ? 16 : 18, weight: 'bold' } },
-          grid: { color: 'rgba(255,255,255,0.08)', drawOnChartArea: true }, 
-          ticks: { 
-            color: '#ffffff', maxRotation: isMobile ? 45 : 0, autoSkip: true, maxTicksLimit: isMobile ? 12 : 24,
-            font: { size: isMobile ? 14 : 16 },
-            callback: (value, index) => {
-              const hour = hours[index];
-              if (index === sunriseIndex) return `🌅 ${hour}`;
-              if (index === sunsetIndex) return `🌇 ${hour}`;
-              if (index === currentIndex) return `🕐 ${hour}`;
-              return hour;
+            // USAR SOLO DATOS REALES
+            const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx];
+            const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx];
+            const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx];
+            const cloudcover_total = meteoData.cloudSeries.cloudcover?.[targetIdx];
+            
+            // Solo incluir en el ranking si tenemos datos
+            if ((low_e !== undefined || mid_e !== undefined || high_e !== undefined) || cloudcover_total !== undefined) {
+              const probability = computeRedProbability(low_e, mid_e, high_e, cloudcover_total, sunsetElev, false, meteoData.current.temperature);
+              cityProbabilities.push({ name: cityName, region: cityInfo.region, probability, percent: Math.round(probability * 100) });
             }
-          } 
-        },
-        y: { 
-          title: { display: true, text: 'Cantidad de nubes', color: '#ffffff', font: { size: isMobile ? 16 : 18, weight: 'bold' } },
-          beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.08)', drawOnChartArea: true }, 
-          ticks: { 
-            color: '#ffffff', stepSize: 20, callback: value => value + '%',
-            font: { size: isMobile ? 14 : 16 }
-          } 
-        }
-      };
+          }
+        } catch (error) { console.warn(`Error calculando probabilidad para ${cityName}:`, error); }
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      
+      // Solo ordenar si hay datos
+      if (cityProbabilities.length > 0) {
+        cityProbabilities.sort((a, b) => b.probability - a.probability);
+        updateRankingTables(cityProbabilities, topRanking, bottomRanking);
+        updateRankingStats(cityProbabilities, rankingStats);
+        updateRegionsRanking(cityProbabilities, regionsRanking);
+      } else {
+        topRanking.innerHTML = '<p>No se pudieron obtener datos para el ranking</p>';
+        bottomRanking.innerHTML = '<p>No se pudieron obtener datos para el ranking</p>';
+      }
     }
 
-    function createChartLegend(sunriseTime, sunsetTime, currentHour) {
-      const oldLegend = document.querySelector('.chart-time-legend');
-      if (oldLegend) oldLegend.remove();
+    function updateRankingTables(cityProbabilities, topRanking, bottomRanking) {
+      const top10 = cityProbabilities.slice(0, 10);
+      const bottom10 = cityProbabilities.slice(-10).reverse();
       
-      const sunriseStr = sunriseTime.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit', hour12: false });
-      const sunsetStr = sunsetTime.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit', hour12: false });
-      const currentStr = `${currentHour.toString().padStart(2, '0')}:00`;
+      topRanking.innerHTML = createRankingTable(top10, cityProbabilities.length, true);
+      bottomRanking.innerHTML = createRankingTable(bottom10, cityProbabilities.length, false);
+    }
+
+    function createRankingTable(cities, totalCities, isTop) {
+      let html = '<table class="ranking-table"><tr><th>#</th><th>Ciudad</th><th>Región</th><th>Probabilidad</th></tr>';
+      cities.forEach((city, index) => {
+        const rank = isTop ? index + 1 : totalCities - index;
+        const color = getProbabilityColor(city.percent);
+        html += `
+          <tr onclick="showPrediction('${city.name}', 'city')" style="cursor: pointer;">
+            <td class="rank">${rank}</td>
+            <td>${city.name}</td>
+            <td>${city.region}</td>
+            <td style="color: ${color}"><strong>${city.percent}%</strong></td>
+          </tr>
+        `;
+      });
+      return html + '</table>';
+    }
+
+    function getProbabilityColor(percent) {
+      if (percent > 70) return '#d7191c';
+      if (percent > 50) return '#fdae61';
+      if (percent > 30) return '#ffffbf';
+      return '#abdda4';
+    }
+
+    function updateRankingStats(cityProbabilities, rankingStats) {
+      const total = cityProbabilities.length;
+      const average = cityProbabilities.reduce((sum, city) => sum + city.percent, 0) / total;
+      const highest = cityProbabilities[0];
+      const lowest = cityProbabilities[cityProbabilities.length - 1];
       
-      const legendContainer = document.createElement('div');
-      legendContainer.className = 'chart-time-legend';
-      legendContainer.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-          <div style="width: 12px; height: 3px; background: #ffeb3b; border-radius: 1px;"></div>
-          <span>🌅 Amanecer ${sunriseStr}</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-          <div style="width: 12px; height: 3px; background: #ff9800; border-radius: 1px;"></div>
-          <span>🌇 Puesta de sol ${sunsetStr}</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-          <div style="width: 12px; height: 3px; background: #4CAF50; border-radius: 1px;"></div>
-          <span>🕐 Ahora ${currentStr}</span>
-        </div>
+      rankingStats.innerHTML = `
+        <div class="data-item">Ciudad más alta: <strong>${highest.name} (${highest.percent}%)</strong></div>
+        <div class="data-item">Ciudad más baja: <strong>${lowest.name} (${lowest.percent}%)</strong></div>
+        <div class="data-item">Promedio nacional: <strong>${average.toFixed(1)}%</strong></div>
+        <div class="data-item">Total analizado: <strong>${total} ciudades</strong></div>
       `;
-      
-      const chartsContainer = document.querySelector('.charts');
-      if (chartsContainer.firstChild) chartsContainer.insertBefore(legendContainer, chartsContainer.firstChild);
-      else chartsContainer.appendChild(legendContainer);
     }
 
-    function probClass(p) {
-      if (p > 0.7) return 'high-prob';
-      if (p < 0.4) return 'low-prob';
-      return 'medium-prob';
+    function updateRegionsRanking(cityProbabilities, regionsRanking) {
+      const regions = {};
+      cityProbabilities.forEach(city => {
+        if (!regions[city.region]) regions[city.region] = { total: 0, sum: 0, cities: [] };
+        regions[city.region].total++;
+        regions[city.region].sum += city.percent;
+        regions[city.region].cities.push(city);
+      });
+      
+      const regionAverages = Object.entries(regions).map(([name, data]) => ({
+        name,
+        average: data.sum / data.total,
+        count: data.total,
+        bestCity: data.cities[0]
+      })).sort((a, b) => b.average - a.average);
+      
+      let regionsHtml = '<table class="ranking-table"><tr><th>Región</th><th>Promedio</th><th>Ciudades</th><th>Mejor Ciudad</th></tr>';
+      regionAverages.forEach(region => {
+        regionsHtml += `
+          <tr>
+            <td><strong>${region.name}</strong></td>
+            <td>${region.average.toFixed(1)}%</td>
+            <td>${region.count}</td>
+            <td>${region.bestCity.name} (${region.bestCity.percent}%)</td>
+          </tr>
+        `;
+      });
+      regionsRanking.innerHTML = regionsHtml + '</table>';
     }
 
     /* ==========================================================================
        INICIALIZACIÓN DE LA APLICACIÓN
        ========================================================================== */
-    document.addEventListener('DOMContentLoaded', initCityMenu);
+    document.addEventListener('DOMContentLoaded', function() {
+      initCityMenu();
+      
+      // Verificar si hay una ubicación guardada
+      const lastCity = localStorage.getItem('lastCity');
+      const locationType = localStorage.getItem('locationType');
+      
+      if (lastCity && chileanCities[lastCity]) {
+        setTimeout(() => {
+          showPrediction(lastCity, locationType || 'city');
+        }, 500);
+      }
+    });
+
+    /* ==========================================================================
+       FUNCIONES DE COMPATIBILIDAD (PARA MANTENER FUNCIONES EXISTENTES)
+       ========================================================================== */
+    // Estas funciones se mantienen para compatibilidad con el código existente
+    async function seleccionarCiudad(nombre) {
+      await showPrediction(nombre, 'city');
+    }
+
+    async function seleccionarObservatorio(nombre) {
+      await showPrediction(nombre, 'observatory');
+    }
+
+    function selectCityFromRanking(cityName) {
+      showPrediction(cityName, 'city');
+    }
+
+    function probClass(p) {
+      if (p > 0.75) return 'high-prob';
+      if (p < 0.35) return 'low-prob';
+      return 'medium-prob';
+    }
   </script>
 
   <footer class="footer">
