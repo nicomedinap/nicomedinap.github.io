@@ -276,25 +276,25 @@ layout: none
             <h4>🥇 Top 10 - Mayor Probabilidad</h4>
             <div id="topRanking"><p>Cargando ranking...</p></div>
           </div>
-          <div class="info-card">
-            <h4>📉 Top 10 - Menor Probabilidad</h4>
-            <div id="bottomRanking"><p>Cargando ranking...</p></div>
-          </div>
-        </div>
-        <div class="info-section">
-          <h3>📈 Estadísticas Generales</h3>
-          <div class="data-grid" id="rankingStats">
-            <div class="data-item">Ciudad más alta: <strong id="highestCity">--</strong></div>
-            <div class="data-item">Ciudad más baja: <strong id="lowestCity">--</strong></div>
-            <div class="data-item">Promedio nacional: <strong id="averageProb">--</strong></div>
-            <div class="data-item">Total analizado: <strong id="totalCities">--</strong></div>
-          </div>
-        </div>
-        <div class="info-section">
-          <h3>🏆 Mejores Regiones</h3>
-          <div id="regionsRanking"></div>
+        <!--  <div class="info-card"> -->
+        <!--    <h4>📉 Top 10 - Menor Probabilidad</h4> -->
+        <!--    <div id="bottomRanking"><p>Cargando ranking...</p></div> -->
         </div>
       </div>
+        <!--<div class="info-section">-->
+        <!--  <h3>📈 Estadísticas Generales</h3>-->
+        <!--  <div class="data-grid" id="rankingStats">-->
+        <!--    <div class="data-item">Ciudad más alta: <strong id="highestCity">--</strong></div>-->
+        <!--    <div class="data-item">Ciudad más baja: <strong id="lowestCity">--</strong></div>-->
+        <!--    <div class="data-item">Promedio nacional: <strong id="averageProb">--</strong></div>-->
+         <!--   <div class="data-item">Total analizado: <strong id="totalCities">--</strong></div>-->
+        <!--  </div>-->
+        <!--</div>-->
+        <!--<div class="info-section">-->
+        <!--  <h3>🏆 Mejores Regiones</h3>-->
+        <!--  <div id="regionsRanking"></div>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
     
     <!-- Pestaña 4: Información -->
@@ -360,11 +360,9 @@ layout: none
     </div>
   </div>
 
-<!-- Scripts externos -->
+<!-- modulos -->
 <script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
-<script src="https://nicomedinap.github.io/preboles/redProbability.js"></script>
-
-<!-- AÑADE ESTA LÍNEA -->
+<!-- <script src="https://nicomedinap.github.io/preboles/redProbability.js"></script> -->
 <script src="https://nicomedinap.github.io/preboles/chartUtils.js"></script>
 
 <!-- Script principal -->
@@ -687,7 +685,7 @@ layout: none
       // Solo calcular si tenemos datos
       if ((low_e !== undefined || mid_e !== undefined || high_e !== undefined) || cloudcover_total !== undefined) {
         // Pasar los datos reales (pueden ser undefined)
-        const probAtardecer = computeRedProbability(low_e, mid_e, high_e, cloudcover_total, sunsetElev, false, meteoData.current.temperature);
+        const probAtardecer = computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature, meteoData.current.pressure);
         updateObservatoryCardUI(nombre, Math.round(probAtardecer * 100), info);
       }
     }
@@ -878,7 +876,7 @@ layout: none
       
       // Solo calcular si tenemos datos
       if ((low_e !== undefined || mid_e !== undefined || high_e !== undefined) || cloudcover_total !== undefined) {
-        const probAtardecer = computeRedProbability(low_e, mid_e, high_e, cloudcover_total, sunsetElev, false, meteoData.current.temperature);
+        const probAtardecer = computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature, meteoData.current.pressure);
         updateCityCardUI(nombre, Math.round(probAtardecer * 100));
       }
     }
@@ -1053,6 +1051,74 @@ layout: none
       }
     }
 
+
+    // redProbability.js - VERSIÓN CON RAYLEIGH PURO
+    function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, temperature = 20, pressure = 1013) {
+      
+      const lowPct  = Math.max(0, Math.min(100, Number(low)  || 0));
+      const midPct  = Math.max(0, Math.min(100, Number(mid)  || 0));
+      const highPct = Math.max(0, Math.min(100, Number(high) || 0));
+
+      // ============================================
+      // 1. IMPLEMENTACIÓN PURA DE DISPERSIÓN RAYLEIGH
+      // ============================================
+      const P0 = 1013; // Presión de referencia (nivel del mar)
+      const P = Math.max(950, Math.min(1050, Number(pressure) || P0));
+      
+      // gamma = 1 para gas ideal
+      const gamma = 1.0;
+      const rayleighIntensity = Math.pow(P / P0, gamma);
+      
+      // Normalizamos entre 0 y 1 para P ∈ [950, 1050] hPa
+      const P_min = 950;
+      const P_max = 1050;
+      const rayleighMin = Math.pow(P_min / P0, gamma);  // = 0.938
+      const rayleighMax = Math.pow(P_max / P0, gamma);  // = 1.037
+      // normalizado
+      const rayleighFactor = (rayleighIntensity - rayleighMin) / (rayleighMax - rayleighMin);
+
+      const layerScore = (
+        0.05 * (lowPct / 100) +
+        0.25 * (midPct / 100) +
+        0.70 * (highPct / 100)
+      );
+
+      // Penalizacion por nubes bajas
+      const lowCloudPenalty = Math.pow(lowPct / 100, 2);
+
+      const idealElev = isSunrise ? 3.0 : -3.0;
+      const geomSigma = 4.0;
+      const geomScore = Math.exp(-Math.pow((elevDeg - idealElev) / geomSigma, 2));
+
+      // Modelo
+      const score =
+        0.6 * layerScore +
+        0.20 * geomScore +
+      //  0.05 * humidityScore +
+        0.10 * rayleighFactor - 
+        0.10 * lowCloudPenalty;
+
+      let p = 1 / (1 + Math.exp(-8 * (score - 0.45)));
+
+      // ============================================
+      // REGLAS ESPECIALES
+      // ============================================
+
+      //if (lowPct > 60) p *= Math.max(0.1, 1 - lowPct / 100);
+
+      // const totalCloud = (lowPct + midPct + highPct) / 3;
+      // if (totalCloud > 90) p *= 0.2;
+      // else if (totalCloud > 70) p *= 0.5;
+
+      //if (lowPct > 80 && totalCloud > 60) p = Math.min(p, 0.15);
+      //if (lowPct < 20 && highPct > 50) p = Math.min(0.99, p * 1.2);
+
+      return Math.max(0.01, Math.min(0.99, p));
+    }
+
+    // Exponer globalmente
+    window.computeRedProbability = computeRedProbability;
+
     function computeProbabilityFromData(weatherData, lat, lon) {
       const { meteoData } = weatherData;
       if (!meteoData.cloudSeries) return 0;
@@ -1063,18 +1129,11 @@ layout: none
       const idxSunset = meteoData.cloudSeries.time.findIndex(t => t.startsWith(sunsetHour));
       const targetIdx = idxSunset >= 0 ? idxSunset : 18;
 
-      // USAR SOLO DATOS REALES
       const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx];
       const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx];
       const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx];
-      const cloudcover_total = meteoData.cloudSeries.cloudcover?.[targetIdx];
-
-      // Solo devolver 0 si realmente no hay datos
-      if (low_e === undefined && mid_e === undefined && high_e === undefined && cloudcover_total === undefined) {
-        return 0;
-      }
       
-      return computeRedProbability(low_e, mid_e, high_e, cloudcover_total, sunsetElev, false, meteoData.current.temperature);
+      return computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature, meteoData.current.pressure);
     }
 
     async function updateHeatmap(cityLat, cityLon) {
@@ -1206,8 +1265,8 @@ layout: none
                   Math.round(((low_e || 0) + (mid_e || 0) + (high_e || 0))/3) : 0);
 
         // Usar los datos reales (pueden ser undefined)
-        const sunriseProb = computeRedProbability(low_s, mid_s, high_s, cloudcover_total_s, sunriseElev, true, meteoData.current.temperature);
-        const sunsetProb = computeRedProbability(low_e, mid_e, high_e, cloudcover_total_e, sunsetElev, false, meteoData.current.temperature);
+        const sunriseProb = computeRedProbability(low_s, mid_s, high_s, sunriseElev, true, meteoData.current.temperature, meteoData.current.pressure);
+        const sunsetProb = computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature, meteoData.current.pressure);
         currentState.preds = { sunrise: sunriseProb, sunset: sunsetProb };
 
         updateUI(cityName, lat, lon, meteoData, sunrise, sunset, sunriseElev, sunsetElev, tot_e, sunriseProb, sunsetProb);
@@ -1324,13 +1383,12 @@ layout: none
        ========================================================================== */
     async function calculateRankings() {
       const topRanking = document.getElementById('topRanking');
-      const bottomRanking = document.getElementById('bottomRanking');
       const rankingStats = document.getElementById('rankingStats');
       const regionsRanking = document.getElementById('regionsRanking');
       
-      if (!topRanking || !bottomRanking) return;
+      if (!topRanking) return;
       
-      topRanking.innerHTML = bottomRanking.innerHTML = '<p>Calculando ranking...</p>';
+      topRanking.innerHTML = '<p>Calculando ranking...</p>';
       const cityProbabilities = [];
       
       const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
@@ -1352,42 +1410,53 @@ layout: none
             const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx];
             const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx];
             const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx];
-            const cloudcover_total = meteoData.cloudSeries.cloudcover?.[targetIdx];
             
-            // Solo incluir en el ranking si tenemos datos
-            if ((low_e !== undefined || mid_e !== undefined || high_e !== undefined) || cloudcover_total !== undefined) {
-              const probability = computeRedProbability(low_e, mid_e, high_e, cloudcover_total, sunsetElev, false, meteoData.current.temperature);
-              cityProbabilities.push({ name: cityName, region: cityInfo.region, probability, percent: Math.round(probability * 100) });
+            // Solo calcular si tenemos datos
+            if (low_e !== undefined || mid_e !== undefined || high_e !== undefined) {
+              const probAtardecer = computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature, meteoData.current.pressure);
+              const probabilityPercent = Math.round(probAtardecer * 100);
+              
+              // Agregar al array de probabilidades (ESTO FALTABA)
+              cityProbabilities.push({
+                name: cityName,
+                region: cityInfo.region,
+                probability: probAtardecer,
+                percent: probabilityPercent
+              });
             }
           }
-        } catch (error) { console.warn(`Error calculando probabilidad para ${cityName}:`, error); }
-        await new Promise(resolve => setTimeout(resolve, 100));
+        } catch (error) { 
+          console.warn(`Error calculando probabilidad para ${cityName}:`, error); 
+        }
+        // Pequeña pausa para no saturar la API
+        await new Promise(resolve => setTimeout(resolve, 50));
       }
       
-      // Solo ordenar si hay datos
       if (cityProbabilities.length > 0) {
         cityProbabilities.sort((a, b) => b.probability - a.probability);
-        updateRankingTables(cityProbabilities, topRanking, bottomRanking);
-        updateRankingStats(cityProbabilities, rankingStats);
-        updateRegionsRanking(cityProbabilities, regionsRanking);
-      } else {
-        topRanking.innerHTML = '<p>No se pudieron obtener datos para el ranking</p>';
-        bottomRanking.innerHTML = '<p>No se pudieron obtener datos para el ranking</p>';
+        updateRankingTable(cityProbabilities, topRanking);
+        
+        // Solo actualizar si los elementos existen
+        if (rankingStats) {
+          updateRankingStats(cityProbabilities, rankingStats);
+        }
+        
+        if (regionsRanking) {
+          updateRegionsRanking(cityProbabilities, regionsRanking);
+        }
       }
     }
 
-    function updateRankingTables(cityProbabilities, topRanking, bottomRanking) {
+    function updateRankingTable(cityProbabilities, topRanking) {
       const top10 = cityProbabilities.slice(0, 10);
-      const bottom10 = cityProbabilities.slice(-10).reverse();
       
-      topRanking.innerHTML = createRankingTable(top10, cityProbabilities.length, true);
-      bottomRanking.innerHTML = createRankingTable(bottom10, cityProbabilities.length, false);
+      topRanking.innerHTML = createRankingTable(top10);
     }
 
-    function createRankingTable(cities, totalCities, isTop) {
+    function createRankingTable(cities) {
       let html = '<table class="ranking-table"><tr><th>#</th><th>Ciudad</th><th>Región</th><th>Probabilidad</th></tr>';
       cities.forEach((city, index) => {
-        const rank = isTop ? index + 1 : totalCities - index;
+        const rank = index + 1;
         const color = getProbabilityColor(city.percent);
         html += `
           <tr onclick="showPrediction('${city.name}', 'city')" style="cursor: pointer;">
@@ -1400,6 +1469,60 @@ layout: none
       });
       return html + '</table>';
     }
+
+    function getProbabilityColor(percent) {
+      if (percent > 70) return '#d7191c';
+      if (percent > 50) return '#fdae61';
+      if (percent > 30) return '#ffffbf';
+      return '#abdda4';
+    }
+
+    function updateRankingStats(cityProbabilities, rankingStats) {
+      const total = cityProbabilities.length;
+      if (total === 0) return;
+      
+      const average = cityProbabilities.reduce((sum, city) => sum + city.percent, 0) / total;
+      const highest = cityProbabilities[0];
+      const lowest = cityProbabilities[cityProbabilities.length - 1];
+      
+      rankingStats.innerHTML = `
+        <div class="data-item">Ciudad más alta: <strong>${highest.name} (${highest.percent}%)</strong></div>
+        <div class="data-item">Ciudad más baja: <strong>${lowest.name} (${lowest.percent}%)</strong></div>
+        <div class="data-item">Promedio nacional: <strong>${average.toFixed(1)}%</strong></div>
+        <div class="data-item">Total analizado: <strong>${total} ciudades</strong></div>
+      `;
+    }
+
+    function updateRegionsRanking(cityProbabilities, regionsRanking) {
+      const regions = {};
+      cityProbabilities.forEach(city => {
+        if (!regions[city.region]) regions[city.region] = { total: 0, sum: 0, cities: [] };
+        regions[city.region].total++;
+        regions[city.region].sum += city.percent;
+        regions[city.region].cities.push(city);
+      });
+      
+      const regionAverages = Object.entries(regions).map(([name, data]) => ({
+        name,
+        average: data.sum / data.total,
+        count: data.total,
+        bestCity: data.cities[0]
+      })).sort((a, b) => b.average - a.average);
+      
+      let regionsHtml = '<table class="ranking-table"><tr><th>Región</th><th>Promedio</th><th>Ciudades</th><th>Mejor Ciudad</th></tr>';
+      regionAverages.forEach(region => {
+        regionsHtml += `
+          <tr>
+            <td><strong>${region.name}</strong></td>
+            <td>${region.average.toFixed(1)}%</td>
+            <td>${region.count}</td>
+            <td>${region.bestCity.name} (${region.bestCity.percent}%)</td>
+          </tr>
+        `;
+      });
+      regionsRanking.innerHTML = regionsHtml + '</table>';
+    }
+
 
     function getProbabilityColor(percent) {
       if (percent > 70) return '#d7191c';
@@ -1486,8 +1609,8 @@ layout: none
     }
 
     function probClass(p) {
-      if (p > 0.75) return 'high-prob';
-      if (p < 0.35) return 'low-prob';
+      if (p > 0.7) return 'high-prob';
+      if (p < 0.4) return 'low-prob';
       return 'medium-prob';
     }
   </script>
