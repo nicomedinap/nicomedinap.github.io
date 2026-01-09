@@ -6,1491 +6,1823 @@ layout: none
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <title>Predictor de Arreboles (Préboles)</title>
+  
+  <!-- Dependencias externas -->
   <script src="https://unpkg.com/suncalc"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
-  <!-- Leaflet para mapas interactivos -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://nicomedinap.github.io/public/css/preboles_2.css">
+
+<style>
+  /* Añadir al final del CSS */
+.data-item small {
+    display: block;
+    margin-top: 2px;
+    line-height: 1.3;
+}
+
+.sun-time small {
+    display: block;
+    margin-top: 3px;
+    opacity: 0.7;
+}
+
+.probability small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    opacity: 0.9;
+    line-height: 1.3;
+}
+
+/* Animación para el tiempo que falta */
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.data-item[style*="border-left: 3px solid #4CAF50"] {
+    animation: pulse 2s infinite;
+}
+
+.data-item[style*="border-left: 3px solid #FF9800"] {
+    animation: pulse 3s infinite;
+}
+</style>
   
-  <link rel="stylesheet" href="https://nicomedinap.github.io/public/css/preboles.css">
-  <style>
-
-  @media (max-width: 768px) {
-    .title {
-        font-size: 2.8rem !important;
-        letter-spacing: 1px !important;
-        margin: 25px 0 20px 0 !important;
-    }
-  }
-
-  @media (max-width: 480px) {
-      .title {
-          font-size: 2.6rem !important;
-          letter-spacing: 0.5px !important;
-          margin: 20px 0 15px 0 !important;
-      }
-  }
-
-  .lead-with-bg {
-    margin: 0 0 20px 0;  
-    max-width: calc(100% - 40px);
-    opacity: 0.95;
-    font-size: 0.95rem;
-    padding: 30px 24px;
-    background: 
-      /* Capa de color sobre la imagen para mejor legibilidad */
-      linear-gradient(
-        rgba(0, 25, 51, 0.75),  /* Azul oscuro con transparencia */
-        rgba(102, 0, 0, 0.65)   /* Rojo oscuro con transparencia */
-      ),
-      /* Imagen de fondo */
-      url('https://as2.ftcdn.net/jpg/04/31/52/97/220_F_431529701_P3LDLj8D32MgRZZ565xmaJaVByjifQ8v.jpg') 
-      center center / cover no-repeat; /* Centrada y cubriendo todo */
-    
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    line-height: 1.7;
-    box-shadow: 
-      0 6px 20px rgba(0, 0, 0, 0.25),
-      inset 0 1px 1px rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(2px); /* Ligero desenfoque */
-    color: white;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-    min-height: 180px; /* Altura mínima */
-    display: flex;
-    align-items: center;
-  }
-
-  .lead-content {
-    position: relative;
-    z-index: 2; /* Asegura que el texto esté sobre las capas de fondo */
-    max-width: 100%;
-  }
-
-  /* Icono de información opcional */
-  .lead-with-bg:after {
-    content: "ⓘ";
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    opacity: 0.5;
-    font-size: 0.9rem;
-    z-index: 3;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Para móviles */
-  @media (max-width: 768px) {
-    .lead-with-bg {
-      padding: 25px 20px;
-      min-height: 160px;
-      font-size: 0.9rem;
-    }
-  }
-  
-  </style>
 </head>
 
 <body>
-
-
-<div style="text-align: center; margin: 40px 0;">
-    <h2 class="title" style="
-        font-size: 5rem;
-        font-weight: 900;
-        background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin: 0;
-        padding: 0;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    ">Préboles</h2>
-    
-    <div style="
-        font-size: 1.6rem;
-        color: #FFB6C1;
-        margin-top: -5px;
-        letter-spacing: 8px;
-        font-weight: 300;
-        opacity: 0.8;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    ">
-        <span style="
-            background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-        ">PRE</span>dictor de arre<span style="
-            background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-        ">BOLES</span>
+  <div class="title-container">
+    <h2 class="title">Préboles</h2>
+    <div class="subtitle">
+      <span class="gradient-text">PRE</span>dictor de arre<span class="gradient-text">BOLES</span>
     </div>
-</div>
+  </div>
 
-<p class="lead-with-bg">
-  <span class="lead-content">
-    El arrebol es el fenómeno óptico donde la luz colorea las nubes de rojo, naranjo o rosado. 
-    Las nubes reflejan diferentes colores dependiendo del tipo de nube, y con eso es posible hacer una predicción. 
-    Elige tu ciudad y prueba tu suerte!!
-  </span>
-</p>
+  <p class="lead-with-bg">
+    <span class="lead-content">
+      El arrebol es el fenómeno óptico donde la luz colorea las nubes de rojo, naranjo o rosado. 
+      Las nubes reflejan diferentes colores dependiendo del tipo de nube, y con eso es posible hacer una predicción. 
+      Elige tu ciudad y prueba tu suerte!!
+    </span>
+  </p>
 
-<div id="loadingIndicator" style="text-align:center; padding:20px;">
-  <div class="loading" style="width:40px; height:40px; margin:0 auto;"></div>
-  <p style="margin-top:10px;">Obteniendo datos...</p>
-</div>
+  <div id="loadingIndicator" style="text-align:center; padding:20px;">
+    <div class="loading" style="width:40px; height:40px; margin:0 auto;"></div>
+    <p style="margin-top:10px;">Obteniendo datos...</p>
+  </div>
 
-<!-- MENÚ DE CIUDADES -->
-<div id="cityMenu"></div>
-
-<!-- CONTENEDOR DE RESULTADOS -->
-<div id="appContainer">
-  <button class="back" onclick="volverMenu()">← Volver</button>
-  
-  <!-- Contenedor principal del código 2 -->
-  <div class="container">
-    <h1 id="cityTitle">🌇 Predictor de Arrebol</h1>
-
-    <!-- Grid principal: lado izquierdo (funcional) y lado derecho (mapa y log) -->
-    <div class="grid">
-      <div>
-        <div class="panel">
-          <div id="result">
-            <!-- Encabezado del resultado: ubicación y carga -->
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 200px;">
-                <div id="locationText">Seleccione ciudad</div>
-                <div class="sun-times" id="sunTimes"></div>
+  <!-- CONTENEDOR PRINCIPAL CON PESTAÑAS -->
+  <div class="tabs-container">
+  <div class="tabs-header">
+    <button class="tab-btn active" data-tab="cities" onclick="switchTab('cities')">🏙️ Ciudades</button>
+    <button class="tab-btn" data-tab="observatories" onclick="switchTab('observatories')">🔭 Observatorios</button>
+    <button class="tab-btn" data-tab="ranking" onclick="switchTab('ranking')">📊 Ranking</button>
+    <button class="tab-btn" data-tab="info" onclick="switchTab('info')">ℹ️ Información</button>
+  </div>
+    
+    <!-- Pestaña 1: Ciudades -->   
+    <div id="tab-cities" class="tab-content active">
+      
+      <h2> Probabilidad de arrebol en la tarde</h2>
+      <p class="lead" style="margin-left: auto; margin-right: auto;">Predicción de diferentes ciudades de Chile. Selecciona un nombre para ver la predicción. Pulsa volver para elegir otra. </p>
+     
+      <div id="cityMenu"></div>
+      <div id="appContainer">
+        <button class="back" onclick="volverMenu()">← Volver</button>
+        <div class="container">
+          <h1 id="cityTitle">🌇 Predictor de Arrebol</h1>
+          
+          <!-- Contenedor principal con elementos independientes -->
+          <div class="main-grid">
+            <!-- 1. PREDICCIÓN (siempre primera) -->
+            <div class="prediction-panel panel">
+              <div id="result">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 200px;">
+                    <div id="locationText">Seleccione ciudad</div>
+                    <div class="sun-times" id="sunTimes"></div>
+                  </div>
+                  <div id="loadingState"></div>
+                </div>
+                <div class="data-grid" id="dataGrid">
+                <div class="data-item">🌅 Nubes a puesta de sol: <strong id="sunsetClouds">—</strong></div>
+                <div class="data-item">🌡️ Temperatura: <strong id="temperature">—</strong></div>
+                <div class="data-item">💧 Humedad: <strong id="humidity">—</strong></div>
+                <div class="data-item">📊 Presión: <strong id="pressure">—</strong></div>
+                </div>
+                <div class="predictions" id="predictions"></div>
               </div>
-              <div id="loadingState"></div>
             </div>
-
-            <!-- Grid de datos: nubosidad, PM2.5 y elevaciones -->
-            <div class="data-grid" id="dataGrid">
-              <div class="data-item">☁️ Nubosidad: <strong id="cloudVal">—</strong></div>
-              <div class="data-item">Cantidad de elemento particulado PM2.5: <strong id="pmVal">—</strong></div>
-              <div class="data-item">⬆ Elev amanecer: <strong id="sunriseElev">—</strong></div>
-              <div class="data-item">⬇ Elev atardecer: <strong id="sunsetElev">—</strong></div>
+            
+            <!-- 2. MAPA -->
+            <div class="map-panel panel">
+              <div><strong>Mapa de probabilidad de arrebol</strong></div>
+              <div class="map-wrapper" style="height: 500px;">
+                <div id="map"></div>
+                <div class="probability-legend">
+                  <div class="legend-title">Probabilidad de arrebol</div>
+                  <div class="legend-gradient"></div>
+                  <div class="legend-labels">
+                    <span>0%</span>
+                    <span>50%</span>
+                    <span>100%</span>
+                  </div>
+                </div>
+                <div class="map-controls">
+                  <button class="map-toggle active" id="toggleHeatmap" onclick="toggleHeatmap()">Hexágonos</button>
+                  <button class="map-toggle active" id="toggleLabels" onclick="toggleLabels()">%</button>
+                </div>
+                <div id="mapLoading" class="map-loading" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 8px;">
+                  Calculando...
+                </div>
+              </div>
+              <div style="font-size:0.9rem; opacity:0.9; margin-top:8px;">
+                Celdas hexagonales muestran la probabilidad de arrebol en la trayectoria hacia el atardecer. 
+                Resolución proporcional a los datos de Open-Meteo.
+                Colores más cálidos indican mayor probabilidad.
+              </div>
             </div>
-
-            <!-- Predicciones (probabilidades) -->
-            <div class="predictions" id="predictions"></div>
-
-            <!-- Gráfico de nubosidad (Chart.js) -->
-            <div class="charts" style="height: 400px; width: 100%;"> <!-- o 600px para más alto -->
-              <canvas id="cloudChart"></canvas>
+            
+            <!-- 3. GRÁFICO -->
+            <div class="chart-panel panel">
+              <div class="charts" style="height: 400px; width: 100%;">
+                <canvas id="cloudChart"></canvas>
+              </div>
+            </div>
+            
+            <!-- 4. LOG -->
+            <div class="log-panel panel">
+              <strong>registro</strong>
+              <pre id="log" style="white-space:pre-wrap; font-size:0.85rem; margin:8px 0 0 0; max-height: 150px; overflow-y: auto;"></pre>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Columna lateral: mapa y log -->
-      <div>
-        <div class="panel">
-          <div><strong>Mapa de probabilidad de arrebol</strong></div>
-          <div class="map-wrapper" style="height: 500px;">
-            <div id="map"></div>
-            
-            <!-- LEYENDA CENTRADA ABAJO CON GRADIENTE ORIGINAL -->
-            <div class="probability-legend">
-              <div class="legend-title">Probabilidad de arrebol</div>
-              <div class="legend-gradient"></div>
-              <div class="legend-labels">
-                <span>0%</span>
-                <span>50%</span>
-                <span>100%</span>
+    </div>
+    
+    <!-- Pestaña 2: Observatorios -->
+    <div id="tab-observatories" class="tab-content">
+      <div class="container">
+        <h2>🔭 Observatorios Astronómicos en Chile</h2>
+        <p class="lead" style="margin-left: auto; margin-right: auto;">Chile es la capital mundial de la astronomía. Selecciona un observatorio para ver la probabilidad de arrebol.</p>
+        
+        <div class="observatories-grid">
+          <!-- MENÚ DE OBSERVATORIOS -->
+          <div id="observatoryMenu" class="city-menu"></div>
+          
+          <!-- MAPA DE OBSERVATORIOS -->
+          <div class="panel" style="height: 600px;">
+            <div><strong>📍 Ubicación de Observatorios</strong></div>
+            <div class="map-wrapper" style="height: 550px;">
+              <div id="observatoriesMap"></div>
+              <div class="map-legend" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 8px 12px; border-radius: 6px; color: white; font-size: 0.85rem;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <div style="width: 16px; height: 16px; background: #ff9800; border-radius: 50%; border: 2px solid white;"></div>
+                  <span>Observatorio astronómico</span>
+                </div>
+                <div style="font-size: 0.8rem; opacity: 0.9;">Haz clic en un marcador para ver detalles</div>
               </div>
             </div>
-            
-            <!-- CONTROLES SIMPLIFICADOS -->
-            <div class="map-controls">
-              <button class="map-toggle active" id="toggleHeatmap" onclick="toggleHeatmap()">Hexágonos</button>
-              <button class="map-toggle active" id="toggleLabels" onclick="toggleLabels()">%</button>
-            </div>
-
-            <div id="mapLoading" class="map-loading" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 8px;">
-              Calculando...
-            </div>
-          </div>
-
-          <div style="font-size:0.9rem; opacity:0.9; margin-top:8px;">
-            Celdas hexagonales muestran la probabilidad de arrebol en la trayectoria hacia el atardecer. 
-            Resolución proporcional a los datos de Open-Meteo.
-            Colores más cálidos indican mayor probabilidad.
           </div>
         </div>
-
-        <div class="panel" style="margin-top:12px;">
-          <strong>registro</strong>
-          <pre id="log" style="white-space:pre-wrap; font-size:0.85rem; margin:8px 0 0 0; max-height: 150px; overflow-y: auto;"></pre>
+      </div>
+    </div>
+    
+    <!-- Pestaña 3: Ranking -->
+    <div id="tab-ranking" class="tab-content">
+      <div class="container">
+        <h2>📊 Ranking de Probabilidades</h2>
+        <p class="lead" style="margin-left: auto; margin-right: auto;" >Las ciudades con mayor probabilidad de arrebol según las condiciones actuales.</p>
+        <div class="info-grid">
+          <div class="info-card">
+            <h4>🥇 Top 10 - Mayor Probabilidad</h4>
+            <div id="topRanking"><p>Cargando ranking...</p></div>
+          </div>
+        <!--  <div class="info-card"> -->
+        <!--    <h4>📉 Top 10 - Menor Probabilidad</h4> -->
+        <!--    <div id="bottomRanking"><p>Cargando ranking...</p></div> -->
+        </div>
+      </div>
+        <!--<div class="info-section">-->
+        <!--  <h3>📈 Estadísticas Generales</h3>-->
+        <!--  <div class="data-grid" id="rankingStats">-->
+        <!--    <div class="data-item">Ciudad más alta: <strong id="highestCity">--</strong></div>-->
+        <!--    <div class="data-item">Ciudad más baja: <strong id="lowestCity">--</strong></div>-->
+        <!--    <div class="data-item">Promedio nacional: <strong id="averageProb">--</strong></div>-->
+         <!--   <div class="data-item">Total analizado: <strong id="totalCities">--</strong></div>-->
+        <!--  </div>-->
+        <!--</div>-->
+        <!--<div class="info-section">-->
+        <!--  <h3>🏆 Mejores Regiones</h3>-->
+        <!--  <div id="regionsRanking"></div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+    
+    <!-- Pestaña 4: Información -->
+    <div id="tab-info" class="tab-content">
+      <div class="container">
+        <h2>ℹ️ Información sobre Préboles</h2>
+        <p class="lead" style="margin-left: auto; margin-right: auto;" >Todo lo que necesitas saber sobre el predictor de arreboles y cómo interpretar los resultados.</p>
+        <div class="info-section">
+          <h3> ¿Qué es un arrebol?</h3>
+          <p>El arrebol es un fenómeno atmosférico-óptico que ocurre durante el amanecer y atardecer, cuando la luz solar ilumina las nubes desde abajo, produciendo colores rojizos, anaranjados y rosados en el cielo.</p>
+              <h4>Condiciones ideales</h4>
+              <ul>
+                <li>Nubes altas o medias</li>
+                <li>Cielo parcialmente nublado</li>
+                <li>Elevación solar entre -6° y 6°</li>
+                <li>Humedad relativa moderada</li>
+              </ul>
+              <h4>Factores analizados</h4>
+              <ul>
+                <li>Nubosidad a diferentes alturas</li>
+                <li>Posición solar</li>
+                <li>Presión atmosférica</li>
+                <li>Temperatura y humedad</li>
+              </ul>
+          <h3> Cómo interpretar los resultados</h3>
+          <div class="info-grid">
+            <div class="info-card" style="border-left: 4px solid #d7191c;">
+              <h4 style="color: #d7191c;">🔴 Alta probabilidad (70-100%)</h4>
+              <p>Condiciones excelentes. Es muy probable que puedas observar un arrebol espectacular si las condiciones se mantienen.</p>
+            </div>
+            <div class="info-card" style="border-left: 4px solid #fdae61;">
+              <h4 style="color: #fdae61;">🟠 Media-alta (50-70%)</h4>
+              <p>Buenas condiciones. Hay posibilidades significativas de ver un arrebol, especialmente si estás en un lugar despejado.</p>
+            </div>
+            <div class="info-card" style="border-left: 4px solid #ffffbf;">
+              <h4 style="color: #ffffbf;">🟡 Media (30-50%)</h4>
+              <p>Condiciones moderadas. Podrías ver algún color en el cielo, pero quizás no tan intenso.</p>
+            </div>
+            <div class="info-card" style="border-left: 4px solid #abdda4;">
+              <h4 style="color: #abdda4;">🟢 Baja (0-30%)</h4>
+              <p>Condiciones desfavorables. Es poco probable que observes un arrebol significativo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="info-section">
+          <h3 class="subsection-title">Contacto y redes sociales</h3>
+          <p>Para consultas técnicas, sugerencias o reportes de observaciones:</p>
+          
+          <div class="contact-links">
+            <a href="https://nicomedinap.github.io/about.html" target="_blank" class="contact-link">
+              <span class="link-icon">👤</span>
+              <span class="link-text">Sobre el autor</span>
+            </a>
+            
+            <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank" class="contact-link">
+              <span class="link-icon">📄</span>
+              <span class="link-text">Artículo técnico</span>
+            </a>
+            </a>
+            
+            <a href="https://github.com/nicomedinap" target="_blank" class="contact-link github">
+              <span class="link-icon">🐙</span>
+              <span class="link-text">GitHub</span>
+            </a>
+            
+            <a href="https://www.instagram.com/nicomediap/" target="_blank" class="contact-link instagram">
+              <span class="link-icon">📷</span>
+              <span class="link-text">Instagram</span>
+            </a>
+        
         </div>
       </div>
     </div>
   </div>
-</div>
 
-
-<!-- Lista con ciudades -->
+<!-- modulos -->
 <script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
+<!-- <script src="https://nicomedinap.github.io/preboles/redProbability.js"></script> -->
+<script src="https://nicomedinap.github.io/preboles/chartUtils.js"></script>
 
-<!--redprob-->
-<script src="https://nicomedinap.github.io/preboles/redProbability.js"></script>
-
+<!-- Script principal -->
 <script>
-/* === VARIABLES GLOBALES PARA EL MAPA === */
-let map = null;
-let marker = null;
-let heatLayer = null;
-let labelLayer = null;
-let heatmapEnabled = true;
-let labelsEnabled = true;
-let weatherDataCache = {};
-
-
-
-
-
-/* ========== FUNCIÓN UNIFICADA PARA OBTENER DATOS METEOROLÓGICOS ========== */
-
-// Función unificada para obtener todos los datos meteorológicos
-async function getMeteoData(lat, lon) {
-  try {
-    // Preguntar datos una sola vez
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=cloudcover,cloudcover_low,cloudcover_mid,cloudcover_high,pressure_msl,relativehumidity_2m,temperature_2m&timezone=auto`;
-    
-    const res = await fetch(url);
-    const data = await res.json();
-    
-    if (!data.hourly) {
-      return getFallbackData();
+    // Función para obtener el índice exacto de la puesta de sol
+    function getSunsetIndex(meteoData, lat, lon, isSunrise = false) {
+        if (!meteoData?.cloudSeries?.time || meteoData.cloudSeries.time.length === 0) {
+            console.warn('No hay datos de series temporales');
+            return isSunrise ? 6 : 18; // Fallback según sea amanecer o atardecer
+        }
+        
+        // 1. Obtener hora de amanecer/atardecer LOCAL
+        const now = new Date();
+        const times = SunCalc.getTimes(now, lat, lon);
+        const targetTime = isSunrise ? times.sunrise : times.sunset;
+        
+        console.log(`DEBUG - Hora ${isSunrise ? 'amanecer' : 'atardecer'} LOCAL:`, targetTime.toLocaleString('es-CL'));
+        
+        // 2. Convertir a formato YYYY-MM-DDTHH:00
+        const year = targetTime.getFullYear();
+        const month = String(targetTime.getMonth() + 1).padStart(2, '0');
+        const day = String(targetTime.getDate()).padStart(2, '0');
+        const hour = String(targetTime.getHours()).padStart(2, '0');
+        
+        const targetFormatted = `${year}-${month}-${day}T${hour}:00`;
+        console.log(`DEBUG - Formato buscado (${isSunrise ? 'amanecer' : 'atardecer'}):`, targetFormatted);
+        
+        // 3. Buscar en los datos
+        const hrs = meteoData.cloudSeries.time;
+        
+        // Primero buscar exacto
+        for (let i = 0; i < hrs.length; i++) {
+            if (hrs[i] === targetFormatted) {
+                console.log(`✓ Índice ${isSunrise ? 'amanecer' : 'atardecer'} encontrado: ${i} (${hrs[i]})`);
+                return i;
+            }
+        }
+        
+        // Si no encuentra exacto, buscar por hora más cercana
+        console.log(`⚠ No se encontró hora exacta de ${isSunrise ? 'amanecer' : 'atardecer'}, buscando más cercana...`);
+        const targetTimeMs = targetTime.getTime();
+        let closestIndex = isSunrise ? 6 : 18; // Fallback apropiado
+        let minDiff = Infinity;
+        
+        for (let i = 0; i < hrs.length; i++) {
+            const hourTime = new Date(hrs[i]).getTime();
+            const diff = Math.abs(hourTime - targetTimeMs);
+            
+            if (diff < minDiff) {
+                minDiff = diff;
+                closestIndex = i;
+            }
+        }
+        
+        console.log(`✓ Usando índice más cercano para ${isSunrise ? 'amanecer' : 'atardecer'}: ${closestIndex} (${hrs[closestIndex]})`);
+        console.log(`  Diferencia: ${Math.round(minDiff / 60000)} minutos`);
+        
+        return closestIndex;
     }
-    
-    // Procesar datos horarios completos para nubosidad
-    const cloudSeries = data.hourly;
-    
-    // Obtener datos actuales de presión, humedad y temperatura
-    const now = new Date();
-    const currentHour = now.toISOString().slice(0, 13);
-    const currentIdx = data.hourly.time.findIndex(t => t.startsWith(currentHour));
-    
-    let currentData = {
-      pressure: 1013,
-      humidity: 50,
-      temperature: 20,
-      timestamp: new Date().toISOString()
-    };
-    
-    if (currentIdx >= 0) {
-      currentData = {
-        pressure: data.hourly.pressure_msl?.[currentIdx] || 1013,
-        humidity: data.hourly.relativehumidity_2m?.[currentIdx] || 50,
-        temperature: data.hourly.temperature_2m?.[currentIdx] || 20,
-        timestamp: data.hourly.time?.[currentIdx] || new Date().toISOString()
-      };
+
+
+    // Función para calcular el tiempo hasta que el sol alcance -3 grados
+    function calculateTimeToMinus3Degrees(lat, lon, isSunrise = false) {
+        const now = new Date();
+        const times = SunCalc.getTimes(now, lat, lon);
+        const sunset = times.sunset;
+        const sunrise = times.sunrise;
+        
+        // Empezar desde la puesta/amanecer y buscar cuando la elevación sea -3°
+        const targetTime = isSunrise ? sunrise : sunset;
+        const targetElevation = isSunrise ? 3 : -3; // 3° para amanecer, -3° para atardecer
+        
+        // Usar búsqueda binaria para encontrar el momento exacto
+        let low = isSunrise ? new Date(sunrise.getTime() - 3600000) : new Date(sunset.getTime());
+        let high = isSunrise ? new Date(sunrise.getTime() + 3600000) : new Date(sunset.getTime() + 7200000); // 2 horas después
+        let mid;
+        
+        // Búsqueda por aproximación
+        for (let i = 0; i < 20; i++) { // 20 iteraciones para precisión
+            mid = new Date((low.getTime() + high.getTime()) / 2);
+            const elev = SunCalc.getPosition(mid, lat, lon).altitude * (180/Math.PI);
+            
+            if (Math.abs(elev - targetElevation) < 0.01) { // Precisión de 0.01°
+                break;
+            }
+            
+            if ((isSunrise && elev < targetElevation) || (!isSunrise && elev > targetElevation)) {
+                low = mid;
+            } else {
+                high = mid;
+            }
+        }
+        
+        return mid;
     }
-    
-    return {
-      cloudSeries: cloudSeries,
-      current: currentData
-    };
-    
-  } catch (e) {
-    console.warn('Error obteniendo datos meteorológicos:', e);
-    return getFallbackData();
-  }
-}
 
-// Datos de respaldo en caso de error
-function getFallbackData() {
-  return {
-    cloudSeries: null,
-    current: {
-      pressure: 1013,
-      humidity: 50,
-      temperature: 20,
-      timestamp: new Date().toISOString()
+    // Función para calcular el tiempo restante en formato legible
+    function formatTimeRemaining(targetTime) {
+        const now = new Date();
+        const diffMs = targetTime.getTime() - now.getTime();
+        
+        if (diffMs <= 0) {
+            return " ";
+        }
+        
+        const diffMinutes = Math.floor(diffMs / 60000);
+        const diffHours = Math.floor(diffMinutes / 60);
+        const remainingMinutes = diffMinutes % 60;
+        
+        if (diffHours > 0) {
+            return `en ${diffHours}h ${remainingMinutes}m`;
+        } else if (diffMinutes > 0) {
+            return `en ${diffMinutes}m`;
+        } else {
+            return "¡muy pronto!";
+        }
     }
-  };
-}
 
-/* === CREAR MENÚ (CON PROBABILIDADES PRECALCULADAS) === */
-async function initCityMenu() {
-    const menu = document.getElementById('cityMenu');
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    
-    // Crear esqueletos de tarjetas inmediatamente
-    for (const [nombre, info] of Object.entries(chileanCities)) {
-        const card = createCityCardSkeleton(nombre, info);
-        menu.appendChild(card);
+    // Función para calcular si ya pasó el momento óptimo
+    function getOptimalTimeStatus(targetTime, isSunrise = false) {
+        const now = new Date();
+        const diffMs = targetTime.getTime() - now.getTime();
+        const eventType = isSunrise ? "amanecer" : "atardecer";
+        
+        if (diffMs > 0) {
+            return {
+                status: "pending",
+                message: `Máximo arrebol ${formatTimeRemaining(targetTime)}`,
+                color: "#4CAF50", // Verde
+            };
+        } else if (diffMs > -1800000) { // Menos de 30 minutos después
+            return {
+                status: "just_passed",
+                message: `El máximo del arrebol acaba de pasar (hace ${Math.abs(Math.floor(diffMs / 60000))}m)`,
+                color: "#FF9800" // Naranja
+            };
+        } else {
+            return {
+                status: "passed",
+                message: ` `,
+                color: "#9E9E9E", // Gris
+            };
+        }
     }
-    
-    // Ocultar indicador y mostrar menú después de un breve delay
-    setTimeout(() => {
-        loadingIndicator.style.display = 'none';
-        menu.style.display = 'grid';
-    }, 3000);
-    
-    // Cargar datos en segundo plano
-    loadAllCityData();
-}
 
-function createCityCardSkeleton(nombre, info) {
-    const card = document.createElement('div');
-    card.className = 'city-card';
-    card.innerHTML = `
-        <div class="city-name">${nombre}</div>
-        <div class="city-region">${info.region}</div>
-        <div class="city-probability">
-            <span class="loading"></span> Calculando...
-        </div>
-        <div class="probability-bar" style="width: 0%"></div>
-    `;
-    card.onclick = () => seleccionarCiudad(nombre);
-    return card;
-}
+    // Función para obtener datos en un índice específico
+    function getDataAtIndex(meteoData, index) {
+        if (!meteoData?.cloudSeries || index < 0 || index >= meteoData.cloudSeries.time?.length) {
+            return null;
+        }
+        
+        return {
+            time: meteoData.cloudSeries.time[index],
+            low: meteoData.cloudSeries.cloudcover_low?.[index],
+            mid: meteoData.cloudSeries.cloudcover_mid?.[index],
+            high: meteoData.cloudSeries.cloudcover_high?.[index],
+            total: meteoData.cloudSeries.cloudcover?.[index],
+            temperature: meteoData.cloudSeries.temperature_2m?.[index],
+            humidity: meteoData.cloudSeries.relativehumidity_2m?.[index],
+            pressure: meteoData.cloudSeries.pressure_msl?.[index]
+        };
+    }
 
-async function loadAllCityData() {
-    const cities = Object.entries(chileanCities);
+
+    /* ==========================================================================
+       CONFIGURACIONES Y CONSTANTES
+       ========================================================================== */
     const BATCH_SIZE = 3;
-    const DELAY = 300;
+    const DELAY = 500;
+    const API_CACHE = {};
     
-    for (let i = 0; i < cities.length; i += BATCH_SIZE) {
-        const batch = cities.slice(i, i + BATCH_SIZE);
+    /* ==========================================================================
+       VARIABLES GLOBALES PARA EL MAPA Y ESTADO
+       ========================================================================== */
+    let map = null, marker = null, heatLayer = null, labelLayer = null;
+    let heatmapEnabled = true, labelsEnabled = true, weatherDataCache = {};
+    
+    /* ==========================================================================
+       ESTADO DE LA APLICACIÓN
+       ========================================================================== */
+    let currentState = {
+      lat: null, lon: null, cityName: '', hourly: null,
+      preds: { sunrise: 0, sunset: 0 }, sunTimes: null, 
+      sunriseElev: null, sunsetElev: null, meteoData: null
+    };
+
+    let currentLocation = {
+      type: null, // 'city', 'observatory', 'park', etc.
+      name: '',
+      lat: null,
+      lon: null,
+      data: null,
+      originalTab: null // Para recordar desde qué pestaña venimos
+    };
+
+    const logEl = document.getElementById('log');
+    // REMOVER: let cloudChart = null; // Ya está definido en chartUtils.js
+
+    /* ==========================================================================
+       FUNCIONES DE REGISTRO
+       ========================================================================== */
+    function log(msg) {
+      const line = `[${new Date().toLocaleString()}] ${msg}`;
+      console.log(line);
+      logEl.textContent = line + '\n' + logEl.textContent;
+    }
+
+    /* ==========================================================================
+      SISTEMA DE PESTAÑAS MEJORADO (CORREGIDO)
+      ========================================================================== */
+    function switchTab(tabName) {
+      // 1. Ocultar todas las pestañas
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // 2. Desactivar todos los botones
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // 3. Activar la pestaña correspondiente
+      const tabElement = document.getElementById(`tab-${tabName}`);
+      if (tabElement) {
+        tabElement.classList.add('active');
+      }
+      
+      // 4. Activar el botón correspondiente
+      const tabButtonMap = {
+        'cities': '🏙️ Ciudades',
+        'observatories': '🔭 Observatorios',
+        'ranking': '📊 Ranking',
+        'info': 'ℹ️ Información'
+      };
+      
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(btn => {
+        if (btn.textContent.trim() === tabButtonMap[tabName]) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // 5. SI ESTAMOS EN PREDICCIÓN, SOLO MANEJAR EL CAMBIO DE PESTAÑA
+      // NO OCULTAR/MOSTRAR NADA AUTOMÁTICAMENTE
+      const isViewingPrediction = document.getElementById('appContainer').style.display === 'block';
+      
+      if (isViewingPrediction) {
+        // Si estamos viendo una predicción y cambiamos de pestaña,
+        // solo cambiar la pestaña pero mantener la predicción visible si estamos en "cities"
+        if (tabName !== 'cities') {
+          // Si cambiamos a otra pestaña que no sea "cities", ocultar la predicción
+          document.getElementById('appContainer').style.display = 'none';
+          
+          // Pero NO mostrar automáticamente ningún menú
+          // El menú se mostrará cuando el usuario haga clic en "Volver"
+        }
+        // Si cambiamos a "cities" y estamos viendo una predicción, mantenerla visible
+      } else {
+        // Si NO estamos viendo una predicción, manejar los menús normalmente
+        if (tabName === 'cities') {
+          document.getElementById('cityMenu').style.display = 'grid';
+          document.getElementById('appContainer').style.display = 'none';
+        } else if (tabName === 'observatories') {
+          // Para observatorios, solo asegurarnos de que el menú de ciudades esté oculto
+          document.getElementById('cityMenu').style.display = 'none';
+          document.getElementById('appContainer').style.display = 'none';
+        } else {
+          // Para otras pestañas, ocultar ambos
+          document.getElementById('cityMenu').style.display = 'none';
+          document.getElementById('appContainer').style.display = 'none';
+        }
+      }
+      
+      // 6. Inicializar contenido si es necesario
+      if (tabName === 'observatories') {
+        setTimeout(() => {
+          initObservatoryMenu();
+        }, 50);
+      }
+      if (tabName === 'ranking') {
+        calculateRankings();
+      }
+    }
+
+    /* ==========================================================================
+       FUNCION UNIVERSAL PARA MOSTRAR PREDICCIÓN
+       ========================================================================== */
+    async function showPrediction(locationName, locationType = 'city') {
+      const location = chileanCities[locationName];
+      if (!location) return;
+      
+      // Guardar el tipo de ubicación y la pestaña original
+      currentLocation = {
+        type: locationType,
+        name: locationName,
+        lat: location.lat,
+        lon: location.lon,
+        data: location,
+        originalTab: getCurrentTab()
+      };
+      
+      // Cambiar a la pestaña de ciudades (donde está la interfaz de predicción)
+      switchTab('cities');
+      
+      // Ocultar menú de ciudades y mostrar el predictor
+      document.getElementById('cityMenu').style.display = 'none';
+      document.getElementById('appContainer').style.display = 'block';
+      
+      // Actualizar el título según el tipo de ubicación
+      let titlePrefix = '';
+      let badgeClass = '';
+      switch(locationType) {
+        case 'observatory':
+          titlePrefix = '🔭 ';
+          badgeClass = 'badge-observatory';
+          break;
+        case 'park':
+          titlePrefix = '🌳 ';
+          badgeClass = 'badge-park';
+          break;
+        default:
+          titlePrefix = '🌇 ';
+          badgeClass = 'badge-city';
+      }
+      
+      const badge = badgeClass ? `<span class="location-type-badge ${badgeClass}">${locationType === 'observatory' ? 'Observatorio' : locationType === 'park' ? 'Parque' : 'Ciudad'}</span>` : '';
+      document.getElementById('cityTitle').innerHTML = `${titlePrefix}${locationName} ${badge}`;
+      
+      localStorage.setItem('lastCity', locationName);
+      localStorage.setItem('locationType', locationType);
+      
+      await predictRedSunset(location.lat, location.lon, locationName);
+    }
+
+    // Función para obtener la pestaña actual
+    function getCurrentTab() {
+      const activeTab = document.querySelector('.tab-content.active');
+      if (!activeTab) return 'cities';
+      
+      const tabId = activeTab.id;
+      if (tabId === 'tab-cities') return 'cities';
+      if (tabId === 'tab-observatories') return 'observatories';
+      if (tabId === 'tab-ranking') return 'ranking';
+      if (tabId === 'tab-info') return 'info';
+      return 'cities';
+    }
+
+    // Modificar la función volverMenu para que regrese a la pestaña original
+    function volverMenu() {
+      // Ocultar el predictor
+      document.getElementById('appContainer').style.display = 'none';
+      
+      // Mostrar el menú correspondiente
+      if (currentLocation.originalTab === 'cities') {
+        document.getElementById('cityMenu').style.display = 'grid';
+        // Si estábamos en ciudades, mantener esa pestaña activa
+        switchTab('cities');
+      } else if (currentLocation.originalTab === 'observatories') {
+        // Si veníamos de observatorios, regresar a esa pestaña
+        switchTab('observatories');
+      } else {
+        // Por defecto, mostrar ciudades
+        document.getElementById('cityMenu').style.display = 'grid';
+        switchTab('cities');
+      }
+      
+      // Limpiar el estado
+      currentLocation = {
+        type: null,
+        name: '',
+        lat: null,
+        lon: null,
+        data: null,
+        originalTab: null
+      };
+      
+      localStorage.removeItem('lastCity');
+      localStorage.removeItem('locationType');
+    }
+
+    /* ==========================================================================
+       FUNCIONES PARA CARGAR OBSERVATORIOS (ACTUALIZADAS)
+       ========================================================================== */
+    let observatoriesLoading = false;
+
+    async function initObservatoryMenu() {
+      const menu = document.getElementById('observatoryMenu');
+      if (!menu) return;
+      
+      if (observatoriesLoading) return;
+      
+      observatoriesLoading = true;
+      menu.innerHTML = '<p>Cargando observatorios...</p>';
+      
+      try {
+        const observatories = Object.entries(chileanCities).filter(([nombre, info]) => 
+          info.type === 'observatory'
+        );
+        
+        menu.innerHTML = '';
+        for (const [nombre, info] of observatories) {
+          const card = document.createElement('div');
+          card.className = 'city-card';
+          card.innerHTML = `
+            <div class="city-name">🔭 ${nombre.replace('Observatorio ', '')}</div>
+            <div class="city-region">${info.region}<br><small>Altitud: ${info.altitude ? info.altitude.toLocaleString() : 'N/A'} m</small></div>
+            <div class="city-probability"><span class="loading"></span> Calculando...</div>
+            <div class="probability-bar" style="width: 0%"></div>
+          `;
+          card.onclick = () => showPrediction(nombre, 'observatory');
+          menu.appendChild(card);
+        }
+        
+        if (document.getElementById('tab-observatories').classList.contains('active')) {
+          await loadObservatoryData(observatories);
+          
+          setTimeout(() => {
+            if (document.getElementById('tab-observatories').classList.contains('active')) {
+              initObservatoriesMap();
+            }
+          }, 100);
+        }
+      } catch (error) {
+        console.error('Error inicializando menú de observatorios:', error);
+        menu.innerHTML = '<p>Error cargando observatorios. Intenta nuevamente.</p>';
+      } finally {
+        observatoriesLoading = false;
+      }
+    }
+
+    async function loadObservatoryData(observatories) {
+      const BATCH_SIZE = 3;
+      const DELAY = 300;
+      
+      if (!document.getElementById('tab-observatories').classList.contains('active')) {
+        return;
+      }
+      
+      for (let i = 0; i < observatories.length; i += BATCH_SIZE) {
+        if (!document.getElementById('tab-observatories').classList.contains('active')) {
+          break;
+        }
+        
+        const batch = observatories.slice(i, i + BATCH_SIZE);
         await Promise.allSettled(
-            batch.map(async ([nombre, info]) => {
-                try {
-                    await updateCityCardData(nombre, info);
-                } catch (error) {
-                    console.warn(`Error cargando ${nombre}:`, error);
-                    markCityCardAsError(nombre);
-                }
-            })
+          batch.map(async ([nombre, info]) => {
+            try { 
+              await updateObservatoryCardData(nombre, info); 
+            } catch (error) { 
+              markObservatoryCardAsError(nombre, true); 
+            }
+          })
         );
         await new Promise(resolve => setTimeout(resolve, DELAY));
+      }
     }
-}
 
-async function updateCityCardData(nombre, info) {
-    const [pm25, meteoData] = await Promise.all([ 
-        getPM25(info.lat, info.lon), 
-        getMeteoData(info.lat, info.lon)
-    ]);
+    async function updateObservatoryCardData(nombre, info) {
+        if (!document.getElementById('tab-observatories').classList.contains('active')) {
+            return;
+        }
+        
+        const meteoData = await getMeteoData(info.lat, info.lon);
+        if (!meteoData.cloudSeries) return;
 
-    let probAtardecer = 0;
-    if (meteoData.cloudSeries) {
-        const now = new Date();
-        const times = SunCalc.getTimes(now, info.lat, info.lon);
-        const sunset = times.sunset;
+        // USAR LA MISMA FUNCIÓN PARA OBTENER ÍNDICE
+        const sunsetIndex = getSunsetIndex(meteoData, info.lat, info.lon, false);
+        const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
         const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
-        const sunsetHour = sunset.toISOString().slice(0,13);
-        const idxSunset = meteoData.cloudSeries.time.findIndex(t => t.startsWith(sunsetHour));
-        const targetIdx = idxSunset >= 0 ? idxSunset : 18;
-
-        const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-        const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-        const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 20);
-
-        probAtardecer = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature);
-        probAtardecer = Math.round(probAtardecer * 100);
+        
+        // Obtener datos en índice exacto
+        const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+        
+        const low_e = sunsetData?.low;
+        const mid_e = sunsetData?.mid;
+        const high_e = sunsetData?.high;
+        
+        // Solo calcular si tenemos datos
+        if (low_e !== undefined || mid_e !== undefined || high_e !== undefined) {
+            // Pasar los datos reales con los mismos parámetros
+            const probAtardecer = computeRedProbability(
+                low_e, mid_e, high_e, 
+                sunsetElev, false, 
+                sunsetData?.temperature || meteoData.current.temperature,
+                sunsetData?.pressure || meteoData.current.pressure
+            );
+            updateObservatoryCardUI(nombre, Math.round(probAtardecer * 100), info);
+        }
     }
 
-    updateCityCardUI(nombre, probAtardecer);
-}
 
-function updateCityCardUI(nombre, probAtardecer) {
-    const cards = document.querySelectorAll('.city-card');
-    const card = Array.from(cards).find(c => c.querySelector('.city-name').textContent === nombre);
-    
-    if (!card) return;
-    
-    card.querySelector('.city-probability').innerHTML = `Prob. arrebol: <strong>${probAtardecer}%</strong>`;
-    card.querySelector('.probability-bar').style.width = `${probAtardecer}%`;
-    
-    // Aplicar estilos según probabilidad
-    if (probAtardecer > 70) {
-        card.style.background = "rgba(255, 80, 80, 0.55)";
-        card.style.boxShadow = "0 4px 16px rgba(255, 80, 80, 0.1)";
-    } else if (probAtardecer > 50) {
-        card.style.background = "rgba(255, 165, 0, 0.3)";
-        card.style.boxShadow = "0 4px 16px rgba(255, 165, 0, 0.2)";
-    } else if (probAtardecer > 30) {
-        card.style.background = "rgba(255, 200, 0, 0.25)";
-    } else if (probAtardecer > 15) {
-        card.style.background = "rgba(200, 200, 255, 0.15)";
-    } else {
-        card.style.background = "rgba(255, 255, 255, 0.05)";
+    function updateObservatoryCardUI(nombre, probAtardecer, info) {
+      if (!document.getElementById('tab-observatories').classList.contains('active')) {
+        return;
+      }
+      
+      const cards = document.querySelectorAll('#observatoryMenu .city-card');
+      const card = Array.from(cards).find(c => c.querySelector('.city-name').textContent.includes(nombre.replace('Observatorio ', '')));
+      if (!card) return;
+      
+      card.querySelector('.city-probability').innerHTML = `Prob. arrebol: <strong>${probAtardecer}%</strong>`;
+      card.querySelector('.probability-bar').style.width = `${probAtardecer}%`;
+      
+      const styles = getProbabilityStyles(probAtardecer / 100);
+      card.style.background = styles.background;
+      card.style.boxShadow = styles.boxShadow || 'none';
     }
-}
 
-// Función para obtener estilos basados en probabilidad (igual que las tarjetas)
-function getProbabilityStyles(probability) {
-    const probPercent = probability * 100;
-    
-    if (probPercent > 70) {
-        return {
-            background: "rgba(255, 80, 80, 0.55)",
-            boxShadow: "0 4px 16px rgba(255, 80, 80, 0.1)",
-            border: "1px solid rgba(255, 95, 0, 0.3)",
-            color: "#ffffff"
-        };
-    } else if (probPercent > 50) {
-        return {
-            background: "rgba(255, 165, 0, 0.3)",
-            boxShadow: "0 4px 16px rgba(255, 165, 0, 0.2)",
-            border: "1px solid rgba(255, 165, 0, 0.2)",
-            color: "#ffd700"
-        };
-    } else if (probPercent > 30) {
-        return {
-            background: "rgba(255, 200, 0, 0.25)",
-            border: "1px solid rgba(255, 200, 0, 0.15)",
-            color: "#ffcc00"
-        };
-    } else if (probPercent > 15) {
-        return {
-            background: "rgba(200, 200, 255, 0.15)",
-            border: "1px solid rgba(200, 200, 255, 0.1)",
-            color: "#aaaaff"
-        };
-    } else {
-        return {
-            background: "rgba(255, 255, 255, 0.05)",
-            border: "1px solid rgba(255, 255, 255, 0.05)",
-            color: "#cccccc"
-        };
-    }
-}
-
-function markCityCardAsError(nombre) {
-    const cards = document.querySelectorAll('.city-card');
-    const card = Array.from(cards).find(c => c.querySelector('.city-name').textContent === nombre);
-    
-    if (card) {
+    function markObservatoryCardAsError(nombre, isObservatory = false) {
+      const selector = isObservatory ? '#observatoryMenu .city-card' : '.city-card';
+      const cards = document.querySelectorAll(selector);
+      const card = Array.from(cards).find(c => {
+        const nameElement = c.querySelector('.city-name');
+        return nameElement && nameElement.textContent.includes(nombre.replace('Observatorio ', ''));
+      });
+      
+      if (card) {
         card.querySelector('.city-probability').innerHTML = '<em>Error al cargar</em>';
         card.style.background = "rgba(255, 0, 0, 0.1)";
+      }
     }
-}
 
-/* boton para volver a elegir ciudad */
-function volverMenu() {
-    document.getElementById('appContainer').style.display = 'none';
-    document.getElementById('cityMenu').style.display = 'grid';
-    localStorage.removeItem('lastCity');
-}
+    function initObservatoriesMap() {
+      const mapContainer = document.getElementById('observatoriesMap');
+      if (!mapContainer || mapContainer._leaflet_id) return;
+      
+      const obsMap = L.map('observatoriesMap').setView([-30, -70], 5);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(obsMap);
+      
+      const observatories = Object.entries(chileanCities).filter(([nombre, info]) => 
+        info.type === 'observatory'
+      );
+      
+      for (const [name, obs] of observatories) {
+        const customIcon = L.divIcon({
+          className: 'observatory-icon',
+          html: `<div style="background: #ff9800; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">🔭</div>`,
+          iconSize: [24, 24],
+          iconAnchor: [12, 12]
+        });
+        
+        L.marker([obs.lat, obs.lon], { icon: customIcon })
+          .addTo(obsMap)
+          .bindPopup(`
+            <div style="min-width: 200px;">
+              <strong>${name}</strong><br>
+              <small>${obs.region}</small><br>
+              <hr style="margin: 5px 0; opacity: 0.3;">
+              <strong>Altitud:</strong> ${obs.altitude ? obs.altitude.toLocaleString() : 'N/A'} m<br>
+              ${obs.operator ? `<strong>Operador:</strong> ${obs.operator}<br>` : ''}
+              <button onclick="showPrediction('${name}', 'observatory')" style="margin-top: 5px; padding: 5px 10px; background: #ff6600; border: none; border-radius: 4px; color: white; cursor: pointer; font-size: 12px; width: 100%;">
+                Ver predicción
+              </button>
+            </div>
+          `);
+      }
+      
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Esri'
+      }).addTo(obsMap);
+    }
 
-async function seleccionarCiudad(nombre){
-  const city=chileanCities[nombre];
-  document.getElementById('cityMenu').style.display='none';
-  document.getElementById('appContainer').style.display='block';
-  document.getElementById('cityTitle').textContent=`Sobre ${nombre}`;
-  localStorage.setItem('lastCity',nombre);
-  await predictRedSunset(city.lat, city.lon, nombre);
-}
+    /* ==========================================================================
+       FUNCIONES PRINCIPALES DE LA APLICACIÓN (ACTUALIZADAS)
+       ========================================================================== */
+    async function getMeteoData(lat, lon) {
+      const cacheKey = `meteo_${lat.toFixed(2)}_${lon.toFixed(2)}`;
+      if (API_CACHE[cacheKey]) return API_CACHE[cacheKey];
+      
+      try {
+        // SOLO solicitamos los datos que realmente necesitamos
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=cloudcover,cloudcover_low,cloudcover_mid,cloudcover_high,pressure_msl,relativehumidity_2m,temperature_2m&timezone=auto`;
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        if (!data.hourly) return getFallbackData();
+        
+        const now = new Date();
+        const currentHour = now.toISOString().slice(0, 13);
+        const currentIdx = data.hourly.time.findIndex(t => t.startsWith(currentHour));
+        
+        const currentData = currentIdx >= 0 ? {
+          pressure: data.hourly.pressure_msl?.[currentIdx] || 1013,
+          humidity: data.hourly.relativehumidity_2m?.[currentIdx] || 50,
+          temperature: data.hourly.temperature_2m?.[currentIdx] || 20,
+          timestamp: data.hourly.time?.[currentIdx] || new Date().toISOString()
+        } : { pressure: 1013, humidity: 50, temperature: 20, timestamp: new Date().toISOString() };
+        
+        const result = { cloudSeries: data.hourly, current: currentData };
+        API_CACHE[cacheKey] = result;
+        return result;
+      } catch (e) {
+        console.warn('Error obteniendo datos meteorológicos:', e);
+        return getFallbackData();
+      }
+    }
 
-// Obtiene PM2.5 desde OpenAQ (si disponible), o valor por defecto
-async function getPM25(lat, lon) {
-  const url = `https://api.openaq.org/v2/latest?coordinates=${lat},${lon}&radius=15000&limit=20`;
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    const pm = data.results?.flatMap(r => r.measurements || []).find(m => m.parameter === 'pm25');
-    return pm ? pm.value : 12;
-  } catch (e) {
-    console.warn('OpenAQ error', e);
-    return 12;
-  }
-}
+    function getFallbackData() {
+      return {
+        cloudSeries: null,
+        current: { pressure: 1013, humidity: 50, temperature: 20, timestamp: new Date().toISOString() }
+      };
+    }
 
-/* ========== FUNCIONES DEL MAPA CON HEXÁGONOS ========== */
+    /* ==========================================================================
+       INTERFAZ DE USUARIO - CIUDADES (ACTUALIZADAS)
+       ========================================================================== */
+    async function initCityMenu() {
+      const menu = document.getElementById('cityMenu');
+      const loadingIndicator = document.getElementById('loadingIndicator');
+      
+      const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
+        !info.type || info.type !== 'observatory'
+      );
+      
+      for (const [nombre, info] of citiesOnly) {
+        menu.appendChild(createCityCardSkeleton(nombre, info));
+      }
+      
+      setTimeout(() => {
+        loadingIndicator.style.display = 'none';
+        menu.style.display = 'grid';
+      }, 3000);
+      
+      loadAllCityData();
+    }
 
-// Función para inicializar o actualizar el mapa
-function initMap(lat, lon, cityName) {
-  // Si el mapa ya existe, simplemente actualízalo
-  if (map) {
-    map.setView([lat, lon], 10);
-    if (marker) {
-      marker.setLatLng([lat, lon]);
-      // ACTUALIZAR EL POPUP TAMBIÉN
-      marker.setPopupContent(`<b>${cityName}</b><br>Lat: ${lat.toFixed(4)}<br>Lon: ${lon.toFixed(4)}`);
-    } else {
+    function createCityCardSkeleton(nombre, info) {
+      const card = document.createElement('div');
+      card.className = 'city-card';
+      card.innerHTML = `
+        <div class="city-name">${nombre}</div>
+        <div class="city-region">${info.region}</div>
+        <div class="city-probability"><span class="loading"></span> Calculando...</div>
+        <div class="probability-bar" style="width: 0%"></div>
+      `;
+      card.onclick = () => showPrediction(nombre, 'city');
+      return card;
+    }
+
+    async function loadAllCityData() {
+      const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
+        !info.type || info.type !== 'observatory'
+      );
+      
+      for (let i = 0; i < citiesOnly.length; i += BATCH_SIZE) {
+        const batch = citiesOnly.slice(i, i + BATCH_SIZE);
+        await Promise.allSettled(batch.map(async ([nombre, info]) => {
+          try { await updateCityCardData(nombre, info); } 
+          catch (error) { markCityCardAsError(nombre); }
+        }));
+        await new Promise(resolve => setTimeout(resolve, DELAY));
+      }
+    }
+
+    async function updateCityCardData(nombre, info) {
+        const meteoData = await getMeteoData(info.lat, info.lon);
+        if (!meteoData.cloudSeries) return;
+
+        // USAR LA MISMA FUNCIÓN PARA OBTENER ÍNDICES
+        const sunsetIndex = getSunsetIndex(meteoData, info.lat, info.lon, false);
+        const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
+        const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
+        
+        // Obtener datos en índice exacto (igual que la predicción principal)
+        const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+        
+        const sunsetLow = sunsetData?.low;
+        const sunsetMid = sunsetData?.mid;
+        const sunsetHigh = sunsetData?.high;
+        
+        // Calcular probabilidad con los mismos parámetros
+        const probAtardecer = computeRedProbability(
+            sunsetLow, sunsetMid, sunsetHigh, 
+            sunsetElev, false,
+            sunsetData?.temperature || meteoData.current.temperature,
+            sunsetData?.pressure || meteoData.current.pressure
+        );
+        
+        updateCityCardUI(nombre, Math.round(probAtardecer * 100));
+    }
+
+    function updateCityCardUI(nombre, probAtardecer) {
+      const cards = document.querySelectorAll('.city-card');
+      const card = Array.from(cards).find(c => c.querySelector('.city-name').textContent === nombre);
+      if (!card) return;
+      
+      card.querySelector('.city-probability').innerHTML = `Prob. arrebol: <strong>${probAtardecer}%</strong>`;
+      card.querySelector('.probability-bar').style.width = `${probAtardecer}%`;
+      
+      const styles = getProbabilityStyles(probAtardecer / 100);
+      card.style.background = styles.background;
+      card.style.boxShadow = styles.boxShadow || 'none';
+    }
+
+    function getProbabilityStyles(probability) {
+        const probPercent = probability * 100;
+        let background, border, color = '#ffffff', boxShadow;
+        
+        if (probPercent > 70) {
+            background = "rgba(255, 80, 80, 0.55)";
+            boxShadow = "0 4px 16px rgba(255, 80, 80, 0.1)";
+            border = "1px solid rgba(255, 80, 80, 0.3)";
+        } else if (probPercent > 50) {
+            background = "rgba(255, 165, 0, 0.3)";
+            boxShadow = "0 4px 16px rgba(255, 165, 0, 0.2)";
+            border = "1px solid rgba(255, 165, 0, 0.2)";
+        } else if (probPercent > 30) {
+            background = "rgba(255, 200, 0, 0.25)";
+            border = "1px solid rgba(255, 200, 0, 0.2)";
+        } else if (probPercent > 15) {
+            background = "rgba(200, 200, 255, 0.15)";
+            border = "1px solid rgba(200, 200, 255, 0.1)";
+        } else {
+            background = "rgba(255, 255, 255, 0.05)";
+            border = "1px solid rgba(255, 255, 255, 0.05)";
+        }
+        
+        return { background, border, color, boxShadow };
+    }
+
+    /* ==========================================================================
+       FUNCIONES DEL MAPA
+       ========================================================================== */
+    function initMap(lat, lon, cityName) {
+      if (map) {
+        map.setView([lat, lon], 10);
+        if (marker) {
+          marker.setLatLng([lat, lon]);
+          marker.setPopupContent(`<b>${cityName}</b><br>Lat: ${lat.toFixed(4)}<br>Lon: ${lon.toFixed(4)}`);
+        } else {
+          marker = L.marker([lat, lon]).addTo(map)
+            .bindPopup(`<b>${cityName}</b><br>Lat: ${lat.toFixed(4)}<br>Lon: ${lon.toFixed(4)}`)
+            .openPopup();
+        }
+        return;
+      }
+      
+      map = L.map('map').setView([lat, lon], 10);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
       marker = L.marker([lat, lon]).addTo(map)
         .bindPopup(`<b>${cityName}</b><br>Lat: ${lat.toFixed(4)}<br>Lon: ${lon.toFixed(4)}`)
         .openPopup();
     }
-    return;
-  }
-  
-  // Si no existe, crea el mapa
-  map = L.map('map').setView([lat, lon], 10);
-  
-  // Añadir capa de OpenStreetMap
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-  
-  // Añadir marcador
-  marker = L.marker([lat, lon]).addTo(map)
-    .bindPopup(`<b>${cityName}</b><br>Lat: ${lat.toFixed(4)}<br>Lon: ${lon.toFixed(4)}`)
-    .openPopup();
-}
 
-/* ===========================
-   GEODÉSICAS Y HEXÁGONOS
-   =========================== */
+    function calculateDestinationPoint(lat, lon, azimuth, distanceKm) {
+      const R = 6371;
+      const latRad = lat * Math.PI / 180;
+      const lonRad = lon * Math.PI / 180;
+      const azRad = azimuth * Math.PI / 180;
+      const dDivR = distanceKm / R;
 
-/**
- * Calcular punto de destino geodésico (sfera).
- * lat, lon en grados; azimuth en grados; distanceKm en km.
- * Devuelve { lat, lon } en grados.
- */
-function calculateDestinationPoint(lat, lon, azimuth, distanceKm) {
-  const R = 6371; // km
-  const latRad = lat * Math.PI / 180;
-  const lonRad = lon * Math.PI / 180;
-  const azRad = azimuth * Math.PI / 180;
-  const dDivR = distanceKm / R;
+      const destLatRad = Math.asin(Math.sin(latRad) * Math.cos(dDivR) + Math.cos(latRad) * Math.sin(dDivR) * Math.cos(azRad));
+      const destLonRad = lonRad + Math.atan2(Math.sin(azRad) * Math.sin(dDivR) * Math.cos(latRad), Math.cos(dDivR) - Math.sin(latRad) * Math.sin(destLatRad));
 
-  const destLatRad = Math.asin(
-    Math.sin(latRad) * Math.cos(dDivR) +
-    Math.cos(latRad) * Math.sin(dDivR) * Math.cos(azRad)
-  );
+      return { lat: destLatRad * 180 / Math.PI, lon: destLonRad * 180 / Math.PI };
+    }
 
-  const destLonRad = lonRad + Math.atan2(
-    Math.sin(azRad) * Math.sin(dDivR) * Math.cos(latRad),
-    Math.cos(dDivR) - Math.sin(latRad) * Math.sin(destLatRad)
-  );
+    function calculateSunsetAzimuth(lat, lon) {
+      const now = new Date();
+      const sunset = SunCalc.getTimes(now, lat, lon).sunset;
+      const pos = SunCalc.getPosition(sunset, lat, lon);
+      return (pos.azimuth * 180 / Math.PI + 180) % 360;
+    }
 
-  return {
-    lat: destLatRad * 180 / Math.PI,
-    lon: destLonRad * 180 / Math.PI
-  };
-}
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+    }
 
-/**
- * Calcula azimut de la puesta de sol (0=N, 90=E, 180=S, 270=W)
- */
-function calculateSunsetAzimuth(lat, lon) {
-  const now = new Date();
-  const times = SunCalc.getTimes(now, lat, lon);
-  const sunset = times.sunset;
-  const pos = SunCalc.getPosition(sunset, lat, lon);
-  // pos.azimuth: radians, measured from south? SunCalc returns azimuth in radians from south (-pi..pi)
-  // Formula below converts to 0=N, 90=E convention and normalizes
-  const az = (pos.azimuth * 180 / Math.PI + 180) % 360;
-  return az;
-}
-
-/**
- * Calcula distancia entre dos puntos geodésicos (km)
- */
-function calculateDistance(lat1, lon1, lat2, lon2) {
-  const R = 6371; // km
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return R * c;
-}
-
-// GENERAR 7 HEXÁGONOS BÁSICOS
-async function generate7HexagonGrid(centerLat, centerLon, sunsetAzimuth) {
-  const hexagons = [];
-  const hexRadiusKm = 10;
-  const hexWidth = Math.sqrt(3) * hexRadiusKm;
-  const hexHeight = 1.5 * hexRadiusKm;
-  const perpendicularAzimuth = (sunsetAzimuth + 90) % 360;
-  
-  // Coordenadas axiales para los 7 hexágonos
-  const hexCoordinates = [
-    // Hexágono central
-    { q: 0, r: 0 },
-    
-    // 6 hexágonos alrededor
-    { q: 1, r: 0 },   // Derecha
-    { q: 0, r: 1 },   // Abajo-derecha
-    { q: -1, r: 1 },  // Abajo-izquierda
-    { q: -1, r: 0 },  // Izquierda
-    { q: 0, r: -1 },  // Arriba-izquierda
-    { q: 1, r: -1 }   // Arriba-derecha
-  ];
-  
-  // Generar los 7 hexágonos
-  for (const coord of hexCoordinates) {
-    const { q, r } = coord;
-    
-    // Convertir coordenadas axiales a coordenadas cartesianas (km)
-    const x = hexWidth * (q + r/2);
-    const y = hexHeight * r;
-    
-    // Calcular punto central del hexágono
-    let hexCenter;
-    
-    if (x === 0 && y === 0) {
-      hexCenter = { lat: centerLat, lon: centerLon };
-    } else {
-      // Primero mover horizontalmente (perpendicular)
-      let tempPoint = { lat: centerLat, lon: centerLon };
-      if (x !== 0) {
-        const dirX = x > 0 ? perpendicularAzimuth : (perpendicularAzimuth + 180) % 360;
-        tempPoint = calculateDestinationPoint(centerLat, centerLon, dirX, Math.abs(x));
-      }
+    async function generate7HexagonGrid(centerLat, centerLon, sunsetAzimuth) {
+      const hexRadiusKm = 10;
+      const hexWidth = Math.sqrt(3) * hexRadiusKm;
+      const hexHeight = 1.5 * hexRadiusKm;
+      const perpendicularAzimuth = (sunsetAzimuth + 90) % 360;
       
-      // Luego mover verticalmente (dirección del atardecer)
-      if (y !== 0) {
-        const dirY = y > 0 ? sunsetAzimuth : (sunsetAzimuth + 180) % 360;
-        hexCenter = calculateDestinationPoint(tempPoint.lat, tempPoint.lon, dirY, Math.abs(y));
+      const hexCoordinates = [
+        { q: 0, r: 0 }, { q: 1, r: 0 }, { q: 0, r: 1 }, 
+        { q: -1, r: 1 }, { q: -1, r: 0 }, { q: 0, r: -1 }, { q: 1, r: -1 }
+      ];
+      
+      for (const coord of hexCoordinates) {
+        const { q, r } = coord;
+        const x = hexWidth * (q + r/2);
+        const y = hexHeight * r;
+        
+        let hexCenter;
+        if (x === 0 && y === 0) {
+          hexCenter = { lat: centerLat, lon: centerLon };
+        } else {
+          let tempPoint = { lat: centerLat, lon: centerLon };
+          if (x !== 0) {
+            const dirX = x > 0 ? perpendicularAzimuth : (perpendicularAzimuth + 180) % 360;
+            tempPoint = calculateDestinationPoint(centerLat, centerLon, dirX, Math.abs(x));
+          }
+          if (y !== 0) {
+            const dirY = y > 0 ? sunsetAzimuth : (sunsetAzimuth + 180) % 360;
+            hexCenter = calculateDestinationPoint(tempPoint.lat, tempPoint.lon, dirY, Math.abs(y));
+          } else {
+            hexCenter = tempPoint;
+          }
+        }
+        
+        if (hexCenter.lat >= -56 && hexCenter.lat <= -17 && hexCenter.lon >= -76 && hexCenter.lon <= -66) {
+          const probability = await calculateGridPointProbability(hexCenter.lat, hexCenter.lon);
+          
+          const vertices = [];
+          for (let i = 0; i < 6; i++) {
+            const angle = sunsetAzimuth + (i * 60);
+            const vertex = calculateDestinationPoint(hexCenter.lat, hexCenter.lon, angle, hexRadiusKm);
+            vertices.push([vertex.lat, vertex.lon]);
+          }
+          
+          const hexagon = L.polygon(vertices, {
+            color: '#ffffff',
+            fillColor: getGradientColorForProbability(probability),
+            fillOpacity: 0.6,
+            weight: 1.5,
+            opacity: 0.9
+          }).addTo(heatLayer);
+          
+          const distance = calculateDistance(centerLat, centerLon, hexCenter.lat, hexCenter.lon);
+          hexagon.bindPopup(`
+            <div style="text-align:center; min-width:150px;">
+              <strong>${(probability*100).toFixed(0)}% Probabilidad</strong><br>
+              Distancia: ${distance.toFixed(0)} km<br>
+              <small>${hexCenter.lat.toFixed(3)}, ${hexCenter.lon.toFixed(3)}</small>
+            </div>
+          `);
+          
+          hexagon.on('mouseover', () => hexagon.setStyle({ fillOpacity: 0.9, weight: 2.5, color: '#ffff00' }));
+          hexagon.on('mouseout', () => hexagon.setStyle({ fillOpacity: 0.7, weight: 1.5, color: '#ffffff' }));
+          
+          if (labelsEnabled) {
+            const percentage = (probability * 100).toFixed(0);
+            L.marker([hexCenter.lat, hexCenter.lon], {
+              icon: L.divIcon({
+                className: 'hexagon-label',
+                html: `<div style="color:white;font-weight:900;font-size:18px;text-shadow:0 1px 3px rgba(0,0,0,0.8)">${percentage}%</div>`,
+                iconSize: [50, 25],
+                iconAnchor: [25, 12]
+              })
+            }).addTo(labelLayer);
+          }
+        }
+      }
+    }
+
+    async function calculateGridPointProbability(lat, lon) {
+      const cacheKey = `${lat.toFixed(2)},${lon.toFixed(2)}`;
+      if (weatherDataCache[cacheKey]) return computeProbabilityFromData(weatherDataCache[cacheKey], lat, lon);
+      
+      try {
+        const meteoData = await getMeteoData(lat, lon);
+        const weatherData = { meteoData };
+        weatherDataCache[cacheKey] = weatherData;
+        return computeProbabilityFromData(weatherData, lat, lon);
+      } catch (error) {
+        console.warn(`Error calculando probabilidad para ${lat}, ${lon}:`, error);
+        return 0;
+      }
+    }
+
+
+// redProbability.js - VERSIÓN CON PRIORIDAD ALTAS > MEDIAS
+function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, temperature = 20, pressure = 1013) {
+  
+  const lowPct  = Math.max(0, Math.min(100, Number(low)  || 0));
+  const midPct  = Math.max(0, Math.min(100, Number(mid)  || 0));
+  const highPct = Math.max(0, Math.min(100, Number(high) || 0));
+
+  // ===== DISPERSIÓN RAYLEIGH =====
+  const P0 = 1013;
+  const P = Math.max(950, Math.min(1050, Number(pressure) || P0));
+  const gamma = 1.0;
+  const rayleighIntensity = Math.pow(P / P0, gamma);
+
+  const P_min = 950;
+  const P_max = 1050;
+  const rayleighMin = Math.pow(P_min / P0, gamma);
+  const rayleighMax = Math.pow(P_max / P0, gamma);
+  const rayleighFactor = (rayleighIntensity - rayleighMin) / (rayleighMax - rayleighMin);
+
+  // ===== GEOMETRÍA A SOL/SALIDA =====
+  const idealElev = isSunrise ? 3.0 : -3.0;
+  const geomSigma = 4.0;
+  const geomScore = Math.exp(-Math.pow((elevDeg - idealElev) / geomSigma, 2));
+
+  const cloudScore = 
+    0.70 * (highPct / 100) +
+    0.30 * (midPct / 100) -
+    0.20 * (lowPct / 100);  // bajas penalizan
+
+  // Boost si hay bastantes nubes altas
+  let highBoost = 0;
+  if (highPct > 40) highBoost = 0.05;
+  else if (highPct > 70) highBoost = 0.15;
+
+  const score =     
+    0.80 * cloudScore +   // más peso a las nubes
+    0.10 * rayleighFactor +
+    0.10 * geomScore +
+    highBoost;
+
+  // ===== SIGMOIDE =====
+  let p = 1 / (1 + Math.exp(-7 * (score - 0.50)));
+
+  // ===== REGLAS ESPECIALES =====
+  if (lowPct > 60) p *= Math.max(0.1, 1 - lowPct/100);
+
+  const totalCloud = (lowPct + midPct + highPct) / 3;
+  if (totalCloud > 90) p *= 0.25;
+  else if (totalCloud > 70) p *= 0.50;
+
+  // Si casi no hay bajas y sí altas → mejor aún
+  // if (lowPct < 20 && highPct > 50) p = Math.min(0.99, p * 1.3);
+
+  return Math.max(0.01, Math.min(0.99, p));
+}
+
+    // Exponer globalmente
+    window.computeRedProbability = computeRedProbability;
+
+    function computeProbabilityFromData(weatherData, lat, lon) {
+        const { meteoData } = weatherData;
+        if (!meteoData.cloudSeries) return 0;
+        
+        // USAR LA MISMA FUNCIÓN PARA OBTENER ÍNDICE
+        const sunsetIndex = getSunsetIndex(meteoData, lat, lon, false);
+        const sunset = SunCalc.getTimes(new Date(), lat, lon).sunset;
+        const sunsetElev = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
+        
+        // Obtener datos EXACTAMENTE en ese índice
+        const low_e = meteoData.cloudSeries.cloudcover_low?.[sunsetIndex];
+        const mid_e = meteoData.cloudSeries.cloudcover_mid?.[sunsetIndex];
+        const high_e = meteoData.cloudSeries.cloudcover_high?.[sunsetIndex];
+        
+        console.log(`Heatmap ${lat},${lon}: Índice atardecer=${sunsetIndex}, datos: low=${low_e}, mid=${mid_e}, high=${high_e}`);
+        
+        return computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, 
+                                    meteoData.current.temperature, meteoData.current.pressure);
+    }
+
+    async function updateHeatmap(cityLat, cityLon) {
+      if (!map || !heatmapEnabled) return;
+      
+      if (heatLayer) try { map.removeLayer(heatLayer); } catch(e) {}
+      if (labelLayer) try { map.removeLayer(labelLayer); } catch(e) {}
+      
+      heatLayer = L.layerGroup().addTo(map);
+      labelLayer = L.layerGroup().addTo(map);
+      document.getElementById('mapLoading').style.display = 'block';
+      
+      try {
+        const sunsetAzimuth = calculateSunsetAzimuth(cityLat, cityLon);
+        await generate7HexagonGrid(cityLat, cityLon, sunsetAzimuth);
+      } catch (error) {
+        console.error('Error actualizando mapa de calor:', error);
+        log('Error creando hexágonos: ' + (error && error.message));
+      } finally {
+        document.getElementById('mapLoading').style.display = 'none';
+      }
+    }
+
+    function getGradientColorForProbability(probability) {
+      const gradientStops = [
+        { pos: 0.0, color: '#2b83ba' }, { pos: 0.25, color: '#abdda4' },
+        { pos: 0.5, color: '#ffffbf' }, { pos: 0.75, color: '#fdae61' },
+        { pos: 1.0, color: '#d7191c' }
+      ];
+      
+      for (let i = 0; i < gradientStops.length - 1; i++) {
+        const start = gradientStops[i], end = gradientStops[i + 1];
+        if (probability >= start.pos && probability <= end.pos) {
+          const t = (probability - start.pos) / (end.pos - start.pos);
+          return interpolateColor(start.color, end.color, t);
+        }
+      }
+      return gradientStops[gradientStops.length - 1].color;
+    }
+
+    function interpolateColor(color1, color2, factor) {
+      if (factor === 0) return color1;
+      if (factor === 1) return color2;
+      
+      const r1 = parseInt(color1.substring(1, 3), 16);
+      const g1 = parseInt(color1.substring(3, 5), 16);
+      const b1 = parseInt(color1.substring(5, 7), 16);
+      
+      const r2 = parseInt(color2.substring(1, 3), 16);
+      const g2 = parseInt(color2.substring(3, 5), 16);
+      const b2 = parseInt(color2.substring(5, 7), 16);
+      
+      const r = Math.round(r1 + factor * (r2 - r1));
+      const g = Math.round(g1 + factor * (g2 - g1));
+      const b = Math.round(b1 + factor * (b2 - b1));
+      
+      return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+    }
+
+    function toggleHeatmap() {
+      heatmapEnabled = !heatmapEnabled;
+      const button = document.getElementById('toggleHeatmap');
+      
+      if (heatmapEnabled && currentState.lat && currentState.lon) {
+        button.classList.add('active');
+        updateHeatmap(currentState.lat, currentState.lon);
       } else {
-        hexCenter = tempPoint;
+        button.classList.remove('active');
+        if (heatLayer) { try { map.removeLayer(heatLayer); } catch(e) {} heatLayer = null; }
+        if (labelLayer) { try { map.removeLayer(labelLayer); } catch(e) {} labelLayer = null; }
       }
     }
-    
-    // Filtrar por caja de Chile
-    if (hexCenter.lat >= -56 && hexCenter.lat <= -17 && hexCenter.lon >= -76 && hexCenter.lon <= -66) {
-      const probability = await calculateGridPointProbability(hexCenter.lat, hexCenter.lon);
+
+    function toggleLabels() {
+      labelsEnabled = !labelsEnabled;
+      const button = document.getElementById('toggleLabels');
       
-      // Calcular 6 vértices del hexágono
-      const vertices = [];
-      for (let i = 0; i < 6; i++) {
-        const angle = sunsetAzimuth + (i * 60); // 60° entre vértices
-        const vertex = calculateDestinationPoint(hexCenter.lat, hexCenter.lon, angle, hexRadiusKm);
-        vertices.push([vertex.lat, vertex.lon]);
-      }
-      
-      // Crear hexágono con el color del gradiente original
-      const hexagon = L.polygon(vertices, {
-        color: '#ffffff',
-        fillColor: getGradientColorForProbability(probability),
-        fillOpacity: 0.6,
-        weight: 1.5,
-        opacity: 0.9
-      }).addTo(heatLayer);
-      
-      // Popup
-      const distance = calculateDistance(centerLat, centerLon, hexCenter.lat, hexCenter.lon);
-      hexagon.bindPopup(`
-        <div style="text-align:center; min-width:150px;">
-          <strong>${(probability*100).toFixed(0)}% Probabilidad</strong><br>
-          Distancia: ${distance.toFixed(0)} km<br>
-          <small>${hexCenter.lat.toFixed(3)}, ${hexCenter.lon.toFixed(3)}</small>
-        </div>
-      `);
-      
-      // Efectos hover
-      hexagon.on('mouseover', function() { 
-        this.setStyle({ fillOpacity: 0.9, weight: 2.5, color: '#ffff00' }); 
-      });
-      hexagon.on('mouseout', function() { 
-        this.setStyle({ fillOpacity: 0.7, weight: 1.5, color: '#ffffff' }); 
-      });
-      
-      // Etiqueta central (porcentajes)
       if (labelsEnabled) {
-        const percentage = (probability * 100).toFixed(0);
-        L.marker([hexCenter.lat, hexCenter.lon], {
-          icon: L.divIcon({
-            className: 'hexagon-label',
-            html: `<div style="color:white;font-weight:900;font-size:18px;text-shadow:0 1px 3px rgba(0,0,0,0.8)">${percentage}%</div>`,
-            iconSize: [50, 25],
-            iconAnchor: [25, 12]
-          })
-        }).addTo(labelLayer);
+        button.classList.add('active');
+        if (labelLayer) map.addLayer(labelLayer);
+        else if (currentState.lat && currentState.lon && heatmapEnabled) updateHeatmap(currentState.lat, currentState.lon);
+      } else {
+        button.classList.remove('active');
+        if (labelLayer) try { map.removeLayer(labelLayer); } catch(e) {}
       }
-      
-      hexagons.push({ lat: hexCenter.lat, lon: hexCenter.lon, probability });
-    }
-  }
-  
-  return hexagons;
-}
-
-// Calcular probabilidad para un punto específico de la grilla
-async function calculateGridPointProbability(lat, lon) {
-  const cacheKey = `${lat.toFixed(2)},${lon.toFixed(2)}`;
-  
-  // Usar caché si está disponible
-  if (weatherDataCache[cacheKey]) {
-    return computeProbabilityFromData(weatherDataCache[cacheKey], lat, lon);
-  }
-  
-  try {
-    // Obtener datos meteorológicos para este punto usando getMeteoData
-    const [pm25, meteoData] = await Promise.all([
-      getPM25(lat, lon),
-      getMeteoData(lat, lon)
-    ]);
-    
-    const weatherData = { pm25, meteoData };
-    
-    // Guardar en caché
-    weatherDataCache[cacheKey] = weatherData;
-    
-    return computeProbabilityFromData(weatherData, lat, lon);
-  } catch (error) {
-    console.warn(`Error calculando probabilidad para ${lat}, ${lon}:`, error);
-    return 0;
-  }
-}
-
-// Calcular probabilidad a partir de datos meteorológicos
-function computeProbabilityFromData(weatherData, lat, lon) {
-  const { pm25, meteoData } = weatherData;
-  
-  if (!meteoData.cloudSeries) return 0;
-  
-  const now = new Date();
-  const times = SunCalc.getTimes(now, lat, lon);
-  const sunset = times.sunset;
-  const sunsetElev = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
-  
-  const sunsetHour = sunset.toISOString().slice(0,13);
-  const idxSunset = meteoData.cloudSeries.time.findIndex(t => t.startsWith(sunsetHour));
-  const targetIdx = idxSunset >= 0 ? idxSunset : 18;
-
-  const low_e = meteoData.cloudSeries.cloudcover_low?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-  const mid_e = meteoData.cloudSeries.cloudcover_mid?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 50);
-  const high_e = meteoData.cloudSeries.cloudcover_high?.[targetIdx] ?? (meteoData.cloudSeries.cloudcover?.[targetIdx] ?? 20);
-
-  return computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature);
-}
-
-// ACTUALIZAR MAPA DE CALOR
-async function updateHeatmap(cityLat, cityLon) {
-  if (!map || !heatmapEnabled) return;
-
-  // Remover capas existentes
-  if (heatLayer) {
-    try { map.removeLayer(heatLayer); } catch(e) {}
-  }
-  if (labelLayer) {
-    try { map.removeLayer(labelLayer); } catch(e) {}
-  }
-
-  // Crear capas nuevas
-  heatLayer = L.layerGroup().addTo(map);
-  labelLayer = L.layerGroup().addTo(map);
-
-  // Mostrar indicador de carga
-  document.getElementById('mapLoading').style.display = 'block';
-
-  try {
-    // Calcular dirección de la puesta de sol
-    const sunsetAzimuth = calculateSunsetAzimuth(cityLat, cityLon);
-    
-    // Generar grilla hexagonal
-    const hexagons = await generate7HexagonGrid(cityLat, cityLon, sunsetAzimuth);
-
-  } catch (error) {
-    console.error('Error actualizando mapa de calor:', error);
-    log('Error creando hexágonos: ' + (error && error.message));
-  } finally {
-    document.getElementById('mapLoading').style.display = 'none';
-  }
-}
-
-/* ========== FUNCIONES DE COLOR CON GRADIENTE ORIGINAL ========== */
-
-// Obtener color según probabilidad usando el gradiente original
-function getGradientColorForProbability(probability) {
-  // Gradiente original de 5 colores
-  const gradientStops = [
-    { pos: 0.0, color: '#2b83ba' },   // Azul - 0%
-    { pos: 0.25, color: '#abdda4' },  // Verde claro - 25%
-    { pos: 0.5, color: '#ffffbf' },   // Amarillo - 50%
-    { pos: 0.75, color: '#fdae61' },  // Naranja - 75%
-    { pos: 1.0, color: '#d7191c' }    // Rojo - 100%
-  ];
-  // Función alternativa simple (para compatibilidad)
-function getColorForProbability(probability) {
-  return getGradientColorForProbability(probability);
-}
-  // Encontrar entre qué dos stops está la probabilidad
-  for (let i = 0; i < gradientStops.length - 1; i++) {
-    const start = gradientStops[i];
-    const end = gradientStops[i + 1];
-    
-    if (probability >= start.pos && probability <= end.pos) {
-      // Calcular posición relativa entre los dos stops
-      const t = (probability - start.pos) / (end.pos - start.pos);
-      
-      // Interpolar entre los dos colores
-      return interpolateColor(start.color, end.color, t);
-    }
-  }
-  
-  // Fallback
-  return gradientStops[gradientStops.length - 1].color;
-}
-
-// Función para interpolar entre dos colores hexadecimales
-function interpolateColor(color1, color2, factor) {
-  if (factor === 0) return color1;
-  if (factor === 1) return color2;
-  
-  const r1 = parseInt(color1.substring(1, 3), 16);
-  const g1 = parseInt(color1.substring(3, 5), 16);
-  const b1 = parseInt(color1.substring(5, 7), 16);
-  
-  const r2 = parseInt(color2.substring(1, 3), 16);
-  const g2 = parseInt(color2.substring(3, 5), 16);
-  const b2 = parseInt(color2.substring(5, 7), 16);
-  
-  const r = Math.round(r1 + factor * (r2 - r1));
-  const g = Math.round(g1 + factor * (g2 - g1));
-  const b = Math.round(b1 + factor * (b2 - b1));
-  
-  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
-}
-
-// Función alternativa simple (para compatibilidad)
-function getColorForProbability(probability) {
-  return getGradientColorForProbability(probability);
-}
-
-// Mostrar/ocultar capa de calor
-function toggleHeatmap() {
-  heatmapEnabled = !heatmapEnabled;
-  const button = document.getElementById('toggleHeatmap');
-  
-  if (heatmapEnabled && currentState.lat && currentState.lon) {
-    button.classList.add('active');
-    updateHeatmap(currentState.lat, currentState.lon);
-  } else {
-    button.classList.remove('active');
-    if (heatLayer) {
-      try { map.removeLayer(heatLayer); } catch(e) {}
-      heatLayer = null;
-    }
-    if (labelLayer) {
-      try { map.removeLayer(labelLayer); } catch(e) {}
-      labelLayer = null;
-    }
-  }
-}
-
-// Mostrar/ocultar etiquetas
-function toggleLabels() {
-  labelsEnabled = !labelsEnabled;
-  const button = document.getElementById('toggleLabels');
-  
-  if (labelsEnabled) {
-    button.classList.add('active');
-    if (labelLayer) {
-      map.addLayer(labelLayer);
-    } else if (currentState.lat && currentState.lon && heatmapEnabled) {
-      updateHeatmap(currentState.lat, currentState.lon);
-    }
-  } else {
-    button.classList.remove('active');
-    if (labelLayer) {
-      try { map.removeLayer(labelLayer); } catch(e) {}
-    }
-  }
-}
-
-
-
-/* ========== INTERFAZ PRINCIPAL ========== */
-
-// Estado compartido actual
-let currentState = {
-    lat: null, lon: null, cityName: '', hourly: null, pm25: null, 
-    preds: { sunrise: 0, sunset: 0 }, sunTimes: null, 
-    sunriseElev: null, sunsetElev: null, meteoData: null
-};
-
-// Elemento para log visible en UI
-const logEl = document.getElementById('log');
-
-let cloudChart = null;
-
-function log(msg) {
-  const line = `[${new Date().toLocaleString()}] ${msg}`;
-  console.log(line);
-  logEl.textContent = line + '\n' + logEl.textContent;
-}
-
-/* ============================
-   Workflow principal: predictRedSunset
-   ============================ */
-
-// Función principal: ejecuta la recolección de datos y calcula probabilidades
-async function predictRedSunset(lat, lon, cityName='') {
-  log(`Predicción para ${cityName || `${lat},${lon}`}`);
-
-  try {
-    // Inicializar o actualizar el mapa
-    initMap(lat, lon, cityName);
-    
-    // Obtener datos meteorológicos usando la función unificada
-    const [pm25, meteoData] = await Promise.all([ 
-      getPM25(lat, lon), 
-      getMeteoData(lat, lon)
-    ]);
-    
-    // Actualizar estado global
-    currentState.lat = lat; 
-    currentState.lon = lon; 
-    currentState.cityName = cityName;
-    currentState.hourly = meteoData.cloudSeries; 
-    currentState.pm25 = pm25;
-    currentState.meteoData = meteoData;
-
-    // Calcular tiempos solares
-    const now = new Date();
-    const times = SunCalc.getTimes(now, lat, lon);
-    currentState.sunTimes = times;
-    const sunrise = times.sunrise;
-    const sunset  = times.sunset;
-    const sunriseElev = SunCalc.getPosition(sunrise, lat, lon).altitude * (180/Math.PI);
-    const sunsetElev  = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
-    currentState.sunriseElev = sunriseElev;
-    currentState.sunsetElev = sunsetElev;
-
-    // Encontrar índices horarios
-    const hrs = meteoData.cloudSeries?.time || [];
-    const idxSunrise = hrs.findIndex(t => t.startsWith(sunrise.toISOString().slice(0,13)));
-    const idxSunset  = hrs.findIndex(t => t.startsWith(sunset.toISOString().slice(0,13)));
-    const idxS = idxSunrise >=0 ? idxSunrise : 6;
-    const idxE = idxSunset  >=0 ? idxSunset  : 20;
-
-    // Extraer valores de nubosidad
-    const low_s  = meteoData.cloudSeries?.cloudcover_low?.[idxS]  ?? (meteoData.cloudSeries?.cloudcover?.[idxS] ?? 50);
-    const mid_s  = meteoData.cloudSeries?.cloudcover_mid?.[idxS]  ?? (meteoData.cloudSeries?.cloudcover?.[idxS] ?? 50);
-    const high_s = meteoData.cloudSeries?.cloudcover_high?.[idxS] ?? (meteoData.cloudSeries?.cloudcover?.[idxS] ?? 20);
-    const tot_s  = meteoData.cloudSeries?.cloudcover?.[idxS] ?? Math.round((low_s + mid_s + high_s)/3);
-
-    const low_e  = meteoData.cloudSeries?.cloudcover_low?.[idxE]  ?? (meteoData.cloudSeries?.cloudcover?.[idxE] ?? 50);
-    const mid_e  = meteoData.cloudSeries?.cloudcover_mid?.[idxE]  ?? (meteoData.cloudSeries?.cloudcover?.[idxE] ?? 50);
-    const high_e = meteoData.cloudSeries?.cloudcover_high?.[idxE] ?? (meteoData.cloudSeries?.cloudcover?.[idxE] ?? 20);
-    const tot_e  = meteoData.cloudSeries?.cloudcover?.[idxE] ?? Math.round((low_e + mid_e + high_e)/3);
-
-    // Calcular probabilidades
-    const sunriseProb = computeRedProbability(pm25, low_s, mid_s, high_s, sunriseElev, true, meteoData.current.temperature);
-    const sunsetProb  = computeRedProbability(pm25, low_e, mid_e, high_e, sunsetElev, false, meteoData.current.temperature);
-
-    currentState.preds.sunrise = sunriseProb;
-    currentState.preds.sunset = sunsetProb;
-
-    // Actualizar UI
-    document.getElementById('loadingState').innerHTML = '';
-    
-    const dataTime = new Date(meteoData.current.timestamp);
-    const fechaStr = dataTime.toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    const horaStr = dataTime.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
-
-    document.getElementById('dataGrid').innerHTML = `
-      <div class="data-item">☁️ Nubosidad: <strong>${Math.round(tot_e)}%</strong></div>
-      <div class="data-item">🌫 PM2.5: <strong>${pm25.toFixed(1)} µg/m³</strong></div>
-      <div class="data-item">⬆ Elev amanecer: <strong>${sunriseElev.toFixed(1)}°</strong></div>
-      <div class="data-item">⬇ Elev atardecer: <strong>${sunsetElev.toFixed(1)}°</strong></div>
-    `;
-
-    document.getElementById('locationText').innerHTML = `
-      📍 ${cityName || `(${lat.toFixed(2)}, ${lon.toFixed(2)})`}<br>
-      <small style="opacity:0.8; font-size:0.9rem;">📅 Datos: ${fechaStr} 🕒 ${horaStr}</small>
-    `;
-
-    document.getElementById('sunTimes').innerHTML = `
-      <div class="sun-time">🌅 Amanecer: ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
-      <div class="sun-time">🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
-    `;
-
-    const predBlock = document.getElementById('predictions');
-
-    // Obtener estilos para cada probabilidad (igual que las tarjetas)
-    const sunriseStyles = getProbabilityStyles(sunriseProb);
-    const sunsetStyles = getProbabilityStyles(sunsetProb);
-
-    // Crear el HTML con estilos inline usando los mismos colores que las tarjetas
-    predBlock.innerHTML = `
-      <div class="probability" style="
-          background: ${sunriseStyles.background};
-          border: ${sunriseStyles.border};
-          box-shadow: ${sunriseStyles.boxShadow || 'none'};
-          color: ${sunriseStyles.color};
-          padding: 15px;
-          border-radius: 10px;
-          text-align: center;
-          font-size: 1.1rem;
-          font-weight: 600;
-          transition: all 0.3s;
-          flex: 1;
-      ">
-        🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%
-        ${sunriseProb > 0.8 ? '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>' : ''}
-      </div>
-      <div class="probability" style="
-          background: ${sunsetStyles.background};
-          border: ${sunsetStyles.border};
-          box-shadow: ${sunsetStyles.boxShadow || 'none'};
-          color: ${sunsetStyles.color};
-          padding: 15px;
-          border-radius: 10px;
-          text-align: center;
-          font-size: 1.1rem;
-          font-weight: 600;
-          transition: all 0.3s;
-          flex: 1;
-      ">
-        🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%
-        ${sunsetProb > 0.8 ? '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>' : ''}
-      </div>
-    `;
-
-    // Estilo del contenedor principal (opcional, para darle coherencia)
-    predBlock.style.cssText = `
-        display: flex;
-        gap: 15px;
-        margin: 20px 0;
-        transition: all 0.3s ease;
-        border-radius: 12px;
-        padding: 15px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    `;
-
-    // Si ambas probabilidades son altas, darle un efecto especial al contenedor
-    if (sunriseProb > 0.7 && sunsetProb > 0.7) {
-        predBlock.style.background = "linear-gradient(135deg, rgba(255, 80, 80, 0.15), rgba(255, 95, 0, 0.1))";
-        predBlock.style.border = "1px solid rgba(255, 95, 0, 0.3)";
-        predBlock.style.boxShadow = "0 4px 20px rgba(255, 80, 80, 0.15)";
-    } else if (sunriseProb > 0.7 || sunsetProb > 0.7) {
-        // Si al menos una es alta
-        predBlock.style.background = "linear-gradient(135deg, rgba(255, 80, 80, 0.1), rgba(255, 165, 0, 0.05))";
-        predBlock.style.border = "1px solid rgba(255, 165, 0, 0.2)";
     }
 
-    // Añadir animación para fuego si no está definida
-    if ((sunriseProb > 0.8 || sunsetProb > 0.8) && !document.querySelector('style#fire-animation')) {
-        const style = document.createElement('style');
-        style.id = 'fire-animation';
-        style.textContent = `
-            @keyframes fire {
-                0% { transform: scale(1); opacity: 0.8; }
-                100% { transform: scale(1.2); opacity: 1; }
-            }
+    /* ==========================================================================
+       PREDICCIÓN PRINCIPAL
+       ========================================================================== */
+    async function predictRedSunset(lat, lon, cityName = '') {
+        log(`Predicción para ${cityName || `${lat},${lon}`}`);
+
+        try {
+            initMap(lat, lon, cityName);
+            const meteoData = await getMeteoData(lat, lon);
+            
+            // Obtener tiempos solares
+            const now = new Date();
+            const times = SunCalc.getTimes(now, lat, lon);
+            const sunrise = times.sunrise;
+            const sunset = times.sunset;
+            
+            // OBTENER ÍNDICES CONSISTENTES usando la misma función
+            const sunriseIndex = getSunsetIndex(meteoData, lat, lon, true);  // true = amanecer
+            const sunsetIndex = getSunsetIndex(meteoData, lat, lon, false); // false = atardecer
+            
+            console.log(`Índices para ${cityName}: Amanecer=${sunriseIndex}, Atardecer=${sunsetIndex}`);
+            
+            // Obtener elevaciones solares
+            const sunriseElev = SunCalc.getPosition(sunrise, lat, lon).altitude * (180/Math.PI);
+            const sunsetElev = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
+            
+            // Obtener datos EXACTAMENTE en esos índices
+            const sunriseData = getDataAtIndex(meteoData, sunriseIndex);
+            const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+            
+            // Calcular probabilidades con datos consistentes
+            const sunriseProb = computeRedProbability(
+                sunriseData?.low, sunriseData?.mid, sunriseData?.high, 
+                sunriseElev, true, 
+                sunriseData?.temperature || meteoData.current.temperature,
+                sunriseData?.pressure || meteoData.current.pressure
+            );
+            
+            const sunsetProb = computeRedProbability(
+                sunsetData?.low, sunsetData?.mid, sunsetData?.high,
+                sunsetElev, false,
+                sunsetData?.temperature || meteoData.current.temperature,
+                sunsetData?.pressure || meteoData.current.pressure
+            );
+            
+            // Actualizar estado
+            currentState = { 
+                lat, lon, cityName, 
+                hourly: meteoData.cloudSeries, 
+                meteoData,
+                sunTimes: times,
+                sunriseElev, sunsetElev,
+                preds: { sunrise: sunriseProb, sunset: sunsetProb },
+                // Guardar índices para consistencia
+                sunriseIndex, sunsetIndex
+            };
+
+            // Calcular tiempos óptimos
+            const optimalSunriseTime = calculateTimeToMinus3Degrees(lat, lon, true);
+            const optimalSunsetTime = calculateTimeToMinus3Degrees(lat, lon, false);
+            
+            const sunriseStatus = getOptimalTimeStatus(optimalSunriseTime, true);
+            const sunsetStatus = getOptimalTimeStatus(optimalSunsetTime, false);
+            
+            // Actualizar UI con tiempos óptimos
+            updateUI(cityName, lat, lon, meteoData, sunrise, sunset, 
+                    sunriseData, sunsetData, sunriseProb, sunsetProb, sunriseStatus, sunsetStatus);
+            
+            // Actualizar UI con datos consistentes
+            updateUI(cityName, lat, lon, meteoData, sunrise, sunset, 
+                    sunriseData, sunsetData, sunriseProb, sunsetProb);
+            
+            // ACTUALIZAR GRÁFICOS con índices consistentes
+            updateCharts(meteoData, sunrise, sunset, sunriseIndex, sunsetIndex);
+            
+            if (heatmapEnabled) await updateHeatmap(lat, lon);
+            
+            log(`% arrebol: amanecer ${(sunriseProb*100).toFixed(1)}%, atardecer ${(sunsetProb*100).toFixed(1)}%`);
+            log(`Índices usados: Amanecer=${sunriseIndex}, Atardecer=${sunsetIndex}`);
+
+        } catch (e) {
+            document.getElementById('loadingState').innerHTML = '';
+            log('Error en predictRedSunset: ' + (e && e.message));
+            console.error(e);
+        }
+    }
+
+    /* ==========================================================================
+       FUNCIONES DE INTERFAZ DE USUARIO (ACTUALIZADAS)
+       ========================================================================== */
+    function updateUI(cityName, lat, lon, meteoData, sunrise, sunset, 
+                    sunriseData, sunsetData, sunriseProb, sunsetProb) {
+        document.getElementById('loadingState').innerHTML = '';
+        
+        const dataTime = new Date(meteoData.current.timestamp);
+        const fechaStr = dataTime.toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        const horaStr = dataTime.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+
+        // Calcular tiempos óptimos
+        const optimalSunriseTime = calculateTimeToMinus3Degrees(lat, lon, true);
+        const optimalSunsetTime = calculateTimeToMinus3Degrees(lat, lon, false);
+        
+        const sunriseStatus = getOptimalTimeStatus(optimalSunriseTime, true);
+        const sunsetStatus = getOptimalTimeStatus(optimalSunsetTime, false);
+        
+        // Mostrar datos específicos de cada hora
+        const sunriseCloudTotal = sunriseData?.total || 0;
+        const sunsetCloudTotal = sunsetData?.total || 0;
+        
+        const sunriseTemp = sunriseData?.temperature || meteoData.current.temperature;
+        const sunsetTemp = sunsetData?.temperature || meteoData.current.temperature;
+        
+        const sunriseHumidity = sunriseData?.humidity || meteoData.current.humidity;
+        const sunsetHumidity = sunsetData?.humidity || meteoData.current.humidity;
+
+        // AÑADIR INFORMACIÓN DE TIEMPO ÓPTIMO AL dataGrid
+        document.getElementById('dataGrid').innerHTML = `
+            <div class="data-item">🌅 Nubes amanecer: <strong>${Math.round(sunriseCloudTotal)}%</strong></div>
+            <div class="data-item">🌇 Nubes atardecer: <strong>${Math.round(sunsetCloudTotal)}%</strong></div>
+            <div class="data-item">🌡️ Temp amanecer: <strong>${sunriseTemp.toFixed(1)}°C</strong></div>
+            <div class="data-item">🌡️ Temp atardecer: <strong>${sunsetTemp.toFixed(1)}°C</strong></div>
         `;
-        document.head.appendChild(style);
+
+        const locationInfo = chileanCities[cityName];
+        let locationHTML = `📍 ${cityName}`;
+        
+        if (locationInfo) {
+            locationHTML += `<br><small style="opacity:0.8; font-size:0.9rem;">`;
+            
+            if (locationInfo.type === 'observatory') {
+                locationHTML += `🔭 Observatorio Astronómico<br>`;
+            } else if (locationInfo.type === 'park') {
+                locationHTML += `🌳 Parque Nacional<br>`;
+            }
+            
+            if (locationInfo.altitude) locationHTML += `Altitud: ${locationInfo.altitude.toLocaleString()} m • `;
+            if (locationInfo.operator) locationHTML += `Operador: ${locationInfo.operator} • `;
+            locationHTML += `Región: ${locationInfo.region}`;
+            locationHTML += `</small>`;
+        }
+        
+        //AGREGAR AL HTML
+        //locationHTML += `<br><small style="opacity:0.8; font-size:0.9rem;">📅 Datos: ${fechaStr} 🕒 ${horaStr}</small>`;
+        //
+
+        document.getElementById('locationText').innerHTML = locationHTML;
+
+        // AÑADIR HORAS ÓPTIMAS AL sunTimes
+        const optimalSunriseStr = optimalSunriseTime.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
+        const optimalSunsetStr = optimalSunsetTime.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
+        
+        document.getElementById('sunTimes').innerHTML = `
+            <div class="sun-time">
+                🌅 Amanecer: ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}
+                <br>
+            </div>
+            <div class="sun-time">
+                🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}
+                <br><small style="opacity:0.7; font-size:0.8rem;">Máximo arrebol: ${optimalSunsetStr}</small>
+            </div>
+        `;
+
+        updatePredictions(sunriseProb, sunsetProb, sunriseStatus, sunsetStatus);
     }
-    // Actualizar gráfico
-    if (meteoData.cloudSeries && meteoData.cloudSeries.time) {
-      const times24 = meteoData.cloudSeries.time.slice(0,24).map(t => {
-        const d = new Date(t);
-        return d.getHours() + ':00';
+
+        /* ==========================================================================
+      FUNCIÓN UPDATE PREDICTIONS (FALTANTE)
+      ========================================================================== */
+    function updatePredictions(sunriseProb, sunsetProb, sunriseStatus = null, sunsetStatus = null) {
+        const predBlock = document.getElementById('predictions');
+        const sunriseStyles = getProbabilityStyles(sunriseProb);
+        const sunsetStyles = getProbabilityStyles(sunsetProb);
+        
+        // Crear contenido para amanecer
+        let sunriseContent = `🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%`;
+        if (sunriseStatus) {
+            sunriseContent += `<br><small style="opacity:0.8; font-size:0.85rem;">${sunriseStatus.message}</small>`;
+        }
+        
+        // Crear contenido para atardecer
+        let sunsetContent = `🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%`;
+        if (sunsetStatus) {
+            sunsetContent += `<br><small style="opacity:0.8; font-size:0.85rem;">${sunsetStatus.message}</small>`;
+        }
+        
+        // Añadir icono de fuego si la probabilidad es alta
+        const fireIcon = '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>';
+        
+        predBlock.innerHTML = `
+            <div class="probability" style="background: ${sunriseStyles.background}; border: ${sunriseStyles.border}; box-shadow: ${sunriseStyles.boxShadow || 'none'}; color: ${sunriseStyles.color};">
+                ${sunriseContent}
+                ${sunriseProb > 0.8 ? fireIcon : ''}
+            </div>
+            <div class="probability" style="background: ${sunsetStyles.background}; border: ${sunsetStyles.border}; box-shadow: ${sunsetStyles.boxShadow || 'none'}; color: ${sunsetStyles.color};">
+                ${sunsetContent}
+                ${sunsetProb > 0.8 ? fireIcon : ''}
+            </div>
+        `;
+
+        predBlock.style.cssText = `
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        `;
+
+        if (sunriseProb > 0.7 && sunsetProb > 0.7) {
+            predBlock.style.background = "linear-gradient(135deg, rgba(255, 80, 80, 0.15), rgba(255, 95, 0, 0.1))";
+            predBlock.style.border = "1px solid rgba(255, 95, 0, 0.3)";
+            predBlock.style.boxShadow = "0 4px 20px rgba(255, 80, 80, 0.15)";
+        } else if (sunriseProb > 0.7 || sunsetProb > 0.7) {
+            predBlock.style.background = "linear-gradient(135deg, rgba(255, 80, 80, 0.1), rgba(255, 165, 0, 0.05))";
+            predBlock.style.border = "1px solid rgba(255, 165, 0, 0.2)";
+        }
+
+        if ((sunriseProb > 0.8 || sunsetProb > 0.8) && !document.querySelector('style#fire-animation')) {
+            const style = document.createElement('style');
+            style.id = 'fire-animation';
+            style.textContent = `@keyframes fire { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.2); opacity: 1; } }`;
+            document.head.appendChild(style);
+        }
+    }
+
+    /* ==========================================================================
+       FUNCIONES PARA RANKING (ACTUALIZADAS)
+       ========================================================================== */
+    async function calculateRankings() {
+        const topRanking = document.getElementById('topRanking');
+        if (!topRanking) return;
+        
+        topRanking.innerHTML = '<p>Calculando ranking...</p>';
+        const cityProbabilities = [];
+        
+        const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
+            !info.type || info.type !== 'observatory'
+        );
+        
+        for (const [cityName, cityInfo] of citiesOnly) {
+            try {
+                const meteoData = await getMeteoData(cityInfo.lat, cityInfo.lon);
+                
+                if (meteoData.cloudSeries) {
+                    // USAR LA MISMA FUNCIÓN QUE LA PREDICCIÓN PRINCIPAL
+                    const sunsetIndex = getSunsetIndex(meteoData, cityInfo.lat, cityInfo.lon, false); // false = atardecer
+                    const sunset = SunCalc.getTimes(new Date(), cityInfo.lat, cityInfo.lon).sunset;
+                    const sunsetElev = SunCalc.getPosition(sunset, cityInfo.lat, cityInfo.lon).altitude * (180/Math.PI);
+                    
+                    console.log(`Ranking ${cityName}: Índice atardecer=${sunsetIndex}`);
+                    
+                    // Obtener datos EXACTAMENTE en ese índice (igual que la predicción principal)
+                    const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+                    
+                    const low_e = sunsetData?.low;
+                    const mid_e = sunsetData?.mid;
+                    const high_e = sunsetData?.high;
+                    
+                    // Calcular con los mismos parámetros que la predicción principal
+                    const probAtardecer = computeRedProbability(
+                        low_e, mid_e, high_e, 
+                        sunsetElev, false, 
+                        sunsetData?.temperature || meteoData.current.temperature,
+                        sunsetData?.pressure || meteoData.current.pressure
+                    );
+                    
+                    const probabilityPercent = Math.round(probAtardecer * 100);
+                    
+                    cityProbabilities.push({
+                        name: cityName,
+                        region: cityInfo.region,
+                        probability: probAtardecer,
+                        percent: probabilityPercent,
+                        sunsetIndex: sunsetIndex, // Para debugging
+                        dataUsed: { low: low_e, mid: mid_e, high: high_e, temp: sunsetData?.temperature, pressure: sunsetData?.pressure }
+                    });
+                }
+            } catch (error) { 
+                console.warn(`Error calculando probabilidad para ${cityName}:`, error); 
+            }
+            // Pequeña pausa para no saturar la API
+            await new Promise(resolve => setTimeout(resolve, 50));
+        }
+        
+        if (cityProbabilities.length > 0) {
+            cityProbabilities.sort((a, b) => b.probability - a.probability);
+            
+            // Mostrar información de debugging en consola
+            console.log("Ranking calculado:", cityProbabilities.map(c => ({
+                name: c.name,
+                percent: c.percent,
+                index: c.sunsetIndex,
+                data: c.dataUsed
+            })));
+            
+            updateRankingTable(cityProbabilities, topRanking);
+            
+            // Actualizar estadísticas si los elementos existen
+            const rankingStats = document.getElementById('rankingStats');
+            if (rankingStats) {
+                updateRankingStats(cityProbabilities, rankingStats);
+            }
+            
+            const regionsRanking = document.getElementById('regionsRanking');
+            if (regionsRanking) {
+                updateRegionsRanking(cityProbabilities, regionsRanking);
+            }
+        }
+    }
+
+    function updateRankingTable(cityProbabilities, topRanking) {
+      const top10 = cityProbabilities.slice(0, 10);
+      
+      topRanking.innerHTML = createRankingTable(top10);
+    }
+
+    function createRankingTable(cities) {
+      let html = '<table class="ranking-table"><tr><th>#</th><th>Ciudad</th><th>Región</th><th>Probabilidad</th></tr>';
+      cities.forEach((city, index) => {
+        const rank = index + 1;
+        const color = getProbabilityColor(city.percent);
+        html += `
+          <tr onclick="showPrediction('${city.name}', 'city')" style="cursor: pointer;">
+            <td class="rank">${rank}</td>
+            <td>${city.name}</td>
+            <td>${city.region}</td>
+            <td style="color: ${color}"><strong>${city.percent}%</strong></td>
+          </tr>
+        `;
       });
-      const clouds = {
-        total: meteoData.cloudSeries.cloudcover.slice(0,24).map(v => Math.round(v)),
-        low: meteoData.cloudSeries.cloudcover_low.slice(0,24).map(v => Math.round(v)),
-        mid: meteoData.cloudSeries.cloudcover_mid.slice(0,24).map(v => Math.round(v)),
-        high: meteoData.cloudSeries.cloudcover_high.slice(0,24).map(v => Math.round(v)),
-      };
-      updateCloudChart(times24, clouds, sunrise, sunset);
+      return html + '</table>';
     }
 
-    // Actualizar mapa de calor
-    if (heatmapEnabled) {
-      await updateHeatmap(lat, lon);
+    function getProbabilityColor(percent) {
+      if (percent > 70) return '#d7191c';
+      if (percent > 50) return '#fdae61';
+      if (percent > 30) return '#ffffbf';
+      return '#abdda4';
     }
 
-    // Escribir log
-    log(`% arrebol: amanecer ${(sunriseProb*100).toFixed(1)}%, atardecer ${(sunsetProb*100).toFixed(1)}%`);
-    log(`Presión ${meteoData.current.pressure.toFixed(0)} hPa, Humedad ${meteoData.current.humidity.toFixed(0)}%`);
-    log(`Temp: ${meteoData.current.temperature.toFixed(1)}°C`);
+    function updateRankingStats(cityProbabilities, rankingStats) {
+      const total = cityProbabilities.length;
+      if (total === 0) return;
+      
+      const average = cityProbabilities.reduce((sum, city) => sum + city.percent, 0) / total;
+      const highest = cityProbabilities[0];
+      const lowest = cityProbabilities[cityProbabilities.length - 1];
+      
+      rankingStats.innerHTML = `
+        <div class="data-item">Ciudad más alta: <strong>${highest.name} (${highest.percent}%)</strong></div>
+        <div class="data-item">Ciudad más baja: <strong>${lowest.name} (${lowest.percent}%)</strong></div>
+        <div class="data-item">Promedio nacional: <strong>${average.toFixed(1)}%</strong></div>
+        <div class="data-item">Total analizado: <strong>${total} ciudades</strong></div>
+      `;
+    }
 
-  } catch (e) {
-    document.getElementById('loadingState').innerHTML = '';
-    log('Error en predictRedSunset: ' + (e && e.message));
-    alert('Error al obtener datos. Revisa la consola.');
-  }
-}
+    function updateRegionsRanking(cityProbabilities, regionsRanking) {
+      const regions = {};
+      cityProbabilities.forEach(city => {
+        if (!regions[city.region]) regions[city.region] = { total: 0, sum: 0, cities: [] };
+        regions[city.region].total++;
+        regions[city.region].sum += city.percent;
+        regions[city.region].cities.push(city);
+      });
+      
+      const regionAverages = Object.entries(regions).map(([name, data]) => ({
+        name,
+        average: data.sum / data.total,
+        count: data.total,
+        bestCity: data.cities[0]
+      })).sort((a, b) => b.average - a.average);
+      
+      let regionsHtml = '<table class="ranking-table"><tr><th>Región</th><th>Promedio</th><th>Ciudades</th><th>Mejor Ciudad</th></tr>';
+      regionAverages.forEach(region => {
+        regionsHtml += `
+          <tr>
+            <td><strong>${region.name}</strong></td>
+            <td>${region.average.toFixed(1)}%</td>
+            <td>${region.count}</td>
+            <td>${region.bestCity.name} (${region.bestCity.percent}%)</td>
+          </tr>
+        `;
+      });
+      regionsRanking.innerHTML = regionsHtml + '</table>';
+    }
 
-function updateCloudChart(hours, cloudVals, sunriseTime, sunsetTime) {
-  const ctx = document.getElementById('cloudChart').getContext('2d');
-  if (cloudChart) cloudChart.destroy();
-  
-  const sunriseHour = sunriseTime.getHours();
-  const sunsetHour = sunsetTime.getHours();
-  const now = new Date();
-  const currentHour = now.getHours();
-  
-  // Encontrar índices para las líneas verticales
-  const sunriseIndex = hours.findIndex(h => {
-    const hour = parseInt(h.split(':')[0]);
-    return hour >= sunriseHour;
-  });
-  
-  const sunsetIndex = hours.findIndex(h => {
-    const hour = parseInt(h.split(':')[0]);
-    return hour >= sunsetHour;
-  });
-  
-  const currentIndex = hours.findIndex(h => {
-    const hour = parseInt(h.split(':')[0]);
-    return hour >= currentHour;
-  });
 
-  const isMobile = window.innerWidth < 768;
-  
-  // Primero crear la leyenda explicativa
-  createChartLegend(sunriseTime, sunsetTime, currentHour);
-  
-  cloudChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: hours,
-      datasets: [
-        {
-          label: 'Nubes bajas',
-          data: cloudVals.low,
-          borderWidth: isMobile ? 1 : 1.5,
-          borderColor: '#4fc3f7',
-          backgroundColor: 'rgba(79, 195, 247, 0.1)',
-          fill: false,
-          tension: 0.3,
-          borderDash: [4, 3],
-          pointBackgroundColor: '#4fc3f7',
-          pointBorderWidth: isMobile ? 0.5 : 1,
-          pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 8, 
-          pointHoverRadius: isMobile ? 10 : 14, 
-        },
-        {
-          label: 'Nubes medias',
-          data: cloudVals.mid,
-          borderWidth: isMobile ? 1 : 1.5,
-          borderColor: '#ffb74d',
-          backgroundColor: 'rgba(255, 183, 77, 0.1)',
-          fill: false,
-          tension: 0.3,
-          borderDash: [2, 3],
-          pointBackgroundColor: '#ffb74d',
-          pointBorderWidth: isMobile ? 0.5 : 1,
-          pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 8, 
-          pointHoverRadius: isMobile ? 10 : 14, 
-        },
-        {
-          label: 'Nubes altas',
-          data: cloudVals.high,
-          borderWidth: isMobile ? 1 : 1.5,
-          borderColor: '#ba68c8',
-          backgroundColor: 'rgba(186, 104, 200, 0.1)',
-          fill: false,
-          tension: 0.3,
-          pointBackgroundColor: '#ba68c8',
-          pointBorderWidth: isMobile ? 0.5 : 1,
-          pointStyle: 'circle',
-          pointRadius: isMobile ? 6 : 8, 
-          pointHoverRadius: isMobile ? 10 : 14, 
-        },
-        {
-          label: 'Nubosidad total',
-          data: cloudVals.total,
-          borderWidth: isMobile ? 1.5 : 2,
-          borderColor: '#ffffff',
-          backgroundColor: 'rgba(255,255,255,0.1)',
-          fill: true,
-          tension: 0.3,
-          pointBackgroundColor: '#ffffff',
-          pointBorderColor: '#ff6600',
-          pointBorderWidth: isMobile ? 1 : 2,
-          pointStyle: 'circle',
-          pointRadius: isMobile ? 7 : 9, 
-          pointHoverRadius: isMobile ? 11 : 15, 
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      aspectRatio: isMobile ? 1.2 : 1.3,
-      plugins: { 
-        title: {
-          display: true,
-          text: 'Nubosidad por Hora del Día en %ciudad',
-          color: '#ffffff',
-          font: {
-            size: isMobile ? 18 : 20,
-            weight: 'bold',
-            family: 'Arial, sans-serif'
-          },
-          padding: {
-            top: 5,
-            bottom: 2 // Reducido para dejar espacio a la leyenda
-          }
-        },
-        legend: { 
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            pointStyle: 'circle',
-            boxWidth: 6,
-            boxHeight: 6,
-            color: '#ffffff',
-            font: {
-              size: isMobile ? 18 : 18,
-              family: 'Arial, sans-serif',
-              weight: 'normal'
-            },
-            padding: isMobile ? 8 : 19
-          }
-        },
-        annotation: {
-          annotations: {
-            sunriseLine: {
-              type: 'line',
-              mode: 'vertical',
-              scaleID: 'x',
-              value: sunriseIndex >= 0 ? sunriseIndex : 6,
-              borderColor: '#ffeb3b',
-              borderWidth: 3,
-              borderDash: [5, 5],
-              label: { 
-                enabled: true, 
-                content: '🌅 Amanecer',
-                position: 'top',
-                backgroundColor: 'rgba(255, 235, 59, 0.7)',
-                color: '#333',
-                font: { size: isMobile ? 10 : 12, weight: 'bold' },
-                padding: { x: 6, y: 4 }
-              }
-            },
-            sunsetLine: {
-              type: 'line',
-              mode: 'vertical',
-              scaleID: 'x',
-              value: sunsetIndex >= 0 ? sunsetIndex : 18,
-              borderColor: '#ff9800',
-              borderWidth: 3,
-              borderDash: [5, 5],
-              label: { 
-                enabled: true, 
-                content: '🌇 Atardecer',
-                position: 'top',
-                backgroundColor: 'rgba(255, 152, 0, 0.7)',
-                color: '#333',
-                font: { size: isMobile ? 10 : 12, weight: 'bold' },
-                padding: { x: 6, y: 4 }
-              }
-            },
-            currentTimeLine: {
-              type: 'line',
-              mode: 'vertical',
-              scaleID: 'x',
-              value: currentIndex >= 0 ? currentIndex : hours.length / 2,
-              borderColor: '#4CAF50',
-              borderWidth: 3,
-              borderDash: [3, 3],
-              label: { 
-                enabled: true, 
-                content: '🕐 Ahora',
-                position: 'top',
-                backgroundColor: 'rgba(76, 175, 80, 0.7)',
-                color: '#333',
-                font: { size: isMobile ? 10 : 12, weight: 'bold' },
-                padding: { x: 6, y: 4 }
-              }
-            }
-          }
-        },
-        tooltip: {
-          mode: 'index',
-          intersect: false,
-          callbacks: {
-            label: function(context) {
-              return `${context.dataset.label}: ${context.parsed.y}%`;
-            },
-            // Añadir información adicional en el tooltip
-            afterBody: function(context) {
-              const index = context[0].dataIndex;
-              const hour = hours[index];
-              
-              // Verificar si esta hora coincide con eventos importantes
-              const lines = [];
-              
-              if (index === sunriseIndex) {
-                lines.push('🌅 Hora del amanecer');
-              }
-              if (index === sunsetIndex) {
-                lines.push('🌇 Hora del atardecer');
-              }
-              if (index === currentIndex) {
-                lines.push('🕐 Hora actual aproximada');
-              }
-              
-              return lines;
-            }
-          }
-        }
-      },
-      scales: {
-        x: { 
-          title: {
-            display: true,
-            text: 'Hora del día',
-            color: '#ffffff',
-            font: { size: isMobile ? 16 : 18, weight: 'bold' }
-          },
-          grid: { 
-            color: 'rgba(255,255,255,0.08)',
-            drawOnChartArea: true
-          }, 
-          ticks: { 
-            color: '#ffffff',
-            maxRotation: isMobile ? 45 : 0,
-            autoSkip: true,
-            maxTicksLimit: isMobile ? 12 : 24,
-            font: {
-              size: isMobile ? 14 : 16
-            },
-            // Destacar horas importantes en las etiquetas
-            callback: function(value, index) {
-              const hour = hours[index];
-              if (index === sunriseIndex) {
-                return `🌅 ${hour}`;
-              } else if (index === sunsetIndex) {
-                return `🌇 ${hour}`;
-              } else if (index === currentIndex) {
-                return `🕐 ${hour}`;
-              }
-              return hour;
-            }
-          } 
-        },
-        y: { 
-          title: {
-            display: true,
-            text: 'Cantidad de nubes',
-            color: '#ffffff',
-            font: { size: isMobile ? 16 : 18, weight: 'bold' }
-          },
-          beginAtZero: true, 
-          max: 100, 
-          grid: { 
-            color: 'rgba(255,255,255,0.08)',
-            drawOnChartArea: true
-          }, 
-          ticks: { 
-            color: '#ffffff',
-            stepSize: 20, // Esto fuerza incrementos de 20%
-            callback: function(value) {
-              return value + '%';
-            },
-            font: {
-              size: isMobile ? 14 : 16
-            }
-          } 
-        }
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index'
-      },
-      elements: {
-        point: {
-          radius: isMobile ? 4 : 6,
-          hoverRadius: isMobile ? 8 : 12
-        }
+    function getProbabilityColor(percent) {
+      if (percent > 70) return '#d7191c';
+      if (percent > 50) return '#fdae61';
+      if (percent > 30) return '#ffffbf';
+      return '#abdda4';
+    }
+
+    function updateRankingStats(cityProbabilities, rankingStats) {
+      const total = cityProbabilities.length;
+      const average = cityProbabilities.reduce((sum, city) => sum + city.percent, 0) / total;
+      const highest = cityProbabilities[0];
+      const lowest = cityProbabilities[cityProbabilities.length - 1];
+      
+      rankingStats.innerHTML = `
+        <div class="data-item">Ciudad más alta: <strong>${highest.name} (${highest.percent}%)</strong></div>
+        <div class="data-item">Ciudad más baja: <strong>${lowest.name} (${lowest.percent}%)</strong></div>
+        <div class="data-item">Promedio nacional: <strong>${average.toFixed(1)}%</strong></div>
+        <div class="data-item">Total analizado: <strong>${total} ciudades</strong></div>
+      `;
+    }
+
+    function updateRegionsRanking(cityProbabilities, regionsRanking) {
+      const regions = {};
+      cityProbabilities.forEach(city => {
+        if (!regions[city.region]) regions[city.region] = { total: 0, sum: 0, cities: [] };
+        regions[city.region].total++;
+        regions[city.region].sum += city.percent;
+        regions[city.region].cities.push(city);
+      });
+      
+      const regionAverages = Object.entries(regions).map(([name, data]) => ({
+        name,
+        average: data.sum / data.total,
+        count: data.total,
+        bestCity: data.cities[0]
+      })).sort((a, b) => b.average - a.average);
+      
+      let regionsHtml = '<table class="ranking-table"><tr><th>Región</th><th>Promedio</th><th>Ciudades</th><th>Mejor Ciudad</th></tr>';
+      regionAverages.forEach(region => {
+        regionsHtml += `
+          <tr>
+            <td><strong>${region.name}</strong></td>
+            <td>${region.average.toFixed(1)}%</td>
+            <td>${region.count}</td>
+            <td>${region.bestCity.name} (${region.bestCity.percent}%)</td>
+          </tr>
+        `;
+      });
+      regionsRanking.innerHTML = regionsHtml + '</table>';
+    }
+
+    /* ==========================================================================
+       INICIALIZACIÓN DE LA APLICACIÓN
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', function() {
+      initCityMenu();
+      
+      // Verificar si hay una ubicación guardada
+      const lastCity = localStorage.getItem('lastCity');
+      const locationType = localStorage.getItem('locationType');
+      
+      if (lastCity && chileanCities[lastCity]) {
+        setTimeout(() => {
+          showPrediction(lastCity, locationType || 'city');
+        }, 500);
       }
+    });
+
+    /* ==========================================================================
+       FUNCIONES DE COMPATIBILIDAD (PARA MANTENER FUNCIONES EXISTENTES)
+       ========================================================================== */
+    // Estas funciones se mantienen para compatibilidad con el código existente
+    async function seleccionarCiudad(nombre) {
+      await showPrediction(nombre, 'city');
     }
-  });
-}
 
-function createChartLegend(sunriseTime, sunsetTime, currentHour) {
-  // Formatear horas
-  const sunriseStr = sunriseTime.toLocaleTimeString('es-CL', { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    hour12: false 
-  });
-  
-  const sunsetStr = sunsetTime.toLocaleTimeString('es-CL', { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    hour12: false 
-  });
-  
-  const currentStr = `${currentHour.toString().padStart(2, '0')}:00`;
-  
-  // Buscar y eliminar leyenda anterior si existe
-  const oldLegend = document.querySelector('.chart-time-legend');
-  if (oldLegend) {
-    oldLegend.remove();
-  }
-  
-  // Crear contenedor para la leyenda
-  const legendContainer = document.createElement('div');
-  legendContainer.className = 'chart-time-legend';
-  
-  // Elementos de la leyenda MÁS COMPACTA
-  legendContainer.innerHTML = `
-    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-      <div style="width: 12px; height: 3px; background: #ffeb3b; border-radius: 1px;"></div>
-      <span>🌅 Amanecer ${sunriseStr}</span>
-    </div>
-    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-      <div style="width: 12px; height: 3px; background: #ff9800; border-radius: 1px;"></div>
-      <span>🌇 Puesta de sol ${sunsetStr}</span>
-    </div>
-    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
-      <div style="width: 12px; height: 3px; background: #4CAF50; border-radius: 1px;"></div>
-      <span>🕐 Ahora ${currentStr}</span>
-    </div>
-  `;
-  
-  // Insertar la leyenda en el contenedor .charts
-  const chartsContainer = document.querySelector('.charts');
-  const canvas = document.getElementById('cloudChart');
-  
-  // Insertar al principio del contenedor (antes del canvas)
-  if (chartsContainer.firstChild) {
-    chartsContainer.insertBefore(legendContainer, chartsContainer.firstChild);
-  } else {
-    chartsContainer.appendChild(legendContainer);
-  }
-}
+    async function seleccionarObservatorio(nombre) {
+      await showPrediction(nombre, 'observatory');
+    }
 
-// Exportar funciones de gráficos
-window.updateCloudChart = updateCloudChart;
-window.createChartLegend = createChartLegend;
+    function selectCityFromRanking(cityName) {
+      showPrediction(cityName, 'city');
+    }
 
-/* ============================
-   Small helpers
-   ============================ */
+    function probClass(p) {
+      if (p > 0.7) return 'high-prob';
+      if (p < 0.4) return 'low-prob';
+      return 'medium-prob';
+    }
+  </script>
 
-// Clase de probabilidad para estilos (alto/medio/bajo)
-function probClass(p) {
-  if (p > 0.7) return 'high-prob';
-  if (p < 0.4) return 'low-prob';
-  return 'medium-prob';
-}
-
-// Ejecutar al cargar
-initCityMenu();
-
-</script>
-
-<footer class="footer">
+  <footer class="footer">
     <p>Préboles 2025. Nicolás Medina Peña.</p>
     <nav>
-        <a href="https://nicomedinap.github.io/about.html" target="_blank"> <u>Sobre el autor</u></a>
-        <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank"> <u>Sobre el modelo predictivo y los datos</u></a>
+      <a href="https://nicomedinap.github.io/about.html" target="_blank"> <u>Sobre el autor</u></a>
+      <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank"> <u>Sobre el modelo predictivo y los datos</u></a>
     </nav>
-</footer>
-
+  </footer>
 </body>
 </html>
