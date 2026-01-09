@@ -9,32 +9,29 @@
     let cloudChart = null;
     
     // Función principal para actualizar gráficos
-    window.updateCharts = function(meteoData, sunriseTime, sunsetTime) {
+    window.updateCharts = function(meteoData, sunriseTime, sunsetTime, sunriseIndex, sunsetIndex) {
         if (!meteoData?.cloudSeries?.time) return;
         
         const chartData = prepareChartData(meteoData.cloudSeries);
-        createCloudChart('cloudChart', chartData, sunriseTime, sunsetTime, new Date());
+        createCloudChart('cloudChart', chartData, sunriseTime, sunsetTime, sunriseIndex, sunsetIndex, new Date());
     };
-    
-    // Crear gráfico de nubes
-    function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, currentTime) {
+
+    // Y en createCloudChart:
+    function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, sunriseIndex, sunsetIndex, currentTime) {
         const ctx = document.getElementById(canvasId)?.getContext('2d');
         if (!ctx) return;
         
         if (cloudChart) cloudChart.destroy();
         
         const isMobile = window.innerWidth < 768;
-        const sunriseHour = sunriseTime.getHours();
-        const sunsetHour = sunsetTime.getHours();
         const currentHour = currentTime.getHours();
-        
-        const sunriseIndex = findHourIndex(chartData.time, sunriseHour);
-        const sunsetIndex = findHourIndex(chartData.time, sunsetHour);
         const currentIndex = findHourIndex(chartData.time, currentHour);
         
-        createChartLegend(sunriseTime, sunsetTime, currentHour);
+        // Usar los índices proporcionados (no calcularlos nuevamente)
+        console.log(`Gráfico: Índices recibidos - Amanecer:${sunriseIndex}, Atardecer:${sunsetIndex}`);
         
-        // Solo crear gráfico si tenemos datos
+        createChartLegend(sunriseTime, sunsetTime, currentHour, sunriseIndex, sunsetIndex, currentIndex);
+        
         if (chartData.hasData) {
             cloudChart = new Chart(ctx, {
                 type: 'line',
