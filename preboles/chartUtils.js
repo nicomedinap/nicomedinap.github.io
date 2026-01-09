@@ -1,7 +1,6 @@
 /**
  * Módulo para funciones relacionadas con gráficos
  * Archivo: https://nicomedinap.github.io/preboles/chartUtils.js
- * VERSIÓN CORREGIDA - Sin valores por defecto inventados
  */
 
 (function() {
@@ -9,25 +8,16 @@
     
     let cloudChart = null;
     
-    window.updateCharts = function(meteoData, sunriseTime, sunsetTime, sunsetIndex = -1) {
+    // Función principal para actualizar gráficos
+    window.updateCharts = function(meteoData, sunriseTime, sunsetTime) {
         if (!meteoData?.cloudSeries?.time) return;
         
-        // DEBUG: Mostrar qué índice estamos recibiendo
-        console.log('CHART DEBUG: Índice puesta sol recibido:', sunsetIndex);
-        if (sunsetIndex >= 0 && meteoData.cloudSeries?.time?.[sunsetIndex]) {
-            console.log('CHART DEBUG: Hora en ese índice:', meteoData.cloudSeries.time[sunsetIndex]);
-            console.log('CHART DEBUG: Datos nubes en ese índice:');
-            console.log('- Bajas:', meteoData.cloudSeries.cloudcover_low?.[sunsetIndex]);
-            console.log('- Medias:', meteoData.cloudSeries.cloudcover_mid?.[sunsetIndex]);
-            console.log('- Altas:', meteoData.cloudSeries.cloudcover_high?.[sunsetIndex]);
-        }
-        
         const chartData = prepareChartData(meteoData.cloudSeries);
-        createCloudChart('cloudChart', chartData, sunriseTime, sunsetTime, new Date(), sunsetIndex);
+        createCloudChart('cloudChart', chartData, sunriseTime, sunsetTime, new Date());
     };
     
     // Crear gráfico de nubes
-    function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, currentTime, sunsetIndex = -1) {
+    function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, currentTime) {
         const ctx = document.getElementById(canvasId)?.getContext('2d');
         if (!ctx) return;
         
@@ -38,21 +28,9 @@
         const sunsetHour = sunsetTime.getHours();
         const currentHour = currentTime.getHours();
         
-        // Si tenemos sunsetIndex, usarlo directamente
-        // Si no, calcularlo como antes
-        let calculatedSunsetIndex = sunsetIndex;
-        if (sunsetIndex < 0) {
-            calculatedSunsetIndex = findHourIndex(chartData.time, sunsetHour);
-        }
-        
         const sunriseIndex = findHourIndex(chartData.time, sunriseHour);
+        const sunsetIndex = findHourIndex(chartData.time, sunsetHour);
         const currentIndex = findHourIndex(chartData.time, currentHour);
-        
-        // DEBUG: Verificar índices
-        console.log('CHART DEBUG: Índices calculados:');
-        console.log('- Amanecer:', sunriseIndex);
-        console.log('- Puesta sol:', calculatedSunsetIndex, '(recibido:', sunsetIndex, ')');
-        console.log('- Actual:', currentIndex);
         
         createChartLegend(sunriseTime, sunsetTime, currentHour);
         
@@ -64,7 +42,7 @@
                     labels: chartData.time,
                     datasets: createChartDatasets(chartData.clouds, isMobile)
                 },
-                options: getChartOptions(isMobile, chartData.time, sunriseIndex, calculatedSunsetIndex, currentIndex)
+                options: getChartOptions(isMobile, chartData.time, sunriseIndex, sunsetIndex, currentIndex)
             });
         } else {
             // Mostrar mensaje de no datos
