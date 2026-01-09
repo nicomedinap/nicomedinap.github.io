@@ -249,15 +249,11 @@ layout: none
           <h3> Cómo interpretar los resultados</h3>
           <div class="info-grid">
             <div class="info-card" style="border-left: 4px solid #d7191c;">
-              <h4 style="color: #d7191c;">🔴 Alta probabilidad (70-100%)</h4>
+              <h4 style="color: #d7191c;">🔴 Alta probabilidad (60-100%)</h4>
               <p>Condiciones excelentes. Es muy probable que puedas observar un arrebol espectacular si las condiciones se mantienen.</p>
             </div>
-            <div class="info-card" style="border-left: 4px solid #fdae61;">
-              <h4 style="color: #fdae61;">🟠 Media-alta (50-70%)</h4>
-              <p>Buenas condiciones. Hay posibilidades significativas de ver un arrebol, especialmente si estás en un lugar despejado.</p>
-            </div>
             <div class="info-card" style="border-left: 4px solid #ffffbf;">
-              <h4 style="color: #ffffbf;">🟡 Media (30-50%)</h4>
+              <h4 style="color: #ffffbf;">🟡 Media (30-60%)</h4>
               <p>Condiciones moderadas. Podrías ver algún color en el cielo, pero quizás no tan intenso.</p>
             </div>
             <div class="info-card" style="border-left: 4px solid #abdda4;">
@@ -267,19 +263,18 @@ layout: none
           </div>
         </div>
         <div class="info-section">
-          <h3 class="subsection-title">Contacto y redes sociales</h3>
+          <h3 class="subsection-title">Redes sociales</h3>
           <p>Para consultas técnicas, sugerencias o reportes de observaciones:</p>
           
           <div class="contact-links">
-            <a href="https://nicomedinap.github.io/about.html" target="_blank" class="contact-link">
+            <a href="https://nicomedinap.github.io/" target="_blank" class="contact-link">
               <span class="link-icon">👤</span>
-              <span class="link-text">Sobre el autor</span>
+              <span class="link-text">Blog</span>
             </a>
             
             <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank" class="contact-link">
               <span class="link-icon">📄</span>
               <span class="link-text">Artículo técnico</span>
-            </a>
             </a>
             
             <a href="https://github.com/nicomedinap" target="_blank" class="contact-link github">
