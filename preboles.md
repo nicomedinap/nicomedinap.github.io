@@ -1451,8 +1451,6 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
         document.getElementById('dataGrid').innerHTML = `
             <div class="data-item">🌅 Nubes amanecer: <strong>${Math.round(sunriseCloudTotal)}%</strong></div>
             <div class="data-item">🌇 Nubes atardecer: <strong>${Math.round(sunsetCloudTotal)}%</strong></div>
-            <div class="data-item">🌡️ Temp amanecer: <strong>${sunriseTemp.toFixed(1)}°C</strong></div>
-            <div class="data-item">🌡️ Temp atardecer: <strong>${sunsetTemp.toFixed(1)}°C</strong></div>
         `;
 
         const locationInfo = chileanCities[cityName];
