@@ -16,6 +16,143 @@ layout: none
   <link rel="stylesheet" href="https://nicomedinap.github.io/public/css/preboles_2.css">
 
   <style>
+
+    /* Estilos para los enlaces de contacto profesionales */
+    .contact-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.25rem;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .contact-link:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Colores específicos para cada tipo de enlace */
+    .contact-link.email {
+      background: rgba(234, 67, 53, 0.15);
+      border-color: rgba(234, 67, 53, 0.3);
+    }
+
+    .contact-link.email:hover {
+      background: rgba(234, 67, 53, 0.25);
+    }
+
+    .contact-link.github {
+      background: rgba(36, 41, 46, 0.15);
+      border-color: rgba(36, 41, 46, 0.3);
+    }
+
+    .contact-link.github:hover {
+      background: rgba(36, 41, 46, 0.25);
+    }
+
+    .contact-link.instagram {
+      background: linear-gradient(45deg, rgba(225, 48, 108, 0.15), rgba(245, 96, 64, 0.15));
+      border-color: rgba(225, 48, 108, 0.3);
+    }
+
+    .contact-link.instagram:hover {
+      background: linear-gradient(45deg, rgba(225, 48, 108, 0.25), rgba(245, 96, 64, 0.25));
+    }
+
+    .contact-link.youtube {
+      background: rgba(255, 0, 0, 0.15);
+      border-color: rgba(255, 0, 0, 0.3);
+    }
+
+    .contact-link.youtube:hover {
+      background: rgba(255, 0, 0, 0.25);
+    }
+
+    .contact-link.twitter {
+      background: rgba(29, 161, 242, 0.15);
+      border-color: rgba(29, 161, 242, 0.3);
+    }
+
+    .contact-link.twitter:hover {
+      background: rgba(29, 161, 242, 0.25);
+    }
+
+    .contact-link.linkedin {
+      background: rgba(10, 102, 194, 0.15);
+      border-color: rgba(10, 102, 194, 0.3);
+    }
+
+    .contact-link.linkedin:hover {
+      background: rgba(10, 102, 194, 0.25);
+    }
+
+    .link-icon {
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+    }
+
+    .link-text {
+      font-weight: 400;
+      flex-grow: 1;
+    }
+
+    .contact-note {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .contact-note p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .contact-note strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-links {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Versión compacta (opcional) */
+    @media (max-width: 480px) {
+      .contact-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .link-icon {
+        font-size: 1rem;
+        width: 20px;
+      }
+    }
+
     .observatories-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -303,31 +440,23 @@ layout: none
         <h2>ℹ️ Información sobre Préboles</h2>
         <p class="lead">Todo lo que necesitas saber sobre el predictor de arreboles y cómo interpretar los resultados.</p>
         <div class="info-section">
-          <h3>❓ ¿Qué es un arrebol?</h3>
+          <h3> ¿Qué es un arrebol?</h3>
           <p>El arrebol es un fenómeno atmosférico-óptico que ocurre durante el amanecer y atardecer, cuando la luz solar ilumina las nubes desde abajo, produciendo colores rojizos, anaranjados y rosados en el cielo.</p>
-          <div class="info-grid">
-            <div class="info-card">
-              <h4>🌅 Condiciones ideales</h4>
+              <h4>Condiciones ideales</h4>
               <ul>
                 <li>Nubes altas o medias</li>
                 <li>Cielo parcialmente nublado</li>
                 <li>Elevación solar entre -6° y 6°</li>
                 <li>Humedad relativa moderada</li>
               </ul>
-            </div>
-            <div class="info-card">
-              <h4>⚙️ Factores analizados</h4>
+              <h4>Factores analizados</h4>
               <ul>
                 <li>Nubosidad a diferentes alturas</li>
                 <li>Posición solar</li>
                 <li>Presión atmosférica</li>
                 <li>Temperatura y humedad</li>
               </ul>
-            </div>
-          </div>
-        </div>
-        <div class="info-section">
-          <h3>🎯 Cómo interpretar los resultados</h3>
+          <h3> Cómo interpretar los resultados</h3>
           <div class="info-grid">
             <div class="info-card" style="border-left: 4px solid #d7191c;">
               <h4 style="color: #d7191c;">🔴 Alta probabilidad (70-100%)</h4>
@@ -348,13 +477,51 @@ layout: none
           </div>
         </div>
         <div class="info-section">
-          <h3>📞 Contacto y Sugerencias</h3>
-          <p>Si tienes preguntas, sugerencias o quieres reportar un arrebol que observaste, contáctanos:</p>
-          <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
-            <a href="https://nicomedinap.github.io/about.html" target="_blank" style="background: rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 6px; color: white; text-decoration: none;">👤 Sobre el autor</a>
-            <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank" style="background: rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 6px; color: white; text-decoration: none;">📖 Artículo técnico</a>
-            <a href="mailto:nicolas.medina@example.com" style="background: var(--accent); padding: 10px 15px; border-radius: 6px; color: white; text-decoration: none;">✉️ Contactar por email</a>
+          <h3 class="subsection-title">Contacto y redes sociales</h3>
+          <p>Para consultas técnicas, sugerencias o reportes de observaciones:</p>
+          
+          <div class="contact-links">
+            <a href="https://nicomedinap.github.io/about.html" target="_blank" class="contact-link">
+              <span class="link-icon">👤</span>
+              <span class="link-text">Sobre el autor</span>
+            </a>
+            
+            <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank" class="contact-link">
+              <span class="link-icon">📄</span>
+              <span class="link-text">Artículo técnico</span>
+            </a>
+            
+            <a href="mailto:nicolas.medina@example.com" class="contact-link email">
+              <span class="link-icon">✉️</span>
+              <span class="link-text">Correo electrónico</span>
+            </a>
+            
+            <a href="https://github.com/nicomedinap" target="_blank" class="contact-link github">
+              <span class="link-icon">🐙</span>
+              <span class="link-text">GitHub</span>
+            </a>
+            
+            <a href="https://www.instagram.com/tu_usuario" target="_blank" class="contact-link instagram">
+              <span class="link-icon">📷</span>
+              <span class="link-text">Instagram</span>
+            </a>
+            
+            <a href="https://www.youtube.com/@tu_canal" target="_blank" class="contact-link youtube">
+              <span class="link-icon">▶️</span>
+              <span class="link-text">YouTube</span>
+            </a>
+            
+            <a href="https://twitter.com/tu_usuario" target="_blank" class="contact-link twitter">
+              <span class="link-icon">🐦</span>
+              <span class="link-text">Twitter/X</span>
+            </a>
+            
+            <a href="https://www.linkedin.com/in/tu_perfil" target="_blank" class="contact-link linkedin">
+              <span class="link-icon">💼</span>
+              <span class="link-text">LinkedIn</span>
+            </a>
           </div>
+        
         </div>
       </div>
     </div>
