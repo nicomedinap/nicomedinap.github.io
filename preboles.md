@@ -1824,5 +1824,3 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
       <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank"> <u>Sobre el modelo predictivo y los datos</u></a>
     </nav>
   </footer>
-</body>
-</html>
