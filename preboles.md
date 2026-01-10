@@ -1515,17 +1515,13 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
             sunsetContent += `<br><small style="opacity:0.8; font-size:0.85rem;">${sunsetStatus.message}</small>`;
         }
         
-        // Añadir icono de fuego si la probabilidad es alta
-        const fireIcon = '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>';
         
         predBlock.innerHTML = `
             <div class="probability" style="background: ${sunriseStyles.background}; border: ${sunriseStyles.border}; box-shadow: ${sunriseStyles.boxShadow || 'none'}; color: ${sunriseStyles.color};">
                 ${sunriseContent}
-                ${sunriseProb > 0.8 ? fireIcon : ''}
             </div>
             <div class="probability" style="background: ${sunsetStyles.background}; border: ${sunsetStyles.border}; box-shadow: ${sunsetStyles.boxShadow || 'none'}; color: ${sunsetStyles.color};">
                 ${sunsetContent}
-                ${sunsetProb > 0.8 ? fireIcon : ''}
             </div>
         `;
 
