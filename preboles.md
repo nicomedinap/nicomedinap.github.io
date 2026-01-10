@@ -52,7 +52,9 @@ layout: none
     animation: pulse 3s infinite;
 }
 </style>
-  
+
+</head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1V436Y1H14"></script>
 <script>
@@ -61,8 +63,6 @@ layout: none
   gtag('js', new Date());
   gtag('config', 'G-1V436Y1H14');
 </script>
-  
-</head>
 
 <body>
   <div class="title-container">
