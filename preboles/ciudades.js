@@ -13,6 +13,8 @@ const chileanCities = {
   "Santiago":         { lat: -33.4489, lon: -70.6693, region: "RM",         altitude: 570 },
   "Rancagua":         { lat: -34.1701, lon: -70.7406, region: "VI Región",  altitude: 572 },
   "Talca":            { lat: -35.4264, lon: -71.6554, region: "VII Región", altitude: 102 },
+  "Pichilemu":        { lat: -34.3878, lon: -72.0042, region: "VI Región", altitude: 27 },
+  "Peumo":            { lat: -34.3958, lon: -71.1647, region: "VI Región", altitude: 172 },
   "Linares":          { lat: -35.8454, lon: -71.5979, region: "VII Región", altitude: 165 },
   "Chillán":          { lat: -36.6066, lon: -72.1034, region: "Ñuble",      altitude: 124 },
   "Concepción":       { lat: -36.8269, lon: -73.0498, region: "VIII Región", altitude: 12 },
