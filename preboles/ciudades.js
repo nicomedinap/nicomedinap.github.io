@@ -15,7 +15,7 @@ const chileanCities = {
   "Pichilemu":        { lat: -34.3878, lon: -72.0042, region: "VI Región", altitude: 27 },
   "Peumo":            { lat: -34.3958, lon: -71.1647, region: "VI Región", altitude: 172 },
   "San Fernando":     { lat: -34.5867, lon: -70.9911, region: "VI Región", altitude: 340 },
-  "Chimbarongo":      { lat: -34.7089. lon: -71.0458, region: "VI Región", altitude: 307 },
+  "Chimbarongo":      { lat: -34.7089, lon: -71.0458, region: "VI Región", altitude: 307 },
   "Talca":            { lat: -35.4264, lon: -71.6554, region: "VII Región", altitude: 102 },
   "Linares":          { lat: -35.8454, lon: -71.5979, region: "VII Región", altitude: 165 },
   "Chillán":          { lat: -36.6066, lon: -72.1034, region: "Ñuble",      altitude: 124 },
