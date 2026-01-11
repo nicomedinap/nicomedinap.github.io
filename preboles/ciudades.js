@@ -103,14 +103,6 @@ const chileanCities = {
     operator: "Municipal",
     altitude: 1120
   },
-  "Observatorio Collowara": {
-    lat: -31.7833,
-    lon: -71.2333,
-    region: "Coquimbo",
-    type: "observatory",
-    operator: "Privado",
-    altitude: 1300
-  }
 };
 
 // Exportar ciudades
