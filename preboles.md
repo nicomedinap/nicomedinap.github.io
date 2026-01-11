@@ -115,7 +115,7 @@ layout: none
     }
   }
 </style>
-}
+
 </style>
   
 </head>
