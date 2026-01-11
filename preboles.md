@@ -342,8 +342,6 @@ layout: none
                   <span class="link-icon">📄</span>
                   <span class="link-text">Artículo técnico</span>
                 </a>
-              
-                </a>
                 
                 <a href="https://github.com/nicomedinap" target="_blank" class="contact-link github">
                   <span class="link-icon">🐙</span>
@@ -359,7 +357,7 @@ layout: none
           </div>
         </div>
       </div>
-    </body>
+    
 
 
     <!-- modulos -->
@@ -1759,5 +1757,4 @@ layout: none
           <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank"> <u>Sobre el modelo predictivo y los datos</u></a>
         </nav>
       </footer>
-
-</html>
+      
