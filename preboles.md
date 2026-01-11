@@ -78,7 +78,6 @@ layout: none
     width: 20px;
   }
 
-  <style>
   /* Agregar estos estilos al bloque <style> existente */
   #tab-observatories .observatories-grid {
     display: flex;
@@ -114,8 +113,7 @@ layout: none
       height: 400px !important;
     }
   }
-</style>
-
+}
 </style>
   
 </head>
@@ -371,6 +369,62 @@ layout: none
 <!-- Script principal -->
 <script>
   
+    function clearMapLayers() {
+        console.log("Limpiando capas del mapa...");
+        
+        // Limpiar heatLayer
+        if (heatLayer) {
+            try {
+                heatLayer.clearLayers();
+                if (map && map.hasLayer(heatLayer)) {
+                    map.removeLayer(heatLayer);
+                }
+            } catch (e) {
+                console.warn("Error limpiando heatLayer:", e);
+            }
+            heatLayer = null;
+        }
+        
+        // Limpiar labelLayer
+        if (labelLayer) {
+            try {
+                labelLayer.clearLayers();
+                if (map && map.hasLayer(labelLayer)) {
+                    map.removeLayer(labelLayer);
+                }
+            } catch (e) {
+                console.warn("Error limpiando labelLayer:", e);
+            }
+            labelLayer = null;
+        }
+    }
+
+    // Función actualizada para updateHeatmap que limpia antes de generar
+    async function updateHeatmap(cityLat, cityLon) {
+        if (!map || !heatmapEnabled) return;
+        
+        // 1. Limpiar capas anteriores
+        clearMapLayers();
+        
+        // 2. Crear nuevas capas
+        heatLayer = L.layerGroup().addTo(map);
+        labelLayer = L.layerGroup().addTo(map);
+        
+        document.getElementById('mapLoading').style.display = 'block';
+        
+        try {
+            const sunsetAzimuth = calculateSunsetAzimuth(cityLat, cityLon);
+            await generate7HexagonGrid(cityLat, cityLon, sunsetAzimuth);
+        } catch (error) {
+            console.error('Error actualizando mapa de calor:', error);
+            log('Error creando hexágonos: ' + (error && error.message));
+        } finally {
+            document.getElementById('mapLoading').style.display = 'none';
+        }
+    }
+
+
+
     // Función para obtener el índice exacto de la puesta de sol
     function getSunsetIndex(meteoData, lat, lon, isSunrise = false) {
         if (!meteoData?.cloudSeries?.time || meteoData.cloudSeries.time.length === 0) {
@@ -626,6 +680,9 @@ layout: none
     function volverMenu() {
       // Ocultar el predictor
       document.getElementById('appContainer').style.display = 'none';
+
+      // Limpiar el mapa
+      clearMapLayers();
       
       // Mostrar el menú correspondiente
       if (currentLocation.originalTab === 'cities') {
@@ -1230,17 +1287,16 @@ layout: none
     }
 
     function toggleHeatmap() {
-      heatmapEnabled = !heatmapEnabled;
-      const button = document.getElementById('toggleHeatmap');
-      
-      if (heatmapEnabled && currentState.lat && currentState.lon) {
-        button.classList.add('active');
-        updateHeatmap(currentState.lat, currentState.lon);
-      } else {
-        button.classList.remove('active');
-        if (heatLayer) { try { map.removeLayer(heatLayer); } catch(e) {} heatLayer = null; }
-        if (labelLayer) { try { map.removeLayer(labelLayer); } catch(e) {} labelLayer = null; }
-      }
+        heatmapEnabled = !heatmapEnabled;
+        const button = document.getElementById('toggleHeatmap');
+        
+        if (heatmapEnabled && currentState.lat && currentState.lon) {
+            button.classList.add('active');
+            updateHeatmap(currentState.lat, currentState.lon);
+        } else {
+            button.classList.remove('active');
+            clearMapLayers();
+        }
     }
 
     function toggleLabels() {
@@ -1264,6 +1320,10 @@ layout: none
         log(`Predicción para ${cityName || `${lat},${lon}`}`);
 
         try {
+
+            // Limpiar mapa antes de cargar nueva ciudad
+            clearMapLayers();
+            
             initMap(lat, lon, cityName);
             const meteoData = await getMeteoData(lat, lon);
             
@@ -1277,7 +1337,7 @@ layout: none
             const sunriseIndex = getSunsetIndex(meteoData, lat, lon, true);  // true = amanecer
             const sunsetIndex = getSunsetIndex(meteoData, lat, lon, false); // false = atardecer
             
-            console.log(`Índices para ${cityName}: Amanecer=${sunriseIndex}, Atardecer=${sunsetIndex}`);
+            // console.log(`Índices para ${cityName}: Amanecer=${sunriseIndex}, Atardecer=${sunsetIndex}`);
             
             // Obtener elevaciones solares
             const sunriseElev = SunCalc.getPosition(sunrise, lat, lon).altitude * (180/Math.PI);
@@ -1404,11 +1464,9 @@ layout: none
         predBlock.innerHTML = `
             <div class="probability" style="background: ${sunriseStyles.background}; border: ${sunriseStyles.border}; box-shadow: ${sunriseStyles.boxShadow || 'none'}; color: ${sunriseStyles.color};">
                 🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%
-                ${sunriseProb > 0.8 ? '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>' : ''}
             </div>
             <div class="probability" style="background: ${sunsetStyles.background}; border: ${sunriseStyles.border}; box-shadow: ${sunsetStyles.boxShadow || 'none'}; color: ${sunsetStyles.color};">
                 🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%
-                ${sunsetProb > 0.8 ? '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>' : ''}
             </div>
         `;
 
