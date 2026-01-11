@@ -9,60 +9,116 @@ layout: none
   
   <!-- Dependencias externas -->
   <script src="https://unpkg.com/suncalc"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <link rel="stylesheet" href="https://nicomedinap.github.io/public/css/preboles_2.css">
 
 <style>
-  /* Añadir al final del CSS */
-.data-item small {
-    display: block;
-    margin-top: 2px;
-    line-height: 1.3;
-}
-
-.sun-time small {
-    display: block;
-    margin-top: 3px;
-    opacity: 0.7;
-}
-
-.probability small {
-    display: block;
-    margin-top: 5px;
+  @media (max-width: 480px) {
+  #cityMenu { grid-template-columns: repeat(2, 1fr); }
+  .container, .tabs-container { padding: 10px; }
+  .panel { padding: 10px; }
+  h1 { font-size: 1.2rem; }
+  
+  .title {
+    font-size: 3.3rem !important;
+    letter-spacing: 0.5px !important;
+    margin: 20px 0 15px !important;
+  }
+  
+  .subtitle { font-size: 1.7rem; letter-spacing: 3px; }
+  .data-item { padding: 8px; font-size: 0.85rem; }
+  
+  .probability { padding: 10px; font-size: 24px; }
+  .probability span { font-size: 28px; }
+  
+  #satelliteImage { max-height: 200px; }
+  .map-wrapper { height: 450px; }
+  
+  .probability-legend {
+    min-width: 200px;
+    font-size: 0.7rem;
+    padding: 8px 12px;
+  }
+  
+  .legend-labels { font-size: 0.6rem; }
+  
+  .map-toggle {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    min-width: 60px;
+    max-width: 100px;
+    width: auto;
+  }
+  
+  .charts { height: 350px; margin-top: 12px; }
+  
+  .chart-time-legend {
+    gap: 6px;
+    margin: 2px 0 6px;
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+  
+  .tab-btn {
+    min-width: 80px;
+    padding: 8px 12px;
     font-size: 0.85rem;
-    opacity: 0.9;
-    line-height: 1.3;
-}
+  }
+  
+  .contact-link {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .link-icon {
+    font-size: 1rem;
+    width: 20px;
+  }
 
-/* Animación para el tiempo que falta */
-@keyframes pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-}
-
-.data-item[style*="border-left: 3px solid #4CAF50"] {
-    animation: pulse 2s infinite;
-}
-
-.data-item[style*="border-left: 3px solid #FF9800"] {
-    animation: pulse 3s infinite;
+  <style>
+  /* Agregar estos estilos al bloque <style> existente */
+  #tab-observatories .observatories-grid {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 20px;
+  }
+  
+  #tab-observatories .city-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+  
+  #observatoriesMap {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 100% !important;
+  }
+  
+  @media (max-width: 768px) {
+    #tab-observatories .city-menu {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      max-height: 250px;
+    }
+    
+    #tab-observatories .panel {
+      height: 400px !important;
+    }
+  }
+</style>
 }
 </style>
-
+  
 </head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1V436Y1H14"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-1V436Y1H14');
-</script>
 
 <body>
   <div class="title-container">
@@ -89,7 +145,7 @@ layout: none
   <div class="tabs-container">
   <div class="tabs-header">
     <button class="tab-btn active" data-tab="cities" onclick="switchTab('cities')">🏙️ Ciudades</button>
-    <button class="tab-btn" data-tab="observatories" onclick="switchTab('observatories')">🔭 Observatorios</button>
+    <button class="tab-btn" data-tab="observatories" onclick="switchTab('observatories')" style="font-size: 0.95em; display: flex; align-items: center; justify-content: center; gap: 5px;"> 🔭 Observatorios</button>
     <button class="tab-btn" data-tab="ranking" onclick="switchTab('ranking')">📊 Ranking</button>
     <button class="tab-btn" data-tab="info" onclick="switchTab('info')">ℹ️ Información</button>
   </div>
@@ -131,7 +187,7 @@ layout: none
             <!-- 2. MAPA -->
             <div class="map-panel panel">
               <div><strong>Mapa de probabilidad de arrebol</strong></div>
-              <div class="map-wrapper" style="height: 500px;">
+              <div class="map-wrapper" style="height: 550px;">
                 <div id="map"></div>
                 <div class="probability-legend">
                   <div class="legend-title">Probabilidad de arrebol</div>
@@ -187,7 +243,7 @@ layout: none
           <!-- MAPA DE OBSERVATORIOS -->
           <div class="panel" style="height: 600px;">
             <div><strong>📍 Ubicación de Observatorios</strong></div>
-            <div class="map-wrapper" style="height: 550px;">
+            <div class="map-wrapper" style="height: 50px;">
               <div id="observatoriesMap"></div>
               <div class="map-legend" style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 8px 12px; border-radius: 6px; color: white; font-size: 0.85rem;">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -258,11 +314,15 @@ layout: none
           <h3> Cómo interpretar los resultados</h3>
           <div class="info-grid">
             <div class="info-card" style="border-left: 4px solid #d7191c;">
-              <h4 style="color: #d7191c;">🔴 Alta probabilidad (60-100%)</h4>
+              <h4 style="color: #d7191c;">🔴 Alta probabilidad (70-100%)</h4>
               <p>Condiciones excelentes. Es muy probable que puedas observar un arrebol espectacular si las condiciones se mantienen.</p>
             </div>
+            <div class="info-card" style="border-left: 4px solid #fdae61;">
+              <h4 style="color: #fdae61;">🟠 Media-alta (50-70%)</h4>
+              <p>Buenas condiciones. Hay posibilidades significativas de ver un arrebol, especialmente si estás en un lugar despejado.</p>
+            </div>
             <div class="info-card" style="border-left: 4px solid #ffffbf;">
-              <h4 style="color: #ffffbf;">🟡 Media (30-60%)</h4>
+              <h4 style="color: #ffffbf;">🟡 Media (30-50%)</h4>
               <p>Condiciones moderadas. Podrías ver algún color en el cielo, pero quizás no tan intenso.</p>
             </div>
             <div class="info-card" style="border-left: 4px solid #abdda4;">
@@ -272,18 +332,20 @@ layout: none
           </div>
         </div>
         <div class="info-section">
-          <h3 class="subsection-title">Redes sociales</h3>
+          <h3 class="subsection-title">Contacto y redes sociales</h3>
           <p>Para consultas técnicas, sugerencias o reportes de observaciones:</p>
           
           <div class="contact-links">
-            <a href="https://nicomedinap.github.io/" target="_blank" class="contact-link">
+            <a href="https://nicomedinap.github.io/about.html" target="_blank" class="contact-link">
               <span class="link-icon">👤</span>
-              <span class="link-text">Blog</span>
+              <span class="link-text">Sobre el autor</span>
             </a>
             
             <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank" class="contact-link">
               <span class="link-icon">📄</span>
               <span class="link-text">Artículo técnico</span>
+            </a>
+          
             </a>
             
             <a href="https://github.com/nicomedinap" target="_blank" class="contact-link github">
@@ -303,11 +365,12 @@ layout: none
 
 <!-- modulos -->
 <script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
-<!-- <script src="https://nicomedinap.github.io/preboles/redProbability.js"></script> -->
+<script src="https://nicomedinap.github.io/preboles/redProbability.js"></script>
 <script src="https://nicomedinap.github.io/preboles/chartUtils.js"></script>
 
 <!-- Script principal -->
 <script>
+  
     // Función para obtener el índice exacto de la puesta de sol
     function getSunsetIndex(meteoData, lat, lon, isSunrise = false) {
         if (!meteoData?.cloudSeries?.time || meteoData.cloudSeries.time.length === 0) {
@@ -319,9 +382,7 @@ layout: none
         const now = new Date();
         const times = SunCalc.getTimes(now, lat, lon);
         const targetTime = isSunrise ? times.sunrise : times.sunset;
-        
-        console.log(`DEBUG - Hora ${isSunrise ? 'amanecer' : 'atardecer'} LOCAL:`, targetTime.toLocaleString('es-CL'));
-        
+                
         // 2. Convertir a formato YYYY-MM-DDTHH:00
         const year = targetTime.getFullYear();
         const month = String(targetTime.getMonth() + 1).padStart(2, '0');
@@ -329,7 +390,7 @@ layout: none
         const hour = String(targetTime.getHours()).padStart(2, '0');
         
         const targetFormatted = `${year}-${month}-${day}T${hour}:00`;
-        console.log(`DEBUG - Formato buscado (${isSunrise ? 'amanecer' : 'atardecer'}):`, targetFormatted);
+        // console.log(`DEBUG - Formato buscado (${isSunrise ? 'amanecer' : 'atardecer'}):`, targetFormatted);
         
         // 3. Buscar en los datos
         const hrs = meteoData.cloudSeries.time;
@@ -362,91 +423,6 @@ layout: none
         console.log(`  Diferencia: ${Math.round(minDiff / 60000)} minutos`);
         
         return closestIndex;
-    }
-
-
-    // Función para calcular el tiempo hasta que el sol alcance -3 grados
-    function calculateTimeToMinus3Degrees(lat, lon, isSunrise = false) {
-        const now = new Date();
-        const times = SunCalc.getTimes(now, lat, lon);
-        const sunset = times.sunset;
-        const sunrise = times.sunrise;
-        
-        // Empezar desde la puesta/amanecer y buscar cuando la elevación sea -3°
-        const targetTime = isSunrise ? sunrise : sunset;
-        const targetElevation = isSunrise ? 3 : -3; // 3° para amanecer, -3° para atardecer
-        
-        // Usar búsqueda binaria para encontrar el momento exacto
-        let low = isSunrise ? new Date(sunrise.getTime() - 3600000) : new Date(sunset.getTime());
-        let high = isSunrise ? new Date(sunrise.getTime() + 3600000) : new Date(sunset.getTime() + 7200000); // 2 horas después
-        let mid;
-        
-        // Búsqueda por aproximación
-        for (let i = 0; i < 20; i++) { // 20 iteraciones para precisión
-            mid = new Date((low.getTime() + high.getTime()) / 2);
-            const elev = SunCalc.getPosition(mid, lat, lon).altitude * (180/Math.PI);
-            
-            if (Math.abs(elev - targetElevation) < 0.01) { // Precisión de 0.01°
-                break;
-            }
-            
-            if ((isSunrise && elev < targetElevation) || (!isSunrise && elev > targetElevation)) {
-                low = mid;
-            } else {
-                high = mid;
-            }
-        }
-        
-        return mid;
-    }
-
-    // Función para calcular el tiempo restante en formato legible
-    function formatTimeRemaining(targetTime) {
-        const now = new Date();
-        const diffMs = targetTime.getTime() - now.getTime();
-        
-        if (diffMs <= 0) {
-            return " ";
-        }
-        
-        const diffMinutes = Math.floor(diffMs / 60000);
-        const diffHours = Math.floor(diffMinutes / 60);
-        const remainingMinutes = diffMinutes % 60;
-        
-        if (diffHours > 0) {
-            return `en ${diffHours}h ${remainingMinutes}m`;
-        } else if (diffMinutes > 0) {
-            return `en ${diffMinutes}m`;
-        } else {
-            return "¡muy pronto!";
-        }
-    }
-
-    // Función para calcular si ya pasó el momento óptimo
-    function getOptimalTimeStatus(targetTime, isSunrise = false) {
-        const now = new Date();
-        const diffMs = targetTime.getTime() - now.getTime();
-        const eventType = isSunrise ? "amanecer" : "atardecer";
-        
-        if (diffMs > 0) {
-            return {
-                status: "pending",
-                message: `Máximo arrebol ${formatTimeRemaining(targetTime)}`,
-                color: "#4CAF50", // Verde
-            };
-        } else if (diffMs > -1800000) { // Menos de 30 minutos después
-            return {
-                status: "just_passed",
-                message: `El máximo del arrebol acaba de pasar (hace ${Math.abs(Math.floor(diffMs / 60000))}m)`,
-                color: "#FF9800" // Naranja
-            };
-        } else {
-            return {
-                status: "passed",
-                message: ` `,
-                color: "#9E9E9E", // Gris
-            };
-        }
     }
 
     // Función para obtener datos en un índice específico
@@ -547,7 +523,6 @@ layout: none
       });
       
       // 5. SI ESTAMOS EN PREDICCIÓN, SOLO MANEJAR EL CAMBIO DE PESTAÑA
-      // NO OCULTAR/MOSTRAR NADA AUTOMÁTICAMENTE
       const isViewingPrediction = document.getElementById('appContainer').style.display === 'block';
       
       if (isViewingPrediction) {
@@ -556,13 +531,9 @@ layout: none
         if (tabName !== 'cities') {
           // Si cambiamos a otra pestaña que no sea "cities", ocultar la predicción
           document.getElementById('appContainer').style.display = 'none';
-          
-          // Pero NO mostrar automáticamente ningún menú
-          // El menú se mostrará cuando el usuario haga clic en "Volver"
         }
         // Si cambiamos a "cities" y estamos viendo una predicción, mantenerla visible
       } else {
-        // Si NO estamos viendo una predicción, manejar los menús normalmente
         if (tabName === 'cities') {
           document.getElementById('cityMenu').style.display = 'grid';
           document.getElementById('appContainer').style.display = 'none';
@@ -684,9 +655,9 @@ layout: none
       localStorage.removeItem('locationType');
     }
 
-    /* ==========================================================================
-       FUNCIONES PARA CARGAR OBSERVATORIOS (ACTUALIZADAS)
-       ========================================================================== */
+    /* ====================================
+       FUNCIONES PARA CARGAR OBSERVATORIOS 
+       ==================================== */
     let observatoriesLoading = false;
 
     async function initObservatoryMenu() {
@@ -788,7 +759,7 @@ layout: none
                 low_e, mid_e, high_e, 
                 sunsetElev, false, 
                 sunsetData?.temperature || meteoData.current.temperature,
-                sunsetData?.pressure || meteoData.current.pressure
+                sunsetData?.pressure || meteoData.current.pressure, meteoData.current.humidity
             );
             updateObservatoryCardUI(nombre, Math.round(probAtardecer * 100), info);
         }
@@ -864,9 +835,6 @@ layout: none
           `);
       }
       
-      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Esri'
-      }).addTo(obsMap);
     }
 
     /* ==========================================================================
@@ -878,8 +846,7 @@ layout: none
       
       try {
         // SOLO solicitamos los datos que realmente necesitamos
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=cloudcover,cloudcover_low,cloudcover_mid,cloudcover_high,pressure_msl,relativehumidity_2m,temperature_2m&timezone=auto`;
-        const res = await fetch(url);
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=cloudcover,cloudcover_low,cloudcover_mid,cloudcover_high,pressure_msl,relativehumidity_2m,temperature_2m,dewpoint_2m&timezone=auto`;        const res = await fetch(url);
         const data = await res.json();
         
         if (!data.hourly) return getFallbackData();
@@ -892,8 +859,15 @@ layout: none
           pressure: data.hourly.pressure_msl?.[currentIdx] || 1013,
           humidity: data.hourly.relativehumidity_2m?.[currentIdx] || 50,
           temperature: data.hourly.temperature_2m?.[currentIdx] || 20,
+          dewpoint: data.hourly.dewpoint_2m?.[currentIdx] || 10, // NUEVO
           timestamp: data.hourly.time?.[currentIdx] || new Date().toISOString()
-        } : { pressure: 1013, humidity: 50, temperature: 20, timestamp: new Date().toISOString() };
+        } : { 
+          pressure: 1013, 
+          humidity: 50, 
+          temperature: 20, 
+          dewpoint: 10, // VALOR POR DEFECTO
+          timestamp: new Date().toISOString() 
+        };
         
         const result = { cloudSeries: data.hourly, current: currentData };
         API_CACHE[cacheKey] = result;
@@ -971,7 +945,7 @@ layout: none
         const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
         const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
         
-        // Obtener datos en índice exacto (igual que la predicción principal)
+        // Obtener datos en índice 
         const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
         
         const sunsetLow = sunsetData?.low;
@@ -983,7 +957,7 @@ layout: none
             sunsetLow, sunsetMid, sunsetHigh, 
             sunsetElev, false,
             sunsetData?.temperature || meteoData.current.temperature,
-            sunsetData?.pressure || meteoData.current.pressure
+            sunsetData?.pressure || meteoData.current.pressure, meteoData.current.humidity
         );
         
         updateCityCardUI(nombre, Math.round(probAtardecer * 100));
@@ -1176,66 +1150,8 @@ layout: none
       }
     }
 
-
-// redProbability.js - VERSIÓN CON PRIORIDAD ALTAS > MEDIAS
-function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, temperature = 20, pressure = 1013) {
-  
-  const lowPct  = Math.max(0, Math.min(100, Number(low)  || 0));
-  const midPct  = Math.max(0, Math.min(100, Number(mid)  || 0));
-  const highPct = Math.max(0, Math.min(100, Number(high) || 0));
-
-  // ===== DISPERSIÓN RAYLEIGH =====
-  const P0 = 1013;
-  const P = Math.max(950, Math.min(1050, Number(pressure) || P0));
-  const gamma = 1.0;
-  const rayleighIntensity = Math.pow(P / P0, gamma);
-
-  const P_min = 950;
-  const P_max = 1050;
-  const rayleighMin = Math.pow(P_min / P0, gamma);
-  const rayleighMax = Math.pow(P_max / P0, gamma);
-  const rayleighFactor = (rayleighIntensity - rayleighMin) / (rayleighMax - rayleighMin);
-
-  // ===== GEOMETRÍA A SOL/SALIDA =====
-  const idealElev = isSunrise ? 3.0 : -3.0;
-  const geomSigma = 4.0;
-  const geomScore = Math.exp(-Math.pow((elevDeg - idealElev) / geomSigma, 2));
-
-  const cloudScore = 
-    0.70 * (highPct / 100) +
-    0.30 * (midPct / 100) -
-    0.20 * (lowPct / 100);  // bajas penalizan
-
-  // Boost si hay bastantes nubes altas
-  let highBoost = 0;
-  if (highPct > 40) highBoost = 0.05;
-  else if (highPct > 70) highBoost = 0.15;
-
-  const score =     
-    0.80 * cloudScore +   // más peso a las nubes
-    0.10 * rayleighFactor +
-    0.10 * geomScore +
-    highBoost;
-
-  // ===== SIGMOIDE =====
-  let p = 1 / (1 + Math.exp(-7 * (score - 0.50)));
-
-  // ===== REGLAS ESPECIALES =====
-  if (lowPct > 60) p *= Math.max(0.1, 1 - lowPct/100);
-
-  const totalCloud = (lowPct + midPct + highPct) / 3;
-  if (totalCloud > 90) p *= 0.25;
-  else if (totalCloud > 70) p *= 0.50;
-
-  // Si casi no hay bajas y sí altas → mejor aún
-  // if (lowPct < 20 && highPct > 50) p = Math.min(0.99, p * 1.3);
-
-  return Math.max(0.01, Math.min(0.99, p));
-}
-
-    // Exponer globalmente
-    window.computeRedProbability = computeRedProbability;
-
+    // redProbability.js, para
+    
     function computeProbabilityFromData(weatherData, lat, lon) {
         const { meteoData } = weatherData;
         if (!meteoData.cloudSeries) return 0;
@@ -1253,7 +1169,7 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
         console.log(`Heatmap ${lat},${lon}: Índice atardecer=${sunsetIndex}, datos: low=${low_e}, mid=${mid_e}, high=${high_e}`);
         
         return computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, 
-                                    meteoData.current.temperature, meteoData.current.pressure);
+                                    meteoData.current.temperature, meteoData.current.pressure, meteoData.current.humidity);
     }
 
     async function updateHeatmap(cityLat, cityLon) {
@@ -1376,14 +1292,14 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
                 sunriseData?.low, sunriseData?.mid, sunriseData?.high, 
                 sunriseElev, true, 
                 sunriseData?.temperature || meteoData.current.temperature,
-                sunriseData?.pressure || meteoData.current.pressure
+                sunriseData?.pressure || meteoData.current.pressure, meteoData.current.humidity
             );
             
             const sunsetProb = computeRedProbability(
                 sunsetData?.low, sunsetData?.mid, sunsetData?.high,
                 sunsetElev, false,
                 sunsetData?.temperature || meteoData.current.temperature,
-                sunsetData?.pressure || meteoData.current.pressure
+                sunsetData?.pressure || meteoData.current.pressure, meteoData.current.humidity
             );
             
             // Actualizar estado
@@ -1397,17 +1313,6 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
                 // Guardar índices para consistencia
                 sunriseIndex, sunsetIndex
             };
-
-            // Calcular tiempos óptimos
-            const optimalSunriseTime = calculateTimeToMinus3Degrees(lat, lon, true);
-            const optimalSunsetTime = calculateTimeToMinus3Degrees(lat, lon, false);
-            
-            const sunriseStatus = getOptimalTimeStatus(optimalSunriseTime, true);
-            const sunsetStatus = getOptimalTimeStatus(optimalSunsetTime, false);
-            
-            // Actualizar UI con tiempos óptimos
-            updateUI(cityName, lat, lon, meteoData, sunrise, sunset, 
-                    sunriseData, sunsetData, sunriseProb, sunsetProb, sunriseStatus, sunsetStatus);
             
             // Actualizar UI con datos consistentes
             updateUI(cityName, lat, lon, meteoData, sunrise, sunset, 
@@ -1439,13 +1344,6 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
         const fechaStr = dataTime.toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric' });
         const horaStr = dataTime.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
 
-        // Calcular tiempos óptimos
-        const optimalSunriseTime = calculateTimeToMinus3Degrees(lat, lon, true);
-        const optimalSunsetTime = calculateTimeToMinus3Degrees(lat, lon, false);
-        
-        const sunriseStatus = getOptimalTimeStatus(optimalSunriseTime, true);
-        const sunsetStatus = getOptimalTimeStatus(optimalSunsetTime, false);
-        
         // Mostrar datos específicos de cada hora
         const sunriseCloudTotal = sunriseData?.total || 0;
         const sunsetCloudTotal = sunsetData?.total || 0;
@@ -1456,10 +1354,11 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
         const sunriseHumidity = sunriseData?.humidity || meteoData.current.humidity;
         const sunsetHumidity = sunsetData?.humidity || meteoData.current.humidity;
 
-        // AÑADIR INFORMACIÓN DE TIEMPO ÓPTIMO AL dataGrid
         document.getElementById('dataGrid').innerHTML = `
             <div class="data-item">🌅 Nubes amanecer: <strong>${Math.round(sunriseCloudTotal)}%</strong></div>
             <div class="data-item">🌇 Nubes atardecer: <strong>${Math.round(sunsetCloudTotal)}%</strong></div>
+            <div class="data-item">🌡️ Temp amanecer: <strong>${sunriseTemp.toFixed(1)}°C</strong></div>
+            <div class="data-item">🌡️ Temp atardecer: <strong>${sunsetTemp.toFixed(1)}°C</strong></div>
         `;
 
         const locationInfo = chileanCities[cityName];
@@ -1480,57 +1379,36 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
             locationHTML += `</small>`;
         }
         
-        //AGREGAR AL HTML
-        //locationHTML += `<br><small style="opacity:0.8; font-size:0.9rem;">📅 Datos: ${fechaStr} 🕒 ${horaStr}</small>`;
-        //
-
+        locationHTML += `<br><small style="opacity:0.8; font-size:0.9rem;">📅 Datos: ${fechaStr} 🕒 ${horaStr}</small>`;
+        
         document.getElementById('locationText').innerHTML = locationHTML;
 
-        // AÑADIR HORAS ÓPTIMAS AL sunTimes
-        const optimalSunriseStr = optimalSunriseTime.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
-        const optimalSunsetStr = optimalSunsetTime.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
-        
         document.getElementById('sunTimes').innerHTML = `
-            <div class="sun-time">
-                🌅 Amanecer: ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}
-                <br>
-            </div>
-            <div class="sun-time">
-                🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}
-                <br><small style="opacity:0.7; font-size:0.8rem;">Máximo arrebol: ${optimalSunsetStr}</small>
-            </div>
+            <div class="sun-time">🌅 Amanecer: ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
+            <div class="sun-time">🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
         `;
 
-        updatePredictions(sunriseProb, sunsetProb, sunriseStatus, sunsetStatus);
+        updatePredictions(sunriseProb, sunsetProb);
+
+        
     }
 
         /* ==========================================================================
       FUNCIÓN UPDATE PREDICTIONS (FALTANTE)
       ========================================================================== */
-    function updatePredictions(sunriseProb, sunsetProb, sunriseStatus = null, sunsetStatus = null) {
+    function updatePredictions(sunriseProb, sunsetProb) {
         const predBlock = document.getElementById('predictions');
         const sunriseStyles = getProbabilityStyles(sunriseProb);
         const sunsetStyles = getProbabilityStyles(sunsetProb);
-        
-        // Crear contenido para amanecer
-        let sunriseContent = `🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%`;
-        if (sunriseStatus) {
-            sunriseContent += `<br><small style="opacity:0.8; font-size:0.85rem;">${sunriseStatus.message}</small>`;
-        }
-        
-        // Crear contenido para atardecer
-        let sunsetContent = `🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%`;
-        if (sunsetStatus) {
-            sunsetContent += `<br><small style="opacity:0.8; font-size:0.85rem;">${sunsetStatus.message}</small>`;
-        }
-        
-        
+
         predBlock.innerHTML = `
             <div class="probability" style="background: ${sunriseStyles.background}; border: ${sunriseStyles.border}; box-shadow: ${sunriseStyles.boxShadow || 'none'}; color: ${sunriseStyles.color};">
-                ${sunriseContent}
+                🌅 Amanecer: ${(sunriseProb*100).toFixed(0)}%
+                ${sunriseProb > 0.8 ? '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>' : ''}
             </div>
-            <div class="probability" style="background: ${sunsetStyles.background}; border: ${sunsetStyles.border}; box-shadow: ${sunsetStyles.boxShadow || 'none'}; color: ${sunsetStyles.color};">
-                ${sunsetContent}
+            <div class="probability" style="background: ${sunsetStyles.background}; border: ${sunriseStyles.border}; box-shadow: ${sunsetStyles.boxShadow || 'none'}; color: ${sunsetStyles.color};">
+                🌇 Atardecer: ${(sunsetProb*100).toFixed(0)}%
+                ${sunsetProb > 0.8 ? '<div style="display:inline-block; margin-left:10px; animation: fire 1s infinite alternate;">🔥</div>' : ''}
             </div>
         `;
 
@@ -1600,7 +1478,7 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
                         low_e, mid_e, high_e, 
                         sunsetElev, false, 
                         sunsetData?.temperature || meteoData.current.temperature,
-                        sunsetData?.pressure || meteoData.current.pressure
+                        sunsetData?.pressure || meteoData.current.pressure, meteoData.current.humidity
                     );
                     
                     const probabilityPercent = Math.round(probAtardecer * 100);
@@ -1822,3 +1700,5 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
       <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank"> <u>Sobre el modelo predictivo y los datos</u></a>
     </nav>
   </footer>
+</body>
+</html>
