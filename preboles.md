@@ -1,6 +1,7 @@
 ---
 layout: none
 ---
+
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -28,14 +29,10 @@ layout: none
     </div>
   </div>
 
-  <p class="lead-with-bg">
-    <span class="lead-content">
-      El arrebol es el fenómeno óptico donde la luz colorea las nubes de rojo, naranjo o rosado. 
-      Las nubes reflejan diferentes colores dependiendo del tipo de nube, y con eso es posible hacer una predicción. 
-      Elige tu ciudad y prueba tu suerte!!
-    </span>
-  </p>
-
+  <!--
+  <p class="lead-with-bg"><span class="lead-content">El arrebol es el fenómeno óptico donde la luz colorea las nubes de rojo, naranjo o rosado. Las nubes reflejan diferentes colores dependiendo del tipo de nube, y con eso es posible hacer una predicción. Elige tu ciudad y prueba tu suerte!!</span></p>
+  -->
+  
   <div id="loadingIndicator" style="text-align:center; padding:20px;">
     <div class="loading" style="width:40px; height:40px; margin:0 auto;"></div>
     <p style="margin-top:10px;">Obteniendo datos...</p>
@@ -1532,7 +1529,7 @@ layout: none
     }
 
     function createRankingTable(cities) {
-        let html = '<table class="ranking-table"><tr><th>#</th><th>Ciudad</th><th>Región</th><th>Probabilidad</th><th>Máximo del arrebol</th></tr>';
+        let html = '<table class="ranking-table"><tr><th>#</th><th>Ciudad</th><th>Prob.</th><th>Máximo del arrebol</th></tr>';
         cities.forEach((city, index) => {
             const rank = index + 1;
             const color = getProbabilityColor(city.percent);
@@ -1542,7 +1539,6 @@ layout: none
                 <tr onclick="showPrediction('${city.name}', 'city')" style="cursor: pointer;">
                     <td class="rank">${rank}</td>
                     <td>${city.name}</td>
-                    <td>${city.region}</td>
                     <td style="color: ${color}"><strong>${city.percent}%</strong></td>
                     <td><small>${optimalTimeStr}</small></td>
                 </tr>
@@ -1699,3 +1695,5 @@ layout: none
       <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank"> <u>Sobre el modelo predictivo y los datos</u></a>
     </nav>
   </footer>
+</body>
+</html>
