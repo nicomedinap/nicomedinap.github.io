@@ -467,7 +467,7 @@ canvas {
    ========================================================================== */
 .map-wrapper {
   position: relative;
-  height: 665px !important; 
+  height: 662px !important; 
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
