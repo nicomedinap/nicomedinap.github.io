@@ -161,7 +161,7 @@ layout: none
     <div id="tab-ranking" class="tab-content">
       <div class="container">
         <h2> Ranking de Probabilidades</h2>
-        <p class="lead" style="margin-left: auto; margin-right: auto;" >Las ciudades con mayor probabilidad de arrebol según las condiciones actuales.</p>
+        <!--  <p class="lead" style="margin-left: auto; margin-right: auto;" >Las ciudades con mayor probabilidad de arrebol según las condiciones actuales.</p> -->
         <div class="info-grid">
           <div class="info-card">
             <h4>🥇 Top 10 - Mayor Probabilidad</h4>
@@ -245,6 +245,90 @@ layout: none
 
 <!-- Script principal -->
 <script>
+
+      // Función para calcular el tiempo hasta que el sol alcance -2 grados
+    function calculateTimeToMinus3Degrees(lat, lon, isSunrise = false) {
+        const now = new Date();
+        const times = SunCalc.getTimes(now, lat, lon);
+        const sunset = times.sunset;
+        const sunrise = times.sunrise;
+        
+        // Empezar desde la puesta/amanecer y buscar cuando la elevación sea -3°
+        const targetTime = isSunrise ? sunrise : sunset;
+        const targetElevation = isSunrise ? 2 : -2; // 1° para amanecer, -1° para atardecer
+        
+        // Usar búsqueda binaria para encontrar el momento exacto
+        let low = isSunrise ? new Date(sunrise.getTime() - 3600000) : new Date(sunset.getTime());
+        let high = isSunrise ? new Date(sunrise.getTime() + 3600000) : new Date(sunset.getTime() + 7200000); // 2 horas después
+        let mid;
+        
+        // Búsqueda por aproximación
+        for (let i = 0; i < 20; i++) { // 20 iteraciones para precisión
+            mid = new Date((low.getTime() + high.getTime()) / 2);
+            const elev = SunCalc.getPosition(mid, lat, lon).altitude * (180/Math.PI);
+            
+            if (Math.abs(elev - targetElevation) < 0.01) { // Precisión de 0.01°
+                break;
+            }
+            
+            if ((isSunrise && elev < targetElevation) || (!isSunrise && elev > targetElevation)) {
+                low = mid;
+            } else {
+                high = mid;
+            }
+        }
+        
+        return mid;
+    }
+
+    // Función para calcular el tiempo restante en formato legible
+    function formatTimeRemaining(targetTime) {
+        const now = new Date();
+        const diffMs = targetTime.getTime() - now.getTime();
+        
+        if (diffMs <= 0) {
+            return " ";
+        }
+        
+        const diffMinutes = Math.floor(diffMs / 60000);
+        const diffHours = Math.floor(diffMinutes / 60);
+        const remainingMinutes = diffMinutes % 60;
+        
+        if (diffHours > 0) {
+            return `en ${diffHours}h ${remainingMinutes}m`;
+        } else if (diffMinutes > 0) {
+            return `en ${diffMinutes}m`;
+        } else {
+            return "¡muy pronto!";
+        }
+    }
+
+    // Función para calcular si ya pasó el momento óptimo
+    function getOptimalTimeStatus(targetTime, isSunrise = false) {
+        const now = new Date();
+        const diffMs = targetTime.getTime() - now.getTime();
+        const eventType = isSunrise ? "amanecer" : "atardecer";
+        
+        if (diffMs > 0) {
+            return {
+                status: "pending",
+                message: `Máximo arrebol ${formatTimeRemaining(targetTime)}`,
+                color: "#4CAF50", // Verde
+            };
+        } else if (diffMs > -1800000) { // Menos de 30 minutos después
+            return {
+                status: "just_passed",
+                message: `El máximo del arrebol acaba de pasar (hace ${Math.abs(Math.floor(diffMs / 60000))}m)`,
+                color: "#FF9800" // Naranja
+            };
+        } else {
+            return {
+                status: "passed",
+                message: ` `,
+                color: "#9E9E9E", // Gris
+            };
+        }
+    }
   
     function clearMapLayers() {
         console.log("Limpiando capas del mapa...");
@@ -1294,8 +1378,6 @@ layout: none
         document.getElementById('dataGrid').innerHTML = `
             <div class="data-item">🌅 Nubes amanecer: <strong>${Math.round(sunriseCloudTotal)}%</strong></div>
             <div class="data-item">🌇 Nubes atardecer: <strong>${Math.round(sunsetCloudTotal)}%</strong></div>
-            <div class="data-item">🌡️ Temp amanecer: <strong>${sunriseTemp.toFixed(1)}°C</strong></div>
-            <div class="data-item">🌡️ Temp atardecer: <strong>${sunsetTemp.toFixed(1)}°C</strong></div>
         `;
 
         const locationInfo = chileanCities[cityName];
@@ -1395,20 +1477,18 @@ layout: none
                 
                 if (meteoData.cloudSeries) {
                     // USAR LA MISMA FUNCIÓN QUE LA PREDICCIÓN PRINCIPAL
-                    const sunsetIndex = getSunsetIndex(meteoData, cityInfo.lat, cityInfo.lon, false); // false = atardecer
+                    const sunsetIndex = getSunsetIndex(meteoData, cityInfo.lat, cityInfo.lon, false);
                     const sunset = SunCalc.getTimes(new Date(), cityInfo.lat, cityInfo.lon).sunset;
                     const sunsetElev = SunCalc.getPosition(sunset, cityInfo.lat, cityInfo.lon).altitude * (180/Math.PI);
                     
-                    console.log(`Ranking ${cityName}: Índice atardecer=${sunsetIndex}`);
-                    
-                    // Obtener datos EXACTAMENTE en ese índice (igual que la predicción principal)
+                    // Obtener datos EXACTAMENTE en ese índice
                     const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
                     
                     const low_e = sunsetData?.low;
                     const mid_e = sunsetData?.mid;
                     const high_e = sunsetData?.high;
                     
-                    // Calcular con los mismos parámetros que la predicción principal
+                    // Calcular probabilidad
                     const probAtardecer = computeRedProbability(
                         low_e, mid_e, high_e, 
                         sunsetElev, false, 
@@ -1418,45 +1498,30 @@ layout: none
                     
                     const probabilityPercent = Math.round(probAtardecer * 100);
                     
+                    // CALCULAR TIEMPO DEL MÁXIMO ARREBOL
+                    const optimalSunsetTime = calculateTimeToMinus3Degrees(cityInfo.lat, cityInfo.lon, false);
+                    const sunsetStatus = getOptimalTimeStatus(optimalSunsetTime, false);
+                    
                     cityProbabilities.push({
                         name: cityName,
                         region: cityInfo.region,
                         probability: probAtardecer,
                         percent: probabilityPercent,
-                        sunsetIndex: sunsetIndex, // Para debugging
-                        dataUsed: { low: low_e, mid: mid_e, high: high_e, temp: sunsetData?.temperature, pressure: sunsetData?.pressure }
+                        optimalTime: optimalSunsetTime,
+                        timeStatus: sunsetStatus,
+                        sunsetIndex: sunsetIndex,
+                        dataUsed: { low: low_e, mid: mid_e, high: high_e }
                     });
                 }
             } catch (error) { 
                 console.warn(`Error calculando probabilidad para ${cityName}:`, error); 
             }
-            // Pequeña pausa para no saturar la API
             await new Promise(resolve => setTimeout(resolve, 50));
         }
         
         if (cityProbabilities.length > 0) {
             cityProbabilities.sort((a, b) => b.probability - a.probability);
-            
-            // Mostrar información de debugging en consola
-            console.log("Ranking calculado:", cityProbabilities.map(c => ({
-                name: c.name,
-                percent: c.percent,
-                index: c.sunsetIndex,
-                data: c.dataUsed
-            })));
-            
             updateRankingTable(cityProbabilities, topRanking);
-            
-            // Actualizar estadísticas si los elementos existen
-            const rankingStats = document.getElementById('rankingStats');
-            if (rankingStats) {
-                updateRankingStats(cityProbabilities, rankingStats);
-            }
-            
-            const regionsRanking = document.getElementById('regionsRanking');
-            if (regionsRanking) {
-                updateRegionsRanking(cityProbabilities, regionsRanking);
-            }
         }
     }
 
@@ -1467,20 +1532,23 @@ layout: none
     }
 
     function createRankingTable(cities) {
-      let html = '<table class="ranking-table"><tr><th>#</th><th>Ciudad</th><th>Región</th><th>Probabilidad</th></tr>';
-      cities.forEach((city, index) => {
-        const rank = index + 1;
-        const color = getProbabilityColor(city.percent);
-        html += `
-          <tr onclick="showPrediction('${city.name}', 'city')" style="cursor: pointer;">
-            <td class="rank">${rank}</td>
-            <td>${city.name}</td>
-            <td>${city.region}</td>
-            <td style="color: ${color}"><strong>${city.percent}%</strong></td>
-          </tr>
-        `;
-      });
-      return html + '</table>';
+        let html = '<table class="ranking-table"><tr><th>#</th><th>Ciudad</th><th>Región</th><th>Probabilidad</th><th>Máximo del arrebol</th></tr>';
+        cities.forEach((city, index) => {
+            const rank = index + 1;
+            const color = getProbabilityColor(city.percent);
+            const optimalTimeStr = city.optimalTime.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
+            
+            html += `
+                <tr onclick="showPrediction('${city.name}', 'city')" style="cursor: pointer;">
+                    <td class="rank">${rank}</td>
+                    <td>${city.name}</td>
+                    <td>${city.region}</td>
+                    <td style="color: ${color}"><strong>${city.percent}%</strong></td>
+                    <td><small>${optimalTimeStr}</small></td>
+                </tr>
+            `;
+        });
+        return html + '</table>';
     }
 
     function getProbabilityColor(percent) {
