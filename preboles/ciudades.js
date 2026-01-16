@@ -43,7 +43,8 @@ const chileanCities = {
     region: "Antofagasta",
     type: "observatory",
     operator: "ESO",
-    altitude: 2635
+    altitude: 2635,
+    weatherCamera: "https://www.eso.org/public/chile/outreach/webcams/?lang#paranal"
   },
   "Observatorio La Silla": {
     lat: -29.2567,
@@ -51,7 +52,8 @@ const chileanCities = {
     region: "Coquimbo",
     type: "observatory",
     operator: "ESO",
-    altitude: 2400
+    altitude: 2400,
+    weatherCamera: "https://www.eso.org/public/chile/outreach/webcams/?lang#lasilla"
   },
   "Observatorio Cerro Tololo": {
     lat: -30.1690,
@@ -59,7 +61,8 @@ const chileanCities = {
     region: "Coquimbo",
     type: "observatory",
     operator: "AURA",
-    altitude: 2200
+    altitude: 2200,
+    weatherCamera: "https://noirlab.edu/science/observing-noirlab/weather-webcams/cerro-tololo/tololo-webcams"
   },
   "Observatorio Las Campanas": {
     lat: -29.0083,
@@ -67,7 +70,8 @@ const chileanCities = {
     region: "Atacama",
     type: "observatory",
     operator: "Carnegie Institution",
-    altitude: 2282
+    altitude: 2282,
+    weatherCamera: "https://weather.lco.cl/stations/magellan"
   },
   "Observatorio Cerro Armazones": {
     lat: -24.5989,
@@ -75,7 +79,8 @@ const chileanCities = {
     region: "Antofagasta",
     type: "observatory",
     operator: "ESO",
-    altitude: 3060
+    altitude: 3060,
+    weatherCamera: ""
   },
   "Observatorio APEX": {
     lat: -23.0064,
@@ -83,7 +88,8 @@ const chileanCities = {
     region: "Antofagasta",
     type: "observatory",
     operator: "ESO",
-    altitude: 5105
+    altitude: 5105,
+    weatherCamera: "https://www.eso.org/public/chile/outreach/webcams/?lang#apex"
   },
   "Observatorio ALMA": {
     lat: -23.0193,
@@ -91,7 +97,8 @@ const chileanCities = {
     region: "Antofagasta",
     type: "observatory",
     operator: "Internacional",
-    altitude: 5058
+    altitude: 5058,
+    weatherCamera: "https://www.eso.org/public/chile/outreach/webcams/?lang#alma"
   },
   "Observatorio Cerro Pachón": {
     lat: -30.2389,
@@ -99,7 +106,8 @@ const chileanCities = {
     region: "Coquimbo",
     type: "observatory",
     operator: "Gemini/AURA",
-    altitude: 2715
+    altitude: 2715,
+    weatherCamera: "https://noirlab.edu/science/observing-noirlab/weather-webcams/cerro-pachon"
   },
   "Observatorio Mamalluca": {
     lat: -30.1889,
@@ -107,7 +115,8 @@ const chileanCities = {
     region: "Coquimbo",
     type: "observatory",
     operator: "Municipal",
-    altitude: 1120
+    altitude: 1120,
+    weatherCamera: ""
   },
 };
 
