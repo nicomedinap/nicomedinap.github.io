@@ -17,6 +17,7 @@ layout: none
   <link rel="stylesheet" href="https://nicomedinap.github.io/public/css/preboles_2.css">
 
   <style>
+    
   </style>
   
 </head>
@@ -125,8 +126,22 @@ layout: none
         </div>
       </div>
     </div>
+        
+    <!-- Pestaña 2: Ranking -->
+    <div id="tab-ranking" class="tab-content">
+      <div class="container">
+        <h2> Ranking de Probabilidades</h2>
+        <!--  <p class="lead" style="margin-left: auto; margin-right: auto;" >Las ciudades con mayor probabilidad de arrebol según las condiciones actuales.</p> -->
+        <div class="info-grid">
+          <div class="info-card">
+            <h4>🥇 Top 10 - Mayor Probabilidad</h4>
+            <div id="topRanking"><p>Cargando ranking...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
     
-    <!-- Pestaña 2: Observatorios -->
+    <!-- Pestaña 3: Observatorios -->
     <div id="tab-observatories" class="tab-content">
       <div class="container">
         <h2>🔭 Observatorios Astronómicos en Chile</h2>
@@ -153,24 +168,13 @@ layout: none
         </div>
       </div>
     </div>
-    
-    <!-- Pestaña 3: Ranking -->
-    <div id="tab-ranking" class="tab-content">
-      <div class="container">
-        <h2> Ranking de Probabilidades</h2>
-        <!--  <p class="lead" style="margin-left: auto; margin-right: auto;" >Las ciudades con mayor probabilidad de arrebol según las condiciones actuales.</p> -->
-        <div class="info-grid">
-          <div class="info-card">
-            <h4>🥇 Top 10 - Mayor Probabilidad</h4>
-            <div id="topRanking"><p>Cargando ranking...</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
+
     <!-- Pestaña 4: Información -->
     <div id="tab-info" class="tab-content">
       <div class="container">
+
+        <p class="lead-with-bg"><span class="lead-content">El arrebol es el fenómeno óptico donde la luz colorea las nubes de rojo, naranjo o rosado. Las nubes reflejan diferentes colores dependiendo del tipo de nube, y con eso es posible hacer una predicción. Elige tu ciudad y prueba tu suerte!!</span></p>
+
         <h2>ℹ️ Información sobre Préboles</h2>
         <div class="info-section">
           <h3> ¿Qué es un arrebol?</h3>
@@ -238,13 +242,488 @@ layout: none
 <!-- modulos -->
 <script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
 <script src="https://nicomedinap.github.io/preboles/redProbability.js"></script>
-<script src="https://nicomedinap.github.io/preboles/chartUtils.js"></script>
+<!--<script src="https://nicomedinap.github.io/preboles/chartUtils.js"></script>
 
 <!-- Script principal -->
 <script>
 
+/**
+ * Módulo para funciones relacionadas con gráficos
+ * Archivo: https://nicomedinap.github.io/preboles/chartUtils.js
+ */
+
+    (function() {
+        'use strict';
+        
+        let cloudChart = null;
+        
+        // Función principal para actualizar gráficos
+        window.updateCharts = function(meteoData, sunriseTime, sunsetTime, sunriseIndex, sunsetIndex) {
+            if (!meteoData?.cloudSeries?.time) return;
+            
+            const chartData = prepareChartData(meteoData.cloudSeries);
+            createCloudChart('cloudChart', chartData, sunriseTime, sunsetTime, sunriseIndex, sunsetIndex, new Date());
+        };
+
+        // Y en createCloudChart:
+        function createCloudChart(canvasId, chartData, sunriseTime, sunsetTime, sunriseIndex, sunsetIndex, currentTime) {
+            const ctx = document.getElementById(canvasId)?.getContext('2d');
+            if (!ctx) return;
+            
+            if (cloudChart) cloudChart.destroy();
+            
+            const isMobile = window.innerWidth < 768;
+            const currentHour = currentTime.getHours();
+            const currentIndex = findHourIndex(chartData.time, currentHour);
+            
+            // Usar los índices proporcionados (no calcularlos nuevamente)
+            console.log(`Gráfico: Índices recibidos - Amanecer:${sunriseIndex}, Atardecer:${sunsetIndex}`);
+            
+            createChartLegend(sunriseTime, sunsetTime, currentHour, sunriseIndex, sunsetIndex, currentIndex);
+            
+            if (chartData.hasData) {
+                cloudChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: chartData.time,
+                        datasets: createChartDatasets(chartData.clouds, isMobile)
+                    },
+                    options: getChartOptions(isMobile, chartData.time, sunriseIndex, sunsetIndex, currentIndex)
+                });
+            } else {
+                // Mostrar mensaje de no datos
+                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.font = '16px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('No hay datos de nubes disponibles', ctx.canvas.width/2, ctx.canvas.height/2);
+            }
+        }
+        
+        // Encontrar índice de hora
+        function findHourIndex(hours, targetHour) {
+            return hours.findIndex(h => parseInt(h.split(':')[0]) >= targetHour);
+        }
+        
+        // Crear datasets
+        function createChartDatasets(cloudData, isMobile) {
+            const datasets = [];
+            
+            // Solo agregar datasets que tengan datos
+            if (cloudData.low && cloudData.low.some(v => v !== null)) {
+                datasets.push(createDataset('Nubes bajas', cloudData.low, '#4fc3f7', [4, 3], isMobile));
+            }
+            
+            if (cloudData.mid && cloudData.mid.some(v => v !== null)) {
+                datasets.push(createDataset('Nubes medias', cloudData.mid, '#ffb74d', [2, 3], isMobile));
+            }
+            
+            if (cloudData.high && cloudData.high.some(v => v !== null)) {
+                datasets.push(createDataset('Nubes altas', cloudData.high, '#ba68c8', null, isMobile));
+            }
+            
+            if (cloudData.total && cloudData.total.some(v => v !== null)) {
+                datasets.push(createTotalDataset('Nubosidad total', cloudData.total, isMobile));
+            }
+            
+            return datasets;
+        }
+        
+        // Crear dataset individual
+        function createDataset(label, data, color, borderDash, isMobile) {
+            return {
+                label,
+                data,
+                borderWidth: isMobile ? 1 : 1.5,
+                borderColor: color,
+                backgroundColor: `${color}1a`,
+                fill: false,
+                tension: 0.3,
+                borderDash: borderDash || undefined,
+                pointBackgroundColor: color,
+                pointBorderWidth: isMobile ? 0.5 : 1,
+                pointStyle: 'circle',
+                pointRadius: isMobile ? 6 : 8,
+                pointHoverRadius: isMobile ? 10 : 14
+            };
+        }
+        
+        // Crear dataset para nubosidad total
+        function createTotalDataset(label, data, isMobile) {
+            return {
+                label,
+                data,
+                borderWidth: isMobile ? 1.5 : 2,
+                borderColor: '#ffffff',
+                backgroundColor: 'rgba(255,255,255,0.1)',
+                fill: true,
+                tension: 0.3,
+                pointBackgroundColor: '#ffffff',
+                pointBorderColor: '#ff6600',
+                pointBorderWidth: isMobile ? 1 : 2,
+                pointStyle: 'circle',
+                pointRadius: isMobile ? 7 : 9,
+                pointHoverRadius: isMobile ? 11 : 15
+            };
+        }
+        
+        // Obtener opciones del gráfico
+        function getChartOptions(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex) {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: isMobile ? 1.2 : 1.3,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Nubosidad por Hora del Día',
+                        color: '#ffffff',
+                        font: { size: isMobile ? 18 : 20, weight: 'bold' },
+                        padding: { top: 5, bottom: 2 }
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            boxWidth: 6,
+                            boxHeight: 6,
+                            color: '#ffffff',
+                            font: { size: isMobile ? 18 : 18 },
+                            padding: isMobile ? 8 : 19
+                        }
+                    },
+                    annotation: {
+                        annotations: createChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile)
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: createTooltipCallbacks(hours, sunriseIndex, sunsetIndex, currentIndex)
+                    }
+                },
+                scales: createChartScales(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex),
+                interaction: { intersect: false, mode: 'index' },
+                elements: { point: { radius: isMobile ? 4 : 6, hoverRadius: isMobile ? 8 : 12 } }
+            };
+        }
+        
+        // Crear anotaciones
+        function createChartAnnotations(sunriseIndex, sunsetIndex, currentIndex, isMobile) {
+            const annotations = {};
+            
+            if (sunriseIndex >= 0) {
+                annotations.sunriseLine = createAnnotation(sunriseIndex, '#ffeb3b', '🌅 Amanecer', isMobile);
+            }
+            
+            if (sunsetIndex >= 0) {
+                annotations.sunsetLine = createAnnotation(sunsetIndex, '#ff9800', '🌇 Atardecer', isMobile);
+            }
+            
+            if (currentIndex >= 0) {
+                annotations.currentTimeLine = createAnnotation(currentIndex, '#4CAF50', '🕐 Ahora', isMobile, [3, 3]);
+            }
+            
+            return annotations;
+        }
+        
+        // Crear anotación individual
+        function createAnnotation(value, color, content, isMobile, borderDash = [5, 5]) {
+            return {
+                type: 'line',
+                mode: 'vertical',
+                scaleID: 'x',
+                value,
+                borderColor: color,
+                borderWidth: 3,
+                borderDash,
+                label: {
+                    enabled: true,
+                    content,
+                    position: 'top',
+                    backgroundColor: `${color}b3`,
+                    color: '#333',
+                    font: { size: isMobile ? 10 : 12, weight: 'bold' },
+                    padding: { x: 6, y: 4 }
+                }
+            };
+        }
+        
+        // Callbacks para tooltips
+        function createTooltipCallbacks(hours, sunriseIndex, sunsetIndex, currentIndex) {
+            return {
+                label: context => `${context.dataset.label}: ${context.parsed.y}%`,
+                afterBody: context => {
+                    const index = context[0].dataIndex;
+                    const lines = [];
+                    if (index === sunriseIndex) lines.push('🌅 Hora del amanecer');
+                    if (index === sunsetIndex) lines.push('🌇 Hora del atardecer');
+                    if (index === currentIndex) lines.push('🕐 Hora actual aproximada');
+                    return lines;
+                }
+            };
+        }
+        
+        // Configurar escalas
+        function createChartScales(isMobile, hours, sunriseIndex, sunsetIndex, currentIndex) {
+            return {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Hora del día',
+                        color: '#ffffff',
+                        font: { size: isMobile ? 16 : 18, weight: 'bold' }
+                    },
+                    grid: { color: 'rgba(255,255,255,0.08)', drawOnChartArea: true },
+                    ticks: {
+                        color: '#ffffff',
+                        maxRotation: isMobile ? 45 : 0,
+                        autoSkip: true,
+                        maxTicksLimit: isMobile ? 12 : 24,
+                        font: { size: isMobile ? 14 : 16 },
+                        callback: (value, index) => {
+                            const hour = hours[index];
+                            if (index === sunriseIndex) return `🌅 ${hour}`;
+                            if (index === sunsetIndex) return `🌇 ${hour}`;
+                            if (index === currentIndex) return `🕐 ${hour}`;
+                            return hour;
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Cantidad de nubes',
+                        color: '#ffffff',
+                        font: { size: isMobile ? 16 : 18, weight: 'bold' }
+                    },
+                    beginAtZero: true,
+                    max: 100,
+                    grid: { color: 'rgba(255,255,255,0.08)', drawOnChartArea: true },
+                    ticks: {
+                        color: '#ffffff',
+                        stepSize: 20,
+                        callback: value => `${value}%`,
+                        font: { size: isMobile ? 14 : 16 }
+                    }
+                }
+            };
+        }
+        
+        // Crear leyenda
+        function createChartLegend(sunriseTime, sunsetTime, currentHour) {
+            const oldLegend = document.querySelector('.chart-time-legend');
+            if (oldLegend) oldLegend.remove();
+            
+            const sunriseStr = formatTime(sunriseTime);
+            const sunsetStr = formatTime(sunsetTime);
+            const currentStr = `${currentHour.toString().padStart(2, '0')}:00`;
+            
+            const legendContainer = document.createElement('div');
+            legendContainer.className = 'chart-time-legend';
+            legendContainer.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                    <div style="width: 12px; height: 3px; background: #ffeb3b; border-radius: 1px;"></div>
+                    <span>🌅 Amanecer ${sunriseStr}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                    <div style="width: 12px; height: 3px; background: #ff9800; border-radius: 1px;"></div>
+                    <span>🌇 Puesta de sol ${sunsetStr}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                    <div style="width: 12px; height: 3px; background: #4CAF50; border-radius: 1px;"></div>
+                    <span>🕐 Ahora ${currentStr}</span>
+                </div>
+            `;
+            
+            const chartsContainer = document.querySelector('.charts');
+            if (chartsContainer) {
+                chartsContainer.insertBefore(legendContainer, chartsContainer.firstChild);
+            }
+        }
+        
+        // Formatear hora
+        function formatTime(date) {
+            return date.toLocaleTimeString('es-CL', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: false 
+            });
+        }
+        
+        // Preparar datos para gráficos - VERSIÓN CORREGIDA
+        function prepareChartData(cloudSeries, hours = 24) {
+            if (!cloudSeries?.time) {
+                return { hasData: false };
+            }
+            
+            const slicedTime = cloudSeries.time.slice(0, hours);
+            const slicedClouds = {
+                total: cloudSeries.cloudcover?.slice(0, hours).map(v => v !== undefined ? Math.round(v) : null) || Array(hours).fill(null),
+                low: cloudSeries.cloudcover_low?.slice(0, hours).map(v => v !== undefined ? Math.round(v) : null) || Array(hours).fill(null),
+                mid: cloudSeries.cloudcover_mid?.slice(0, hours).map(v => v !== undefined ? Math.round(v) : null) || Array(hours).fill(null),
+                high: cloudSeries.cloudcover_high?.slice(0, hours).map(v => v !== undefined ? Math.round(v) : null) || Array(hours).fill(null)
+            };
+            
+            // Verificar si hay al menos algún dato
+            const hasData = Object.values(slicedClouds).some(dataArray => 
+                dataArray.some(v => v !== null)
+            );
+            
+            return {
+                hasData,
+                time: slicedTime.map(t => {
+                    const d = new Date(t);
+                    return `${d.getHours()}:00`;
+                }),
+                clouds: slicedClouds
+            };
+        }
+    })();
+
+
+
+
+    // Función para interpolar linealmente entre dos valores
+    function linearInterpolate(y1, y2, fraction) {
+        if (y1 === undefined || y2 === undefined) return y1 !== undefined ? y1 : y2 !== undefined ? y2 : 0;
+        return y1 + (y2 - y1) * fraction;
+    }
+
+    // Función para encontrar las dos horas más cercanas a un tiempo específico
+    function findClosestTimes(times, targetTime) {
+        if (!times || times.length === 0) return { prevTime: null, nextTime: null, prevIndex: -1, nextIndex: -1 };
+        
+        const targetMs = targetTime.getTime();
+        let prevIndex = -1;
+        let nextIndex = -1;
+        
+        // Buscar la hora anterior y posterior más cercanas
+        for (let i = 0; i < times.length; i++) {
+            const timeMs = new Date(times[i]).getTime();
+            
+            if (timeMs <= targetMs) {
+                prevIndex = i;
+            }
+            if (timeMs >= targetMs && nextIndex === -1) {
+                nextIndex = i;
+            }
+        }
+        
+        // Si no encontramos hora anterior, usar la primera
+        if (prevIndex === -1 && nextIndex > 0) {
+            prevIndex = nextIndex;
+        }
+        
+        // Si no encontramos hora siguiente, usar la última
+        if (nextIndex === -1 && prevIndex < times.length - 1) {
+            nextIndex = prevIndex + 1;
+        } else if (nextIndex === -1) {
+            nextIndex = prevIndex;
+        }
+        
+        // Si ambas son iguales, ajustar
+        if (prevIndex === nextIndex) {
+            if (prevIndex > 0) prevIndex = prevIndex - 1;
+            else if (nextIndex < times.length - 1) nextIndex = nextIndex + 1;
+        }
+        
+        return {
+            prevTime: prevIndex >= 0 ? new Date(times[prevIndex]) : null,
+            nextTime: nextIndex >= 0 ? new Date(times[nextIndex]) : null,
+            prevIndex: prevIndex,
+            nextIndex: nextIndex
+        };
+    }
+
+    // Función para interpolar datos meteorológicos en un tiempo específico
+    function interpolateMeteoData(meteoData, targetTime) {
+        if (!meteoData?.cloudSeries?.time || meteoData.cloudSeries.time.length < 2) {
+            return null;
+        }
+        
+        const { prevTime, nextTime, prevIndex, nextIndex } = findClosestTimes(meteoData.cloudSeries.time, targetTime);
+        
+        if (!prevTime || !nextTime || prevIndex === -1 || nextIndex === -1) {
+            return null;
+        }
+        
+        // Calcular fracción para interpolación (0 a 1)
+        const prevMs = prevTime.getTime();
+        const nextMs = nextTime.getTime();
+        const targetMs = targetTime.getTime();
+        
+        let fraction = 0;
+        if (nextMs > prevMs) {
+            fraction = (targetMs - prevMs) / (nextMs - prevMs);
+            // Asegurar que esté entre 0 y 1
+            fraction = Math.max(0, Math.min(1, fraction));
+        }
+        
+        // Función auxiliar para interpolar un array
+        const interpolateArray = (arr) => {
+            if (!arr || arr.length === 0) return 0;
+            const val1 = arr[prevIndex] !== undefined ? arr[prevIndex] : 0;
+            const val2 = arr[nextIndex] !== undefined ? arr[nextIndex] : val1;
+            return linearInterpolate(val1, val2, fraction);
+        };
+        
+        // Interpolar todos los datos necesarios
+        return {
+            time: targetTime,
+            low: interpolateArray(meteoData.cloudSeries.cloudcover_low),
+            mid: interpolateArray(meteoData.cloudSeries.cloudcover_mid),
+            high: interpolateArray(meteoData.cloudSeries.cloudcover_high),
+            total: interpolateArray(meteoData.cloudSeries.cloudcover),
+            temperature: interpolateArray(meteoData.cloudSeries.temperature_2m),
+            humidity: interpolateArray(meteoData.cloudSeries.relativehumidity_2m),
+            pressure: interpolateArray(meteoData.cloudSeries.pressure_msl),
+            // Información de depuración
+            _debug: {
+                prevIndex,
+                nextIndex,
+                fraction: Math.round(fraction * 1000) / 1000,
+                prevTime: prevTime.toLocaleTimeString('es-CL'),
+                nextTime: nextTime.toLocaleTimeString('es-CL'),
+                targetTime: targetTime.toLocaleTimeString('es-CL')
+            }
+        };
+    }
+
+    // Función principal para obtener datos interpolados del atardecer
+    function getSunsetDataWithInterpolation(meteoData, lat, lon) {
+        if (!meteoData?.cloudSeries) return null;
+        
+        // Obtener hora exacta del máximo arrebol
+        const optimalSunsetTime = calculateTimeToMinus2Degrees(lat, lon, false);
+        
+        // Interpolar datos para esa hora exacta
+        const interpolatedData = interpolateMeteoData(meteoData, optimalSunsetTime);
+        
+        if (interpolatedData) {
+            console.log(`✓ Atardecer interpolado para ${optimalSunsetTime.toLocaleTimeString('es-CL')}:`, {
+                horaAnterior: interpolatedData._debug.prevTime,
+                horaSiguiente: interpolatedData._debug.nextTime,
+                fraccion: interpolatedData._debug.fraction,
+                nubesBajas: Math.round(interpolatedData.low),
+                nubesMedias: Math.round(interpolatedData.mid),
+                nubesAltas: Math.round(interpolatedData.high)
+            });
+            
+            return {
+                data: interpolatedData,
+                optimalTime: optimalSunsetTime,
+                elevDeg: SunCalc.getPosition(optimalSunsetTime, lat, lon).altitude * (180/Math.PI)
+            };
+        }
+        
+        // Fallback: usar datos no interpolados
+        return null;
+    }
+
+
       // Función para calcular el tiempo hasta que el sol alcance -2 grados
-    function calculateTimeToMinus3Degrees(lat, lon, isSunrise = false) {
+    function calculateTimeToMinus2Degrees(lat, lon, isSunrise = false) {
         const now = new Date();
         const times = SunCalc.getTimes(now, lat, lon);
         const sunset = times.sunset;
@@ -380,8 +859,6 @@ layout: none
             document.getElementById('mapLoading').style.display = 'none';
         }
     }
-
-
 
     // Función para obtener el índice exacto de la puesta de sol
     function getSunsetIndex(meteoData, lat, lon, isSunrise = false) {
@@ -755,28 +1232,35 @@ layout: none
         const meteoData = await getMeteoData(info.lat, info.lon);
         if (!meteoData.cloudSeries) return;
 
-        // USAR LA MISMA FUNCIÓN PARA OBTENER ÍNDICE
-        const sunsetIndex = getSunsetIndex(meteoData, info.lat, info.lon, false);
-        const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
-        const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
+        // USAR INTERPOLACIÓN para obtener datos más precisos del atardecer
+        const sunsetResult = getSunsetDataWithInterpolation(meteoData, info.lat, info.lon);
         
-        // Obtener datos en índice exacto
-        const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
-        
-        const low_e = sunsetData?.low;
-        const mid_e = sunsetData?.mid;
-        const high_e = sunsetData?.high;
-        
-        // Solo calcular si tenemos datos
-        if (low_e !== undefined || mid_e !== undefined || high_e !== undefined) {
-            // Pasar los datos reales con los mismos parámetros
+        if (sunsetResult) {
             const probAtardecer = computeRedProbability(
-                low_e, mid_e, high_e, 
-                sunsetElev, false, 
-                sunsetData?.temperature || meteoData.current.temperature,
-                sunsetData?.pressure || meteoData.current.pressure, meteoData.current.humidity
+                sunsetResult.data.low, sunsetResult.data.mid, sunsetResult.data.high, 
+                sunsetResult.elevDeg, false, 
+                sunsetResult.data.temperature || meteoData.current.temperature,
+                sunsetResult.data.pressure || meteoData.current.pressure,
+                sunsetResult.data.humidity || meteoData.current.humidity
             );
             updateObservatoryCardUI(nombre, Math.round(probAtardecer * 100), info);
+        } else {
+            // Fallback: usar método anterior
+            const sunsetIndex = getSunsetIndex(meteoData, info.lat, info.lon, false);
+            const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
+            const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
+            const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+            
+            if (sunsetData?.low !== undefined || sunsetData?.mid !== undefined || sunsetData?.high !== undefined) {
+                const probAtardecer = computeRedProbability(
+                    sunsetData.low, sunsetData.mid, sunsetData.high, 
+                    sunsetElev, false, 
+                    sunsetData.temperature || meteoData.current.temperature,
+                    sunsetData.pressure || meteoData.current.pressure,
+                    sunsetData.humidity || meteoData.current.humidity
+                );
+                updateObservatoryCardUI(nombre, Math.round(probAtardecer * 100), info);
+            }
         }
     }
 
@@ -955,27 +1439,34 @@ layout: none
         const meteoData = await getMeteoData(info.lat, info.lon);
         if (!meteoData.cloudSeries) return;
 
-        // USAR LA MISMA FUNCIÓN PARA OBTENER ÍNDICES
-        const sunsetIndex = getSunsetIndex(meteoData, info.lat, info.lon, false);
-        const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
-        const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
+        // USAR INTERPOLACIÓN para obtener datos más precisos del atardecer
+        const sunsetResult = getSunsetDataWithInterpolation(meteoData, info.lat, info.lon);
         
-        // Obtener datos en índice 
-        const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
-        
-        const sunsetLow = sunsetData?.low;
-        const sunsetMid = sunsetData?.mid;
-        const sunsetHigh = sunsetData?.high;
-        
-        // Calcular probabilidad con los mismos parámetros
-        const probAtardecer = computeRedProbability(
-            sunsetLow, sunsetMid, sunsetHigh, 
-            sunsetElev, false,
-            sunsetData?.temperature || meteoData.current.temperature,
-            sunsetData?.pressure || meteoData.current.pressure, meteoData.current.humidity
-        );
-        
-        updateCityCardUI(nombre, Math.round(probAtardecer * 100));
+        if (sunsetResult) {
+            const probAtardecer = computeRedProbability(
+                sunsetResult.data.low, sunsetResult.data.mid, sunsetResult.data.high, 
+                sunsetResult.elevDeg, false,
+                sunsetResult.data.temperature || meteoData.current.temperature,
+                sunsetResult.data.pressure || meteoData.current.pressure,
+                sunsetResult.data.humidity || meteoData.current.humidity
+            );
+            updateCityCardUI(nombre, Math.round(probAtardecer * 100));
+        } else {
+            // Fallback: usar método anterior
+            const sunsetIndex = getSunsetIndex(meteoData, info.lat, info.lon, false);
+            const sunset = SunCalc.getTimes(new Date(), info.lat, info.lon).sunset;
+            const sunsetElev = SunCalc.getPosition(sunset, info.lat, info.lon).altitude * (180/Math.PI);
+            const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+            
+            const probAtardecer = computeRedProbability(
+                sunsetData?.low, sunsetData?.mid, sunsetData?.high, 
+                sunsetElev, false,
+                sunsetData?.temperature || meteoData.current.temperature,
+                sunsetData?.pressure || meteoData.current.pressure,
+                sunsetData?.humidity || meteoData.current.humidity
+            );
+            updateCityCardUI(nombre, Math.round(probAtardecer * 100));
+        }
     }
 
     function updateCityCardUI(nombre, probAtardecer) {
@@ -1124,12 +1615,13 @@ layout: none
           }).addTo(heatLayer);
           
           const distance = calculateDistance(centerLat, centerLon, hexCenter.lat, hexCenter.lon);
-          hexagon.bindPopup(`
-            <div style="text-align:center; min-width:150px;">
-              <strong>${(probability*100).toFixed(0)}% Probabilidad</strong><br>
-              Distancia: ${distance.toFixed(0)} km<br>
-              <small>${hexCenter.lat.toFixed(3)}, ${hexCenter.lon.toFixed(3)}</small>
-            </div>
+            hexagon.bindPopup(`
+                <div style="text-align:center; min-width:150px;">
+                    <strong>${(probability*100).toFixed(0)}% Probabilidad</strong><br>
+                    Distancia: ${distance.toFixed(0)} km<br>
+                    <small>${hexCenter.lat.toFixed(3)}, ${hexCenter.lon.toFixed(3)}</small><br>
+                    <small style="color:#888; font-size:0.8em;">Cálculo interpolado a la hora exacta</small>
+                </div>
           `);
           
           hexagon.on('mouseover', () => hexagon.setStyle({ fillOpacity: 0.9, weight: 2.5, color: '#ffff00' }));
@@ -1151,18 +1643,20 @@ layout: none
     }
 
     async function calculateGridPointProbability(lat, lon) {
-      const cacheKey = `${lat.toFixed(2)},${lon.toFixed(2)}`;
-      if (weatherDataCache[cacheKey]) return computeProbabilityFromData(weatherDataCache[cacheKey], lat, lon);
-      
-      try {
-        const meteoData = await getMeteoData(lat, lon);
-        const weatherData = { meteoData };
-        weatherDataCache[cacheKey] = weatherData;
-        return computeProbabilityFromData(weatherData, lat, lon);
-      } catch (error) {
-        console.warn(`Error calculando probabilidad para ${lat}, ${lon}:`, error);
-        return 0;
-      }
+        const cacheKey = `${lat.toFixed(2)},${lon.toFixed(2)}`;
+        if (weatherDataCache[cacheKey]) {
+            return computeProbabilityFromData(weatherDataCache[cacheKey], lat, lon);
+        }
+        
+        try {
+            const meteoData = await getMeteoData(lat, lon);
+            const weatherData = { meteoData };
+            weatherDataCache[cacheKey] = weatherData;
+            return computeProbabilityFromData(weatherData, lat, lon);
+        } catch (error) {
+            console.warn(`Error calculando probabilidad para ${lat}, ${lon}:`, error);
+            return 0;
+        }
     }
 
     // redProbability.js, para
@@ -1171,20 +1665,36 @@ layout: none
         const { meteoData } = weatherData;
         if (!meteoData.cloudSeries) return 0;
         
-        // USAR LA MISMA FUNCIÓN PARA OBTENER ÍNDICE
-        const sunsetIndex = getSunsetIndex(meteoData, lat, lon, false);
-        const sunset = SunCalc.getTimes(new Date(), lat, lon).sunset;
-        const sunsetElev = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
+        // USAR INTERPOLACIÓN para obtener datos precisos del atardecer
+        const sunsetResult = getSunsetDataWithInterpolation(meteoData, lat, lon);
         
-        // Obtener datos EXACTAMENTE en ese índice
-        const low_e = meteoData.cloudSeries.cloudcover_low?.[sunsetIndex];
-        const mid_e = meteoData.cloudSeries.cloudcover_mid?.[sunsetIndex];
-        const high_e = meteoData.cloudSeries.cloudcover_high?.[sunsetIndex];
-        
-        console.log(`Heatmap ${lat},${lon}: Índice atardecer=${sunsetIndex}, datos: low=${low_e}, mid=${mid_e}, high=${high_e}`);
-        
-        return computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, 
-                                    meteoData.current.temperature, meteoData.current.pressure, meteoData.current.humidity);
+        if (sunsetResult) {
+            // Usar datos interpolados
+            const sunsetProb = computeRedProbability(
+                sunsetResult.data.low, sunsetResult.data.mid, sunsetResult.data.high,
+                sunsetResult.elevDeg, false,
+                sunsetResult.data.temperature || meteoData.current.temperature,
+                sunsetResult.data.pressure || meteoData.current.pressure,
+                sunsetResult.data.humidity || meteoData.current.humidity
+            );
+            
+            console.log(`Heatmap ${lat},${lon}: Interpolado, prob=${(sunsetProb*100).toFixed(1)}%`);
+            return sunsetProb;
+        } else {
+            // Fallback: usar datos del índice del atardecer (método anterior)
+            const sunsetIndex = getSunsetIndex(meteoData, lat, lon, false);
+            const sunset = SunCalc.getTimes(new Date(), lat, lon).sunset;
+            const sunsetElev = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
+            
+            const low_e = meteoData.cloudSeries.cloudcover_low?.[sunsetIndex];
+            const mid_e = meteoData.cloudSeries.cloudcover_mid?.[sunsetIndex];
+            const high_e = meteoData.cloudSeries.cloudcover_high?.[sunsetIndex];
+            
+            console.log(`Heatmap ${lat},${lon}: Índice atardecer=${sunsetIndex}, datos: low=${low_e}, mid=${mid_e}, high=${high_e}`);
+            
+            return computeRedProbability(low_e, mid_e, high_e, sunsetElev, false, 
+                                        meteoData.current.temperature, meteoData.current.pressure, meteoData.current.humidity);
+        }
     }
 
     async function updateHeatmap(cityLat, cityLon) {
@@ -1274,11 +1784,11 @@ layout: none
     /* ==========================================================================
        PREDICCIÓN PRINCIPAL
        ========================================================================== */
+    // Función actualizada para predictRedSunset
     async function predictRedSunset(lat, lon, cityName = '') {
-        log(`Predicción para ${cityName || `${lat},${lon}`}`);
+        log(`Predicción para ${cityName || `${lat},${lon}`} (con interpolación de atardecer)`);
 
         try {
-
             // Limpiar mapa antes de cargar nueva ciudad
             clearMapLayers();
             
@@ -1291,33 +1801,57 @@ layout: none
             const sunrise = times.sunrise;
             const sunset = times.sunset;
             
-            // OBTENER ÍNDICES CONSISTENTES usando la misma función
-            const sunriseIndex = getSunsetIndex(meteoData, lat, lon, true);  // true = amanecer
-            const sunsetIndex = getSunsetIndex(meteoData, lat, lon, false); // false = atardecer
-            
-            // console.log(`Índices para ${cityName}: Amanecer=${sunriseIndex}, Atardecer=${sunsetIndex}`);
-            
-            // Obtener elevaciones solares
-            const sunriseElev = SunCalc.getPosition(sunrise, lat, lon).altitude * (180/Math.PI);
-            const sunsetElev = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
-            
-            // Obtener datos EXACTAMENTE en esos índices
+            // 1. AMANECER: usar datos normales (sin interpolación)
+            const sunriseIndex = getSunsetIndex(meteoData, lat, lon, true);
             const sunriseData = getDataAtIndex(meteoData, sunriseIndex);
-            const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+            const sunriseElev = SunCalc.getPosition(sunrise, lat, lon).altitude * (180/Math.PI);
             
-            // Calcular probabilidades con datos consistentes
+            // 2. ATARDECER: usar interpolación para máxima precisión
+            const sunsetResult = getSunsetDataWithInterpolation(meteoData, lat, lon);
+            let sunsetData, sunsetElev, sunsetProb, optimalSunsetTime;
+            
+            if (sunsetResult) {
+                // Usar datos interpolados
+                sunsetData = sunsetResult.data;
+                sunsetElev = sunsetResult.elevDeg;
+                optimalSunsetTime = sunsetResult.optimalTime;
+                
+                // Calcular probabilidad con datos interpolados
+                sunsetProb = computeRedProbability(
+                    sunsetData.low, sunsetData.mid, sunsetData.high,
+                    sunsetElev, false,
+                    sunsetData.temperature || meteoData.current.temperature,
+                    sunsetData.pressure || meteoData.current.pressure,
+                    sunsetData.humidity || meteoData.current.humidity
+                );
+                
+                log(`✓ Atardecer interpolado a las ${optimalSunsetTime.toLocaleTimeString('es-CL')}`);
+                log(`  Nubes: Bajas=${Math.round(sunsetData.low)}%, Medias=${Math.round(sunsetData.mid)}%, Altas=${Math.round(sunsetData.high)}%`);
+            } else {
+                // Fallback: usar datos no interpolados
+                const sunsetIndex = getSunsetIndex(meteoData, lat, lon, false);
+                sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+                sunsetElev = SunCalc.getPosition(sunset, lat, lon).altitude * (180/Math.PI);
+                optimalSunsetTime = calculateTimeToMinus2Degrees(lat, lon, false);
+                
+                sunsetProb = computeRedProbability(
+                    sunsetData?.low, sunsetData?.mid, sunsetData?.high,
+                    sunsetElev, false,
+                    sunsetData?.temperature || meteoData.current.temperature,
+                    sunsetData?.pressure || meteoData.current.pressure,
+                    sunsetData?.humidity || meteoData.current.humidity
+                );
+                
+                log(`⚠ Usando datos no interpolados para atardecer`);
+            }
+            
+            // Calcular probabilidad del amanecer
             const sunriseProb = computeRedProbability(
                 sunriseData?.low, sunriseData?.mid, sunriseData?.high, 
                 sunriseElev, true, 
                 sunriseData?.temperature || meteoData.current.temperature,
-                sunriseData?.pressure || meteoData.current.pressure, meteoData.current.humidity
-            );
-            
-            const sunsetProb = computeRedProbability(
-                sunsetData?.low, sunsetData?.mid, sunsetData?.high,
-                sunsetElev, false,
-                sunsetData?.temperature || meteoData.current.temperature,
-                sunsetData?.pressure || meteoData.current.pressure, meteoData.current.humidity
+                sunriseData?.pressure || meteoData.current.pressure,
+                sunriseData?.humidity || meteoData.current.humidity
             );
             
             // Actualizar estado
@@ -1328,21 +1862,22 @@ layout: none
                 sunTimes: times,
                 sunriseElev, sunsetElev,
                 preds: { sunrise: sunriseProb, sunset: sunsetProb },
-                // Guardar índices para consistencia
-                sunriseIndex, sunsetIndex
+                sunriseData,
+                sunsetData,
+                optimalSunsetTime: optimalSunsetTime
             };
             
-            // Actualizar UI con los mismos datos
+            // Actualizar UI con información del máximo arrebol
             updateUI(cityName, lat, lon, meteoData, sunrise, sunset, 
-                    sunriseData, sunsetData, sunriseProb, sunsetProb);
+                    sunriseData, sunsetData, sunriseProb, sunsetProb, optimalSunsetTime);
             
-            // ACTUALIZAR GRÁFICOS
-            updateCharts(meteoData, sunrise, sunset, sunriseIndex, sunsetIndex);
+            // ACTUALIZAR GRÁFICOS (usar índices normales para compatibilidad)
+            updateCharts(meteoData, sunrise, sunset, sunriseIndex, getSunsetIndex(meteoData, lat, lon, false));
             
             if (heatmapEnabled) await updateHeatmap(lat, lon);
             
             log(`% arrebol: amanecer ${(sunriseProb*100).toFixed(1)}%, atardecer ${(sunsetProb*100).toFixed(1)}%`);
-            log(`Índices usados: Amanecer=${sunriseIndex}, Atardecer=${sunsetIndex}`);
+            log(`Máximo arrebol estimado: ${optimalSunsetTime.toLocaleTimeString('es-CL')}`);
 
         } catch (e) {
             document.getElementById('loadingState').innerHTML = '';
@@ -1355,7 +1890,7 @@ layout: none
        FUNCIONES DE INTERFAZ DE USUARIO
        ================================= */
     function updateUI(cityName, lat, lon, meteoData, sunrise, sunset, 
-                    sunriseData, sunsetData, sunriseProb, sunsetProb) {
+                    sunriseData, sunsetData, sunriseProb, sunsetProb, optimalSunsetTime) {
         document.getElementById('loadingState').innerHTML = '';
         
         const dataTime = new Date(meteoData.current.timestamp);
@@ -1372,9 +1907,11 @@ layout: none
         const sunriseHumidity = sunriseData?.humidity || meteoData.current.humidity;
         const sunsetHumidity = sunsetData?.humidity || meteoData.current.humidity;
 
+        // Actualizar dataGrid con información del máximo arrebol
         document.getElementById('dataGrid').innerHTML = `
             <div class="data-item">🌅 Nubes amanecer: <strong>${Math.round(sunriseCloudTotal)}%</strong></div>
             <div class="data-item">🌇 Nubes atardecer: <strong>${Math.round(sunsetCloudTotal)}%</strong></div>
+            ${optimalSunsetTime ? `<div class="data-item">⏰ Máximo arrebol: <strong>${optimalSunsetTime.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'})}</strong></div>` : ''}
         `;
 
         const locationInfo = chileanCities[cityName];
@@ -1399,14 +1936,16 @@ layout: none
         
         document.getElementById('locationText').innerHTML = locationHTML;
 
+        // Mostrar horas con información del máximo
+        const optimalStr = optimalSunsetTime ? 
+            `<br><small style="opacity:0.7; font-size:0.8rem;">Máximo arrebol: ${optimalSunsetTime.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'})}</small>` : '';
+        
         document.getElementById('sunTimes').innerHTML = `
             <div class="sun-time">🌅 Amanecer: ${sunrise.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
-            <div class="sun-time">🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}</div>
+            <div class="sun-time">🌇 Atardecer: ${sunset.toLocaleTimeString('es-CL',{hour:'2-digit', minute:'2-digit'})}${optimalStr}</div>
         `;
 
         updatePredictions(sunriseProb, sunsetProb);
-
-        
     }
 
         /* ==========================================================================
@@ -1461,7 +2000,7 @@ layout: none
         const topRanking = document.getElementById('topRanking');
         if (!topRanking) return;
         
-        topRanking.innerHTML = '<p>Calculando ranking...</p>';
+        topRanking.innerHTML = '<p>Calculando ranking (con interpolación de atardecer)...</p>';
         const cityProbabilities = [];
         
         const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
@@ -1473,30 +2012,39 @@ layout: none
                 const meteoData = await getMeteoData(cityInfo.lat, cityInfo.lon);
                 
                 if (meteoData.cloudSeries) {
-                    // USAR LA MISMA FUNCIÓN QUE LA PREDICCIÓN PRINCIPAL
-                    const sunsetIndex = getSunsetIndex(meteoData, cityInfo.lat, cityInfo.lon, false);
-                    const sunset = SunCalc.getTimes(new Date(), cityInfo.lat, cityInfo.lon).sunset;
-                    const sunsetElev = SunCalc.getPosition(sunset, cityInfo.lat, cityInfo.lon).altitude * (180/Math.PI);
+                    // USAR INTERPOLACIÓN para obtener datos más precisos del atardecer
+                    const sunsetResult = getSunsetDataWithInterpolation(meteoData, cityInfo.lat, cityInfo.lon);
                     
-                    // Obtener datos EXACTAMENTE en ese índice
-                    const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+                    let probAtardecer = 0;
+                    let optimalSunsetTime = calculateTimeToMinus2Degrees(cityInfo.lat, cityInfo.lon, false);
                     
-                    const low_e = sunsetData?.low;
-                    const mid_e = sunsetData?.mid;
-                    const high_e = sunsetData?.high;
-                    
-                    // Calcular probabilidad
-                    const probAtardecer = computeRedProbability(
-                        low_e, mid_e, high_e, 
-                        sunsetElev, false, 
-                        sunsetData?.temperature || meteoData.current.temperature,
-                        sunsetData?.pressure || meteoData.current.pressure, meteoData.current.humidity
-                    );
+                    if (sunsetResult) {
+                        // Usar datos interpolados
+                        probAtardecer = computeRedProbability(
+                            sunsetResult.data.low, sunsetResult.data.mid, sunsetResult.data.high, 
+                            sunsetResult.elevDeg, false, 
+                            sunsetResult.data.temperature || meteoData.current.temperature,
+                            sunsetResult.data.pressure || meteoData.current.pressure,
+                            sunsetResult.data.humidity || meteoData.current.humidity
+                        );
+                        optimalSunsetTime = sunsetResult.optimalTime;
+                    } else {
+                        // Fallback: usar datos no interpolados
+                        const sunsetIndex = getSunsetIndex(meteoData, cityInfo.lat, cityInfo.lon, false);
+                        const sunset = SunCalc.getTimes(new Date(), cityInfo.lat, cityInfo.lon).sunset;
+                        const sunsetElev = SunCalc.getPosition(sunset, cityInfo.lat, cityInfo.lon).altitude * (180/Math.PI);
+                        const sunsetData = getDataAtIndex(meteoData, sunsetIndex);
+                        
+                        probAtardecer = computeRedProbability(
+                            sunsetData?.low, sunsetData?.mid, sunsetData?.high, 
+                            sunsetElev, false, 
+                            sunsetData?.temperature || meteoData.current.temperature,
+                            sunsetData?.pressure || meteoData.current.pressure,
+                            sunsetData?.humidity || meteoData.current.humidity
+                        );
+                    }
                     
                     const probabilityPercent = Math.round(probAtardecer * 100);
-                    
-                    // CALCULAR TIEMPO DEL MÁXIMO ARREBOL
-                    const optimalSunsetTime = calculateTimeToMinus3Degrees(cityInfo.lat, cityInfo.lon, false);
                     const sunsetStatus = getOptimalTimeStatus(optimalSunsetTime, false);
                     
                     cityProbabilities.push({
@@ -1506,8 +2054,12 @@ layout: none
                         percent: probabilityPercent,
                         optimalTime: optimalSunsetTime,
                         timeStatus: sunsetStatus,
-                        sunsetIndex: sunsetIndex,
-                        dataUsed: { low: low_e, mid: mid_e, high: high_e }
+                        dataUsed: { 
+                            interpolated: sunsetResult !== null,
+                            low: sunsetResult?.data?.low,
+                            mid: sunsetResult?.data?.mid,
+                            high: sunsetResult?.data?.high 
+                        }
                     });
                 }
             } catch (error) { 
@@ -1695,3 +2247,5 @@ layout: none
       <a href="https://nicomedinap.github.io/2025/12/21/Preboles.html" target="_blank"> <u>Sobre el modelo predictivo y los datos</u></a>
     </nav>
   </footer>
+</body>
+</html>
