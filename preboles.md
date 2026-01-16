@@ -2000,7 +2000,7 @@ layout: none
         const topRanking = document.getElementById('topRanking');
         if (!topRanking) return;
         
-        topRanking.innerHTML = '<p>Calculando ranking (con interpolación de atardecer)...</p>';
+        topRanking.innerHTML = '<p>Calculando ranking...</p>';
         const cityProbabilities = [];
         
         const citiesOnly = Object.entries(chileanCities).filter(([nombre, info]) => 
