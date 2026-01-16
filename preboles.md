@@ -1786,7 +1786,7 @@ layout: none
        ========================================================================== */
     // Función actualizada para predictRedSunset
     async function predictRedSunset(lat, lon, cityName = '') {
-        log(`Predicción para ${cityName || `${lat},${lon}`} (con interpolación de atardecer)`);
+        log(`Predicción para ${cityName || `${lat},${lon}`}`);
 
         try {
             // Limpiar mapa antes de cargar nueva ciudad
