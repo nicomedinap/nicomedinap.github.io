@@ -1,7 +1,6 @@
 ---
 layout: topbar
 ---
-<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -17,7 +16,7 @@ layout: topbar
   canvas { display: block; }
   #ui {
     position: fixed;
-    top: 10px;
+    top: 30px;
     left: 10px;
     background: rgba(0,0,0,0.6);
     padding: 8px 12px;
@@ -63,10 +62,6 @@ window.addEventListener("resize", resize);
 const vortices = [
   { x: 0.3,  y: 0.5,  gamma:  0.2 },
   { x: 0.7,  y: 0.5,  gamma: -0.2 },
-  { x: 0.4,  y: 0.2,  gamma:  0.2 },
-  { x: 0.5,  y: 0.3,  gamma: -0.3 },
-  { x: 0.2,  y: 0.3,  gamma: -0.5 },
-  { x: 0.6,  y: 0.2,  gamma:  0.4 },
   { x: 0.8,  y: 0.4,  gamma: -0.3 },
   { x: 0.25, y: 0.7,  gamma:  0.3 },
   { x: 0.55, y: 0.75, gamma: -0.4 },
@@ -77,7 +72,7 @@ const vortices = [
    PARTÍCULAS
 ====================== */
 const particles = [];
-const MAX_TRAIL = 120;
+const MAX_TRAIL = 50;
 const INITIAL_PARTICLES = 40;
 const MIN_PARTICLES = 10;
 
@@ -85,7 +80,7 @@ function spawnParticle(x,y){
   particles.push({
     x, y,
     age: 0,
-    life: 1500 - Math.random()*00,
+    life: 1500 - Math.random()*400,
     trail: []
   });
 }
@@ -102,8 +97,8 @@ canvas.addEventListener("mousedown", e=>{
 
   for(let k=0;k<22;k++){
     spawnParticle(
-      x0 + 0.06*(Math.random()-0.5),
-      y0 + 0.06*(Math.random()-0.5)
+      x0 + 0.26*(Math.random()-0.5),
+      y0 + 0.26*(Math.random()-0.5)
     );
   }
 });
