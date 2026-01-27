@@ -16,7 +16,7 @@ layout: topbar
   canvas { display: block; }
   #ui {
     position: fixed;
-    top: 30px;
+    top: 60px;
     left: 10px;
     background: rgba(0,0,0,0.6);
     padding: 8px 12px;
