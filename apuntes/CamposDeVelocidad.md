@@ -1,7 +1,7 @@
 ---
 layout: topbar
 ---
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -85,7 +85,7 @@ function spawnParticle(x,y){
   particles.push({
     x, y,
     age: 0,
-    life: 400 + Math.random()*300,
+    life: 1500 - Math.random()*00,
     trail: []
   });
 }
@@ -100,7 +100,7 @@ canvas.addEventListener("mousedown", e=>{
   const x0 = (e.clientX - r.left) / canvas.width;
   const y0 = (e.clientY - r.top)  / canvas.height;
 
-  for(let k=0;k<12;k++){
+  for(let k=0;k<22;k++){
     spawnParticle(
       x0 + 0.06*(Math.random()-0.5),
       y0 + 0.06*(Math.random()-0.5)
@@ -202,8 +202,8 @@ function animate(){
     const v = velocityField(p.x,p.y);
     const dt = 0.002;
 
-    p.x += dt*v.vx + 0.0005*(Math.random()-0.5);
-    p.y += dt*v.vy + 0.0005*(Math.random()-0.5);
+    p.x += dt*v.vx + 0.0015*(Math.random()-0.5);
+    p.y += dt*v.vy + 0.0015*(Math.random()-0.5);
 
     if(periodicCheckbox.checked){
       if(p.x < 0) p.x += 1;
