@@ -299,7 +299,7 @@ function spawn(x,y){
 }
 
 // Numero de particulas al inicio
-for(let i=0;i<1200;i++) spawn(Math.random(),Math.random());
+for(let i=0;i<500;i++) spawn(Math.random(),Math.random());
 
 // Evento de clic para desktop (se mantiene)
 canvas.addEventListener("mousedown", e=>{
