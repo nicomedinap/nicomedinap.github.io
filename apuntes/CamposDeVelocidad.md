@@ -31,18 +31,6 @@ canvas{
   z-index:100;
 }
 
-#instructions{
-  position:fixed;
-  top:60px;
-  right:10px;
-  background:rgba(0,0,0,0.7);
-  padding:10px 15px;
-  border:1px solid #444;
-  border-radius:8px;
-  font-size:12px;
-  max-width:250px;
-  z-index:100;
-}
 .control-btn{
   background:rgba(100,100,100,0.5);
   color:white;
@@ -73,13 +61,6 @@ canvas{
 <label><input type="checkbox" id="particleFrame"> Seguir partícula roja</label>
 </div>
 
-<div id="instructions">
-Controles táctiles:<br>
-• Un dedo: Arrastrar vista<br>
-• Dos dedos: Zoom<br>
-• Toque largo: Crear partículas
-</div>
-
 <canvas id="canvas"></canvas>
 
 <script>
@@ -98,14 +79,16 @@ resize();
 addEventListener("resize", resize);
 
 const showField = document.getElementById("showField");
+
 const frameBox  = document.getElementById("particleFrame");
+frameBox.checked = true;
 
 /* ================= ZOOM Y PAN ================= */
 let zoom = 1.0;
 let viewX = 0.5;
 let viewY = 0.5;
 const ZOOM_MIN = 0.05;
-const ZOOM_MAX = 5.0;
+const ZOOM_MAX = 30.0;
 
 // Variables para controles táctiles
 let touchStartDistance = 0;
@@ -184,7 +167,7 @@ canvas.addEventListener("touchmove", e=>{
     const currentDistance = Math.sqrt(dx * dx + dy * dy);
     
     if (touchStartDistance > 0) {
-      const zoomFactor = touchStartDistance / currentDistance;
+      const zoomFactor = currentDistance / touchStartDistance;
       zoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, touchStartZoom * zoomFactor));
     }
   }
@@ -205,7 +188,7 @@ canvas.addEventListener("touchend", e=>{
   if (e.changedTouches.length === 1 && Date.now() - touchStartTime < 300) {
     const touch = e.changedTouches[0];
     // Verificar que no sea en los controles UI
-    const uiElements = document.querySelectorAll('#ui, #instructions');
+    const uiElements = document.querySelectorAll('#ui');
     let isOnUI = false;
     uiElements.forEach(el => {
       const rect = el.getBoundingClientRect();
@@ -290,15 +273,23 @@ canvas.addEventListener("mouseleave", ()=>{
 });
 
 /* ================= VÓRTICES ================= */
-const vortices=[
- {x:0.3,y:0.9,gamma:0.05},{x:0.7,y:0.2,gamma:-0.25},
- {x:0.4,y:0.2,gamma:0.3},{x:0.6,y:0.3,gamma:-0.1},
- {x:0.2,y:0.3,gamma:-0.7},{x:0.8,y:0.6,gamma:0.25}
+const vortices = [
+  // Par principal (estructura global)
+  { x:0.40, y:0.50, gamma: 0.9 },
+  { x:0.60, y:0.50, gamma:-0.9 },
+
+  // Par secundario (rompe simetría)
+  { x:0.50, y:0.40, gamma:-0.6 },
+  { x:0.50, y:0.60, gamma: 0.6 },
+
+  // Vórtices débiles periféricos (mezcla caótica)
+  { x:0.35, y:0.35, gamma: 0.25 },
+  { x:0.65, y:0.65, gamma:-0.25 }
 ];
 
 /* ================= PARTÍCULAS ================= */
 const particles=[];
-const MAX_TRAIL=120;
+const MAX_TRAIL=40;
 
 const refParticle={x:Math.random(),y:Math.random(),trail:[]};
 particles.push(refParticle);
@@ -307,7 +298,8 @@ function spawn(x,y){
  particles.push({x,y,age:0,life:900+400*Math.random(),trail:[]});
 }
 
-for(let i=0;i<15;i++) spawn(Math.random(),Math.random());
+// Numero de particulas al inicio
+for(let i=0;i<1200;i++) spawn(Math.random(),Math.random());
 
 // Evento de clic para desktop (se mantiene)
 canvas.addEventListener("mousedown", e=>{
@@ -322,8 +314,8 @@ canvas.addEventListener("mousedown", e=>{
  const worldY=cy+(e.clientY-r.top)/canvas.height*zoom-0.5*zoom;
  
  for(let k=0;k<15;k++)
-  spawn(worldX+0.5*(Math.random()-0.5),
-        worldY+0.5*(Math.random()-0.5));
+  spawn(worldX+3.5*(Math.random()-0.5),
+        worldY+3.5*(Math.random()-0.5));
 });
 
 /* ================= UTILIDADES ================= */
@@ -347,10 +339,48 @@ function screenToWorld(screenX, screenY, cx, cy) {
 }
 
 /* ================= CAMPO ================= */
-function velocity(x,y){
- const X=6*(x-0.5), Y=6*(y-0.5);
- const Z=Math.sin(X)*Math.cos(Y)+1;
- return {vx:-Y-Z, vy:X+0.2*Y};
+
+function vortexVelocity(x, y, vx, vy) {
+  let ux = 0, uy = 0;
+  const eps = 1e-4;
+
+  vortices.forEach(v => {
+    const dx = x - v.x;
+    const dy = y - v.y;
+    const r2 = dx*dx + dy*dy + eps;
+
+    const factor = v.gamma / (2 * Math.PI * r2);
+
+    ux += -factor * dy;
+    uy +=  factor * dx;
+  });
+
+  return { vx: vx + ux, vy: vy + uy };
+}
+
+function velocity(x, y){
+
+  // Coordenadas centradas
+  const X = 2 * (x - 0.5);
+  const Y = 2 * (y - 0.5);
+
+  /* --------- PARÁMETROS --------- */
+  const omega = 3.82;   // rotación base
+  const shear = 10.09;   // deformación
+  const drift = 08.35;  // empuje constante (CLAVE)
+
+  /* --------- CAMPO --------- */
+  let vx =
+      -omega * Y
+      + shear * Math.sin(2.0 * Y)
+      + drift;
+
+  let vy =
+       omega * X
+      + shear * Math.sin(2.0 * X)
+      + 0.5 * drift;
+
+  return { vx, vy };
 }
 
 /* ================= FLECHAS ================= */
@@ -423,7 +453,7 @@ function animate(){
   }
  }
 
- /* VÓRTICES */
+ /* VÓRTICES
  vortices.forEach(v=>{
   const screenPos=worldToScreen(v.x,v.y,cx,cy);
   if(screenPos.visible){
@@ -432,7 +462,7 @@ function animate(){
    ctx.arc(screenPos.X, screenPos.Y, 6, 0, 2*Math.PI);
    ctx.fill();
   }
- });
+ }); */
 
  /* Indicador de posición de la vista */
  if(!useFrame){
