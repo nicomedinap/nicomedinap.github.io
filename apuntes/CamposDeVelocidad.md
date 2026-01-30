@@ -30,19 +30,7 @@ canvas{
   font-size:14px;
   z-index:100;
 }
-#mobileControls{
-  position:fixed;
-  bottom:20px;
-  left:10px;
-  right:10px;
-  background:rgba(0,0,0,0.7);
-  padding:10px;
-  border:1px solid #444;
-  border-radius:8px;
-  font-size:12px;
-  text-align:center;
-  z-index:100;
-}
+
 #instructions{
   position:fixed;
   top:60px;
@@ -70,11 +58,7 @@ canvas{
     font-size:12px;
     padding:8px 12px;
   }
-  #mobileControls{
-    display:flex;
-    justify-content:space-around;
-    bottom:10px;
-  }
+
   .control-btn{
     font-size:12px;
     padding:6px 10px;
@@ -87,13 +71,6 @@ canvas{
 <div id="ui">
 <label><input type="checkbox" id="showField"> Mostrar campo</label><br>
 <label><input type="checkbox" id="particleFrame"> Seguir partícula roja</label>
-</div>
-
-<div id="mobileControls">
-  <button class="control-btn" id="spawnBtn">+ Partículas</button>
-  <button class="control-btn" id="resetViewBtn">↺ Vista</button>
-  <button class="control-btn" id="zoomInBtn">+ Zoom</button>
-  <button class="control-btn" id="zoomOutBtn">- Zoom</button>
 </div>
 
 <div id="instructions">
@@ -228,7 +205,7 @@ canvas.addEventListener("touchend", e=>{
   if (e.changedTouches.length === 1 && Date.now() - touchStartTime < 300) {
     const touch = e.changedTouches[0];
     // Verificar que no sea en los controles UI
-    const uiElements = document.querySelectorAll('#ui, #mobileControls, #instructions');
+    const uiElements = document.querySelectorAll('#ui, #instructions');
     let isOnUI = false;
     uiElements.forEach(el => {
       const rect = el.getBoundingClientRect();
@@ -248,9 +225,9 @@ canvas.addEventListener("touchend", e=>{
       const worldX = cx + (touch.clientX - rect.left) / canvas.width * zoom - 0.5 * zoom;
       const worldY = cy + (touch.clientY - rect.top) / canvas.height * zoom - 0.5 * zoom;
       
-      for(let k = 0; k < 5; k++) {
-        spawn(worldX + 0.08 * (Math.random() - 0.5),
-              worldY + 0.08 * (Math.random() - 0.5));
+      for(let k = 0; k < 15; k++) {
+        spawn(worldX + 2.0 * (Math.random() - 0.5),
+              worldY + 2.0 * (Math.random() - 0.5));
       }
     }
   }
@@ -312,32 +289,6 @@ canvas.addEventListener("mouseleave", ()=>{
   canvas.style.cursor = "default";
 });
 
-/* ================= CONTROLES DE BOTONES ================= */
-document.getElementById("spawnBtn").addEventListener("click", ()=>{
-  const useFrame = frameBox.checked;
-  const cx = useFrame ? refParticle.x : viewX;
-  const cy = useFrame ? refParticle.y : viewY;
-  
-  for(let k = 0; k < 15; k++) {
-    spawn(cx + 0.15 * (Math.random() - 0.5),
-          cy + 0.15 * (Math.random() - 0.5));
-  }
-});
-
-document.getElementById("resetViewBtn").addEventListener("click", ()=>{
-  zoom = 1.0;
-  viewX = 0.5;
-  viewY = 0.5;
-});
-
-document.getElementById("zoomInBtn").addEventListener("click", ()=>{
-  zoom = Math.min(ZOOM_MAX, zoom * 1.2);
-});
-
-document.getElementById("zoomOutBtn").addEventListener("click", ()=>{
-  zoom = Math.max(ZOOM_MIN, zoom / 1.2);
-});
-
 /* ================= VÓRTICES ================= */
 const vortices=[
  {x:0.3,y:0.9,gamma:0.05},{x:0.7,y:0.2,gamma:-0.25},
@@ -371,8 +322,8 @@ canvas.addEventListener("mousedown", e=>{
  const worldY=cy+(e.clientY-r.top)/canvas.height*zoom-0.5*zoom;
  
  for(let k=0;k<15;k++)
-  spawn(worldX+0.1*(Math.random()-0.5),
-        worldY+0.1*(Math.random()-0.5));
+  spawn(worldX+0.5*(Math.random()-0.5),
+        worldY+0.5*(Math.random()-0.5));
 });
 
 /* ================= UTILIDADES ================= */
