@@ -30,7 +30,6 @@ canvas{
   font-size:14px;
   z-index:100;
 }
-
 .control-btn{
   background:rgba(100,100,100,0.5);
   color:white;
@@ -46,7 +45,6 @@ canvas{
     font-size:12px;
     padding:8px 12px;
   }
-
   .control-btn{
     font-size:12px;
     padding:6px 10px;
@@ -57,8 +55,8 @@ canvas{
 <body>
 
 <div id="ui">
-<label><input type="checkbox" id="showField"> Mostrar campo</label><br>
-<label><input type="checkbox" id="particleFrame"> Seguir partícula roja</label>
+<label><input type="checkbox" id="showField" checked> Mostrar campo</label><br>
+<label><input type="checkbox" id="particleFrame" checked> Seguir partícula roja</label>
 </div>
 
 <canvas id="canvas"></canvas>
@@ -79,7 +77,6 @@ resize();
 addEventListener("resize", resize);
 
 const showField = document.getElementById("showField");
-
 const frameBox  = document.getElementById("particleFrame");
 frameBox.checked = true;
 
@@ -274,22 +271,17 @@ canvas.addEventListener("mouseleave", ()=>{
 
 /* ================= VÓRTICES ================= */
 const vortices = [
-  // Par principal (estructura global)
   { x:0.40, y:0.50, gamma: 0.9 },
   { x:0.60, y:0.50, gamma:-0.9 },
-
-  // Par secundario (rompe simetría)
   { x:0.50, y:0.40, gamma:-0.6 },
   { x:0.50, y:0.60, gamma: 0.6 },
-
-  // Vórtices débiles periféricos (mezcla caótica)
   { x:0.35, y:0.35, gamma: 0.25 },
   { x:0.65, y:0.65, gamma:-0.25 }
 ];
 
 /* ================= PARTÍCULAS ================= */
 const particles=[];
-const MAX_TRAIL=40;
+const MAX_TRAIL=60;
 
 const refParticle={x:Math.random(),y:Math.random(),trail:[]};
 particles.push(refParticle);
@@ -339,146 +331,176 @@ function screenToWorld(screenX, screenY, cx, cy) {
 }
 
 /* ================= CAMPO ================= */
-
-function vortexVelocity(x, y, vx, vy) {
-  let ux = 0, uy = 0;
-  const eps = 1e-4;
-
-  vortices.forEach(v => {
-    const dx = x - v.x;
-    const dy = y - v.y;
-    const r2 = dx*dx + dy*dy + eps;
-
-    const factor = v.gamma / (2 * Math.PI * r2);
-
-    ux += -factor * dy;
-    uy +=  factor * dx;
-  });
-
-  return { vx: vx + ux, vy: vy + uy };
-}
-
 function velocity(x, y){
-
   // Coordenadas centradas
   const X = 2 * (x - 0.5);
   const Y = 2 * (y - 0.5);
 
-  /* --------- PARÁMETROS --------- */
-  const omega = 3.82;   // rotación base
-  const shear = 10.09;   // deformación
-  const drift = 08.35;  // empuje constante (CLAVE)
+  const omega = 3.82;
+  const shear = 10.09;
+  const drift = 8.35;
 
-  /* --------- CAMPO --------- */
-  let vx =
-      -omega * Y
-      + shear * Math.sin(2.0 * Y)
-      + drift;
-
-  let vy =
-       omega * X
-      + shear * Math.sin(2.0 * X)
-      + 0.5 * drift;
+  let vx = -omega * Y + shear * Math.sin(2.0 * Y) + drift;
+  let vy = omega * X + shear * Math.sin(2.0 * X) + 0.5 * drift;
 
   return { vx, vy };
 }
 
-/* ================= FLECHAS ================= */
-function drawArrow(x,y,vx,vy,color="rgba(180,180,180,0.4)",L=25){
- const m=Math.hypot(vx,vy); if(m<1e-3)return;
- const ux=vx/m, uy=vy/m;
- ctx.strokeStyle=color; ctx.fillStyle=color;
- ctx.beginPath(); ctx.moveTo(x,y);
- ctx.lineTo(x+L*ux,y+L*uy); ctx.stroke();
- const a=Math.PI/6;
- ctx.beginPath();
- ctx.moveTo(x+L*ux,y+L*uy);
- ctx.lineTo(x+L*ux-8*(ux*Math.cos(a)-uy*Math.sin(a)),
-            y+L*uy-8*(uy*Math.cos(a)+ux*Math.sin(a)));
- ctx.lineTo(x+L*ux-8*(ux*Math.cos(a)+uy*Math.sin(a)),
-            y+L*uy-8*(uy*Math.cos(a)-ux*Math.sin(a)));
- ctx.closePath(); ctx.fill();
+// Función para calcular la intensidad (magnitud) del vector
+function getIntensity(vx, vy) {
+  return Math.sqrt(vx * vx + vy * vy);
+}
+
+// Función para obtener color según intensidad - versión simplificada
+function getColorForIntensity(intensity) {
+  // Escala simplificada: baja intensidad = azul, alta intensidad = rojo
+  // Calcular un valor entre 0 y 1 basado en la intensidad
+  
+  // Primero, normalizamos la intensidad entre 0 y 1
+  // Para este campo, valores típicos están entre 5 y 35
+  const minIntensity = 5;
+  const maxIntensity = 35;
+  
+  // Asegurarse de que la intensidad esté dentro del rango
+  let normalized = (intensity - minIntensity) / (maxIntensity - minIntensity);
+  normalized = Math.max(0, Math.min(1, normalized)); // Clamp entre 0 y 1
+  
+  // Interpolar entre azul (0,0,255) y rojo (255,0,0) pasando por verde (0,255,0)
+  let r, g, b;
+  
+  if (normalized < 0.5) {
+    // Azul -> Verde
+    const t = normalized * 2;
+    r = Math.floor(0);
+    g = Math.floor(255 * t);
+    b = Math.floor(255 * (1 - t));
+  } else {
+    // Verde -> Rojo
+    const t = (normalized - 0.5) * 2;
+    r = Math.floor(255 * t);
+    g = Math.floor(255 * (1 - t));
+    b = Math.floor(0);
+  }
+  
+  return `rgba(${r}, ${g}, ${b}, 0.7)`;
+}
+
+/* ================= FLECHAS CON COLOR POR INTENSIDAD ================= */
+function drawArrow(x, y, vx, vy, customColor=null, L=25){
+  const m = Math.hypot(vx, vy);
+  if(m < 1e-3) return;
+  
+  const ux = vx / m;
+  const uy = vy / m;
+  
+  // Si se proporciona un color personalizado, usarlo
+  // De lo contrario, calcular el color según la intensidad
+  const color = customColor || getColorForIntensity(m);
+  
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  
+  // Dibujar la línea de la flecha
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + L * ux, y + L * uy);
+  ctx.stroke();
+  
+  // Dibujar la punta de la flecha
+  const a = Math.PI/6;
+  ctx.beginPath();
+  ctx.moveTo(x + L * ux, y + L * uy);
+  ctx.lineTo(x + L * ux - 8 * (ux * Math.cos(a) - uy * Math.sin(a)),
+             y + L * uy - 8 * (uy * Math.cos(a) + ux * Math.sin(a)));
+  ctx.lineTo(x + L * ux - 8 * (ux * Math.cos(a) + uy * Math.sin(a)),
+             y + L * uy - 8 * (uy * Math.cos(a) - ux * Math.sin(a)));
+  ctx.closePath();
+  ctx.fill();
 }
 
 /* ================= LOOP ================= */
 function animate(){
- ctx.fillStyle="black";
- ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
- const useFrame=frameBox.checked;
- const ref=refParticle;
- const cx=useFrame?ref.x:viewX;
- const cy=useFrame?ref.y:viewY;
+  const useFrame = frameBox.checked;
+  const ref = refParticle;
+  const cx = useFrame ? ref.x : viewX;
+  const cy = useFrame ? ref.y : viewY;
 
- /* CAMPO */
- if(showField.checked){
-  for(let i=0;i<canvas.width;i+=70)
-   for(let j=0;j<canvas.height;j+=70){
-    const screenX = i;
-    const screenY = j;
-    const worldPos = screenToWorld(screenX, screenY, cx, cy);
-    const v=velocity(worldPos.x, worldPos.y);
-    drawArrow(screenX, screenY, v.vx, v.vy);
-   }
- }
-
- /* PARTÍCULAS */
- for(let i=particles.length-1;i>=0;i--){
-  const p=particles[i];
-  const v=velocity(p.x,p.y);
-  p.x+=0.002*v.vx; p.y+=0.002*v.vy;
-
-  p.trail.push({x:p.x,y:p.y});
-  if(p.trail.length>MAX_TRAIL)p.trail.shift();
-
-  ctx.strokeStyle="rgba(255,255,255,0.25)";
-  ctx.beginPath();
-  p.trail.forEach((t,k)=>{
-    const screenPos=worldToScreen(t.x,t.y,cx,cy);
-    if(!screenPos.visible)return;
-    k?ctx.lineTo(screenPos.X,screenPos.Y):ctx.moveTo(screenPos.X,screenPos.Y);
-  });
-  ctx.stroke();
-
-  const screenPos=worldToScreen(p.x,p.y,cx,cy);
-  if(screenPos.visible){
-   ctx.fillStyle=p===ref?"red":"white";
-   ctx.beginPath();
-   ctx.arc(screenPos.X, screenPos.Y, p===ref?6:2.2,0,2*Math.PI);
-   ctx.fill();
-
-   if(p===ref){
-    drawArrow(screenPos.X, screenPos.Y, v.vx, v.vy, "red", 60);
-   }
+  /* CAMPO VECTORIAL CON COLOR POR INTENSIDAD */
+  if(showField.checked){
+    for(let i = 0; i < canvas.width; i += 70) {
+      for(let j = 0; j < canvas.height; j += 70){
+        const screenX = i;
+        const screenY = j;
+        const worldPos = screenToWorld(screenX, screenY, cx, cy);
+        const v = velocity(worldPos.x, worldPos.y);
+        
+        // Dibujar flecha con color según intensidad
+        drawArrow(screenX, screenY, v.vx, v.vy);
+      }
+    }
   }
- }
 
- /* VÓRTICES
- vortices.forEach(v=>{
-  const screenPos=worldToScreen(v.x,v.y,cx,cy);
-  if(screenPos.visible){
-   ctx.fillStyle=v.gamma>0?"green":"blue";
-   ctx.beginPath();
-   ctx.arc(screenPos.X, screenPos.Y, 6, 0, 2*Math.PI);
-   ctx.fill();
+  /* PARTÍCULAS */
+  for(let i = particles.length - 1; i >= 0; i--){
+    const p = particles[i];
+    const v = velocity(p.x, p.y);
+    p.x += 0.002 * v.vx;
+    p.y += 0.002 * v.vy;
+
+    p.trail.push({x: p.x, y: p.y});
+    if(p.trail.length > MAX_TRAIL) p.trail.shift();
+
+    ctx.strokeStyle = "rgba(255,255,255,0.25)";
+    ctx.beginPath();
+    p.trail.forEach((t,k) => {
+      const screenPos = worldToScreen(t.x, t.y, cx, cy);
+      if(!screenPos.visible) return;
+      k ? ctx.lineTo(screenPos.X, screenPos.Y) : ctx.moveTo(screenPos.X, screenPos.Y);
+    });
+    ctx.stroke();
+
+    const screenPos = worldToScreen(p.x, p.y, cx, cy);
+    if(screenPos.visible){
+      ctx.fillStyle = p === ref ? "red" : "white";
+      ctx.beginPath();
+      ctx.arc(screenPos.X, screenPos.Y, p === ref ? 6 : 2.2, 0, 2 * Math.PI);
+      ctx.fill();
+
+      if(p === ref){
+        drawArrow(screenPos.X, screenPos.Y, v.vx, v.vy, "red", 60);
+      }
+    }
   }
- }); */
 
- /* Indicador de posición de la vista */
- if(!useFrame){
-  ctx.fillStyle="rgba(255,255,255,0.1)";
-  ctx.beginPath();
-  ctx.arc(canvas.width/2, canvas.height/2, 5, 0, 2*Math.PI);
-  ctx.fill();
-  
-  ctx.font=(isMobile ? "10px" : "12px") + " sans-serif";
-  ctx.fillStyle="rgba(255,255,255,0.5)";
-  ctx.textAlign="right";
-  ctx.fillText(`Vista: (${viewX.toFixed(2)}, ${viewY.toFixed(2)})`, canvas.width-20, 30);
-  ctx.fillText(`Zoom: ${zoom.toFixed(2)}`, canvas.width-20, isMobile ? 45 : 50);
- }
+  /* VÓRTICES (OPCIONAL)
+  vortices.forEach(v => {
+    const screenPos = worldToScreen(v.x, v.y, cx, cy);
+    if(screenPos.visible){
+      ctx.fillStyle = v.gamma > 0 ? "green" : "blue";
+      ctx.beginPath();
+      ctx.arc(screenPos.X, screenPos.Y, 6, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }); */
 
- requestAnimationFrame(animate);
+  /* Indicador de posición de la vista */
+  if(!useFrame){
+    ctx.fillStyle = "rgba(255,255,255,0.1)";
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height/2, 5, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    ctx.font = (isMobile ? "10px" : "12px") + " sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.5)";
+    ctx.textAlign = "right";
+    ctx.fillText(`Vista: (${viewX.toFixed(2)}, ${viewY.toFixed(2)})`, canvas.width - 20, 30);
+    ctx.fillText(`Zoom: ${zoom.toFixed(2)}`, canvas.width - 20, isMobile ? 45 : 50);
+  }
+
+  requestAnimationFrame(animate);
 }
 animate();
 </script>
