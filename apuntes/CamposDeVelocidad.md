@@ -184,7 +184,7 @@ canvas.addEventListener("touchmove", e=>{
     const currentDistance = Math.sqrt(dx * dx + dy * dy);
     
     if (touchStartDistance > 0) {
-      const zoomFactor = currentDistance / touchStartDistance;
+      const zoomFactor = touchStartDistance / currentDistance;
       zoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, touchStartZoom * zoomFactor));
     }
   }
