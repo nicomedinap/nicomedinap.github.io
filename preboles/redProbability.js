@@ -5,8 +5,8 @@ function computeRedProbability(low, mid, high, elevDeg, isSunrise = false, tempe
   const highPct = Math.max(0, Math.min(100, Number(high) || 0));
 
   const F_N = 0.60 * (highPct / 100) +  
-              0.30 * (midPct / 100) + 
-              0.10 * (lowPct / 100)
+              0.40 * (midPct / 100)  
+              //0.10 * (lowPct / 100)
 
   //===== FACTOR GEOMÉTRICO (F_θ) =====
   const idealElev = isSunrise ? 3.0 : -3.0;
