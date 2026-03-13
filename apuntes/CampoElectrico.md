@@ -5,102 +5,100 @@ layout: topbar
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Simulador de Cargas Eléctricas</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Simulador de Cargas - Móvil</title>
 <style>
-/* ===== ESTILOS GENERALES ===== */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
 body {
     margin: 0;
     background: black;
     overflow: hidden;
     color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    touch-action: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
 canvas {
     display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
 }
 
-/* ===== BOTÓN PARA OCULTAR/MOSTRAR PANEL ===== */
 #menu-toggle {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 40px;
-    height: 40px;
-    background: rgba(30, 30, 40, 0.95);
+    top: 10px;
+    left: 10px;
+    width: 44px;
+    height: 44px;
+    background: rgba(20,20,30,0.95);
     backdrop-filter: blur(10px);
-    border: 1px solid #555;
-    border-radius: 8px;
-    color: white;
+    border: 1px solid #4CAF50;
+    border-radius: 12px;
+    color: #4CAF50;
     font-size: 20px;
     cursor: pointer;
     z-index: 1001;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transition: all 0.2s;
 }
 
-#menu-toggle:hover {
-    background: rgba(50, 50, 60, 0.95);
-    border-color: #777;
-}
-
-/* ===== PANEL DE CONTROL ===== */
 #ui {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 260px;
-    background: rgba(20, 20, 30, 0.95);
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: rgba(10,10,15,0.98);
     backdrop-filter: blur(10px);
-    padding: 0;
-    border-radius: 12px;
-    border: 1px solid #444;
-    font-size: 13px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid #333;
     z-index: 1000;
     transition: transform 0.3s ease;
-    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
 }
 
 #ui.collapsed {
-    transform: translateX(-280px);
+    transform: translateX(-100%);
 }
 
 .ui-header {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-bottom: 1px solid #444;
+    padding: 20px 15px;
+    border-bottom: 1px solid #333;
+    background: rgba(0,0,0,0.3);
 }
 
 .ui-header h1 {
     margin: 0;
     font-size: 18px;
-    color: #fff;
     text-align: center;
     font-weight: 500;
-    letter-spacing: 1px;
 }
 
-.ui-header h1 span {
-    color: #4CAF50;
-    font-weight: bold;
+.ui-header span { color: #4CAF50; }
+
+.ui-content { padding: 15px; }
+
+.section {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
-.ui-content {
-    padding: 16px;
-    max-height: calc(100vh - 120px);
-    overflow-y: auto;
-}
-
-.ui-section {
-    margin-bottom: 20px;
-}
-
-.ui-section h3 {
+.section h3 {
     margin: 0 0 12px 0;
     font-size: 14px;
     color: #aaa;
@@ -110,76 +108,89 @@ canvas {
     padding-left: 8px;
 }
 
-.ui-row {
+.row {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: background 0.2s;
+    gap: 10px;
+    padding: 8px 0;
+    min-height: 44px;
 }
 
-.ui-row:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.ui-row label {
+.row label {
     flex: 1;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
     color: #eee;
+    font-size: 14px;
 }
 
-.ui-row input[type="checkbox"],
-.ui-row input[type="radio"] {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
+input[type="checkbox"], input[type="radio"] {
+    width: 20px;
+    height: 20px;
     accent-color: #4CAF50;
 }
 
-.ui-button {
-    width: 100%;
-    padding: 10px;
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.mode-btn {
     background: #2a2a3a;
-    color: white;
     border: 1px solid #555;
-    border-radius: 6px;
-    cursor: pointer;
+    border-radius: 30px;
+    padding: 14px 5px;
+    color: white;
     font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
+    touch-action: manipulation;
 }
 
-.ui-button:hover {
-    background: #3a3a4a;
-    border-color: #777;
+.mode-btn.active {
+    background: #4CAF50;
+    border-color: #8bc34a;
+    color: black;
 }
 
-.ui-badge {
-    background: #333;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    color: #4CAF50;
-    border: 1px solid #4CAF5033;
-    font-weight: bold;
+.mode-btn:active { transform: scale(0.95); }
+
+.action-btn {
+    width: 100%;
+    background: #2a2a3a;
+    border: 1px solid #555;
+    border-radius: 30px;
+    padding: 14px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    touch-action: manipulation;
 }
+
+.action-btn:active { background: #3a3a4a; }
+
+.action-btn.danger { background: #5a2a2a; }
 
 .help-text {
     font-size: 12px;
     color: #aaa;
-    line-height: 1.8;
-    padding: 10px;
-    background: rgba(0,0,0,0.2);
-    border-radius: 6px;
-    margin-top: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 15px;
 }
 
 .help-text div {
@@ -189,197 +200,279 @@ canvas {
     gap: 8px;
 }
 
-/* Estilo para scrollbar */
-.ui-content::-webkit-scrollbar {
-    width: 6px;
+.mode-indicator {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.9);
+    border: 2px solid #4CAF50;
+    border-radius: 40px;
+    padding: 12px 20px;
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 2000;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
-.ui-content::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.2);
+.controls-container {
+    transition: opacity 0.2s;
+    margin-top: 10px;
 }
 
-.ui-content::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 3px;
-}
-
-.ui-content::-webkit-scrollbar-thumb:hover {
-    background: #777;
-}
+.hidden { display: none !important; }
 </style>
 </head>
-
 <body>
 
-<div id="menu-toggle" onclick="toggleMenu()">◀</div>
+<div id="menu-toggle" onclick="toggleMenu()">☰</div>
 
 <div id="ui">
-    <div class="ui-header">
-        <h1><span>⚡</span> SIMULADOR DE CARGAS ELÉCTRICAS <span>⚡</span></h1>
-    </div>
-    
+    <div class="ui-header"><h1><span>⚡</span> CARGAS MÓVILES <span>⚡</span></h1></div>
     <div class="ui-content">
-        <!-- Visualización -->
-        <div class="ui-section">
+        
+        <div class="section">
             <h3>VISUALIZACIÓN</h3>
-            <div class="ui-row">
-                <label><input type="checkbox" id="showGrid" checked> Grilla de coordenadas</label>
+            <div class="row"><label><input type="checkbox" id="showGrid" checked> Grilla</label></div>
+            <div class="row"><label><input type="checkbox" id="showField" checked> Vectores campo</label></div>
+            <div class="row"><label><input type="checkbox" id="showPotential" checked> Potencial</label></div>
+            <div class="row"><label><input type="checkbox" id="showFieldLines" checked> Líneas campo</label></div>
+            <div class="row"><label><input type="checkbox" id="showTrails" checked> Trayectorias</label></div>
+        </div>
+
+        <div class="section">
+            <h3>MODO</h3>
+            <div class="mode-grid">
+                <button class="mode-btn" id="modePan">🖱️ Mover</button>
+                <button class="mode-btn" id="modeAddFixed">➕ Fija</button>
+                <button class="mode-btn" id="modeAddMobile">⚡ Móvil</button>
+                <button class="mode-btn" id="modeMeasure">📏 Medir</button>
             </div>
-            <div class="ui-row">
-                <label><input type="checkbox" id="showField" checked> Vectores de campo</label>
+            
+            <div id="fixedControls" class="controls-container hidden">
+                <div class="row"><label><input type="radio" name="pol" value="1" checked> 🔴 Positiva</label></div>
+                <div class="row"><label><input type="radio" name="pol" value="-1"> 🔵 Negativa</label></div>
             </div>
-            <div class="ui-row">
-                <label><input type="checkbox" id="showPotential" checked> Potencial (fondo)</label>
+            
+            <div id="mobileControls" class="controls-container hidden">
+                <div class="row"><label><input type="radio" name="mobilePol" value="1" checked> 🟠 Positiva móvil</label></div>
+                <div class="row"><label><input type="radio" name="mobilePol" value="-1"> 🟣 Negativa móvil</label></div>
             </div>
-            <div class="ui-row">
-                <label><input type="checkbox" id="showFieldLines" checked> Líneas de campo</label>
+            
+            <div id="measureControls" class="controls-container hidden">
+                <div class="row"><label><input type="checkbox" id="showModel"> Modelo 1/r²</label></div>
+                <button class="action-btn" id="clearMeasurements">🗑️ Borrar <span id="measurementCount">0</span></button>
             </div>
         </div>
 
-        <!-- Medición -->
-        <div class="ui-section">
-            <h3>MEDICIÓN</h3>
-            <div class="ui-row">
-                <label><input type="checkbox" id="measureMode"> Modo medición</label>
-                <span class="ui-badge" id="measurementCount">0</span>
-            </div>
-            <div class="ui-row">
-                <label><input type="checkbox" id="showModel"> Modelo 1/r²</label>
-            </div>
-            <button class="ui-button" id="clearMeasurements">
-                <span>🗑️</span> Borrar mediciones
-            </button>
+        <div class="section">
+            <h3>ACCIONES</h3>
+            <button class="action-btn" id="clearMobileCharges">🗑️ Eliminar móviles</button>
+            <button class="action-btn" id="toggleMotion">⏸️ Pausar</button>
+            <button class="action-btn" id="resetView">🎯 Centrar vista</button>
         </div>
 
-        <!-- Cargas -->
-        <div class="ui-section">
-            <h3>Polaridad de las cargas</h3>
-            <div class="ui-row">
-                <label><input type="radio" name="pol" value="1" checked> <span style="color: #ff6b6b;">🔴 Positiva</span></label>
-            </div>
-            <div class="ui-row">
-                <label><input type="radio" name="pol" value="-1"> <span style="color: #6b9fff;">🔵 Negativa</span></label>
-            </div>
+        <div class="help-text">
+            <div>👆 Arrastrar: Mover vista</div>
+            <div>👆 Tocar: Acción según modo</div>
+            <div>👆 Tocar carga: Eliminar</div>
+            <div>🌌 Dominio 20×30 cíclico</div>
         </div>
-
     </div>
 </div>
+
+<div id="modeIndicator" class="mode-indicator">🖱️ MOVER</div>
 
 <canvas id="canvas"></canvas>
 
 <script>
-/* ============================================================================
-   SIMULADOR DE CARGAS ELÉCTRICAS - VERSIÓN FINAL
-   ============================================================================ */
+// ============================================================================
+// SIMULADOR OPTIMIZADO PARA MÓVIL - CON LÍNEAS DE CAMPO MÁS DENSAS Y VECTORES MÁS GRANDES
+// ============================================================================
 
-/* ----------------------------------------------------------------------------
-   CONFIGURACIÓN Y CONSTANTES GLOBALES
-   ---------------------------------------------------------------------------- */
+// --- CONSTANTES ---
+const DOMAIN = { W:20, H:30, X_MIN:-10, X_MAX:10, Y_MIN:-15, Y_MAX:15 };
 const CONFIG = {
-    FIELD_MAX: 20,              // Valor máximo para escala de colores
-    POTENTIAL_SCALE: 0.4,       // Escala para visualización de potencial
-    EPSILON: 1e-6,              // Evitar divisiones por cero
-    LINE_STEP: 0.015,           // Paso inicial para líneas de campo
-    MAX_LINE_POINTS: 400,       // Máximo de puntos por línea
-    MIN_FIELD_THRESHOLD: 1e-4,  // Umbral mínimo de campo
-    CHARGE_RADIUS: 8,           // Radio visual de las cargas
-    MEASUREMENT_RADIUS: 5,      // Radio visual de las mediciones
-    GRID_STEP: 0.2,             // Paso base de la grilla
-    ZOOM: { MIN: 0.05, MAX: 20 } // Límites de zoom
+    FIELD_MAX:20, POTENTIAL_SCALE:0.4, EPSILON:1e-6,
+    CHARGE_RADIUS:8, MOBILE_RADIUS:10, MEASUREMENT_RADIUS:5,
+    GRID_STEP:1.0, ZOOM_MIN:2, ZOOM_MAX:40, DT:0.1, MASS:1.0, TRAIL_LENGTH:20,
+    // Parámetros mejorados para visualización
+    FIELD_LINE_DENSITY: 12,      // Más líneas por carga (antes 6)
+    FIELD_LINE_STEP: 0.03,       // Paso más pequeño para líneas más suaves
+    FIELD_LINE_MAX_STEPS: 150,   // Más pasos por línea
+    ARROW_SIZE_MULT: 1.5,        // Flechas más grandes
+    ARROW_SPACING: 40            // Más vectores (antes 50)
 };
 
-// Error máximo para mediciones (valores fijos)
-const ERROR = {
-    POSITION: 0.02,    // Error máximo de posición
-    FIELD: 0.1         // Error máximo de campo
+const ERROR = { POSITION:0.02, FIELD:0.1 };
+const MODE = { PAN:'pan', ADD_FIXED:'addFixed', ADD_MOBILE:'addMobile', MEASURE:'measure' };
+
+// --- ELEMENTOS UI ---
+const ui = {
+    toggle: document.getElementById("menu-toggle"),
+    panel: document.getElementById("ui"),
+    showGrid: document.getElementById("showGrid"),
+    showField: document.getElementById("showField"),
+    showPotential: document.getElementById("showPotential"),
+    showFieldLines: document.getElementById("showFieldLines"),
+    showTrails: document.getElementById("showTrails"),
+    showModel: document.getElementById("showModel"),
+    clearMeasurements: document.getElementById("clearMeasurements"),
+    measurementCount: document.getElementById("measurementCount"),
+    clearMobile: document.getElementById("clearMobileCharges"),
+    toggleMotion: document.getElementById("toggleMotion"),
+    resetView: document.getElementById("resetView"),
+    modeIndicator: document.getElementById("modeIndicator"),
+    
+    modePan: document.getElementById("modePan"),
+    modeAddFixed: document.getElementById("modeAddFixed"),
+    modeAddMobile: document.getElementById("modeAddMobile"),
+    modeMeasure: document.getElementById("modeMeasure"),
+    
+    fixedControls: document.getElementById("fixedControls"),
+    mobileControls: document.getElementById("mobileControls"),
+    measureControls: document.getElementById("measureControls")
 };
 
-/* ----------------------------------------------------------------------------
-   FUNCIÓN PARA OCULTAR/MOSTRAR PANEL
-   ---------------------------------------------------------------------------- */
-function toggleMenu() {
-    const ui = document.getElementById('ui');
-    const toggle = document.getElementById('menu-toggle');
-    ui.classList.toggle('collapsed');
-    toggle.textContent = ui.classList.contains('collapsed') ? '▶' : '◀';
+// --- ESTADO ---
+let canvas, ctx;
+let zoom = 15, viewX = 0, viewY = 0;
+let currentMode = MODE.PAN;
+let charges = [], mobileCharges = [], measurements = [];
+let simulationPaused = false, draggingOrigin = false;
+let origin = { x:0, y:0 };
+
+// Touch handling
+let touchStart = null, touchMoved = false, lastTouch = null;
+
+// --- INICIALIZACIÓN ---
+function init() {
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    resize();
+    window.addEventListener('resize', resize);
+    
+    // Event listeners táctiles
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd);
+    canvas.addEventListener('touchcancel', handleTouchEnd);
+    
+    // Event listeners ratón (para desarrollo)
+    canvas.addEventListener('mousedown', handleMouseDown);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseup', handleMouseUp);
+    canvas.addEventListener('wheel', handleWheel, { passive: false });
+    canvas.addEventListener('contextmenu', e => e.preventDefault());
+    
+    // Configurar botones
+    setupButtons();
+    
+    // Ejemplos iniciales
+    charges.push({ x:-5, y:0, q:3 }, { x:5, y:0, q:-3 });
+    mobileCharges.push({
+        x:0, y:0, q:0.5, vx:0.3, vy:0.2,
+        trail: [{ x:0, y:0 }]
+    });
+    
+    setMode(MODE.PAN);
+    animate();
 }
-
-/* ----------------------------------------------------------------------------
-   ELEMENTOS UI Y REFERENCIAS
-   ---------------------------------------------------------------------------- */
-const showGrid = document.getElementById("showGrid");
-const showField = document.getElementById("showField");
-const showPotential = document.getElementById("showPotential");
-const showFieldLines = document.getElementById("showFieldLines");
-const measureMode = document.getElementById("measureMode");
-const showModel = document.getElementById("showModel");
-const clearMeasurements = document.getElementById("clearMeasurements");
-const measurementCount = document.getElementById("measurementCount");
-
-// Modelo desactivado por defecto
-showModel.checked = false;
-
-/* ----------------------------------------------------------------------------
-   CANVAS Y CONTEXTO
-   ---------------------------------------------------------------------------- */
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
 
 function resize() {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
-resize();
-addEventListener("resize", resize);
 
-/* ----------------------------------------------------------------------------
-   ESTADO DE LA VISTA
-   ---------------------------------------------------------------------------- */
-let zoom = 1;
-let viewX = 0.5;
-let viewY = 0.5;
+function toggleMenu() {
+    ui.panel.classList.toggle('collapsed');
+    ui.toggle.textContent = ui.panel.classList.contains('collapsed') ? '☰' : '✕';
+}
 
-/* ----------------------------------------------------------------------------
-   DATOS DE LA SIMULACIÓN
-   ---------------------------------------------------------------------------- */
-const charges = [];
-const measurements = [];
-let measurementPoint = null;
+function setupButtons() {
+    ui.modePan.onclick = () => setMode(MODE.PAN);
+    ui.modeAddFixed.onclick = () => setMode(MODE.ADD_FIXED);
+    ui.modeAddMobile.onclick = () => setMode(MODE.ADD_MOBILE);
+    ui.modeMeasure.onclick = () => setMode(MODE.MEASURE);
+    
+    ui.clearMeasurements.onclick = () => {
+        measurements = [];
+        updateMeasurementCount();
+    };
+    
+    ui.clearMobile.onclick = () => { mobileCharges = []; };
+    
+    ui.toggleMotion.onclick = () => {
+        simulationPaused = !simulationPaused;
+        ui.toggleMotion.innerHTML = simulationPaused ? '▶️ Reanudar' : '⏸️ Pausar';
+    };
+    
+    ui.resetView.onclick = () => {
+        viewX = 0; viewY = 0; zoom = 15;
+    };
+    
+    ui.showModel.checked = false;
+}
 
-// Actualizar contador de mediciones
+function setMode(mode) {
+    currentMode = mode;
+    
+    [ui.modePan, ui.modeAddFixed, ui.modeAddMobile, ui.modeMeasure].forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    document.getElementById(`mode${mode.charAt(0).toUpperCase()+mode.slice(1)}`).classList.add('active');
+    
+    ui.fixedControls.classList.toggle('hidden', mode !== MODE.ADD_FIXED);
+    ui.mobileControls.classList.toggle('hidden', mode !== MODE.ADD_MOBILE);
+    ui.measureControls.classList.toggle('hidden', mode !== MODE.MEASURE);
+    
+    const modeNames = {
+        [MODE.PAN]: '🖱️ MOVER', [MODE.ADD_FIXED]: '➕ FIJA',
+        [MODE.ADD_MOBILE]: '⚡ MÓVIL', [MODE.MEASURE]: '📏 MEDIR'
+    };
+    ui.modeIndicator.textContent = `MODO: ${modeNames[mode]}`;
+    ui.modeIndicator.style.borderColor = mode === MODE.ADD_MOBILE ? '#ffaa6b' : '#4CAF50';
+}
+
 function updateMeasurementCount() {
-    measurementCount.textContent = measurements.length;
+    ui.measurementCount.textContent = measurements.length;
 }
 
-// Borrar mediciones
-clearMeasurements.onclick = () => {
-    measurements.length = 0;
-    updateMeasurementCount();
-};
+// --- FUNCIONES FÍSICAS OPTIMIZADAS ---
+function applyCyclic(x, y) {
+    if (x > DOMAIN.X_MAX) x -= DOMAIN.W;
+    else if (x < DOMAIN.X_MIN) x += DOMAIN.W;
+    if (y > DOMAIN.Y_MAX) y -= DOMAIN.H;
+    else if (y < DOMAIN.Y_MIN) y += DOMAIN.H;
+    return { x, y };
+}
 
-/* ----------------------------------------------------------------------------
-   ORIGEN PARA MEDICIONES
-   ---------------------------------------------------------------------------- */
-let origin = { x: 0, y: 0 };
-let draggingOrigin = false;
+function minImageDistance(x1, y1, x2, y2) {
+    let dx = x1 - x2, dy = y1 - y2;
+    if (dx > DOMAIN.W/2) dx -= DOMAIN.W;
+    else if (dx < -DOMAIN.W/2) dx += DOMAIN.W;
+    if (dy > DOMAIN.H/2) dy -= DOMAIN.H;
+    else if (dy < -DOMAIN.H/2) dy += DOMAIN.H;
+    return { dx, dy, r: Math.hypot(dx, dy) };
+}
 
-/* ----------------------------------------------------------------------------
-   FUNCIONES FÍSICAS
-   ---------------------------------------------------------------------------- */
-
-/**
- * Calcula el campo eléctrico en un punto (x, y)
- */
 function field(x, y) {
     let Ex = 0, Ey = 0;
     
-    for (const c of charges) {
-        const dx = x - c.x;
-        const dy = y - c.y;
-        const r2 = dx * dx + dy * dy + CONFIG.EPSILON;
-        const r = Math.sqrt(r2);
-        const E = c.q / r2;
-        
+    for (let c of charges) {
+        let { dx, dy, r } = minImageDistance(x, y, c.x, c.y);
+        if (r < CONFIG.EPSILON) continue;
+        let E = c.q / (r * r + CONFIG.EPSILON);
+        Ex += E * dx / r;
+        Ey += E * dy / r;
+    }
+    
+    for (let c of mobileCharges) {
+        let { dx, dy, r } = minImageDistance(x, y, c.x, c.y);
+        if (r < CONFIG.EPSILON) continue;
+        let E = c.q / (r * r + CONFIG.EPSILON);
         Ex += E * dx / r;
         Ey += E * dy / r;
     }
@@ -387,59 +480,77 @@ function field(x, y) {
     return { vx: Ex, vy: Ey };
 }
 
-/**
- * Calcula el potencial eléctrico en un punto (x, y)
- */
 function potential(x, y) {
     let V = 0;
-    
-    for (const c of charges) {
-        const dx = x - c.x;
-        const dy = y - c.y;
-        const r = Math.sqrt(dx * dx + dy * dy) + CONFIG.EPSILON;
-        V += c.q / r;
-    }
-    
+    for (let c of charges) V += c.q / (minImageDistance(x, y, c.x, c.y).r + CONFIG.EPSILON);
+    for (let c of mobileCharges) V += c.q / (minImageDistance(x, y, c.x, c.y).r + CONFIG.EPSILON);
     return V;
 }
 
-/* ----------------------------------------------------------------------------
-   FUNCIONES DE ERROR
-   ---------------------------------------------------------------------------- */
+function drawFieldLine(startX, startY, forward = true) {
+    let x = startX, y = startY;
+    const step = CONFIG.FIELD_LINE_STEP * (forward ? 1 : -1);
+    
+    ctx.beginPath();
+    const startScreen = worldToScreen(x, y);
+    ctx.moveTo(startScreen.X, startScreen.Y);
 
-/**
- * Genera ruido aleatorio con el nivel máximo especificado
- */
-function noise(level) {
-    return (Math.random() * 2 - 1) * level;
+    for (let i = 0; i < CONFIG.FIELD_LINE_MAX_STEPS; i++) {
+        const f = field(x, y);
+        const m = Math.hypot(f.vx, f.vy);
+        
+        if (m < 0.001) break;
+        
+        x += step * f.vx / m;
+        y += step * f.vy / m;
+        
+        // APLICAR CONDICIONES CÍCLICAS TAMBIÉN EN EL DIBUJO
+        const cyclic = applyCyclicForDrawing(x, y);
+        x = cyclic.x;
+        y = cyclic.y;
+        
+        const s = worldToScreen(x, y);
+        ctx.lineTo(s.X, s.Y);
+    }
+    
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
 }
 
-/* ----------------------------------------------------------------------------
-   FUNCIONES DE COLOR
-   ---------------------------------------------------------------------------- */
+// Función para aplicar condiciones cíclicas también en el dibujo
+function applyCyclicForDrawing(px, py) {
+    // Si está fuera del dominio visible, reiniciar para que siga dibujando
+    if (px < DOMAIN.X_MIN) px += DOMAIN.W;
+    else if (px > DOMAIN.X_MAX) px -= DOMAIN.W;
+    if (py < DOMAIN.Y_MIN) py += DOMAIN.H;
+    else if (py > DOMAIN.Y_MAX) py -= DOMAIN.H;
+    return { x: px, y: py };
+}
 
-function potentialColor(V) {
-    V *= CONFIG.POTENTIAL_SCALE;
-    const intensity = Math.min(255, 200 * Math.abs(V));
+function updateMobile() {
+    if (simulationPaused) return;
     
-    if (V > 0) {
-        return `rgba(${intensity}, 40, 40, 0.35)`;
-    } else {
-        return `rgba(40, 40, ${intensity}, 0.35)`;
+    for (let c of mobileCharges) {
+        let E = field(c.x, c.y);
+        let ax = c.q * E.vx / CONFIG.MASS;
+        let ay = c.q * E.vy / CONFIG.MASS;
+        
+        let newX = c.x + c.vx * CONFIG.DT + 0.5 * ax * CONFIG.DT * CONFIG.DT;
+        let newY = c.y + c.vy * CONFIG.DT + 0.5 * ay * CONFIG.DT * CONFIG.DT;
+        
+        c.vx += ax * CONFIG.DT;
+        c.vy += ay * CONFIG.DT;
+        
+        let pos = applyCyclic(newX, newY);
+        c.x = pos.x; c.y = pos.y;
+        
+        c.trail.push({ x: c.x, y: c.y });
+        if (c.trail.length > CONFIG.TRAIL_LENGTH) c.trail.shift();
     }
 }
 
-function fieldColor(E) {
-    const t = Math.max(0, Math.min(1, E / CONFIG.FIELD_MAX));
-    const r = Math.floor(255 * t);
-    const b = Math.floor(255 * (1 - t));
-    return `rgb(${r}, 0, ${b})`;
-}
-
-/* ----------------------------------------------------------------------------
-   CONVERSIÓN COORDENADAS
-   ---------------------------------------------------------------------------- */
-
+// --- CONVERSIÓN COORDENADAS ---
 function worldToScreen(x, y) {
     return {
         X: canvas.width * (0.5 + (x - viewX) / zoom),
@@ -454,567 +565,551 @@ function screenToWorld(X, Y) {
     };
 }
 
-/* ----------------------------------------------------------------------------
-   DIBUJO DE GRILLA (AHORA CON CHECKBOX)
-   ---------------------------------------------------------------------------- */
-
-function drawMainGrid() {
-    if (!showGrid.checked) return; // No dibujar si está desactivada
-
-    const worldWidth = zoom;
-    const worldHeight = zoom * canvas.height / canvas.width;
-
-    // Ajustar paso según zoom
-    let baseStep = CONFIG.GRID_STEP;
-    if (zoom < 0.5) baseStep = 1.0;
-    else if (zoom < 1) baseStep = 0.5;
-    else if (zoom < 2) baseStep = 0.2;
-    else if (zoom < 5) baseStep = 0.1;
-    else baseStep = 0.05;
-
-    const startX = Math.floor((viewX - worldWidth / 2) / baseStep) * baseStep;
-    const startY = Math.floor((viewY - worldHeight / 2) / baseStep) * baseStep;
-    const endX = viewX + worldWidth / 2;
-    const endY = viewY + worldHeight / 2;
-
-    const originScreen = worldToScreen(0, 0);
-
-    // Líneas de grilla
-    ctx.strokeStyle = "rgba(255,255,255,0.08)";
-    ctx.lineWidth = 0.5;
-
-    // Verticales
-    for (let x = startX; x <= endX; x += baseStep) {
-        if (Math.abs(x) < 0.001) continue;
-        const screenX = worldToScreen(x, 0).X;
-        if (screenX >= 0 && screenX <= canvas.width) {
-            ctx.beginPath();
-            ctx.moveTo(screenX, 0);
-            ctx.lineTo(screenX, canvas.height);
-            ctx.stroke();
-        }
-    }
-
-    // Horizontales
-    for (let y = startY; y <= endY; y += baseStep) {
-        if (Math.abs(y) < 0.001) continue;
-        const screenY = worldToScreen(0, y).Y;
-        if (screenY >= 0 && screenY <= canvas.height) {
-            ctx.beginPath();
-            ctx.moveTo(0, screenY);
-            ctx.lineTo(canvas.width, screenY);
-            ctx.stroke();
-        }
-    }
-
-    // Ejes coordenados (siempre visibles aunque la grilla esté desactivada)
-    ctx.strokeStyle = "rgba(255,255,255,0.25)";
-    ctx.lineWidth = 1;
-
-    if (originScreen.Y >= 0 && originScreen.Y <= canvas.height) {
-        ctx.beginPath();
-        ctx.moveTo(0, originScreen.Y);
-        ctx.lineTo(canvas.width, originScreen.Y);
-        ctx.stroke();
-    }
-
-    if (originScreen.X >= 0 && originScreen.X <= canvas.width) {
-        ctx.beginPath();
-        ctx.moveTo(originScreen.X, 0);
-        ctx.lineTo(originScreen.X, canvas.height);
-        ctx.stroke();
-    }
-}
-
-/* ----------------------------------------------------------------------------
-   DIBUJO DE FLECHAS
-   ---------------------------------------------------------------------------- */
-
-function drawArrow(x, y, vx, vy) {
-    const m = Math.hypot(vx, vy);
-    if (m < 1e-6) return;
-
-    const L = 6 + 10 * Math.tanh(0.15 * m);
-    const ux = vx / m;
-    const uy = vy / m;
-    const color = fieldColor(m);
-
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
-
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + L * ux, y + L * uy);
-    ctx.stroke();
-
-    const angle = Math.PI / 6;
-    const tipX = x + L * ux;
-    const tipY = y + L * uy;
-
-    ctx.beginPath();
-    ctx.moveTo(tipX, tipY);
-    ctx.lineTo(
-        tipX - 5 * (ux * Math.cos(angle) - uy * Math.sin(angle)),
-        tipY - 5 * (uy * Math.cos(angle) + ux * Math.sin(angle))
-    );
-    ctx.lineTo(
-        tipX - 5 * (ux * Math.cos(angle) + uy * Math.sin(angle)),
-        tipY - 5 * (uy * Math.cos(angle) - ux * Math.sin(angle))
-    );
-    ctx.closePath();
-    ctx.fill();
-}
-
-/* ----------------------------------------------------------------------------
-   DIBUJO DE LÍNEAS DE CAMPO
-   ---------------------------------------------------------------------------- */
-
-function drawFieldLine(startX, startY, forward = true) {
-    let x = startX, y = startY;
-    const step = 0.01 * (forward ? 1 : -1);
+// --- DIBUJO MEJORADO ---
+// --- DIBUJO MEJORADO ---
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    ctx.beginPath();
-    
-    // Primer punto
-    const startScreen = worldToScreen(x, y);
-    ctx.moveTo(startScreen.X, startScreen.Y);
-
-    for (let i = 0; i < 300; i++) {
-        const f = field(x, y);
-        const m = Math.hypot(f.vx, f.vy);
-        
-        if (m < 0.001) break;
-        
-        // Avanzar en dirección del campo
-        x += step * f.vx / m;
-        y += step * f.vy / m;
-        
-        const s = worldToScreen(x, y);
-        ctx.lineTo(s.X, s.Y);
-        
-        // Salir si nos vamos muy lejos
-        if (s.X < -50 || s.X > canvas.width + 50 || 
-            s.Y < -50 || s.Y > canvas.height + 50) break;
-    }
-    
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
-}
-
-/* ================= ESCALA ================= */
-
-function drawScale() {
-    const x = canvas.width - 50;
-    const y0 = 100;
-    const h = 200;
-
-    ctx.fillStyle = "rgba(0,0,0,0.7)";
-    ctx.fillRect(x - 12, y0 - 20, 42, h + 30);
-
-    for (let i = 0; i < h; i++) {
-        const t = i / h;
-        const E = (1 - t) * CONFIG.FIELD_MAX;
-        ctx.strokeStyle = fieldColor(E);
-        
-        ctx.beginPath();
-        ctx.moveTo(x, y0 + i);
-        ctx.lineTo(x + 20, y0 + i);
-        ctx.stroke();
-    }
-
-    ctx.fillStyle = "white";
-    ctx.font = "11px sans-serif";
-    ctx.textAlign = "left";
-    ctx.fillText("E", x - 8, y0 - 10);
-    ctx.fillText("bajo", x + 25, y0 + h - 5);
-    ctx.fillText("alto", x + 25, y0 + 10);
-}
-/* ----------------------------------------------------------------------------
-   ESCALA DE COLORES
-   ---------------------------------------------------------------------------- */
-
-function drawScale() {
-    const x = canvas.width - 50;
-    const y0 = 100;
-    const h = 200;
-
-    ctx.fillStyle = "rgba(0,0,0,0.7)";
-    ctx.fillRect(x - 12, y0 - 20, 42, h + 30);
-
-    for (let i = 0; i < h; i++) {
-        const t = i / h;
-        const E = (1 - t) * CONFIG.FIELD_MAX;
-        ctx.strokeStyle = fieldColor(E);
-        
-        ctx.beginPath();
-        ctx.moveTo(x, y0 + i);
-        ctx.lineTo(x + 20, y0 + i);
-        ctx.stroke();
-    }
-
-    ctx.fillStyle = "white";
-    ctx.font = "11px sans-serif";
-    ctx.fillText("E", x - 8, y0 - 10);
-    ctx.fillText("bajo", x + 25, y0 + h - 5);
-    ctx.fillText("alto", x + 25, y0 + 10);
-}
-
-/* ----------------------------------------------------------------------------
-   GRÁFICO DE MEDICIONES
-   ---------------------------------------------------------------------------- */
-
-function drawGraph() {
-    if (!measureMode.checked) return;
-
-    // Cuando el modo medición está activo, el gráfico ocupa la mitad inferior
-    const graphHeight = measurements.length === 0 ? 0.15 : 0.35;
-    const h = canvas.height * graphHeight;
-    const y0 = canvas.height - h;
-    
-    ctx.fillStyle = "rgba(0,0,0,0.95)";
-    ctx.fillRect(0, y0, canvas.width, h);
-
-    if (measurements.length === 0) {
-        // Mensaje cuando no hay mediciones
-        ctx.fillStyle = "#666";
-        ctx.font = "14px sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText("Haz clic en el área de simulación para agregar mediciones", canvas.width / 2, y0 + h / 2);
-        return;
-    }
-
-    const margin = { left: 90, right: 50, bottom: 70, top: 30 };
-    const xAxis = margin.left;
-    const yAxis = y0 + h - margin.bottom;
-
-    // Calcular rangos
-    let rMin = Infinity, rMax = -Infinity;
-    let eMin = Infinity, eMax = -Infinity;
-    
-    measurements.forEach(p => {
-        rMin = Math.min(rMin, p.r);
-        rMax = Math.max(rMax, p.r);
-        eMin = Math.min(eMin, p.E);
-        eMax = Math.max(eMax, p.E);
-    });
-
-    if (rMax === rMin) rMax = rMin + 1e-6;
-    if (eMax === eMin) eMax = eMin + 1e-6;
-
-    // Ejes
-    ctx.strokeStyle = "white";
-    ctx.lineWidth = 1;
-    
-    ctx.beginPath();
-    ctx.moveTo(xAxis, yAxis);
-    ctx.lineTo(canvas.width - margin.right, yAxis);
-    ctx.stroke();
-    
-    ctx.beginPath();
-    ctx.moveTo(xAxis, yAxis);
-    ctx.lineTo(xAxis, y0 + margin.top);
-    ctx.stroke();
-
-    // Etiquetas
-    ctx.fillStyle = "white";
-    ctx.font = "12px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("r (distancia)", canvas.width / 2, yAxis + 25);
-    
-    ctx.save();
-    ctx.translate(25, y0 + h / 2);
-    ctx.rotate(-Math.PI / 2);
-    ctx.fillText("E (campo)", 0, 0);
-    ctx.restore();
-
-    // Grid del gráfico
-    ctx.strokeStyle = "rgba(255,255,255,0.1)";
-    ctx.lineWidth = 0.5;
-    
-    for (let i = 1; i <= 4; i++) {
-        const y = yAxis - (i / 5) * (h - margin.top - margin.bottom);
-        ctx.beginPath();
-        ctx.moveTo(xAxis, y);
-        ctx.lineTo(canvas.width - margin.right, y);
-        ctx.stroke();
-    }
-    
-    for (let i = 1; i <= 4; i++) {
-        const x = xAxis + (i / 5) * (canvas.width - margin.left - margin.right);
-        ctx.beginPath();
-        ctx.moveTo(x, yAxis);
-        ctx.lineTo(x, y0 + margin.top);
-        ctx.stroke();
-    }
-
-    // Puntos de medición
-    measurements.forEach(p => {
-        const x = xAxis + (p.r - rMin) / (rMax - rMin) * (canvas.width - margin.left - margin.right);
-        const y = yAxis - (p.E - eMin) / (eMax - eMin) * (h - margin.top - margin.bottom);
-        
-        ctx.fillStyle = fieldColor(p.E);
-        ctx.beginPath();
-        ctx.arc(x, y, CONFIG.MEASUREMENT_RADIUS, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.strokeStyle = "white";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-    });
-
-    // Modelo 1/r² (solo si está activado)
-    if (showModel.checked && measurements.length > 1) {
-        let num = 0, den = 0;
-        measurements.forEach(p => {
-            num += p.E / (p.r * p.r);
-            den += 1 / (p.r * p.r * p.r * p.r);
-        });
-        const A = num / den;
-
-        ctx.strokeStyle = "#4CAF50";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-
-        for (let i = 0; i < 200; i++) {
-            const r = rMin + (rMax - rMin) * i / 199;
-            const E = A / (r * r);
-            
-            const x = xAxis + (r - rMin) / (rMax - rMin) * (canvas.width - margin.left - margin.right);
-            const y = yAxis - (E - eMin) / (eMax - eMin) * (h - margin.top - margin.bottom);
-            
-            if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-        
-        ctx.fillStyle = "#4CAF50";
-        ctx.font = "12px sans-serif";
-        ctx.fillText("modelo 1/r²", canvas.width - 150, y0 + 30);
-    }
-
-    // Leyenda con número de mediciones
-    ctx.fillStyle = "#aaa";
-    ctx.font = "11px sans-serif";
-    ctx.textAlign = "right";
-    ctx.fillText(`Mediciones: ${measurements.length}`, canvas.width - 60, y0 + 50);
-}
-
-/* ----------------------------------------------------------------------------
-   DIBUJO DEL ORIGEN
-   ---------------------------------------------------------------------------- */
-
-function drawOrigin() {
-    if (!measureMode.checked) return;
-
-    const s = worldToScreen(origin.x, origin.y);
-
-    ctx.strokeStyle = "yellow";
-    ctx.lineWidth = 2;
-    
-    ctx.beginPath();
-    ctx.moveTo(s.X - 12, s.Y);
-    ctx.lineTo(s.X + 12, s.Y);
-    ctx.stroke();
-    
-    ctx.beginPath();
-    ctx.moveTo(s.X, s.Y - 12);
-    ctx.lineTo(s.X, s.Y + 12);
-    ctx.stroke();
-    
-    ctx.fillStyle = "yellow";
-    ctx.font = "12px sans-serif";
-    ctx.fillText("Origen", s.X + 15, s.Y - 10);
-}
-
-/* ----------------------------------------------------------------------------
-   EVENTOS DE RATÓN
-   ---------------------------------------------------------------------------- */
-
-let mouseDown = false;
-let moved = false;
-let startX = 0, startY = 0, lastX = 0, lastY = 0;
-
-canvas.addEventListener("mousedown", e => {
-    const rect = canvas.getBoundingClientRect();
-    const w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
-
-    if (measureMode.checked) {
-        const dx = w.x - origin.x;
-        const dy = w.y - origin.y;
-        if (Math.hypot(dx, dy) < 0.05) {
-            draggingOrigin = true;
-            return;
-        }
-    }
-
-    mouseDown = true;
-    moved = false;
-    startX = lastX = e.clientX;
-    startY = lastY = e.clientY;
-});
-
-canvas.addEventListener("mousemove", e => {
-    if (draggingOrigin) {
-        const rect = canvas.getBoundingClientRect();
-        const w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
-        origin.x = w.x;
-        origin.y = w.y;
-        return;
-    }
-
-    if (!mouseDown) return;
-
-    const dx = e.clientX - lastX;
-    const dy = e.clientY - lastY;
-
-    if (Math.hypot(e.clientX - startX, e.clientY - startY) > 5) {
-        moved = true;
-    }
-
-    viewX -= dx / canvas.width * zoom;
-    viewY -= dy / canvas.height * zoom;
-
-    lastX = e.clientX;
-    lastY = e.clientY;
-});
-
-canvas.addEventListener("mouseup", e => {
-    if (draggingOrigin) {
-        draggingOrigin = false;
-        return;
-    }
-
-    if (!mouseDown) return;
-    mouseDown = false;
-
-    if (!moved) {
-        const rect = canvas.getBoundingClientRect();
-        const w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
-
-        if (measureMode.checked) {
-            measurementPoint = w;
-            
-            // Aplicar errores máximos
-            let x = w.x + noise(ERROR.POSITION);
-            let y = w.y + noise(ERROR.POSITION);
-            
-            const dx = x - origin.x;
-            const dy = y - origin.y;
-            const r = Math.hypot(dx, dy);
-            
-            const f = field(x, y);
-            let Ex = f.vx * (1 + noise(ERROR.FIELD));
-            let Ey = f.vy * (1 + noise(ERROR.FIELD));
-            const E = Math.hypot(Ex, Ey);
-            
-            measurements.push({ r, E });
-            updateMeasurementCount();
-            return;
-        }
-
-        const pol = document.querySelector('input[name="pol"]:checked').value;
-        charges.push({ x: w.x, y: w.y, q: Number(pol) });
-    }
-});
-
-canvas.addEventListener("contextmenu", e => {
-    e.preventDefault();
-    
-    const rect = canvas.getBoundingClientRect();
-    const w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
-
-    for (let i = charges.length - 1; i >= 0; i--) {
-        const dx = charges[i].x - w.x;
-        const dy = charges[i].y - w.y;
-        if (Math.hypot(dx, dy) < 0.05) {
-            charges.splice(i, 1);
-            break;
-        }
-    }
-});
-
-canvas.addEventListener("wheel", e => {
-    e.preventDefault();
-    
-    const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const before = screenToWorld(mx, my);
-
-    zoom *= Math.exp(e.deltaY * 0.001);
-    zoom = Math.max(CONFIG.ZOOM.MIN, Math.min(CONFIG.ZOOM.MAX, zoom));
-
-    const after = screenToWorld(mx, my);
-    viewX += before.x - after.x;
-    viewY += before.y - after.y;
-}, { passive: false });
-
-/* ----------------------------------------------------------------------------
-   BUCLE PRINCIPAL
-   ---------------------------------------------------------------------------- */
-
-function animate() {
-    ctx.fillStyle = "black";
+    // Fondo
+    ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Dibujar grilla (solo si está activada)
-    drawMainGrid();
-
-    if (showPotential.checked) {
-        const step = 30;
+    
+    // Potencial (fondo)
+    if (ui.showPotential.checked) {
+        let step = 30;
         for (let i = 0; i < canvas.width; i += step) {
             for (let j = 0; j < canvas.height; j += step) {
-                const w = screenToWorld(i, j);
-                ctx.fillStyle = potentialColor(potential(w.x, w.y));
+                let w = screenToWorld(i, j);
+                let V = potential(w.x, w.y) * CONFIG.POTENTIAL_SCALE;
+                let int = Math.min(255, 200 * Math.abs(V));
+                ctx.fillStyle = V > 0 ? `rgba(${int},40,40,0.35)` : `rgba(40,40,${int},0.35)`;
                 ctx.fillRect(i, j, step, step);
             }
         }
     }
-
-    if (showFieldLines.checked) {
-        for (const c of charges) {
-            const numLines = Math.max(8, Math.floor(16 * Math.abs(c.q)));
-            for (let i = 0; i < numLines; i++) {
-                const angle = 2 * Math.PI * i / numLines;
-                const startX = c.x + 0.05 * Math.cos(angle);
-                const startY = c.y + 0.05 * Math.sin(angle);
+    
+    // Grilla
+    if (ui.showGrid.checked) {
+        let step = CONFIG.GRID_STEP;
+        ctx.strokeStyle = "rgba(255,255,255,0.08)";
+        ctx.lineWidth = 0.5;
+        
+        let startX = Math.floor((viewX - zoom/2) / step) * step;
+        let startY = Math.floor((viewY - zoom*canvas.height/canvas.width/2) / step) * step;
+        
+        for (let x = startX; x <= viewX + zoom/2; x += step) {
+            let sx = worldToScreen(x, 0).X;
+            if (sx >= 0 && sx <= canvas.width) {
+                ctx.beginPath();
+                ctx.moveTo(sx, 0);
+                ctx.lineTo(sx, canvas.height);
+                ctx.stroke();
+            }
+        }
+        
+        for (let y = startY; y <= viewY + zoom*canvas.height/canvas.width/2; y += step) {
+            let sy = worldToScreen(0, y).Y;
+            if (sy >= 0 && sy <= canvas.height) {
+                ctx.beginPath();
+                ctx.moveTo(0, sy);
+                ctx.lineTo(canvas.width, sy);
+                ctx.stroke();
+            }
+        }
+        
+        // Bordes dominio
+        ctx.strokeStyle = "#4CAF50";
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        let tl = worldToScreen(DOMAIN.X_MIN, DOMAIN.Y_MIN);
+        let br = worldToScreen(DOMAIN.X_MAX, DOMAIN.Y_MAX);
+        ctx.strokeRect(tl.X, tl.Y, br.X - tl.X, br.Y - tl.Y);
+        ctx.setLineDash([]);
+    }
+    
+    // LÍNEAS DE CAMPO - AHORA CUBREN TODO EL DOMINIO
+    if (ui.showFieldLines.checked) {
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.lineWidth = 1.2;
+        
+        // Crear una cuadrícula de puntos de inicio en el dominio
+        let spacing = 1.5; // Espaciado en unidades del mundo
+        for (let x = DOMAIN.X_MIN; x <= DOMAIN.X_MAX; x += spacing) {
+            for (let y = DOMAIN.Y_MIN; y <= DOMAIN.Y_MAX; y += spacing) {
+                // Evitar empezar muy cerca de las cargas (para no saturar)
+                let cercaDeCarga = false;
+                for (let c of charges) {
+                    let dx = x - c.x;
+                    let dy = y - c.y;
+                    if (Math.hypot(dx, dy) < 0.8) {
+                        cercaDeCarga = true;
+                        break;
+                    }
+                }
+                if (!cercaDeCarga) {
+                    for (let c of mobileCharges) {
+                        let dx = x - c.x;
+                        let dy = y - c.y;
+                        if (Math.hypot(dx, dy) < 0.8) {
+                            cercaDeCarga = true;
+                            break;
+                        }
+                    }
+                }
                 
-                drawFieldLine(startX, startY, true);
-                drawFieldLine(startX, startY, false);
+                if (!cercaDeCarga) {
+                    // Dibujar línea en dirección del campo
+                    let f = field(x, y);
+                    let m = Math.hypot(f.vx, f.vy);
+                    if (m > 0.1) {
+                        // Dirección positiva
+                        let px = x, py = y;
+                        ctx.beginPath();
+                        let start = worldToScreen(px, py);
+                        ctx.moveTo(start.X, start.Y);
+                        
+                        for (let step = 0; step < 50; step++) {
+                            let f2 = field(px, py);
+                            let m2 = Math.hypot(f2.vx, f2.vy);
+                            if (m2 < 0.01) break;
+                            
+                            px += 0.1 * f2.vx / m2;
+                            py += 0.1 * f2.vy / m2;
+                            
+                            if (px < DOMAIN.X_MIN || px > DOMAIN.X_MAX || 
+                                py < DOMAIN.Y_MIN || py > DOMAIN.Y_MAX) break;
+                            
+                            let s = worldToScreen(px, py);
+                            ctx.lineTo(s.X, s.Y);
+                        }
+                        ctx.stroke();
+                        
+                        // Dirección negativa
+                        px = x; py = y;
+                        ctx.beginPath();
+                        ctx.moveTo(start.X, start.Y);
+                        
+                        for (let step = 0; step < 50; step++) {
+                            let f2 = field(px, py);
+                            let m2 = Math.hypot(f2.vx, f2.vy);
+                            if (m2 < 0.01) break;
+                            
+                            px -= 0.1 * f2.vx / m2;
+                            py -= 0.1 * f2.vy / m2;
+                            
+                            if (px < DOMAIN.X_MIN || px > DOMAIN.X_MAX || 
+                                py < DOMAIN.Y_MIN || py > DOMAIN.Y_MAX) break;
+                            
+                            let s = worldToScreen(px, py);
+                            ctx.lineTo(s.X, s.Y);
+                        }
+                        ctx.stroke();
+                    }
+                }
             }
         }
     }
-
-    if (showField.checked) {
-        const spacing = 60;
-        for (let i = 0; i < canvas.width; i += spacing) {
-            for (let j = 0; j < canvas.height; j += spacing) {
-                const w = screenToWorld(i, j);
-                const f = field(w.x, w.y);
-                drawArrow(i, j, f.vx, f.vy);
+    
+    // VECTORES DE CAMPO
+    if (ui.showField.checked) {
+        let spacing = 40;
+        for (let i = spacing/2; i < canvas.width; i += spacing) {
+            for (let j = spacing/2; j < canvas.height; j += spacing) {
+                let w = screenToWorld(i, j);
+                // Solo dibujar vectores dentro del dominio
+                if (w.x >= DOMAIN.X_MIN && w.x <= DOMAIN.X_MAX && 
+                    w.y >= DOMAIN.Y_MIN && w.y <= DOMAIN.Y_MAX) {
+                    let f = field(w.x, w.y);
+                    let m = Math.hypot(f.vx, f.vy);
+                    if (m < 0.01) continue;
+                    
+                    let L = (8 + 15 * Math.tanh(0.15 * m)) * 1.5;
+                    let ux = f.vx / m, uy = f.vy / m;
+                    let t = Math.min(1, m / CONFIG.FIELD_MAX);
+                    ctx.strokeStyle = `rgb(${255*t},0,${255*(1-t)})`;
+                    ctx.fillStyle = ctx.strokeStyle;
+                    ctx.lineWidth = 1.5;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(i, j);
+                    ctx.lineTo(i + L*ux, j + L*uy);
+                    ctx.stroke();
+                    
+                    let tipX = i + L*ux, tipY = j + L*uy;
+                    let arrowSize = 7 * 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(tipX, tipY);
+                    ctx.lineTo(tipX - arrowSize*(ux*0.866 - uy*0.5), 
+                              tipY - arrowSize*(uy*0.866 + ux*0.5));
+                    ctx.lineTo(tipX - arrowSize*(ux*0.866 + uy*0.5), 
+                              tipY - arrowSize*(uy*0.866 - ux*0.5));
+                    ctx.closePath();
+                    ctx.fill();
+                }
             }
         }
     }
-
-    for (const c of charges) {
-        const s = worldToScreen(c.x, c.y);
+    
+    // Trayectorias
+    if (ui.showTrails.checked) {
+        for (let c of mobileCharges) {
+            if (c.trail.length < 2) continue;
+            ctx.strokeStyle = c.q > 0 ? "#ffaa6b" : "#9f6bff";
+            ctx.lineWidth = 1.5;
+            ctx.globalAlpha = 0.5;
+            ctx.beginPath();
+            
+            for (let i = 0; i < c.trail.length; i++) {
+                let s = worldToScreen(c.trail[i].x, c.trail[i].y);
+                if (i === 0) ctx.moveTo(s.X, s.Y);
+                else ctx.lineTo(s.X, s.Y);
+            }
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+        }
+    }
+    
+    // Cargas fijas
+    for (let c of charges) {
+        let s = worldToScreen(c.x, c.y);
         ctx.fillStyle = c.q > 0 ? "#ff6b6b" : "#6b9fff";
         ctx.beginPath();
-        ctx.arc(s.X, s.Y, CONFIG.CHARGE_RADIUS, 0, 2 * Math.PI);
+        ctx.arc(s.X, s.Y, CONFIG.CHARGE_RADIUS, 0, 2*Math.PI);
         ctx.fill();
         ctx.strokeStyle = "white";
         ctx.lineWidth = 1;
         ctx.stroke();
     }
+    
+    // Cargas móviles
+    for (let c of mobileCharges) {
+        let s = worldToScreen(c.x, c.y);
+        ctx.fillStyle = c.q > 0 ? "#ffaa6b" : "#9f6bff";
+        ctx.beginPath();
+        ctx.arc(s.X, s.Y, CONFIG.MOBILE_RADIUS, 0, 2*Math.PI);
+        ctx.fill();
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+    
+    // Origen medición
+    if (currentMode === MODE.MEASURE) {
+        let s = worldToScreen(origin.x, origin.y);
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(s.X - 12, s.Y);
+        ctx.lineTo(s.X + 12, s.Y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(s.X, s.Y - 12);
+        ctx.lineTo(s.X, s.Y + 12);
+        ctx.stroke();
+        ctx.fillStyle = "yellow";
+        ctx.font = "12px sans-serif";
+        ctx.fillText("Origen", s.X + 15, s.Y - 10);
+    }
+    
+    // Gráfico mediciones
+    if (currentMode === MODE.MEASURE && measurements.length > 0) {
+        let h = canvas.height * 0.3;
+        let y0 = canvas.height - h;
+        
+        ctx.fillStyle = "rgba(0,0,0,0.95)";
+        ctx.fillRect(0, y0, canvas.width, h);
+        
+        let rMin = Math.min(...measurements.map(m => m.r));
+        let rMax = Math.max(...measurements.map(m => m.r));
+        let eMin = Math.min(...measurements.map(m => m.E));
+        let eMax = Math.max(...measurements.map(m => m.E));
+        
+        if (rMax === rMin) rMax = rMin + 1;
+        if (eMax === eMin) eMax = eMin + 1;
+        
+        for (let m of measurements) {
+            let x = 50 + (m.r - rMin) / (rMax - rMin) * (canvas.width - 100);
+            let y = y0 + 20 + (1 - (m.E - eMin) / (eMax - eMin)) * (h - 40);
+            
+            let t = Math.min(1, m.E / CONFIG.FIELD_MAX);
+            ctx.fillStyle = `rgb(${255*t},0,${255*(1-t)})`;
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, 2*Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+    }
+    
+    // Escala
+    let x = canvas.width - 40, y0 = 80, h = 150;
+    ctx.fillStyle = "rgba(0,0,0,0.7)";
+    ctx.fillRect(x - 8, y0 - 10, 30, h + 20);
+    
+    for (let i = 0; i < h; i++) {
+        let t = i / h;
+        let E = (1 - t) * CONFIG.FIELD_MAX;
+        ctx.strokeStyle = `rgb(${255*t},0,${255*(1-t)})`;
+        ctx.beginPath();
+        ctx.moveTo(x, y0 + i);
+        ctx.lineTo(x + 15, y0 + i);
+        ctx.stroke();
+    }
+    
+    ctx.fillStyle = "white";
+    ctx.font = "10px sans-serif";
+    ctx.fillText("E", x - 6, y0 - 5);
+}
 
-    drawOrigin();
-    drawGraph();
-    drawScale();
+// --- MANEJADORES TÁCTILES OPTIMIZADOS ---
+function handleTouchStart(e) {
+    e.preventDefault();
+    let touch = e.touches[0];
+    let rect = canvas.getBoundingClientRect();
+    let w = screenToWorld(touch.clientX - rect.left, touch.clientY - rect.top);
+    
+    if (currentMode === MODE.MEASURE && Math.hypot(w.x - origin.x, w.y - origin.y) < 0.5) {
+        draggingOrigin = true;
+        return;
+    }
+    
+    touchStart = { x: touch.clientX, y: touch.clientY };
+    lastTouch = { x: touch.clientX, y: touch.clientY };
+    touchMoved = false;
+}
 
+function handleTouchMove(e) {
+    e.preventDefault();
+    if (!touchStart && !draggingOrigin) return;
+    
+    let touch = e.touches[0];
+    
+    if (draggingOrigin) {
+        let rect = canvas.getBoundingClientRect();
+        let w = screenToWorld(touch.clientX - rect.left, touch.clientY - rect.top);
+        origin.x = w.x;
+        origin.y = w.y;
+        return;
+    }
+    
+    let dx = touch.clientX - lastTouch.x;
+    let dy = touch.clientY - lastTouch.y;
+    
+    if (Math.hypot(touch.clientX - touchStart.x, touch.clientY - touchStart.y) > 10) {
+        touchMoved = true;
+    }
+    
+    viewX -= dx / canvas.width * zoom;
+    viewY -= dy / canvas.height * zoom;
+    
+    lastTouch = { x: touch.clientX, y: touch.clientY };
+}
+
+function handleTouchEnd(e) {
+    e.preventDefault();
+    
+    if (draggingOrigin) {
+        draggingOrigin = false;
+        return;
+    }
+    
+    if (!touchStart) return;
+    
+    if (!touchMoved && e.touches.length === 0) {
+        // Fue un tap
+        let rect = canvas.getBoundingClientRect();
+        let w = screenToWorld(touchStart.x - rect.left, touchStart.y - rect.top);
+        w = applyCyclic(w.x, w.y);
+        
+        // Verificar si tocó alguna carga para eliminar
+        let chargeFound = false;
+        for (let i = 0; i < charges.length; i++) {
+            let { r } = minImageDistance(charges[i].x, charges[i].y, w.x, w.y);
+            if (r < 1.0) {
+                charges.splice(i, 1);
+                chargeFound = true;
+                break;
+            }
+        }
+        
+        if (!chargeFound) {
+            for (let i = 0; i < mobileCharges.length; i++) {
+                let { r } = minImageDistance(mobileCharges[i].x, mobileCharges[i].y, w.x, w.y);
+                if (r < 1.0) {
+                    mobileCharges.splice(i, 1);
+                    chargeFound = true;
+                    break;
+                }
+            }
+        }
+        
+        // Si no tocó ninguna carga, realizar acción según modo
+        if (!chargeFound) {
+            switch (currentMode) {
+                case MODE.ADD_FIXED:
+                    let pol = document.querySelector('input[name="pol"]:checked').value;
+                    charges.push({ x: w.x, y: w.y, q: Number(pol) });
+                    break;
+                    
+                case MODE.ADD_MOBILE:
+                    let mpol = document.querySelector('input[name="mobilePol"]:checked').value;
+                    mobileCharges.push({
+                        x: w.x, y: w.y, q: Number(mpol),
+                        vx: 0.2, vy: 0.1,
+                        trail: [{ x: w.x, y: w.y }]
+                    });
+                    break;
+                    
+                case MODE.MEASURE:
+                    let x = w.x + (Math.random()*2-1)*ERROR.POSITION;
+                    let y = w.y + (Math.random()*2-1)*ERROR.POSITION;
+                    let dx = x - origin.x, dy = y - origin.y;
+                    let r = Math.hypot(dx, dy);
+                    let f = field(x, y);
+                    let Ex = f.vx * (1 + (Math.random()*2-1)*ERROR.FIELD);
+                    let Ey = f.vy * (1 + (Math.random()*2-1)*ERROR.FIELD);
+                    measurements.push({ r, E: Math.hypot(Ex, Ey) });
+                    updateMeasurementCount();
+                    break;
+            }
+        }
+    }
+    
+    touchStart = null;
+}
+
+// --- MANEJADORES RATÓN (respaldo) ---
+function handleMouseDown(e) {
+    let rect = canvas.getBoundingClientRect();
+    let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
+    
+    if (currentMode === MODE.MEASURE && Math.hypot(w.x - origin.x, w.y - origin.y) < 0.5) {
+        draggingOrigin = true;
+        return;
+    }
+    
+    touchStart = { x: e.clientX, y: e.clientY };
+    lastTouch = { x: e.clientX, y: e.clientY };
+    touchMoved = false;
+}
+
+function handleMouseMove(e) {
+    if (!touchStart && !draggingOrigin) return;
+    
+    if (draggingOrigin) {
+        let rect = canvas.getBoundingClientRect();
+        let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
+        origin.x = w.x;
+        origin.y = w.y;
+        return;
+    }
+    
+    let dx = e.clientX - lastTouch.x;
+    let dy = e.clientY - lastTouch.y;
+    
+    if (Math.hypot(e.clientX - touchStart.x, e.clientY - touchStart.y) > 5) {
+        touchMoved = true;
+    }
+    
+    viewX -= dx / canvas.width * zoom;
+    viewY -= dy / canvas.height * zoom;
+    
+    lastTouch = { x: e.clientX, y: e.clientY };
+}
+
+function handleMouseUp(e) {
+    if (draggingOrigin) {
+        draggingOrigin = false;
+        return;
+    }
+    
+    if (!touchStart) return;
+    
+    if (!touchMoved) {
+        let rect = canvas.getBoundingClientRect();
+        let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
+        w = applyCyclic(w.x, w.y);
+        
+        // Verificar si hizo click en alguna carga para eliminar
+        let chargeFound = false;
+        for (let i = 0; i < charges.length; i++) {
+            let { r } = minImageDistance(charges[i].x, charges[i].y, w.x, w.y);
+            if (r < 1.0) {
+                charges.splice(i, 1);
+                chargeFound = true;
+                break;
+            }
+        }
+        
+        if (!chargeFound) {
+            for (let i = 0; i < mobileCharges.length; i++) {
+                let { r } = minImageDistance(mobileCharges[i].x, mobileCharges[i].y, w.x, w.y);
+                if (r < 1.0) {
+                    mobileCharges.splice(i, 1);
+                    chargeFound = true;
+                    break;
+                }
+            }
+        }
+        
+        // Si no hizo click en ninguna carga, realizar acción según modo
+        if (!chargeFound) {
+            switch (currentMode) {
+                case MODE.ADD_FIXED:
+                    let pol = document.querySelector('input[name="pol"]:checked').value;
+                    charges.push({ x: w.x, y: w.y, q: Number(pol) });
+                    break;
+                    
+                case MODE.ADD_MOBILE:
+                    let mpol = document.querySelector('input[name="mobilePol"]:checked').value;
+                    mobileCharges.push({
+                        x: w.x, y: w.y, q: Number(mpol),
+                        vx: 0.2, vy: 0.1,
+                        trail: [{ x: w.x, y: w.y }]
+                    });
+                    break;
+                    
+                case MODE.MEASURE:
+                    let x = w.x + (Math.random()*2-1)*ERROR.POSITION;
+                    let y = w.y + (Math.random()*2-1)*ERROR.POSITION;
+                    let dx = x - origin.x, dy = y - origin.y;
+                    let r = Math.hypot(dx, dy);
+                    let f = field(x, y);
+                    let Ex = f.vx * (1 + (Math.random()*2-1)*ERROR.FIELD);
+                    let Ey = f.vy * (1 + (Math.random()*2-1)*ERROR.FIELD);
+                    measurements.push({ r, E: Math.hypot(Ex, Ey) });
+                    updateMeasurementCount();
+                    break;
+            }
+        }
+    }
+    
+    touchStart = null;
+}
+
+function handleWheel(e) {
+    e.preventDefault();
+    let rect = canvas.getBoundingClientRect();
+    let before = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
+    
+    zoom *= Math.exp(e.deltaY * 0.001);
+    zoom = Math.max(CONFIG.ZOOM_MIN, Math.min(CONFIG.ZOOM_MAX, zoom));
+    
+    let after = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
+    viewX += before.x - after.x;
+    viewY += before.y - after.y;
+}
+
+// --- BUCLE PRINCIPAL ---
+function animate() {
+    updateMobile();
+    draw();
     requestAnimationFrame(animate);
 }
 
-animate();
+// Iniciar
+window.onload = init;
 </script>
 </body>
 </html>
