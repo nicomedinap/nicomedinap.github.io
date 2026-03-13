@@ -35,22 +35,25 @@ canvas {
 
 #menu-toggle {
     position: fixed;
-    top: 8px;
+    top: 30px;
     left: 8px;
-    width: 40px;
+    padding: 8px 16px;  /* Padding horizontal para que el texto entre */
+    width: auto;        /* Ancho automático según el contenido */
     height: 40px;
     background: rgba(20,20,30,0.95);
     backdrop-filter: blur(10px);
     border: 1px solid #4CAF50;
-    border-radius: 10px;
+    border-radius: 20px;  /* Más redondeado para que se vea mejor con texto */
     color: #4CAF50;
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
     z-index: 1001;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    white-space: nowrap;  /* Evita que el texto se rompa en múltiples líneas */
 }
 
 #ui {
@@ -215,7 +218,7 @@ input[type="checkbox"], input[type="radio"] {
 </head>
 <body>
 
-<div id="menu-toggle" onclick="toggleMenu()">☰</div>
+<div id="menu-toggle" onclick="toggleMenu()">MENÚ DE ACCIONES</div>
 
 <div id="ui" class="collapsed">
     <div class="ui-header"><h1><span>⚡</span> CARGAS MÓVILES <span>⚡</span></h1></div>
@@ -277,14 +280,14 @@ input[type="checkbox"], input[type="radio"] {
 
 <script>
 // ============================================================================
-// SIMULADOR OPTIMIZADO PARA MÓVIL - CON ZOOM POR PELLIZCO
+// SIMULADOR OPTIMIZADO PARA MÓVIL - CON SÍMBOLOS + Y -
 // ============================================================================
 
 // --- CONSTANTES ---
-const DOMAIN = { W:20, H:30, X_MIN:-10, X_MAX:10, Y_MIN:-15, Y_MAX:15 };
+const DOMAIN = { W:30, H:40, X_MIN:-15, X_MAX:15, Y_MIN:-20, Y_MAX:20 };
 const CONFIG = {
     FIELD_MAX:20, POTENTIAL_SCALE:0.4, EPSILON:1e-6,
-    CHARGE_RADIUS:8, MOBILE_RADIUS:10, MEASUREMENT_RADIUS:5,
+    CHARGE_RADIUS:15, MOBILE_RADIUS:15, MEASUREMENT_RADIUS:5,
     GRID_STEP:1.0, ZOOM_MIN:2, ZOOM_MAX:40, DT:0.1, MASS:1.0, TRAIL_LENGTH:20
 };
 
@@ -326,11 +329,12 @@ let charges = [], mobileCharges = [], measurements = [];
 let simulationPaused = false, draggingOrigin = false;
 let origin = { x:0, y:0 };
 
-// Touch handling - MEJORADO PARA ZOOM
-let touches = {}; // Almacena todos los dedos activos
+// Touch handling
+let touches = {};
 let touchStart = null, touchMoved = false, lastTouch = null;
-let initialDistance = null; // Para zoom con dos dedos
+let initialDistance = null;
 let initialZoom = null;
+let zoomCenter = null;
 
 // --- INICIALIZACIÓN ---
 function init() {
@@ -339,7 +343,6 @@ function init() {
     resize();
     window.addEventListener('resize', resize);
     
-    // Event listeners táctiles - MEJORADOS
     canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
     canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
     canvas.addEventListener('touchend', handleTouchEnd);
@@ -515,6 +518,46 @@ function screenToWorld(X, Y) {
     };
 }
 
+// --- FUNCIÓN PARA DIBUJAR CARGA CON SÍMBOLO ---
+function drawCharge(x, y, q, isMobile = false) {
+    let s = worldToScreen(x, y);
+    let radius = isMobile ? CONFIG.MOBILE_RADIUS : CONFIG.CHARGE_RADIUS;
+    
+    // Color de fondo según polaridad y tipo
+    if (q > 0) {
+        // Positivas: rojo
+        ctx.fillStyle = "#ff3333";
+    } else {
+        // Negativas: azul oscuro
+        ctx.fillStyle = "#003366";
+    }
+    
+    // Círculo de fondo
+    ctx.beginPath();
+    ctx.arc(s.X, s.Y, radius, 0, 2*Math.PI);
+    ctx.fill();
+    
+    // Borde blanco
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = isMobile ? 2 : 1.5;
+    ctx.stroke();
+    
+    // Símbolo
+    ctx.font = `bold ${radius * 2}px Arial`; 
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    
+    if (q > 0) {
+        // Positivo: signo + negro
+        ctx.fillStyle = "black";
+        ctx.fillText("+", s.X, s.Y - 1);
+    } else {
+        // Negativo: signo - blanco
+        ctx.fillStyle = "white";
+        ctx.fillText("−", s.X, s.Y - 1);
+    }
+}
+
 // --- DIBUJO ---
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -574,53 +617,96 @@ function draw() {
         ctx.setLineDash([]);
     }
     
-    // Líneas de campo
-    if (ui.showFieldLines.checked) {
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-        ctx.lineWidth = 1;
-        
-        let spacing = 1.2;
-        for (let x = DOMAIN.X_MIN; x <= DOMAIN.X_MAX; x += spacing) {
-            for (let y = DOMAIN.Y_MIN; y <= DOMAIN.Y_MAX; y += spacing) {
-                let cerca = false;
-                for (let c of charges) {
+// Líneas de campo con flechas de dirección < >
+if (ui.showFieldLines.checked) {
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+    ctx.lineWidth = 1.4;
+    
+    let spacing = 1.2;
+    for (let x = DOMAIN.X_MIN; x <= DOMAIN.X_MAX; x += spacing) {
+        for (let y = DOMAIN.Y_MIN; y <= DOMAIN.Y_MAX; y += spacing) {
+            let cerca = false;
+            for (let c of charges) {
+                if (Math.hypot(x - c.x, y - c.y) < 0.6) { cerca = true; break; }
+            }
+            if (!cerca) {
+                for (let c of mobileCharges) {
                     if (Math.hypot(x - c.x, y - c.y) < 0.6) { cerca = true; break; }
                 }
-                if (!cerca) {
-                    for (let c of mobileCharges) {
-                        if (Math.hypot(x - c.x, y - c.y) < 0.6) { cerca = true; break; }
+            }
+            
+            if (!cerca) {
+                let f = field(x, y);
+                let m = Math.hypot(f.vx, f.vy);
+                if (m > 0.05) {
+                    let px = x, py = y;
+                    let puntos = [];
+                    
+                    // Recoger puntos de la línea
+                    for (let step = 0; step < 40; step++) {
+                        let f2 = field(px, py);
+                        let m2 = Math.hypot(f2.vx, f2.vy);
+                        if (m2 < 0.01) break;
+                        
+                        px += 0.12 * f2.vx / m2;
+                        py += 0.12 * f2.vy / m2;
+                        
+                        if (px < DOMAIN.X_MIN || px > DOMAIN.X_MAX || 
+                            py < DOMAIN.Y_MIN || py > DOMAIN.Y_MAX) break;
+                        
+                        puntos.push({ x: px, y: py });
                     }
-                }
-                
-                if (!cerca) {
-                    let f = field(x, y);
-                    let m = Math.hypot(f.vx, f.vy);
-                    if (m > 0.05) {
-                        let px = x, py = y;
+                    
+                    // Dibujar la línea
+                    if (puntos.length > 1) {
                         ctx.beginPath();
-                        let start = worldToScreen(px, py);
+                        let start = worldToScreen(x, y);
                         ctx.moveTo(start.X, start.Y);
                         
-                        for (let step = 0; step < 40; step++) {
-                            let f2 = field(px, py);
-                            let m2 = Math.hypot(f2.vx, f2.vy);
-                            if (m2 < 0.01) break;
-                            
-                            px += 0.12 * f2.vx / m2;
-                            py += 0.12 * f2.vy / m2;
-                            
-                            if (px < DOMAIN.X_MIN || px > DOMAIN.X_MAX || 
-                                py < DOMAIN.Y_MIN || py > DOMAIN.Y_MAX) break;
-                            
-                            let s = worldToScreen(px, py);
+                        for (let p of puntos) {
+                            let s = worldToScreen(p.x, p.y);
                             ctx.lineTo(s.X, s.Y);
                         }
                         ctx.stroke();
+                        
+                        // Añadir flecha < > en la dirección
+                        if (puntos.length > 5) {
+                            let idx = Math.floor(puntos.length / 2);
+                            let p1 = puntos[idx-1];
+                            let p2 = puntos[idx];
+                            
+                            if (p1 && p2) {
+                                let s1 = worldToScreen(p1.x, p1.y);
+                                let s2 = worldToScreen(p2.x, p2.y);
+                                
+                                // Vector dirección
+                                let dx = s2.X - s1.X;
+                                let dy = s2.Y - s1.Y;
+                                let len = Math.hypot(dx, dy);
+                                let angulo = Math.atan2(dy, dx);
+                                
+                                if (len > 5) {
+                                    ctx.save();
+                                    ctx.translate(s2.X, s2.Y);
+                                    ctx.rotate(angulo);
+                                    
+                                    // Dibujar símbolo <
+                                    ctx.font = "20px Arial";
+                                    ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+                                    ctx.textAlign = "center";
+                                    ctx.textBaseline = "middle";
+                                    ctx.fillText(">", 0, 0);
+                                    
+                                    ctx.restore();
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
+}
     
     // Vectores campo
     if (ui.showField.checked) {
@@ -700,27 +786,14 @@ function draw() {
         }
     }
     
-    // Cargas
+    // Cargas fijas con símbolos
     for (let c of charges) {
-        let s = worldToScreen(c.x, c.y);
-        ctx.fillStyle = c.q > 0 ? "#ff6b6b" : "#6b9fff";
-        ctx.beginPath();
-        ctx.arc(s.X, s.Y, CONFIG.CHARGE_RADIUS, 0, 2*Math.PI);
-        ctx.fill();
-        ctx.strokeStyle = "white";
-        ctx.lineWidth = 1;
-        ctx.stroke();
+        drawCharge(c.x, c.y, c.q, false);
     }
     
+    // Cargas móviles con símbolos
     for (let c of mobileCharges) {
-        let s = worldToScreen(c.x, c.y);
-        ctx.fillStyle = c.q > 0 ? "#ffaa6b" : "#9f6bff";
-        ctx.beginPath();
-        ctx.arc(s.X, s.Y, CONFIG.MOBILE_RADIUS, 0, 2*Math.PI);
-        ctx.fill();
-        ctx.strokeStyle = "white";
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        drawCharge(c.x, c.y, c.q, true);
     }
     
     // Origen medición
@@ -799,7 +872,6 @@ function getTouchDistance(touch1, touch2) {
     return Math.hypot(dx, dy);
 }
 
-// --- FUNCIÓN AUXILIAR PARA PUNTO MEDIO ENTRE DOS DEDOS ---
 function getTouchMidpoint(touch1, touch2) {
     return {
         x: (touch1.clientX + touch2.clientX) / 2,
@@ -807,12 +879,11 @@ function getTouchMidpoint(touch1, touch2) {
     };
 }
 
-// --- MANEJADORES TÁCTILES CON ZOOM POR PELLIZCO ---
+// --- MANEJADORES TÁCTILES ---
 function handleTouchStart(e) {
     e.preventDefault();
     let rect = canvas.getBoundingClientRect();
     
-    // Guardar todos los toques
     for (let i = 0; i < e.touches.length; i++) {
         let touch = e.touches[i];
         touches[touch.identifier] = {
@@ -822,19 +893,15 @@ function handleTouchStart(e) {
         };
     }
     
-    // Si hay exactamente 2 toques, preparar para zoom
     if (e.touches.length === 2) {
         let touch1 = e.touches[0];
         let touch2 = e.touches[1];
         initialDistance = getTouchDistance(touch1, touch2);
         initialZoom = zoom;
         
-        // Calcular punto medio para zoom centrado
         let mid = getTouchMidpoint(touch1, touch2);
-        let worldMid = screenToWorld(mid.x - rect.left, mid.y - rect.top);
-        zoomCenter = worldMid;
+        zoomCenter = screenToWorld(mid.x - rect.left, mid.y - rect.top);
     }
-    // Si es un solo toque, manejar como antes
     else if (e.touches.length === 1) {
         let touch = e.touches[0];
         let w = screenToWorld(touch.clientX - rect.left, touch.clientY - rect.top);
@@ -854,7 +921,6 @@ function handleTouchMove(e) {
     e.preventDefault();
     let rect = canvas.getBoundingClientRect();
     
-    // Actualizar posiciones de los toques
     for (let i = 0; i < e.touches.length; i++) {
         let touch = e.touches[i];
         if (touches[touch.identifier]) {
@@ -863,24 +929,20 @@ function handleTouchMove(e) {
         }
     }
     
-    // ZOOM CON DOS DEDOS
     if (e.touches.length === 2 && initialDistance !== null) {
         let touch1 = e.touches[0];
         let touch2 = e.touches[1];
         
         let currentDistance = getTouchDistance(touch1, touch2);
-        let zoomFactor = currentDistance / initialDistance;
+        let zoomFactor = initialDistance / currentDistance;  // Invertido
         
-        // Calcular nuevo zoom
         let newZoom = initialZoom * zoomFactor;
         newZoom = Math.max(CONFIG.ZOOM_MIN, Math.min(CONFIG.ZOOM_MAX, newZoom));
         
-        // Aplicar zoom centrado en el punto medio
         if (zoomCenter) {
             let mid = getTouchMidpoint(touch1, touch2);
             let worldMid = screenToWorld(mid.x - rect.left, mid.y - rect.top);
             
-            // Ajustar vista para mantener el punto medio fijo
             viewX += (zoomCenter.x - worldMid.x) * (1 - zoom/newZoom);
             viewY += (zoomCenter.y - worldMid.y) * (1 - zoom/newZoom);
         }
@@ -889,7 +951,6 @@ function handleTouchMove(e) {
         return;
     }
     
-    // ARRASTRE CON UN DEDO
     if (draggingOrigin) {
         let touch = e.touches[0];
         let w = screenToWorld(touch.clientX - rect.left, touch.clientY - rect.top);
@@ -918,7 +979,6 @@ function handleTouchEnd(e) {
     e.preventDefault();
     let rect = canvas.getBoundingClientRect();
     
-    // Eliminar toques que ya no están
     let remainingTouches = {};
     for (let i = 0; i < e.touches.length; i++) {
         let touch = e.touches[i];
@@ -926,7 +986,6 @@ function handleTouchEnd(e) {
     }
     touches = remainingTouches;
     
-    // Resetear variables de zoom si ya no hay 2 dedos
     if (e.touches.length !== 2) {
         initialDistance = null;
         initialZoom = null;
@@ -941,66 +1000,42 @@ function handleTouchEnd(e) {
     if (!touchStart) return;
     
     if (!touchMoved && e.touches.length === 0) {
-        // TAP con un dedo
         let w = screenToWorld(touchStart.x - rect.left, touchStart.y - rect.top);
         w = applyCyclic(w.x, w.y);
         
-        let chargeFound = false;
-        for (let i = 0; i < charges.length; i++) {
-            let { r } = minImageDistance(charges[i].x, charges[i].y, w.x, w.y);
-            if (r < 1.0) {
-                charges.splice(i, 1);
-                chargeFound = true;
+        // SIEMPRE AGREGAR SEGÚN EL MODO, SIN COMPROBAR ELIMINACIÓN
+        switch (currentMode) {
+            case MODE.ADD_FIXED:
+                let pol = document.querySelector('input[name="pol"]:checked').value;
+                charges.push({ x: w.x, y: w.y, q: Number(pol) });
                 break;
-            }
-        }
-        
-        if (!chargeFound) {
-            for (let i = 0; i < mobileCharges.length; i++) {
-                let { r } = minImageDistance(mobileCharges[i].x, mobileCharges[i].y, w.x, w.y);
-                if (r < 1.0) {
-                    mobileCharges.splice(i, 1);
-                    chargeFound = true;
-                    break;
-                }
-            }
-        }
-        
-        if (!chargeFound) {
-            switch (currentMode) {
-                case MODE.ADD_FIXED:
-                    let pol = document.querySelector('input[name="pol"]:checked').value;
-                    charges.push({ x: w.x, y: w.y, q: Number(pol) });
-                    break;
-                    
-                case MODE.ADD_MOBILE:
-                    let mpol = document.querySelector('input[name="mobilePol"]:checked').value;
-                    mobileCharges.push({
-                        x: w.x, y: w.y, q: Number(mpol),
-                        vx: 0.2, vy: 0.1,
-                        trail: []
-                    });
-                    break;
-                    
-                case MODE.MEASURE:
-                    let x = w.x + (Math.random()*2-1)*ERROR.POSITION;
-                    let y = w.y + (Math.random()*2-1)*ERROR.POSITION;
-                    let dx = x - origin.x, dy = y - origin.y;
-                    let r = Math.hypot(dx, dy);
-                    let f = field(x, y);
-                    let Ex = f.vx * (1 + (Math.random()*2-1)*ERROR.FIELD);
-                    let Ey = f.vy * (1 + (Math.random()*2-1)*ERROR.FIELD);
-                    measurements.push({ r, E: Math.hypot(Ex, Ey) });
-                    updateMeasurementCount();
-                    break;
-            }
+                
+            case MODE.ADD_MOBILE:
+                let mpol = document.querySelector('input[name="mobilePol"]:checked').value;
+                mobileCharges.push({
+                    x: w.x, y: w.y, q: Number(mpol),
+                    vx: 0.2, vy: 0.1,
+                    trail: []
+                });
+                break;
+                
+            case MODE.MEASURE:
+                let x = w.x + (Math.random()*2-1)*ERROR.POSITION;
+                let y = w.y + (Math.random()*2-1)*ERROR.POSITION;
+                let dx = x - origin.x, dy = y - origin.y;
+                let r = Math.hypot(dx, dy);
+                let f = field(x, y);
+                let Ex = f.vx * (1 + (Math.random()*2-1)*ERROR.FIELD);
+                let Ey = f.vy * (1 + (Math.random()*2-1)*ERROR.FIELD);
+                measurements.push({ r, E: Math.hypot(Ex, Ey) });
+                updateMeasurementCount();
+                break;
         }
     }
     
     touchStart = null;
 }
-
-// --- MANEJADORES RATÓN (sin cambios) ---
+// --- MANEJADORES RATÓN ---
 function handleMouseDown(e) {
     let rect = canvas.getBoundingClientRect();
     let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
@@ -1052,61 +1087,38 @@ function handleMouseUp(e) {
         let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
         w = applyCyclic(w.x, w.y);
         
-        let chargeFound = false;
-        for (let i = 0; i < charges.length; i++) {
-            let { r } = minImageDistance(charges[i].x, charges[i].y, w.x, w.y);
-            if (r < 1.0) {
-                charges.splice(i, 1);
-                chargeFound = true;
+        // SIEMPRE AGREGAR SEGÚN EL MODO, SIN COMPROBAR ELIMINACIÓN
+        switch (currentMode) {
+            case MODE.ADD_FIXED:
+                let pol = document.querySelector('input[name="pol"]:checked').value;
+                charges.push({ x: w.x, y: w.y, q: Number(pol) });
                 break;
-            }
-        }
-        
-        if (!chargeFound) {
-            for (let i = 0; i < mobileCharges.length; i++) {
-                let { r } = minImageDistance(mobileCharges[i].x, mobileCharges[i].y, w.x, w.y);
-                if (r < 1.0) {
-                    mobileCharges.splice(i, 1);
-                    chargeFound = true;
-                    break;
-                }
-            }
-        }
-        
-        if (!chargeFound) {
-            switch (currentMode) {
-                case MODE.ADD_FIXED:
-                    let pol = document.querySelector('input[name="pol"]:checked').value;
-                    charges.push({ x: w.x, y: w.y, q: Number(pol) });
-                    break;
-                    
-                case MODE.ADD_MOBILE:
-                    let mpol = document.querySelector('input[name="mobilePol"]:checked').value;
-                    mobileCharges.push({
-                        x: w.x, y: w.y, q: Number(mpol),
-                        vx: 0.2, vy: 0.1,
-                        trail: []
-                    });
-                    break;
-                    
-                case MODE.MEASURE:
-                    let x = w.x + (Math.random()*2-1)*ERROR.POSITION;
-                    let y = w.y + (Math.random()*2-1)*ERROR.POSITION;
-                    let dx = x - origin.x, dy = y - origin.y;
-                    let r = Math.hypot(dx, dy);
-                    let f = field(x, y);
-                    let Ex = f.vx * (1 + (Math.random()*2-1)*ERROR.FIELD);
-                    let Ey = f.vy * (1 + (Math.random()*2-1)*ERROR.FIELD);
-                    measurements.push({ r, E: Math.hypot(Ex, Ey) });
-                    updateMeasurementCount();
-                    break;
-            }
+                
+            case MODE.ADD_MOBILE:
+                let mpol = document.querySelector('input[name="mobilePol"]:checked').value;
+                mobileCharges.push({
+                    x: w.x, y: w.y, q: Number(mpol),
+                    vx: 0.2, vy: 0.1,
+                    trail: []
+                });
+                break;
+                
+            case MODE.MEASURE:
+                let x = w.x + (Math.random()*2-1)*ERROR.POSITION;
+                let y = w.y + (Math.random()*2-1)*ERROR.POSITION;
+                let dx = x - origin.x, dy = y - origin.y;
+                let r = Math.hypot(dx, dy);
+                let f = field(x, y);
+                let Ex = f.vx * (1 + (Math.random()*2-1)*ERROR.FIELD);
+                let Ey = f.vy * (1 + (Math.random()*2-1)*ERROR.FIELD);
+                measurements.push({ r, E: Math.hypot(Ex, Ey) });
+                updateMeasurementCount();
+                break;
         }
     }
     
     touchStart = null;
 }
-
 function handleWheel(e) {
     e.preventDefault();
     let rect = canvas.getBoundingClientRect();
