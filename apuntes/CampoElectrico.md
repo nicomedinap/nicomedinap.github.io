@@ -35,30 +35,29 @@ canvas {
 
 #menu-toggle {
     position: fixed;
-    top: 10px;
-    left: 10px;
-    width: 44px;
-    height: 44px;
+    top: 8px;
+    left: 8px;
+    width: 40px;
+    height: 40px;
     background: rgba(20,20,30,0.95);
     backdrop-filter: blur(10px);
     border: 1px solid #4CAF50;
-    border-radius: 12px;
+    border-radius: 10px;
     color: #4CAF50;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     z-index: 1001;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
 #ui {
     position: fixed;
     top: 0;
     left: 0;
-    width: 280px;
+    width: 260px;
     height: 100%;
     background: rgba(10,10,15,0.98);
     backdrop-filter: blur(10px);
@@ -67,7 +66,7 @@ canvas {
     transition: transform 0.3s ease;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 #ui.collapsed {
@@ -75,35 +74,33 @@ canvas {
 }
 
 .ui-header {
-    padding: 20px 15px;
+    padding: 15px 12px;
     border-bottom: 1px solid #333;
-    background: rgba(0,0,0,0.3);
 }
 
 .ui-header h1 {
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     font-weight: 500;
 }
 
 .ui-header span { color: #4CAF50; }
 
-.ui-content { padding: 15px; }
+.ui-content { padding: 12px; }
 
 .section {
     background: rgba(255,255,255,0.05);
-    border-radius: 16px;
-    padding: 15px;
-    margin-bottom: 15px;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
 }
 
 .section h3 {
-    margin: 0 0 12px 0;
-    font-size: 14px;
+    margin: 0 0 10px 0;
+    font-size: 13px;
     color: #aaa;
     text-transform: uppercase;
-    letter-spacing: 1px;
     border-left: 3px solid #4CAF50;
     padding-left: 8px;
 }
@@ -111,47 +108,46 @@ canvas {
 .row {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    min-height: 44px;
+    gap: 8px;
+    padding: 6px 0;
+    min-height: 40px;
 }
 
 .row label {
     flex: 1;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     color: #eee;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 input[type="checkbox"], input[type="radio"] {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     accent-color: #4CAF50;
 }
 
 .mode-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    margin: 10px 0;
+    gap: 6px;
+    margin: 8px 0;
 }
 
 .mode-btn {
     background: #2a2a3a;
     border: 1px solid #555;
-    border-radius: 30px;
-    padding: 14px 5px;
+    border-radius: 25px;
+    padding: 12px 3px;
     color: white;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 4px;
     touch-action: manipulation;
 }
 
@@ -167,58 +163,51 @@ input[type="checkbox"], input[type="radio"] {
     width: 100%;
     background: #2a2a3a;
     border: 1px solid #555;
-    border-radius: 30px;
-    padding: 14px;
+    border-radius: 25px;
+    padding: 12px;
     color: white;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
-    margin: 5px 0;
+    margin: 4px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     touch-action: manipulation;
 }
 
 .action-btn:active { background: #3a3a4a; }
 
-.action-btn.danger { background: #5a2a2a; }
-
 .help-text {
-    font-size: 12px;
+    font-size: 11px;
     color: #aaa;
     background: rgba(0,0,0,0.3);
-    border-radius: 12px;
-    padding: 12px;
-    margin-top: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 12px;
 }
 
 .help-text div {
-    margin: 6px 0;
+    margin: 5px 0;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .mode-indicator {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
+    bottom: 8px;
+    right: 8px;
     background: rgba(0,0,0,0.9);
-    border: 2px solid #4CAF50;
-    border-radius: 40px;
-    padding: 12px 20px;
+    border: 1.5px solid #4CAF50;
+    border-radius: 30px;
+    padding: 8px 16px;
     color: #4CAF50;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
     z-index: 2000;
     pointer-events: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
-
-.controls-container {
-    transition: opacity 0.2s;
-    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
 .hidden { display: none !important; }
@@ -228,7 +217,7 @@ input[type="checkbox"], input[type="radio"] {
 
 <div id="menu-toggle" onclick="toggleMenu()">☰</div>
 
-<div id="ui">
+<div id="ui" class="collapsed">
     <div class="ui-header"><h1><span>⚡</span> CARGAS MÓVILES <span>⚡</span></h1></div>
     <div class="ui-content">
         
@@ -250,17 +239,17 @@ input[type="checkbox"], input[type="radio"] {
                 <button class="mode-btn" id="modeMeasure">📏 Medir</button>
             </div>
             
-            <div id="fixedControls" class="controls-container hidden">
+            <div id="fixedControls" class="hidden">
                 <div class="row"><label><input type="radio" name="pol" value="1" checked> 🔴 Positiva</label></div>
                 <div class="row"><label><input type="radio" name="pol" value="-1"> 🔵 Negativa</label></div>
             </div>
             
-            <div id="mobileControls" class="controls-container hidden">
+            <div id="mobileControls" class="hidden">
                 <div class="row"><label><input type="radio" name="mobilePol" value="1" checked> 🟠 Positiva móvil</label></div>
                 <div class="row"><label><input type="radio" name="mobilePol" value="-1"> 🟣 Negativa móvil</label></div>
             </div>
             
-            <div id="measureControls" class="controls-container hidden">
+            <div id="measureControls" class="hidden">
                 <div class="row"><label><input type="checkbox" id="showModel"> Modelo 1/r²</label></div>
                 <button class="action-btn" id="clearMeasurements">🗑️ Borrar <span id="measurementCount">0</span></button>
             </div>
@@ -288,7 +277,7 @@ input[type="checkbox"], input[type="radio"] {
 
 <script>
 // ============================================================================
-// SIMULADOR OPTIMIZADO PARA MÓVIL - CON LÍNEAS DE CAMPO MÁS DENSAS Y VECTORES MÁS GRANDES
+// SIMULADOR OPTIMIZADO PARA MÓVIL
 // ============================================================================
 
 // --- CONSTANTES ---
@@ -296,13 +285,7 @@ const DOMAIN = { W:20, H:30, X_MIN:-10, X_MAX:10, Y_MIN:-15, Y_MAX:15 };
 const CONFIG = {
     FIELD_MAX:20, POTENTIAL_SCALE:0.4, EPSILON:1e-6,
     CHARGE_RADIUS:8, MOBILE_RADIUS:10, MEASUREMENT_RADIUS:5,
-    GRID_STEP:1.0, ZOOM_MIN:2, ZOOM_MAX:40, DT:0.1, MASS:1.0, TRAIL_LENGTH:20,
-    // Parámetros mejorados para visualización
-    FIELD_LINE_DENSITY: 12,      // Más líneas por carga (antes 6)
-    FIELD_LINE_STEP: 0.03,       // Paso más pequeño para líneas más suaves
-    FIELD_LINE_MAX_STEPS: 150,   // Más pasos por línea
-    ARROW_SIZE_MULT: 1.5,        // Flechas más grandes
-    ARROW_SPACING: 40            // Más vectores (antes 50)
+    GRID_STEP:1.0, ZOOM_MIN:2, ZOOM_MAX:40, DT:0.1, MASS:1.0, TRAIL_LENGTH:20
 };
 
 const ERROR = { POSITION:0.02, FIELD:0.1 };
@@ -353,27 +336,23 @@ function init() {
     resize();
     window.addEventListener('resize', resize);
     
-    // Event listeners táctiles
     canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
     canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
     canvas.addEventListener('touchend', handleTouchEnd);
     canvas.addEventListener('touchcancel', handleTouchEnd);
     
-    // Event listeners ratón (para desarrollo)
     canvas.addEventListener('mousedown', handleMouseDown);
     canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('mouseup', handleMouseUp);
     canvas.addEventListener('wheel', handleWheel, { passive: false });
     canvas.addEventListener('contextmenu', e => e.preventDefault());
     
-    // Configurar botones
     setupButtons();
     
-    // Ejemplos iniciales
     charges.push({ x:-5, y:0, q:3 }, { x:5, y:0, q:-3 });
     mobileCharges.push({
         x:0, y:0, q:0.5, vx:0.3, vy:0.2,
-        trail: [{ x:0, y:0 }]
+        trail: []
     });
     
     setMode(MODE.PAN);
@@ -387,7 +366,6 @@ function resize() {
 
 function toggleMenu() {
     ui.panel.classList.toggle('collapsed');
-    ui.toggle.textContent = ui.panel.classList.contains('collapsed') ? '☰' : '✕';
 }
 
 function setupButtons() {
@@ -440,7 +418,7 @@ function updateMeasurementCount() {
     ui.measurementCount.textContent = measurements.length;
 }
 
-// --- FUNCIONES FÍSICAS OPTIMIZADAS ---
+// --- FUNCIONES FÍSICAS ---
 function applyCyclic(x, y) {
     if (x > DOMAIN.X_MAX) x -= DOMAIN.W;
     else if (x < DOMAIN.X_MIN) x += DOMAIN.W;
@@ -487,47 +465,6 @@ function potential(x, y) {
     return V;
 }
 
-function drawFieldLine(startX, startY, forward = true) {
-    let x = startX, y = startY;
-    const step = CONFIG.FIELD_LINE_STEP * (forward ? 1 : -1);
-    
-    ctx.beginPath();
-    const startScreen = worldToScreen(x, y);
-    ctx.moveTo(startScreen.X, startScreen.Y);
-
-    for (let i = 0; i < CONFIG.FIELD_LINE_MAX_STEPS; i++) {
-        const f = field(x, y);
-        const m = Math.hypot(f.vx, f.vy);
-        
-        if (m < 0.001) break;
-        
-        x += step * f.vx / m;
-        y += step * f.vy / m;
-        
-        // APLICAR CONDICIONES CÍCLICAS TAMBIÉN EN EL DIBUJO
-        const cyclic = applyCyclicForDrawing(x, y);
-        x = cyclic.x;
-        y = cyclic.y;
-        
-        const s = worldToScreen(x, y);
-        ctx.lineTo(s.X, s.Y);
-    }
-    
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
-}
-
-// Función para aplicar condiciones cíclicas también en el dibujo
-function applyCyclicForDrawing(px, py) {
-    // Si está fuera del dominio visible, reiniciar para que siga dibujando
-    if (px < DOMAIN.X_MIN) px += DOMAIN.W;
-    else if (px > DOMAIN.X_MAX) px -= DOMAIN.W;
-    if (py < DOMAIN.Y_MIN) py += DOMAIN.H;
-    else if (py > DOMAIN.Y_MAX) py -= DOMAIN.H;
-    return { x: px, y: py };
-}
-
 function updateMobile() {
     if (simulationPaused) return;
     
@@ -543,7 +480,18 @@ function updateMobile() {
         c.vy += ay * CONFIG.DT;
         
         let pos = applyCyclic(newX, newY);
-        c.x = pos.x; c.y = pos.y;
+        
+        // Verificar si hubo salto de dominio
+        let saltoX = Math.abs(pos.x - c.x) > DOMAIN.W/2;
+        let saltoY = Math.abs(pos.y - c.y) > DOMAIN.H/2;
+        
+        c.x = pos.x;
+        c.y = pos.y;
+        
+        // Si hubo salto, reiniciar el trail para evitar líneas rectas
+        if (saltoX || saltoY) {
+            c.trail = [];
+        }
         
         c.trail.push({ x: c.x, y: c.y });
         if (c.trail.length > CONFIG.TRAIL_LENGTH) c.trail.shift();
@@ -565,16 +513,14 @@ function screenToWorld(X, Y) {
     };
 }
 
-// --- DIBUJO MEJORADO ---
-// --- DIBUJO MEJORADO ---
+// --- DIBUJO ---
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Fondo
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Potencial (fondo)
+    // Potencial
     if (ui.showPotential.checked) {
         let step = 30;
         for (let i = 0; i < canvas.width; i += step) {
@@ -617,7 +563,6 @@ function draw() {
             }
         }
         
-        // Bordes dominio
         ctx.strokeStyle = "#4CAF50";
         ctx.lineWidth = 2;
         ctx.setLineDash([5, 5]);
@@ -627,75 +572,41 @@ function draw() {
         ctx.setLineDash([]);
     }
     
-    // LÍNEAS DE CAMPO - AHORA CUBREN TODO EL DOMINIO
+    // Líneas de campo
     if (ui.showFieldLines.checked) {
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
-        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+        ctx.lineWidth = 1;
         
-        // Crear una cuadrícula de puntos de inicio en el dominio
-        let spacing = 1.5; // Espaciado en unidades del mundo
+        let spacing = 1.2;
         for (let x = DOMAIN.X_MIN; x <= DOMAIN.X_MAX; x += spacing) {
             for (let y = DOMAIN.Y_MIN; y <= DOMAIN.Y_MAX; y += spacing) {
-                // Evitar empezar muy cerca de las cargas (para no saturar)
-                let cercaDeCarga = false;
+                let cerca = false;
                 for (let c of charges) {
-                    let dx = x - c.x;
-                    let dy = y - c.y;
-                    if (Math.hypot(dx, dy) < 0.8) {
-                        cercaDeCarga = true;
-                        break;
-                    }
+                    if (Math.hypot(x - c.x, y - c.y) < 0.6) { cerca = true; break; }
                 }
-                if (!cercaDeCarga) {
+                if (!cerca) {
                     for (let c of mobileCharges) {
-                        let dx = x - c.x;
-                        let dy = y - c.y;
-                        if (Math.hypot(dx, dy) < 0.8) {
-                            cercaDeCarga = true;
-                            break;
-                        }
+                        if (Math.hypot(x - c.x, y - c.y) < 0.6) { cerca = true; break; }
                     }
                 }
                 
-                if (!cercaDeCarga) {
-                    // Dibujar línea en dirección del campo
+                if (!cerca) {
                     let f = field(x, y);
                     let m = Math.hypot(f.vx, f.vy);
-                    if (m > 0.1) {
+                    if (m > 0.05) {
                         // Dirección positiva
                         let px = x, py = y;
                         ctx.beginPath();
                         let start = worldToScreen(px, py);
                         ctx.moveTo(start.X, start.Y);
                         
-                        for (let step = 0; step < 50; step++) {
+                        for (let step = 0; step < 40; step++) {
                             let f2 = field(px, py);
                             let m2 = Math.hypot(f2.vx, f2.vy);
                             if (m2 < 0.01) break;
                             
-                            px += 0.1 * f2.vx / m2;
-                            py += 0.1 * f2.vy / m2;
-                            
-                            if (px < DOMAIN.X_MIN || px > DOMAIN.X_MAX || 
-                                py < DOMAIN.Y_MIN || py > DOMAIN.Y_MAX) break;
-                            
-                            let s = worldToScreen(px, py);
-                            ctx.lineTo(s.X, s.Y);
-                        }
-                        ctx.stroke();
-                        
-                        // Dirección negativa
-                        px = x; py = y;
-                        ctx.beginPath();
-                        ctx.moveTo(start.X, start.Y);
-                        
-                        for (let step = 0; step < 50; step++) {
-                            let f2 = field(px, py);
-                            let m2 = Math.hypot(f2.vx, f2.vy);
-                            if (m2 < 0.01) break;
-                            
-                            px -= 0.1 * f2.vx / m2;
-                            py -= 0.1 * f2.vy / m2;
+                            px += 0.12 * f2.vx / m2;
+                            py += 0.12 * f2.vy / m2;
                             
                             if (px < DOMAIN.X_MIN || px > DOMAIN.X_MAX || 
                                 py < DOMAIN.Y_MIN || py > DOMAIN.Y_MAX) break;
@@ -710,13 +621,12 @@ function draw() {
         }
     }
     
-    // VECTORES DE CAMPO
+    // Vectores campo
     if (ui.showField.checked) {
         let spacing = 40;
         for (let i = spacing/2; i < canvas.width; i += spacing) {
             for (let j = spacing/2; j < canvas.height; j += spacing) {
                 let w = screenToWorld(i, j);
-                // Solo dibujar vectores dentro del dominio
                 if (w.x >= DOMAIN.X_MIN && w.x <= DOMAIN.X_MAX && 
                     w.y >= DOMAIN.Y_MIN && w.y <= DOMAIN.Y_MAX) {
                     let f = field(w.x, w.y);
@@ -728,7 +638,6 @@ function draw() {
                     let t = Math.min(1, m / CONFIG.FIELD_MAX);
                     ctx.strokeStyle = `rgb(${255*t},0,${255*(1-t)})`;
                     ctx.fillStyle = ctx.strokeStyle;
-                    ctx.lineWidth = 1.5;
                     
                     ctx.beginPath();
                     ctx.moveTo(i, j);
@@ -759,17 +668,40 @@ function draw() {
             ctx.globalAlpha = 0.5;
             ctx.beginPath();
             
+            let puntosValidos = [];
             for (let i = 0; i < c.trail.length; i++) {
-                let s = worldToScreen(c.trail[i].x, c.trail[i].y);
-                if (i === 0) ctx.moveTo(s.X, s.Y);
-                else ctx.lineTo(s.X, s.Y);
+                let p = c.trail[i];
+                // Solo dibujar si no hay saltos grandes entre puntos consecutivos
+                if (i > 0) {
+                    let dist = Math.hypot(p.x - c.trail[i-1].x, p.y - c.trail[i-1].y);
+                    if (dist < 5) { // Si la distancia es razonable
+                        puntosValidos.push(p);
+                    } else {
+                        // Si hay salto, empezar nuevo segmento
+                        if (puntosValidos.length > 1) {
+                            ctx.stroke();
+                        }
+                        puntosValidos = [p];
+                    }
+                } else {
+                    puntosValidos.push(p);
+                }
             }
-            ctx.stroke();
+            
+            if (puntosValidos.length > 1) {
+                ctx.beginPath();
+                for (let i = 0; i < puntosValidos.length; i++) {
+                    let s = worldToScreen(puntosValidos[i].x, puntosValidos[i].y);
+                    if (i === 0) ctx.moveTo(s.X, s.Y);
+                    else ctx.lineTo(s.X, s.Y);
+                }
+                ctx.stroke();
+            }
             ctx.globalAlpha = 1;
         }
     }
     
-    // Cargas fijas
+    // Cargas
     for (let c of charges) {
         let s = worldToScreen(c.x, c.y);
         ctx.fillStyle = c.q > 0 ? "#ff6b6b" : "#6b9fff";
@@ -781,7 +713,6 @@ function draw() {
         ctx.stroke();
     }
     
-    // Cargas móviles
     for (let c of mobileCharges) {
         let s = worldToScreen(c.x, c.y);
         ctx.fillStyle = c.q > 0 ? "#ffaa6b" : "#9f6bff";
@@ -862,7 +793,7 @@ function draw() {
     ctx.fillText("E", x - 6, y0 - 5);
 }
 
-// --- MANEJADORES TÁCTILES OPTIMIZADOS ---
+// --- MANEJADORES TÁCTILES ---
 function handleTouchStart(e) {
     e.preventDefault();
     let touch = e.touches[0];
@@ -917,12 +848,10 @@ function handleTouchEnd(e) {
     if (!touchStart) return;
     
     if (!touchMoved && e.touches.length === 0) {
-        // Fue un tap
         let rect = canvas.getBoundingClientRect();
         let w = screenToWorld(touchStart.x - rect.left, touchStart.y - rect.top);
         w = applyCyclic(w.x, w.y);
         
-        // Verificar si tocó alguna carga para eliminar
         let chargeFound = false;
         for (let i = 0; i < charges.length; i++) {
             let { r } = minImageDistance(charges[i].x, charges[i].y, w.x, w.y);
@@ -944,7 +873,6 @@ function handleTouchEnd(e) {
             }
         }
         
-        // Si no tocó ninguna carga, realizar acción según modo
         if (!chargeFound) {
             switch (currentMode) {
                 case MODE.ADD_FIXED:
@@ -957,7 +885,7 @@ function handleTouchEnd(e) {
                     mobileCharges.push({
                         x: w.x, y: w.y, q: Number(mpol),
                         vx: 0.2, vy: 0.1,
-                        trail: [{ x: w.x, y: w.y }]
+                        trail: []
                     });
                     break;
                     
@@ -979,7 +907,7 @@ function handleTouchEnd(e) {
     touchStart = null;
 }
 
-// --- MANEJADORES RATÓN (respaldo) ---
+// --- MANEJADORES RATÓN (simplificados) ---
 function handleMouseDown(e) {
     let rect = canvas.getBoundingClientRect();
     let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
@@ -1031,7 +959,6 @@ function handleMouseUp(e) {
         let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
         w = applyCyclic(w.x, w.y);
         
-        // Verificar si hizo click en alguna carga para eliminar
         let chargeFound = false;
         for (let i = 0; i < charges.length; i++) {
             let { r } = minImageDistance(charges[i].x, charges[i].y, w.x, w.y);
@@ -1053,7 +980,6 @@ function handleMouseUp(e) {
             }
         }
         
-        // Si no hizo click en ninguna carga, realizar acción según modo
         if (!chargeFound) {
             switch (currentMode) {
                 case MODE.ADD_FIXED:
@@ -1066,7 +992,7 @@ function handleMouseUp(e) {
                     mobileCharges.push({
                         x: w.x, y: w.y, q: Number(mpol),
                         vx: 0.2, vy: 0.1,
-                        trail: [{ x: w.x, y: w.y }]
+                        trail: []
                     });
                     break;
                     
@@ -1108,7 +1034,6 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Iniciar
 window.onload = init;
 </script>
 </body>
