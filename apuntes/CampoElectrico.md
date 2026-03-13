@@ -35,15 +35,16 @@ canvas {
 
 #menu-toggle {
     position: fixed;
-    top: 30px;
+    top: 40px;
     left: 8px;
-    padding: 8px 16px;  /* Padding horizontal para que el texto entre */
-    width: auto;        /* Ancho automático según el contenido */
+    padding: 8px 16px;
+    width: auto;
+    min-width: 40px;  /* Ancho mínimo para cuando muestra ✕ */
     height: 40px;
     background: rgba(20,20,30,0.95);
     backdrop-filter: blur(10px);
     border: 1px solid #4CAF50;
-    border-radius: 20px;  /* Más redondeado para que se vea mejor con texto */
+    border-radius: 20px;
     color: #4CAF50;
     font-size: 14px;
     font-weight: bold;
@@ -53,7 +54,14 @@ canvas {
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    white-space: nowrap;  /* Evita que el texto se rompa en múltiples líneas */
+    white-space: nowrap;
+    transition: all 0.2s ease;  /* Transición suave al cambiar */
+}
+
+/* Estilo especial cuando muestra ✕ */
+#menu-toggle:has(✕) {
+    font-size: 18px;  /* ✕ un poco más grande */
+    padding: 8px 12px;  /* Menos padding horizontal */
 }
 
 #ui {
@@ -221,9 +229,13 @@ input[type="checkbox"], input[type="radio"] {
 <div id="menu-toggle" onclick="toggleMenu()">MENÚ DE ACCIONES</div>
 
 <div id="ui" class="collapsed">
-    <div class="ui-header"><h1><span>⚡</span> CARGAS MÓVILES <span>⚡</span></h1></div>
+
     <div class="ui-content">
-        
+        <br>
+        <br>
+        <br>
+        <br>
+
         <div class="section">
             <h3>VISUALIZACIÓN</h3>
             <div class="row"><label><input type="checkbox" id="showGrid" checked> Grilla</label></div>
@@ -363,16 +375,34 @@ function init() {
     });
     
     setMode(MODE.PAN);
+    // Asegurar que el botón muestre "MENÚ DE ACCIONES" al inicio
+    ui.toggle.textContent = 'MENÚ DE ACCIONES';
+    ui.toggle.style.backgroundColor = 'rgba(20,20,30,0.95)';
+    ui.toggle.style.borderColor = '#4CAF50';
+    ui.toggle.style.color = '#4CAF50';
     animate();
+}
+
+function toggleMenu() {
+    ui.panel.classList.toggle('collapsed');
+    
+    // Cambiar el texto y estilo del botón según el estado del menú
+    if (ui.panel.classList.contains('collapsed')) {
+        ui.toggle.textContent = 'MENÚ DE ACCIONES';  // Menú cerrado
+        ui.toggle.style.backgroundColor = 'rgba(20,20,30,0.95)';
+        ui.toggle.style.borderColor = '#4CAF50';
+        ui.toggle.style.color = '#4CAF50';
+    } else {
+        ui.toggle.textContent = '✕';  // Menú abierto - símbolo de cerrar
+        ui.toggle.style.backgroundColor = '#4CAF50';
+        ui.toggle.style.borderColor = '#4CAF50';
+        ui.toggle.style.color = 'black';
+    }
 }
 
 function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-}
-
-function toggleMenu() {
-    ui.panel.classList.toggle('collapsed');
 }
 
 function setupButtons() {
