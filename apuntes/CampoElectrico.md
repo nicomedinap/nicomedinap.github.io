@@ -277,7 +277,7 @@ input[type="checkbox"], input[type="radio"] {
 
 <script>
 // ============================================================================
-// SIMULADOR OPTIMIZADO PARA MÓVIL
+// SIMULADOR OPTIMIZADO PARA MÓVIL - CON ZOOM POR PELLIZCO
 // ============================================================================
 
 // --- CONSTANTES ---
@@ -326,8 +326,11 @@ let charges = [], mobileCharges = [], measurements = [];
 let simulationPaused = false, draggingOrigin = false;
 let origin = { x:0, y:0 };
 
-// Touch handling
+// Touch handling - MEJORADO PARA ZOOM
+let touches = {}; // Almacena todos los dedos activos
 let touchStart = null, touchMoved = false, lastTouch = null;
+let initialDistance = null; // Para zoom con dos dedos
+let initialZoom = null;
 
 // --- INICIALIZACIÓN ---
 function init() {
@@ -336,6 +339,7 @@ function init() {
     resize();
     window.addEventListener('resize', resize);
     
+    // Event listeners táctiles - MEJORADOS
     canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
     canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
     canvas.addEventListener('touchend', handleTouchEnd);
@@ -481,14 +485,12 @@ function updateMobile() {
         
         let pos = applyCyclic(newX, newY);
         
-        // Verificar si hubo salto de dominio
         let saltoX = Math.abs(pos.x - c.x) > DOMAIN.W/2;
         let saltoY = Math.abs(pos.y - c.y) > DOMAIN.H/2;
         
         c.x = pos.x;
         c.y = pos.y;
         
-        // Si hubo salto, reiniciar el trail para evitar líneas rectas
         if (saltoX || saltoY) {
             c.trail = [];
         }
@@ -594,7 +596,6 @@ function draw() {
                     let f = field(x, y);
                     let m = Math.hypot(f.vx, f.vy);
                     if (m > 0.05) {
-                        // Dirección positiva
                         let px = x, py = y;
                         ctx.beginPath();
                         let start = worldToScreen(px, py);
@@ -671,13 +672,11 @@ function draw() {
             let puntosValidos = [];
             for (let i = 0; i < c.trail.length; i++) {
                 let p = c.trail[i];
-                // Solo dibujar si no hay saltos grandes entre puntos consecutivos
                 if (i > 0) {
                     let dist = Math.hypot(p.x - c.trail[i-1].x, p.y - c.trail[i-1].y);
-                    if (dist < 5) { // Si la distancia es razonable
+                    if (dist < 5) {
                         puntosValidos.push(p);
                     } else {
-                        // Si hay salto, empezar nuevo segmento
                         if (puntosValidos.length > 1) {
                             ctx.stroke();
                         }
@@ -793,37 +792,115 @@ function draw() {
     ctx.fillText("E", x - 6, y0 - 5);
 }
 
-// --- MANEJADORES TÁCTILES ---
+// --- FUNCIÓN AUXILIAR PARA DISTANCIA ENTRE DOS DEDOS ---
+function getTouchDistance(touch1, touch2) {
+    let dx = touch1.clientX - touch2.clientX;
+    let dy = touch1.clientY - touch2.clientY;
+    return Math.hypot(dx, dy);
+}
+
+// --- FUNCIÓN AUXILIAR PARA PUNTO MEDIO ENTRE DOS DEDOS ---
+function getTouchMidpoint(touch1, touch2) {
+    return {
+        x: (touch1.clientX + touch2.clientX) / 2,
+        y: (touch1.clientY + touch2.clientY) / 2
+    };
+}
+
+// --- MANEJADORES TÁCTILES CON ZOOM POR PELLIZCO ---
 function handleTouchStart(e) {
     e.preventDefault();
-    let touch = e.touches[0];
     let rect = canvas.getBoundingClientRect();
-    let w = screenToWorld(touch.clientX - rect.left, touch.clientY - rect.top);
     
-    if (currentMode === MODE.MEASURE && Math.hypot(w.x - origin.x, w.y - origin.y) < 0.5) {
-        draggingOrigin = true;
-        return;
+    // Guardar todos los toques
+    for (let i = 0; i < e.touches.length; i++) {
+        let touch = e.touches[i];
+        touches[touch.identifier] = {
+            id: touch.identifier,
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        };
     }
     
-    touchStart = { x: touch.clientX, y: touch.clientY };
-    lastTouch = { x: touch.clientX, y: touch.clientY };
-    touchMoved = false;
+    // Si hay exactamente 2 toques, preparar para zoom
+    if (e.touches.length === 2) {
+        let touch1 = e.touches[0];
+        let touch2 = e.touches[1];
+        initialDistance = getTouchDistance(touch1, touch2);
+        initialZoom = zoom;
+        
+        // Calcular punto medio para zoom centrado
+        let mid = getTouchMidpoint(touch1, touch2);
+        let worldMid = screenToWorld(mid.x - rect.left, mid.y - rect.top);
+        zoomCenter = worldMid;
+    }
+    // Si es un solo toque, manejar como antes
+    else if (e.touches.length === 1) {
+        let touch = e.touches[0];
+        let w = screenToWorld(touch.clientX - rect.left, touch.clientY - rect.top);
+        
+        if (currentMode === MODE.MEASURE && Math.hypot(w.x - origin.x, w.y - origin.y) < 0.5) {
+            draggingOrigin = true;
+            return;
+        }
+        
+        touchStart = { x: touch.clientX, y: touch.clientY };
+        lastTouch = { x: touch.clientX, y: touch.clientY };
+        touchMoved = false;
+    }
 }
 
 function handleTouchMove(e) {
     e.preventDefault();
-    if (!touchStart && !draggingOrigin) return;
+    let rect = canvas.getBoundingClientRect();
     
-    let touch = e.touches[0];
+    // Actualizar posiciones de los toques
+    for (let i = 0; i < e.touches.length; i++) {
+        let touch = e.touches[i];
+        if (touches[touch.identifier]) {
+            touches[touch.identifier].clientX = touch.clientX;
+            touches[touch.identifier].clientY = touch.clientY;
+        }
+    }
     
+    // ZOOM CON DOS DEDOS
+    if (e.touches.length === 2 && initialDistance !== null) {
+        let touch1 = e.touches[0];
+        let touch2 = e.touches[1];
+        
+        let currentDistance = getTouchDistance(touch1, touch2);
+        let zoomFactor = currentDistance / initialDistance;
+        
+        // Calcular nuevo zoom
+        let newZoom = initialZoom * zoomFactor;
+        newZoom = Math.max(CONFIG.ZOOM_MIN, Math.min(CONFIG.ZOOM_MAX, newZoom));
+        
+        // Aplicar zoom centrado en el punto medio
+        if (zoomCenter) {
+            let mid = getTouchMidpoint(touch1, touch2);
+            let worldMid = screenToWorld(mid.x - rect.left, mid.y - rect.top);
+            
+            // Ajustar vista para mantener el punto medio fijo
+            viewX += (zoomCenter.x - worldMid.x) * (1 - zoom/newZoom);
+            viewY += (zoomCenter.y - worldMid.y) * (1 - zoom/newZoom);
+        }
+        
+        zoom = newZoom;
+        return;
+    }
+    
+    // ARRASTRE CON UN DEDO
     if (draggingOrigin) {
-        let rect = canvas.getBoundingClientRect();
+        let touch = e.touches[0];
         let w = screenToWorld(touch.clientX - rect.left, touch.clientY - rect.top);
         origin.x = w.x;
         origin.y = w.y;
         return;
     }
     
+    if (!touchStart) return;
+    
+    let touch = e.touches[0];
     let dx = touch.clientX - lastTouch.x;
     let dy = touch.clientY - lastTouch.y;
     
@@ -839,6 +916,22 @@ function handleTouchMove(e) {
 
 function handleTouchEnd(e) {
     e.preventDefault();
+    let rect = canvas.getBoundingClientRect();
+    
+    // Eliminar toques que ya no están
+    let remainingTouches = {};
+    for (let i = 0; i < e.touches.length; i++) {
+        let touch = e.touches[i];
+        remainingTouches[touch.identifier] = touches[touch.identifier];
+    }
+    touches = remainingTouches;
+    
+    // Resetear variables de zoom si ya no hay 2 dedos
+    if (e.touches.length !== 2) {
+        initialDistance = null;
+        initialZoom = null;
+        zoomCenter = null;
+    }
     
     if (draggingOrigin) {
         draggingOrigin = false;
@@ -848,7 +941,7 @@ function handleTouchEnd(e) {
     if (!touchStart) return;
     
     if (!touchMoved && e.touches.length === 0) {
-        let rect = canvas.getBoundingClientRect();
+        // TAP con un dedo
         let w = screenToWorld(touchStart.x - rect.left, touchStart.y - rect.top);
         w = applyCyclic(w.x, w.y);
         
@@ -907,7 +1000,7 @@ function handleTouchEnd(e) {
     touchStart = null;
 }
 
-// --- MANEJADORES RATÓN (simplificados) ---
+// --- MANEJADORES RATÓN (sin cambios) ---
 function handleMouseDown(e) {
     let rect = canvas.getBoundingClientRect();
     let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
