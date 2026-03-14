@@ -38,7 +38,7 @@ canvas {
     left: 8px;
     padding: 8px 16px;
     width: auto;
-    min-width: 40px;
+    min-width: 20px;
     height: 40px;
     background: rgba(20,20,30,0.95);
     backdrop-filter: blur(10px);
@@ -66,7 +66,7 @@ canvas {
     position: fixed;
     top: 0;
     left: 0;
-    width: 220px; /* Reducido de 260px a 220px */
+    width: 250px;
     height: 100%;
     background: rgba(10,10,15,0.98);
     backdrop-filter: blur(10px);
@@ -78,10 +78,9 @@ canvas {
     padding-bottom: 15px;
 }
 
-/* Aún más angosto para pantallas muy pequeñas */
 @media (max-width: 360px) {
     #ui {
-        width: 200px;
+        width: 120px;
     }
 }
 
@@ -104,112 +103,122 @@ canvas {
 .ui-header span { color: #4CAF50; }
 
 .ui-content { 
-    padding: 8px; /* Reducido de 12px a 8px */
+    padding: 8px;
 }
 
 .section {
     background: rgba(255,255,255,0.05);
-    border-radius: 10px; /* Reducido de 12px a 10px */
-    padding: 8px; /* Reducido de 12px a 8px */
-    margin-bottom: 8px; /* Reducido de 12px a 8px */
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 8px;
 }
 
 .section h3 {
-    margin: 0 0 8px 0; /* Reducido margen inferior */
-    font-size: 12px; /* Reducido de 13px a 12px */
+    margin: 0 0 8px 0;
+    font-size: 12px;
     color: #aaa;
     text-transform: uppercase;
     border-left: 3px solid #4CAF50;
-    padding-left: 6px; /* Reducido de 8px a 6px */
+    padding-left: 6px;
 }
 
 .row {
     display: flex;
     align-items: center;
-    gap: 6px; /* Reducido de 8px a 6px */
-    padding: 4px 0; /* Reducido de 6px a 4px */
-    min-height: 36px; /* Reducido de 40px a 36px */
+    gap: 6px;
+    padding: 4px 0;
+    min-height: 36px;
 }
 
 .row label {
     flex: 1;
     display: flex;
     align-items: center;
-    gap: 4px; /* Reducido de 6px a 4px */
+    gap: 4px;
     color: #eee;
-    font-size: 12px; /* Reducido de 13px a 12px */
+    font-size: 12px;
 }
 
 input[type="checkbox"], input[type="radio"] {
-    width: 16px; /* Reducido de 18px a 16px */
-    height: 16px; /* Reducido de 18px a 16px */
+    width: 16px;
+    height: 16px;
     accent-color: #4CAF50;
 }
 
-.mode-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px; /* Reducido de 6px a 4px */
-    margin: 6px 0; /* Reducido de 8px a 6px */
+/* Estilos para botones verticales */
+.vertical-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 6px 0;
 }
 
-.mode-btn {
+.mode-btn-vertical {
+    width: 100%;
     background: #2a2a3a;
     border: 1px solid #555;
-    border-radius: 20px; /* Reducido de 25px a 20px */
-    padding: 10px 2px; /* Reducido de 12px 3px a 10px 2px */
+    border-radius: 20px;
+    padding: 10px;
     color: white;
-    font-size: 11px; /* Reducido de 12px a 11px */
+    font-size: 12px;
     font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3px; /* Reducido de 4px a 3px */
+    gap: 4px;
     touch-action: manipulation;
 }
 
-.mode-btn.active {
+.mode-btn-vertical.active {
     background: #4CAF50;
     border-color: #8bc34a;
     color: black;
 }
 
-.mode-btn:active { transform: scale(0.95); }
+.mode-btn-vertical:active { transform: scale(0.95); }
+
+/* Mantener el grid original para los botones de polaridad */
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    margin: 6px 0;
+}
 
 .action-btn {
     width: 100%;
     background: #2a2a3a;
     border: 1px solid #555;
-    border-radius: 20px; /* Reducido de 25px a 20px */
-    padding: 10px; /* Reducido de 12px a 10px */
+    border-radius: 20px;
+    padding: 10px;
     color: white;
-    font-size: 12px; /* Reducido de 13px a 12px */
+    font-size: 12px;
     cursor: pointer;
-    margin: 3px 0; /* Reducido de 4px a 3px */
+    margin: 3px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px; /* Reducido de 6px a 4px */
+    gap: 4px;
     touch-action: manipulation;
 }
 
 .action-btn:active { background: #3a3a4a; }
 
 .help-text {
-    font-size: 10px; /* Reducido de 11px a 10px */
+    font-size: 10px;
     color: #aaa;
     background: rgba(0,0,0,0.3);
-    border-radius: 8px; /* Reducido de 10px a 8px */
-    padding: 8px; /* Reducido de 10px a 8px */
-    margin-top: 10px; /* Reducido de 12px a 10px */
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 10px;
 }
 
 .help-text div {
-    margin: 4px 0; /* Reducido de 5px a 4px */
+    margin: 4px 0;
     display: flex;
     align-items: center;
-    gap: 4px; /* Reducido de 6px a 4px */
+    gap: 4px;
 }
 
 .mode-indicator {
@@ -219,10 +228,10 @@ input[type="checkbox"], input[type="radio"] {
     background: rgba(0,0,0,0.9);
     border: 1.5px solid #4CAF50;
     border-radius: 30px;
-    padding: 6px 12px; /* Reducido de 8px 16px a 6px 12px */
+    padding: 6px 12px;
     color: #4CAF50;
     font-weight: bold;
-    font-size: 11px; /* Reducido de 12px a 11px */
+    font-size: 11px;
     z-index: 2000;
     pointer-events: none;
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
@@ -233,7 +242,7 @@ input[type="checkbox"], input[type="radio"] {
 </head>
 <body>
 
-<div id="menu-toggle" onclick="toggleMenu()">MENÚ</div> <!-- Texto más corto -->
+<div id="menu-toggle" onclick="toggleMenu()">MENÚ</div>
 
 <div id="ui" class="collapsed">
 
@@ -244,27 +253,29 @@ input[type="checkbox"], input[type="radio"] {
         <br>
 
         <div class="section">
-            <h3>VISUAL</h3> <!-- Abreviado -->
+            <h3>VISUAL</h3>
             <div class="row"><label><input type="checkbox" id="showGrid" checked> Grilla</label></div>
-            <div class="row"><label><input type="checkbox" id="showField" checked> Vectores</label></div> <!-- Abreviado -->
+            <div class="row"><label><input type="checkbox" id="showField" checked> Vectores</label></div>
             <div class="row"><label><input type="checkbox" id="showPotential" checked> Potencial</label></div>
-            <div class="row"><label><input type="checkbox" id="showFieldLines" checked> Líneas</label></div> <!-- Abreviado -->
+            <div class="row"><label><input type="checkbox" id="showFieldLines" checked> Líneas</label></div>
             <div class="row"><label><input type="checkbox" id="showTrails" checked> Trayectorias</label></div>
         </div>
 
         <div class="section">
             <h3>MODO</h3>
-            <div class="mode-grid">
-                <button class="mode-btn" id="modePan">🖱️ Mover</button>
-                <button class="mode-btn" id="modeMeasure">📏 Medir</button>
+            <!-- Botones en vertical -->
+            <div class="vertical-grid">
+                <button class="mode-btn-vertical" id="modePan">🖱️ Mover</button>
+                <button class="mode-btn-vertical" id="modeMeasure">📏 Medir</button>
             </div>
         </div>
 
         <div class="section">
-            <h3>AGREGAR</h3> <!-- Abreviado -->
-            <div class="mode-grid">
-                <button class="mode-btn" id="modeAddFixed">➕ Fija</button>
-                <button class="mode-btn" id="modeAddMobile">⚡ Móvil</button>
+            <h3>AGREGAR</h3>
+            <!-- Botones en vertical -->
+            <div class="vertical-grid">
+                <button class="mode-btn-vertical" id="modeAddFixed">➕ Fija</button>
+                <button class="mode-btn-vertical" id="modeAddMobile">⚡ Móvil</button>
             </div>
             
             <div id="fixedControls" class="hidden">
@@ -273,31 +284,31 @@ input[type="checkbox"], input[type="radio"] {
             </div>
             
             <div id="mobileControls" class="hidden">
-                <div class="row"><label><input type="radio" name="mobilePol" value="1" checked> 🟠 Positiva</label></div> <!-- Abreviado -->
-                <div class="row"><label><input type="radio" name="mobilePol" value="-1"> 🟣 Negativa</label></div> <!-- Abreviado -->
+                <div class="row"><label><input type="radio" name="mobilePol" value="1" checked> 🔴 Positiva</label></div>
+                <div class="row"><label><input type="radio" name="mobilePol" value="-1"> 🔵 Negativa</label></div>
             </div>
         </div>
 
         <div class="section">
             <h3>ACCIONES</h3>
-            <button class="action-btn" id="clearFixedCharges">🗑️ Fijas</button> <!-- Abreviado -->
-            <button class="action-btn" id="clearMobileCharges">🗑️ Móviles</button> <!-- Abreviado -->
+            <button class="action-btn" id="clearFixedCharges">🗑️ Fijas</button>
+            <button class="action-btn" id="clearMobileCharges">🗑️ Móviles</button>
             <button class="action-btn" id="toggleMotion">⏸️ Pausar</button>
         </div>
 
         <div class="section">
             <h3>MEDICIÓN</h3>
             <div id="measureControls">
-                <div class="row"><label><input type="checkbox" id="showModel"> 1/r²</label></div> <!-- Abreviado -->
-                <button class="action-btn" id="clearMeasurements">🗑️ <span id="measurementCount">0</span></button> <!-- Abreviado -->
+                <div class="row"><label><input type="checkbox" id="showModel"> 1/r²</label></div>
+                <button class="action-btn" id="clearMeasurements">🗑️ <span id="measurementCount">0</span></button>
             </div>
         </div>
 
         <div class="help-text">
-            <div>👆 Arrastrar: Mover</div> <!-- Abreviado -->
-            <div>👆 Tocar: Acción</div> <!-- Abreviado -->
+            <div>👆 Arrastrar: Mover</div>
+            <div>👆 Tocar: Acción</div>
             <div>👆 Tocar carga: Eliminar</div>
-            <div>🌌 Dominio 20×30</div> <!-- Abreviado -->
+            <div>🌌 Dominio 20×30</div>
         </div>
     </div>
 </div>
@@ -305,7 +316,6 @@ input[type="checkbox"], input[type="radio"] {
 <div id="modeIndicator" class="mode-indicator">🖱️ MOVER</div>
 
 <canvas id="canvas"></canvas>
-
 
 <script>
 // ============================================================================
