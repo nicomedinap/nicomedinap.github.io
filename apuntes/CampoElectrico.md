@@ -78,9 +78,24 @@ canvas {
     padding-bottom: 15px;
 }
 
-@media (max-width: 360px) {
+/* Móviles muy pequeños (iPhone SE, etc) */
+@media (max-width: 375px) {
     #ui {
-        width: 120px;
+        width: 150px;
+    }
+}
+
+/* Móviles pequeños (iPhone X, etc) */
+@media (min-width: 376px) and (max-width: 414px) {
+    #ui {
+        width: 150px;
+    }
+}
+
+/* Móviles grandes */
+@media (min-width: 415px) and (max-width: 600px) {
+    #ui {
+        width: 150px;
     }
 }
 
@@ -327,7 +342,10 @@ const DOMAIN = { W:30, H:40, X_MIN:-15, X_MAX:15, Y_MIN:-20, Y_MAX:20 };
 const CONFIG = {
     FIELD_MAX:20, POTENTIAL_SCALE:0.4, EPSILON:1e-6,
     CHARGE_RADIUS:15, MOBILE_RADIUS:15, MEASUREMENT_RADIUS:5,
-    GRID_STEP:1.0, ZOOM_MIN:2, ZOOM_MAX:40, DT:0.1, MASS:1.0, TRAIL_LENGTH:20
+    GRID_STEP:1.0, ZOOM_MIN:2, ZOOM_MAX:40, DT:0.1, MASS:1.0, TRAIL_LENGTH:20,
+    // Nuevas constantes para tamaño proporcional
+    CHARGE_SIZE_FACTOR: 0.8,  // Factor de escala para el tamaño
+    CHARGE_MIN_SIZE: 8        // Tamaño mínimo en píxeles
 };
 
 const ERROR = { POSITION:0.02, FIELD:0.1 };
@@ -584,7 +602,16 @@ function screenToWorld(X, Y) {
 // --- FUNCIÓN PARA DIBUJAR CARGA CON SÍMBOLO ---
 function drawCharge(x, y, q, isMobile = false) {
     let s = worldToScreen(x, y);
-    let radius = isMobile ? CONFIG.MOBILE_RADIUS : CONFIG.CHARGE_RADIUS;
+    // Radio base según tipo, multiplicado por la magnitud de la carga
+    // Usamos Math.abs(q) para que el tamaño dependa de la magnitud
+    // Añadimos un factor de escala y un mínimo para que no desaparezcan
+    let baseRadius = isMobile ? CONFIG.MOBILE_RADIUS : CONFIG.CHARGE_RADIUS;
+    let scaleFactor = 0.5; // Ajusta este valor para cambiar la sensibilidad
+    let minRadius = 8; // Tamaño mínimo para cargas muy pequeñas
+ 
+    let magnitude = Math.abs(q);
+    let scaledSize = baseRadius * (1 + Math.log(magnitude + 1)) * CONFIG.CHARGE_SIZE_FACTOR;
+    let radius = Math.max(CONFIG.CHARGE_MIN_SIZE, Math.min(scaledSize, 40)); // Máximo 40px
     
     if (q > 0) {
         ctx.fillStyle = "#ff3333";
