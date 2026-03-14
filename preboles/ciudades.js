@@ -34,6 +34,7 @@ const chileanCities = {
   "Valdivia":         { lat: -39.8142, lon: -73.2459, region: "XIV Región", altitude: 19 },
   "Osorno":           { lat: -40.5739, lon: -73.1310, region: "X Región",   altitude: 65 },
   "Puerto Montt":     { lat: -41.4689, lon: -72.9411, region: "X Región",   altitude: 85 },
+  "Quellón":       { lat: -43.1181, lon: -73.6167, region: "X Región",   altitude: 5 },
   "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34 },
 
   /* === OBSERVATORIOS ASTRONÓMICOS === */
