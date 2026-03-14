@@ -1,7 +1,4 @@
----
-layout: topbar
----
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -39,7 +36,7 @@ canvas {
     left: 8px;
     padding: 8px 16px;
     width: auto;
-    min-width: 40px;  /* Ancho mínimo para cuando muestra ✕ */
+    min-width: 40px;
     height: 40px;
     background: rgba(20,20,30,0.95);
     backdrop-filter: blur(10px);
@@ -55,13 +52,12 @@ canvas {
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
     white-space: nowrap;
-    transition: all 0.2s ease;  /* Transición suave al cambiar */
+    transition: all 0.2s ease;
 }
 
-/* Estilo especial cuando muestra ✕ */
 #menu-toggle:has(✕) {
-    font-size: 18px;  /* ✕ un poco más grande */
-    padding: 8px 12px;  /* Menos padding horizontal */
+    font-size: 18px;
+    padding: 8px 12px;
 }
 
 #ui {
@@ -249,9 +245,15 @@ input[type="checkbox"], input[type="radio"] {
             <h3>MODO</h3>
             <div class="mode-grid">
                 <button class="mode-btn" id="modePan">🖱️ Mover</button>
-                <button class="mode-btn" id="modeAddFixed">➕ Fija</button>
-                <button class="mode-btn" id="modeAddMobile">⚡ Móvil</button>
                 <button class="mode-btn" id="modeMeasure">📏 Medir</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>AGREGAR CARGA</h3>
+            <div class="mode-grid">
+                <button class="mode-btn" id="modeAddFixed">➕ Fija q = 20 C</button>
+                <button class="mode-btn" id="modeAddMobile">⚡ Móvil q = 0.1 C</button>
             </div>
             
             <div id="fixedControls" class="hidden">
@@ -260,21 +262,24 @@ input[type="checkbox"], input[type="radio"] {
             </div>
             
             <div id="mobileControls" class="hidden">
-                <div class="row"><label><input type="radio" name="mobilePol" value="1" checked> 🟠 Positiva móvil</label></div>
-                <div class="row"><label><input type="radio" name="mobilePol" value="-1"> 🟣 Negativa móvil</label></div>
-            </div>
-            
-            <div id="measureControls" class="hidden">
-                <div class="row"><label><input type="checkbox" id="showModel"> Modelo 1/r²</label></div>
-                <button class="action-btn" id="clearMeasurements">🗑️ Borrar <span id="measurementCount">0</span></button>
+                <div class="row"><label><input type="radio" name="mobilePol" value="1" checked> 🔴 Positiva móvil</label></div>
+                <div class="row"><label><input type="radio" name="mobilePol" value="-1"> 🔵 Negativa móvil</label></div>
             </div>
         </div>
 
         <div class="section">
             <h3>ACCIONES</h3>
-            <button class="action-btn" id="clearMobileCharges">🗑️ Eliminar móviles</button>
+            <button class="action-btn" id="clearFixedCharges">🗑️ Eliminar carga fijas</button>
+            <button class="action-btn" id="clearMobileCharges">🗑️ Eliminar carga móvil</button>
             <button class="action-btn" id="toggleMotion">⏸️ Pausar</button>
-            <button class="action-btn" id="resetView">🎯 Centrar vista</button>
+        </div>
+
+        <div class="section">
+            <h3>MEDICIÓN</h3>
+            <div id="measureControls">
+                <div class="row"><label><input type="checkbox" id="showModel"> Modelo 1/r²</label></div>
+                <button class="action-btn" id="clearMeasurements">🗑️ Borrar <span id="measurementCount">0</span></button>
+            </div>
         </div>
 
         <div class="help-text">
@@ -292,7 +297,7 @@ input[type="checkbox"], input[type="radio"] {
 
 <script>
 // ============================================================================
-// SIMULADOR OPTIMIZADO PARA MÓVIL - CON SÍMBOLOS + Y -
+// SIMULADOR DE CARGAS ELÉCTRICAS - VECTORES PROPORCIONALES AL MÓDULO
 // ============================================================================
 
 // --- CONSTANTES ---
@@ -318,9 +323,9 @@ const ui = {
     showModel: document.getElementById("showModel"),
     clearMeasurements: document.getElementById("clearMeasurements"),
     measurementCount: document.getElementById("measurementCount"),
+    clearFixed: document.getElementById("clearFixedCharges"), // NUEVO
     clearMobile: document.getElementById("clearMobileCharges"),
     toggleMotion: document.getElementById("toggleMotion"),
-    resetView: document.getElementById("resetView"),
     modeIndicator: document.getElementById("modeIndicator"),
     
     modePan: document.getElementById("modePan"),
@@ -335,7 +340,7 @@ const ui = {
 
 // --- ESTADO ---
 let canvas, ctx;
-let zoom = 15, viewX = 0, viewY = 0;
+let zoom = 20, viewX = 0, viewY = 0;
 let currentMode = MODE.PAN;
 let charges = [], mobileCharges = [], measurements = [];
 let simulationPaused = false, draggingOrigin = false;
@@ -368,14 +373,13 @@ function init() {
     
     setupButtons();
     
-    charges.push({ x:-5, y:0, q:3 }, { x:5, y:0, q:-3 });
+    charges.push({ x:-5, y:0, q:20 }, { x:5, y:0, q:-20 });
     mobileCharges.push({
-        x:0, y:0, q:0.5, vx:0.3, vy:0.2,
+        x:0, y:0, q:0.1, vx:0.1, vy:0.1,
         trail: []
     });
     
     setMode(MODE.PAN);
-    // Asegurar que el botón muestre "MENÚ DE ACCIONES" al inicio
     ui.toggle.textContent = 'MENÚ DE ACCIONES';
     ui.toggle.style.backgroundColor = 'rgba(20,20,30,0.95)';
     ui.toggle.style.borderColor = '#4CAF50';
@@ -386,14 +390,13 @@ function init() {
 function toggleMenu() {
     ui.panel.classList.toggle('collapsed');
     
-    // Cambiar el texto y estilo del botón según el estado del menú
     if (ui.panel.classList.contains('collapsed')) {
-        ui.toggle.textContent = 'MENÚ DE ACCIONES';  // Menú cerrado
+        ui.toggle.textContent = 'MENÚ DE ACCIONES';
         ui.toggle.style.backgroundColor = 'rgba(20,20,30,0.95)';
         ui.toggle.style.borderColor = '#4CAF50';
         ui.toggle.style.color = '#4CAF50';
     } else {
-        ui.toggle.textContent = '✕';  // Menú abierto - símbolo de cerrar
+        ui.toggle.textContent = '✕';
         ui.toggle.style.backgroundColor = '#4CAF50';
         ui.toggle.style.borderColor = '#4CAF50';
         ui.toggle.style.color = 'black';
@@ -407,24 +410,21 @@ function resize() {
 
 function setupButtons() {
     ui.modePan.onclick = () => setMode(MODE.PAN);
+    ui.modeMeasure.onclick = () => setMode(MODE.MEASURE);
     ui.modeAddFixed.onclick = () => setMode(MODE.ADD_FIXED);
     ui.modeAddMobile.onclick = () => setMode(MODE.ADD_MOBILE);
-    ui.modeMeasure.onclick = () => setMode(MODE.MEASURE);
     
     ui.clearMeasurements.onclick = () => {
         measurements = [];
         updateMeasurementCount();
     };
     
+    ui.clearFixed.onclick = () => { charges = []; };
     ui.clearMobile.onclick = () => { mobileCharges = []; };
     
     ui.toggleMotion.onclick = () => {
         simulationPaused = !simulationPaused;
         ui.toggleMotion.innerHTML = simulationPaused ? '▶️ Reanudar' : '⏸️ Pausar';
-    };
-    
-    ui.resetView.onclick = () => {
-        viewX = 0; viewY = 0; zoom = 15;
     };
     
     ui.showModel.checked = false;
@@ -433,19 +433,30 @@ function setupButtons() {
 function setMode(mode) {
     currentMode = mode;
     
-    [ui.modePan, ui.modeAddFixed, ui.modeAddMobile, ui.modeMeasure].forEach(btn => {
+    // Quitar active de todos los botones de modo y agregar carga
+    [ui.modePan, ui.modeMeasure, ui.modeAddFixed, ui.modeAddMobile].forEach(btn => {
         btn.classList.remove('active');
     });
     
-    document.getElementById(`mode${mode.charAt(0).toUpperCase()+mode.slice(1)}`).classList.add('active');
+    // Activar el botón correspondiente
+    if (mode === MODE.PAN) ui.modePan.classList.add('active');
+    else if (mode === MODE.MEASURE) ui.modeMeasure.classList.add('active');
+    else if (mode === MODE.ADD_FIXED) ui.modeAddFixed.classList.add('active');
+    else if (mode === MODE.ADD_MOBILE) ui.modeAddMobile.classList.add('active');
     
+    // Mostrar controles según el modo
     ui.fixedControls.classList.toggle('hidden', mode !== MODE.ADD_FIXED);
     ui.mobileControls.classList.toggle('hidden', mode !== MODE.ADD_MOBILE);
-    ui.measureControls.classList.toggle('hidden', mode !== MODE.MEASURE);
+    
+    // El bloque de medición ahora siempre visible en su propia sección
+    // pero podrías ocultarlo si no estás en modo medición
+    // ui.measureControls.classList.toggle('hidden', mode !== MODE.MEASURE);
     
     const modeNames = {
-        [MODE.PAN]: '🖱️ MOVER', [MODE.ADD_FIXED]: '➕ FIJA',
-        [MODE.ADD_MOBILE]: '⚡ MÓVIL', [MODE.MEASURE]: '📏 MEDIR'
+        [MODE.PAN]: '🖱️ MOVER', 
+        [MODE.MEASURE]: '📏 MEDIR',
+        [MODE.ADD_FIXED]: '➕ FIJA',
+        [MODE.ADD_MOBILE]: '⚡ MÓVIL'
     };
     ui.modeIndicator.textContent = `MODO: ${modeNames[mode]}`;
     ui.modeIndicator.style.borderColor = mode === MODE.ADD_MOBILE ? '#ffaa6b' : '#4CAF50';
@@ -553,42 +564,55 @@ function drawCharge(x, y, q, isMobile = false) {
     let s = worldToScreen(x, y);
     let radius = isMobile ? CONFIG.MOBILE_RADIUS : CONFIG.CHARGE_RADIUS;
     
-    // Color de fondo según polaridad y tipo
     if (q > 0) {
-        // Positivas: rojo
         ctx.fillStyle = "#ff3333";
     } else {
-        // Negativas: azul oscuro
         ctx.fillStyle = "#003366";
     }
     
-    // Círculo de fondo
     ctx.beginPath();
     ctx.arc(s.X, s.Y, radius, 0, 2*Math.PI);
     ctx.fill();
     
-    // Borde blanco
     ctx.strokeStyle = "white";
     ctx.lineWidth = isMobile ? 2 : 1.5;
     ctx.stroke();
     
-    // Símbolo
     ctx.font = `bold ${radius * 2}px Arial`; 
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     
     if (q > 0) {
-        // Positivo: signo + negro
         ctx.fillStyle = "black";
         ctx.fillText("+", s.X, s.Y - 1);
     } else {
-        // Negativo: signo - blanco
         ctx.fillStyle = "white";
         ctx.fillText("−", s.X, s.Y - 1);
     }
 }
 
-// --- DIBUJO ---
+// --- FUNCIÓN PARA TRAZAR LÍNEA DE CAMPO ---
+function traceFieldLine(startX, startY, direction = 1, paso = 0.15, maxPasos = 200) {
+    let puntos = [];
+    let x = startX, y = startY;
+    
+    for (let i = 0; i < maxPasos; i++) {
+        let f = field(x, y);
+        let m = Math.hypot(f.vx, f.vy);
+        if (m < 0.001) break;
+        
+        x += direction * paso * f.vx / m;
+        y += direction * paso * f.vy / m;
+        
+        if (x < DOMAIN.X_MIN || x > DOMAIN.X_MAX || y < DOMAIN.Y_MIN || y > DOMAIN.Y_MAX) break;
+        
+        puntos.push({ x, y });
+    }
+    
+    return puntos;
+}
+
+// --- DIBUJO PRINCIPAL ---
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
@@ -597,13 +621,13 @@ function draw() {
     
     // Potencial
     if (ui.showPotential.checked) {
-        let step = 30;
+        let step = 40;
         for (let i = 0; i < canvas.width; i += step) {
             for (let j = 0; j < canvas.height; j += step) {
                 let w = screenToWorld(i, j);
                 let V = potential(w.x, w.y) * CONFIG.POTENTIAL_SCALE;
                 let int = Math.min(255, 200 * Math.abs(V));
-                ctx.fillStyle = V > 0 ? `rgba(${int},40,40,0.35)` : `rgba(40,40,${int},0.35)`;
+                ctx.fillStyle = V > 0 ? `rgba(${int},40,40,0.25)` : `rgba(40,40,${int},0.25)`;
                 ctx.fillRect(i, j, step, step);
             }
         }
@@ -647,130 +671,163 @@ function draw() {
         ctx.setLineDash([]);
     }
     
-// Líneas de campo con flechas de dirección < >
-if (ui.showFieldLines.checked) {
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-    ctx.lineWidth = 1.4;
-    
-    let spacing = 1.2;
-    for (let x = DOMAIN.X_MIN; x <= DOMAIN.X_MAX; x += spacing) {
-        for (let y = DOMAIN.Y_MIN; y <= DOMAIN.Y_MAX; y += spacing) {
-            let cerca = false;
-            for (let c of charges) {
-                if (Math.hypot(x - c.x, y - c.y) < 0.6) { cerca = true; break; }
-            }
-            if (!cerca) {
-                for (let c of mobileCharges) {
-                    if (Math.hypot(x - c.x, y - c.y) < 0.6) { cerca = true; break; }
-                }
-            }
+    // LÍNEAS DE CAMPO
+    if (ui.showFieldLines.checked) {
+        ctx.strokeStyle = "rgba(220, 220, 220, 0.25)";
+        ctx.lineWidth = 1.0;
+        
+        let todasLasCargas = [...charges, ...mobileCharges];
+        
+        // Crear una cuadrícula para estimar densidad
+        let gridSize = 2.0; // Tamaño de celda en unidades del mundo
+        let densidadGrid = {};
+        
+        // Primera pasada: calcular densidad
+        for (let c of todasLasCargas) {
+            let gx = Math.floor(c.x / gridSize);
+            let gy = Math.floor(c.y / gridSize);
+            let key = `${gx},${gy}`;
+            densidadGrid[key] = (densidadGrid[key] || 0) + 1;
+        }
+        
+        // Segunda pasada: dibujar líneas con densidad adaptativa
+        for (let c of todasLasCargas) {
+            let gx = Math.floor(c.x / gridSize);
+            let gy = Math.floor(c.y / gridSize);
+            let key = `${gx},${gy}`;
+            let densidad = densidadGrid[key] || 1;
             
-            if (!cerca) {
-                let f = field(x, y);
-                let m = Math.hypot(f.vx, f.vy);
-                if (m > 0.05) {
-                    let px = x, py = y;
-                    let puntos = [];
-                    
-                    // Recoger puntos de la línea
-                    for (let step = 0; step < 40; step++) {
-                        let f2 = field(px, py);
-                        let m2 = Math.hypot(f2.vx, f2.vy);
-                        if (m2 < 0.01) break;
-                        
-                        px += 0.12 * f2.vx / m2;
-                        py += 0.12 * f2.vy / m2;
-                        
-                        if (px < DOMAIN.X_MIN || px > DOMAIN.X_MAX || 
-                            py < DOMAIN.Y_MIN || py > DOMAIN.Y_MAX) break;
-                        
-                        puntos.push({ x: px, y: py });
-                    }
-                    
+            // Menos líneas donde hay más densidad
+            let factorDensidad = Math.max(0.3, 1.0 / Math.sqrt(densidad));
+            let numLines = Math.floor(8 * Math.abs(c.q) * factorDensidad);
+            numLines = Math.max(3, Math.min(10, numLines));
+            
+            for (let i = 0; i < numLines; i++) {
+                let angulo = (2 * Math.PI * i) / numLines + (c.x * 0.1); // Pequeña variación
+                let startX = c.x + 0.5 * Math.cos(angulo);
+                let startY = c.y + 0.5 * Math.sin(angulo);
+                
+                let direccion = c.q > 0 ? 1 : -1;
+                let puntos = traceFieldLine(startX, startY, direccion, 0.15, 150);
+                
+                if (puntos.length > 3) {
                     // Dibujar la línea
-                    if (puntos.length > 1) {
-                        ctx.beginPath();
-                        let start = worldToScreen(x, y);
-                        ctx.moveTo(start.X, start.Y);
+                    ctx.beginPath();
+                    let start = worldToScreen(startX, startY);
+                    ctx.moveTo(start.X, start.Y);
+                    
+                    for (let p of puntos) {
+                        let s = worldToScreen(p.x, p.y);
+                        ctx.lineTo(s.X, s.Y);
+                    }
+                    ctx.stroke();
+                    
+                    // AÑADIR FLECHA EN EL MEDIO
+                    if (puntos.length > 10) {
+                        let idx = Math.floor(puntos.length / 2);
+                        let p = puntos[idx];
                         
-                        for (let p of puntos) {
-                            let s = worldToScreen(p.x, p.y);
-                            ctx.lineTo(s.X, s.Y);
-                        }
-                        ctx.stroke();
-                        
-                        // Añadir flecha < > en la dirección
-                        if (puntos.length > 5) {
-                            let idx = Math.floor(puntos.length / 2);
-                            let p1 = puntos[idx-1];
-                            let p2 = puntos[idx];
+                        let f = field(p.x, p.y);
+                        let m = Math.hypot(f.vx, f.vy);
+                        if (m > 0.01) {
+                            let dirX = f.vx / m;
+                            let dirY = f.vy / m;
                             
-                            if (p1 && p2) {
-                                let s1 = worldToScreen(p1.x, p1.y);
-                                let s2 = worldToScreen(p2.x, p2.y);
-                                
-                                // Vector dirección
-                                let dx = s2.X - s1.X;
-                                let dy = s2.Y - s1.Y;
-                                let len = Math.hypot(dx, dy);
-                                let angulo = Math.atan2(dy, dx);
-                                
-                                if (len > 5) {
-                                    ctx.save();
-                                    ctx.translate(s2.X, s2.Y);
-                                    ctx.rotate(angulo);
-                                    
-                                    // Dibujar símbolo <
-                                    ctx.font = "20px Arial";
-                                    ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
-                                    ctx.textAlign = "center";
-                                    ctx.textBaseline = "middle";
-                                    ctx.fillText(">", 0, 0);
-                                    
-                                    ctx.restore();
-                                }
-                            }
+                            let s = worldToScreen(p.x, p.y);
+                            let anguloFlecha = Math.atan2(dirY, dirX);
+                            
+                            ctx.save();
+                            ctx.translate(s.X, s.Y);
+                            ctx.rotate(anguloFlecha);
+                            
+                            ctx.font = "14px Arial";
+                            ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+                            ctx.textAlign = "center";
+                            ctx.textBaseline = "middle";
+                            ctx.fillText("▶", 0, 0);
+                            
+                            ctx.restore();
                         }
                     }
                 }
             }
         }
     }
-}
     
-    // Vectores campo
+    // VECTORES DE CAMPO - PROPORCIONALES AL MÓDULO Y COLOREADOS SEGÚN ESCALA
     if (ui.showField.checked) {
-        let spacing = 40;
+        let spacing = 45;
+        
         for (let i = spacing/2; i < canvas.width; i += spacing) {
             for (let j = spacing/2; j < canvas.height; j += spacing) {
                 let w = screenToWorld(i, j);
                 if (w.x >= DOMAIN.X_MIN && w.x <= DOMAIN.X_MAX && 
                     w.y >= DOMAIN.Y_MIN && w.y <= DOMAIN.Y_MAX) {
-                    let f = field(w.x, w.y);
-                    let m = Math.hypot(f.vx, f.vy);
-                    if (m < 0.01) continue;
                     
-                    let L = (8 + 15 * Math.tanh(0.15 * m)) * 1.5;
-                    let ux = f.vx / m, uy = f.vy / m;
-                    let t = Math.min(1, m / CONFIG.FIELD_MAX);
-                    ctx.strokeStyle = `rgb(${255*t},0,${255*(1-t)})`;
-                    ctx.fillStyle = ctx.strokeStyle;
+                    // Evitar zonas muy cerca de las cargas
+                    let cercaDeCarga = false;
+                    let distanciaMinima = 1.2;
                     
-                    ctx.beginPath();
-                    ctx.moveTo(i, j);
-                    ctx.lineTo(i + L*ux, j + L*uy);
-                    ctx.stroke();
+                    for (let c of charges) {
+                        if (Math.hypot(w.x - c.x, w.y - c.y) < distanciaMinima) {
+                            cercaDeCarga = true;
+                            break;
+                        }
+                    }
+                    if (!cercaDeCarga) {
+                        for (let c of mobileCharges) {
+                            if (Math.hypot(w.x - c.x, w.y - c.y) < distanciaMinima) {
+                                cercaDeCarga = true;
+                                break;
+                            }
+                        }
+                    }
                     
-                    let tipX = i + L*ux, tipY = j + L*uy;
-                    let arrowSize = 7 * 1.5;
-                    ctx.beginPath();
-                    ctx.moveTo(tipX, tipY);
-                    ctx.lineTo(tipX - arrowSize*(ux*0.866 - uy*0.5), 
-                              tipY - arrowSize*(uy*0.866 + ux*0.5));
-                    ctx.lineTo(tipX - arrowSize*(ux*0.866 + uy*0.5), 
-                              tipY - arrowSize*(uy*0.866 - ux*0.5));
-                    ctx.closePath();
-                    ctx.fill();
+                    if (!cercaDeCarga) {
+                        let f = field(w.x, w.y);
+                        let m = Math.hypot(f.vx, f.vy);
+                        if (m < 0.02) continue;
+                        
+                        // Normalizar el módulo para color y longitud
+                        let t = Math.min(1, m / CONFIG.FIELD_MAX);
+                        
+                        // --- COLOR IDÉNTICO AL DE LA BARRA ---
+                        // EN LA BARRA: t=1 arriba (rojo), t=0 abajo (azul)
+                        // PERO en la barra se invierte con: let t = 1 - i / barHeight;
+                        // Para que coincida visualmente, usamos la misma relación:
+                        // rojo intenso para valores altos, azul para valores bajos
+                        let red = Math.floor(255 * t);
+                        let blue = Math.floor(255 * (1 - t));
+                        let green = 80; // Mantenemos el verde para visibilidad
+                        
+                        // Longitud proporcional a la intensidad
+                        let L = 15 + 30 * t;
+                        
+                        let ux = f.vx / m, uy = f.vy / m;
+                        
+                        // Dibujar la línea del vector
+                        ctx.strokeStyle = `rgb(${red}, ${green}, ${blue})`;
+                        ctx.lineWidth = 2.0;
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(i, j);
+                        ctx.lineTo(i + L*ux, j + L*uy);
+                        ctx.stroke();
+                        
+                        // Punta de flecha del mismo color
+                        let tipX = i + L*ux, tipY = j + L*uy;
+                        let arrowSize = 8 + 4 * t;
+                        
+                        ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+                        ctx.beginPath();
+                        ctx.moveTo(tipX, tipY);
+                        ctx.lineTo(tipX - arrowSize*(ux*0.866 - uy*0.5), 
+                                tipY - arrowSize*(uy*0.866 + ux*0.5));
+                        ctx.lineTo(tipX - arrowSize*(ux*0.866 + uy*0.5), 
+                                tipY - arrowSize*(uy*0.866 - ux*0.5));
+                        ctx.closePath();
+                        ctx.fill();
+                    }
                 }
             }
         }
@@ -782,46 +839,25 @@ if (ui.showFieldLines.checked) {
             if (c.trail.length < 2) continue;
             ctx.strokeStyle = c.q > 0 ? "#ffaa6b" : "#9f6bff";
             ctx.lineWidth = 1.5;
-            ctx.globalAlpha = 0.5;
+            ctx.globalAlpha = 0.4;
             ctx.beginPath();
             
-            let puntosValidos = [];
             for (let i = 0; i < c.trail.length; i++) {
-                let p = c.trail[i];
-                if (i > 0) {
-                    let dist = Math.hypot(p.x - c.trail[i-1].x, p.y - c.trail[i-1].y);
-                    if (dist < 5) {
-                        puntosValidos.push(p);
-                    } else {
-                        if (puntosValidos.length > 1) {
-                            ctx.stroke();
-                        }
-                        puntosValidos = [p];
-                    }
-                } else {
-                    puntosValidos.push(p);
-                }
+                let s = worldToScreen(c.trail[i].x, c.trail[i].y);
+                if (i === 0) ctx.moveTo(s.X, s.Y);
+                else ctx.lineTo(s.X, s.Y);
             }
-            
-            if (puntosValidos.length > 1) {
-                ctx.beginPath();
-                for (let i = 0; i < puntosValidos.length; i++) {
-                    let s = worldToScreen(puntosValidos[i].x, puntosValidos[i].y);
-                    if (i === 0) ctx.moveTo(s.X, s.Y);
-                    else ctx.lineTo(s.X, s.Y);
-                }
-                ctx.stroke();
-            }
+            ctx.stroke();
             ctx.globalAlpha = 1;
         }
     }
     
-    // Cargas fijas con símbolos
+    // Cargas fijas
     for (let c of charges) {
         drawCharge(c.x, c.y, c.q, false);
     }
     
-    // Cargas móviles con símbolos
+    // Cargas móviles
     for (let c of mobileCharges) {
         drawCharge(c.x, c.y, c.q, true);
     }
@@ -875,24 +911,47 @@ if (ui.showFieldLines.checked) {
         }
     }
     
-    // Escala
-    let x = canvas.width - 40, y0 = 80, h = 150;
-    ctx.fillStyle = "rgba(0,0,0,0.7)";
-    ctx.fillRect(x - 8, y0 - 10, 30, h + 20);
-    
-    for (let i = 0; i < h; i++) {
-        let t = i / h;
-        let E = (1 - t) * CONFIG.FIELD_MAX;
-        ctx.strokeStyle = `rgb(${255*t},0,${255*(1-t)})`;
-        ctx.beginPath();
-        ctx.moveTo(x, y0 + i);
-        ctx.lineTo(x + 15, y0 + i);
-        ctx.stroke();
+    // --- BARRA DE COLOR QUE MUESTRA LA ESCALA USADA ---
+    let barX = canvas.width - 50;
+    let barY = 80;
+    let barWidth = 25;
+    let barHeight = 200;
+
+    // Fondo de la barra
+    ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+    ctx.fillRect(barX - 5, barY - 5, barWidth + 10, barHeight + 10);
+    ctx.strokeStyle = "#4CAF50";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(barX - 5, barY - 5, barWidth + 10, barHeight + 10);
+
+    // Dibujar gradiente de color (exactamente el mismo que usan los vectores)
+    for (let i = 0; i < barHeight; i++) {
+        let t = 1 - i / barHeight; // t=1 arriba (máximo), t=0 abajo (mínimo)
+        let red = Math.floor(255 * t);
+        let blue = Math.floor(255 * (1 - t));
+        let green = 80;
+        
+        ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+        ctx.fillRect(barX, barY + i, barWidth, 1);
     }
-    
+
+    // Etiquetas
     ctx.fillStyle = "white";
-    ctx.font = "10px sans-serif";
-    ctx.fillText("E", x - 6, y0 - 5);
+    ctx.font = "bold 12px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("E", barX + barWidth/2, barY - 10);
+
+    ctx.font = "10px Arial";
+    ctx.textAlign = "right";
+    ctx.fillText(CONFIG.FIELD_MAX.toFixed(1), barX - 8, barY + 5);
+    ctx.fillText("0", barX - 8, barY + barHeight - 5);
+
+    // Indicadores
+    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+    ctx.font = "9px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("intenso", barX + barWidth/2, barY - 25);
+    ctx.fillText("débil", barX + barWidth/2, barY + barHeight + 15);
 }
 
 // --- FUNCIÓN AUXILIAR PARA DISTANCIA ENTRE DOS DEDOS ---
@@ -964,7 +1023,7 @@ function handleTouchMove(e) {
         let touch2 = e.touches[1];
         
         let currentDistance = getTouchDistance(touch1, touch2);
-        let zoomFactor = initialDistance / currentDistance;  // Invertido
+        let zoomFactor = initialDistance / currentDistance;
         
         let newZoom = initialZoom * zoomFactor;
         newZoom = Math.max(CONFIG.ZOOM_MIN, Math.min(CONFIG.ZOOM_MAX, newZoom));
@@ -1033,7 +1092,6 @@ function handleTouchEnd(e) {
         let w = screenToWorld(touchStart.x - rect.left, touchStart.y - rect.top);
         w = applyCyclic(w.x, w.y);
         
-        // SIEMPRE AGREGAR SEGÚN EL MODO, SIN COMPROBAR ELIMINACIÓN
         switch (currentMode) {
             case MODE.ADD_FIXED:
                 let pol = document.querySelector('input[name="pol"]:checked').value;
@@ -1065,6 +1123,7 @@ function handleTouchEnd(e) {
     
     touchStart = null;
 }
+
 // --- MANEJADORES RATÓN ---
 function handleMouseDown(e) {
     let rect = canvas.getBoundingClientRect();
@@ -1117,7 +1176,6 @@ function handleMouseUp(e) {
         let w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
         w = applyCyclic(w.x, w.y);
         
-        // SIEMPRE AGREGAR SEGÚN EL MODO, SIN COMPROBAR ELIMINACIÓN
         switch (currentMode) {
             case MODE.ADD_FIXED:
                 let pol = document.querySelector('input[name="pol"]:checked').value;
@@ -1149,6 +1207,7 @@ function handleMouseUp(e) {
     
     touchStart = null;
 }
+
 function handleWheel(e) {
     e.preventDefault();
     let rect = canvas.getBoundingClientRect();
