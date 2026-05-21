@@ -48,7 +48,8 @@ const chileanCities = {
   "Osorno":           { lat: -40.5739, lon: -73.1310, region: "X Región",   altitude: 65, weatherCamera: "" },
   "Puerto Montt":     { lat: -41.4689, lon: -72.9411, region: "X Región",   altitude: 85, weatherCamera: "" },
   "Quellón":          { lat: -43.1181, lon: -73.6167, region: "X Región",   altitude: 5, weatherCamera: "" },
-  "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34, weatherCamera: "" },
+  "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34, 
+  weatherCamera: "https://www.youtube.com/watch?v=1xN2SQ-afro" },
 
   /* === OBSERVATORIOS ASTRONÓMICOS === */
   "Observatorio Paranal": {
@@ -112,7 +113,7 @@ const chileanCities = {
     type: "observatory",
     operator: "Internacional",
     altitude: 5058,
-    weatherCamera: "https://www.eso.org/public/chile/outreach/webcams/?lang#alma"
+    weatherCamera: "https://www.youtube.com/live/Zdy0AxaVYvI?si=Z75ZVJl25uWpFeN7"
   },
   "Observatorio Cerro Pachón": {
     lat: -30.2389,

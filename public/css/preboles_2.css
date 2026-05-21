@@ -930,7 +930,10 @@ canvas {
 }
 
 @media (max-width: 480px) {
-  #cityMenu { grid-template-columns: repeat(2, 1fr); }
+  #cityMenu { 
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  }
+  
   .container, .tabs-container { padding: 10px; }
   .panel { padding: 10px; }
   h1 { font-size: 1.2rem; }
@@ -948,7 +951,7 @@ canvas {
   .probability span { font-size: 28px; }
   
   #satelliteImage { max-height: 200px; }
-  .map-wrapper { height: 550px !important; } /* AUMENTADO */
+  .map-wrapper { height: 550px !important; }
   
   .probability-legend {
     min-width: 200px;
@@ -1009,6 +1012,15 @@ canvas {
     font-size: 15px !important; 
     margin: 0 4px !important;
   }
+
+  #observatoryMenu {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .city-card { padding: 12px 6px;}
+  .city-name { font-size: 0.85rem; }
+  .city-region { font-size: 0.7rem; }
+
 }
 
 /* ==========================================================================
