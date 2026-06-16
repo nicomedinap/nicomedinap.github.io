@@ -28,6 +28,7 @@ const chileanCities = {
   "Rancagua":         { lat: -34.1701, lon: -70.7406, region: "VI Región",  altitude: 572, weatherCamera: "" },
   "Pichilemu":        { lat: -34.3878, lon: -72.0042, region: "VI Región", altitude: 27, weatherCamera: "" },
   "Peumo":            { lat: -34.3958, lon: -71.1647, region: "VI Región", altitude: 172, weatherCamera: "" },
+  "San Vicente de Tagua Tagua": { lat: -34.43859, lon: -71.07751, region: "VI Región",  altitude: 206, weatherCamera: "" }, 
   "San Fernando":     { lat: -34.5867, lon: -70.9911, region: "VI Región", altitude: 340, weatherCamera: "" },
   "Chimbarongo":      { lat: -34.7089, lon: -71.0458, region: "VI Región", altitude: 307, weatherCamera: "" },
   "Santa Cruz":       { lat: -34.6388, lon: -71.3658, region: "VI Región", altitude: 196, weatherCamera: "" },
