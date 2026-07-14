@@ -493,7 +493,7 @@ p.lead {
    ============================================================================ */
 .data-grid {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px !important;
   width: 100% !important;
 }
