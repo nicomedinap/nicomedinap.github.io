@@ -4,6 +4,7 @@ const chileanCities = {
   "Iquique":          { lat: -20.2146, lon: -70.1524, region: "I Región",   altitude: 56, weatherCamera: "" },
   "Antofagasta":      { lat: -23.6509, lon: -70.3975, region: "II Región",  altitude: 40, weatherCamera: "" },
   "Calama":           { lat: -22.4544, lon: -68.9294, region: "II Región",  altitude: 2260, weatherCamera: "" },
+  "Rapa Nui":         { lat: -27.1212, lon: -109.3664, region: "Región de Valparaíso", altitude: 69, weatherCamera: "https://www.youtube.com/watch?v=Tjonty9k2gc" },
   "Copiapó":          { lat: -27.3667, lon: -70.3333, region: "III Región", altitude: 390, weatherCamera: "" },
   "Vallenar":         { lat: -28.5708, lon: -70.7581, region: "III Región", altitude: 380, weatherCamera: "https://www.youtube.com/watch?v=kzk4Diie67Q" },
   "La Serena":        { lat: -29.9027, lon: -71.2519, region: "IV Región",  altitude: 28, weatherCamera: "https://www.youtube.com/watch?v=M_mW4LlmZzo" },
