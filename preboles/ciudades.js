@@ -28,7 +28,7 @@ const chileanCities = {
   "Pichilemu":        { lat: -34.3878, lon: -72.0042, region: "VI Región", altitude: 27, weatherCamera: "https://www.youtube.com/watch?v=_VqoObfHFgk" },
   "Peumo":            { lat: -34.3958, lon: -71.1647, region: "VI Región", altitude: 172, weatherCamera: "" },
   "San Vicente de Tagua Tagua": { lat: -34.43859, lon: -71.07751, region: "VI Región",  altitude: 206, weatherCamera: "" }, 
-  "San Fernando":     { lat: -34.5867, lon: -70.9911, region: "VI Región", altitude: 340, weatherCamera: "" },
+  "San Fernando":     { lat: -34.5867, lon: -70.9911, region: "VI Región", altitude: 340, weatherCamera: "https://www.youtube.com/watch?v=1Oa-sQ0fzwk" },
   "Chimbarongo":      { lat: -34.7089, lon: -71.0458, region: "VI Región", altitude: 307, weatherCamera: "" },
   "Santa Cruz":       { lat: -34.6388, lon: -71.3658, region: "VI Región", altitude: 196, weatherCamera: "" },
   "Talca":            { lat: -35.4264, lon: -71.6554, region: "VII Región", altitude: 102, weatherCamera: "" },
@@ -49,6 +49,18 @@ const chileanCities = {
   "Puerto Montt":     { lat: -41.4689, lon: -72.9411, region: "X Región",   altitude: 85, weatherCamera: "" },
   "Quellón":          { lat: -43.1181, lon: -73.6167, region: "X Región",   altitude: 5, weatherCamera: "" },
   "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34, weatherCamera: "https://www.youtube.com/watch?v=1xN2SQ-afro" },
+  "Buenos Aires": { lat: -34.6037, lon: -58.3816, region: "Argentina", altitude: 25, weatherCamera: "" },
+  "Montevideo": { lat: -34.9011, lon: -56.1645, region: "Uruguay", altitude: 43, weatherCamera: "" },
+  "Asunción": { lat: -25.2637, lon: -57.5759, region: "Paraguay", altitude: 43, weatherCamera: "" },
+  "La Paz": { lat: -16.4897, lon: -68.1193, region: "Bolivia", altitude: 3640, weatherCamera: "" },
+  "Lima": { lat: -12.0464, lon: -77.0428, region: "Perú", altitude: 154, weatherCamera: "" },
+  "Quito": { lat: -0.1807, lon: -78.4678, region: "Ecuador", altitude: 2850, weatherCamera: "" },
+  "Bogotá": { lat: 4.7110, lon: -74.0721, region: "Colombia", altitude: 2640, weatherCamera: "" },
+  "Caracas": { lat: 10.4806, lon: -66.9036, region: "Venezuela", altitude: 900, weatherCamera: "" },
+  "Brasilia": { lat: -15.7939, lon: -47.8828, region: "Brasil", altitude: 1172, weatherCamera: "" },
+  "Ciudad de México": { lat: 19.4326, lon: -99.1332, region: "México", altitude: 2240, weatherCamera: "" },
+  "Washington D.C.": { lat: 38.9072, lon: -77.0369, region: "Estados Unidos", altitude: 7, weatherCamera: "" },
+  "Ottawa": { lat: 45.4215, lon: -75.6972, region: "Canadá", altitude: 70, weatherCamera: "" },
 
   /* === OBSERVATORIOS ASTRONÓMICOS === */
   "Observatorio Paranal": {
