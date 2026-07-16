@@ -101,7 +101,7 @@ const chileanCities = {
   "Sídney": { lat: -33.8688, lon: 151.2093, region: "Australia", altitude: 58, weatherCamera: "" },
   "Auckland": { lat: -36.8509, lon: 174.7645, region: "Nueva Zelanda", altitude: 43, weatherCamera: "" },
   "Wellington": { lat: -41.2866, lon: 174.7756, region: "Nueva Zelanda", altitude: 25, weatherCamera: "" },
-
+  "Calgary": {lat: 51.0447,lon: -114.0719,region: "Alberta, Canadá",altitude: 1045,weatherCamera: ""},
   /* === OBSERVATORIOS ASTRONÓMICOS === */
   "Observatorio Paranal": {
     lat: -24.6270,
