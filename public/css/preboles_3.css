@@ -22,6 +22,7 @@
 
 html, body {
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden; /* evita scroll horizontal si algo se desborda por error */
 }
 
@@ -189,22 +190,31 @@ h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 8px; }
    ============================================================================ */
 .prediction-toggle {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   justify-content: center;
   margin: 6px 0;
 }
 .prediction-toggle button {
-  padding: 6px 15px;
+  padding: 5px 12px;
   border-radius: 25px;
   border: none;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.08);
   color: white;
+  line-height: 1.5;
+  font-size: 0.85rem;
+  min-height: 0;
   transition: all 0.2s ease;
 }
 .prediction-toggle button.active {
   background: #ff6b35;
   color: white;
+}
+@media (max-width: 480px) {
+  .prediction-toggle button {
+    padding: 4px 10px;
+    font-size: 0.78rem;
+  }
 }
 
 /* Botones toggle genéricos (ej. "Ver contribuciones" / "Ver incerteza") */
@@ -237,18 +247,6 @@ h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 8px; }
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   padding: 8px 15px;
-}
-
-/* Observatorios: una sola columna, porque comparte la mitad del
-   ancho con el mapa (.observatories-grid es 1fr 1fr). Con scroll
-   propio si la lista es más larga que el alto disponible. */
-#observatoryMenu {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  padding: 8px 10px 8px 0;
-  overflow-y: auto;
-  max-height: 100%;
 }
 
 .city-card {
@@ -480,6 +478,7 @@ button.back {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
+/* Override específico para p.lead: más compacto y sin fondo/blur del lead genérico */
 p.lead {
   margin: 0 0 8px;
   padding: 12px 20px;
@@ -494,7 +493,8 @@ p.lead {
 .data-grid {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px !important;
+  gap: 6px !important;
+  margin-top: 6px !important;
   width: 100% !important;
 }
 
@@ -510,7 +510,7 @@ p.lead {
   gap: 8px;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin: 6px 0;
+  margin: 3px 0;
 }
 
 .sun-time {
@@ -518,6 +518,13 @@ p.lead {
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 0.95rem;
+}
+
+.sun-time-clouds {
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.85;
+  margin-top: 3px;
 }
 
 /* ============================================================================
@@ -548,6 +555,12 @@ p.lead {
 .high-prob   { background: rgba(255, 204, 0, 0.18); color: #ffd24d; }
 .medium-prob { background: rgba(255, 153, 102, 0.12); color: #ffb07a; }
 .low-prob    { background: rgba(204, 102, 51, 0.12); color: #e09b79; }
+
+.probability .mc-percent {
+  font-size: 2.2rem !important;
+  font-weight: bold;
+  line-height: 1.1;
+}
 
 #result { min-height: 0px; }
 #log {
@@ -599,6 +612,35 @@ p.lead {
   transform: translateX(-50%);
 }
 
+.mc-grid {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 15px;
+  margin-top: 6px;
+  width: 100%;
+}
+.mc-box {
+  min-width: 0;
+  padding: 15px;
+  border-radius: 12px;
+}
+.mc-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  width: 100%;
+}
+.mc-unc { opacity: 0.7; }
+
+@media (max-width: 600px) {
+  .probability .mc-percent { font-size: 1.6rem !important; }
+  .mc-grid { gap: 8px; }
+  .mc-box { padding: 10px; }
+}
+
 /* ============================================================================
    CONTROLES Y FORMULARIOS
    ============================================================================ */
@@ -646,6 +688,84 @@ button {
 .map-toggle.active { background: #4CAF50; }
 
 /* ============================================================================
+   DÍA SELECTOR
+   ============================================================================ */
+.day-selector {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr)); /* minmax(0,..): permite que la columna se achique de verdad */
+  gap: 3px;
+  margin: 6px 0 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* Especificidad #daySelector .day-btn (id + clase) para ganarle a
+   cualquier regla tipo ".tabs-container button" del CSS externo, que
+   tiene más especificidad que un simple ".day-btn" y por eso el padding
+   no se aplicaba antes. */
+#daySelector.day-selector .day-btn {
+  min-width: 2px !important;   /* clave: sin esto el botón nunca se achica más que su texto */
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  padding: 0 2px !important;
+  height: 35px !important;
+  min-height: 0 !important;
+  max-height: 35px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  background: rgba(255,255,255,0.05) !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  line-height: 1 !important;
+  font-family: inherit !important;
+  transition: background 0.15s ease;
+}
+#daySelector.day-selector .day-btn:hover { background: rgba(255,255,255,0.12) !important; }
+#daySelector.day-selector .day-btn.active {
+  background: linear-gradient(135deg, #ff6600, #ff9800) !important;
+  border-color: transparent !important;
+  font-weight: 600 !important;
+}
+
+.day-btn-top {
+  font-size: 0.5rem;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  opacity: 0.85;
+}
+.day-btn-bottom {
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.day-selector--locked {
+  opacity: 0.5;
+  pointer-events: none;   /* refuerzo visual/táctil: ni el hover responde */
+}
+.day-selector--locked .day-btn.active::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: dayBtnPulse 0.9s ease-in-out infinite;
+}
+@keyframes dayBtnPulse {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
+
+/* ============================================================================
    GRÁFICOS
    ============================================================================ */
 .charts {
@@ -685,6 +805,16 @@ canvas {
   order: 1;
 }
 
+.irr-cell {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.irr-cell .subline {
+  display: block;
+  font-size: 0.62rem;
+  opacity: 0.6;
+}
+
 /* ============================================================================
    MAPA Y LEYENDA
    ============================================================================ */
@@ -709,16 +839,6 @@ canvas {
   margin-top: 8px;
   height: calc(100vh - 120px);
   min-height: 700px;
-}
-
-@media (max-width: 1024px) {
-  .observatories-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    height: calc(100vh - 120px);
-    min-height: 700px;
-  }
 }
 
 .map-controls {
@@ -1079,6 +1199,62 @@ canvas {
 }
 .footer nav a.fa:hover { transform: scale(1.2); }
 
+.trebol-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.arrebol-percent {
+  position: absolute;
+  bottom: -0.85em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #f5f5f5;
+  -webkit-text-fill-color: #f5f5f5; /* rompe la herencia de transparent que viene de .title */
+  background: none; /* por si acaso hereda algún background-clip */
+  opacity: 0.9;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); /* un poco de contraste extra sobre el fondo */
+}
+
+.prediction-panel {
+  position: relative;
+}
+
+/* --- Red de seguridad: evita que nada se salga del ancho de pantalla --- */
+.tabs-container, .container, .main-grid, .panel,
+.prediction-panel, .map-panel, .chart-panel, .log-panel {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+#map, .map-wrapper, .charts, #cloudChart,
+img, iframe, table {
+  max-width: 100%;
+}
+.data-grid, .predictions, .location-header-row {
+  max-width: 100%;
+}
+
+.location-header-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 8px;
+  min-width: 0;
+}
+.location-header-row > div:first-child {
+  min-width: 0;
+}
+.location-header-row .weather-camera-btn {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+}
+
 /* ============================================================================
    MEDIA QUERIES — RESPONSIVE
    ============================================================================ */
@@ -1121,9 +1297,7 @@ canvas {
     grid-template-columns: repeat(3, 1fr); /* menos espacio: baja a 3 columnas */
     gap: 12px;
     padding: 15px 10px;
-  }  
-  .city-card { padding: 8px 6px; }
-  .city-region { font-size: 0.55rem; }
+  }
 
   .container, .tabs-container { padding: 12px; }
   .grid { grid-template-columns: 1fr; gap: 12px; }
@@ -1170,6 +1344,75 @@ canvas {
   .footer p { font-size: 13px !important; }
   .footer nav a { font-size: 13px !important; }
   .footer nav a.fa { font-size: 16px !important; margin: 0 5px !important; }
+
+  .main-grid { display: block !important; } /* fuerza apilado, sea grid o flex */
+  .main-grid > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 16px;
+  }
+  .predictions { grid-template-columns: 1fr !important; } /* amanecer y atardecer apilados */
+  .predictions span[style*="2.5rem"],
+  .predictions [style*="font-size:2.5rem"] {
+    font-size: 1.8rem !important;
+  }
+  pre#log {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* Tarjetas de ciudades/observatorios: layout compacto para mobile.
+     El tamaño de .probability-big/.probability-value ya NO se fija aquí:
+     se calcula por tarjeta en JS (ver _probabilityFontSize en
+     test_tarjetas.js), este bloque solo deja un tope máximo de
+     seguridad para el estado inicial ("--"). */
+  .city-card {
+    padding: 6px 8px;
+    min-height: 0;
+  }
+  .card-header {
+    margin-bottom: 1px;
+  }
+  .probability-big {
+    max-height: 1.3rem;
+    line-height: 1.1;
+  }
+  .probability-uncertainty {
+    font-size: 0.58rem;
+    line-height: 1;
+  }
+  .city-region {
+    font-size: 0.6rem;
+    line-height: 1.1;
+  }
+  .city-name-row {
+    margin: 0;
+  }
+  .city-name,
+  .city-name--lg,
+  .city-name--md,
+  .city-name--sm,
+  .city-name--xs {
+    font-size: 0.76rem;
+    line-height: 1.1;
+  }
+  .card-meta {
+    margin-top: 1px;
+    gap: 0;
+  }
+  .meta-row,
+  .time-row,
+  .visibility-row {
+    font-size: 0.63rem;
+    line-height: 1.15;
+  }
+  .probability-bar {
+    height: 2px;
+    margin-top: 2px;
+  }
+  .webcam-link {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1207,28 +1450,34 @@ canvas {
 
   .city-card { padding: 6px 4px; }
   .city-region { font-size: 0.5rem; }
+
+  .location-header-row { grid-template-columns: 1fr; }
+  .location-header-row .weather-camera-btn { justify-self: start; margin-top: 6px; }
 }
 
-@media (max-width: 350px) { #cityMenu, #observatoryMenu {grid-template-columns: repeat(2, 1fr); }}
+@media (max-width: 400px) {
+  .day-btn-top    { font-size: 0.58rem; }
+  .day-btn-bottom { font-size: 0.75rem; }
 
-.trebol-wrap {
-  position: relative;
-  display: inline-block;
+  .probability .mc-percent { font-size: 1.3rem !important; }
+
+  .city-card {
+    padding: 5px 7px;
+  }
+  .city-name,
+  .city-name--lg,
+  .city-name--md,
+  .city-name--sm,
+  .city-name--xs {
+    font-size: 0.7rem;
+  }
+  .meta-row,
+  .time-row,
+  .visibility-row {
+    font-size: 0.58rem;
+  }
 }
 
-.arrebol-percent {
-  position: absolute;
-  bottom: -0.85em;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: #f5f5f5;
-  -webkit-text-fill-color: #f5f5f5; /* rompe la herencia de transparent que viene de .title */
-  background: none; /* por si acaso hereda algún background-clip */
-  opacity: 0.9;
-  font-variant-numeric: tabular-nums;
-  pointer-events: none;
-  white-space: nowrap;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); /* un poco de contraste extra sobre el fondo */
+@media (max-width: 350px) {
+  #cityMenu, #observatoryMenu { grid-template-columns: repeat(2, 1fr); }
 }
