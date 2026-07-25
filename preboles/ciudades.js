@@ -2,6 +2,7 @@
 const chileanCities = {
   "Arica":            { lat: -18.4783, lon: -70.3126, region: "XV Región",  altitude: 30, weatherCamera: "" },
   "Iquique":          { lat: -20.2146, lon: -70.1524, region: "I Región",   altitude: 56, weatherCamera: "" },
+  "Mejillones":       { lat: -23.0965, lon: -70.4486, region: "II Región", altitude: 32, weatherCamera: "https://www.youtube.com/watch?v=OMms0kfRW7Q" },
   "Antofagasta":      { lat: -23.6509, lon: -70.3975, region: "II Región",  altitude: 40, weatherCamera: "" },
   "Calama":           { lat: -22.4544, lon: -68.9294, region: "II Región",  altitude: 2260, weatherCamera: "" },
   "Rapa Nui":         { lat: -27.1212, lon: -109.366, region: "V Región", altitude: 69, weatherCamera: "https://www.youtube.com/watch?v=Tjonty9k2gc" },
