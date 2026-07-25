@@ -71,7 +71,6 @@ layout: none
     <div class="subtitle">
       <span class="gradient-text">PRE</span>dictor de arre<span class="gradient-text">BOLES</span>
     </div>
-    <div class="luck-subtitle">Prueba tu suerte</div>
   </div>
   
   <div id="loadingIndicator" style="text-align:center; padding:20px;">
@@ -323,8 +322,8 @@ layout: none
   <script src="https://nicomedinap.github.io/preboles/redProbability.js"></script>
 
   <!-- UI -->
-  <script src="https://nicomedinap.github.io/preboles/test_tarjetas.js"></script>
-  <script src="https://nicomedinap.github.io/preboles/test_navegacion.js"></script>
+  <script src="https://nicomedinap.github.io/preboles/tarjetas.js"></script>
+  <script src="https://nicomedinap.github.io/preboles/navegacion.js"></script>
 
   <!-- Datos -->
   <script src="https://nicomedinap.github.io/preboles/ciudades.js"></script>
