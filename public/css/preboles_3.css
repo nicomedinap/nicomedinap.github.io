@@ -94,7 +94,7 @@ body {
 }
 
 .title {
-  font: 900 5rem 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font: 900 4rem 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(90deg, #FF5F00, #FF2D95, #FF0000);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
