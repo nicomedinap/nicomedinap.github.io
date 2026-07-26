@@ -50,7 +50,7 @@ const chileanCities = {
   "Puerto Montt":     { lat: -41.4689, lon: -72.9411, region: "X Región",   altitude: 85, weatherCamera: "" },
   "Quellón":          { lat: -43.1181, lon: -73.6167, region: "X Región",   altitude: 5, weatherCamera: "" },
   "Punta Arenas":     { lat: -53.1638, lon: -70.9171, region: "XII Región", altitude: 34, weatherCamera: "https://www.youtube.com/watch?v=1xN2SQ-afro" },
-
+  "Puerto Williams":  { lat: -54.9336, lon: -67.6143, region: "XII Región", altitude: 18, weatherCamera: "https://www.youtube.com/watch?v=IOmiUDI2wBU" },
   /* === OBSERVATORIOS ASTRONÓMICOS === */
   "Observatorio Paranal": {
     lat: -24.6270,
