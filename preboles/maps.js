@@ -274,10 +274,7 @@
        Calculo espacial del grid
        ========================================================================== */
  
-    // Ya no calcula nada por su cuenta: delega en computeCityPrediction, el
-    // mismo cálculo que usan las tarjetas, la vista detallada y el background.
-    // Así el hexágono sobre la ciudad siempre coincide con el porcentaje
-    // mostrado en el resto del sitio.
+    // Ya no calcula nada por su cuenta: delega en computeCityPrediction
     async function computeProbabilityFromData(weatherData, lat, lon, altitude = 0) {
         const result = await window.computeCityPrediction(lat, lon, { altitude }); // sin Monte Carlo, rápido para el grid
         if (!result) return { sunrise: 0, sunset: 0 };

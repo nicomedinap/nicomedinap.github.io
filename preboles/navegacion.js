@@ -88,11 +88,7 @@
       localStorage.removeItem('locationType');
 
       // Si el día cambió mientras estábamos viendo una ciudad, las
-      // tarjetas del menú de Ciudades quedaron desactualizadas: se
-      // refrescan recién ahora, al volver (no antes, para no recalcular
-      // ciudades que no se estaban mostrando).
-      // Nota: la pestaña Observatorios ya se auto-refresca dentro de
-      // switchTab('observatories'), así que no necesita este chequeo.
+      // tarjetas del menú de Ciudades quedaron desactualizadas
       if (origin === 'cities' && _cardsStale.cities && typeof mountCityCardView === 'function') {
         _cardsStale.cities = false;
         mountCityCardView();
@@ -112,10 +108,7 @@
       return timeUtils.getQueryDayOffset ? timeUtils.getQueryDayOffset() : 0;
     }
 
-    // Etiqueta de dos líneas (arriba: "Hoy"/"Mañana"/día de semana, abajo:
-    // número del día). Es deliberadamente corta para que quepa sin
-    // desbordarse en pantallas angostas; la fecha completa queda en el
-    // atributo title (tooltip) para quien pase el mouse o use lector de pantalla.
+    // Etiqueta deliberadamente corta para que quepa 
     function formatDayButtonLabel(offset) {
       const d = new Date();
       d.setDate(d.getDate() + offset);

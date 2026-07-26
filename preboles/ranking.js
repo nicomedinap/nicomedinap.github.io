@@ -49,10 +49,7 @@
         const meteoData = await getMeteoData(cityInfo.lat, cityInfo.lon);
         if (!meteoData.cloudSeries) return null;
 
-        // El ranking siempre es para HOY, sin importar el día elegido en
-        // el selector de fechas (que solo afecta la vista de detalle de
-        // cada ciudad). Por eso se pasa new Date() explícito en vez de
-        // dejar que tome el default de timeUtils.getQueryDate().
+        // El ranking siempre es para HOY, sin importar el día elegido 
         const sunsetResult = timeUtils.getSunsetDataWithInterpolation(
             meteoData, cityInfo.lat, cityInfo.lon, false, cityInfo.altitude ?? 0, new Date()
         );
@@ -62,9 +59,7 @@
 
         // Firma correcta de computeRedProbability: (low, mid, high, elevDeg,
         // isSunrise, temperature, pressure, humidity, dewPoint, shortwave,
-        // uncertaintyData, nSimulations, returnFactors). Antes se pasaban
-        // vientos en los lugares de presión/humedad/irradiancia, y la
-        // irradiancia real (d.shortwave) nunca se usaba.
+        // uncertaintyData, nSimulations, returnFactors)
         const probAtardecer = computeRedProbability(
             d.low,
             d.mid,
@@ -95,10 +90,7 @@
     // RENDER
     // ============================================================================
 
-    // Fecha para la que es válido el ranking (día elegido en el selector,
-    // no la fecha/hora real del sistema como estaba antes).
-    // El ranking siempre es para hoy (ver nota en calculateCityProbability),
-    // así que el label ya no depende del selector de días.
+    // Fecha para la que es válido el ranking 
     function _rankingDateLabel() {
         const dateStr = new Date().toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long' });
         return `${dateStr} (hoy)`;

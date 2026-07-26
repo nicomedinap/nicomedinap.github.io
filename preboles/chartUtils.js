@@ -11,7 +11,6 @@
         // Offset en días (0=hoy, 1=mañana...) en vez de comparar fechas:
         // así el gráfico ubica el bloque de 24h correcto sin depender de
         // que la zona horaria del dispositivo coincida con la de la ciudad
-        // consultada (eso era lo que fallaba en el teléfono).
         const dayOffset = (typeof timeUtils !== 'undefined' && timeUtils.getQueryDayOffset)
             ? timeUtils.getQueryDayOffset()
             : 0;
@@ -327,7 +326,7 @@
     // Preparar datos para gráficos
     // startIndex: desde dónde empieza el bloque de `hours` horas a mostrar.
     // Antes siempre era 0 (o sea, siempre "hoy"); ahora se calcula a partir
-    // del día elegido en el selector (ver updateCharts más arriba).
+    // del día elegido en el selector
     function prepareChartData(cloudSeries, hours = 24, startIndex = 0) {
         if (!cloudSeries?.time) {
             return { hasData: false };

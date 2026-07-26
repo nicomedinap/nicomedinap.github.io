@@ -70,10 +70,8 @@
 
 
     // Tamaño del mensaje de advertencia proporcional al grado de bloqueo
-    // del horizonte (weighted, 0..~0.7 típico). A más probable el bloqueo,
-    // más grande y notorio el texto; a menos probable, más discreto.
     function _visibilityFontSize(weighted) {
-        const CAP = 0.7; // tope de normalización: valores típicos rara vez superan esto
+        const CAP = 0.7; // tope de normalización: valores típicos rara vez superan esto (?)
         const t = Math.max(0, Math.min(1, (weighted ?? 0) / CAP));
 
         const isSmallMobile = window.matchMedia('(max-width: 400px)').matches;
@@ -94,9 +92,6 @@
         return 'Iluminación débil';
     }
 
-    // Devuelve { text, weighted }: weighted es el grado (0..1 aprox.) de
-    // qué tan bloqueado/interferido está el horizonte, según el mismo
-    // factor que ya calcula computeProbability(). Lo usa _visibilityFontSize
     // para hacer el texto más grande cuanto más probable es el bloqueo.
     function getWarningText(prediction) {
         if (!prediction) return { text: '', weighted: 0 };
@@ -106,8 +101,7 @@
         }
         const irrUnc = prediction.factors?.find(f => f.isUncertainty);
         if (irrUnc) {
-            // Mensaje corto: antes incluía "(baja confianza por irradiancia)"
-            // o el detalle en W/m², que sobraba en una tarjeta chica.
+            // o el detalle en W/m²
             return { text: 'MALA VISIBILIDAD', weighted: irrUnc.weighted ?? 0 };
         }
         return { text: '✓ Sin limitaciones importantes', weighted: 0 };
@@ -201,8 +195,7 @@
         return String(raw);
     }
 
-    // Pinta la tarjeta según window.cardPredictionMode. Nunca toca .city-name
-    // ni .city-region — esos ya quedaron fijos al crear la tarjeta.
+    // Pinta la tarjeta según window.cardPredictionMode. 
     function _applyProbabilityToCard(card, probs) {
         const prediction = getMomentPrediction(probs);
         const moment      = getMomentData(probs);
@@ -221,6 +214,7 @@
 
         // Ahora sí hay confidence.std real (Monte Carlo liviano activado
         // arriba), así que mostramos ±1σ con el color de confianza.
+        
         const uncEl = card.querySelector('.probability-uncertainty');
         if (prediction.confidence && Number.isFinite(prediction.std)) {
             uncEl.textContent = `±${Math.round(prediction.std * 100)}%`;

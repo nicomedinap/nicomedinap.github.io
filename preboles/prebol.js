@@ -1,16 +1,5 @@
-    /* ==========================================================================
-   PORCENTAJE DE ROJO REAL — LEÍDO DIRECTAMENTE DEL PIXEL RENDERIZADO
-   ==========================================================================
-   En vez de reimplementar a mano la interpolación de color del gradiente
-   (lo que arrastra errores de aproximación), pintamos el MISMO gradiente
-   en un <canvas> oculto usando createLinearGradient con los mismos colores,
-   posiciones y ángulo que el CSS. El canvas hace la interpolación exacta.
-   Luego, en cada frame, leemos con getImageData el pixel que corresponde
-   al centro del trébol (según el background-position actual) y calculamos
-   su "rojez" real como (R-G) normalizado contra el stop más rojo.
-*/
 (function () {
-  const ANIMATION_DURATION_MS = 16300; // debe calzar con "16s" en @keyframes arrebolShift
+  const ANIMATION_DURATION_MS = 16200; // debe calzar con "16s" en @keyframes arrebolShift
   const GRADIENT_ANGLE_DEG = 290;      // debe calzar con el ángulo del gradiente CSS
   const BG_SIZE_X = 5;                 // background-size: 500% 100% → 5x de ancho
   const SAMPLE_INTERVAL_MS = 80;       // ~12 lecturas/seg, de sobra para un contador de texto
