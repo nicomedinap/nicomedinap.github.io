@@ -5,18 +5,22 @@ layout: none
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="viewport" content="
+  <meta name="description"
+  content="Préboles es un predictor de arreboles que estima la probabilidad de observar un amanecer o atardecer rojo utilizando datos meteorológicos en tiempo real.">width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="keywords"
+  content="arrebol, atardecer, amanecer, cielo rojo, meteorología, Chile, predictor de arreboles">
   <title>Predictor de Arreboles (Préboles)</title>
   
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1V436Y1H14"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N9ZJVJKDMB"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-1V436Y1H14');
+  gtag('config', 'G-N9ZJVJKDMB');
   </script>
-  
+
   <!-- Dependencias externas -->
   <script src="https://unpkg.com/suncalc"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
