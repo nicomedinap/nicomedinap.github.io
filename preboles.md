@@ -5,11 +5,10 @@ layout: none
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="
-  <meta name="description"
-  content="Préboles es un predictor de arreboles que estima la probabilidad de observar un amanecer o atardecer rojo utilizando datos meteorológicos en tiempo real.">width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta name="keywords"
-  content="arrebol, atardecer, amanecer, cielo rojo, meteorología, Chile, predictor de arreboles">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="description" content="Préboles es un predictor de arreboles que estima la probabilidad de observar un amanecer o atardecer rojo utilizando datos meteorológicos en tiempo real.">
+  <meta name="keywords" content="arrebol, atardecer, amanecer, cielo rojo, meteorología, Chile, predictor de arreboles">
+  
   <title>Predictor de Arreboles (Préboles)</title>
   
   <!-- Google Analytics -->
