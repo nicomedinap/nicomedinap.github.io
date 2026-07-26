@@ -9,12 +9,12 @@ layout: none
   <title>Predictor de Arreboles (Préboles)</title>
   
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1V436Y1H14"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N9ZJVJKDMB"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-1V436Y1H14');
+  gtag('config', 'G-N9ZJVJKDMB');
   </script>
   
   <!-- Dependencias externas -->
