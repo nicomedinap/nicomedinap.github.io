@@ -1,8 +1,42 @@
+/* ================================================================
+ * Préboles · Recolector de datos ML para etiquetado de arreboles
+ * ================================================================
+ *
+ * NOVEDADES vs. versión anterior:
+ *   1. Umbral de probabilidad ajustable en "Por etiquetar" (antes fijo en 60%)
+ *   2. Sección auto-explicativa (colapsable) para quien no conozca la herramienta
+ *   3. El selector de umbral se deshabilita mientras siguen llegando cálculos
+ *      de nuevas ciudades, para que no se reinicie/interrumpa en medio del uso
+ * ---------------------------------------------------------------- */
+
 (function(global) {
     'use strict';
 
-    var ML_STORAGE_KEY = 'preboles_ml_data_v2';
-    var ML_MAX_RECORDS  = 2000;
+    var ML_STORAGE_KEY     = 'preboles_ml_data_v2';
+    var ML_MAX_RECORDS     = 2000;
+    var ML_THRESHOLD_KEY   = 'preboles_ml_threshold_v1';
+
+    // Mientras se están calculando/guardando varias ciudades seguidas
+    // (p.ej. al cargar la app), no queremos redibujar el historial en
+    // cada una — eso resetea el <select> del umbral y es molesto.
+    // En vez de eso, esperamos a que pasen RENDER_DEBOUNCE_MS sin
+    // llamadas nuevas antes de renderizar de verdad.
+    var RENDER_DEBOUNCE_MS  = 900;
+    var renderDebounceTimer = null;
+    var isCalculating       = false;
+
+    function nowISO() { return new Date().toISOString(); }
+
+    function scheduleRender() {
+        isCalculating = true;
+        renderHistoryTab(); // refresca contenido/contador, pero con el selector bloqueado
+        if (renderDebounceTimer) clearTimeout(renderDebounceTimer);
+        renderDebounceTimer = setTimeout(function() {
+            renderDebounceTimer = null;
+            isCalculating = false;
+            renderHistoryTab();
+        }, RENDER_DEBOUNCE_MS);
+    }
 
     function loadData() {
         try {
@@ -48,6 +82,24 @@
     }
 
     // ================================
+    // Umbral de probabilidad (lista "Por etiquetar")
+    // ================================
+    function loadThreshold() {
+        var v = localStorage.getItem(ML_THRESHOLD_KEY);
+        var n = v !== null ? parseFloat(v) : 0.6;
+        return isNaN(n) ? 0.6 : n;
+    }
+
+    function saveThreshold(v) {
+        localStorage.setItem(ML_THRESHOLD_KEY, String(v));
+    }
+
+    window.setLabelingThreshold = function(v) {
+        saveThreshold(parseFloat(v));
+        renderHistoryTab();
+    };
+
+    // ================================
     // Guardar una predicción
     // ================================
     function collectPrediction(raw) {
@@ -87,9 +139,10 @@
                         data[i].pressure    = raw.weatherData.pressure;
                         data[i].dewpoint    = raw.weatherData.dewpoint;
                     }
+                    data[i].updatedAt = nowISO();
                     saveData(data);
                     console.log('📊 Registro actualizado [' + data[i].locationName + ']');
-                    renderHistoryTab();
+                    scheduleRender();
                     return data[i];
                 }
             }
@@ -127,13 +180,14 @@
             dewpoint:           raw.weatherData ? (raw.weatherData.dewpoint    || null) : null,
             actualArrebol:      null,
             userRating:         null,
-            userNotes:          null
+            userNotes:          null,
+            updatedAt:          nowISO()
         };
 
         data.push(record);
         data = saveData(data);
         console.log('📊 Registro guardado [' + record.locationName + '] id=' + record.id);
-        renderHistoryTab();
+        scheduleRender();
         return record;
     }
 
@@ -148,6 +202,7 @@
                 data[i].actualArrebol = actualArrebol;
                 data[i].userRating    = userRating != null ? userRating : null;
                 data[i].userNotes     = userNotes  != null ? userNotes  : null;
+                data[i].updatedAt     = nowISO();
                 found = true;
                 break;
             }
@@ -165,7 +220,7 @@
     function clearAll()   { localStorage.removeItem(ML_STORAGE_KEY); }
 
     // ================================
-    // Estadísticas resumidas
+    // Estadísticas resumidas (uso programático / consola)
     // ================================
     function getStats() {
         var data = loadData();
@@ -212,7 +267,7 @@
         'sunriseCloudsLow','sunriseCloudsM','sunriseCloudsHigh','sunriseCloudsTotal',
         'sunsetCloudsLow','sunsetCloudsMid','sunsetCloudsHigh','sunsetCloudsTotal',
         'temperature','humidity','pressure','dewpoint',
-        'actualArrebol','userRating','userNotes'
+        'actualArrebol','userRating','userNotes','updatedAt'
     ];
 
     function escapeCSV(v) {
@@ -239,7 +294,7 @@
         if (!data.length) { alert('No hay datos para exportar. Visita algunas ciudades primero.'); return; }
         var payload = {
             meta: { exported: new Date().toISOString(), total: data.length,
-                    schema_ver: '2.0', description: 'Datos de predicción de arrebol – Préboles' },
+                    schema_ver: '2.1', description: 'Datos de predicción de arrebol – Préboles' },
             records: data
         };
         downloadBlob(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }),
@@ -247,15 +302,48 @@
     }
 
     // ================================
-    // Lista vertical de etiquetado
-    // solo registros con prob > 60% sin etiquetar
+    // Bloque de ayuda / auto-explicación
     // ================================
+    function buildHelpBlock() {
+        return (
+            '<details style="margin-bottom:14px;">' +
+            '<summary style="cursor:pointer;font-size:0.8rem;opacity:0.6;user-select:none;">' +
+                'ℹ️ ¿Qué es esta sección?' +
+            '</summary>' +
+            '<div style="font-size:0.78rem;opacity:0.65;line-height:1.55;margin-top:8px;padding:10px 12px;background:rgba(255,255,255,0.04);border-radius:8px;">' +
+                '<p style="margin:0 0 8px;">Sección de uso interno, con el fin de cuantificar los parámetros atmosféricos de las ciudades al momento del arrebol. Cada vez que visitas una ciudad, la app guarda automáticamente la predicción de arrebol (el color del cielo al amanecer/atardecer) para poder comparar después con lo que realmente ocurrió — esto sirve para entrenar y mejorar el modelo.</p>' +
+                '<p style="margin:0;">El <strong>umbral</strong> controla desde qué probabilidad predicha aparece una ciudad en la lista. Bájalo a 0% si quieres revisar también casos de baja probabilidad — a veces son los más interesantes para el modelo, porque muestran dónde se equivocó.</p>' +
+            '</div>' +
+            '</details>'
+        );
+    }
+
+    // ================================
+    // Lista vertical de etiquetado
+    // umbral configurable (por defecto 60%, ajustable desde la UI)
+    // ================================
+    function buildThresholdSelector(current, disabled) {
+        var opts = [0, 0.2, 0.4, 0.6, 0.8];
+        return (
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">' +
+            '<label style="font-size:0.72rem;opacity:0.55;">Umbral mínimo de probabilidad:</label>' +
+            '<select' + (disabled ? ' disabled' : '') + ' onchange="window.setLabelingThreshold(this.value)" style="background:rgba(255,255,255,0.08);color:inherit;border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:3px 8px;font-size:0.75rem;' + (disabled ? 'opacity:0.45;cursor:not-allowed;' : '') + '">' +
+            opts.map(function(o) {
+                return '<option value="' + o + '"' + (Math.abs(o - current) < 0.001 ? ' selected' : '') + '>' +
+                    (o === 0 ? '0% (todas)' : (o * 100) + '%') + '</option>';
+            }).join('') +
+            '</select>' +
+            (disabled ? '<span style="font-size:0.68rem;opacity:0.4;">calculando ciudades…</span>' : '') +
+            '</div>'
+        );
+    }
+
     function buildLabelingList(data) {
-        var PROB_THRESHOLD = 0.6;
+        var threshold = loadThreshold();
 
         var pending = data.filter(function(r) {
             return (r.actualArrebol === null || r.actualArrebol === undefined)
-                && (r.sunsetProb || 0) > PROB_THRESHOLD;
+                && (r.sunsetProb || 0) >= threshold;
         }).sort(function(a, b) {
             return (b.sunsetProb || 0) - (a.sunsetProb || 0);
         });
@@ -285,10 +373,10 @@
         if (!pending.length) {
             pendingHTML =
                 '<p style="font-size:0.8rem;opacity:0.45;text-align:center;padding:12px 0;margin:0;">' +
-                '✨ Sin ciudades con prob &gt;60% pendientes.' +
+                'Sin ciudades pendientes sobre ese umbral.' +
                 '</p>';
         } else {
-            pendingHTML = 
+            pendingHTML =
                 '<div style="overflow-x:auto;margin:0 -2px;padding:0 2px;">' +
                 '<table style="width:100%;border-collapse:collapse;font-size:0.75rem;">' +
                 '<thead>' +
@@ -302,7 +390,7 @@
                 '<tbody>' +
                 pending.map(function(r) {
                     var pct    = (r.sunsetProb * 100).toFixed(0);
-                    var pctClr = r.sunsetProb > 0.8 ? '#ff6f60' : '#ffb74d';
+                    var pctClr = r.sunsetProb > 0.8 ? '#ff6f60' : (r.sunsetProb > 0.6 ? '#ffb74d' : '#90a4ae');
                     var fechaParts = (r.date || '').split('-');
                     var fechaCorta = fechaParts.length === 3
                         ? fechaParts[2] + '/' + fechaParts[1]
@@ -333,7 +421,7 @@
         var labeledHTML = '';
         if (labeled.length) {
             var iconMap = { '1': '✅', '0.5': '🙄', '0': '❌' };
-            
+
             labeledHTML =
                 '<details style="margin-top:12px;">' +
                 '<summary style="cursor:pointer;font-size:0.75rem;opacity:0.45;user-select:none;list-style:none;padding:6px 0;">' +
@@ -375,9 +463,7 @@
         return (
             '<div class="info-card" style="width:100%;box-sizing:border-box;overflow:hidden;">' +
                 '<h4 style="margin-bottom:8px;">🏷️ Por etiquetar' + pendingCount + '</h4>' +
-                '<p style="font-size:0.7rem;opacity:0.45;margin-bottom:12px;">' +
-                    'Ciudades con probabilidad &gt;60%' +
-                '</p>' +
+                buildThresholdSelector(threshold, isCalculating) +
                 pendingHTML +
                 labeledHTML +
             '</div>'
@@ -392,42 +478,22 @@
         if (!container) return;
         if (!container.classList.contains('active')) return;
 
-        var data  = loadData();
-        var stats = getStats();
-
-        var statsHTML;
-        if (!stats) {
-            statsHTML =
-                '<div style="text-align:center;padding:24px;opacity:0.6;">' +
-                    '<div style="font-size:2.5rem;margin-bottom:8px;">🌅</div>' +
-                    '<p>Aún no hay registros.</p>' +
-                    '<p style="font-size:0.85rem;">Cada ciudad que visites quedará guardada automáticamente aquí.</p>' +
-                '</div>';
-        } else {
-            var typeStr = Object.keys(stats.byType)
-                .map(function(k) { return k + ': ' + stats.byType[k]; })
-                .join(' &nbsp;·&nbsp; ');
-            statsHTML =
-                '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:10px;">' +
-                    mkStat(stats.total,   'Registros') +
-                    mkStat(stats.labeled, 'Etiquetados') +
-                    mkStat(stats.unique,  'Ciudades') +
-                    mkStat((+stats.avgSunsetProb * 100).toFixed(1) + '%', 'Prob. media') +
-                '</div>' +
-                '<p style="font-size:0.75rem;opacity:0.5;margin:0;">📅 ' +
-                stats.firstDate + ' → ' + stats.lastDate + ' &nbsp;·&nbsp; ' + typeStr + '</p>';
-        }
+        var data = loadData();
 
         container.innerHTML =
             '<div class="container">' +
             '<h2>📜 Historial</h2>' +
+            buildHelpBlock() +
             '<div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">' +
 
-                '<div class="info-card" style="width:100%;box-sizing:border-box;">' +
-                    '<h4>📊 Resumen</h4>' + statsHTML +
-                '</div>' +
-
-                (data.length ? buildLabelingList(data) : '') +
+                (data.length
+                    ? buildLabelingList(data)
+                    : '<div class="info-card" style="width:100%;box-sizing:border-box;text-align:center;padding:24px;opacity:0.6;">' +
+                        '<div style="font-size:2.5rem;margin-bottom:8px;">🌅</div>' +
+                        '<p style="margin:0;">Aún no hay registros.</p>' +
+                        '<p style="font-size:0.85rem;margin:4px 0 0;">Cada ciudad que visites quedará guardada automáticamente aquí.</p>' +
+                      '</div>'
+                ) +
 
                 '<div class="info-card" style="width:100%;box-sizing:border-box;">' +
                     '<h4>💾 Exportar</h4>' +
@@ -441,15 +507,6 @@
                 '</div>' +
 
             '</div></div>';
-    }
-
-    function mkStat(value, label) {
-        return (
-            '<div class="stat-box">' +
-                '<span class="stat-val">' + value + '</span>' +
-                '<span class="stat-label">' + label + '</span>' +
-            '</div>'
-        );
     }
 
     function showStats() { renderHistoryTab(); }
@@ -470,7 +527,7 @@
     global.dataCollector = {
         collectPrediction: collectPrediction,
         updateLabel:       updateLabel,
-        getAllData:         getAllData,
+        getAllData:        getAllData,
         getCount:          getCount,
         getLast:           getLast,
         clearAll:          clearAll,
@@ -478,7 +535,9 @@
         exportCSV:         exportCSV,
         exportJSON:        exportJSON,
         showStats:         showStats,
-        renderHistoryTab:  renderHistoryTab
+        renderHistoryTab:  renderHistoryTab,
+        getThreshold:      loadThreshold,
+        setThreshold:      saveThreshold
     };
 
 })(window);
