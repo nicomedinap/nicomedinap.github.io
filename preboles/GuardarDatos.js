@@ -1,14 +1,3 @@
-/* ================================================================
- * Préboles · Recolector de datos ML para etiquetado de arreboles
- * ================================================================
- *
- * NOVEDADES vs. versión anterior:
- *   1. Umbral de probabilidad ajustable en "Por etiquetar" (antes fijo en 60%)
- *   2. Sección auto-explicativa (colapsable) para quien no conozca la herramienta
- *   3. El selector de umbral se deshabilita mientras siguen llegando cálculos
- *      de nuevas ciudades, para que no se reinicie/interrumpa en medio del uso
- * ---------------------------------------------------------------- */
-
 (function(global) {
     'use strict';
 
@@ -16,10 +5,7 @@
     var ML_MAX_RECORDS     = 2000;
     var ML_THRESHOLD_KEY   = 'preboles_ml_threshold_v1';
 
-    // Mientras se están calculando/guardando varias ciudades seguidas
-    // (p.ej. al cargar la app), no queremos redibujar el historial en
-    // cada una — eso resetea el <select> del umbral y es molesto.
-    // En vez de eso, esperamos a que pasen RENDER_DEBOUNCE_MS sin
+    // esperamos a que pasen RENDER_DEBOUNCE_MS sin
     // llamadas nuevas antes de renderizar de verdad.
     var RENDER_DEBOUNCE_MS  = 900;
     var renderDebounceTimer = null;
@@ -81,9 +67,8 @@
         return String(value);
     }
 
-    // ================================
-    // Umbral de probabilidad (lista "Por etiquetar")
-    // ================================
+    // Umbral de probabilidad 
+    // 
     function loadThreshold() {
         var v = localStorage.getItem(ML_THRESHOLD_KEY);
         var n = v !== null ? parseFloat(v) : 0.6;
@@ -99,9 +84,7 @@
         renderHistoryTab();
     };
 
-    // ================================
     // Guardar una predicción
-    // ================================
     function collectPrediction(raw) {
         var data = loadData();
         var now  = new Date();
@@ -141,7 +124,7 @@
                     }
                     data[i].updatedAt = nowISO();
                     saveData(data);
-                    console.log('📊 Registro actualizado [' + data[i].locationName + ']');
+                    console.log('Registro actualizado [' + data[i].locationName + ']');
                     scheduleRender();
                     return data[i];
                 }
@@ -186,14 +169,12 @@
 
         data.push(record);
         data = saveData(data);
-        console.log('📊 Registro guardado [' + record.locationName + '] id=' + record.id);
+        console.log('Registro guardado [' + record.locationName + '] id=' + record.id);
         scheduleRender();
         return record;
     }
 
-    // ================================
     // Etiquetar un registro
-    // ================================
     function updateLabel(id, actualArrebol, userRating, userNotes) {
         var data  = loadData();
         var found = false;
@@ -211,17 +192,13 @@
         return found;
     }
 
-    // ================================
     // Getters
-    // ================================
     function getAllData()  { return loadData(); }
     function getCount()   { return loadData().length; }
     function getLast(n)   { var d = loadData(); return d.slice(-(n || 10)).reverse(); }
     function clearAll()   { localStorage.removeItem(ML_STORAGE_KEY); }
 
-    // ================================
-    // Estadísticas resumidas (uso programático / consola)
-    // ================================
+    // Estadísticas resumidas
     function getStats() {
         var data = loadData();
         if (!data.length) return null;
@@ -368,7 +345,7 @@
             'min-width:32px'
         ].join(';');
 
-        // Items pendientes — tabla responsiva con scroll horizontal
+        // pendientes: — tabla responsiva con scroll horizontal
         var pendingHTML = '';
         if (!pending.length) {
             pendingHTML =
