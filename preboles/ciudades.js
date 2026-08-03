@@ -34,7 +34,7 @@ const chileanCities = {
   "Santa Cruz":       { lat: -34.6388, lon: -71.3658, region: "VI Región", altitude: 196, weatherCamera: "" },
   "Talca":            { lat: -35.4264, lon: -71.6554, region: "VII Región", altitude: 102, weatherCamera: "" },
   "Curicó":           { lat: -34.9828, lon: -71.2394, region: "VII Región", altitude: 228, weatherCamera: "https://www.youtube.com/watch?v=1lhRUdl--o0" },
-  "Linares":          { lat: -35.8454, lon: -71.5979, region: "VII Región", altitude: 165, weatherCamera: "" },
+  "Linares":          { lat: -35.8454, lon: -71.5979, region: "VII Región", altitude: 165, weatherCamera: "https://www.youtube.com/watch?v=SQDMH3NpBXo" },
   "Constitución":     { lat: -35.3330, lon: -72.4115, region: "VII Región", altitude: 12, weatherCamera: "" },
   "San Carlos":       { lat: -36.4248, lon: -71.9580, region: "Ñuble", altitude: 153, weatherCamera: "" },
   "Chillán":          { lat: -36.6066, lon: -72.1034, region: "Ñuble",      altitude: 124, weatherCamera: "" },
