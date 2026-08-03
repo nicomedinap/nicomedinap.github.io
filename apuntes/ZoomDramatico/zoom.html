@@ -44,9 +44,9 @@
                 target: "161.16572 -59.96429"  // Initial coordinates to center on
             });
 
-            let finalFov = 0.15;  // Final FoV after zooming in
-            let zoomSpeed = 0.975;  // Zoom speed factor (más cercano a 1 = más suave)
-            let intervalTime = 16;  
+            let finalFov = 0.05;  // Final FoV after zooming in
+            let zoomSpeed = 1;  // Zoom speed factor (closer to 1 means slower zoom)
+            let intervalTime = 60;  // Time in milliseconds between each zoom step
             let zoomInterval;
 
             // Function to start the zoom animation
@@ -59,23 +59,17 @@
                     let currentFov = aladin.getFov()[0];  // Get the current FoV
                     
                     if (currentFov > finalFov) {
-                        // Zoom in by reducing the FoV con factor de suavidad
-                        let newFov = currentFov * zoomSpeed;
-                        // Asegurar que no pase por debajo del finalFov
-                        if (newFov < finalFov) {
-                            newFov = finalFov;
-                        }
-                        aladin.setFov(newFov);
+                        // Zoom in by reducing the FoV
+                        aladin.setFov(currentFov * zoomSpeed);
                     } else {
                         // Stop the zooming animation
                         clearInterval(zoomInterval);
-                        // Center precisely on the target object
+                        // Optionally, center precisely on the target object
                         aladin.gotoObject(targetCoords);
 
                         // Change to the GLIMPSE 360 survey
                         aladin.setImageSurvey("P/GLIMPSE360");
-                        // Nota: GLIMPSE360 no tiene radio button, así que lo omitimos
-                        // o puedes agregar un radio button para GLIMPSE360 en el HTML
+                        $('input#GLIMPSE360').prop("checked", true); // Update radio button selection
                     }
                 }, intervalTime);
             }
