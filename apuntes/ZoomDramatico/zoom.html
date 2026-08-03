@@ -3,108 +3,312 @@
 
 <head>
     <title>Zoom en Aladin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://nicomedinap.github.io/decosmos/PublicCSS/Zoom.css">
+    <style>
+        /* Reset y fullscreen */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Contenedor principal - Ocupa toda la pantalla */
+        #aladin-lite-div {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        /* Loading indicator - Solo visible durante la animación */
+        .loading-indicator {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+
+        .loading-indicator.active {
+            display: block;
+            animation: pulseGlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            }
+            50% {
+                box-shadow: 0 8px 32px rgba(100, 180, 255, 0.2);
+            }
+        }
+
+        /* Botón de reinicio - Pequeño y discreto */
+        .reset-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .reset-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Ocultar todos los controles de Aladin */
+        .aladin-controls,
+        .aladin-goto-control,
+        .aladin-layers-control,
+        .aladin-simbad-control,
+        .aladin-frame {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Aladin Lite viewer -->
+    <!-- Aladin Lite viewer - Fullscreen -->
     <div id="aladin-lite-div"></div>
-
-    <!-- Survey selection buttons -->
-    <div class="survey-buttons">
-        <input id="DSS" type="radio" name="survey" value="P/DSS2/color" checked><label for="DSS">DSS color</label>
-        <input id="2MASS" type="radio" name="survey" value="P/2MASS/color"><label for="2MASS">2MASS</label>
-        <input id="allwise" type="radio" name="survey" value="P/allWISE/color"><label for="allwise">AllWISE</label>
-    </div>
-
-    <!-- Coordinate input fields, suggestions, and button -->
-    <div class="coord-input">
-        <select id="object-select">
-            <option value="" disabled selected>Elige un objeto popular</option>
-            <option value="10.6847083 41.2690650">Andrómeda (M31)</option>
-            <option value="201.3650633 -43.0191122">Omega Centauri</option>
-            <option value="83.8220833 -5.3911111">Nebulosa de Orión (M42)</option>
-            <option value="187.2779159 2.0523872">Cúmulo de Virgo (M87)</option>
-            <option value="271.259639 -24.417031">SMACS 0723</option>
-        </select>
-        <input id="ra" type="text" placeholder="Enter RA (degrees)" />
-        <input id="dec" type="text" placeholder="Enter Dec (degrees)" />
-        <button id="start-zoom">Hacer Zoom</button>
-    </div>
 
     <!-- JavaScript -->
     <script>
         $(document).ready(function() {
-            // Initialize AladinLite with a large FoV
+            // Detectar si es móvil
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            
+            // Initialize AladinLite - Fullscreen sin controles
             let aladin = A.aladin('#aladin-lite-div', {
                 survey: "P/DSS2/color",
-                fov: 360,  // Start with a large FoV
-                target: "161.16572 -59.96429"  // Initial coordinates to center on
+                fov: 100,
+                target: "266.405 -29.008",  // Centro galáctico
+                showControls: false,
+                showGotoControl: false,
+                showLayersControl: false,
+                showFrame: false,
+                showSimbadPointerControl: false,
+                showObjectTooltip: false,
+                fullScreen: true
             });
 
-            let finalFov = 0.05;  // Final FoV after zooming in
-            let zoomSpeed = 1;  // Zoom speed factor (closer to 1 means slower zoom)
-            let intervalTime = 30;  // Time in milliseconds between each zoom step
+            // Variables - Movimiento lento en viaje, zoom más rápido
+            let finalFov = 0.08;
+            let zoomSpeed = 0.998;  // Zoom más rápido (antes 0.998)
+            let intervalTime = isMobile ? 20 : 16;
+            let travelDuration = isMobile ? 8000 : 6000;  // Viaje lento
+            
             let zoomInterval;
+            let travelInterval;
+            let isAnimating = false;
+            let currentTarget = "161.16572 -59.96429";  // M16 por defecto
 
-            // Function to start the zoom animation
-            function startZoom(targetCoords) {
-                clearInterval(zoomInterval);  // Clear any previous zoom intervals
-                aladin.gotoObject(targetCoords);  // Go to the new coordinates
-                aladin.setFov(360);  // Reset the FoV to the initial large value
+            // Mostrar/ocultar indicador
+            function showLoading(show, text) {
+                if (show) {
+                    if (text) $('#loadingIndicator').text(text);
+                    $('#loadingIndicator').addClass('active');
+                } else {
+                    $('#loadingIndicator').removeClass('active');
+                    setTimeout(() => {
+                        $('#loadingIndicator').text('🌌 Viajando al objeto...');
+                    }, 100);
+                }
+            }
 
-                zoomInterval = setInterval(function() {
-                    let currentFov = aladin.getFov()[0];  // Get the current FoV
+            // Interpolación de coordenadas
+            function interpolateCoords(coord1, coord2, t) {
+                let ra1 = parseFloat(coord1.split(' ')[0]);
+                let dec1 = parseFloat(coord1.split(' ')[1]);
+                let ra2 = parseFloat(coord2.split(' ')[0]);
+                let dec2 = parseFloat(coord2.split(' ')[1]);
+                
+                let raDiff = ra2 - ra1;
+                if (raDiff > 180) raDiff -= 360;
+                if (raDiff < -180) raDiff += 360;
+                
+                let ra = ra1 + raDiff * t;
+                let dec = dec1 + (dec2 - dec1) * t;
+                
+                return `${ra} ${dec}`;
+            }
+
+            // Easing suave
+            function easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+
+            // Viaje desde centro galáctico al objeto
+            function travelToObject(targetCoords) {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                clearInterval(travelInterval);
+                clearInterval(zoomInterval);
+                
+                showLoading(true, '🌌 Viajando al objeto...');
+                
+                let startCoords = "266.405 -29.008";
+                let startTime = Date.now();
+                
+                let startFov = 100;
+                let endFov = isMobile ? 30 : 20;
+                
+                travelInterval = setInterval(function() {
+                    let elapsed = Date.now() - startTime;
+                    let progress = Math.min(elapsed / travelDuration, 1);
                     
-                    if (currentFov > finalFov) {
-                        // Zoom in by reducing the FoV
-                        aladin.setFov(currentFov * zoomSpeed);
-                    } else {
-                        // Stop the zooming animation
-                        clearInterval(zoomInterval);
-                        // Optionally, center precisely on the target object
-                        aladin.gotoObject(targetCoords);
-
-                        // Change to the GLIMPSE 360 survey
-                        aladin.setImageSurvey("P/GLIMPSE360");
-                        $('input#GLIMPSE360').prop("checked", true); // Update radio button selection
+                    let easeProgress = easeInOutCubic(progress);
+                    
+                    let currentCoords = interpolateCoords(startCoords, targetCoords, easeProgress);
+                    aladin.gotoObject(currentCoords);
+                    
+                    let currentFov = startFov - (startFov - endFov) * easeProgress;
+                    aladin.setFov(currentFov);
+                    
+                    if (progress > 0.3 && progress < 0.8) {
+                        showLoading(true, '🔄 Aproximando...');
+                    } else if (progress >= 0.8) {
+                        showLoading(true, '🎯 Casi llegando...');
+                    }
+                    
+                    if (progress >= 1) {
+                        clearInterval(travelInterval);
+                        showLoading(true, '🔍 Iniciando zoom...');
+                        
+                        setTimeout(function() {
+                            startZoom(targetCoords);
+                        }, 300);
                     }
                 }, intervalTime);
             }
 
-            // Automatic zoom to M16 after 5 seconds
-            setTimeout(function() {
-                let targetCoords = "161.16572 -59.96429";  // Coordinates
-                startZoom(targetCoords);
-            }, 5000);
-
-            // Event handler for the Start Zoom button
-            $('#start-zoom').click(function() {
-                let ra = $('#ra').val().trim();
-                let dec = $('#dec').val().trim();
+            // Función de zoom más rápida
+            function startZoom(targetCoords) {
+                clearInterval(zoomInterval);
                 
-                if (ra && dec) {
-                    let targetCoords = `${ra} ${dec}`;
-                    startZoom(targetCoords);
-                } else {
-                    alert("Please enter valid RA and Dec coordinates.");
+                aladin.gotoObject(targetCoords);
+                let startFov = isMobile ? 30 : 20;
+                aladin.setFov(startFov);
+                
+                // Zoom más rápido
+                let currentZoomSpeed = 0.992;  // Más rápido
+                let currentInterval = isMobile ? 20 : 16;
+                
+                zoomInterval = setInterval(function() {
+                    let currentFov = aladin.getFov()[0];
+                    
+                    if (currentFov > finalFov) {
+                        let newFov = currentFov * currentZoomSpeed;
+                        if (newFov < finalFov) {
+                            newFov = finalFov;
+                        }
+                        aladin.setFov(newFov);
+                    } else {
+                        clearInterval(zoomInterval);
+                        aladin.gotoObject(targetCoords);
+                        
+                        // Cambiar a GLIMPSE 360
+                        aladin.setImageSurvey("P/GLIMPSE360");
+                        isAnimating = false;
+                        
+                        showLoading(true, '✅ ¡Completado!');
+                        setTimeout(() => {
+                            showLoading(false);
+                        }, 2000);
+                    }
+                }, currentInterval);
+            }
+
+            // Función principal
+            function iniciarViajeYZoom(targetCoords) {
+                if (isAnimating) {
+                    clearInterval(travelInterval);
+                    clearInterval(zoomInterval);
+                    isAnimating = false;
                 }
+                
+                currentTarget = targetCoords;
+                
+                // Resetear al centro galáctico
+                aladin.gotoObject("266.405 -29.008");
+                aladin.setFov(100);
+                
+                setTimeout(function() {
+                    travelToObject(targetCoords);
+                }, 500);
+            }
+
+            // Event handler para el botón de reinicio
+            $('#resetBtn').click(function() {
+                // Elegir un objeto aleatorio o usar el mismo
+                const objetos = [
+                    "10.6847083 41.2690650",  // Andrómeda
+                    "201.3650633 -43.0191122", // Omega Centauri
+                    "83.8220833 -5.3911111",   // Orión
+                    "187.2779159 2.0523872",    // Virgo
+                    "271.259639 -24.417031",    // SMACS
+                    "161.16572 -59.96429"       // M16
+                ];
+                let randomCoords = objetos[Math.floor(Math.random() * objetos.length)];
+                iniciarViajeYZoom(randomCoords);
             });
 
-            // Event handler for the object selection dropdown
-            $('#object-select').change(function() {
-                let coords = $(this).val().split(" ");
-                $('#ra').val(coords[0]);
-                $('#dec').val(coords[1]);
-            });
+            // Auto-inicio después de 2 segundos
+            setTimeout(function() {
+                iniciarViajeYZoom("161.16572 -59.96429");
+            }, 2000);
 
-            // Update survey image on radio button change
-            $('input[name=survey]').change(function() {
-                let selectedSurvey = $(this).val();
-                aladin.setImageSurvey(selectedSurvey);
-            });
+            // Prevenir scroll en el body
+            document.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+
+            // Ocultar cualquier UI de Aladin que aparezca
+            setTimeout(function() {
+                $('.aladin-controls, .aladin-goto-control, .aladin-layers-control, .aladin-simbad-control, .aladin-frame').hide();
+            }, 100);
         });
     </script>
 </body>
