@@ -93,7 +93,7 @@
     // Fecha para la que es válido el ranking 
     function _rankingDateLabel() {
         const dateStr = new Date().toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long' });
-        return `${dateStr} (hoy)`;
+        return `${dateStr}`;
     }
 
     function _formatIrradiance(shortwave) {
