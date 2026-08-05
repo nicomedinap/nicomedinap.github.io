@@ -880,6 +880,67 @@ layout: none
     }
 
     /* ==========================================================================
+      PREDICCIÓN POR COORDENADAS MANUALES / GEOLOCALIZACIÓN
+      ========================================================================== */
+
+    function toggleCoordPanel() {
+      const body = document.getElementById('coordPanelBody');
+      body.style.display = body.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function openCoordPrediction(lat, lon, label) {
+      currentLocation = { type: 'coords', name: label, lat, lon, data: null };
+
+      // Reutiliza el mismo panel de detalle que usan las ciudades.
+      document.getElementById('cityMenu').style.display = 'none';
+      document.getElementById('appContainer').style.display = 'block';
+      document.getElementById('cityTitle').textContent = `🌇 ${label}`;
+
+      predictRedSunset(lat, lon, label);
+    }
+
+    function predictFromManualCoords() {
+      const lat = parseFloat(document.getElementById('coordLat').value);
+      const lon = parseFloat(document.getElementById('coordLon').value);
+
+      if (isNaN(lat) || isNaN(lon) || lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+        alert('Ingresa coordenadas válidas (latitud entre -90 y 90, longitud entre -180 y 180).');
+        return;
+      }
+
+      const label = `📍 ${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+      openCoordPrediction(lat, lon, label);
+    }
+
+    function predictFromGeolocation(evt) {
+      if (!navigator.geolocation) {
+        alert('Tu navegador no soporta geolocalización.');
+        return;
+      }
+
+      const btn = evt?.target;
+      const originalText = btn?.textContent;
+      if (btn) { btn.textContent = '📡 Obteniendo ubicación...'; btn.disabled = true; }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          const { latitude, longitude } = pos.coords;
+          document.getElementById('coordLat').value = latitude.toFixed(4);
+          document.getElementById('coordLon').value = longitude.toFixed(4);
+          if (btn) { btn.textContent = originalText; btn.disabled = false; }
+          openCoordPrediction(latitude, longitude, '📍 Mi ubicación');
+        },
+        err => {
+          if (btn) { btn.textContent = originalText; btn.disabled = false; }
+          let msg = 'No se pudo obtener tu ubicación.';
+          if (err.code === err.PERMISSION_DENIED) msg = 'Permiso de ubicación denegado. Habilítalo en la configuración de tu navegador.';
+          else if (err.code === err.TIMEOUT) msg = 'Tiempo de espera agotado al obtener tu ubicación.';
+          alert(msg);
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+      );
+    }
+    /* ==========================================================================
        ACTUALIZACIÓN DE UI
        ========================================================================== */
     function updateUI(cityName, lat, lon, meteoData, sunrise, sunset, sunriseData, sunsetData, sunriseResult, sunsetResult, optimalSunsetTime) {
