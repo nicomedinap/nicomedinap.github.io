@@ -53,6 +53,199 @@ layout: none
     }
 
     .coord-predict-panel { margin: 8px 0; }
+
+    /* ============================================================
+   COORDENADAS - UNA SOLA FILA CON TEXTO A LA IZQUIERDA
+   ============================================================ */
+
+.coord-predict-panel {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 6px 12px;
+  margin: 4px 0;
+  border: 1px solid var(--white-1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.coord-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;  /* Alinea todo a la izquierda */
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 2px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.coord-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  white-space: nowrap;
+  padding: 0 4px;
+  flex-shrink: 0;  /* Evita que el texto se encoja */
+}
+
+.coord-inputs-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.coord-controls input[type="number"] {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--white-1);
+  border-radius: 6px;
+  padding: 5px 10px;
+  color: white;
+  font-size: 0.85rem;
+  width: 110px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+  min-height: 32px;
+}
+
+.coord-controls input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+}
+
+.coord-controls input[type="number"]::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 300;
+}
+
+.coord-controls input[type="number"]::-webkit-inner-spin-button,
+.coord-controls input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.coord-controls input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.coord-controls button {
+  padding: 5px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+  min-height: 32px;
+  flex-shrink: 0;
+}
+
+.coord-btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.coord-btn-primary:hover {
+  background: #e65c00;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+}
+
+.coord-btn-primary:active {
+  transform: translateY(0);
+}
+
+.coord-btn-geo {
+  background: rgba(76, 175, 80, 0.2);
+  color: #81c784;
+  border: 1px solid rgba(76, 175, 80, 0.3) !important;
+}
+
+.coord-btn-geo:hover {
+  background: rgba(76, 175, 80, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.coord-btn-geo:active {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 992px) {
+  .coord-controls {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .coord-label {
+    font-size: 0.8rem;
+    white-space: normal;
+    width: 100%;
+    text-align: left;
+    flex-shrink: 1;
+  }
+
+  .coord-inputs-group {
+    flex-shrink: 1;
+    flex-wrap: wrap;
+  }
+
+  .coord-controls input[type="number"] {
+    width: 90px;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    min-height: 30px;
+  }
+
+  .coord-controls button {
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    min-height: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .coord-predict-panel {
+    padding: 4px 6px;
+  }
+
+  .coord-inputs-group {
+    width: 100%;
+    gap: 4px;
+  }
+
+  .coord-controls input[type="number"] {
+    width: calc(50% - 2px);
+    flex: 1;
+    min-width: 60px;
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    min-height: 26px;
+  }
+
+  .coord-controls button {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    min-height: 26px;
+    flex: 1;
+    min-width: 70px;
+  }
+
+  .coord-label {
+    font-size: 0.75rem;
+  }
+}
   </style>
   
 </head>
@@ -111,6 +304,18 @@ layout: none
       <h2>Probabilidad de arrebol en la tarde</h2>
       <span id="fechaPrediccion"></span>
       <div id="queryDateTime" style="opacity:0.8; font-size:0.9rem; margin-bottom:10px;"></div>
+
+          <div class="coord-predict-panel">
+      <div class="coord-controls">
+        <span class="coord-label">📍 No ves tu ciudad? Busca tus coordenadas:</span>
+        <div class="coord-inputs-group">
+          <input type="number" id="coordLat" placeholder="Latitud" step="0.0001">
+          <input type="number" id="coordLon" placeholder="Longitud" step="0.0001">
+        </div>
+        <button onclick="predictFromManualCoords()" class="coord-btn-primary">🔍 Buscar</button>
+        <button onclick="predictFromGeolocation()" class="coord-btn-geo">📡 Mi ubicación</button>
+      </div>
+    </div>
 
       <div id="cityMenu"></div>
       <div id="appContainer">
