@@ -99,11 +99,23 @@
     function _formatIrradiance(shortwave) {
         if (shortwave == null || !isFinite(shortwave)) return '—';
         const val = Math.round(shortwave);
+
+        // Misma fórmula que irradCorr en computeProbability (idealSW=60,
+        // tooLow=15, tooHigh=200), para que la etiqueta refleje exactamente
+        // lo que el modelo está premiando/penalizando, con su asimetría.
+        const swClamped = Math.max(0, Math.min(1200, val));
+        const idealSW = 60, tooHigh = 200, tooLow = 15;
+        let irradCorr = swClamped >= idealSW
+            ? Math.exp(-Math.pow((swClamped - idealSW) / (tooHigh - idealSW) * 2, 2))
+            : Math.exp(-Math.pow((swClamped - idealSW) / (idealSW - tooLow) * 2, 2));
+        irradCorr = Math.max(0.30, Math.min(1.0, irradCorr));
+
         let label;
-        if (val >= 700)      label = 'Excelente';
-        else if (val >= 500) label = 'Buena';
-        else if (val >= 300) label = 'Moderada';
-        else                 label = 'Mala';
+        if (irradCorr >= 0.85)      label = 'Excelente';
+        else if (irradCorr >= 0.65) label = 'Buena';
+        else if (irradCorr >= 0.40) label = 'Moderada';
+        else                        label = 'Mala';
+
         return `${label}<span class="subline">${val} W/m²</span>`;
     }
 

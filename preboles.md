@@ -409,7 +409,7 @@ layout: none
         <h2>Ranking de Probabilidades</h2>
         <div class="info-grid">
           <div class="info-card">
-            <h4>🥇 Top 10 - Mayor Probabilidad al atardecer</h4>
+            <h4>🥇 Top 12 - Mayor Probabilidad al atardecer</h4>
             <br>
             <div id="topRanking"><p>Cargando ranking...</p></div>
           </div>
