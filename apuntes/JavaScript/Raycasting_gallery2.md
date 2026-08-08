@@ -122,8 +122,9 @@ layout: none
         #toggleFieldLinesBtn { position: absolute; top: 55px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
         #fieldCompass {
             position: absolute;
-            bottom: 15px;
-            left: 15px;
+            top: 280px;
+            left: 15%;
+            transform: translateX(-50%);
             z-index: 100;
             width: 90px;
             background: rgba(0,10,20,0.75);
@@ -319,6 +320,14 @@ layout: none
         let renderCanvas = document.createElement('canvas');
         let renderCtx = renderCanvas.getContext('2d', { alpha: false, willReadFrequently: false });
         renderCtx.imageSmoothingEnabled = true;
+
+        // Z-buffer: una distancia de pared por cada columna de píxel del
+        // renderCanvas, llenado por drawWalls. drawSprites lo consulta en
+        // vez de volver a lanzar un rayo completo por cada columna de cada
+        // sprite (que era, con diferencia, más caro que el costo de las
+        // lentes — un sprite típico son cientos de columnas, cada una un
+        // raycast completo, por sprite, por frame).
+        let wallDepthBuffer = new Float32Array(1);
 
         // Game State
         const player = { x: 2, y: 2, angle: 70, speed: 0, turnSpeed: 0 };
@@ -553,6 +562,7 @@ layout: none
             canvas.height = window.innerHeight;
             renderCanvas.width = Math.floor(canvas.width * currentRenderScale);
             renderCanvas.height = Math.floor(canvas.height * currentRenderScale);
+            wallDepthBuffer = new Float32Array(renderCanvas.width);
         }
 
         function detectMobileAndLockOrientation() {
@@ -1024,7 +1034,9 @@ layout: none
             drawSkyAndFloor(renderCtx, renderCanvas);
             drawWalls(renderCtx, renderCanvas);
             drawSprites(renderCtx, renderCanvas);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Se elimina el clearRect de acá: drawImage de abajo ya cubre
+            // el canvas entero de forma opaca (alpha:false en el contexto),
+            // así que limpiar antes era trabajo tirado a la basura.
             ctx.drawImage(renderCanvas, 0, 0, canvas.width, canvas.height);
             drawMinimap();
         }
@@ -1046,9 +1058,23 @@ layout: none
             const rayAngleStep = FOV / numRays;
             const pixelPerRay = canvasToUse.width / numRays;
             const maxWallHeight = canvasToUse.height * 2;
+            const bufLen = wallDepthBuffer.length;
             for (let i = 0; i < numRays; i++) {
                 const rayAngle = player.angle - FOV / 2 + i * rayAngleStep;
                 const { dist, texture, hitOffset, magnification } = castRay(rayAngle);
+
+                const x = Math.round(i * pixelPerRay);
+                const w = Math.ceil(pixelPerRay);
+
+                // Z-buffer: se llena SIEMPRE, aunque este rayo no tenga
+                // textura visible dentro de MAX_DISTANCE_TO_TEXTURE — así
+                // drawSprites sabe correctamente que "no hay pared cerca"
+                // en esa columna, en vez de asumir oclusión por defecto.
+                const xEnd = Math.min(bufLen, x + w);
+                for (let px = x < 0 ? 0 : x; px < xEnd; px++) {
+                    wallDepthBuffer[px] = dist;
+                }
+
                 if (dist <= MAX_DISTANCE_TO_TEXTURE) {
                     let lineHeight = Math.min(canvasToUse.height / dist, maxWallHeight);
                     lineHeight *= magnification || 1.0;
@@ -1063,17 +1089,12 @@ layout: none
                             mipLevel++;
                         }
                         const textureX = Math.floor(hitOffset * texture[mipLevel].width);
-                        // Asignar la posición y el ancho correcto para cada franja:
-                        const x = Math.round(i * pixelPerRay);
-                        const w = Math.ceil(pixelPerRay);
                         ctxToUse.drawImage(
                             texture[mipLevel],
                             textureX, 0, 1, texture[mipLevel].height,
                             x, lineOffset, w, lineHeight
                         );
                     } else {
-                        const x = Math.round(i * pixelPerRay);
-                        const w = Math.ceil(pixelPerRay);
                         ctxToUse.fillStyle = 'black';
                         ctxToUse.fillRect(x, lineOffset, w, lineHeight);
                     }
@@ -1101,20 +1122,28 @@ layout: none
                         opacity = Math.max(0, Math.min(1, opacity));
                     }
 
-                    
+                    // Antes: un castRay() completo por cada columna del
+                    // sprite (cientos por sprite, por frame — más caro que
+                    // todo el trabajo de las lentes juntas). Ahora: una
+                    // consulta O(1) al z-buffer que drawWalls ya llenó este
+                    // mismo frame. También se elimina el cálculo de
+                    // relAngle/rayAngle (trig por columna) que solo existía
+                    // para alimentar ese raycast, y se saca el save/restore
+                    // del canvas fuera del loop (la opacidad es la misma
+                    // para todas las columnas del sprite, no hace falta
+                    // guardar/restaurar el estado del contexto en cada una).
+                    const bufLen = wallDepthBuffer.length;
+                    ctxOut.save();
+                    ctxOut.globalAlpha = opacity * 0.98;
                     for (let i = 0; i < spriteSize; i++) {
                         const colScreenX = screenX - spriteSize / 2 + i;
-                        const relAngle = Math.atan2(i - spriteSize / 2, canvasOut.width / (2 * Math.tan(FOV / 2)));
-                        const rayAngle = player.angle + spriteAngle + relAngle * 0.9;
-                        const spriteDistAtCol = dist;
-                        const ray = castRay(rayAngle);
-                        if (ray.dist < spriteDistAtCol - 0.05) continue;
+                        const dCol = Math.round(colScreenX);
+                        const wallDist = (dCol >= 0 && dCol < bufLen) ? wallDepthBuffer[dCol] : Infinity;
+                        if (wallDist < dist - 0.05) continue;
                         const spriteCol = Math.floor(i * imgWidth / spriteSize);
-                        ctxOut.save();
-                        ctxOut.globalAlpha = opacity * 0.98;
                         ctxOut.drawImage(s.img, spriteCol, 0, 1, imgHeight, colScreenX, yBase, 1, spriteSize);
-                        ctxOut.restore();
                     }
+                    ctxOut.restore();
                 }
             }
         }
