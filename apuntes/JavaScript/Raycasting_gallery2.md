@@ -120,6 +120,7 @@ layout: none
 
         /* Brújula de campo (gravedad + eléctrico) */
         #toggleFieldLinesBtn { position: absolute; top: 55px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
+        #toggleLaserBtn { position: absolute; top: 100px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #3a0000; color: #f66; border: none; font-size: 15px; cursor: pointer; }
         #fieldCompass {
             position: absolute;
             top: 280px;
@@ -243,6 +244,7 @@ layout: none
     </div>
     <button id="toggleLensesBtn">Desactivar lentes</button>
     <button id="toggleFieldLinesBtn">Ocultar líneas de campo</button>
+    <button id="toggleLaserBtn">Mostrar rayo láser</button>
 
     <div id="fieldCompass">
         <div id="fieldCompassDial"><div id="fieldCompassNeedle"></div></div>
@@ -282,7 +284,7 @@ layout: none
         const WALL_MARGIN = 0.85;
         const RENDER_SCALE_MAX = 0.8;
         const TARGET_FPS = 25;
-        const STEPSIZE = 0.05;
+        const STEPSIZE_BASE = 0.05;
 
         // DOM Elements
         const canvas = document.getElementById('gameCanvas');
@@ -303,6 +305,7 @@ layout: none
         const lensLabel = document.getElementById('lensLabel');
         const toggleLensesBtn = document.getElementById('toggleLensesBtn');
         const toggleFieldLinesBtn = document.getElementById('toggleFieldLinesBtn');
+        const toggleLaserBtn = document.getElementById('toggleLaserBtn');
         const fieldCompass = document.getElementById('fieldCompass');
         const fieldCompassNeedle = document.getElementById('fieldCompassNeedle');
         const fieldCompassMagnitude = document.getElementById('fieldCompassMagnitude');
@@ -356,13 +359,24 @@ layout: none
         // solo alimenta visualizaciones baratas: líneas de campo en el
         // minimapa y la brújula — nunca toca castRay.
         //
-        // Cada fuente: { x, y, charge, type: 'gravity' | 'electric' | 'magnetic', label }
-        // Convención de signo: charge > 0 repele (el vector de campo apunta
-        // lejos de la fuente), charge < 0 atrae (apunta hacia la fuente).
-        // La gravedad siempre es atractiva, así que se deriva de `lenses`
-        // como charge negativo si el mapa no define fieldSources propias.
+        // Fuente de gravedad: { x, y, mass, type: 'gravity' }. Se usa la ley
+        // de gravitación universal, g = G·M/r² (siempre atractivo).
+        // Fuente eléctrica: { x, y, charge, type: 'electric' } (ley de
+        // Coulomb, con signo — repele si charge>0, atrae si charge<0).
+        // G_SIM es una constante "de juguete" en unidades de la simulación,
+        // NO la constante gravitatoria real (6.674×10⁻¹¹ N·m²/kg² sería
+        // invisible a esta escala) — se aclara así para no dar a entender
+        // que esto son unidades físicas reales.
+        const G_SIM = 1;
         let fieldSources = [];
         let fieldLinesVisible = true;
+        // Rayo láser: traza y dibuja el camino óptico real (con la misma
+        // física de curvatura que usa castRay) desde el jugador en la
+        // dirección a la que mira, en el minimapa. Apagado por defecto —
+        // se prende con el botón. Costo: UN trazado por frame (equivalente
+        // a un solo castRay con puntos grabados), nada comparado a los
+        // cientos de rayos que ya se lanzan para las paredes.
+        let laserVisible = false;
 
         // --- ESCALADO DE CALIDAD ADAPTATIVO (Dynamic Resolution Scaling) ---
         // Es la red de seguridad para hardware realmente débil, además de la
@@ -376,13 +390,14 @@ layout: none
         const FRAME_BUDGET_MS = 1000 / TARGET_FPS;
         const DRS_CHECK_INTERVAL = 30;
         const QUALITY_TIERS = [
-            { renderScale: 0.80, raysPerPixel: 0.50 },
-            { renderScale: 0.65, raysPerPixel: 0.42 },
-            { renderScale: 0.50, raysPerPixel: 0.35 },
-            { renderScale: 0.40, raysPerPixel: 0.28 },
+            { renderScale: 0.80, raysPerPixel: 0.50, stepSizeMultiplier: 1.0 },
+            { renderScale: 0.65, raysPerPixel: 0.42, stepSizeMultiplier: 1.3 },
+            { renderScale: 0.50, raysPerPixel: 0.35, stepSizeMultiplier: 1.6 },
+            { renderScale: 0.40, raysPerPixel: 0.28, stepSizeMultiplier: 2.0 },
         ];
         let currentRenderScale = QUALITY_TIERS[0].renderScale;
         let currentRaysPerPixel = QUALITY_TIERS[0].raysPerPixel;
+        let currentStepSize = STEPSIZE_BASE;
         let qualityTier = 0;
         let drsFrameTimes = [];
         let drsFrameCounter = 0;
@@ -392,7 +407,9 @@ layout: none
             const q = QUALITY_TIERS[qualityTier];
             currentRenderScale = q.renderScale;
             currentRaysPerPixel = q.raysPerPixel;
+            currentStepSize = STEPSIZE_BASE * q.stepSizeMultiplier;
             setCanvasSize();
+            updateRaycastingParams();
         }
 
         function evaluateDRS(lastFrameMs) {
@@ -492,6 +509,11 @@ layout: none
             updateFieldLinesButton();
         });
 
+        toggleLaserBtn.addEventListener('click', () => {
+            laserVisible = !laserVisible;
+            toggleLaserBtn.textContent = laserVisible ? "Ocultar rayo láser" : "Mostrar rayo láser";
+        });
+
         function lensNearPlayer(threshold = 2.5) {
             let closest = -1, minD = 99;
             for (let i = 0; i < lenses.length; i++) {
@@ -507,10 +529,14 @@ layout: none
         }
 
         // Campo neto en (px, py) por superposición vectorial de todas las
-        // fuentes (ley del inverso del cuadrado). Barato: es un solo loop
-        // sobre `fieldSources`, que en la práctica tiene pocos elementos
-        // (unas pocas fuentes por mapa) — nada que ver con el costo de
+        // fuentes. Barato: es un solo loop sobre `fieldSources`, que en la
+        // práctica tiene pocos elementos — nada que ver con el costo de
         // castRay, que itera cientos de veces por rayo.
+        //
+        // Gravedad: g = G·M/r² (ley de gravitación universal, siempre
+        // atractivo — el vector apunta hacia la fuente).
+        // Eléctrico: E = k·q/r² (ley de Coulomb, con signo — repele si la
+        // carga es positiva).
         function fieldVectorAt(px, py) {
             let fx = 0, fy = 0;
             for (let i = 0; i < fieldSources.length; i++) {
@@ -520,7 +546,9 @@ layout: none
                 const distSq = dx * dx + dy * dy;
                 if (distSq < 0.01) continue; // evita singularidad muy cerca de la fuente
                 const dist = Math.sqrt(distSq);
-                const k = src.charge / distSq; // magnitud con signo (inverso del cuadrado)
+                const k = src.type === 'electric'
+                    ? (src.charge || 0) / distSq                    // Coulomb, con signo
+                    : -(G_SIM * (src.mass || 0)) / distSq;           // Newton, siempre atractivo
                 fx += k * (dx / dist);
                 fy += k * (dy / dist);
             }
@@ -533,10 +561,55 @@ layout: none
             return 'rgba(150,190,255,'; // gravity (mismo tono que el círculo de la lente)
         }
 
+        // Traza el camino óptico completo desde el jugador, con la MISMA
+        // física de curvatura que usa castRay (para que lo que se vea acá
+        // sea consistente con lo que realmente se renderiza en 3D), pero
+        // grabando cada punto en vez de solo devolver el resultado final.
+        // Se llama UNA vez por frame cuando el láser está activo — el costo
+        // es equivalente a un solo rayo más, nada comparado a los cientos
+        // que ya se lanzan para las paredes.
+        function traceLaserPath(startAngle) {
+            let x = player.x, y = player.y;
+            let angle = startAngle;
+            let sin = Math.sin(angle), cos = Math.cos(angle);
+            const points = [{ x, y }];
+            const numLenses = activeLensesCache.length;
+            const RECORD_STRIDE = 3; // registrar cada 3 pasos alcanza para una curva suave
+            for (let iter = 1; iter <= MAX_ITERATIONS; iter++) {
+                if (numLenses > 0) {
+                    for (let li = 0; li < numLenses; li++) {
+                        const lens = activeLensesCache[li];
+                        const dx = x - lens.x, dy = y - lens.y;
+                        const distSq = dx * dx + dy * dy;
+                        if (distSq >= lens.radiusSq) continue;
+                        const distToLens = Math.sqrt(distSq);
+                        const epsilon = 0.0001;
+                        const safeDist = distToLens < epsilon ? epsilon : distToLens;
+                        const bendFactor = lens.strength * (1 - safeDist / lens.radius);
+                        const angleToLens = Math.atan2(dy, dx);
+                        const newAngle = angle + bendFactor * Math.sin(angle - angleToLens);
+                        if (Math.abs(newAngle - angle) > 0.0001) {
+                            angle = newAngle; sin = Math.sin(angle); cos = Math.cos(angle);
+                        }
+                    }
+                }
+                x += cos * currentStepSize;
+                y += sin * currentStepSize;
+                const mapX = Math.floor(x), mapY = Math.floor(y);
+                if (mapX < 0 || mapY < 0 || mapY >= map.length || mapX >= map[0].length) break;
+                if (iter % RECORD_STRIDE === 0) points.push({ x, y });
+                if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 'L') {
+                    points.push({ x, y });
+                    break;
+                }
+            }
+            return points;
+        }
+
         function updateRaycastingParams() {
             if (!map || !map.length) return;
             const maxMapDist = Math.sqrt(map[0].length ** 2 + map.length ** 2);
-            MAX_ITERATIONS = Math.ceil(maxMapDist / STEPSIZE) + 2;
+            MAX_ITERATIONS = Math.ceil(maxMapDist / currentStepSize) + 2;
         }
 
         async function loadSprites() {
@@ -738,7 +811,7 @@ layout: none
                 } else {
                     fieldSources = lenses.map(l => ({
                         x: l.x, y: l.y,
-                        charge: -Math.abs(l.strength) * 40, // gravedad = siempre atractiva
+                        mass: Math.abs(l.strength) * 40, // "masa" derivada de la fuerza de la lente
                         type: 'gravity'
                     }));
                 }
@@ -807,8 +880,11 @@ layout: none
             const { fx, fy, magnitude } = fieldVectorAt(player.x, player.y);
             const angleDeg = (Math.atan2(fy, fx) * 180 / Math.PI) + 90; // 0deg = "arriba" del dial
             fieldCompassNeedle.style.transform = `translate(-50%, -100%) rotate(${angleDeg}deg)`;
-            fieldCompassMagnitude.textContent = `|F| = ${magnitude.toFixed(3)}`;
-            renderLaTeX(fieldCompassEq, `$\\vec{F} = \\sum_i \\dfrac{q_i}{r_i^2}\\,\\hat{r}_i$`);
+            fieldCompassMagnitude.textContent = `|g| = ${magnitude.toFixed(3)}`;
+            // g = G·M/r²: notación newtoniana, ya que las fuentes actuales
+            // son masas gravitatorias (derivadas de las lentes), no cargas
+            // eléctricas genéricas.
+            renderLaTeX(fieldCompassEq, `$\\vec{g} = -\\sum_i \\dfrac{G\\,M_i}{r_i^2}\\,\\hat{r}_i$`);
         }
 
         function isValidMove(x, y) {
@@ -901,7 +977,7 @@ layout: none
             let y = player.y;
             let sin = Math.sin(angle);
             let cos = Math.cos(angle);
-            const stepSize = STEPSIZE;
+            const stepSize = currentStepSize;
             const originalAngle = angle;
             const maxIterations = MAX_ITERATIONS;
             let iterations = 0;
@@ -948,8 +1024,8 @@ layout: none
             while (iterations++ < maxIterations) {
                 // Un solo paso por lente (antes eran dos: uno para
                 // magnificación y otro, en applyLensEffects, para curvatura
-                // — cada uno con su propio sqrt). Y ahora el bloque entero
-                // se salta si NINGÚN lente es alcanzable por este rayo.
+                // — cada uno con su propio sqrt). El bloque entero se salta
+                // si NINGÚN lente es alcanzable por este rayo.
                 if (anyLensReachable) {
                     for (let li = 0; li < numLenses; li++) {
                         const lens = activeLensesCache[li];
@@ -1159,6 +1235,7 @@ layout: none
             drawMapCells();
             drawFieldLines();
             drawLensEffects();
+            drawLaserPath();
             drawPlayer();
             drawPlayerFOV();
             for (const s of sprites) {
@@ -1237,6 +1314,25 @@ layout: none
                         minimapCtx.fill();
                     }
                 }
+            }
+            function drawLaserPath() {
+                if (!laserVisible) return;
+                const points = traceLaserPath(player.angle);
+                if (points.length < 2) return;
+                minimapCtx.strokeStyle = 'rgba(255,40,40,0.9)';
+                minimapCtx.lineWidth = 1.5;
+                minimapCtx.beginPath();
+                minimapCtx.moveTo(points[0].x * scale, points[0].y * scale);
+                for (let i = 1; i < points.length; i++) {
+                    minimapCtx.lineTo(points[i].x * scale, points[i].y * scale);
+                }
+                minimapCtx.stroke();
+                // punto final, para que se note dónde "pega" el rayo
+                const last = points[points.length - 1];
+                minimapCtx.fillStyle = 'rgba(255,80,80,0.95)';
+                minimapCtx.beginPath();
+                minimapCtx.arc(last.x * scale, last.y * scale, 2, 0, Math.PI * 2);
+                minimapCtx.fill();
             }
             function drawPlayer() {
                 minimapCtx.fillStyle = 'red';
