@@ -117,6 +117,50 @@ layout: none
         #lensControls input { width: 100%; }
         #lensMoveGroup { margin-top: 10px; display: flex; gap: 3px; flex-wrap: wrap;}
         #lensMoveGroup button { flex: 1 1 45%; margin: 2px; padding: 3px 0; border-radius: 3px; border: 1px solid #333; background: #444; color: #fff;}
+
+        /* Brújula de campo (gravedad + eléctrico) */
+        #toggleFieldLinesBtn { position: absolute; top: 55px; right: 10px; z-index:110; padding: 7px 18px; border-radius: 6px; background: #222; color: #fff; border: none; font-size: 15px; cursor: pointer; }
+        #fieldCompass {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            z-index: 100;
+            width: 90px;
+            background: rgba(0,10,20,0.75);
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+            display: none;
+            font-family: 'Courier New', monospace;
+        }
+        #fieldCompassDial {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 6px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,255,255,0.4);
+            background: rgba(0,255,255,0.05);
+        }
+        #fieldCompassNeedle {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 2px;
+            height: 24px;
+            background: #0ff;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg);
+            transition: transform 0.15s linear;
+        }
+        #fieldCompassMagnitude { color: #0ff; font-size: 11px; }
+        #fieldCompassEq { color: #ccc; font-size: 11px; min-height: 14px; }
+        #fieldCompassEq .MathJax { font-size: 0.85em !important; padding: 0 2px !important; }
+        @media (max-width: 480px) {
+            #fieldCompass { width: 76px; }
+            #fieldCompassDial { width: 50px; height: 50px; }
+        }
         
         #textureActionsContainer {
             position: absolute;
@@ -197,6 +241,13 @@ layout: none
         <label>Radio: <input type="range" id="lensRadius" min="0.3" max="15" step="0.01" value="1."></label>
     </div>
     <button id="toggleLensesBtn">Desactivar lentes</button>
+    <button id="toggleFieldLinesBtn">Ocultar líneas de campo</button>
+
+    <div id="fieldCompass">
+        <div id="fieldCompassDial"><div id="fieldCompassNeedle"></div></div>
+        <div id="fieldCompassMagnitude">|F| = 0.000</div>
+        <div id="fieldCompassEq" class="tex2jax_process"></div>
+    </div>
 
     <!-- Modal enriquecido para las apps -->
     <div id="enrichedAppModal">
@@ -228,7 +279,7 @@ layout: none
         const WALL_INFO_DISTANCE = 1.5;
         const MAX_DISTANCE_TO_TEXTURE = 35;
         const WALL_MARGIN = 0.85;
-        const RENDER_SCALE = 0.8;
+        const RENDER_SCALE_MAX = 0.8;
         const TARGET_FPS = 25;
         const STEPSIZE = 0.05;
 
@@ -250,6 +301,11 @@ layout: none
         const lensRadiusInput = document.getElementById('lensRadius');
         const lensLabel = document.getElementById('lensLabel');
         const toggleLensesBtn = document.getElementById('toggleLensesBtn');
+        const toggleFieldLinesBtn = document.getElementById('toggleFieldLinesBtn');
+        const fieldCompass = document.getElementById('fieldCompass');
+        const fieldCompassNeedle = document.getElementById('fieldCompassNeedle');
+        const fieldCompassMagnitude = document.getElementById('fieldCompassMagnitude');
+        const fieldCompassEq = document.getElementById('fieldCompassEq');
         const textureActionsContainer = document.getElementById('textureActionsContainer');
         const btnAbrirApp = document.getElementById('btnAbrirApp');
         const btnVerInfo = document.getElementById('btnVerInfo');
@@ -283,6 +339,68 @@ layout: none
         // no en cada paso de cada rayo. Evita repetir el chequeo `.visible`
         // miles de veces por frame dentro de castRay.
         let activeLensesCache = [];
+
+        // --- FUENTES DE CAMPO (gravedad + eléctrico) ---
+        // OJO: esto es un sistema APARTE de `lenses`. `lenses` sigue siendo
+        // lo único que dobla los rayos dentro de castRay (así el hot path del
+        // renderizador queda intacto, sin ningún costo extra). `fieldSources`
+        // solo alimenta visualizaciones baratas: líneas de campo en el
+        // minimapa y la brújula — nunca toca castRay.
+        //
+        // Cada fuente: { x, y, charge, type: 'gravity' | 'electric' | 'magnetic', label }
+        // Convención de signo: charge > 0 repele (el vector de campo apunta
+        // lejos de la fuente), charge < 0 atrae (apunta hacia la fuente).
+        // La gravedad siempre es atractiva, así que se deriva de `lenses`
+        // como charge negativo si el mapa no define fieldSources propias.
+        let fieldSources = [];
+        let fieldLinesVisible = true;
+
+        // --- ESCALADO DE CALIDAD ADAPTATIVO (Dynamic Resolution Scaling) ---
+        // Es la red de seguridad para hardware realmente débil, además de la
+        // optimización específica de lentes de arriba (el precheque rayo-vs-
+        // círculo). En vez de adivinar la potencia del teléfono de antemano
+        // (con navigator.hardwareConcurrency o similar, poco confiable entre
+        // fabricantes/navegadores), se mide el tiempo real que tarda cada
+        // frame y se ajusta la calidad de a poco — es lo que hacen Unity y
+        // Unreal de fábrica. Se evalúa cada N frames (no en cada uno) y con
+        // una banda de tolerancia, para no estar oscilando de calidad.
+        const FRAME_BUDGET_MS = 1000 / TARGET_FPS;
+        const DRS_CHECK_INTERVAL = 30;
+        const QUALITY_TIERS = [
+            { renderScale: 0.80, raysPerPixel: 0.50 },
+            { renderScale: 0.65, raysPerPixel: 0.42 },
+            { renderScale: 0.50, raysPerPixel: 0.35 },
+            { renderScale: 0.40, raysPerPixel: 0.28 },
+        ];
+        let currentRenderScale = QUALITY_TIERS[0].renderScale;
+        let currentRaysPerPixel = QUALITY_TIERS[0].raysPerPixel;
+        let qualityTier = 0;
+        let drsFrameTimes = [];
+        let drsFrameCounter = 0;
+
+        function applyQualityTier(tier) {
+            qualityTier = Math.max(0, Math.min(QUALITY_TIERS.length - 1, tier));
+            const q = QUALITY_TIERS[qualityTier];
+            currentRenderScale = q.renderScale;
+            currentRaysPerPixel = q.raysPerPixel;
+            setCanvasSize();
+        }
+
+        function evaluateDRS(lastFrameMs) {
+            drsFrameTimes.push(lastFrameMs);
+            if (drsFrameTimes.length > DRS_CHECK_INTERVAL) drsFrameTimes.shift();
+            if (++drsFrameCounter % DRS_CHECK_INTERVAL !== 0) return;
+
+            const avg = drsFrameTimes.reduce((a, b) => a + b, 0) / drsFrameTimes.length;
+            // Solo baja calidad si vamos consistentemente ~30% más lento que
+            // el presupuesto, y solo sube si vamos con harto margen (evita
+            // estar cambiando de nivel todo el rato por ruido de un frame).
+            if (avg > FRAME_BUDGET_MS * 1.3 && qualityTier < QUALITY_TIERS.length - 1) {
+                applyQualityTier(qualityTier + 1);
+            } else if (avg < FRAME_BUDGET_MS * 0.7 && qualityTier > 0) {
+                applyQualityTier(qualityTier - 1);
+            }
+        }
 
         // --- NUEVA LÓGICA PARA DETECTAR MIRADA FIJA SOBRE TEXTURA ---
         let lastLookedTexture = null;
@@ -356,6 +474,15 @@ layout: none
             updateLensesButton();
         });
 
+        function updateFieldLinesButton() {
+            toggleFieldLinesBtn.textContent = fieldLinesVisible ? "Ocultar líneas de campo" : "Mostrar líneas de campo";
+            fieldCompass.style.display = (fieldLinesVisible && fieldSources.length) ? "block" : "none";
+        }
+        toggleFieldLinesBtn.addEventListener('click', () => {
+            fieldLinesVisible = !fieldLinesVisible;
+            updateFieldLinesButton();
+        });
+
         function lensNearPlayer(threshold = 2.5) {
             let closest = -1, minD = 99;
             for (let i = 0; i < lenses.length; i++) {
@@ -368,6 +495,33 @@ layout: none
                 }
             }
             return closest;
+        }
+
+        // Campo neto en (px, py) por superposición vectorial de todas las
+        // fuentes (ley del inverso del cuadrado). Barato: es un solo loop
+        // sobre `fieldSources`, que en la práctica tiene pocos elementos
+        // (unas pocas fuentes por mapa) — nada que ver con el costo de
+        // castRay, que itera cientos de veces por rayo.
+        function fieldVectorAt(px, py) {
+            let fx = 0, fy = 0;
+            for (let i = 0; i < fieldSources.length; i++) {
+                const src = fieldSources[i];
+                const dx = px - src.x;
+                const dy = py - src.y;
+                const distSq = dx * dx + dy * dy;
+                if (distSq < 0.01) continue; // evita singularidad muy cerca de la fuente
+                const dist = Math.sqrt(distSq);
+                const k = src.charge / distSq; // magnitud con signo (inverso del cuadrado)
+                fx += k * (dx / dist);
+                fy += k * (dy / dist);
+            }
+            return { fx, fy, magnitude: Math.sqrt(fx * fx + fy * fy) };
+        }
+
+        function fieldSourceColor(type) {
+            if (type === 'electric') return 'rgba(255,150,80,';
+            if (type === 'magnetic') return 'rgba(140,255,140,';
+            return 'rgba(150,190,255,'; // gravity (mismo tono que el círculo de la lente)
         }
 
         function updateRaycastingParams() {
@@ -397,8 +551,8 @@ layout: none
         function setCanvasSize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            renderCanvas.width = Math.floor(canvas.width * RENDER_SCALE);
-            renderCanvas.height = Math.floor(canvas.height * RENDER_SCALE);
+            renderCanvas.width = Math.floor(canvas.width * currentRenderScale);
+            renderCanvas.height = Math.floor(canvas.height * currentRenderScale);
         }
 
         function detectMobileAndLockOrientation() {
@@ -564,6 +718,21 @@ layout: none
                 if (typeof mapData === "undefined") throw new Error('mapData no está definido');
                 map = mapData.map;
                 lenses = (mapData.lenses || []).map(l => ({ ...l, visible: lensesActive, radiusSq: l.radius * l.radius }));
+
+                // fieldSources: si el mapa define las suyas (para agregar
+                // cargas eléctricas, por ejemplo) se usan tal cual. Si no,
+                // se derivan de las lentes de gravedad para que cualquier
+                // mapa existente muestre líneas de campo gratis, sin tocarlo.
+                if (Array.isArray(mapData.fieldSources) && mapData.fieldSources.length) {
+                    fieldSources = mapData.fieldSources.map(f => ({ ...f }));
+                } else {
+                    fieldSources = lenses.map(l => ({
+                        x: l.x, y: l.y,
+                        charge: -Math.abs(l.strength) * 40, // gravedad = siempre atractiva
+                        type: 'gravity'
+                    }));
+                }
+                updateFieldLinesButton();
                 if (mapData.roomTextures) customRoomTextures = mapData.roomTextures;
                 if (mapData.skyTexture) customSkyTexture = mapData.skyTexture;
                 if (mapData.floorTexture) customFloorTexture = mapData.floorTexture;
@@ -615,7 +784,21 @@ layout: none
                     lensControls.style.display = "none";
                     currentLensIndex = -1;
                 }
+                updateFieldCompass();
             }
+        }
+
+        // Brújula de campo: solo se recalcula cada 20 frames (igual que el
+        // resto del HUD), no en cada frame. El costo es un loop sobre
+        // fieldSources (pocas fuentes) más un typeset de MathJax, que sería
+        // caro si se llamara por frame — throttleado, es gratis.
+        function updateFieldCompass() {
+            if (!fieldLinesVisible || fieldSources.length === 0) return;
+            const { fx, fy, magnitude } = fieldVectorAt(player.x, player.y);
+            const angleDeg = (Math.atan2(fy, fx) * 180 / Math.PI) + 90; // 0deg = "arriba" del dial
+            fieldCompassNeedle.style.transform = `translate(-50%, -100%) rotate(${angleDeg}deg)`;
+            fieldCompassMagnitude.textContent = `|F| = ${magnitude.toFixed(3)}`;
+            renderLaTeX(fieldCompassEq, `$\\vec{F} = \\sum_i \\dfrac{q_i}{r_i^2}\\,\\hat{r}_i$`);
         }
 
         function isValidMove(x, y) {
@@ -715,36 +898,73 @@ layout: none
             let magnification = 1.0;
             const numLenses = activeLensesCache.length;
 
-            while (iterations++ < maxIterations) {
-                // Un solo paso por lente (antes eran dos: uno para magnificación
-                // y otro, en applyLensEffects, para curvatura — cada uno con su
-                // propio sqrt). Además, se descarta con distancia AL CUADRADO
-                // antes de sacar la raíz, así los puntos lejos del lente (la
-                // mayoría) no pagan el costo del sqrt.
+            // --- PRECHEQUEO: ¿esta línea de mirada puede pasar cerca de
+            // ALGÚN lente? En un frame típico, la mayoría de los rayos
+            // miran lejos de cualquier lente (que ocupa solo una porción
+            // del campo visual) — antes, igual pagaban sqrt+atan2 en cada
+            // paso del loop principal. Esto se resuelve con geometría
+            // rayo-vs-círculo (proyección + distancia perpendicular, sin
+            // sqrt ni trig) UNA vez por rayo, no una vez por paso.
+            //
+            // OJO: esto es un interruptor todo-o-nada, no un filtro por
+            // lente. Con 2+ lentes, un rayo puede curvarse por el primero
+            // y terminar acercándose a un segundo lente que la línea recta
+            // original nunca habría alcanzado — filtrar lente por lente
+            // rompía ese caso (probado con el mapa del telescopio, que
+            // encadena varios lentes). Por eso: si CUALQUIER lente es
+            // alcanzable, se revisan TODOS los lentes en cada paso (idéntico
+            // al código sin prechequeo, sin aproximaciones). Solo se salta
+            // el bloque completo cuando NINGÚN lente es alcanzable — y ahí
+            // sí es exacto, porque si la línea recta nunca entra al radio
+            // de ningún lente, el rayo jamás empieza a curvarse.
+            let anyLensReachable = false;
+            if (numLenses > 0) {
+                const maxRayDist = maxIterations * stepSize;
+                const MARGIN = 0.5;
                 for (let li = 0; li < numLenses; li++) {
                     const lens = activeLensesCache[li];
-                    const dx = x - lens.x;
-                    const dy = y - lens.y;
-                    const distSq = dx * dx + dy * dy;
-                    if (distSq >= lens.radiusSq) continue;
+                    const toLensX = lens.x - x;
+                    const toLensY = lens.y - y;
+                    const t = toLensX * cos + toLensY * sin; // proyección sobre la línea del rayo
+                    if (t < -lens.radius - MARGIN || t > maxRayDist + lens.radius + MARGIN) continue;
+                    const perp = toLensX * sin - toLensY * cos; // distancia perpendicular a la línea
+                    const padded = lens.radius + MARGIN;
+                    if (perp * perp >= padded * padded) continue;
+                    anyLensReachable = true;
+                    break;
+                }
+            }
 
-                    const distToLens = Math.sqrt(distSq);
+            while (iterations++ < maxIterations) {
+                // Un solo paso por lente (antes eran dos: uno para
+                // magnificación y otro, en applyLensEffects, para curvatura
+                // — cada uno con su propio sqrt). Y ahora el bloque entero
+                // se salta si NINGÚN lente es alcanzable por este rayo.
+                if (anyLensReachable) {
+                    for (let li = 0; li < numLenses; li++) {
+                        const lens = activeLensesCache[li];
+                        const dx = x - lens.x;
+                        const dy = y - lens.y;
+                        const distSq = dx * dx + dy * dy;
+                        if (distSq >= lens.radiusSq) continue;
 
-                    // Magnificación (igual que antes)
-                    const normalizedDist = distToLens / lens.radius;
-                    magnification *= 1 + lens.strength * (1 - normalizedDist);
+                        const distToLens = Math.sqrt(distSq);
 
-                    // Curvatura del rayo (antes era applyLensEffects(), en un
-                    // loop aparte que recalculaba dx/dy/distToLens de nuevo)
-                    const epsilon = 0.0001;
-                    const safeDist = distToLens < epsilon ? epsilon : distToLens;
-                    const bendFactor = lens.strength * (1 - safeDist / lens.radius);
-                    const angleToLens = Math.atan2(dy, dx);
-                    const newAngle = angle + bendFactor * Math.sin(angle - angleToLens);
-                    if (Math.abs(newAngle - angle) > 0.0001) {
-                        angle = newAngle;
-                        sin = Math.sin(angle);
-                        cos = Math.cos(angle);
+                        // Magnificación
+                        const normalizedDist = distToLens / lens.radius;
+                        magnification *= 1 + lens.strength * (1 - normalizedDist);
+
+                        // Curvatura del rayo
+                        const epsilon = 0.0001;
+                        const safeDist = distToLens < epsilon ? epsilon : distToLens;
+                        const bendFactor = lens.strength * (1 - safeDist / lens.radius);
+                        const angleToLens = Math.atan2(dy, dx);
+                        const newAngle = angle + bendFactor * Math.sin(angle - angleToLens);
+                        if (Math.abs(newAngle - angle) > 0.0001) {
+                            angle = newAngle;
+                            sin = Math.sin(angle);
+                            cos = Math.cos(angle);
+                        }
                     }
                 }
 
@@ -758,7 +978,20 @@ layout: none
                 if (map[mapY][mapX] !== 0 && map[mapY][mapX] !== 'L') {
                     const dist = Math.sqrt((x - player.x) ** 2 + (y - player.y) ** 2);
                     const hitData = calculateHitData(x, y, mapX, mapY, originalAngle);
-                    return { dist, texture: textures[map[mapY][mapX]], ...hitData, magnification };
+                    // Se listan los campos a mano en vez de usar spread
+                    // (`...hitData`): mantiene la misma "forma" de objeto en
+                    // cada return, lo que ayuda al motor JS a optimizar mejor
+                    // esta función (se llama cientos de veces por frame) y
+                    // evita una copia de propiedades innecesaria.
+                    return {
+                        dist,
+                        texture: textures[map[mapY][mapX]],
+                        hitOffset: hitData.hitOffset,
+                        mapX: hitData.mapX,
+                        mapY: hitData.mapY,
+                        isVerticalWall: hitData.isVerticalWall,
+                        magnification
+                    };
                 }
             }
             return { dist: Infinity, texture: null, hitOffset: 0, mapX: -1, mapY: -1, magnification };
@@ -809,8 +1042,7 @@ layout: none
             }
         }
         function drawWalls(ctxToUse, canvasToUse) {
-            const RAYS_PER_PIXEL = 0.5; // 1 = 1 
-            const numRays = Math.floor(canvasToUse.width * RAYS_PER_PIXEL);
+            const numRays = Math.floor(canvasToUse.width * currentRaysPerPixel);
             const rayAngleStep = FOV / numRays;
             const pixelPerRay = canvasToUse.width / numRays;
             const maxWallHeight = canvasToUse.height * 2;
@@ -896,6 +1128,7 @@ layout: none
             minimapCanvas.height = mapHeight * scale;
             minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
             drawMapCells();
+            drawFieldLines();
             drawLensEffects();
             drawPlayer();
             drawPlayerFOV();
@@ -914,6 +1147,55 @@ layout: none
                             minimapCtx.fillStyle = 'white';
                             minimapCtx.fillRect(x * scale, y * scale, scale, scale);
                         }
+                    }
+                }
+            }
+            // Grilla de baja resolución (máx 14x10 puntos) — un solo loop
+            // sobre celdas de grilla, cada una hace fieldVectorAt (que a su
+            // vez es O(nº de fuentes), típicamente 1-3). Nada comparable al
+            // costo de castRay, y de por sí ya corre solo al ritmo throttleado
+            // de drawMinimap (TARGET_FPS), no en cada frame de verdad.
+            function drawFieldLines() {
+                if (!fieldLinesVisible || fieldSources.length === 0) return;
+                const gridCols = Math.min(14, mapWidth);
+                const gridRows = Math.min(10, mapHeight);
+                const stepX = mapWidth / gridCols;
+                const stepY = mapHeight / gridRows;
+                const maxArrowPx = Math.min(scale * stepX, scale * stepY) * 0.42;
+
+                minimapCtx.lineWidth = 1;
+                for (let gy = 0; gy < gridRows; gy++) {
+                    for (let gx = 0; gx < gridCols; gx++) {
+                        const mx = (gx + 0.5) * stepX;
+                        const my = (gy + 0.5) * stepY;
+                        const cellX = Math.floor(mx), cellY = Math.floor(my);
+                        if (map[cellY] && map[cellY][cellX] !== 0) continue; // no dibujar dentro de paredes
+
+                        const { fx, fy, magnitude } = fieldVectorAt(mx, my);
+                        if (magnitude < 1e-4) continue;
+
+                        const ux = fx / magnitude, uy = fy / magnitude;
+                        const len = Math.min(maxArrowPx, maxArrowPx * Math.min(1, magnitude * 3));
+                        const px = mx * scale, py = my * scale;
+                        const ex = px + ux * len, ey = py + uy * len;
+
+                        const alpha = Math.min(0.85, 0.25 + magnitude * 0.5);
+                        const color = fieldSourceColor(fieldSources[0]?.type) + alpha + ')';
+                        minimapCtx.strokeStyle = color;
+                        minimapCtx.beginPath();
+                        minimapCtx.moveTo(px, py);
+                        minimapCtx.lineTo(ex, ey);
+                        minimapCtx.stroke();
+
+                        // punta de flecha simple
+                        const ah = Math.min(3, len * 0.4);
+                        const arrowAngle = Math.atan2(uy, ux);
+                        minimapCtx.beginPath();
+                        minimapCtx.moveTo(ex, ey);
+                        minimapCtx.lineTo(ex - ah * Math.cos(arrowAngle - 0.4), ey - ah * Math.sin(arrowAngle - 0.4));
+                        minimapCtx.moveTo(ex, ey);
+                        minimapCtx.lineTo(ex - ah * Math.cos(arrowAngle + 0.4), ey - ah * Math.sin(arrowAngle + 0.4));
+                        minimapCtx.stroke();
                     }
                 }
             }
@@ -956,7 +1238,9 @@ layout: none
         function gameLoop(now) {
             update();
             if (!lastDrawTime || now - lastDrawTime > 1000 / TARGET_FPS) {
+                const drawStart = performance.now();
                 draw();
+                evaluateDRS(performance.now() - drawStart);
                 lastDrawTime = now || 0;
             }
             requestAnimationFrame(gameLoop);
