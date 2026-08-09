@@ -332,6 +332,47 @@ layout: none
         // raycast completo, por sprite, por frame).
         let wallDepthBuffer = new Float32Array(1);
 
+        // Caché estático del minimapa: las celdas de pared no cambian
+        // mientras el mapa está cargado, así que en vez de recorrer TODO
+        // el grid y volver a llamar fillRect por cada celda EN CADA FRAME,
+        // se dibuja una sola vez (al cargar el mapa) a un canvas aparte, y
+        // drawMinimap solo hace un drawImage de esa imagen ya lista + dibuja
+        // encima lo que sí cambia cada frame (jugador, láser, líneas de
+        // campo, sprites). También evita reasignar minimapCanvas.width/height
+        // en cada frame, que de por sí resetea el canvas en algunos
+        // navegadores aunque el valor sea el mismo.
+        let minimapScale = 1;
+        let minimapStaticCanvas = null;
+        let minimapStaticCtx = null;
+
+        function rebuildMinimapStatic() {
+            if (!map || !map.length) return;
+            const mapWidth = map[0].length;
+            const mapHeight = map.length;
+            minimapScale = Math.min(MINIMAP_MAX_SIZE / mapWidth, MINIMAP_MAX_SIZE / mapHeight);
+            const w = Math.ceil(mapWidth * minimapScale);
+            const h = Math.ceil(mapHeight * minimapScale);
+
+            minimapCanvas.width = w;
+            minimapCanvas.height = h;
+
+            if (!minimapStaticCanvas) {
+                minimapStaticCanvas = document.createElement('canvas');
+                minimapStaticCtx = minimapStaticCanvas.getContext('2d');
+            }
+            minimapStaticCanvas.width = w;
+            minimapStaticCanvas.height = h;
+            minimapStaticCtx.clearRect(0, 0, w, h);
+            minimapStaticCtx.fillStyle = 'white';
+            for (let y = 0; y < map.length; y++) {
+                for (let x = 0; x < map[y].length; x++) {
+                    if (map[y][x] !== 0) {
+                        minimapStaticCtx.fillRect(x * minimapScale, y * minimapScale, minimapScale, minimapScale);
+                    }
+                }
+            }
+        }
+
         // Game State
         const player = { x: 2, y: 2, angle: 70, speed: 0, turnSpeed: 0 };
         const textures = {};
@@ -390,14 +431,21 @@ layout: none
         const FRAME_BUDGET_MS = 1000 / TARGET_FPS;
         const DRS_CHECK_INTERVAL = 30;
         const QUALITY_TIERS = [
-            { renderScale: 0.80, raysPerPixel: 0.50, stepSizeMultiplier: 1.0 },
-            { renderScale: 0.65, raysPerPixel: 0.42, stepSizeMultiplier: 1.3 },
-            { renderScale: 0.50, raysPerPixel: 0.35, stepSizeMultiplier: 1.6 },
-            { renderScale: 0.40, raysPerPixel: 0.28, stepSizeMultiplier: 2.0 },
+            { renderScale: 0.80, raysPerPixel: 0.50 },
+            { renderScale: 0.65, raysPerPixel: 0.42 },
+            { renderScale: 0.50, raysPerPixel: 0.35 },
+            { renderScale: 0.40, raysPerPixel: 0.28 },
         ];
         let currentRenderScale = QUALITY_TIERS[0].renderScale;
         let currentRaysPerPixel = QUALITY_TIERS[0].raysPerPixel;
-        let currentStepSize = STEPSIZE_BASE;
+        // STEPSIZE queda FIJO (no atado al DRS): variarlo en vivo cambia la
+        // forma real de la curva de la lente (no solo la nitidez), y como
+        // acercarse a un lente es justo lo que hace que el DRS suba de
+        // nivel, se generaba un ciclo que retroalimentaba a la propia
+        // lente — la curva cambiaba de forma según la distancia del
+        // jugador, que es exactamente el reporte de bug. No vale la pena
+        // el rendimiento ganado a costa de que la óptica se vea inconsistente.
+        const currentStepSize = STEPSIZE_BASE;
         let qualityTier = 0;
         let drsFrameTimes = [];
         let drsFrameCounter = 0;
@@ -407,9 +455,7 @@ layout: none
             const q = QUALITY_TIERS[qualityTier];
             currentRenderScale = q.renderScale;
             currentRaysPerPixel = q.raysPerPixel;
-            currentStepSize = STEPSIZE_BASE * q.stepSizeMultiplier;
             setCanvasSize();
-            updateRaycastingParams();
         }
 
         function evaluateDRS(lastFrameMs) {
@@ -826,6 +872,7 @@ layout: none
                 updateLensControlsVisibility();
                 updateRaycastingParams();
                 updateLensesButton();
+                rebuildMinimapStatic();
             } catch (error) {
                 console.error('Error al cargar el mapa:', error);
             }
@@ -1228,11 +1275,9 @@ layout: none
             if (!map.length) return;
             const mapWidth = map[0].length;
             const mapHeight = map.length;
-            const scale = Math.min(MINIMAP_MAX_SIZE / mapWidth, MINIMAP_MAX_SIZE / mapHeight);
-            minimapCanvas.width = mapWidth * scale;
-            minimapCanvas.height = mapHeight * scale;
+            const scale = minimapScale;
             minimapCtx.clearRect(0, 0, minimapCanvas.width, minimapCanvas.height);
-            drawMapCells();
+            if (minimapStaticCanvas) minimapCtx.drawImage(minimapStaticCanvas, 0, 0);
             drawFieldLines();
             drawLensEffects();
             drawLaserPath();
@@ -1245,16 +1290,6 @@ layout: none
                 minimapCtx.arc(s.x * scale, s.y * scale, scale * 0.45, 0, Math.PI * 2);
                 minimapCtx.fill();
                 minimapCtx.restore();
-            }
-            function drawMapCells() {
-                for (let y = 0; y < map.length; y++) {
-                    for (let x = 0; x < map[y].length; x++) {
-                        if (map[y][x] !== 0) {
-                            minimapCtx.fillStyle = 'white';
-                            minimapCtx.fillRect(x * scale, y * scale, scale, scale);
-                        }
-                    }
-                }
             }
             // Grilla de baja resolución (máx 14x10 puntos) — un solo loop
             // sobre celdas de grilla, cada una hace fieldVectorAt (que a su
