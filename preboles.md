@@ -810,7 +810,7 @@ layout: none
         MapUtils.initMap(lat, lon, cityName);
 
         const altitude = chileanCities[cityName]?.altitude ?? 0;
-        const result = await computeCityPrediction(lat, lon, { nSimulations: 20, returnFactors: true, altitude });
+        const result = await computeCityPrediction(lat, lon, { nSimulations: null, returnFactors: true, altitude });
         
         if (!result) throw new Error('No se pudieron obtener datos meteorológicos.');
 
@@ -868,9 +868,8 @@ layout: none
         updateCharts(meteoData, sunrise, sunset, timeUtils.getSunsetIndex(meteoData, lat, lon, true), timeUtils.getSunsetIndex(meteoData, lat, lon, false));
         if (heatmapEnabled) await MapUtils.updateHeatmap(lat, lon, altitude);
 
-        log(`% arrebol: amanecer ${(sunriseProbResult.probability * 100).toFixed(1)}% ±${(sunriseProbResult.confidence.std * 100).toFixed(1)}%`);
-        log(`% arrebol: atardecer ${(sunsetProbResult.probability * 100).toFixed(1)}% ±${(sunsetProbResult.confidence.std * 100).toFixed(1)}%`);
-        log(`Confianza atardecer: ${sunsetProbResult.confidence.level}`);
+        log(`% arrebol: amanecer ${(sunriseProbResult.probability * 100).toFixed(1)}%`);
+        log(`% arrebol: atardecer ${(sunsetProbResult.probability * 100).toFixed(1)}%`);
         log(`Máximo arrebol estimado: ${optimalSunsetTime.toLocaleTimeString('es-CL')}`);
       } catch (e) {
         document.getElementById('loadingState').innerHTML = '';
@@ -1079,7 +1078,7 @@ layout: none
       for (const name of cities) {
         const city = chileanCities[name];
         try {
-          const result = await computeCityPrediction(city.lat, city.lon, { nSimulations: 50, returnFactors: false, altitude: city.altitude ?? 0 });
+          const result = await computeCityPrediction(city.lat, city.lon, { nSimulations: null, returnFactors: false, altitude: city.altitude ?? 0 });
           if (!result) continue;
 
           const { meteoData, sunsetMoment, sunriseMoment } = result;
