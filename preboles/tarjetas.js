@@ -52,17 +52,19 @@
         return window.cardPredictionMode === 'sunrise' ? probs.sunriseMoment : probs.sunsetMoment;
     }
 
+    let _isSmallMobile = window.matchMedia('(max-width: 400px)').matches;
+    let _isMobile      = window.matchMedia('(max-width: 768px)').matches;
+
+    window.matchMedia('(max-width: 400px)').addEventListener('change', e => { _isSmallMobile = e.matches; });
+    window.matchMedia('(max-width: 768px)').addEventListener('change', e => { _isMobile = e.matches; });
 
     function _probabilityFontSize(value) {
         const pct = Math.max(0, Math.min(50, value ?? 0));
         const t = pct / 30; // 0..1
 
-        const isSmallMobile = window.matchMedia('(max-width: 400px)').matches;
-        const isMobile      = window.matchMedia('(max-width: 768px)').matches;
-
         let min, max;
-        if (isSmallMobile)      { min = 0.75; max = 1.0;  }
-        else if (isMobile)      { min = 0.85; max = 1.15; }
+        if (_isSmallMobile)     { min = 0.75; max = 1.0;  }
+        else if (_isMobile)     { min = 0.85; max = 1.15; }
         else                    { min = 1.6;  max = 2.3;  }
 
         return `${(min + t * (max - min)).toFixed(2)}rem`;
@@ -74,12 +76,9 @@
         const CAP = 0.7; // tope de normalización: valores típicos rara vez superan esto (?)
         const t = Math.max(0, Math.min(1, (weighted ?? 0) / CAP));
 
-        const isSmallMobile = window.matchMedia('(max-width: 400px)').matches;
-        const isMobile      = window.matchMedia('(max-width: 768px)').matches;
-
         let min, max;
-        if (isSmallMobile)      { min = 0.55; max = 0.72; }
-        else if (isMobile)      { min = 0.6;  max = 0.8;  }
+        if (_isSmallMobile)      { min = 0.55; max = 0.72; }
+        else if (_isMobile)      { min = 0.6;  max = 0.8;  }
         else                    { min = 0.8;  max = 1.05; }
 
         return `${(min + t * (max - min)).toFixed(2)}rem`;
@@ -211,17 +210,6 @@
 
         const probBig = card.querySelector('.probability-big');
         if (probBig) probBig.style.fontSize = _probabilityFontSize(value);
-
-        // Ahora sí hay confidence.std real (Monte Carlo liviano activado
-        // arriba), así que mostramos ±1σ con el color de confianza.
-        
-        const uncEl = card.querySelector('.probability-uncertainty');
-        if (prediction.confidence && Number.isFinite(prediction.std)) {
-            uncEl.textContent = `±${Math.round(prediction.std * 100)}%`;
-            uncEl.style.color = prediction.confidence.color;
-        } else {
-            uncEl.innerHTML = '&nbsp;';
-        }
 
         card.querySelector('.probability-uncertainty').innerHTML = '&nbsp;';
 
