@@ -144,7 +144,7 @@
                 <div class="meta-row time-row">🕐 --:--</div>
                 <div class="meta-row visibility-row">Calculando...</div>
             </div>
-            <div class="probability-bar" style="width: 0%"></div>
+            <div class="probability-bar"></div>
         `;
     }
 
@@ -225,7 +225,7 @@
 
         // Barra de probabilidad (la franja verde→amarillo→rojo)
         const bar = card.querySelector('.probability-bar');
-        if (bar) bar.style.width = `${value ?? 0}%`;
+        if (bar) bar.style.transform = `scaleX(${(value ?? 0) / 100})`;
 
         const styles = getProbabilityStyles((value ?? 0) / 100);
         card.style.background = styles.background;

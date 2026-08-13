@@ -255,7 +255,7 @@ h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 8px; }
   text-align: left;
   padding: 8px 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
@@ -367,7 +367,9 @@ h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 8px; }
   border-radius: 3px;
   margin-top: 2px;
   background: linear-gradient(90deg, #4CAF50, #FFC107, #F44336);
-  transition: width 0.4s ease;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
 }
 
 /* Observatorios: mismo grid que ciudades, con scroll propio si la
@@ -1361,11 +1363,6 @@ img, iframe, table {
     word-break: break-word;
   }
 
-  /* Tarjetas de ciudades/observatorios: layout compacto para mobile.
-     El tamaño de .probability-big/.probability-value ya NO se fija aquí:
-     se calcula por tarjeta en JS (ver _probabilityFontSize en
-     test_tarjetas.js), este bloque solo deja un tope máximo de
-     seguridad para el estado inicial ("--"). */
   .city-card {
     padding: 6px 8px;
     min-height: 0;
