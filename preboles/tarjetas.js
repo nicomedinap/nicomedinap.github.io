@@ -5,8 +5,8 @@
     // CONFIGURACIÓN
     // ============================================================================
 
-    const BATCH_SIZE = 5;
-    const DELAY_MS   = 100;
+    const BATCH_SIZE = 4;
+    const DELAY_MS   = 60;
 
     window.cardPredictionMode = 'sunset';
 
