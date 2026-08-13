@@ -257,10 +257,10 @@
         });
     }
 
-    async function _loadCard(nombre, info, containerSelector, isObservatory, checkActiveFn) {
+    async function _loadCard(nombre, info, cardMap, checkActiveFn) {
         if (checkActiveFn && !checkActiveFn()) return;
 
-        const card = _findCard(containerSelector, nombre);
+        const card = cardMap.get(nombre);
         if (!card) return;
 
         try {
@@ -279,14 +279,14 @@
     // CARGA EN LOTES
     // ============================================================================
 
-    async function _loadBatch(entries, containerSelector, isObservatory, checkActiveFn) {
+    async function _loadBatch(entries, cardMap, checkActiveFn) {
         for (let i = 0; i < entries.length; i += BATCH_SIZE) {
             if (checkActiveFn && !checkActiveFn()) break;
 
             const batch = entries.slice(i, i + BATCH_SIZE);
             await Promise.allSettled(
                 batch.map(([nombre, info]) =>
-                    _loadCard(nombre, info, containerSelector, isObservatory, checkActiveFn)
+                    _loadCard(nombre, info, cardMap, checkActiveFn)
                 )
             );
 
@@ -325,9 +325,14 @@
             ([, info]) => !info.type || info.type !== 'observatory'
         );
 
-        cities.forEach(([nombre, info]) =>
-            menu.appendChild(_renderCityCard(nombre, info))
-        );
+        const fragment = document.createDocumentFragment();
+        const cardMap = new Map();
+        cities.forEach(([nombre, info]) => {
+            const card = _renderCityCard(nombre, info);
+            cardMap.set(nombre, card);
+            fragment.appendChild(card);
+        });
+        menu.appendChild(fragment);
 
         if (_firstLoad) {
             _firstLoad = false;
@@ -341,7 +346,7 @@
         }
 
         try {
-            await _loadBatch(cities, '#cityMenu', false, null);
+            await _loadBatch(cities, cardMap, null);
         } finally {
             _cityLoading = false;
         }
@@ -368,12 +373,18 @@
         );
 
         menu.innerHTML = '';
-        observatories.forEach(([nombre, info]) =>
-            menu.appendChild(_renderObservatoryCard(nombre, info))
-        );
+        
+        const fragment = document.createDocumentFragment();
+        const cardMap = new Map();
+        observatories.forEach(([nombre, info]) => {
+            const card = _renderObservatoryCard(nombre, info);
+            cardMap.set(nombre, card);
+            fragment.appendChild(card);
+        });
+        menu.appendChild(fragment);
 
         if (isObsActive()) {
-            await _loadBatch(observatories, '#observatoryMenu', true, isObsActive);
+            await _loadBatch(observatories, cardMap, isObsActive);
         }
 
         _obsLoading = false;
