@@ -2,7 +2,7 @@
   const ANIMATION_DURATION_MS = 16200; // debe calzar con "16s" en @keyframes arrebolShift
   const GRADIENT_ANGLE_DEG = 290;      // debe calzar con el ángulo del gradiente CSS
   const BG_SIZE_X = 5;                 // background-size: 500% 100% → 5x de ancho
-  const SAMPLE_INTERVAL_MS = 80;       // ~12 lecturas/seg, de sobra para un contador de texto
+  const SAMPLE_INTERVAL_MS = 200;       // ~12 lecturas/seg, de sobra para un contador de texto
 
   // Mismos 27 colores y posiciones que el @keyframes/gradiente CSS
   const STOP_COLORS = [
@@ -92,6 +92,7 @@
   }
 
   function updateArrebolPercent(timestampMs) {
+    if (!visible) return; // el loop sigue al volver a ser visible
     const el = document.getElementById('arrebolPercent');
     if (el && ready && timestampMs - lastSample >= SAMPLE_INTERVAL_MS) {
       lastSample = timestampMs;
@@ -110,12 +111,24 @@
 
   let ready = false;
   let lastSample = 0;
+  let visible = true;
 
   document.addEventListener('DOMContentLoaded', () => {
     initOrResize();
     // El span puede tardar un tick en tener dimensiones finales (fuentes cargando)
     setTimeout(initOrResize, 300);
-    requestAnimationFrame(updateArrebolPercent);
+
+    const emoji = document.getElementById('trebolEmoji');
+    if (emoji && 'IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        const wasVisible = visible;
+        visible = entries[0].isIntersecting;
+        if (visible && !wasVisible) requestAnimationFrame(updateArrebolPercent);
+      }, { threshold: 0 }).observe(emoji);
+    
+    } else {
+      requestAnimationFrame(updateArrebolPercent);
+    }
   });
 
   window.addEventListener('resize', initOrResize);
