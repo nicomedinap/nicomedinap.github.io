@@ -255,13 +255,14 @@ h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 8px; }
   text-align: left;
   padding: 8px 12px;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease,
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   gap: 1px;
   min-width: 0;
   overflow: hidden;
+  contain: content;
 }
 
 #observatoryMenu .city-card { width: 100%; margin: 0; }
