@@ -7,15 +7,10 @@
   --white-1: rgba(255, 255, 255, 0.1);
   --white-15: rgba(255, 255, 255, 0.15);
   --black-25: rgba(0, 0, 0, 0.25);
-  /* Alturas de mapa/gráficos: antes se repetía el selector completo
-     (.map-wrapper / .charts) en cada media query solo para cambiar
-     un número. Ahora cada breakpoint solo reasigna la variable. */
   --map-h: 662px;
   --charts-h: 400px;
 }
 
-/* Reset global: * ya cubre margin/padding, así que no hace falta
-   repetirlo en html/body (evita reglas redundantes). */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -1001,10 +996,7 @@ canvas {
 .observatory-card h4 { color: #4fc3f7; }
 
 /* La tabla de Ranking en realidad usa .rank-table / .rank-container,
-   generados dinámicamente por test_ranking.js (con su propio <style
-   id="rank-styles">), no .ranking-table. Ver #tab-ranking .rank-container
-   más abajo para el límite de ancho real. */
-
+   generados dinámicamente por test_ranking.js */
 .contact-links {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1034,8 +1026,7 @@ canvas {
 }
 
 /* Redes sociales: mismo patrón de color (fondo .15 / hover .25 / borde .3)
-   parametrizado con una variable RGB por marca en vez de repetir la regla
-   completa 6 veces. Instagram conserva su gradiente como excepción. */
+   parametrizado con una variable RGB */
 .contact-link.email     { --link-rgb: 234, 67, 53; }
 .contact-link.github    { --link-rgb: 36, 41, 46; }
 .contact-link.youtube   { --link-rgb: 255, 0, 0; }
@@ -1318,8 +1309,7 @@ img, iframe, table {
   .city-name-row {
     margin: 0;
   }
-  /* En mobile las 4 variantes de tamaño colapsan al mismo valor,
-     así que se agrupan con un selector de atributo en vez de listarlas. */
+  /* se agrupan con un selector de atributo en vez de listarlas. */
   [class*="city-name"] {
     font-size: 0.76rem;
     line-height: 1.1;
@@ -1328,8 +1318,6 @@ img, iframe, table {
     margin-top: 1px;
     gap: 0;
   }
-  /* .time-row y .visibility-row no existen en el HTML/JS: se quitan
-     (código muerto). Si en algún momento se usan, agregarlas de nuevo. */
   .meta-row {
     font-size: 0.63rem;
     line-height: 1.15;
@@ -1386,10 +1374,7 @@ img, iframe, table {
 @media (max-width: 400px) {
   /* .day-btn-top / .day-btn-bottom ya usan clamp() en su definición base
      que cubre este ancho de pantalla (clamp(0.45rem,0.6vw,0.6rem) y
-     clamp(0.7rem,1.2vw,1rem)). Se comentan en vez de borrar: verificar
-     visualmente en 400px antes de eliminarlas del todo.
-  .day-btn-top    { font-size: 0.58rem; }
-  .day-btn-bottom { font-size: 0.75rem; }
+     clamp(0.7rem,1.2vw,1rem)).
   */
 
   .probability .mc-percent { font-size: 1.3rem !important; }
@@ -1408,11 +1393,6 @@ img, iframe, table {
 @media (max-width: 350px) {
   #cityMenu, #observatoryMenu { grid-template-columns: repeat(2, 1fr); }
 }
-
-
-/* ============================================================
-   COORDENADAS - VERSIÓN OPTIMIZADA (SIN MEDIA QUERIES)
-   ============================================================ */
 
 .coord-predict-panel {
   background: var(--card);
