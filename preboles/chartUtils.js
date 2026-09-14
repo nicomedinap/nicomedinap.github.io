@@ -9,8 +9,6 @@
         if (!meteoData?.cloudSeries?.time) return;
 
         // Offset en días (0=hoy, 1=mañana...) en vez de comparar fechas:
-        // así el gráfico ubica el bloque de 24h correcto sin depender de
-        // que la zona horaria del dispositivo coincida con la de la ciudad
         const dayOffset = (typeof timeUtils !== 'undefined' && timeUtils.getQueryDayOffset)
             ? timeUtils.getQueryDayOffset()
             : 0;
@@ -21,7 +19,6 @@
 
         const chartData = prepareChartData(meteoData.cloudSeries, 24, dayStartIndex);
 
-        // sunriseIndex/sunsetIndex vienen como índices absolutos sobre todo
         // el arreglo; hay que volverlos relativos al bloque de 24h mostrado.
         const relSunriseIndex = sunriseIndex - dayStartIndex;
         const relSunsetIndex  = sunsetIndex  - dayStartIndex;
@@ -325,8 +322,7 @@
     
     // Preparar datos para gráficos
     // startIndex: desde dónde empieza el bloque de `hours` horas a mostrar.
-    // Antes siempre era 0 (o sea, siempre "hoy"); ahora se calcula a partir
-    // del día elegido en el selector
+    // Antes siempre era 0 (o sea, siempre "hoy"); ahora se calcula como referencia
     function prepareChartData(cloudSeries, hours = 24, startIndex = 0) {
         if (!cloudSeries?.time) {
             return { hasData: false };
@@ -358,7 +354,6 @@
 
 
     // Funcion que calcula y renderiza los paneles de contribucion
-    
     function renderFactorPanel(srResult, ssResult) {
       const el = document.getElementById('factorPanel');
       if (!el) return;

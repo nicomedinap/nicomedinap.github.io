@@ -57,9 +57,7 @@
 
         const d = sunsetResult.data;
 
-        // Firma correcta de computeRedProbability: (low, mid, high, elevDeg,
-        // isSunrise, temperature, pressure, humidity, dewPoint, shortwave,
-        // uncertaintyData, nSimulations, returnFactors)
+        // Firma correcta de computeRedProbability: (low, mid, high, elevDeg, isSunrise, temperature, pressure, humidity, dewPoint, shortwave, uncertaintyData, nSimulations, returnFactors)
         const probAtardecer = computeRedProbability(
             d.low,
             d.mid,
@@ -71,7 +69,7 @@
             d.humidity    ?? meteoData.current.humidity,
             d.dewpoint    ?? meteoData.current.dewpoint,
             d.shortwave   ?? null,
-            null, // uncertaintyData: sin Monte Carlo, ranking rápido
+            null, // uncertaintyData: no por ahora
             null, // nSimulations
             false // returnFactors: solo queremos el número
         );
@@ -85,10 +83,7 @@
             shortwave: d.shortwave ?? null
         };
     }
-    
-    // ============================================================================
-    // RENDER
-    // ============================================================================
+
 
     // Fecha para la que es válido el ranking 
     function _rankingDateLabel() {
@@ -100,9 +95,8 @@
         if (shortwave == null || !isFinite(shortwave)) return '—';
         const val = Math.round(shortwave);
 
-        // Misma fórmula que irradCorr en computeProbability (idealSW=60,
-        // tooLow=15, tooHigh=200), para que la etiqueta refleje exactamente
-        // lo que el modelo está premiando/penalizando, con su asimetría.
+        // Misma fórmula que irradCorr en computeProbability 
+
         const swClamped = Math.max(0, Math.min(1200, val));
         const idealSW = 60, tooHigh = 200, tooLow = 15;
         let irradCorr = swClamped >= idealSW
@@ -119,8 +113,7 @@
         return `${label}<span class="subline">${val} W/m²</span>`;
     }
 
-    // Formato "18.05 h" en 24 horas, sin depender del locale del
-    // dispositivo (algunos SO ignoran el 24h de es-CL y muestran am/pm).
+    // Formato "18.05 h" en 24 horas
     function _formatOptimalTime(date) {
         const h = String(date.getHours()).padStart(2, '0');
         const m = String(date.getMinutes()).padStart(2, '0');
@@ -140,7 +133,7 @@
             return;
         }
         
-        // CAMBIO: Mostrar 15 ciudades en lugar de 10
+        // Mostrar 12 ciudades
         const top12 = cities.slice(0, 12);
         
         let html = `
@@ -190,9 +183,7 @@
         addStyles();
     }
     
-    // ============================================================================
     // ESTILOS
-    // ============================================================================
     
     function addStyles() {
         if (document.getElementById('rank-styles')) return;
@@ -305,9 +296,6 @@
         document.head.appendChild(style);
     }
     
-    // ============================================================================
     // EXPORTAR
-    // ============================================================================
-    
     window.calculateRankings = calculateRankings;
 })();

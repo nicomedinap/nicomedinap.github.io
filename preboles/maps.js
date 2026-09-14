@@ -273,10 +273,9 @@
     /* ==========================================================================
        Calculo espacial del grid
        ========================================================================== */
- 
     // Ya no calcula nada por su cuenta: delega en computeCityPrediction
     async function computeProbabilityFromData(weatherData, lat, lon, altitude = 0) {
-        const result = await window.computeCityPrediction(lat, lon, { altitude }); // sin Monte Carlo, rápido para el grid
+        const result = await window.computeCityPrediction(lat, lon, { altitude });
         if (!result) return { sunrise: 0, sunset: 0 };
  
         const sunset  = typeof result.sunset  === 'number' ? result.sunset  : result.sunset.probability;

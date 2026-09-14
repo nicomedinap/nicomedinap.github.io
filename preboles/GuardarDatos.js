@@ -5,8 +5,7 @@
     var ML_MAX_RECORDS     = 2000;
     var ML_THRESHOLD_KEY   = 'preboles_ml_threshold_v1';
 
-    // esperamos a que pasen RENDER_DEBOUNCE_MS sin
-    // llamadas nuevas antes de renderizar de verdad.
+    // esperamos a que pasen RENDER_DEBOUNCE_MS sin llamadas nuevas 
     var RENDER_DEBOUNCE_MS  = 900;
     var renderDebounceTimer = null;
     var isCalculating       = false;
@@ -68,7 +67,6 @@
     }
 
     // Umbral de probabilidad 
-    // 
     function loadThreshold() {
         var v = localStorage.getItem(ML_THRESHOLD_KEY);
         var n = v !== null ? parseFloat(v) : 0.6;
@@ -278,9 +276,7 @@
             'preboles_historial_' + new Date().toISOString().slice(0,10) + '.json');
     }
 
-    // ================================
     // Bloque de ayuda / auto-explicación
-    // ================================
     function buildHelpBlock() {
         return (
             '<details style="margin-bottom:14px;">' +
@@ -295,10 +291,7 @@
         );
     }
 
-    // ================================
-    // Lista vertical de etiquetado
-    // umbral configurable (por defecto 60%, ajustable desde la UI)
-    // ================================
+    // umbral configurable (por defecto 60%)
     function buildThresholdSelector(current, disabled) {
         var opts = [0, 0.2, 0.4, 0.6, 0.8];
         return (
@@ -331,7 +324,7 @@
             return b.timestamp > a.timestamp ? 1 : -1;
         });
 
-        // Estilo base de botón — compacto, adaptable
+        // Botones
         var BTN = [
             'border:none',
             'border-radius:5px',
@@ -345,7 +338,6 @@
             'min-width:32px'
         ].join(';');
 
-        // pendientes: — tabla responsiva con scroll horizontal
         var pendingHTML = '';
         if (!pending.length) {
             pendingHTML =
@@ -394,7 +386,7 @@
                 '</div>';
         }
 
-        // Etiquetados colapsados - versión responsiva
+        // Etiquetados
         var labeledHTML = '';
         if (labeled.length) {
             var iconMap = { '1': '✅', '0.5': '🙄', '0': '❌' };
@@ -447,9 +439,7 @@
         );
     }
 
-    // ================================
     // Renderizar la pestaña historial
-    // ================================
     function renderHistoryTab() {
         var container = document.getElementById('tab-history');
         if (!container) return;
@@ -519,9 +509,7 @@
 
 })(window);
 
-// ================================================================
-// Funciones globales — versión defensiva
-// ================================================================
+// Funciones globales 
 window.exportMLDataCSV = function() {
     if (typeof dataCollector !== 'undefined' && dataCollector.exportCSV)
         dataCollector.exportCSV();

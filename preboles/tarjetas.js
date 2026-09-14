@@ -1,19 +1,13 @@
 (function () {
     'use strict';
 
-    // ============================================================================
     // CONFIGURACIÓN
-    // ============================================================================
-
     const BATCH_SIZE = 4;
     const DELAY_MS   = 60;
 
     window.cardPredictionMode = 'sunset';
 
-    // ============================================================================
     // ESTILOS POR NIVEL DE PROBABILIDAD
-    // ============================================================================
-
     function getProbabilityStyles(probability) {
         const p = probability * 100;
         let background, border, boxShadow, color = '#ffffff';
@@ -40,10 +34,7 @@
         return { background, border, color, boxShadow };
     }
 
-    // ============================================================================
     // HELPERS DE DATOS
-    // ============================================================================
-
     function getMomentPrediction(probs) {
         return window.cardPredictionMode === 'sunrise' ? probs.sunrise : probs.sunset;
     }
@@ -69,7 +60,6 @@
 
         return `${(min + t * (max - min)).toFixed(2)}rem`;
     }
-
 
     // Tamaño del mensaje de advertencia proporcional al grado de bloqueo
     function _visibilityFontSize(weighted) {
@@ -253,7 +243,7 @@
         }
         return window.PrebolesPredictor.getProbabilities(info.lat, info.lon, {
             altitude: info.altitude || 0,
-            nSimulations: 20 // liviano vs. 200 del detalle — ajusta si va lento en batch
+            nSimulations: 20 // liviano
         });
     }
 
@@ -294,19 +284,14 @@
         }
     }
 
-    // ============================================================================
-    // PUNTO DE ENTRADA: VISTA DE CIUDADES
-    // ============================================================================
+    //VISTA DE CIUDADES
 
     // Guard de reentrancy: evita que dos cargas en lote corran en paralelo
-    // si el usuario cambia de día varias veces rápido, o si se vuelve a
-    // llamar a esta función para refrescar tras elegir un nuevo día.
+    // si el usuario cambia de día varias veces rápido
     let _cityLoading = false;
 
     // El delay artificial de 3s (para no mostrar la grilla "en blanco" antes
-    // de que carguen las tarjetas) solo tiene sentido en la carga inicial de
-    // la página. En los refrescos por cambio de día, la grilla ya existe y
-    // está visible, así que mostrarla de inmediato se ve mejor.
+    // de que carguen las tarjetas) solo tiene sentido en la carga inicial
     let _firstLoad = true;
 
     async function mountCityCardView() {

@@ -8,8 +8,6 @@
       document.querySelector(`.tab-btn[data-tab="${tabName}"]`)?.classList.add('active');
 
       // Botones amanecer/atardecer y selector de fecha: solo visibles en
-      // Ciudades y Observatorios. En Ranking y Datos no aplican (el ranking
-      // siempre es de atardecer, y el historial es de datos ya registrados).
       const toggle = document.querySelector('.prediction-toggle');
       if (toggle) {
         toggle.style.display = (tabName === 'cities' || tabName === 'observatories') ? 'flex' : 'none';
@@ -101,7 +99,7 @@
     }
 
     /* ==========================================================================
-       SELECTOR DE DÍA CONSULTADO (hoy .. +5 días)
+       SELECTOR DE DÍA (hoy +5 días)
        ========================================================================== */
     function getSelectedDayOffset() {
       // el desajuste de zona horaria en el teléfono).
@@ -143,8 +141,8 @@
 
       const target = new Date();
       target.setDate(target.getDate() + offset);
-      timeUtils.setQueryDate(target);       // fecha real, la necesita SunCalc para amanecer/atardecer
-      timeUtils.setQueryDayOffset(offset);  // offset directo, lo usa el gráfico (inmune a husos horarios)
+      timeUtils.setQueryDate(target);       // fecha real
+      timeUtils.setQueryDayOffset(offset);  // offset directo
 
       document.querySelectorAll('#daySelector .day-btn').forEach((btn, idx) => {
         btn.classList.toggle('active', idx === offset);

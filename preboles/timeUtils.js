@@ -1,11 +1,9 @@
 (function(global) {
     'use strict';
 
-
     // ================================
     // ESTADO GLOBAL: día consultado
     // Por defecto "hoy". El selector de días en index.html llama a
-    // setQueryDate() cuando el usuario elige +1, +2... +5 días.
     // ================================
     function getQueryDate() {
         return global.PrebolesQueryDate || new Date();
@@ -24,9 +22,6 @@
     // Además de la fecha (necesaria para SunCalc: amanecer/atardecer sí
     // dependen de una fecha calendario real), guardamos el offset en días
     // (0 = hoy, 1 = mañana...) como fuente de verdad para ubicar el bloque
-    // de 24h en el arreglo horario. Usar el offset directo evita reconstruir
-    // fechas y compararlas como texto, que es lo que fallaba cuando la zona
-    // horaria del dispositivo no coincide con la de la ciudad consultada.
     function setQueryDayOffset(offset) {
         global.PrebolesQueryDayOffset = offset;
     }
@@ -39,13 +34,10 @@
     global.PrebolesQueryDayOffset = 0;
     resetQueryDateToToday();
 
-
-    // ================================
     // localNoonDate
     // Ancla el "hoy" al mediodía local para evitar que SunCalc "ruede" al
     // día siguiente cuando la medianoche UTC cae en horario diurno local
     // (en Chile, UTC-4, eso pasa desde las 20:00 hora local en adelante).
-    // ================================
     function localNoonDate(date = new Date()) {
         const d = new Date(date);
         d.setHours(12, 0, 0, 0);
@@ -60,7 +52,7 @@
     }
 
     // ================================
-    // Interpolación lineal
+    // Interpolación lineal para aproximar hora
     // ================================
     function linearInterpolate(y1, y2, fraction) {
         if (y1 == null || y2 == null) return y1 ?? y2 ?? null;
@@ -97,11 +89,7 @@
         };
     }
 
-    // ================================
-    // interpolateMeteoData
-    // Interpola TODOS los campos horarios en un tiempo exacto.
     // Incluye viento por capas, irradiancia solar y punto de rocío.
-    // ================================
     function interpolateMeteoData(meteoData, targetTime) {
         if (!meteoData?.cloudSeries?.time || meteoData.cloudSeries.time.length < 2) return null;
 
@@ -137,7 +125,7 @@
             temperature: interp(meteoData.cloudSeries.temperature_2m),
             humidity:    interp(meteoData.cloudSeries.relativehumidity_2m),
             pressure:    interp(meteoData.cloudSeries.pressure_msl),
-            dewpoint:    interp(meteoData.cloudSeries.dewpoint_2m), // NUEVO: necesario para computeRedProbability
+            dewpoint:    interp(meteoData.cloudSeries.dewpoint_2m),
 
             // Viento por capas de nubes
             wind300: interp(meteoData.cloudSeries.windspeed_300hPa),
@@ -157,11 +145,6 @@
         };
     }
 
-    // ================================
-    // getSunsetDataWithInterpolation
-    // Generalizada: sirve tanto para atardecer como amanecer.
-    // isSunrise = false (atardecer, comportamiento original) por defecto,
-    // ================================
     function getSunsetDataWithInterpolation(meteoData, lat, lon, isSunrise = false, altitude = 0, targetDate = getQueryDate()) {
         if (!meteoData?.cloudSeries) return null;
 
@@ -199,11 +182,6 @@
         const now    = localNoonDate(targetDate);
         const times  = SunCalc.getTimes(now, lat, lon);
 
-        // "Dip" del horizonte: un observador en altura ve el horizonte marino
-        // deprimido bajo la línea geométrica de 0°, así que la luz rasante
-        // sigue pegando en nubes altas un poco más tarde al atardecer (o
-        // empieza un poco más temprano al amanecer) de lo que predice un
-        // horizonte a nivel del mar. dip(°) ≈ 0.0293·√altura(m).
         // Con altitude=0 (ciudades costeras/nivel del mar) esto no cambia nada.
         const dip = 0.0293 * Math.sqrt(Math.max(0, altitude || 0));
         const targetElevation = -(2 + dip); // mismo valor para ambos casos:
@@ -229,9 +207,7 @@
         return mid;
     }
 
-    // ================================
     // getSunsetIndex
-    // ================================
     function getSunsetIndex(meteoData, lat, lon, isSunrise = false, targetDate = getQueryDate()) {
         if (!meteoData?.cloudSeries?.time || meteoData.cloudSeries.time.length === 0) {
             return isSunrise ? 6 : 18;
@@ -280,11 +256,8 @@
 
         const hrs = meteoData.cloudSeries.time;
 
-        // Camino robusto (el que se usa siempre ahora): Open-Meteo entrega
-        // datos horarios uniformes que arrancan en la hora 00:00 del día 0,
-        // así que el día N siempre empieza en el índice N*24. No depende
-        // de comparar fechas como texto, así que es inmune a diferencias
-        // de zona horaria entre el dispositivo y la ciudad consultada.
+        // Open-Meteo entrega datos horarios uniformes que arrancan en la hora 00:00 del día 0,
+        // así que el día N siempre empieza en el índice N*24.
         if (typeof offsetOrDate === 'number') {
             const idx = offsetOrDate * 24;
             return idx < hrs.length ? idx : 0;
@@ -306,11 +279,8 @@
         return prefixIdx !== -1 ? prefixIdx : 0;
     }
 
-    // ================================
-    // getDataAtIndex
     // Extrae todos los campos del array horario en un índice dado.
     // Incluye viento por capas, irradiancia solar y punto de rocío.
-    // ================================
     function getDataAtIndex(meteoData, index) {
         if (!meteoData?.cloudSeries || index < 0 || index >= meteoData.cloudSeries.time?.length) return null;
 
@@ -328,7 +298,7 @@
             temperature: s.temperature_2m?.[index]        ?? null,
             humidity:    s.relativehumidity_2m?.[index]   ?? null,
             pressure:    s.pressure_msl?.[index]          ?? null,
-            dewpoint:    s.dewpoint_2m?.[index]           ?? null, // NUEVO
+            dewpoint:    s.dewpoint_2m?.[index]           ?? null, 
 
             // Viento por capas
             wind300: s.windspeed_300hPa?.[index] ?? null,
@@ -340,9 +310,7 @@
         };
     }
 
-    // ================================
     // API pública
-    // ================================
     global.timeUtils = {
         linearInterpolate,
         findClosestTimes,

@@ -54,9 +54,7 @@ layout: none
 
     .coord-predict-panel { margin: 8px 0; }
 
-    /* ============================================================
-   COORDENADAS - UNA SOLA FILA CON TEXTO A LA IZQUIERDA
-   ============================================================ */
+    /* COORDENADAS - UNA SOLA FILA CON TEXTO A LA IZQUIERDA*/
 
 .coord-predict-panel {
   background: var(--card);
@@ -700,8 +698,7 @@ layout: none
 
 
     // Botón "atrás"/"adelante" del navegador: si la URL vuelve a tener
-    // ?ciudad=X, reabre esa ciudad; si no, cierra el detalle sin volver
-    // a tocar el historial (el navegador ya lo hizo).
+    // ?ciudad=X, reabre esa ciudad; si no, cierra el detalle sin volver a tocar el historial 
     window.addEventListener('popstate', () => {
       const params = new URLSearchParams(window.location.search);
       const ciudad = params.get('ciudad');
@@ -1118,15 +1115,10 @@ layout: none
 
     // Si el día cambia mientras se está viendo una ciudad, el menú de
     // tarjetas queda desactualizado pero NO se recalcula de inmediato
-    // (sería recalcular decenas de ciudades que ni se están mostrando).
-    // Se marca aquí, y se resuelve al volver al menú (ver closeDetailView).
     let _cardsStale = { cities: false, observatories: false };
 
-    // Bloqueo simple: mientras un cambio de día se está aplicando, se
-    // ignoran clics nuevos. Esto evita que dos cálculos (predictRedSunset /
-    // mountCityCardView) corran en paralelo escribiendo sobre el mismo
-    // estado/DOM — que era la causa de que a veces "ganara" un resultado
-    // viejo aunque el botón activo ya mostrara el día correcto.
+    // mientras un cambio de día se está aplicando, se
+    // ignoran clics nuevos.
     let _dayChangeApplying = false;
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -1135,16 +1127,16 @@ layout: none
       mountCityCardView();
       setTimeout(calcularTodasLasCiudades, 4000);
 
-      // Deep link: si la URL trae ?ciudad=X, abre esa ciudad directamente.
+      // link dentro de preboles: si la URL trae ?ciudad=X, abre esa ciudad directamente.
       const initParams = new URLSearchParams(window.location.search);
       const initCiudad = initParams.get('ciudad');
 
       if (initCiudad && chileanCities[initCiudad]) {
         const initTipo = initParams.get('tipo') || 'city';
-        showPrediction(initCiudad, initTipo, false); // false: la URL ya trae el parámetro, no la dupliquemos
+        showPrediction(initCiudad, initTipo, false); // false: la URL ya trae el parámetro
       }
 
-      // --- Toggle amanecer / atardecer en las tarjetas ---
+      // Toggle amanecer / atardecer en las tarjetas 
       const btnSunset  = document.getElementById('btnSunset');
       const btnSunrise = document.getElementById('btnSunrise');
  
@@ -1154,9 +1146,7 @@ layout: none
         btnSunrise.classList.remove('active');
         window.refreshCardProbabilities();
  
-        // Si hay un mapa de hexágonos activo (vista detallada de una ciudad),
-        // redibujarlo. No vuelve a pedir datos: calculateGridPointProbability
-        // ya tiene ambos valores cacheados.
+        // Si hay un mapa de hexágonos activo 
         if (currentState.lat && currentState.lon) {
           MapUtils.updateHeatmap(currentState.lat, currentState.lon, currentState.altitude ?? 0);
         }

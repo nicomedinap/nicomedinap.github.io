@@ -1,13 +1,8 @@
-/* ==========================================================================
-   PORCENTAJE DE ROJO REAL — VERSIÓN OPTIMIZADA
-   ==========================================================================
-   - Muestreo a 2 FPS (en lugar de ~12 FPS)
-   - Canvas se pinta una vez
-*/
+
 (function () {
   'use strict';
 
-  // --- CONFIGURACIÓN ---
+  // CONFIGURACIÓN 
   const CONFIG = {
     ANIMATION_DURATION_MS: 16300,    // duración de la animación (ms)
     GRADIENT_ANGLE_DEG: 290,         // ángulo del gradiente CSS
@@ -17,7 +12,7 @@
     RESIZE_DEBOUNCE_MS: 200,         // debounce para resize
   };
 
-  // --- DATOS DEL GRADIENTE (precalculados) ---
+  // DATOS DEL GRADIENTE (precalculados) 
   const STOP_COLORS = [
     '#1b5e20', '#2e7d32', '#4caf50', '#81c784', '#a5d6a7', '#c8e6c9',
     '#a5d6a7', '#81c784', '#4caf50', '#2e7d32',
@@ -32,7 +27,6 @@
     [0.58, 55], [0.65, 65], [0.75, 80], [0.85, 92], [1.00, 100]
   ];
 
-  // --- PRECÁLCULOS (se ejecutan una sola vez) ---
   // Convertir colores a RGB una sola vez
   const RGB_COLORS = STOP_COLORS.map(hex => {
     const n = parseInt(hex.slice(1), 16);
@@ -61,7 +55,7 @@
     return 0;
   }
 
-  // --- ESTADO ---
+  // ESTADO 
   let canvas, ctx;
   let W = 0, H = 0, bigW = 0, bigH = 0;
   let canvasReady = false;
@@ -70,11 +64,10 @@
   let animationId = null;
   let resizeTimeout = null;
 
-  // --- DOM REFS (cacheadas) ---
+  // DOM REFS (cacheadas??)
   const emojiEl = document.getElementById('trebolEmoji');
   const percentEl = document.getElementById('arrebolPercent');
 
-  // --- FUNCIÓN PRINCIPAL: PINTAR GRADIENTE (solo cuando es necesario) ---
   function paintGradient() {
     if (!emojiEl) return false;
 
@@ -101,7 +94,7 @@
     canvas.width = Math.max(1, Math.round(bigW));
     canvas.height = Math.max(1, Math.round(bigH));
 
-    // Calcular línea de gradiente (misma fórmula que CSS)
+    // Calcular línea de gradiente
     const a = CONFIG.GRADIENT_ANGLE_DEG * Math.PI / 180;
     const dx = Math.sin(a);
     const dy = -Math.cos(a);
@@ -123,7 +116,7 @@
     return true;
   }
 
-  // --- MUESTREO OPTIMIZADO (usando lookup table) ---
+  // MUESTREO
   function samplePixelAt(bgPosPercent) {
     // Usar lookup table para obtener la posición X
     const progress = (performance.now() % CONFIG.ANIMATION_DURATION_MS) / CONFIG.ANIMATION_DURATION_MS;
@@ -141,7 +134,7 @@
     return { r: data[0], g: data[1] };
   }
 
-  // --- ACTUALIZAR PORCENTAJE CON THROTTLING ---
+  // ACTUALIZAR PORCENTAJE CON THROTTLING 
   function updateArrebolPercent(timestamp) {
     if (!canvasReady || !percentEl) {
       animationId = requestAnimationFrame(updateArrebolPercent);
@@ -171,7 +164,6 @@
     animationId = requestAnimationFrame(updateArrebolPercent);
   }
 
-  // --- INICIALIZACIÓN CON DEBOUNCE ---
   function initOrResize() {
     // Limpiar timeout previo (debounce)
     if (resizeTimeout) {
@@ -186,7 +178,6 @@
     });
   }
 
-  // --- START / STOP (para pestañas inactivas) ---
   function startAnimation() {
     if (animationId) return;
     lastSample = 0;
@@ -201,7 +192,6 @@
     }
   }
 
-  // --- EVENTOS ---
   document.addEventListener('DOMContentLoaded', () => {
     // Esperar a que el DOM esté listo y las fuentes cargadas
     initOrResize();
@@ -212,7 +202,7 @@
   // Resize con debounce
   window.addEventListener('resize', initOrResize);
 
-  // Pausar cuando la pestaña no está visible (ahorro de CPU)
+  // Pausar cuando la pestaña no está visible
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       stopAnimation();
@@ -223,7 +213,7 @@
     }
   });
 
-  // Cleanup al salir (opcional)
+  // limpiar al salir
   window.addEventListener('beforeunload', () => {
     stopAnimation();
     if (canvas) {

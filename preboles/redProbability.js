@@ -1,7 +1,4 @@
-    /* ------------------------------------------------------------------
-       NÚCLEO DETERMINISTA — calcula una probabilidad a partir de valores
-       ------------------------------------------------------------------ */
-    function computeProbability(low, mid, high, elevDeg, isSunrise, temp, press, hum, shortwave, returnFactors) {
+  function computeProbability(low, mid, high, elevDeg, isSunrise, temp, press, hum, shortwave, returnFactors) {
       const lowPct = Math.max(0, Math.min(100, Number(low) || 0));
       const midPct = Math.max(0, Math.min(100, Number(mid) || 0));
       const highPct = Math.max(0, Math.min(100, Number(high) || 0));
@@ -72,27 +69,25 @@
     }
 
     /* ------------------------------------------------------------------
-       FUNCIÓN PRINCIPAL — con Monte Carlo opcional para incerteza
+      
        ------------------------------------------------------------------ */
     function computeRedProbability(low, mid, high, elevDeg, isSunrise,
                                    temperature, pressure, humidity,
                                    dewPoint, shortwave,
                                    uncertaintyData, nSimulations, returnFactors) {
 
-      /* ---- Sin incerteza: modo determinista ---- */
       if (!uncertaintyData) {
         return computeProbability(low, mid, high, elevDeg, isSunrise,
                                   temperature, pressure, humidity,
                                   shortwave, returnFactors);
       }
 
-      /* ---- Con incerteza: Monte Carlo ---- */
-      // 1. Calcular el valor determinista (el "mejor estimado")
+      // 1. Calcular el valor determinista 
       const detResult = computeProbability(low, mid, high, elevDeg, isSunrise,
                                            temperature, pressure, humidity,
                                            shortwave, true);
 
-      // 2. Ejecutar simulaciones Monte Carlo para estimar la incerteza
+      // 2. simulaciones Monte Carlo para estimar la incerteza
       const samples = [];
       const vars = {
         low: { value: low, key: 'cloudcover_low' },
@@ -156,12 +151,11 @@
 
     window.computeRedProbability = computeRedProbability;
 
-// ============================================================================
+    // ============================================================================
     // computeMomentData(meteoData, lat, lon, isSunrise)
     // Datos meteorológicos + geométricos para UN momento (amanecer o atardecer).
-    // Decide interpolar o usar el índice horario más cercano. Un solo lugar
-    // para esta lógica; nadie más debe repetirla.
     // ============================================================================
+    
     function computeMomentData(meteoData, lat, lon, isSunrise, altitude = 0) {
         const result = timeUtils.getSunsetDataWithInterpolation(meteoData, lat, lon, isSunrise, altitude);
 
@@ -184,11 +178,8 @@
 
     // ============================================================================
     // computeCityPrediction(lat, lon, options)
-    // ÚNICO punto de cálculo de probabilidades de arrebol en todo el sitio.
-    // Lo usan: las tarjetas (rápido, sin Monte Carlo), la vista detallada
-    // (con Monte Carlo y factores) y el cálculo en background (Monte Carlo
-    // liviano). Así el número que ves en cualquier parte sale siempre del
-    // mismo camino, con los mismos argumentos en el mismo orden.
+    // Cálculo de probabilidades de arrebol en todo el sitio.
+    // Lo usan: las tarjetas, dentro de las tarjetas y el cálculo en background
     //
     // options.nSimulations: null/0 = determinista. 200 = detalle. 50 = background.
     // options.returnFactors: true para obtener factores/bloqueadores (panel).
@@ -231,9 +222,9 @@
     window.computeCityPrediction = computeCityPrediction;
 
     // ============================================================================
-    // getProbabilities(lat, lon) — contrato que usan las tarjetas.
-    // Llama a computeCityPrediction sin Monte Carlo (rápido).
+    // getProbabilities(lat, lon) 
     // ============================================================================
+
     async function getProbabilities(lat, lon, { altitude = 0, nSimulations = null } = {}) {
 
         const result = await computeCityPrediction(lat, lon, {
@@ -257,12 +248,7 @@
     window.PrebolesPredictor = window.PrebolesPredictor || {};
     window.PrebolesPredictor.getProbabilities = getProbabilities;
 
-
-
-    /* ------------------------------------------------------------------
-       CONFIGURACIÓN DE INCERTEZAS POR VARIABLE
-       Basado en errores típicos de modelos NWP (Numerical Weather Prediction).
-       ------------------------------------------------------------------ */
+    //CONFIGURACIÓN DE INCERTEZAS POR VARIABLE
     const UNCERTAINTY_CONFIG = {
       cloudcover_low:      { std: 18, min: 0, max: 100, distribution: 'beta' },
       cloudcover_mid:      { std: 15, min: 0, max: 100, distribution: 'beta' },
@@ -273,10 +259,7 @@
       shortwave_radiation: { std: 25, min: 0, max: 1200, distribution: 'lognormal' }
     };
 
-    /* ------------------------------------------------------------------
-       GENERADORES DE NÚMEROS ALEATORIOS
-       ------------------------------------------------------------------ */
-
+    // GENERADORES DE NÚMEROS ALEATORIOS
     function normalRandom(mean, std) {
       const u1 = Math.random(), u2 = Math.random();
       return mean + Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * std;
@@ -289,7 +272,7 @@
       return x / (x + y);
     }
 
-    /* Muestrea una variable con incerteza */
+    // Muestrea una variable con incerteza
     function sampleWithUncertainty(value, config) {
       if (value === null || value === undefined) return value;
       const { std, min, max, distribution } = config;
@@ -310,7 +293,7 @@
       return Math.max(min, Math.min(max, sampled));
     }
 
-    /* Estadísticos de un array de muestras */
+    // Estadísticos de un array de muestras
     function calculateStats(samples) {
       const n = samples.length;
       if (n === 0) return null;
@@ -330,7 +313,6 @@
         n
       };
     }
-
 
 
     window.sampleWithUncertainty = sampleWithUncertainty;
