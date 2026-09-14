@@ -13,7 +13,7 @@
 }
 
 /* Reset global: * ya cubre margin/padding, así que no hace falta
-   repetirlo en html/body (evita reglas redundantes). */
+   repetirlo en html/body */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -318,9 +318,6 @@ h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 8px; }
   margin-top: 1px;
 }
 
-/* Nombre: fila propia que reclama todo el espacio vertical libre
-   (flex: 1 1 auto, ya que .city-card es flex-column), quedando
-   centrada entre el header (%) y el meta (hora/visibilidad). */
 .city-name-row {
   flex: 1 1 auto;
   display: flex;
