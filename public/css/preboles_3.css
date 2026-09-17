@@ -699,9 +699,7 @@ button {
   box-sizing: border-box;
 }
 /* Especificidad #daySelector .day-btn (id + clase) para ganarle a
-   cualquier regla tipo ".tabs-container button" del CSS externo, que
-   tiene más especificidad que un simple ".day-btn" y por eso el padding
-   no se aplicaba antes. */
+   cualquier regla tipo ".tabs-container button" */
 #daySelector.day-selector .day-btn {
   min-width: 2px !important;   /* clave: sin esto el botón nunca se achica más que su texto */
   box-sizing: border-box !important;
