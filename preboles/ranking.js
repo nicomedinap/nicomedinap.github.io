@@ -146,7 +146,7 @@
                         <tr>
                             <th>Lugar</th>
                             <th>Ciudad</th>
-                            <th>Probabilidad </th>
+                            <th>Probabilidad Local</th>
                             <th>Visibilidad</th>
                             <th>
                                 Hora máximo
