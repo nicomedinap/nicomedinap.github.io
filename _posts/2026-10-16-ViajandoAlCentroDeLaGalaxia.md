@@ -9,9 +9,11 @@ Estoy proponiendo una serie de charlas en el centro cultural de los ángeles, co
 
 Entonces, el tema propuesto para esta segunda charla, que será el jueves 29 de Octubre del año 2026, será: "Viajando al centro de la galaxia"
 
-<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/refs/heads/master/imagenes/Afiche_ViajandoAlCentroDeLaGalaxia.JPG" width="400" height="600" > 
+<img src="https://raw.githubusercontent.com/nicomedinap/nicomedinap.github.io/refs/heads/master/imagenes/Afiche_ViajandoAlCentroDeLaGalaxia.JPG" width="410" height="600" > 
 
 Ya que la primera charla trató sobre telescopios, y sobre cómo aprendimos cosas del sistema solar con ellos, ahora hablaremos sobre la galaxia y su contenido: Las regiones de formación estelar, tan coloridas y con densidades diversas. Los grupos estelares: Cúmulos globulares, cúmulos abiertos. Su distribución, y la inmensa densidad estelar del centro galáctico.
+
+Asi también, hablaremos sobre las protagonistas indiscutibles de las galaxias: Las Estrellas. Su formación, vida, muerte y el ciclo de retroalimentación estelar.  
 
 La idea central de esta charla, será valiar nuestro punto de vista desde la galaxia, y tratar de darlse sentido al cielo. Una explicación lógica, como cada uno de nuestros antepasados y antepasadas trataron de hacer con la información que tenían.
 
