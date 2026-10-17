@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>Zoom al Centro Galáctico - Infrarrojo</title>
+    <title>Zoom al Centro Galáctico - 2MASS Infrarrojo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
@@ -40,21 +40,18 @@
         $(document).ready(function() {
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-            // Coordenadas del Centro Galáctico (Sgr A*)
             const GALACTIC_CENTER = "266.405 -29.008";
-            // Survey inicial (Óptico) y final (Infrarrojo - Spitzer GLIMPSE360)
             const SURVEY_OPTICAL = "P/DSS2/color";
-            const SURVEY_INFRARED = "P/GLIMPSE360";
+            const SURVEY_2MASS = "P/2MASS/color"; // Survey infrarrojo 2MASS
 
             let aladin;
             let animInterval = null;
             let isAnimating = false;
 
-            // Inicializar Aladin con un FOV grande (zoom out)
             A.init.then(() => {
                 aladin = A.aladin('#aladin-lite-div', {
                     survey: SURVEY_OPTICAL,
-                    fov: 180, // Iniciamos muy abierto
+                    fov: 180,
                     target: GALACTIC_CENTER,
                     showControls: false,
                     showGotoControl: false,
@@ -65,13 +62,11 @@
                     fullScreen: true
                 });
 
-                // Lanzar animación automáticamente tras 1 segundo
                 setTimeout(() => {
                     startAnimation();
                 }, 1000);
             });
 
-            // Función para mostrar el estado
             function showStatus(text) {
                 $('#loadingIndicator').text(text).addClass('active');
             }
@@ -80,47 +75,43 @@
                 $('#loadingIndicator').removeClass('active');
             }
 
-            // Easing suave para el movimiento
-            function easeInOutCubic(t) {
-                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            // Easing más suave para un viaje pausado
+            function easeInOutQuint(t) {
+                return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
             }
 
-            // Animación principal
             function startAnimation() {
                 if (isAnimating) return;
                 isAnimating = true;
 
-                // 1. FASE DE ZOOM OUT MÁXIMO
-                // Forzamos el campo visual a 360 grados (o el máximo permitido por el survey)
+                // 1. ZOOM OUT MÁXIMO
                 aladin.setFov(360);
                 aladin.gotoObject(GALACTIC_CENTER);
                 showStatus("🌌 Zoom out máximo...");
 
+                // Pausa más larga para contemplar el cielo completo
                 setTimeout(() => {
-                    // 2. FASE DE ACERCAMIENTO (ZOOM IN)
-                    showStatus("🔭 Acercando al Centro Galáctico...");
+                    // 2. VIAJE LENTO HACIA EL CENTRO GALÁCTICO
+                    showStatus("🔭 Viajando lentamente al Centro Galáctico...");
 
                     const startFov = 360;
-                    const endFov = 0.5; // Zoom final (ajusta si quieres más cerca)
-                    const duration = isMobile ? 6000 : 5000;
+                    const endFov = 0.3; // Zoom final más cercano
+                    const duration = isMobile ? 14000 : 12000; // Viaje mucho más lento (12-14 seg)
                     const startTime = Date.now();
 
-                    // Limpiar cualquier intervalo previo
                     if (animInterval) clearInterval(animInterval);
 
                     animInterval = setInterval(() => {
                         const elapsed = Date.now() - startTime;
                         let progress = Math.min(elapsed / duration, 1);
-                        let ease = easeInOutCubic(progress);
+                        let ease = easeInOutQuint(progress);
 
-                        // Calcular FOV actual
                         let currentFov = startFov - (startFov - endFov) * ease;
 
-                        // Si el FOV es muy pequeño, forzar el cambio a infrarrojo antes de terminar
-                        if (currentFov <= 0.8 && aladin.getBaseImageLayer().id !== SURVEY_INFRARED) {
-                            // CAMBIO A INFRARROJO
-                            aladin.setImageSurvey(SURVEY_INFRARED);
-                            showStatus("🔥 Cambiando a Infrarrojo (Spitzer)...");
+                        // Cambio a 2MASS cuando el FOV sea pequeño (cerca del final)
+                        if (currentFov <= 0.6 && aladin.getBaseImageLayer().id !== SURVEY_2MASS) {
+                            aladin.setImageSurvey(SURVEY_2MASS);
+                            showStatus("🔥 Cambiando a Infrarrojo 2MASS...");
                         }
 
                         aladin.setFov(currentFov);
@@ -131,48 +122,41 @@
                             animInterval = null;
                             isAnimating = false;
 
-                            // Asegurar que estamos en infrarrojo al final
-                            aladin.setImageSurvey(SURVEY_INFRARED);
+                            aladin.setImageSurvey(SURVEY_2MASS);
                             aladin.setFov(endFov);
 
-                            showStatus("✅ Centro Galáctico en Infrarrojo");
-                            setTimeout(hideStatus, 2000);
+                            showStatus("✅ Centro Galáctico en 2MASS");
+                            setTimeout(hideStatus, 2500);
                         }
-                    }, isMobile ? 30 : 20);
+                    }, isMobile ? 40 : 30); // Actualizaciones más espaciadas para suavidad
 
-                }, 2000); // Esperar 2 segundos después del zoom out para empezar a acercar
+                }, 3000); // 3 segundos de pausa en el zoom out máximo
             }
 
-            // Botón para reiniciar la animación
             $('#resetBtn').click(function() {
                 if (animInterval) clearInterval(animInterval);
                 isAnimating = false;
                 hideStatus();
 
-                // Volver al estado óptico y zoom out
                 aladin.setImageSurvey(SURVEY_OPTICAL);
                 aladin.setFov(360);
                 aladin.gotoObject(GALACTIC_CENTER);
 
-                // Reiniciar
                 setTimeout(() => {
                     startAnimation();
-                }, 500);
+                }, 800);
             });
 
-            // Prevenir scroll en móvil
             document.addEventListener('touchmove', function(e) {
                 e.preventDefault();
             }, { passive: false });
 
-            // Ocultar UI de Aladin
             setTimeout(function() {
                 $('.aladin-controls, .aladin-goto-control, .aladin-layers-control, .aladin-simbad-control, .aladin-frame').hide();
             }, 100);
         });
     </script>
 
-    <!-- Botón de reinicio (opcional) -->
     <button id="resetBtn" class="reset-btn">🔄 Reiniciar</button>
     <div id="loadingIndicator" class="loading-indicator"></div>
 
