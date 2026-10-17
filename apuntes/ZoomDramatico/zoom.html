@@ -2,314 +2,179 @@
 <html lang="es">
 
 <head>
-    <title>Zoom en Aladin</title>
+    <title>Zoom al Centro Galáctico - Infrarrojo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* Reset y fullscreen */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        #aladin-lite-div { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #000;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        /* Contenedor principal - Ocupa toda la pantalla */
-        #aladin-lite-div {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-        }
-
-        /* Loading indicator - Solo visible durante la animación */
         .loading-indicator {
-            display: none;
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            pointer-events: none;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            display: none; position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+            z-index: 1000; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px);
+            color: white; padding: 12px 24px; border-radius: 30px; font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1); pointer-events: none; font-weight: 500;
         }
+        .loading-indicator.active { display: block; animation: pulseGlow 1.5s ease-in-out infinite; }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.4); } 50% { box-shadow: 0 8px 32px rgba(100, 180, 255, 0.2); } }
 
-        .loading-indicator.active {
-            display: block;
-            animation: pulseGlow 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% {
-                box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            }
-            50% {
-                box-shadow: 0 8px 32px rgba(100, 180, 255, 0.2);
-            }
-        }
-
-        /* Botón de reinicio - Pequeño y discreto */
         .reset-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: 30px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            letter-spacing: 0.3px;
+            position: fixed; bottom: 20px; right: 20px; z-index: 100;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 10px 16px;
+            border-radius: 30px; font-size: 12px; cursor: pointer; transition: all 0.3s ease;
         }
+        .reset-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
 
-        .reset-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
-
-        .reset-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Ocultar todos los controles de Aladin */
-        .aladin-controls,
-        .aladin-goto-control,
-        .aladin-layers-control,
-        .aladin-simbad-control,
-        .aladin-frame {
-            display: none !important;
-        }
+        .aladin-controls, .aladin-goto-control, .aladin-layers-control, .aladin-simbad-control, .aladin-frame { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- Aladin Lite viewer - Fullscreen -->
     <div id="aladin-lite-div"></div>
 
-    <!-- JavaScript -->
     <script>
         $(document).ready(function() {
-            // Detectar si es móvil
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-            
-            // Initialize AladinLite - Fullscreen sin controles
-            let aladin = A.aladin('#aladin-lite-div', {
-                survey: "P/DSS2/color",
-                fov: 100,
-                target: "266.405 -29.008",  // Centro galáctico
-                showControls: false,
-                showGotoControl: false,
-                showLayersControl: false,
-                showFrame: false,
-                showSimbadPointerControl: false,
-                showObjectTooltip: false,
-                fullScreen: true
+
+            // Coordenadas del Centro Galáctico (Sgr A*)
+            const GALACTIC_CENTER = "266.405 -29.008";
+            // Survey inicial (Óptico) y final (Infrarrojo - Spitzer GLIMPSE360)
+            const SURVEY_OPTICAL = "P/DSS2/color";
+            const SURVEY_INFRARED = "P/GLIMPSE360";
+
+            let aladin;
+            let animInterval = null;
+            let isAnimating = false;
+
+            // Inicializar Aladin con un FOV grande (zoom out)
+            A.init.then(() => {
+                aladin = A.aladin('#aladin-lite-div', {
+                    survey: SURVEY_OPTICAL,
+                    fov: 180, // Iniciamos muy abierto
+                    target: GALACTIC_CENTER,
+                    showControls: false,
+                    showGotoControl: false,
+                    showLayersControl: false,
+                    showFrame: false,
+                    showSimbadPointerControl: false,
+                    showObjectTooltip: false,
+                    fullScreen: true
+                });
+
+                // Lanzar animación automáticamente tras 1 segundo
+                setTimeout(() => {
+                    startAnimation();
+                }, 1000);
             });
 
-            // Variables - Movimiento lento en viaje, zoom más rápido
-            let finalFov = 0.08;
-            let zoomSpeed = 0.998;  // Zoom más rápido (antes 0.998)
-            let intervalTime = isMobile ? 20 : 16;
-            let travelDuration = isMobile ? 8000 : 6000;  // Viaje lento
-            
-            let zoomInterval;
-            let travelInterval;
-            let isAnimating = false;
-            let currentTarget = "161.16572 -59.96429";  // M16 por defecto
-
-            // Mostrar/ocultar indicador
-            function showLoading(show, text) {
-                if (show) {
-                    if (text) $('#loadingIndicator').text(text);
-                    $('#loadingIndicator').addClass('active');
-                } else {
-                    $('#loadingIndicator').removeClass('active');
-                    setTimeout(() => {
-                        $('#loadingIndicator').text('🌌 Viajando al objeto...');
-                    }, 100);
-                }
+            // Función para mostrar el estado
+            function showStatus(text) {
+                $('#loadingIndicator').text(text).addClass('active');
             }
 
-            // Interpolación de coordenadas
-            function interpolateCoords(coord1, coord2, t) {
-                let ra1 = parseFloat(coord1.split(' ')[0]);
-                let dec1 = parseFloat(coord1.split(' ')[1]);
-                let ra2 = parseFloat(coord2.split(' ')[0]);
-                let dec2 = parseFloat(coord2.split(' ')[1]);
-                
-                let raDiff = ra2 - ra1;
-                if (raDiff > 180) raDiff -= 360;
-                if (raDiff < -180) raDiff += 360;
-                
-                let ra = ra1 + raDiff * t;
-                let dec = dec1 + (dec2 - dec1) * t;
-                
-                return `${ra} ${dec}`;
+            function hideStatus() {
+                $('#loadingIndicator').removeClass('active');
             }
 
-            // Easing suave
+            // Easing suave para el movimiento
             function easeInOutCubic(t) {
                 return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
             }
 
-            // Viaje desde centro galáctico al objeto
-            function travelToObject(targetCoords) {
+            // Animación principal
+            function startAnimation() {
                 if (isAnimating) return;
                 isAnimating = true;
-                
-                clearInterval(travelInterval);
-                clearInterval(zoomInterval);
-                
-                showLoading(true, '🌌 Viajando al objeto...');
-                
-                let startCoords = "266.405 -29.008";
-                let startTime = Date.now();
-                
-                let startFov = 100;
-                let endFov = isMobile ? 30 : 20;
-                
-                travelInterval = setInterval(function() {
-                    let elapsed = Date.now() - startTime;
-                    let progress = Math.min(elapsed / travelDuration, 1);
-                    
-                    let easeProgress = easeInOutCubic(progress);
-                    
-                    let currentCoords = interpolateCoords(startCoords, targetCoords, easeProgress);
-                    aladin.gotoObject(currentCoords);
-                    
-                    let currentFov = startFov - (startFov - endFov) * easeProgress;
-                    aladin.setFov(currentFov);
-                    
-                    if (progress > 0.3 && progress < 0.8) {
-                        showLoading(true, '🔄 Aproximando...');
-                    } else if (progress >= 0.8) {
-                        showLoading(true, '🎯 Casi llegando...');
-                    }
-                    
-                    if (progress >= 1) {
-                        clearInterval(travelInterval);
-                        showLoading(true, '🔍 Iniciando zoom...');
-                        
-                        setTimeout(function() {
-                            startZoom(targetCoords);
-                        }, 300);
-                    }
-                }, intervalTime);
-            }
 
-            // Función de zoom más rápida
-            function startZoom(targetCoords) {
-                clearInterval(zoomInterval);
-                
-                aladin.gotoObject(targetCoords);
-                let startFov = isMobile ? 30 : 20;
-                aladin.setFov(startFov);
-                
-                // Zoom más rápido
-                let currentZoomSpeed = 0.992;  // Más rápido
-                let currentInterval = isMobile ? 20 : 16;
-                
-                zoomInterval = setInterval(function() {
-                    let currentFov = aladin.getFov()[0];
-                    
-                    if (currentFov > finalFov) {
-                        let newFov = currentFov * currentZoomSpeed;
-                        if (newFov < finalFov) {
-                            newFov = finalFov;
+                // 1. FASE DE ZOOM OUT MÁXIMO
+                // Forzamos el campo visual a 360 grados (o el máximo permitido por el survey)
+                aladin.setFov(360);
+                aladin.gotoObject(GALACTIC_CENTER);
+                showStatus("🌌 Zoom out máximo...");
+
+                setTimeout(() => {
+                    // 2. FASE DE ACERCAMIENTO (ZOOM IN)
+                    showStatus("🔭 Acercando al Centro Galáctico...");
+
+                    const startFov = 360;
+                    const endFov = 0.5; // Zoom final (ajusta si quieres más cerca)
+                    const duration = isMobile ? 6000 : 5000;
+                    const startTime = Date.now();
+
+                    // Limpiar cualquier intervalo previo
+                    if (animInterval) clearInterval(animInterval);
+
+                    animInterval = setInterval(() => {
+                        const elapsed = Date.now() - startTime;
+                        let progress = Math.min(elapsed / duration, 1);
+                        let ease = easeInOutCubic(progress);
+
+                        // Calcular FOV actual
+                        let currentFov = startFov - (startFov - endFov) * ease;
+
+                        // Si el FOV es muy pequeño, forzar el cambio a infrarrojo antes de terminar
+                        if (currentFov <= 0.8 && aladin.getBaseImageLayer().id !== SURVEY_INFRARED) {
+                            // CAMBIO A INFRARROJO
+                            aladin.setImageSurvey(SURVEY_INFRARED);
+                            showStatus("🔥 Cambiando a Infrarrojo (Spitzer)...");
                         }
-                        aladin.setFov(newFov);
-                    } else {
-                        clearInterval(zoomInterval);
-                        aladin.gotoObject(targetCoords);
-                        
-                        // Cambiar a GLIMPSE 360
-                        aladin.setImageSurvey("P/GLIMPSE360");
-                        isAnimating = false;
-                        
-                        showLoading(true, '✅ ¡Completado!');
-                        setTimeout(() => {
-                            showLoading(false);
-                        }, 2000);
-                    }
-                }, currentInterval);
+
+                        aladin.setFov(currentFov);
+                        aladin.gotoObject(GALACTIC_CENTER);
+
+                        if (progress >= 1) {
+                            clearInterval(animInterval);
+                            animInterval = null;
+                            isAnimating = false;
+
+                            // Asegurar que estamos en infrarrojo al final
+                            aladin.setImageSurvey(SURVEY_INFRARED);
+                            aladin.setFov(endFov);
+
+                            showStatus("✅ Centro Galáctico en Infrarrojo");
+                            setTimeout(hideStatus, 2000);
+                        }
+                    }, isMobile ? 30 : 20);
+
+                }, 2000); // Esperar 2 segundos después del zoom out para empezar a acercar
             }
 
-            // Función principal
-            function iniciarViajeYZoom(targetCoords) {
-                if (isAnimating) {
-                    clearInterval(travelInterval);
-                    clearInterval(zoomInterval);
-                    isAnimating = false;
-                }
-                
-                currentTarget = targetCoords;
-                
-                // Resetear al centro galáctico
-                aladin.gotoObject("266.405 -29.008");
-                aladin.setFov(100);
-                
-                setTimeout(function() {
-                    travelToObject(targetCoords);
-                }, 500);
-            }
-
-            // Event handler para el botón de reinicio
+            // Botón para reiniciar la animación
             $('#resetBtn').click(function() {
-                // Elegir un objeto aleatorio o usar el mismo
-                const objetos = [
-                    "10.6847083 41.2690650",  // Andrómeda
-                    "201.3650633 -43.0191122", // Omega Centauri
-                    "83.8220833 -5.3911111",   // Orión
-                    "187.2779159 2.0523872",    // Virgo
-                    "271.259639 -24.417031",    // SMACS
-                    "161.16572 -59.96429"       // M16
-                ];
-                let randomCoords = objetos[Math.floor(Math.random() * objetos.length)];
-                iniciarViajeYZoom(randomCoords);
+                if (animInterval) clearInterval(animInterval);
+                isAnimating = false;
+                hideStatus();
+
+                // Volver al estado óptico y zoom out
+                aladin.setImageSurvey(SURVEY_OPTICAL);
+                aladin.setFov(360);
+                aladin.gotoObject(GALACTIC_CENTER);
+
+                // Reiniciar
+                setTimeout(() => {
+                    startAnimation();
+                }, 500);
             });
 
-            // Auto-inicio después de 2 segundos
-            setTimeout(function() {
-                iniciarViajeYZoom("161.16572 -59.96429");
-            }, 2000);
-
-            // Prevenir scroll en el body
+            // Prevenir scroll en móvil
             document.addEventListener('touchmove', function(e) {
                 e.preventDefault();
             }, { passive: false });
 
-            // Ocultar cualquier UI de Aladin que aparezca
+            // Ocultar UI de Aladin
             setTimeout(function() {
                 $('.aladin-controls, .aladin-goto-control, .aladin-layers-control, .aladin-simbad-control, .aladin-frame').hide();
             }, 100);
         });
     </script>
+
+    <!-- Botón de reinicio (opcional) -->
+    <button id="resetBtn" class="reset-btn">🔄 Reiniciar</button>
+    <div id="loadingIndicator" class="loading-indicator"></div>
+
 </body>
 </html>
