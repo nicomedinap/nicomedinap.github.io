@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>Zoom al Centro Galáctico - 2MASS Infrarrojo</title>
+    <title>Cruz del Sur ⇄ Centro Galáctico - 2MASS</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
@@ -21,13 +21,17 @@
         .loading-indicator.active { display: block; animation: pulseGlow 1.5s ease-in-out infinite; }
         @keyframes pulseGlow { 0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.4); } 50% { box-shadow: 0 8px 32px rgba(100, 180, 255, 0.2); } }
 
-        .reset-btn {
+        .controls {
             position: fixed; bottom: 20px; right: 20px; z-index: 100;
+            display: flex; gap: 10px;
+        }
+        .ctrl-btn {
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 10px 16px;
             border-radius: 30px; font-size: 12px; cursor: pointer; transition: all 0.3s ease;
         }
-        .reset-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+        .ctrl-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+        .ctrl-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 
         .aladin-controls, .aladin-goto-control, .aladin-layers-control, .aladin-simbad-control, .aladin-frame { display: none !important; }
     </style>
@@ -40,7 +44,10 @@
         $(document).ready(function() {
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
+            const CRUX_START = "186.65 -63.10";
             const GALACTIC_CENTER = "266.405 -29.008";
+            const START_GAL_L = 300;
+
             const SURVEY_OPTICAL = "P/DSS2/color";
             const SURVEY_2MASS = "P/2MASS/color";
 
@@ -51,8 +58,8 @@
             A.init.then(() => {
                 aladin = A.aladin('#aladin-lite-div', {
                     survey: SURVEY_OPTICAL,
-                    fov: 180,
-                    target: GALACTIC_CENTER,
+                    fov: 100,
+                    target: CRUX_START,
                     showControls: false,
                     showGotoControl: false,
                     showLayersControl: false,
@@ -63,89 +70,223 @@
                 });
 
                 setTimeout(() => {
-                    startAnimation();
+                    goForward();
                 }, 1500);
             });
 
             function showStatus(text) {
                 $('#loadingIndicator').text(text).addClass('active');
             }
-
             function hideStatus() {
                 $('#loadingIndicator').removeClass('active');
             }
+            function easeInOutSine(t) {
+                return -(Math.cos(Math.PI * t) - 1) / 2;
+            }
+            function galacticToEquatorial(l, b) {
+                const raNGP = 192.85948, decNGP = 27.12825, lNCP = 122.93192;
+                const lRad = l * Math.PI / 180;
+                const bRad = b * Math.PI / 180;
+                const raNGPrad = raNGP * Math.PI / 180;
+                const decNGPrad = decNGP * Math.PI / 180;
+                const lNCPrad = lNCP * Math.PI / 180;
 
-            // Easing muy suave (quíntica) para un viaje lento y cinematográfico
-            function easeInOutQuint(t) {
-                return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
+                const sinDec = Math.sin(bRad) * Math.sin(decNGPrad) +
+                               Math.cos(bRad) * Math.cos(decNGPrad) * Math.cos(lNCPrad - lRad);
+                const dec = Math.asin(sinDec);
+
+                const y = Math.cos(bRad) * Math.sin(lNCPrad - lRad);
+                const x = Math.sin(bRad) * Math.cos(decNGPrad) -
+                          Math.cos(bRad) * Math.sin(decNGPrad) * Math.cos(lNCPrad - lRad);
+
+                let ra = raNGPrad + Math.atan2(y, x);
+                ra = (ra * 180 / Math.PI + 360) % 360;
+
+                return { ra: ra, dec: dec * 180 / Math.PI };
+            }
+            function interpolateCoords(coord1, coord2, t) {
+                const [ra1, dec1] = coord1.split(' ').map(Number);
+                const [ra2, dec2] = coord2.split(' ').map(Number);
+                let raDiff = ra2 - ra1;
+                if (raDiff > 180) raDiff -= 360;
+                if (raDiff < -180) raDiff += 360;
+                const ra = ra1 + raDiff * t;
+                const dec = dec1 + (dec2 - dec1) * t;
+                return `${ra} ${dec}`;
             }
 
-            function startAnimation() {
+            // ==================== IDA: Cruz del Sur → Centro Galáctico ====================
+            function goForward() {
                 if (isAnimating) return;
                 isAnimating = true;
+                $('#btnBack').prop('disabled', false);
 
-                // 1. ZOOM OUT MÁXIMO
-                aladin.setFov(360);
-                aladin.gotoObject(GALACTIC_CENTER);
-                showStatus("🌌 Zoom out máximo...");
+                showStatus("🌠 Recorriendo el disco galáctico hacia el centro...");
 
-                // Pausa larga para contemplar todo el cielo
-                setTimeout(() => {
-                    // 2. VIAJE MUY LENTO HACIA EL CENTRO GALÁCTICO
-                    showStatus("🔭 Viajando lentamente al Centro Galáctico...");
+                const phase2Duration = isMobile ? 14000 : 13000;
+                const phase2Start = Date.now();
+                const phase2StartFov = 100;
+                const phase2MidFov = 5;
 
-                    const startFov = 360;
-                    const endFov = 0.3;
-                    // Viaje MUY lento: 25 segundos escritorio, 30 segundos móvil
-                    const duration = isMobile ? 30000 : 25000;
-                    const startTime = Date.now();
+                if (animInterval) clearInterval(animInterval);
 
-                    if (animInterval) clearInterval(animInterval);
+                animInterval = setInterval(() => {
+                    const elapsed2 = Date.now() - phase2Start;
+                    let progress2 = Math.min(elapsed2 / phase2Duration, 1);
+                    let ease2 = easeInOutSine(progress2);
 
-                    animInterval = setInterval(() => {
-                        const elapsed = Date.now() - startTime;
-                        let progress = Math.min(elapsed / duration, 1);
-                        let ease = easeInOutQuint(progress);
+                    let deltaL = 0 - START_GAL_L;
+                    if (deltaL > 180) deltaL -= 360;
+                    if (deltaL < -180) deltaL += 360;
 
-                        let currentFov = startFov - (startFov - endFov) * ease;
+                    let currentL = START_GAL_L + deltaL * ease2;
+                    currentL = (currentL + 360) % 360;
 
-                        // Cambio a 2MASS cerca del final del recorrido
-                        if (currentFov <= 0.6 && aladin.getBaseImageLayer().id !== SURVEY_2MASS) {
-                            aladin.setImageSurvey(SURVEY_2MASS);
-                            showStatus("🔥 Cambiando a Infrarrojo 2MASS...");
-                        }
+                    const eq = galacticToEquatorial(currentL, 0);
+                    aladin.gotoObject(`${eq.ra} ${eq.dec}`);
 
-                        aladin.setFov(currentFov);
-                        aladin.gotoObject(GALACTIC_CENTER);
+                    const currentFov = phase2StartFov - (phase2StartFov - phase2MidFov) * ease2;
+                    aladin.setFov(currentFov);
 
-                        if (progress >= 1) {
-                            clearInterval(animInterval);
-                            animInterval = null;
-                            isAnimating = false;
+                    if (currentFov <= 0.6 && aladin.getBaseImageLayer().id !== SURVEY_2MASS) {
+                        aladin.setImageSurvey(SURVEY_2MASS);
+                        showStatus("🔥 Cambiando a Infrarrojo 2MASS...");
+                    }
 
-                            aladin.setImageSurvey(SURVEY_2MASS);
-                            aladin.setFov(endFov);
+                    if (progress2 >= 1) {
+                        clearInterval(animInterval);
+                        animInterval = null;
 
-                            showStatus("✅ Centro Galáctico en 2MASS");
-                            setTimeout(hideStatus, 3000);
-                        }
-                    }, isMobile ? 50 : 40); // Updates más espaciados = movimiento más pausado
+                        // Fase 3: zoom final
+                        showStatus("🎯 Aproximando al Centro Galáctico...");
+                        aladin.setImageSurvey(SURVEY_2MASS);
 
-                }, 5000); // 5 segundos de pausa en el zoom out máximo
+                        const gcEq = galacticToEquatorial(0, 0);
+                        const startCoords = `${gcEq.ra} ${gcEq.dec}`;
+                        const endCoords = GALACTIC_CENTER;
+
+                        const phase3Duration = isMobile ? 5000 : 4500;
+                        const phase3Start = Date.now();
+                        const phase3StartFov = 5;
+                        const endFov = 0.3;
+
+                        animInterval = setInterval(() => {
+                            const elapsed3 = Date.now() - phase3Start;
+                            let progress3 = Math.min(elapsed3 / phase3Duration, 1);
+                            let ease3 = easeInOutSine(progress3);
+
+                            aladin.gotoObject(interpolateCoords(startCoords, endCoords, ease3));
+                            aladin.setFov(phase3StartFov - (phase3StartFov - endFov) * ease3);
+
+                            if (progress3 >= 1) {
+                                clearInterval(animInterval);
+                                animInterval = null;
+                                isAnimating = false;
+                                aladin.gotoObject(GALACTIC_CENTER);
+                                aladin.setFov(endFov);
+                                showStatus("✅ Centro Galáctico en 2MASS");
+                                setTimeout(hideStatus, 3000);
+                            }
+                        }, 20);
+                    }
+                }, 20);
             }
 
-            $('#resetBtn').click(function() {
+            // ==================== VUELTA: Centro Galáctico → Cruz del Sur ====================
+            function goBack() {
+                if (isAnimating) return;
+                isAnimating = true;
+                $('#btnBack').prop('disabled', true);
+
+                showStatus("🔙 Regresando desde el Centro Galáctico...");
+
+                // Fase 1 inversa: zoom out en 2MASS desde 0.3° hasta 5°
+                const phase3Duration = isMobile ? 5000 : 4500;
+                const phase3Start = Date.now();
+                const startFov = 0.3;
+                const endFov3 = 5;
+
+                const gcEq = galacticToEquatorial(0, 0);
+                const gcCoords = `${gcEq.ra} ${gcEq.dec}`;
+
                 if (animInterval) clearInterval(animInterval);
-                isAnimating = false;
-                hideStatus();
 
+                animInterval = setInterval(() => {
+                    const elapsed3 = Date.now() - phase3Start;
+                    let progress3 = Math.min(elapsed3 / phase3Duration, 1);
+                    let ease3 = easeInOutSine(progress3);
+
+                    aladin.gotoObject(interpolateCoords(GALACTIC_CENTER, gcCoords, ease3));
+                    aladin.setFov(startFov + (endFov3 - startFov) * ease3);
+
+                    if (progress3 >= 1) {
+                        clearInterval(animInterval);
+                        animInterval = null;
+
+                        // Fase 2 inversa: recorrer el disco al revés y volver a óptico
+                        showStatus("🌌 Regresando por el disco galáctico...");
+
+                        const phase2Duration = isMobile ? 14000 : 13000;
+                        const phase2Start = Date.now();
+                        const startFov2 = 5;
+                        const endFov2 = 100;
+
+                        animInterval = setInterval(() => {
+                            const elapsed2 = Date.now() - phase2Start;
+                            let progress2 = Math.min(elapsed2 / phase2Duration, 1);
+                            let ease2 = easeInOutSine(progress2);
+
+                            // l va de 0 → START_GAL_L
+                            let deltaL = START_GAL_L - 0;
+                            if (deltaL > 180) deltaL -= 360;
+                            if (deltaL < -180) deltaL += 360;
+
+                            let currentL = 0 + deltaL * ease2;
+                            currentL = (currentL + 360) % 360;
+
+                            const eq = galacticToEquatorial(currentL, 0);
+                            aladin.gotoObject(`${eq.ra} ${eq.dec}`);
+
+                            const currentFov = startFov2 + (endFov2 - startFov2) * ease2;
+                            aladin.setFov(currentFov);
+
+                            // Volver a óptico cuando el FOV ya es grande (cerca del final)
+                            if (currentFov >= 60 && aladin.getBaseImageLayer().id !== SURVEY_OPTICAL) {
+                                aladin.setImageSurvey(SURVEY_OPTICAL);
+                                showStatus("🌠 Volviendo a imagen óptica...");
+                            }
+
+                            if (progress2 >= 1) {
+                                clearInterval(animInterval);
+                                animInterval = null;
+                                isAnimating = false;
+
+                                // Cierre limpio en Cruz del Sur
+                                aladin.setImageSurvey(SURVEY_OPTICAL);
+                                aladin.gotoObject(CRUX_START);
+                                aladin.setFov(100);
+
+                                showStatus("✨ De vuelta en la Cruz del Sur");
+                                setTimeout(hideStatus, 3000);
+                            }
+                        }, 20);
+                    }
+                }, 20);
+            }
+
+            $('#btnForward').click(function() {
+                if (isAnimating) return;
+                // Reset a estado inicial antes de ir
                 aladin.setImageSurvey(SURVEY_OPTICAL);
-                aladin.setFov(360);
-                aladin.gotoObject(GALACTIC_CENTER);
+                aladin.gotoObject(CRUX_START);
+                aladin.setFov(100);
+                hideStatus();
+                setTimeout(goForward, 500);
+            });
 
-                setTimeout(() => {
-                    startAnimation();
-                }, 1000);
+            $('#btnBack').click(function() {
+                if (isAnimating) return;
+                goBack();
             });
 
             document.addEventListener('touchmove', function(e) {
@@ -158,7 +299,10 @@
         });
     </script>
 
-    <button id="resetBtn" class="reset-btn">🔄 Reiniciar</button>
+    <div class="controls">
+        <button id="btnBack" class="ctrl-btn">◀ Volver</button>
+        <button id="btnForward" class="ctrl-btn">🔄 Reiniciar</button>
+    </div>
     <div id="loadingIndicator" class="loading-indicator"></div>
 
 </body>
