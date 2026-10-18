@@ -121,7 +121,7 @@
                 isAnimating = true;
                 $('#btnBack').prop('disabled', false);
 
-                showStatus("🌠 Recorriendo el disco galáctico hacia el centro...");
+                showStatus("Recorriendo el disco galáctico hacia el centro...");
 
                 const phase2Duration = isMobile ? 14000 : 13000;
                 const phase2Start = Date.now();
@@ -150,7 +150,7 @@
 
                     if (currentFov <= 0.6 && aladin.getBaseImageLayer().id !== SURVEY_2MASS) {
                         aladin.setImageSurvey(SURVEY_2MASS);
-                        showStatus("🔥 Cambiando a Infrarrojo 2MASS...");
+                        showStatus("Cambiando a Infrarrojo 2MASS...");
                     }
 
                     if (progress2 >= 1) {
@@ -158,7 +158,7 @@
                         animInterval = null;
 
                         // Fase 3: zoom final
-                        showStatus("🎯 Aproximando al Centro Galáctico...");
+                        showStatus("Aproximando al Centro Galáctico...");
                         aladin.setImageSurvey(SURVEY_2MASS);
 
                         const gcEq = galacticToEquatorial(0, 0);
@@ -184,7 +184,7 @@
                                 isAnimating = false;
                                 aladin.gotoObject(GALACTIC_CENTER);
                                 aladin.setFov(endFov);
-                                showStatus("✅ Centro Galáctico en 2MASS");
+                                showStatus("Centro Galáctico en 2MASS");
                                 setTimeout(hideStatus, 3000);
                             }
                         }, 20);
@@ -198,7 +198,7 @@
                 isAnimating = true;
                 $('#btnBack').prop('disabled', true);
 
-                showStatus("🔙 Regresando desde el Centro Galáctico...");
+                showStatus("Regresando desde el Centro Galáctico...");
 
                 // Fase 1 inversa: zoom out en 2MASS desde 0.3° hasta 5°
                 const phase3Duration = isMobile ? 5000 : 4500;
@@ -224,7 +224,7 @@
                         animInterval = null;
 
                         // Fase 2 inversa: recorrer el disco al revés y volver a óptico
-                        showStatus("🌌 Regresando por el disco galáctico...");
+                        showStatus("Regresando por el disco galáctico...");
 
                         const phase2Duration = isMobile ? 14000 : 13000;
                         const phase2Start = Date.now();
@@ -253,7 +253,7 @@
                             // Volver a óptico cuando el FOV ya es grande (cerca del final)
                             if (currentFov >= 60 && aladin.getBaseImageLayer().id !== SURVEY_OPTICAL) {
                                 aladin.setImageSurvey(SURVEY_OPTICAL);
-                                showStatus("🌠 Volviendo a imagen óptica...");
+                                showStatus("Volviendo a imagen óptica...");
                             }
 
                             if (progress2 >= 1) {
@@ -266,7 +266,7 @@
                                 aladin.gotoObject(CRUX_START);
                                 aladin.setFov(100);
 
-                                showStatus("✨ De vuelta en la Cruz del Sur");
+                                showStatus("De vuelta en la Cruz del Sur");
                                 setTimeout(hideStatus, 3000);
                             }
                         }, 20);
@@ -301,7 +301,7 @@
 
     <div class="controls">
         <button id="btnBack" class="ctrl-btn">◀ Volver</button>
-        <button id="btnForward" class="ctrl-btn">🔄 Reiniciar</button>
+        <button id="btnForward" class="ctrl-btn">Reiniciar</button>
     </div>
     <div id="loadingIndicator" class="loading-indicator"></div>
 
