@@ -42,7 +42,7 @@
 
             const GALACTIC_CENTER = "266.405 -29.008";
             const SURVEY_OPTICAL = "P/DSS2/color";
-            const SURVEY_2MASS = "P/2MASS/color"; // Survey infrarrojo 2MASS
+            const SURVEY_2MASS = "P/2MASS/color";
 
             let aladin;
             let animInterval = null;
@@ -64,7 +64,7 @@
 
                 setTimeout(() => {
                     startAnimation();
-                }, 1000);
+                }, 1500);
             });
 
             function showStatus(text) {
@@ -75,7 +75,7 @@
                 $('#loadingIndicator').removeClass('active');
             }
 
-            // Easing más suave para un viaje pausado
+            // Easing muy suave (quíntica) para un viaje lento y cinematográfico
             function easeInOutQuint(t) {
                 return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
             }
@@ -89,14 +89,15 @@
                 aladin.gotoObject(GALACTIC_CENTER);
                 showStatus("🌌 Zoom out máximo...");
 
-                // Pausa más larga para contemplar el cielo completo
+                // Pausa larga para contemplar todo el cielo
                 setTimeout(() => {
-                    // 2. VIAJE LENTO HACIA EL CENTRO GALÁCTICO
+                    // 2. VIAJE MUY LENTO HACIA EL CENTRO GALÁCTICO
                     showStatus("🔭 Viajando lentamente al Centro Galáctico...");
 
                     const startFov = 360;
-                    const endFov = 0.3; // Zoom final más cercano
-                    const duration = isMobile ? 14000 : 12000; // Viaje mucho más lento (12-14 seg)
+                    const endFov = 0.3;
+                    // Viaje MUY lento: 25 segundos escritorio, 30 segundos móvil
+                    const duration = isMobile ? 30000 : 25000;
                     const startTime = Date.now();
 
                     if (animInterval) clearInterval(animInterval);
@@ -108,7 +109,7 @@
 
                         let currentFov = startFov - (startFov - endFov) * ease;
 
-                        // Cambio a 2MASS cuando el FOV sea pequeño (cerca del final)
+                        // Cambio a 2MASS cerca del final del recorrido
                         if (currentFov <= 0.6 && aladin.getBaseImageLayer().id !== SURVEY_2MASS) {
                             aladin.setImageSurvey(SURVEY_2MASS);
                             showStatus("🔥 Cambiando a Infrarrojo 2MASS...");
@@ -126,11 +127,11 @@
                             aladin.setFov(endFov);
 
                             showStatus("✅ Centro Galáctico en 2MASS");
-                            setTimeout(hideStatus, 2500);
+                            setTimeout(hideStatus, 3000);
                         }
-                    }, isMobile ? 40 : 30); // Actualizaciones más espaciadas para suavidad
+                    }, isMobile ? 50 : 40); // Updates más espaciados = movimiento más pausado
 
-                }, 3000); // 3 segundos de pausa en el zoom out máximo
+                }, 5000); // 5 segundos de pausa en el zoom out máximo
             }
 
             $('#resetBtn').click(function() {
@@ -144,7 +145,7 @@
 
                 setTimeout(() => {
                     startAnimation();
-                }, 800);
+                }, 1000);
             });
 
             document.addEventListener('touchmove', function(e) {
