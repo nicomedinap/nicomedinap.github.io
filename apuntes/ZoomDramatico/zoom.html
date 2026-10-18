@@ -58,7 +58,7 @@
             A.init.then(() => {
                 aladin = A.aladin('#aladin-lite-div', {
                     survey: SURVEY_OPTICAL,
-                    fov: 100,
+                    fov: 50,
                     target: CRUX_START,
                     showControls: false,
                     showGotoControl: false,
@@ -125,7 +125,7 @@
 
                 const phase2Duration = isMobile ? 14000 : 13000;
                 const phase2Start = Date.now();
-                const phase2StartFov = 100;
+                const phase2StartFov = 50;
                 const phase2MidFov = 5;
 
                 if (animInterval) clearInterval(animInterval);
