@@ -15,6 +15,17 @@ Ya que la primera charla trató sobre telescopios, y sobre cómo aprendimos cosa
 
 Asi también, hablaremos sobre las protagonistas indiscutibles de las galaxias: Las Estrellas. Su formación, vida, muerte y el ciclo de retroalimentación estelar.  
 
+A continuación, dejo el link de una animación que muestra el viaje desde la cruz del sur hasta el centro galáctico 
+
+<iframe 
+  src="https://nicomedinap.github.io/apuntes/ZoomDramatico/ViajeAlCentroGalactico.html" 
+  width="100%" 
+  height="600" 
+  frameborder="0">
+</iframe>
+
 La idea central de esta charla, será valiar nuestro punto de vista desde la galaxia, y tratar de darlse sentido al cielo. Una explicación lógica, como cada uno de nuestros antepasados y antepasadas trataron de hacer con la información que tenían.
 
 Debemos hacer lo mismo: Dejar que la evidencia nos lleve de la mano. Observar nuestro entorno. Sentirnos parte del universo. 
+
+Entonces, con esto en mente, realizaremos un viaje a través de la aplicación astronómica "Aladin", visualizaremos diferentes objetos en el camino entre la cruz del sur y el centro de la galáxia. Nos detendremos en regiones de formación estelar, en cúmulos de galaxias, y en la densidad estelar del centro galáctico. Luego, daremos perspectivas de la escala extra-galáctica del universo.  
