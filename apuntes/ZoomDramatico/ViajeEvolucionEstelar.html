@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Tour Vía Láctea - Evolución Estelar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        #aladin-lite-div { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
+
+        /* ===== Panel de información del objeto ===== */
+        #info-panel {
+            position: fixed; top: 20px; left: 20px; width: 380px; max-width: calc(100vw - 40px);
+            background: rgba(10, 15, 30, 0.88); backdrop-filter: blur(14px);
+            border: 1px solid rgba(100, 180, 255, 0.35); border-radius: 14px;
+            padding: 20px 22px; color: #e0e0e0; z-index: 1000;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.8); line-height: 1.55;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        #info-panel.hidden { opacity: 0; transform: translateX(-30px); pointer-events: none; }
+        #info-panel h2 { color: #8ab4f8; font-size: 19px; margin-bottom: 6px; border-bottom: 1px solid rgba(138,180,248,0.35); padding-bottom: 10px; padding-right: 36px; }
+        #info-panel .object-type { font-size: 11px; text-transform: uppercase; color: #fbbc04; letter-spacing: 1.2px; margin-bottom: 12px; display: block; font-weight: 600; }
+        #info-panel p { font-size: 13.5px; color: #ccc; margin-bottom: 9px; }
+        #info-panel .highlight { color: #a8dab5; font-weight: 600; }
+
+        /* Botón X para cerrar el panel */
+        #toggle-info-btn {
+            position: absolute; top: 12px; right: 12px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+            color: #ccc; width: 32px; height: 32px; border-radius: 50%;
+            cursor: pointer; font-size: 15px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease; line-height: 1;
+        }
+        #toggle-info-btn:hover { background: rgba(255, 80, 80, 0.25); border-color: #ff6b6b; color: #fff; transform: scale(1.08); }
+
+        /* Botón flotante para reabrir info */
+        #reopen-info-btn {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            background: rgba(30, 40, 60, 0.92); backdrop-filter: blur(12px);
+            border: 1px solid rgba(100, 180, 255, 0.45); color: #fff;
+            padding: 12px 20px; border-radius: 30px; font-size: 14px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6); display: none;
+            align-items: center; gap: 8px;
+        }
+        #reopen-info-btn.visible { display: flex; }
+        #reopen-info-btn:hover { background: rgba(60, 100, 160, 0.95); border-color: #8ab4f8; transform: translateY(-2px); }
+
+        /* ===== Indicador de parada ===== */
+        #stop-indicator {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: rgba(0,0,0,0.75); padding: 9px 20px; border-radius: 20px;
+            color: #fff; font-size: 13px; border: 1px solid rgba(255,255,255,0.15);
+            letter-spacing: 1px; font-weight: 600;
+        }
+
+        /* ===== Panel de longitud de onda (2/3 y 1/3) ===== */
+        #wavelength-panel {
+            position: fixed; top: 64px; right: 20px; z-index: 1000;
+            background: rgba(10, 15, 30, 0.88); backdrop-filter: blur(14px);
+            border: 1px solid rgba(100, 180, 255, 0.35); border-radius: 14px;
+            padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            display: flex; flex-direction: row; gap: 14px; align-items: stretch;
+            width: 480px; max-width: calc(100vw - 40px);
+        }
+        
+        /* Columna de botones: 2/3 del ancho */
+        #wavelength-panel .buttons-col {
+            flex: 2;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        #wavelength-panel .panel-title {
+            font-size: 11px; text-transform: uppercase; color: #8ab4f8;
+            letter-spacing: 1.2px; margin-bottom: 2px; text-align: center; font-weight: 600;
+        }
+
+        .wave-btn {
+            background: rgba(255,255,255,0.07);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: #ddd; padding: 14px 18px; border-radius: 28px;
+            font-size: 15px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex; align-items: center; gap: 10px; justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        .wave-btn:hover { background: rgba(100,180,255,0.2); color: #fff; border-color: rgba(138,180,248,0.6); }
+        .wave-btn.active {
+            background: linear-gradient(135deg, rgba(138,180,248,0.35), rgba(100,150,230,0.25));
+            border-color: #8ab4f8; color: #fff;
+            box-shadow: 0 0 20px rgba(138,180,248,0.5), inset 0 0 10px rgba(138,180,248,0.2);
+        }
+        .wave-btn.active::after { content: "●"; color: #8ab4f8; font-size: 11px; margin-left: 2px; }
+        .wave-btn .icon { font-size: 18px; }
+
+        /* Info lateral: 1/3 del ancho */
+        #wavelength-info {
+            flex: 1;
+            display: flex; flex-direction: column; justify-content: center;
+            border-left: 1px solid rgba(255,255,255,0.15);
+            padding-left: 14px; font-size: 12px; color: #bbb; line-height: 1.5;
+            min-width: 0;
+        }
+        #wavelength-info strong { color: #8ab4f8; font-size: 12.5px; display: block; margin-bottom: 5px; }
+        #wavelength-info .hint { color: #888; font-size: 11px; margin-top: 6px; font-style: italic; }
+
+        /* ===== Indicador de estado ===== */
+        .loading-indicator {
+            display: none; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+            z-index: 1000; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
+            color: white; padding: 13px 26px; border-radius: 30px; font-size: 15px;
+            border: 1px solid rgba(100,180,255,0.3); pointer-events: none; font-weight: 600;
+        }
+        .loading-indicator.active { display: block; animation: pulseGlow 1.5s ease-in-out infinite; }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.5); } 50% { box-shadow: 0 8px 32px rgba(100, 180, 255, 0.35); } }
+
+        /* ===== Controles de navegación ===== */
+        .controls {
+            position: fixed; bottom: 24px; right: 24px; left: 24px; z-index: 1000;
+            display: flex; gap: 14px;
+        }
+        .ctrl-btn {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(40, 60, 100, 0.95), rgba(25, 35, 65, 0.95));
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(100, 180, 255, 0.5); color: #fff;
+            padding: 16px 30px; border-radius: 34px; font-size: 15px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s ease;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.6); letter-spacing: 0.3px;
+            text-align: center;
+        }
+        .ctrl-btn:hover {
+            background: linear-gradient(135deg, rgba(70, 110, 180, 0.98), rgba(45, 70, 130, 0.98));
+            border-color: #8ab4f8; transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(100, 180, 255, 0.35);
+        }
+        .ctrl-btn:active { transform: translateY(-1px); }
+        .ctrl-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .aladin-controls, .aladin-goto-control, .aladin-layers-control, .aladin-simbad-control, .aladin-frame { display: none !important; }
+
+        /* ===== DISEÑO PARA MÓVILES ===== */
+        @media (max-width: 700px) {
+            /* Panel de info del objeto */
+            #info-panel { width: calc(100vw - 40px); left: 20px; top: 70px; padding: 16px; }
+            #info-panel p { font-size: 13px; }
+            
+            /* Panel de longitud de onda: mantenemos la disposición 2/3 y 1/3 */
+            #wavelength-panel { 
+                top: auto; 
+                bottom: 100px; 
+                left: 16px; 
+                right: 16px; 
+                width: auto; 
+                max-width: none;
+                padding: 12px; 
+                gap: 10px;
+            }
+            .wave-btn { padding: 12px 10px; font-size: 13px; gap: 6px; }
+            .wave-btn .icon { font-size: 16px; }
+            #wavelength-info { padding-left: 10px; font-size: 11.5px; }
+            #wavelength-info strong { font-size: 12px; }
+            #wavelength-info .hint { font-size: 10px; margin-top: 4px; }
+            
+            /* Controles de navegación */
+            .controls { bottom: 20px; left: 16px; right: 16px; gap: 10px; }
+            .ctrl-btn { padding: 14px; font-size: 14px; }
+            
+            /* Ajuste del indicador de parada */
+            #stop-indicator { top: 16px; right: 16px; padding: 8px 14px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="aladin-lite-div"></div>
+
+    <!-- Panel de información del objeto -->
+    <div id="info-panel">
+        <button id="toggle-info-btn" title="Ocultar información">✕</button>
+        <span class="object-type" id="obj-type">Cargando...</span>
+        <h2 id="obj-title">Cruz del Sur</h2>
+        <div id="obj-desc"></div>
+    </div>
+
+    <!-- Botón flotante para reabrir la info -->
+    <button id="reopen-info-btn">☰ Información</button>
+
+    <!-- Indicador de parada -->
+    <div id="stop-indicator">Parada 1 / 6</div>
+
+    <!-- Panel de longitud de onda -->
+    <div id="wavelength-panel">
+        <div class="buttons-col">
+            <div class="panel-title">Longitud de onda</div>
+            <button class="wave-btn active" id="btn-optical"><span class="icon">🔭</span> Óptico</button>
+            <button class="wave-btn" id="btn-infrared"><span class="icon">🌡️</span> Infrarrojo</button>
+        </div>
+        <div id="wavelength-info">
+            <strong id="wave-info-title">Luz visible</strong>
+            <span id="wave-info-text">Vista óptica DSS2: estrellas y nebulosas tal como las percibe el ojo humano.</span>
+            <span class="hint" id="wave-info-hint">Cambia para revelar lo oculto tras el polvo.</span>
+        </div>
+    </div>
+
+    <div id="loadingIndicator" class="loading-indicator"></div>
+
+    <!-- Controles de navegación -->
+    <div class="controls">
+        <button id="btnBack" class="ctrl-btn">◀ Anterior</button>
+        <button id="btnNext" class="ctrl-btn">Siguiente ▶</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            const SURVEY_OPTICAL = "P/DSS2/color";
+            const SURVEY_2MASS  = "P/2MASS/color";
+
+            const WAVE_INFO = {
+                [SURVEY_OPTICAL]: {
+                    title: "Luz visible",
+                    text: "Vista óptica DSS2: estrellas y nebulosas tal como las percibe el ojo humano.",
+                    hint: "Cambia para revelar lo oculto tras el polvo."
+                },
+                [SURVEY_2MASS]: {
+                    title: "Infrarrojo cercano",
+                    text: "Vista 2MASS: el polvo se vuelve transparente y revela regiones ocultas.",
+                    hint: "Cambia a óptico para ver las estrellas en luz visible."
+                }
+            };
+
+            // ==================== DESTINOS DEL TOUR ====================
+            const STOPS = [
+                {
+                    name: "Cruz del Sur (Crux)",
+                    type: "Constelación / Punto de partida",
+                    ra: 186.65, dec: -63.10, fov: 50,
+                    description: `
+                        <p>Iniciamos el recorrido en la <span class="highlight">Cruz del Sur</span>. Sus estrellas principales (Acrux, Mimosa) son masivas y calientes (tipo B y O): viven rápido y terminarán como supernovas.</p>
+                        <p>Desde aquí emprenderemos un viaje hacia el centro de la Vía Láctea, observando distintas etapas de la <span class="highlight">evolución estelar</span>.</p>
+                    `
+                },
+                {
+                    name: "Alfa Centauri",
+                    type: "Sistema Estelar Triple",
+                    ra: 219.90, dec: -60.83, fov: 3,
+                    description: `
+                        <p><span class="highlight">Alfa Centauri</span> es el sistema más cercano al Sol (4.37 al). Contiene a Alfa Cen A (tipo G, como el Sol), Alfa Cen B (tipo K) y Próxima Centauri (enana roja tipo M).</p>
+                        <p>Comparar sus masas nos muestra cómo la masa determina la velocidad de evolución: las más masivas mueren antes; las enanas rojas viven billones de años.</p>
+                    `
+                },
+                {
+                    name: "Omega Centauri (NGC 5139)",
+                    type: "Cúmulo Globular Masivo",
+                    ra: 201.69, dec: -47.48, fov: 2.5,
+                    description: `
+                        <p><span class="highlight">Omega Centauri</span> es el cúmulo globular más masivo de la Vía Láctea (~10 millones de estrellas). Muestra <strong>múltiples poblaciones estelares</strong> de distintas edades y metalicidades.</p>
+                        <p>Probablemente es el núcleo de una galaxia enana canibalizada: un fósil de la evolución estelar temprana del universo.</p>
+                    `
+                },
+                {
+                    name: "NGC 6334 (Pata de Gato)",
+                    type: "Región de Formación Estelar",
+                    ra: 259.85, dec: -35.78, fov: 1.5,
+                    description: `
+                        <p><span class="highlight">NGC 6334</span> es una de las regiones de formación de estrellas masivas más activas de la galaxia (~5,500 al).</p>
+                        <p>Aquí vemos el <strong>nacimiento</strong> estelar: el gas colapsa, nace una protoestrella y las estrellas O/B jóvenes ionizan el gas esculpiendo la nebulosa. Viven rápido y mueren jóvenes.</p>
+                    `
+                },
+                {
+                    name: "Centro Galáctico (Sgr A*)",
+                    type: "Centro de la Vía Láctea",
+                    ra: 266.405, dec: -29.008, fov: 0.4,
+                    description: `
+                        <p>El <span class="highlight">Centro Galáctico</span> alberga a <strong>Sagitario A*</strong>, un agujero negro supermasivo de 4 millones de masas solares.</p>
+                        <p>El polvo oculta la vista visible: prueba a pulsar <strong>Infrarrojo</strong> para atravesarlo con la vista 2MASS. Aquí las estrellas orbitan a velocidades extremas, y aún hay formación estelar activa pese a la radiación intensa.</p>
+                    `
+                },
+                {
+                    name: "Nebulosa de la Laguna (M8)",
+                    type: "Nebulosa de Emisión / Guardería Estelar",
+                    ra: 270.90, dec: -24.38, fov: 1.2,
+                    description: `
+                        <p>Cerramos el tour en la <span class="highlight">Nebulosa de la Laguna</span> (~4,000-5,000 al). Es una guardería estelar clásica: el cúmulo NGC 6530 contiene estrellas muy jóvenes que ionizan el hidrógeno circundante.</p>
+                        <p>Es el ciclo completo: gas denso → estrellas masivas → vientos que esculpen la nebulosa → futuras supernovas que devolverán material al medio interestelar.</p>
+                    `
+                }
+            ];
+
+            // ==================== ESTADO ====================
+            let aladin;
+            let currentIndex = 0;
+            let currentSurvey = SURVEY_OPTICAL;
+            let isAnimating = false;
+            let animInterval = null;
+            let infoVisible = true;
+
+            // ==================== UTILIDADES ====================
+            function showStatus(text) { $('#loadingIndicator').text(text).addClass('active'); }
+            function hideStatus() { $('#loadingIndicator').removeClass('active'); }
+            function easeInOutSine(t) { return -(Math.cos(Math.PI * t) - 1) / 2; }
+
+            function interpolateCoords(ra1, dec1, ra2, dec2, t) {
+                let raDiff = ra2 - ra1;
+                if (raDiff > 180) raDiff -= 360;
+                if (raDiff < -180) raDiff += 360;
+                const ra = ra1 + raDiff * t;
+                const dec = dec1 + (dec2 - dec1) * t;
+                return `${ra} ${dec}`;
+            }
+
+            function updateUI(index) {
+                const s = STOPS[index];
+                $('#obj-title').text(s.name);
+                $('#obj-type').text(s.type);
+                $('#obj-desc').html(s.description);
+                $('#stop-indicator').text(`Parada ${index + 1} / ${STOPS.length}`);
+
+                $('#btnBack').prop('disabled', index === 0);
+                if (index === STOPS.length - 1) {
+                    $('#btnNext').text("⟲ Inicio");
+                } else {
+                    $('#btnNext').text("Siguiente ▶");
+                }
+            }
+
+            function updateWavelengthUI() {
+                const isOptical = currentSurvey === SURVEY_OPTICAL;
+                $('#btn-optical').toggleClass('active', isOptical);
+                $('#btn-infrared').toggleClass('active', !isOptical);
+
+                const info = WAVE_INFO[currentSurvey];
+                $('#wave-info-title').text(info.title);
+                $('#wave-info-text').text(info.text);
+                $('#wave-info-hint').text(info.hint);
+            }
+
+            // ==================== MOSTRAR / OCULTAR INFO ====================
+            function setInfoVisible(visible) {
+                infoVisible = visible;
+                if (visible) {
+                    $('#info-panel').removeClass('hidden');
+                    $('#reopen-info-btn').removeClass('visible');
+                } else {
+                    $('#info-panel').addClass('hidden');
+                    $('#reopen-info-btn').addClass('visible');
+                }
+            }
+
+            // ==================== INICIALIZACIÓN ====================
+            A.init.then(() => {
+                const start = STOPS[0];
+                aladin = A.aladin('#aladin-lite-div', {
+                    survey: SURVEY_OPTICAL,
+                    fov: start.fov,
+                    target: `${start.ra} ${start.dec}`,
+                    showControls: false,
+                    showGotoControl: false,
+                    showLayersControl: false,
+                    showFrame: false,
+                    showSimbadPointerControl: false,
+                    showObjectTooltip: false,
+                    fullScreen: true
+                });
+
+                currentSurvey = SURVEY_OPTICAL;
+                updateWavelengthUI();
+
+                setTimeout(() => {
+                    updateUI(0);
+                    showStatus(start.name);
+                    setTimeout(hideStatus, 2500);
+                }, 800);
+            });
+
+            // ==================== CAMBIO DE SURVEY DIRECTO ====================
+            function changeSurvey(targetSurvey) {
+                if (isAnimating) return;
+                if (targetSurvey === currentSurvey) return;
+
+                showStatus(targetSurvey === SURVEY_2MASS ? "Cambiando a infrarrojo..." : "Cambiando a imagen óptica...");
+
+                setTimeout(() => {
+                    aladin.setImageSurvey(targetSurvey);
+                    currentSurvey = targetSurvey;
+                    updateWavelengthUI();
+
+                    setTimeout(() => {
+                        hideStatus();
+                        showStatus(targetSurvey === SURVEY_2MASS ? "Vista infrarroja 2MASS activa" : "Vista óptica DSS2 activa");
+                        setTimeout(hideStatus, 2000);
+                    }, 600);
+                }, 150);
+            }
+
+            // ==================== ANIMACIÓN DE VIAJE ====================
+            function flyTo(from, to, onComplete) {
+                if (animInterval) { clearInterval(animInterval); animInterval = null; }
+
+                const transitFov = Math.max(from.fov, to.fov, 40);
+                const totalDuration = isMobile ? 9000 : 7000;
+                const startTime = Date.now();
+
+                showStatus(`Viajando hacia ${to.name}...`);
+
+                animInterval = setInterval(() => {
+                    const elapsed = Date.now() - startTime;
+                    let p = Math.min(elapsed / totalDuration, 1);
+                    let e = easeInOutSine(p);
+
+                    let currentFov;
+                    if (e < 0.5) {
+                        const t = e / 0.5;
+                        currentFov = from.fov + (transitFov - from.fov) * t;
+                    } else {
+                        const t = (e - 0.5) / 0.5;
+                        currentFov = transitFov + (to.fov - transitFov) * t;
+                    }
+
+                    const coordStr = interpolateCoords(from.ra, from.dec, to.ra, to.dec, e);
+                    aladin.gotoObject(coordStr);
+                    aladin.setFov(currentFov);
+
+                    if (p >= 1) {
+                        clearInterval(animInterval);
+                        animInterval = null;
+
+                        aladin.gotoObject(`${to.ra} ${to.dec}`);
+                        aladin.setFov(to.fov);
+
+                        showStatus(to.name);
+                        setTimeout(hideStatus, 2500);
+
+                        if (onComplete) onComplete();
+                    }
+                }, 20);
+            }
+
+            // ==================== NAVEGACIÓN ====================
+            function goTo(index) {
+                if (isAnimating) return;
+                if (index < 0 || index >= STOPS.length) return;
+
+                isAnimating = true;
+                const from = STOPS[currentIndex];
+                const to = STOPS[index];
+                currentIndex = index;
+                updateUI(index);
+
+                flyTo(from, to, () => {
+                    isAnimating = false;
+                });
+            }
+
+            function next() {
+                if (isAnimating) return;
+                if (currentIndex === STOPS.length - 1) {
+                    resetToStart();
+                } else {
+                    goTo(currentIndex + 1);
+                }
+            }
+
+            function prev() {
+                if (isAnimating) return;
+                if (currentIndex > 0) goTo(currentIndex - 1);
+            }
+
+            function resetToStart() {
+                if (isAnimating) return;
+                if (currentIndex === 0) return;
+
+                isAnimating = true;
+                showStatus("Volviendo al inicio...");
+
+                const from = STOPS[currentIndex];
+                const to = STOPS[0];
+
+                flyTo(from, to, () => {
+                    currentIndex = 0;
+                    updateUI(0);
+                    isAnimating = false;
+
+                    showStatus("De vuelta en la Cruz del Sur");
+                    setTimeout(hideStatus, 2500);
+                });
+            }
+
+            // ==================== EVENTOS ====================
+            $('#btnNext').click(next);
+            $('#btnBack').click(prev);
+
+            $('#btn-optical').click(function() { changeSurvey(SURVEY_OPTICAL); });
+            $('#btn-infrared').click(function() { changeSurvey(SURVEY_2MASS); });
+
+            $('#toggle-info-btn').click(function() { setInfoVisible(false); });
+            $('#reopen-info-btn').click(function() { setInfoVisible(true); });
+
+            document.addEventListener('touchmove', function(e) { e.preventDefault(); }, { passive: false });
+
+            setInterval(() => {
+                $('.aladin-controls, .aladin-goto-control, .aladin-layers-control, .aladin-simbad-control, .aladin-frame').hide();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
