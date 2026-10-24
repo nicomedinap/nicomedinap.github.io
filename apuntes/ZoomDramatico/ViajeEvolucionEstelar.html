@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Viaje Evolución Estelar</title>
+    <title>Viaje al centro de la galaxia</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
@@ -109,35 +109,49 @@
 
         /* ===== Indicador de estado ===== */
         .loading-indicator {
-            display: none; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+            display: none; position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%);
             z-index: 1000; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
-            color: white; padding: 13px 26px; border-radius: 30px; font-size: 15px;
+            color: white; padding: 11px 22px; border-radius: 30px; font-size: 14px;
             border: 1px solid rgba(100,180,255,0.3); pointer-events: none; font-weight: 600;
         }
         .loading-indicator.active { display: block; animation: pulseGlow 1.5s ease-in-out infinite; }
         @keyframes pulseGlow { 0%, 100% { box-shadow: 0 8px 32px rgba(0,0,0,0.5); } 50% { box-shadow: 0 8px 32px rgba(100, 180, 255, 0.35); } }
 
-        /* ===== Controles de navegación ===== */
+        /* ===== CONTROLES DE NAVEGACIÓN (Más pequeños y elevados) ===== */
         .controls {
-            position: fixed; bottom: 24px; right: 24px; left: 24px; z-index: 1000;
-            display: flex; gap: 14px;
+            position: fixed; 
+            bottom: 45px; /* Elevados para liberar espacio inferior */
+            left: 50%; 
+            transform: translateX(-50%); /* Centrados horizontalmente */
+            z-index: 1000;
+            display: flex; 
+            gap: 10px;
+            width: calc(100% - 32px); /* No llega a los bordes de la pantalla */
+            max-width: 340px; /* Ancho máximo para que no se estiren demasiado en PC */
         }
         .ctrl-btn {
             flex: 1;
             background: linear-gradient(135deg, rgba(40, 60, 100, 0.95), rgba(25, 35, 65, 0.95));
             backdrop-filter: blur(12px);
-            border: 2px solid rgba(100, 180, 255, 0.5); color: #fff;
-            padding: 16px 30px; border-radius: 34px; font-size: 15px; font-weight: 700;
-            cursor: pointer; transition: all 0.2s ease;
-            box-shadow: 0 6px 22px rgba(0,0,0,0.6); letter-spacing: 0.3px;
+            border: 2px solid rgba(100, 180, 255, 0.5); 
+            color: #fff;
+            padding: 10px 14px; /* Reducido drásticamente */
+            border-radius: 24px; /* Más redondeados */
+            font-size: 13px; /* Fuente más pequeña */
+            font-weight: 700;
+            cursor: pointer; 
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6); 
+            letter-spacing: 0.3px;
             text-align: center;
         }
         .ctrl-btn:hover {
             background: linear-gradient(135deg, rgba(70, 110, 180, 0.98), rgba(45, 70, 130, 0.98));
-            border-color: #8ab4f8; transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(100, 180, 255, 0.35);
+            border-color: #8ab4f8; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(100, 180, 255, 0.35);
         }
-        .ctrl-btn:active { transform: translateY(-1px); }
+        .ctrl-btn:active { transform: translateY(0); }
         .ctrl-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
 
         .aladin-controls, .aladin-goto-control, .aladin-layers-control, .aladin-simbad-control, .aladin-frame { display: none !important; }
@@ -148,10 +162,10 @@
             #info-panel { width: calc(100vw - 40px); left: 20px; top: 70px; padding: 16px; }
             #info-panel p { font-size: 13px; }
             
-            /* Panel de longitud de onda: mantenemos la disposición 2/3 y 1/3 */
+            /* Panel de longitud de onda */
             #wavelength-panel { 
                 top: auto; 
-                bottom: 100px; 
+                bottom: 95px; /* Un poco más arriba para no chocar con los nuevos botones */
                 left: 16px; 
                 right: 16px; 
                 width: auto; 
@@ -165,12 +179,11 @@
             #wavelength-info strong { font-size: 12px; }
             #wavelength-info .hint { font-size: 10px; margin-top: 4px; }
             
-            /* Controles de navegación */
-            .controls { bottom: 20px; left: 16px; right: 16px; gap: 10px; }
-            .ctrl-btn { padding: 14px; font-size: 14px; }
-            
             /* Ajuste del indicador de parada */
             #stop-indicator { top: 16px; right: 16px; padding: 8px 14px; font-size: 12px; }
+            
+            /* Botones de navegación en móvil */
+            .controls { bottom: 30px; }
         }
     </style>
 </head>
